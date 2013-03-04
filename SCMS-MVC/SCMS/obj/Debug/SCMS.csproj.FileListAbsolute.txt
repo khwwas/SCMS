@@ -1,0 +1,36 @@
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC - MA\SCMS\bin\SCMS.dll
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC - MA\SCMS\bin\SCMS.pdb
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC - MA\SCMS\bin\EntityFramework.dll
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC - MA\SCMS\bin\SCMSDataLayer.dll
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC - MA\SCMS\bin\SCMSDataLayer.pdb
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC - MA\SCMS\bin\EntityFramework.xml
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC - MA\SCMS\obj\Debug\SCMS.csprojResolveAssemblyReference.cache
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC - MA\SCMS\obj\Debug\SCMS.dll
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC - MA\SCMS\obj\Debug\SCMS.pdb
+D:\Dropbox\Supply Chain\SCMS-MVC - MA\SCMS\bin\SCMS.dll
+D:\Dropbox\Supply Chain\SCMS-MVC - MA\SCMS\bin\SCMS.pdb
+D:\Dropbox\Supply Chain\SCMS-MVC - MA\SCMS\bin\EntityFramework.dll
+D:\Dropbox\Supply Chain\SCMS-MVC - MA\SCMS\bin\SCMSDataLayer.dll
+D:\Dropbox\Supply Chain\SCMS-MVC - MA\SCMS\bin\SCMSDataLayer.pdb
+D:\Dropbox\Supply Chain\SCMS-MVC - MA\SCMS\bin\EntityFramework.xml
+D:\Dropbox\Supply Chain\SCMS-MVC - MA\SCMS\obj\Debug\ResolveAssemblyReference.cache
+D:\Dropbox\Supply Chain\SCMS-MVC - MA\SCMS\obj\Debug\SCMS.dll
+D:\Dropbox\Supply Chain\SCMS-MVC - MA\SCMS\obj\Debug\SCMS.pdb
+D:\Dropbox\Supply Chain\SCMS-MVC\SCMS\bin\SCMS.dll
+D:\Dropbox\Supply Chain\SCMS-MVC\SCMS\bin\SCMS.pdb
+D:\Dropbox\Supply Chain\SCMS-MVC\SCMS\bin\EntityFramework.dll
+D:\Dropbox\Supply Chain\SCMS-MVC\SCMS\bin\SCMSDataLayer.dll
+D:\Dropbox\Supply Chain\SCMS-MVC\SCMS\bin\SCMSDataLayer.pdb
+D:\Dropbox\Supply Chain\SCMS-MVC\SCMS\bin\EntityFramework.xml
+D:\Dropbox\Supply Chain\SCMS-MVC\SCMS\obj\Debug\ResolveAssemblyReference.cache
+D:\Dropbox\Supply Chain\SCMS-MVC\SCMS\obj\Debug\SCMS.dll
+D:\Dropbox\Supply Chain\SCMS-MVC\SCMS\obj\Debug\SCMS.pdb
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC\SCMS\bin\SCMS.dll
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC\SCMS\bin\SCMS.pdb
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC\SCMS\bin\EntityFramework.dll
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC\SCMS\bin\SCMSDataLayer.dll
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC\SCMS\bin\SCMSDataLayer.pdb
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC\SCMS\bin\EntityFramework.xml
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC\SCMS\obj\Debug\SCMS.csprojResolveAssemblyReference.cache
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC\SCMS\obj\Debug\SCMS.dll
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC\SCMS\obj\Debug\SCMS.pdb

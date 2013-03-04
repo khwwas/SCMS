@@ -1,0 +1,22 @@
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC - MA\SCMSDataLayer\bin\Debug\SCMSDataLayer.dll.config
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC - MA\SCMSDataLayer\bin\Debug\SCMSDataLayer.dll
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC - MA\SCMSDataLayer\bin\Debug\SCMSDataLayer.pdb
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC - MA\SCMSDataLayer\obj\Debug\SCMSDataLayer.dll
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC - MA\SCMSDataLayer\obj\Debug\SCMSDataLayer.pdb
+D:\Dropbox\Supply Chain\SCMS-MVC - MA\SCMSDataLayer\bin\Debug\SCMSDataLayer.dll.config
+D:\Dropbox\Supply Chain\SCMS-MVC - MA\SCMSDataLayer\bin\Debug\SCMSDataLayer.dll
+D:\Dropbox\Supply Chain\SCMS-MVC - MA\SCMSDataLayer\bin\Debug\SCMSDataLayer.pdb
+D:\Dropbox\Supply Chain\SCMS-MVC - MA\SCMSDataLayer\obj\Debug\ResolveAssemblyReference.cache
+D:\Dropbox\Supply Chain\SCMS-MVC - MA\SCMSDataLayer\obj\Debug\SCMSDataLayer.dll
+D:\Dropbox\Supply Chain\SCMS-MVC - MA\SCMSDataLayer\obj\Debug\SCMSDataLayer.pdb
+D:\Dropbox\Supply Chain\SCMS-MVC\SCMSDataLayer\bin\Debug\SCMSDataLayer.dll.config
+D:\Dropbox\Supply Chain\SCMS-MVC\SCMSDataLayer\bin\Debug\SCMSDataLayer.dll
+D:\Dropbox\Supply Chain\SCMS-MVC\SCMSDataLayer\bin\Debug\SCMSDataLayer.pdb
+D:\Dropbox\Supply Chain\SCMS-MVC\SCMSDataLayer\obj\Debug\ResolveAssemblyReference.cache
+D:\Dropbox\Supply Chain\SCMS-MVC\SCMSDataLayer\obj\Debug\SCMSDataLayer.dll
+D:\Dropbox\Supply Chain\SCMS-MVC\SCMSDataLayer\obj\Debug\SCMSDataLayer.pdb
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC\SCMSDataLayer\bin\Debug\SCMSDataLayer.dll.config
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC\SCMSDataLayer\bin\Debug\SCMSDataLayer.dll
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC\SCMSDataLayer\bin\Debug\SCMSDataLayer.pdb
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC\SCMSDataLayer\obj\Debug\SCMSDataLayer.dll
+D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC\SCMSDataLayer\obj\Debug\SCMSDataLayer.pdb

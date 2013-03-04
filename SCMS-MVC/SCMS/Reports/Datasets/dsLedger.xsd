@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsLedger" targetNamespace="http://tempuri.org/dsLedger.xsd" xmlns:mstns="http://tempuri.org/dsLedger.xsd" xmlns="http://tempuri.org/dsLedger.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsLedger" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsLedger" msprop:Generator_UserDSName="dsLedger">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="LedgerDetail" msprop:Generator_TableClassName="LedgerDetailDataTable" msprop:Generator_TableVarName="tableLedgerDetail" msprop:Generator_TablePropName="LedgerDetail" msprop:Generator_RowDeletingName="LedgerDetailRowDeleting" msprop:Generator_UserTableName="LedgerDetail" msprop:Generator_RowChangingName="LedgerDetailRowChanging" msprop:Generator_RowEvHandlerName="LedgerDetailRowChangeEventHandler" msprop:Generator_RowDeletedName="LedgerDetailRowDeleted" msprop:Generator_RowEvArgName="LedgerDetailRowChangeEvent" msprop:Generator_RowChangedName="LedgerDetailRowChanged" msprop:Generator_RowClassName="LedgerDetailRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Loc_Id" msprop:Generator_ColumnVarNameInTable="columnLoc_Id" msprop:Generator_ColumnPropNameInRow="Loc_Id" msprop:Generator_ColumnPropNameInTable="Loc_IdColumn" msprop:Generator_UserColumnName="Loc_Id" type="xs:string" minOccurs="0" />
+              <xs:element name="Loc_Title" msprop:Generator_ColumnVarNameInTable="columnLoc_Title" msprop:Generator_ColumnPropNameInRow="Loc_Title" msprop:Generator_ColumnPropNameInTable="Loc_TitleColumn" msprop:Generator_UserColumnName="Loc_Title" type="xs:string" minOccurs="0" />
+              <xs:element name="ChrtAcc_Id" msprop:Generator_ColumnVarNameInTable="columnChrtAcc_Id" msprop:Generator_ColumnPropNameInRow="ChrtAcc_Id" msprop:Generator_ColumnPropNameInTable="ChrtAcc_IdColumn" msprop:Generator_UserColumnName="ChrtAcc_Id" type="xs:string" minOccurs="0" />
+              <xs:element name="ChrtAcc_Code" msprop:Generator_ColumnVarNameInTable="columnChrtAcc_Code" msprop:Generator_ColumnPropNameInRow="ChrtAcc_Code" msprop:Generator_ColumnPropNameInTable="ChrtAcc_CodeColumn" msprop:Generator_UserColumnName="ChrtAcc_Code" type="xs:string" minOccurs="0" />
+              <xs:element name="ChrtAcc_Title" msprop:Generator_ColumnVarNameInTable="columnChrtAcc_Title" msprop:Generator_ColumnPropNameInRow="ChrtAcc_Title" msprop:Generator_ColumnPropNameInTable="ChrtAcc_TitleColumn" msprop:Generator_UserColumnName="ChrtAcc_Title" type="xs:string" minOccurs="0" />
+              <xs:element name="VchMas_Id" msprop:Generator_ColumnVarNameInTable="columnVchMas_Id" msprop:Generator_ColumnPropNameInRow="VchMas_Id" msprop:Generator_ColumnPropNameInTable="VchMas_IdColumn" msprop:Generator_UserColumnName="VchMas_Id" type="xs:string" minOccurs="0" />
+              <xs:element name="VchMas_Code" msprop:Generator_ColumnVarNameInTable="columnVchMas_Code" msprop:Generator_ColumnPropNameInRow="VchMas_Code" msprop:Generator_ColumnPropNameInTable="VchMas_CodeColumn" msprop:Generator_UserColumnName="VchMas_Code" type="xs:string" minOccurs="0" />
+              <xs:element name="VchMas_Date" msprop:Generator_ColumnVarNameInTable="columnVchMas_Date" msprop:Generator_ColumnPropNameInRow="VchMas_Date" msprop:Generator_ColumnPropNameInTable="VchMas_DateColumn" msprop:Generator_UserColumnName="VchMas_Date" type="xs:string" minOccurs="0" />
+              <xs:element name="VchMas_DrAmount" msprop:Generator_ColumnVarNameInTable="columnVchMas_DrAmount" msprop:Generator_ColumnPropNameInRow="VchMas_DrAmount" msprop:Generator_ColumnPropNameInTable="VchMas_DrAmountColumn" msprop:Generator_UserColumnName="VchMas_DrAmount" type="xs:double" minOccurs="0" />
+              <xs:element name="VchMas_CrAmount" msprop:Generator_ColumnVarNameInTable="columnVchMas_CrAmount" msprop:Generator_ColumnPropNameInRow="VchMas_CrAmount" msprop:Generator_ColumnPropNameInTable="VchMas_CrAmountColumn" msprop:Generator_UserColumnName="VchMas_CrAmount" type="xs:double" minOccurs="0" />
+              <xs:element name="VchDet_Remarks" msprop:Generator_ColumnVarNameInTable="columnVchDet_Remarks" msprop:Generator_ColumnPropNameInRow="VchDet_Remarks" msprop:Generator_ColumnPropNameInTable="VchDet_RemarksColumn" msprop:Generator_UserColumnName="VchDet_Remarks" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

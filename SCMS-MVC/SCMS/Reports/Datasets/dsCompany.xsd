@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsCompany" targetNamespace="http://tempuri.org/dsCompany.xsd" xmlns:mstns="http://tempuri.org/dsCompany.xsd" xmlns="http://tempuri.org/dsCompany.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsCompany" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsCompany" msprop:Generator_UserDSName="dsCompany">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Company" msprop:Generator_TableClassName="CompanyDataTable" msprop:Generator_TableVarName="tableCompany" msprop:Generator_TablePropName="Company" msprop:Generator_RowDeletingName="CompanyRowDeleting" msprop:Generator_UserTableName="Company" msprop:Generator_RowChangingName="CompanyRowChanging" msprop:Generator_RowEvHandlerName="CompanyRowChangeEventHandler" msprop:Generator_RowDeletedName="CompanyRowDeleted" msprop:Generator_RowEvArgName="CompanyRowChangeEvent" msprop:Generator_RowChangedName="CompanyRowChanged" msprop:Generator_RowClassName="CompanyRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Cmp_Id" msprop:Generator_ColumnVarNameInTable="columnCmp_Id" msprop:Generator_ColumnPropNameInRow="Cmp_Id" msprop:Generator_ColumnPropNameInTable="Cmp_IdColumn" msprop:Generator_UserColumnName="Cmp_Id" type="xs:string" minOccurs="0" />
+              <xs:element name="Cmp_Code" msprop:Generator_ColumnVarNameInTable="columnCmp_Code" msprop:Generator_ColumnPropNameInRow="Cmp_Code" msprop:Generator_ColumnPropNameInTable="Cmp_CodeColumn" msprop:Generator_UserColumnName="Cmp_Code" type="xs:string" minOccurs="0" />
+              <xs:element name="Cmp_Title" msprop:Generator_ColumnVarNameInTable="columnCmp_Title" msprop:Generator_ColumnPropNameInRow="Cmp_Title" msprop:Generator_ColumnPropNameInTable="Cmp_TitleColumn" msprop:Generator_UserColumnName="Cmp_Title" type="xs:string" minOccurs="0" />
+              <xs:element name="Cmp_Address1" msprop:Generator_ColumnVarNameInTable="columnCmp_Address1" msprop:Generator_ColumnPropNameInRow="Cmp_Address1" msprop:Generator_ColumnPropNameInTable="Cmp_Address1Column" msprop:Generator_UserColumnName="Cmp_Address1" type="xs:string" minOccurs="0" />
+              <xs:element name="Cmp_Address2" msprop:Generator_ColumnVarNameInTable="columnCmp_Address2" msprop:Generator_ColumnPropNameInRow="Cmp_Address2" msprop:Generator_ColumnPropNameInTable="Cmp_Address2Column" msprop:Generator_UserColumnName="Cmp_Address2" type="xs:string" minOccurs="0" />
+              <xs:element name="Cmp_Email" msprop:Generator_ColumnVarNameInTable="columnCmp_Email" msprop:Generator_ColumnPropNameInRow="Cmp_Email" msprop:Generator_ColumnPropNameInTable="Cmp_EmailColumn" msprop:Generator_UserColumnName="Cmp_Email" type="xs:string" minOccurs="0" />
+              <xs:element name="Cmp_Phone" msprop:Generator_ColumnVarNameInTable="columnCmp_Phone" msprop:Generator_ColumnPropNameInRow="Cmp_Phone" msprop:Generator_ColumnPropNameInTable="Cmp_PhoneColumn" msprop:Generator_UserColumnName="Cmp_Phone" type="xs:string" minOccurs="0" />
+              <xs:element name="Cmp_Fax" msprop:Generator_ColumnVarNameInTable="columnCmp_Fax" msprop:Generator_ColumnPropNameInRow="Cmp_Fax" msprop:Generator_ColumnPropNameInTable="Cmp_FaxColumn" msprop:Generator_UserColumnName="Cmp_Fax" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Logo" msprop:Generator_TableClassName="LogoDataTable" msprop:Generator_TableVarName="tableLogo" msprop:Generator_TablePropName="Logo" msprop:Generator_RowDeletingName="LogoRowDeleting" msprop:Generator_UserTableName="Logo" msprop:Generator_RowChangingName="LogoRowChanging" msprop:Generator_RowEvHandlerName="LogoRowChangeEventHandler" msprop:Generator_RowDeletedName="LogoRowDeleted" msprop:Generator_RowEvArgName="LogoRowChangeEvent" msprop:Generator_RowChangedName="LogoRowChanged" msprop:Generator_RowClassName="LogoRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CmpLogo" msprop:Generator_ColumnVarNameInTable="columnCmpLogo" msprop:Generator_ColumnPropNameInRow="CmpLogo" msprop:Generator_ColumnPropNameInTable="CmpLogoColumn" msprop:Generator_UserColumnName="CmpLogo" type="xs:base64Binary" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
