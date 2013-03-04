@@ -126,7 +126,6 @@
                     <ul>
                         <li><a href="../Company">Company</a> </li>
                         <li><a href="../Location">Location</a> </li>
-                        <%--<li><a href="#">Country</a> </li>--%>
                         <li><a href="../City">City</a> </li>
                         <li><a href="../SupplierType">Supplier Types</a> </li>
                         <li><a href="../Supplier">Suppliers</a> </li>

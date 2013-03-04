@@ -34,3 +34,12 @@ D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC\SCMS\bin\EntityFramework.xml
 D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC\SCMS\obj\Debug\SCMS.csprojResolveAssemblyReference.cache
 D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC\SCMS\obj\Debug\SCMS.dll
 D:\Working Projects\Dropbox\Supply Chain\SCMS-MVC\SCMS\obj\Debug\SCMS.pdb
+D:\Projects\SCMS\SCMS-MVC\SCMS\bin\SCMS.dll
+D:\Projects\SCMS\SCMS-MVC\SCMS\bin\SCMS.pdb
+D:\Projects\SCMS\SCMS-MVC\SCMS\bin\EntityFramework.dll
+D:\Projects\SCMS\SCMS-MVC\SCMS\bin\SCMSDataLayer.dll
+D:\Projects\SCMS\SCMS-MVC\SCMS\bin\SCMSDataLayer.pdb
+D:\Projects\SCMS\SCMS-MVC\SCMS\bin\EntityFramework.xml
+D:\Projects\SCMS\SCMS-MVC\SCMS\obj\Debug\SCMS.csprojResolveAssemblyReference.cache
+D:\Projects\SCMS\SCMS-MVC\SCMS\obj\Debug\SCMS.dll
+D:\Projects\SCMS\SCMS-MVC\SCMS\obj\Debug\SCMS.pdb
