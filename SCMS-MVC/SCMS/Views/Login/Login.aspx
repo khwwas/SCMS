@@ -11,6 +11,16 @@
         $(document).ready(function () {
             var lcnt_Username = document.getElementById("txt_UserName");
             lcnt_Username.focus();
+            $("#txt_UserName").keydown(function (event) {
+                if (event.keyCode == 13) {
+                    ValidateUser();
+                }
+            });
+            $("#txt_Password").keydown(function (event) {
+                if (event.keyCode == 13) {
+                    ValidateUser();
+                }
+            });
         });
 
         function ValidateUser() {
@@ -94,7 +104,7 @@
                                 <b>Username:</b>
                             </label>
                             <%--<asp:TextBox ID="txt_UserName" runat="server" Text="" ></asp:TextBox>--%>
-                           <input type="text" id="txt_UserName" />
+                            <input type="text" id="txt_UserName" />
                         </div>
                         <div class="row clear">
                             <label for="password">

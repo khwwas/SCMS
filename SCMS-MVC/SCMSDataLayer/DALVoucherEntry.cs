@@ -91,6 +91,19 @@ namespace SCMSDataLayer
             }
         }
 
+        public List<GL_VchrMaster> GetAllMasterRecords()
+        {
+            try
+            {
+                SCMSDataContext dbSCMS = Connection.Create();
+                return dbSCMS.GL_VchrMasters.OrderBy(c => c.VchMas_Id).ToList();
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public int DeleteRecordById(String ps_Id)
         {
             int li_Result = 0;
