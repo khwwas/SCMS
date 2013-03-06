@@ -82,7 +82,7 @@ namespace SCMSDataLayer
             {
                 SCMSDataContext dbSCMS = Connection.Create();
                 List<SETUP_ChartOfAccount> ChartOfAccountList = new List<SETUP_ChartOfAccount>();
-                ChartOfAccountList = dbSCMS.ExecuteQuery<SETUP_ChartOfAccount>("Select ChrtAcc_Id,ChrtAcc_Title+'['+ChrtAcc_Code+']' as ChrtAcc_Title From SETUP_ChartOfAccount Order By ChrtAcc_Code,ChrtAcc_Level").ToList();
+                ChartOfAccountList = dbSCMS.ExecuteQuery<SETUP_ChartOfAccount>("Select ChrtAcc_Id,ChrtAcc_Title+'['+ChrtAcc_Code+']' as ChrtAcc_Title From SETUP_ChartOfAccount Where ChrtAcc_Level = 5 Order By ChrtAcc_Code,ChrtAcc_Level").ToList();
                 return ChartOfAccountList;
             }
             catch

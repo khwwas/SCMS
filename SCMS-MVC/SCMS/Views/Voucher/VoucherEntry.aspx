@@ -192,11 +192,13 @@
             $("#ddl_Account3").combobox();
         });
 
-        function AddDetailRow() {
+        function AddDetailRow(RowNo, AccountId, Detail, Debit, Credit) {
             var DivArr = $("[id^=DetailRow]");
-            var RowNo = DivArr.length;
+            if (RowNo == null || RowNo == "") {
+                RowNo = DivArr.length;
+            }
             var Url = document.getElementById('frm_VoucherEntry').action;
-            Url += "Voucher/NewVoucherDetailEntryRow?RowNo=" + RowNo;
+            Url += "Voucher/NewVoucherDetailEntryRow?RowNo=" + RowNo + "&AccountCode=" + AccountId + "&Narration=" + Detail + "&Debit=" + Debit + "&Credit=" + Credit;
             $.ajax({
                 type: "GET",
                 url: Url,
@@ -414,7 +416,7 @@
         </div>
         <div style="float: left;">
             <img alt="Add New" src="../../img/add.png" style="width: 30px; cursor: pointer;"
-                onclick="javascript:AddDetailRow();" />
+                onclick='javascript:AddDetailRow("");' />
         </div>
         <hr style="padding: 0; margin-bottom: 5px;" />
         <div class="CustomCell" style="width: 820px; height: 30px; text-align: right;">
@@ -456,5 +458,60 @@
     <script type="text/javascript">
         document.getElementById("ddl_Status").value = '<%=ViewData["Status"] %>';
         document.getElementById("ddl_VoucherType").value = '<%=ViewData["VoucherType"] %>';
+
+        var TotalRows = '<%=ViewData["RowsCount"] %>';
+        var Debit = "";
+        var Credit = "";
+
+        document.getElementById("ddl_Account").value = '<%=ViewData["AccountId"] %>';
+        document.getElementById("txt_Details").value = '<%=ViewData["txt_Details"] %>';
+
+        Debit = '<%=ViewData["txt_Debit"] %>';
+        if (Debit != null && parseFloat(Debit) > 0) {
+            document.getElementById("txt_Debit").value = parseFloat(Debit).toFixed(2);
+        }
+        Credit = '<%=ViewData["txt_Credit"] %>';
+        if (Credit != null && parseFloat(Credit) > 0) {
+            document.getElementById("txt_Credit").value = parseFloat(Credit).toFixed(2);
+        }
+
+        document.getElementById("ddl_Account1").value = '<%=ViewData["AccountId1"] %>';
+        document.getElementById("txt_Details1").value = '<%=ViewData["txt_Details1"] %>';
+
+        Debit = '<%=ViewData["txt_Debit1"] %>';
+        if (Debit != null && parseFloat(Debit) > 0) {
+            document.getElementById("txt_Debit1").value = parseFloat(Debit).toFixed(2);
+        }
+        Credit = '<%=ViewData["txt_Credit1"] %>';
+        if (Credit != null && parseFloat(Credit) > 0) {
+            document.getElementById("txt_Credit1").value = parseFloat(Credit).toFixed(2);
+        }
+
+        document.getElementById("ddl_Account2").value = '<%=ViewData["AccountId2"] %>';
+        document.getElementById("txt_Details2").value = '<%=ViewData["txt_Details2"] %>';
+        Debit = '<%=ViewData["txt_Debit2"] %>';
+        if (Debit != null && parseFloat(Debit) > 0) {
+            document.getElementById("txt_Debit2").value = parseFloat(Debit).toFixed(2);
+        }
+        Credit = '<%=ViewData["txt_Credit2"] %>';
+        if (Credit != null && parseFloat(Credit) > 0) {
+            document.getElementById("txt_Credit2").value = parseFloat(Credit).toFixed(2);
+        }
+        document.getElementById("ddl_Account3").value = '<%=ViewData["AccountId3"] %>';
+        document.getElementById("txt_Details3").value = '<%=ViewData["txt_Details3"] %>';
+        Debit = '<%=ViewData["txt_Debit3"] %>';
+        if (Debit != null && parseFloat(Debit) > 0) {
+            document.getElementById("txt_Debit3").value = parseFloat(Debit).toFixed(2);
+        }
+        Credit = '<%=ViewData["txt_Credit3"] %>';
+        if (Credit != null && parseFloat(Credit) > 0) {
+            document.getElementById("txt_Credit3").value = parseFloat(Credit).toFixed(2);
+        }
+
+        if (TotalRows != null && parseInt(TotalRows) > 4) {
+            for (index = 4; index < parseInt(TotalRows); index++) {
+                AddDetailRow(index, '<%=ViewData["AccountId"] %>', '<%=ViewData["txt_Details"] %>', '<%=ViewData["txt_Debit"] %>', '<%=ViewData["txt_Credit"] %>');
+            }
+        }
     </script>
 </asp:Content>
