@@ -38,17 +38,18 @@ namespace SCMS.Controllers
             ViewData["ddl_Account"] = new SelectList(ChartOfAccounts, "ChrtAcc_Id", "ChrtAcc_Title", "");
             if (!String.IsNullOrEmpty(VoucherId))
             {
-                ViewData["VoucherCode"] = VoucherId;
+                SetVoucherEntryToEdit(VoucherId);
             }
             else
             {
                 ViewData["VoucherCode"] = "[Auto]";
+                ViewData["CurrentDate"] = DateTime.Now.ToString("MM/dd/yyyy");
             }
-            ViewData["CurrentDate"] = DateTime.Now.ToString("MM/dd/yyyy");
+
             return View();
         }
 
-        public String NewVoucherDetailEntryRow(int RowNo)
+        public String NewVoucherDetailEntryRow(int RowNo, String AccountCode, String Narration, String Debit, String Credit)
         {
             var ChartOfAccounts = new DALChartOfAccount().GetChartOfAccountForDropDown();
             String Response = "";
@@ -61,6 +62,10 @@ namespace SCMS.Controllers
             }
             Response += "</select>";
             Response += "</div>";
+            Response += "<div class='CustomCell' style='width: 565px; height: 30px;'>";
+            Response += "<input type='text' class='CustomText' style='width: 545px;' id='txt_Details" + RowNo.ToString() + "' name='txt_Details'";
+            Response += "maxlength='50' />";
+            Response += "</div>";
             Response += "<div class='CustomCell' style='width: 118px; height: 30px;'>";
             Response += "<input type='text' class='CustomText' style='width: 100px;' id='txt_Debit" + RowNo.ToString() + "' name='txt_Debit'";
             Response += "maxlength='50' onblur='SetTotals(this.id)' />";
@@ -68,10 +73,6 @@ namespace SCMS.Controllers
             Response += "<div class='CustomCell' style='width: 118px; height: 30px;'>";
             Response += "<input type='text' class='CustomText' style='width: 100px;' id='txt_Credit" + RowNo.ToString() + "' name='txt_Credit'";
             Response += "maxlength='50' onblur='SetTotals(this.id)' />";
-            Response += "</div>";
-            Response += "<div class='CustomCell' style='width: 565px; height: 30px;'>";
-            Response += "<input type='text' class='CustomText' style='width: 545px;' id='txt_Details" + RowNo.ToString() + "' name='txt_Details'";
-            Response += "maxlength='50' />";
             Response += "</div>";
             // Response += "</div>";
             return Response;
@@ -154,6 +155,19 @@ namespace SCMS.Controllers
             {
                 ViewData["SaveResult"] = 0;
                 return PartialView("GridData");
+            }
+        }
+
+        public void SetVoucherEntryToEdit(String VoucherId)
+        {
+            var VoucherEntryRow = new DALVoucherEntry().GetAllMasterRecords().Where(c => c.VchMas_Id.Equals(VoucherId)).SingleOrDefault();
+            if (VoucherEntryRow != null)
+            {
+                ViewData["VoucherCode"] = VoucherEntryRow.VchMas_Code;
+                ViewData["CurrentDate"] = Convert.ToDateTime(VoucherEntryRow.VchMas_Date).ToString("MM/dd/yyyy");
+                ViewData["Status"] = VoucherEntryRow.VchMas_Status;
+                ViewData["VoucherType"] = VoucherEntryRow.VchrType_Id;
+                ViewData["Remarks"] = VoucherEntryRow.VchMas_Remarks;
             }
         }
 

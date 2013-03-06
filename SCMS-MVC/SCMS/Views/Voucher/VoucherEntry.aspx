@@ -324,25 +324,29 @@
         <div class="CustomCell" style="width: 97px; height: 30px;">
             Remarks</div>
         <div class="CustomCell" style="width: 960px; height: 30px;">
-            <input type="text" class="CustomText" style="width: 940px;" id="txt_Remarks" name="txt_Remarks"
-                maxlength="50" />
+            <input type="text" value="<%=ViewData["Remarks"] %>" class="CustomText" style="width: 940px;"
+                id="txt_Remarks" name="txt_Remarks" maxlength="50" />
         </div>
         <hr style="padding: 0; margin-bottom: 5px;" />
         <div class="CustomCell" style="width: 252px;">
             Account Title
         </div>
+        <div class="CustomCell" style="width: 567px;">
+            Narration</div>
         <div class="CustomCell" style="width: 120px;">
             Dr.</div>
         <div class="CustomCell" style="width: 118px;">
             Cr.</div>
-        <div class="CustomCell">
-            Narration</div>
         <div class="Clear">
         </div>
         <div id="DetailContainer">
             <div id="DetailRow" style="float: left; width: auto;">
                 <div class="CustomCell" style="width: 250px; height: 30px;">
                     <%= Html.DropDownList("ddl_Account", null, new { style ="width:250px;" })%>
+                </div>
+                <div class="CustomCell" style="width: 565px; height: 30px;">
+                    <input type="text" class="CustomText" style="width: 545px;" id="txt_Details" name="txt_Details"
+                        maxlength="50" />
                 </div>
                 <div class="CustomCell" style="width: 118px; height: 30px;">
                     <input type="text" class="CustomText" style="width: 100px;" id="txt_Debit" name="txt_Debit"
@@ -352,15 +356,15 @@
                     <input type="text" class="CustomText" style="width: 100px;" id="txt_Credit" name="txt_Credit"
                         maxlength="50" onblur="SetTotals(this.id)" />
                 </div>
-                <div class="CustomCell" style="width: 565px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 545px;" id="txt_Details" name="txt_Details"
-                        maxlength="50" />
-                </div>
             </div>
             <div id="DetailRow1" style="float: left; width: auto;">
                 <div class="CustomCell" style="width: 250px; height: 30px;">
                     <% ViewData["ddl_Account1"] = new SelectList((List<SCMSDataLayer.DB.SETUP_ChartOfAccount>)ViewData["ChartOfAccounts"], "ChrtAcc_Id", "ChrtAcc_Title", "");%>
                     <%= Html.DropDownList("ddl_Account1", null,new { style = "width:250px;" })%>
+                </div>
+                <div class="CustomCell" style="width: 565px; height: 30px;">
+                    <input type="text" class="CustomText" style="width: 545px;" id="txt_Details1" name="txt_Details"
+                        maxlength="50" />
                 </div>
                 <div class="CustomCell" style="width: 118px; height: 30px;">
                     <input type="text" class="CustomText" style="width: 100px;" id="txt_Debit1" name="txt_Debit"
@@ -370,15 +374,15 @@
                     <input type="text" class="CustomText" style="width: 100px;" id="txt_Credit1" name="txt_Credit"
                         maxlength="50" onblur="SetTotals(this.id)" />
                 </div>
-                <div class="CustomCell" style="width: 565px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 545px;" id="txt_Details1" name="txt_Details"
-                        maxlength="50" />
-                </div>
             </div>
             <div id="DetailRow2" style="float: left; width: auto;">
                 <div class="CustomCell" style="width: 250px; height: 30px;">
                     <% ViewData["ddl_Account2"] = new SelectList((List<SCMSDataLayer.DB.SETUP_ChartOfAccount>)ViewData["ChartOfAccounts"], "ChrtAcc_Id", "ChrtAcc_Title", "");%>
                     <%= Html.DropDownList("ddl_Account2", null,new { style = "width:250px;" })%>
+                </div>
+                <div class="CustomCell" style="width: 565px; height: 30px;">
+                    <input type="text" class="CustomText" style="width: 545px;" id="txt_Details2" name="txt_Details"
+                        maxlength="50" />
                 </div>
                 <div class="CustomCell" style="width: 118px; height: 30px;">
                     <input type="text" class="CustomText" style="width: 100px;" id="txt_Debit2" name="txt_Debit"
@@ -388,15 +392,15 @@
                     <input type="text" class="CustomText" style="width: 100px;" id="txt_Credit2" name="txt_Credit"
                         maxlength="50" onblur="SetTotals(this.id)" />
                 </div>
-                <div class="CustomCell" style="width: 565px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 545px;" id="txt_Details2" name="txt_Details"
-                        maxlength="50" />
-                </div>
             </div>
             <div id="DetailRow3" style="float: left; width: auto;">
                 <div class="CustomCell" style="width: 250px; height: 30px;">
                     <% ViewData["ddl_Account3"] = new SelectList((List<SCMSDataLayer.DB.SETUP_ChartOfAccount>)ViewData["ChartOfAccounts"], "ChrtAcc_Id", "ChrtAcc_Title", "");%>
                     <%= Html.DropDownList("ddl_Account3", null,new { style = "width:250px;" })%>
+                </div>
+                <div class="CustomCell" style="width: 565px; height: 30px;">
+                    <input type="text" class="CustomText" style="width: 545px;" id="txt_Details3" name="txt_Details"
+                        maxlength="50" />
                 </div>
                 <div class="CustomCell" style="width: 118px; height: 30px;">
                     <input type="text" class="CustomText" style="width: 100px;" id="txt_Debit3" name="txt_Debit"
@@ -406,10 +410,6 @@
                     <input type="text" class="CustomText" style="width: 100px;" id="txt_Credit3" name="txt_Credit"
                         maxlength="50" onblur="SetTotals(this.id)" />
                 </div>
-                <div class="CustomCell" style="width: 565px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 545px;" id="txt_Details3" name="txt_Details"
-                        maxlength="50" />
-                </div>
             </div>
         </div>
         <div style="float: left;">
@@ -417,7 +417,7 @@
                 onclick="javascript:AddDetailRow();" />
         </div>
         <hr style="padding: 0; margin-bottom: 5px;" />
-        <div class="CustomCell" style="width: 250px; height: 30px; text-align: right;">
+        <div class="CustomCell" style="width: 820px; height: 30px; text-align: right;">
             Total &nbsp;
         </div>
         <div class="CustomCell" style="width: 118px; height: 30px;">
@@ -431,7 +431,7 @@
         <div class="CustomCell" style="width: 30px; height: 30px; text-align: right;">
             Diff &nbsp;
         </div>
-        <div class="CustomCell" style="width: 535px; height: 30px;">
+        <div class="CustomCell" style="width: 165px; height: 30px;">
             <input type="text" class="CustomText" style="width: 100px;" id="txt_Difference" disabled="disabled"
                 name="txt_Difference" maxlength="50" />
         </div>
@@ -453,4 +453,8 @@
     /> <div id="GridContainer"> <%Html.RenderPartial("GridData");%> </div>--%>
     </div>
     </form>
+    <script type="text/javascript">
+        document.getElementById("ddl_Status").value = '<%=ViewData["Status"] %>';
+        document.getElementById("ddl_VoucherType").value = '<%=ViewData["VoucherType"] %>';
+    </script>
 </asp:Content>
