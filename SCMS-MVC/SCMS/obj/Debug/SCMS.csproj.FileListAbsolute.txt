@@ -43,3 +43,12 @@ D:\Projects\SCMS\SCMS-MVC\SCMS\bin\EntityFramework.xml
 D:\Projects\SCMS\SCMS-MVC\SCMS\obj\Debug\SCMS.csprojResolveAssemblyReference.cache
 D:\Projects\SCMS\SCMS-MVC\SCMS\obj\Debug\SCMS.dll
 D:\Projects\SCMS\SCMS-MVC\SCMS\obj\Debug\SCMS.pdb
+D:\Development\SCMS\SCMS-MVC\SCMS\bin\SCMS.dll
+D:\Development\SCMS\SCMS-MVC\SCMS\bin\SCMS.pdb
+D:\Development\SCMS\SCMS-MVC\SCMS\bin\EntityFramework.dll
+D:\Development\SCMS\SCMS-MVC\SCMS\bin\SCMSDataLayer.dll
+D:\Development\SCMS\SCMS-MVC\SCMS\bin\SCMSDataLayer.pdb
+D:\Development\SCMS\SCMS-MVC\SCMS\bin\EntityFramework.xml
+D:\Development\SCMS\SCMS-MVC\SCMS\obj\Debug\ResolveAssemblyReference.cache
+D:\Development\SCMS\SCMS-MVC\SCMS\obj\Debug\SCMS.dll
+D:\Development\SCMS\SCMS-MVC\SCMS\obj\Debug\SCMS.pdb
