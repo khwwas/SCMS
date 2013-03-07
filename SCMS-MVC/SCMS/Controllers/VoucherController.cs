@@ -59,7 +59,7 @@ namespace SCMS.Controllers
             {
                 Narration = "";
             }
-            if (Debit == null || Debit == "undefined")
+            if (Debit == null || Debit == "undefined" || Debit == "0.000000")
             {
                 Debit = "";
             }
@@ -67,7 +67,7 @@ namespace SCMS.Controllers
             {
                 Debit = Math.Round(Convert.ToDecimal(Debit), 2).ToString();
             }
-            if (Credit == null || Credit == "undefined")
+            if (Credit == null || Credit == "undefined" || Credit == "0.000000")
             {
                 Credit = "";
             }
@@ -105,7 +105,7 @@ namespace SCMS.Controllers
             }
             else
             {
-                Response += "maxlength='50' onblur='SetTotals(this.id)' />";
+                Response += "maxlength='50' onblur='SetTotals(this.id)' disabled='disabled' />";
             }
             Response += "</div>";
             Response += "<div class='CustomCell' style='width: 118px; height: 30px;'>";
@@ -116,7 +116,7 @@ namespace SCMS.Controllers
             }
             else
             {
-                Response += "maxlength='50'  onblur='SetTotals(this.id)' />";
+                Response += "maxlength='50'  onblur='SetTotals(this.id)' disabled='disabled' />";
             }
             Response += "</div>";
             // Response += "</div>";
@@ -209,11 +209,12 @@ namespace SCMS.Controllers
             if (VoucherEntryRow != null)
             {
                 ViewData["VoucherCode"] = VoucherEntryRow.VchMas_Code;
+                ViewData["VoucherId"] = VoucherEntryRow.VchMas_Id;
                 ViewData["CurrentDate"] = Convert.ToDateTime(VoucherEntryRow.VchMas_Date).ToString("MM/dd/yyyy");
                 ViewData["Status"] = VoucherEntryRow.VchMas_Status;
                 ViewData["VoucherType"] = VoucherEntryRow.VchrType_Id;
                 ViewData["Remarks"] = VoucherEntryRow.VchMas_Remarks;
-                var VoucherDetailRows = new DALVoucherEntry().GetAllDetailRecords().Where(c => c.VchMas_Id.Equals(VoucherId)).ToList();
+                var VoucherDetailRows = new DALVoucherEntry().GetAllDetailRecords().Where(c => c.VchMas_Id.Equals(VoucherId)).ToList().OrderBy(c => c.VchDet_Id).ToList();
                 if (VoucherDetailRows != null && VoucherDetailRows.Count > 0)
                 {
                     ViewData["RowsCount"] = VoucherDetailRows.Count;
@@ -222,23 +223,8 @@ namespace SCMS.Controllers
                     {
                         ViewData["AccountId" + Count] = DetailRow.ChrtAcc_Id;
                         ViewData["txt_Details" + Count] = DetailRow.VchDet_Remarks;
-                        if (DetailRow.VchMas_DrAmount != null && Convert.ToDouble(DetailRow.VchMas_DrAmount) > 0.00)
-                        {
-                            ViewData["txt_Debit" + Count] = DetailRow.VchMas_DrAmount;
-                        }
-                        else
-                        {
-                            ViewData["txt_Debit" + Count] = "";
-                        }
-                        //  if (DetailRow.VchMas_CrAmount != null && DetailRow.VchMas_CrAmount > 0)
-                        //  {
+                        ViewData["txt_Debit" + Count] = DetailRow.VchMas_DrAmount;
                         ViewData["txt_Credit" + Count] = DetailRow.VchMas_CrAmount;
-                        //   }
-                        //   else
-                        //   {
-                        //        ViewData["txt_Credit" + Count] = "";
-                        //   }
-
                         if (Count == "")
                         {
                             Count = "0";
