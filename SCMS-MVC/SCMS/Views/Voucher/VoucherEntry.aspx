@@ -192,11 +192,13 @@
             $("#ddl_Account3").combobox();
         });
 
-        function AddDetailRow() {
+        function AddDetailRow(RowNo, AccountId, Detail, Debit, Credit) {
             var DivArr = $("[id^=DetailRow]");
-            var RowNo = DivArr.length;
+            if (RowNo == null || RowNo == "") {
+                RowNo = DivArr.length;
+            }
             var Url = document.getElementById('frm_VoucherEntry').action;
-            Url += "Voucher/NewVoucherDetailEntryRow?RowNo=" + RowNo;
+            Url += "Voucher/NewVoucherDetailEntryRow?RowNo=" + RowNo + "&AccountCode=" + AccountId + "&Narration=" + Detail + "&Debit=" + Debit + "&Credit=" + Credit;
             $.ajax({
                 type: "GET",
                 url: Url,
@@ -263,6 +265,7 @@
                 txt_Difference.style.color = "red";
             }
             txt_Difference.value = Difference;
+
             if (document.getElementById(Id).value != "" && Id.match(/Debit/) != null) {
                 document.getElementById(Id.replace("Debit", "Credit")).disabled = "disabled";
             }
@@ -278,7 +281,7 @@
         }
     </script>
     <form id="frm_VoucherEntry" action='<%=Url.Content("~/") %>'>
-    <input type="hidden" id="txt_SelectedMasterCode" name="txt_SelectedMasterCode" value="" />
+    <input type="hidden" id="txt_SelectedMasterCode" name="txt_SelectedMasterCode" value='<%=ViewData["VoucherId"] %>' />
     <input type="hidden" id="txt_SelectedDetailCode" name="txt_SelectedDetailCode" value="" />
     <div class="box round first fullpage grid">
         <h2>
@@ -290,7 +293,7 @@
                 Code</div>
             <div class="CustomCell" style="width: 320px; height: 30px;">
                 <input type="text" class="CustomText" style="width: 250px;" id="txt_Code" name="txt_Code"
-                    maxlength="15" readonly="readonly" value="<%=ViewData["VoucherCode"] %>" />
+                    maxlength="15" readonly="readonly" value='<%=ViewData["VoucherCode"] %>' />
             </div>
             <div class="CustomCell" style="width: 40px; height: 30px;">
                 Date</div>
@@ -414,7 +417,7 @@
         </div>
         <div style="float: left;">
             <img alt="Add New" src="../../img/add.png" style="width: 30px; cursor: pointer;"
-                onclick="javascript:AddDetailRow();" />
+                onclick='javascript:AddDetailRow("");' />
         </div>
         <hr style="padding: 0; margin-bottom: 5px;" />
         <div class="CustomCell" style="width: 820px; height: 30px; text-align: right;">
@@ -449,12 +452,125 @@
                     height: 35px; padding-top: 5px; color: White; font-weight: bold; font-size: 11pt;" />
             </div>
         </div>
-        <%-- <hr
-    /> <div id="GridContainer"> <%Html.RenderPartial("GridData");%> </div>--%>
+        <%-- <hr/> <div id="GridContainer"> <%Html.RenderPartial("GridData");%> </div>--%>
     </div>
     </form>
     <script type="text/javascript">
         document.getElementById("ddl_Status").value = '<%=ViewData["Status"] %>';
         document.getElementById("ddl_VoucherType").value = '<%=ViewData["VoucherType"] %>';
+
+        var TotalRows = '<%=ViewData["RowsCount"] %>';
+        var Debit = "";
+        var Credit = "";
+
+        document.getElementById("ddl_Account").value = '<%=ViewData["AccountId"] %>';
+        document.getElementById("txt_Details").value = '<%=ViewData["txt_Details"] %>';
+
+        Debit = '<%=ViewData["txt_Debit"] %>';
+        if (Debit != null && parseFloat(Debit) > 0) {
+            document.getElementById("txt_Debit").value = parseFloat(Debit).toFixed(2);
+            SetTotals("txt_Debit");
+        }
+        Credit = '<%=ViewData["txt_Credit"] %>';
+        if (Credit != null && parseFloat(Credit) > 0) {
+            document.getElementById("txt_Credit").value = parseFloat(Credit).toFixed(2);
+            SetTotals("txt_Credit");
+        }
+
+        document.getElementById("ddl_Account1").value = '<%=ViewData["AccountId1"] %>';
+        document.getElementById("txt_Details1").value = '<%=ViewData["txt_Details1"] %>';
+
+        Debit = '<%=ViewData["txt_Debit1"] %>';
+        if (Debit != null && parseFloat(Debit) > 0) {
+            document.getElementById("txt_Debit1").value = parseFloat(Debit).toFixed(2);
+            SetTotals("txt_Debit1");
+        }
+        Credit = '<%=ViewData["txt_Credit1"] %>';
+        if (Credit != null && parseFloat(Credit) > 0) {
+            document.getElementById("txt_Credit1").value = parseFloat(Credit).toFixed(2);
+            SetTotals("txt_Credit1");
+        }
+
+        document.getElementById("ddl_Account2").value = '<%=ViewData["AccountId2"] %>';
+        document.getElementById("txt_Details2").value = '<%=ViewData["txt_Details2"] %>';
+        Debit = '<%=ViewData["txt_Debit2"] %>';
+        if (Debit != null && parseFloat(Debit) > 0) {
+            document.getElementById("txt_Debit2").value = parseFloat(Debit).toFixed(2);
+            SetTotals("txt_Debit2");
+        }
+        Credit = '<%=ViewData["txt_Credit2"] %>';
+        if (Credit != null && parseFloat(Credit) > 0) {
+            document.getElementById("txt_Credit2").value = parseFloat(Credit).toFixed(2);
+            SetTotals("txt_Credit2");
+        }
+        document.getElementById("ddl_Account3").value = '<%=ViewData["AccountId3"] %>';
+        document.getElementById("txt_Details3").value = '<%=ViewData["txt_Details3"] %>';
+        Debit = '<%=ViewData["txt_Debit3"] %>';
+        if (Debit != null && parseFloat(Debit) > 0) {
+            document.getElementById("txt_Debit3").value = parseFloat(Debit).toFixed(2);
+            SetTotals("txt_Debit3");
+        }
+        Credit = '<%=ViewData["txt_Credit3"] %>';
+        if (Credit != null && parseFloat(Credit) > 0) {
+            document.getElementById("txt_Credit3").value = parseFloat(Credit).toFixed(2);
+            SetTotals("txt_Credit3");
+        }
     </script>
+    <% var TotalRows = ViewData["RowsCount"];
+       if (TotalRows != null && Convert.ToInt32(TotalRows) > 0)
+       {
+           for (int index = 4; index < Convert.ToInt32(TotalRows); index++)
+           {
+               var Debit = ViewData["txt_Debit" + index.ToString()];
+               var Credit = ViewData["txt_Credit" + index.ToString()];
+               var Narration = ViewData["txt_Details" + index.ToString()];
+               var AccountId = ViewData["AccountId" + index.ToString()];
+               string flag = "txt_Debit";
+               if (Credit != null && Credit != "" && Convert.ToInt32(Credit) > 0)
+               {
+                   flag = "txt_Credit";
+               }
+    %>
+    <script type="text/javascript">
+        AddDetailRow('<%=index %>', '<%=AccountId %>', '<%=Narration %>', '<%=Debit %>', '<%=Credit %>');
+        var txt_TotalDebit = document.getElementById('txt_TotalDebit');
+        var txt_TotalCredit = document.getElementById('txt_TotalCredit');
+        var txt_Difference = document.getElementById('txt_Difference');
+        var flag = '<%=flag%>';
+        if (flag == "txt_Debit") {
+            txt_TotalDebit.value = parseFloat(txt_TotalDebit.value) + parseFloat('<%=Debit %>');
+        }
+        else {
+            txt_TotalCredit.value = parseFloat(txt_TotalCredit.value) + parseFloat('<%=Credit %>');
+        }
+
+        txt_TotalDebit.style.color = "green";
+        txt_TotalCredit.style.color = "green";
+
+        if (parseFloat(txt_TotalDebit.value) < parseFloat(txt_TotalCredit.value)) {
+            txt_TotalDebit.style.color = "red";
+        }
+        else {
+            txt_TotalDebit.style.color = "green";
+        }
+        if (parseFloat(txt_TotalCredit.value) < parseFloat(txt_TotalDebit.value)) {
+            txt_TotalCredit.style.color = "red";
+        }
+        else {
+            txt_TotalCredit.style.color = "green";
+        }
+        var Difference = parseFloat(txt_TotalDebit.value) - parseFloat(txt_TotalCredit.value);
+        txt_Difference.style.color = "green";
+        if (Difference < 0) {
+            Difference = parseFloat(txt_TotalCredit.value) - parseFloat(txt_TotalDebit.value);
+        }
+        if (Difference > 0) {
+            txt_Difference.style.color = "red";
+        }
+        txt_Difference.value = Difference;
+    </script>
+    <% }
+       }
+        
+    %>
 </asp:Content>

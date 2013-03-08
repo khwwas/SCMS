@@ -51,6 +51,30 @@ namespace SCMS.Controllers
 
         public String NewVoucherDetailEntryRow(int RowNo, String AccountCode, String Narration, String Debit, String Credit)
         {
+            if (AccountCode == null || AccountCode == "undefined")
+            {
+                AccountCode = "0";
+            }
+            if (Narration == null || Narration == "undefined")
+            {
+                Narration = "";
+            }
+            if (Debit == null || Debit == "undefined" || Debit == "0.000000")
+            {
+                Debit = "";
+            }
+            else
+            {
+                Debit = Math.Round(Convert.ToDecimal(Debit), 2).ToString();
+            }
+            if (Credit == null || Credit == "undefined" || Credit == "0.000000")
+            {
+                Credit = "";
+            }
+            else
+            {
+                Credit = Math.Round(Convert.ToDecimal(Credit), 2).ToString();
+            }
             var ChartOfAccounts = new DALChartOfAccount().GetChartOfAccountForDropDown();
             String Response = "";
             // Response += "<div id='DetailRow" + RowNo.ToString() + "' style='float: left; width: auto;'>";
@@ -58,21 +82,42 @@ namespace SCMS.Controllers
             Response += "<select id='ddl_Account" + RowNo.ToString() + "' name='ddl_Account" + RowNo.ToString() + "' style='width:250px;'><option value='0'></option>";
             foreach (SETUP_ChartOfAccount row in ChartOfAccounts)
             {
-                Response += "<option value='" + row.ChrtAcc_Id + "'>" + row.ChrtAcc_Title + "</option>";
+                if (row.ChrtAcc_Id == AccountCode)
+                {
+                    Response += "<option value='" + row.ChrtAcc_Id + "' selected='selected'>" + row.ChrtAcc_Title + "</option>";
+                }
+                else
+                {
+                    Response += "<option value='" + row.ChrtAcc_Id + "'>" + row.ChrtAcc_Title + "</option>";
+                }
             }
             Response += "</select>";
             Response += "</div>";
             Response += "<div class='CustomCell' style='width: 565px; height: 30px;'>";
             Response += "<input type='text' class='CustomText' style='width: 545px;' id='txt_Details" + RowNo.ToString() + "' name='txt_Details'";
-            Response += "maxlength='50' />";
+            Response += "maxlength='50' value='" + Narration + "' />";
             Response += "</div>";
             Response += "<div class='CustomCell' style='width: 118px; height: 30px;'>";
             Response += "<input type='text' class='CustomText' style='width: 100px;' id='txt_Debit" + RowNo.ToString() + "' name='txt_Debit'";
-            Response += "maxlength='50' onblur='SetTotals(this.id)' />";
+            if (Debit != "")
+            {
+                Response += "maxlength='50' value='" + Debit + "' onblur='SetTotals(this.id)' />";
+            }
+            else
+            {
+                Response += "maxlength='50' onblur='SetTotals(this.id)' disabled='disabled' />";
+            }
             Response += "</div>";
             Response += "<div class='CustomCell' style='width: 118px; height: 30px;'>";
             Response += "<input type='text' class='CustomText' style='width: 100px;' id='txt_Credit" + RowNo.ToString() + "' name='txt_Credit'";
-            Response += "maxlength='50' onblur='SetTotals(this.id)' />";
+            if (Credit != "")
+            {
+                Response += "maxlength='50' value='" + Credit + "' onblur='SetTotals(this.id)' />";
+            }
+            else
+            {
+                Response += "maxlength='50'  onblur='SetTotals(this.id)' disabled='disabled' />";
+            }
             Response += "</div>";
             // Response += "</div>";
             return Response;
@@ -164,10 +209,29 @@ namespace SCMS.Controllers
             if (VoucherEntryRow != null)
             {
                 ViewData["VoucherCode"] = VoucherEntryRow.VchMas_Code;
+                ViewData["VoucherId"] = VoucherEntryRow.VchMas_Id;
                 ViewData["CurrentDate"] = Convert.ToDateTime(VoucherEntryRow.VchMas_Date).ToString("MM/dd/yyyy");
                 ViewData["Status"] = VoucherEntryRow.VchMas_Status;
                 ViewData["VoucherType"] = VoucherEntryRow.VchrType_Id;
                 ViewData["Remarks"] = VoucherEntryRow.VchMas_Remarks;
+                var VoucherDetailRows = new DALVoucherEntry().GetAllDetailRecords().Where(c => c.VchMas_Id.Equals(VoucherId)).ToList().OrderBy(c => c.VchDet_Id).ToList();
+                if (VoucherDetailRows != null && VoucherDetailRows.Count > 0)
+                {
+                    ViewData["RowsCount"] = VoucherDetailRows.Count;
+                    String Count = "";
+                    foreach (GL_VchrDetail DetailRow in VoucherDetailRows)
+                    {
+                        ViewData["AccountId" + Count] = DetailRow.ChrtAcc_Id;
+                        ViewData["txt_Details" + Count] = DetailRow.VchDet_Remarks;
+                        ViewData["txt_Debit" + Count] = DetailRow.VchMas_DrAmount;
+                        ViewData["txt_Credit" + Count] = DetailRow.VchMas_CrAmount;
+                        if (Count == "")
+                        {
+                            Count = "0";
+                        }
+                        Count = (Convert.ToInt32(Count) + 1).ToString();
+                    }
+                }
             }
         }
 
