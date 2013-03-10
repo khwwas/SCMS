@@ -240,21 +240,27 @@ namespace SCMS.Reports
 
                     LocationCode = SCMS.Reports.ReportParameters.Location;
 
+                    if (_dsLedger.Tables.Contains("Logo"))
+                    {
+                        _dsLedger.Tables.Remove("Logo");
+                    }
+
                     if (_dsLedger.Tables.Contains("LedgerDetail"))
                     {
                         _dsLedger.Tables.Remove("LedgerDetail");
                     }
 
-                    _ds = _dalReports.LedgerDetail(
+                    _ds = _dalReports.LedgerDetail();
+                    _dsLedger.Tables.Add(_ds.Tables[0].Copy());
+                    _dsLedger.Tables[0].TableName = "LedgerDetail";
+                    _rptLedger.SetDataSource(_dsLedger);
 
                     if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
                     {
                         MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
                     }
 
-                    _dsLedger.Tables.Add(_ds.Tables[0].Copy());
-                    _dsLedger.Tables[0].TableName = "LedgerDetail";
-                    _rptLedger.SetDataSource(_dsLedger);
+
 
                     _rptLedger.SummaryInfo.ReportTitle = ls_Company;
                     _rptLedger.SummaryInfo.ReportSubject = "Ledger Detail";
@@ -267,13 +273,18 @@ namespace SCMS.Reports
                 #endregion
 
                 #region Trial Balance
-                 else if (ReportName.ToLower() == "TrialBalance".ToLower())
+                else if (ReportName.ToLower() == "TrialBalance".ToLower())
                 {
-                    Reps.rptTrialBalance _rptTrialBalance   = new Reps.rptTrialBalance();
+                    Reps.rptTrialBalance _rptTrialBalance = new Reps.rptTrialBalance();
                     Datasets.dsTrialBalance _dsTrialBalance = new Datasets.dsTrialBalance();
                     string LocationCode = "";
 
                     LocationCode = SCMS.Reports.ReportParameters.Location;
+
+                    if (_dsTrialBalance.Tables.Contains("Logo"))
+                    {
+                        _dsTrialBalance.Tables.Remove("Logo");
+                    }
 
                     if (_dsTrialBalance.Tables.Contains("TrialBalance"))
                     {

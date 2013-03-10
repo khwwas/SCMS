@@ -459,7 +459,7 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public LedgerDetailRow AddLedgerDetailRow(string Loc_Id, string Loc_Title, string ChrtAcc_Id, string ChrtAcc_Code, string ChrtAcc_Title, string VchMas_Id, string VchMas_Code, string VchMas_Date, double VchMas_DrAmount, double VchMas_CrAmount, string VchDet_Remarks) {
+            public LedgerDetailRow AddLedgerDetailRow(string Loc_Id, string Loc_Title, string ChrtAcc_Id, string ChrtAcc_Code, string ChrtAcc_Title, string VchMas_Id, string VchMas_Code, System.DateTime VchMas_Date, double VchMas_DrAmount, double VchMas_CrAmount, string VchDet_Remarks) {
                 LedgerDetailRow rowLedgerDetailRow = ((LedgerDetailRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Loc_Id,
@@ -525,7 +525,7 @@ namespace SCMS.Reports.Datasets {
                 base.Columns.Add(this.columnVchMas_Id);
                 this.columnVchMas_Code = new global::System.Data.DataColumn("VchMas_Code", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnVchMas_Code);
-                this.columnVchMas_Date = new global::System.Data.DataColumn("VchMas_Date", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnVchMas_Date = new global::System.Data.DataColumn("VchMas_Date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnVchMas_Date);
                 this.columnVchMas_DrAmount = new global::System.Data.DataColumn("VchMas_DrAmount", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnVchMas_DrAmount);
@@ -787,10 +787,10 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string VchMas_Date {
+            public System.DateTime VchMas_Date {
                 get {
                     try {
-                        return ((string)(this[this.tableLedgerDetail.VchMas_DateColumn]));
+                        return ((global::System.DateTime)(this[this.tableLedgerDetail.VchMas_DateColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'VchMas_Date\' in table \'LedgerDetail\' is DBNull.", e);

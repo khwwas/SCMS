@@ -16,8 +16,7 @@ namespace SCMSDataLayer
             SqlConnection con = new SqlConnection();
             SqlCommand _cmd = new SqlCommand();
             DataSet _ds = new DataSet();
-            //string _Sql = "";
-
+          
             try
             {
                 con = Connection.ReportConnection("Open");
@@ -173,33 +172,70 @@ namespace SCMSDataLayer
         }
         #endregion
 
-        public List<sp_ReportLedgerDetailResult> LedgerDetail()
+        public DataSet LedgerDetail()
         {
+            SqlConnection con = new SqlConnection();
+            SqlCommand _cmd = new SqlCommand();
+            DataSet _ds = new DataSet();
+
             try
             {
-                SCMSDataContext dbSCMS = Connection.Create();
-                return dbSCMS.sp_ReportLedgerDetail().ToList();
+                con = Connection.ReportConnection("Open");
+                if (con.State != System.Data.ConnectionState.Open)
+                {
+                    return null;
+                }
+
+                _cmd.Connection = con;
+                _cmd.CommandType = CommandType.StoredProcedure;
+                _cmd.CommandText = "sp_ReportLedgerDetail";
+                _cmd.ExecuteNonQuery();
+
+                SqlDataAdapter da = new SqlDataAdapter(_cmd);
+                da.Fill(_ds, "LedgerDetail");
+
+                Connection.ReportConnection("Close");
             }
-            catch
+            catch (Exception ex)
             {
-                return null;
+                throw new Exception(ex.Message.ToString());
             }
+
+            return _ds;
         }
 
         #region Trial Balance
-        public List<sp_ReportTrialBalanceResult> TrialBalance()
+        public DataSet  TrialBalance()
         {
+            SqlConnection con = new SqlConnection();
+            SqlCommand _cmd = new SqlCommand();
+            DataSet _ds = new DataSet();
+
             try
             {
-                SCMSDataContext dbSCMS = Connection.Create();
-                return dbSCMS.sp_ReportTrialBalance(1, "", 1, "", 1, "", "").ToList();
-            }
-            catch
-            {
-                return null;
-            }
-        }
+                con = Connection.ReportConnection("Open");
+                if (con.State != System.Data.ConnectionState.Open)
+                {
+                    return null;
+                }
 
+                _cmd.Connection = con;
+                _cmd.CommandType = CommandType.StoredProcedure;
+                _cmd.CommandText = "sp_ReportTrialBalance";
+                _cmd.ExecuteNonQuery();
+
+                SqlDataAdapter da = new SqlDataAdapter(_cmd);
+                da.Fill(_ds, "TrialBalance");
+
+                Connection.ReportConnection("Close");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message.ToString());
+            }
+
+            return _ds;
+        }
         #endregion
 
     }
