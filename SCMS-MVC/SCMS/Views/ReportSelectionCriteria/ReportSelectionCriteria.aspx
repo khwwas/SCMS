@@ -42,6 +42,10 @@
                 var pcnt_Location = document.getElementById('ddl_location');
                 var Url = "../ReportSelectionCriteria/SetParameter?ps_ReportName=" + ps_ReportName + "&ps_Location=" + pcnt_Location.value;
             }
+            else if (ps_ReportName == "TrialBalance") {
+                var pcnt_Location = document.getElementById('ddl_location');
+                var Url = "../ReportSelectionCriteria/SetParameter?ps_ReportName=" + ps_ReportName + "&ps_Location=" + pcnt_Location.value;
+            }
 
             $.ajax({
                 type: "GET",

@@ -200,7 +200,7 @@
             <div class="CustomCell" style="width: 40px;">
                 Level</div>
             <div class="CustomCell" style="width: 42px;">
-                <input type="text" class="CustomText" id="txt_Level" name="txt_Level" maxlength="2"
+                <input type="text" class="CustomText" id="txt_Level" name="txt_Level" maxlength="1" 
                     style="width: 35px; border-right: 0px;" value="1" disabled="disabled" />
             </div>
             <div class="CustomCell" style="border: 1px solid #ccc; width: 20px; height: 28px;

@@ -232,37 +232,72 @@ namespace SCMS.Reports
                 #endregion
 
                 #region Ledger Detail
-                else if (ReportName.ToLower() == "Ledger".ToLower())
+                else if (ReportName.ToLower() == "LedgerDetail".ToLower())
                 {
-                    //Reps.rptLedger _rptLedger = new Reps.rptLedger();
-                    //Datasets.dsLedger _dsLedger = new Datasets.dsLedger();
-                    //string LocationCode = "";
+                    Reps.rptLedger _rptLedger = new Reps.rptLedger();
+                    Datasets.dsLedger _dsLedger = new Datasets.dsLedger();
+                    string LocationCode = "";
 
-                    //LocationCode = SCMS.Reports.ReportParameters.Location;
+                    LocationCode = SCMS.Reports.ReportParameters.Location;
 
-                    //if (_dsLedger.Tables.Contains("LedgerDetail"))
-                    //{
-                    //    _dsLedger.Tables.Remove("LedgerDetail");
-                    //}
+                    if (_dsLedger.Tables.Contains("LedgerDetail"))
+                    {
+                        _dsLedger.Tables.Remove("LedgerDetail");
+                    }
 
-                    //_ds = CreateDataSet(_dalReports.LedgerDetail());
+                    _ds = _dalReports.LedgerDetail(
 
-                    //if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
-                    //{
-                    //    MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
-                    //}
+                    if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
+                    {
+                        MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
+                    }
 
-                    //_dsLedger.Tables.Add(_ds.Tables[0].Copy());
-                    //_dsLedger.Tables[0].TableName = "LedgerDetail";
-                    //_rptLedger.SetDataSource(_dsLedger);
+                    _dsLedger.Tables.Add(_ds.Tables[0].Copy());
+                    _dsLedger.Tables[0].TableName = "LedgerDetail";
+                    _rptLedger.SetDataSource(_dsLedger);
 
-                    //_rptLedger.SummaryInfo.ReportTitle = ls_Company;
-                    //_rptLedger.SummaryInfo.ReportSubject = "Ledger Detail";
-                    //_rptLedger.SummaryInfo.ReportComments = ls_ApplicationName;
-                    //_rptLedger.SummaryInfo.ReportAuthor = ls_User;
+                    _rptLedger.SummaryInfo.ReportTitle = ls_Company;
+                    _rptLedger.SummaryInfo.ReportSubject = "Ledger Detail";
+                    _rptLedger.SummaryInfo.ReportComments = ls_ApplicationName;
+                    _rptLedger.SummaryInfo.ReportAuthor = ls_User;
 
-                    //crvReports.ReportSource = _rptLedger;
-                    //crvReports.DataBind();
+                    crvReports.ReportSource = _rptLedger;
+                    crvReports.DataBind();
+                }
+                #endregion
+
+                #region Trial Balance
+                 else if (ReportName.ToLower() == "TrialBalance".ToLower())
+                {
+                    Reps.rptTrialBalance _rptTrialBalance   = new Reps.rptTrialBalance();
+                    Datasets.dsTrialBalance _dsTrialBalance = new Datasets.dsTrialBalance();
+                    string LocationCode = "";
+
+                    LocationCode = SCMS.Reports.ReportParameters.Location;
+
+                    if (_dsTrialBalance.Tables.Contains("TrialBalance"))
+                    {
+                        _dsTrialBalance.Tables.Remove("TrialBalance");
+                    }
+
+                    _ds = _dalReports.TrialBalance();
+
+                    if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
+                    {
+                        MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
+                    }
+
+                    _dsTrialBalance.Tables.Add(_ds.Tables[0].Copy());
+                    _dsTrialBalance.Tables[0].TableName = "TrialBalance";
+                    _rptTrialBalance.SetDataSource(_dsTrialBalance);
+
+                    _rptTrialBalance.SummaryInfo.ReportTitle = ls_Company;
+                    _rptTrialBalance.SummaryInfo.ReportSubject = "Trial Balance";
+                    _rptTrialBalance.SummaryInfo.ReportComments = ls_ApplicationName;
+                    _rptTrialBalance.SummaryInfo.ReportAuthor = ls_User;
+
+                    crvReports.ReportSource = _rptTrialBalance;
+                    crvReports.DataBind();
                 }
                 #endregion
 

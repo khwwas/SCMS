@@ -179,8 +179,6 @@ namespace SCMSDataLayer
             {
                 SCMSDataContext dbSCMS = Connection.Create();
                 return dbSCMS.sp_ReportLedgerDetail().ToList();
-
-                //.Where(c => c.AccNatr_Active == 1).OrderBy(c => c.AccNatr_Code).ToList();
             }
             catch
             {
@@ -188,6 +186,21 @@ namespace SCMSDataLayer
             }
         }
 
- 
+        #region Trial Balance
+        public List<sp_ReportTrialBalanceResult> TrialBalance()
+        {
+            try
+            {
+                SCMSDataContext dbSCMS = Connection.Create();
+                return dbSCMS.sp_ReportTrialBalance(1, "", 1, "", 1, "", "").ToList();
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        #endregion
+
     }
 }
