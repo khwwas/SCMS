@@ -119,7 +119,7 @@
                     <ul>
                         <li><a href="../UserGroup">User Groups</a> </li>
                         <li><a href="../User">Users</a> </li>
-                        <li><a href="#">Menu Rights</a> </li>
+                        <%--<li><a href="../UserRightsSetup">Menu Rights</a> </li>--%>
                     </ul>
                 </li>
                 <li class="ic-typography"><a href="javascript:"><span>Setups</span></a>
@@ -152,7 +152,8 @@
                         <li><a href="../ReportSelectionCriteria?ps_ReportName=ChartOfAccount">Chart Of Account</a>
                         </li>
                         <li><a href="../ReportSelectionCriteria?ps_ReportName=LedgerDetail">Ledger</a> </li>
-                        <li><a href="../ReportSelectionCriteria?ps_ReportName=TrialBalance">Trial Balance</a> </li>
+                        <li><a href="../ReportSelectionCriteria?ps_ReportName=TrialBalance">Trial Balance</a>
+                        </li>
                     </ul>
                 </li>
             </ul>

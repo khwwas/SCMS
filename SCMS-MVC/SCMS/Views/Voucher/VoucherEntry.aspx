@@ -25,6 +25,7 @@
             var txt_Credit = document.getElementById('txt_Credit');
             var txt_Details = document.getElementById('txt_Details');
             var txt_Difference = document.getElementById('txt_Difference');
+            var ddl_Location = document.getElementById('ddl_Location');
 
             if (txt_Date.value == "") {
                 FadeIn(MessageBox);
@@ -132,7 +133,7 @@
                 }
 
                 var Url = document.getElementById('frm_VoucherEntry').action;
-                Url += "Voucher/SaveVoucher?VoucherMasterCode=" + txt_SelectedMasterCode.value + "&VoucherDate=" + txt_Date.value + "&Status=" + ddl_Status.value + "&VoucherType=" + ddl_VoucherType.value + "&Remarks=" + txt_Remarks.value + "&VoucherDetailRows=" + VoucherDetailRows;
+                Url += "Voucher/SaveVoucher?VoucherMasterCode=" + txt_SelectedMasterCode.value + "&VoucherDate=" + txt_Date.value + "&Status=" + ddl_Status.value + "&VoucherType=" + ddl_VoucherType.value + "&LocationId=" + ddl_Location.value + "&Remarks=" + txt_Remarks.value + "&VoucherDetailRows=" + VoucherDetailRows;
                 $.ajax({
                     type: "GET",
                     url: Url,
@@ -325,6 +326,13 @@
         <div class="Clear">
         </div>
         <div class="CustomCell" style="width: 97px; height: 30px;">
+            Location</div>
+        <div class="CustomCell" style="width: 270px; height: 30px;">
+            <%= Html.DropDownList("ddl_Location", null, new { style = "width:955px;" })%>
+        </div>
+        <div class="Clear">
+        </div>
+        <div class="CustomCell" style="width: 97px; height: 30px;">
             Remarks</div>
         <div class="CustomCell" style="width: 960px; height: 30px;">
             <input type="text" value="<%=ViewData["Remarks"] %>" class="CustomText" style="width: 940px;"
@@ -458,7 +466,7 @@
     <script type="text/javascript">
         document.getElementById("ddl_Status").value = '<%=ViewData["Status"] %>';
         document.getElementById("ddl_VoucherType").value = '<%=ViewData["VoucherType"] %>';
-
+        document.getElementById("ddl_Location").value = '<%=ViewData["LocationId"] %>';
         var TotalRows = '<%=ViewData["RowsCount"] %>';
         var Debit = "";
         var Credit = "";
