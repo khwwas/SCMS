@@ -23,6 +23,8 @@ namespace SCMS.Controllers
             DALVoucherEntry objDalVoucherEntry = new DALVoucherEntry();
 
             var VoucherTypes = new DALVoucherType().GetAllData();
+            var Locations = new DALLocation().GetAllLocation();
+
             sp_GetVoucherTypesListResult Select = new sp_GetVoucherTypesListResult();
             Select.VchrType_Id = "0";
             Select.VchrType_Title = "";
@@ -36,6 +38,7 @@ namespace SCMS.Controllers
             ChartOfAccounts.Insert(0, SelectChartOfAccount);
             ViewData["ChartOfAccounts"] = ChartOfAccounts;
             ViewData["ddl_Account"] = new SelectList(ChartOfAccounts, "ChrtAcc_Id", "ChrtAcc_Title", "");
+            ViewData["ddl_Location"] = new SelectList(Locations, "Loc_Id", "Loc_Title", "");
             if (!String.IsNullOrEmpty(VoucherId))
             {
                 SetVoucherEntryToEdit(VoucherId);
@@ -123,7 +126,7 @@ namespace SCMS.Controllers
             return Response;
         }
 
-        public ActionResult SaveVoucher(String VoucherMasterCode, DateTime VoucherDate, int Status, String VoucherType, String Remarks, String[] VoucherDetailRows)
+        public ActionResult SaveVoucher(String VoucherMasterCode, DateTime VoucherDate, int Status, String VoucherType, String LocationId, String Remarks, String[] VoucherDetailRows)
         {
             DALVoucherEntry objDalVoucherEntry = new DALVoucherEntry();
             Int32 li_ReturnValue = 0;
@@ -150,10 +153,10 @@ namespace SCMS.Controllers
                 {
                     GL_Master.VchMas_Id = VoucherMasterCode;
                     ViewData["VoucherId"] = VoucherMasterCode;
-                    GL_Master.VchMas_Code = Prefix + VoucherMasterCode;
-                    ViewData["VoucherCode"] = Prefix + VoucherMasterCode;
+                    GL_Master.VchMas_Code = Prefix + Convert.ToInt32(LocationId).ToString() + VoucherMasterCode;
+                    ViewData["VoucherCode"] = Prefix + Convert.ToInt32(LocationId).ToString() + VoucherMasterCode;
                     GL_Master.VchMas_Date = VoucherDate;
-                    GL_Master.Loc_Id = "00001";
+                    GL_Master.Loc_Id = LocationId;
                     GL_Master.VchrType_Id = VoucherType;
                     GL_Master.VchMas_Remarks = Remarks;
                     GL_Master.VchMas_Status = Status;
@@ -213,6 +216,7 @@ namespace SCMS.Controllers
                 ViewData["CurrentDate"] = Convert.ToDateTime(VoucherEntryRow.VchMas_Date).ToString("MM/dd/yyyy");
                 ViewData["Status"] = VoucherEntryRow.VchMas_Status;
                 ViewData["VoucherType"] = VoucherEntryRow.VchrType_Id;
+                ViewData["LocationId"] = VoucherEntryRow.Loc_Id;
                 ViewData["Remarks"] = VoucherEntryRow.VchMas_Remarks;
                 var VoucherDetailRows = new DALVoucherEntry().GetAllDetailRecords().Where(c => c.VchMas_Id.Equals(VoucherId)).ToList().OrderBy(c => c.VchDet_Id).ToList();
                 if (VoucherDetailRows != null && VoucherDetailRows.Count > 0)
