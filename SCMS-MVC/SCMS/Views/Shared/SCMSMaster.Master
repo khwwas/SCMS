@@ -119,7 +119,7 @@
                     <ul>
                         <li><a href="../UserGroup">User Groups</a> </li>
                         <li><a href="../User">Users</a> </li>
-                        <%--<li><a href="../UserRightsSetup">Menu Rights</a> </li>--%>
+                        <li><a href="../UserRightsSetup">Menu Rights</a> </li>
                     </ul>
                 </li>
                 <li class="ic-typography"><a href="javascript:"><span>Setups</span></a>
