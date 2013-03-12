@@ -79,7 +79,6 @@
     <Compile Include="Controllers\SupplierTypeController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\UserRightsSetup.cs" />
     <Compile Include="Controllers\VoucherController.cs" />
     <Compile Include="Controllers\VoucherEntryConsoleController.cs" />
     <Compile Include="Controllers\VoucherTypeController.cs" />
