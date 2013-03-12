@@ -36,9 +36,6 @@ namespace SCMSDataLayer.DB
     partial void InsertSYSTEM_Nature(SYSTEM_Nature instance);
     partial void UpdateSYSTEM_Nature(SYSTEM_Nature instance);
     partial void DeleteSYSTEM_Nature(SYSTEM_Nature instance);
-    partial void InsertGL_VchrMaster(GL_VchrMaster instance);
-    partial void UpdateGL_VchrMaster(GL_VchrMaster instance);
-    partial void DeleteGL_VchrMaster(GL_VchrMaster instance);
     partial void InsertSECURITY_User(SECURITY_User instance);
     partial void UpdateSECURITY_User(SECURITY_User instance);
     partial void DeleteSECURITY_User(SECURITY_User instance);
@@ -96,6 +93,9 @@ namespace SCMSDataLayer.DB
     partial void InsertSYSTEM_CodeGeneration(SYSTEM_CodeGeneration instance);
     partial void UpdateSYSTEM_CodeGeneration(SYSTEM_CodeGeneration instance);
     partial void DeleteSYSTEM_CodeGeneration(SYSTEM_CodeGeneration instance);
+    partial void InsertGL_VchrMaster(GL_VchrMaster instance);
+    partial void UpdateGL_VchrMaster(GL_VchrMaster instance);
+    partial void DeleteGL_VchrMaster(GL_VchrMaster instance);
     #endregion
 		
 		public SCMSDataContext() : 
@@ -141,54 +141,6 @@ namespace SCMSDataLayer.DB
 			get
 			{
 				return this.GetTable<SYSTEM_Nature>();
-			}
-		}
-		
-		public System.Data.Linq.Table<GL_VchrMaster> GL_VchrMasters
-		{
-			get
-			{
-				return this.GetTable<GL_VchrMaster>();
-			}
-		}
-		
-		public System.Data.Linq.Table<pbcatcol> pbcatcols
-		{
-			get
-			{
-				return this.GetTable<pbcatcol>();
-			}
-		}
-		
-		public System.Data.Linq.Table<pbcatedt> pbcatedts
-		{
-			get
-			{
-				return this.GetTable<pbcatedt>();
-			}
-		}
-		
-		public System.Data.Linq.Table<pbcatfmt> pbcatfmts
-		{
-			get
-			{
-				return this.GetTable<pbcatfmt>();
-			}
-		}
-		
-		public System.Data.Linq.Table<pbcattbl> pbcattbls
-		{
-			get
-			{
-				return this.GetTable<pbcattbl>();
-			}
-		}
-		
-		public System.Data.Linq.Table<pbcatvld> pbcatvlds
-		{
-			get
-			{
-				return this.GetTable<pbcatvld>();
 			}
 		}
 		
@@ -344,18 +296,19 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		public System.Data.Linq.Table<GL_VchrMaster> GL_VchrMasters
+		{
+			get
+			{
+				return this.GetTable<GL_VchrMaster>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetCityList")]
 		public ISingleResult<sp_GetCityListResult> sp_GetCityList()
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
 			return ((ISingleResult<sp_GetCityListResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_VoucherEntryConsole")]
-		public ISingleResult<sp_VoucherEntryConsoleResult> sp_VoucherEntryConsole([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AllLocation", DbType="Int")] System.Nullable<int> allLocation, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="LocationId", DbType="VarChar(1)")] string locationId, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AllVoucherType", DbType="Int")] System.Nullable<int> allVoucherType, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="VoucherTypeId", DbType="VarChar(1)")] string voucherTypeId, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AllDate", DbType="Int")] System.Nullable<int> allDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="DateFrom", DbType="VarChar(1)")] string dateFrom, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="DateTo", DbType="VarChar(1)")] string dateTo)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), allLocation, locationId, allVoucherType, voucherTypeId, allDate, dateFrom, dateTo);
-			return ((ISingleResult<sp_VoucherEntryConsoleResult>)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetCompanyList")]
@@ -462,6 +415,13 @@ namespace SCMSDataLayer.DB
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), allLocation, locationId, allVoucherType, voucherTypeId, allDate, dateFrom, dateTo);
 			return ((ISingleResult<sp_ReportTrialBalanceResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_VoucherEntryConsole")]
+		public ISingleResult<sp_VoucherEntryConsoleResult> sp_VoucherEntryConsole([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AllLocation", DbType="Int")] System.Nullable<int> allLocation, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="LocationId", DbType="VarChar(1)")] string locationId, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AllVoucherType", DbType="Int")] System.Nullable<int> allVoucherType, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="VoucherTypeId", DbType="VarChar(1)")] string voucherTypeId, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AllDate", DbType="Int")] System.Nullable<int> allDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="DateFrom", DbType="VarChar(1)")] string dateFrom, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="DateTo", DbType="VarChar(1)")] string dateTo)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), allLocation, locationId, allVoucherType, voucherTypeId, allDate, dateFrom, dateTo);
+			return ((ISingleResult<sp_VoucherEntryConsoleResult>)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GL_VchrDetail")]
@@ -482,9 +442,9 @@ namespace SCMSDataLayer.DB
 		
 		private string _VchDet_Remarks;
 		
-		private EntityRef<GL_VchrMaster> _GL_VchrMaster;
-		
 		private EntityRef<SETUP_ChartOfAccount> _SETUP_ChartOfAccount;
+		
+		private EntityRef<GL_VchrMaster> _GL_VchrMaster;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -506,8 +466,8 @@ namespace SCMSDataLayer.DB
 		
 		public GL_VchrDetail()
 		{
-			this._GL_VchrMaster = default(EntityRef<GL_VchrMaster>);
 			this._SETUP_ChartOfAccount = default(EntityRef<SETUP_ChartOfAccount>);
+			this._GL_VchrMaster = default(EntityRef<GL_VchrMaster>);
 			OnCreated();
 		}
 		
@@ -639,40 +599,6 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GL_VchrMaster_GL_VchrDetail", Storage="_GL_VchrMaster", ThisKey="VchMas_Id", OtherKey="VchMas_Id", IsForeignKey=true)]
-		public GL_VchrMaster GL_VchrMaster
-		{
-			get
-			{
-				return this._GL_VchrMaster.Entity;
-			}
-			set
-			{
-				GL_VchrMaster previousValue = this._GL_VchrMaster.Entity;
-				if (((previousValue != value) 
-							|| (this._GL_VchrMaster.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._GL_VchrMaster.Entity = null;
-						previousValue.GL_VchrDetails.Remove(this);
-					}
-					this._GL_VchrMaster.Entity = value;
-					if ((value != null))
-					{
-						value.GL_VchrDetails.Add(this);
-						this._VchMas_Id = value.VchMas_Id;
-					}
-					else
-					{
-						this._VchMas_Id = default(string);
-					}
-					this.SendPropertyChanged("GL_VchrMaster");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_ChartOfAccount_GL_VchrDetail", Storage="_SETUP_ChartOfAccount", ThisKey="ChrtAcc_Id", OtherKey="ChrtAcc_Id", IsForeignKey=true)]
 		public SETUP_ChartOfAccount SETUP_ChartOfAccount
 		{
@@ -703,6 +629,40 @@ namespace SCMSDataLayer.DB
 						this._ChrtAcc_Id = default(string);
 					}
 					this.SendPropertyChanged("SETUP_ChartOfAccount");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GL_VchrMaster_GL_VchrDetail", Storage="_GL_VchrMaster", ThisKey="VchMas_Id", OtherKey="VchMas_Id", IsForeignKey=true)]
+		public GL_VchrMaster GL_VchrMaster
+		{
+			get
+			{
+				return this._GL_VchrMaster.Entity;
+			}
+			set
+			{
+				GL_VchrMaster previousValue = this._GL_VchrMaster.Entity;
+				if (((previousValue != value) 
+							|| (this._GL_VchrMaster.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._GL_VchrMaster.Entity = null;
+						previousValue.GL_VchrDetails.Remove(this);
+					}
+					this._GL_VchrMaster.Entity = value;
+					if ((value != null))
+					{
+						value.GL_VchrDetails.Add(this);
+						this._VchMas_Id = value.VchMas_Id;
+					}
+					else
+					{
+						this._VchMas_Id = default(string);
+					}
+					this.SendPropertyChanged("GL_VchrMaster");
 				}
 			}
 		}
@@ -911,1626 +871,6 @@ namespace SCMSDataLayer.DB
 		{
 			this.SendPropertyChanging();
 			entity.SYSTEM_Nature = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GL_VchrMaster")]
-	public partial class GL_VchrMaster : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _VchMas_Id;
-		
-		private string _VchMas_Code;
-		
-		private System.Nullable<System.DateTime> _VchMas_Date;
-		
-		private string _Cmp_Id;
-		
-		private string _Loc_Id;
-		
-		private string _VchrType_Id;
-		
-		private string _VchMas_Remarks;
-		
-		private System.Nullable<int> _VchMas_Status;
-		
-		private string _VchMas_EnteredBy;
-		
-		private System.Nullable<System.DateTime> _VchMas_EnteredDate;
-		
-		private string _VchMas_ApprovedBy;
-		
-		private System.Nullable<System.DateTime> _VchMas_ApprovedDate;
-		
-		private EntitySet<GL_VchrDetail> _GL_VchrDetails;
-		
-		private EntityRef<SETUP_Company> _SETUP_Company;
-		
-		private EntityRef<SETUP_Location> _SETUP_Location;
-		
-		private EntityRef<SETUP_VoucherType> _SETUP_VoucherType;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnVchMas_IdChanging(string value);
-    partial void OnVchMas_IdChanged();
-    partial void OnVchMas_CodeChanging(string value);
-    partial void OnVchMas_CodeChanged();
-    partial void OnVchMas_DateChanging(System.Nullable<System.DateTime> value);
-    partial void OnVchMas_DateChanged();
-    partial void OnCmp_IdChanging(string value);
-    partial void OnCmp_IdChanged();
-    partial void OnLoc_IdChanging(string value);
-    partial void OnLoc_IdChanged();
-    partial void OnVchrType_IdChanging(string value);
-    partial void OnVchrType_IdChanged();
-    partial void OnVchMas_RemarksChanging(string value);
-    partial void OnVchMas_RemarksChanged();
-    partial void OnVchMas_StatusChanging(System.Nullable<int> value);
-    partial void OnVchMas_StatusChanged();
-    partial void OnVchMas_EnteredByChanging(string value);
-    partial void OnVchMas_EnteredByChanged();
-    partial void OnVchMas_EnteredDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnVchMas_EnteredDateChanged();
-    partial void OnVchMas_ApprovedByChanging(string value);
-    partial void OnVchMas_ApprovedByChanged();
-    partial void OnVchMas_ApprovedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnVchMas_ApprovedDateChanged();
-    #endregion
-		
-		public GL_VchrMaster()
-		{
-			this._GL_VchrDetails = new EntitySet<GL_VchrDetail>(new Action<GL_VchrDetail>(this.attach_GL_VchrDetails), new Action<GL_VchrDetail>(this.detach_GL_VchrDetails));
-			this._SETUP_Company = default(EntityRef<SETUP_Company>);
-			this._SETUP_Location = default(EntityRef<SETUP_Location>);
-			this._SETUP_VoucherType = default(EntityRef<SETUP_VoucherType>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string VchMas_Id
-		{
-			get
-			{
-				return this._VchMas_Id;
-			}
-			set
-			{
-				if ((this._VchMas_Id != value))
-				{
-					this.OnVchMas_IdChanging(value);
-					this.SendPropertyChanging();
-					this._VchMas_Id = value;
-					this.SendPropertyChanged("VchMas_Id");
-					this.OnVchMas_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Code", DbType="VarChar(50)")]
-		public string VchMas_Code
-		{
-			get
-			{
-				return this._VchMas_Code;
-			}
-			set
-			{
-				if ((this._VchMas_Code != value))
-				{
-					this.OnVchMas_CodeChanging(value);
-					this.SendPropertyChanging();
-					this._VchMas_Code = value;
-					this.SendPropertyChanged("VchMas_Code");
-					this.OnVchMas_CodeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Date", DbType="DateTime")]
-		public System.Nullable<System.DateTime> VchMas_Date
-		{
-			get
-			{
-				return this._VchMas_Date;
-			}
-			set
-			{
-				if ((this._VchMas_Date != value))
-				{
-					this.OnVchMas_DateChanging(value);
-					this.SendPropertyChanging();
-					this._VchMas_Date = value;
-					this.SendPropertyChanged("VchMas_Date");
-					this.OnVchMas_DateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cmp_Id", DbType="VarChar(50)")]
-		public string Cmp_Id
-		{
-			get
-			{
-				return this._Cmp_Id;
-			}
-			set
-			{
-				if ((this._Cmp_Id != value))
-				{
-					if (this._SETUP_Company.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCmp_IdChanging(value);
-					this.SendPropertyChanging();
-					this._Cmp_Id = value;
-					this.SendPropertyChanged("Cmp_Id");
-					this.OnCmp_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id", DbType="VarChar(50)")]
-		public string Loc_Id
-		{
-			get
-			{
-				return this._Loc_Id;
-			}
-			set
-			{
-				if ((this._Loc_Id != value))
-				{
-					if (this._SETUP_Location.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnLoc_IdChanging(value);
-					this.SendPropertyChanging();
-					this._Loc_Id = value;
-					this.SendPropertyChanged("Loc_Id");
-					this.OnLoc_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchrType_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string VchrType_Id
-		{
-			get
-			{
-				return this._VchrType_Id;
-			}
-			set
-			{
-				if ((this._VchrType_Id != value))
-				{
-					if (this._SETUP_VoucherType.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnVchrType_IdChanging(value);
-					this.SendPropertyChanging();
-					this._VchrType_Id = value;
-					this.SendPropertyChanged("VchrType_Id");
-					this.OnVchrType_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Remarks", DbType="VarChar(200)")]
-		public string VchMas_Remarks
-		{
-			get
-			{
-				return this._VchMas_Remarks;
-			}
-			set
-			{
-				if ((this._VchMas_Remarks != value))
-				{
-					this.OnVchMas_RemarksChanging(value);
-					this.SendPropertyChanging();
-					this._VchMas_Remarks = value;
-					this.SendPropertyChanged("VchMas_Remarks");
-					this.OnVchMas_RemarksChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Status", DbType="Int")]
-		public System.Nullable<int> VchMas_Status
-		{
-			get
-			{
-				return this._VchMas_Status;
-			}
-			set
-			{
-				if ((this._VchMas_Status != value))
-				{
-					this.OnVchMas_StatusChanging(value);
-					this.SendPropertyChanging();
-					this._VchMas_Status = value;
-					this.SendPropertyChanged("VchMas_Status");
-					this.OnVchMas_StatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_EnteredBy", DbType="VarChar(100)")]
-		public string VchMas_EnteredBy
-		{
-			get
-			{
-				return this._VchMas_EnteredBy;
-			}
-			set
-			{
-				if ((this._VchMas_EnteredBy != value))
-				{
-					this.OnVchMas_EnteredByChanging(value);
-					this.SendPropertyChanging();
-					this._VchMas_EnteredBy = value;
-					this.SendPropertyChanged("VchMas_EnteredBy");
-					this.OnVchMas_EnteredByChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_EnteredDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> VchMas_EnteredDate
-		{
-			get
-			{
-				return this._VchMas_EnteredDate;
-			}
-			set
-			{
-				if ((this._VchMas_EnteredDate != value))
-				{
-					this.OnVchMas_EnteredDateChanging(value);
-					this.SendPropertyChanging();
-					this._VchMas_EnteredDate = value;
-					this.SendPropertyChanged("VchMas_EnteredDate");
-					this.OnVchMas_EnteredDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_ApprovedBy", DbType="VarChar(100)")]
-		public string VchMas_ApprovedBy
-		{
-			get
-			{
-				return this._VchMas_ApprovedBy;
-			}
-			set
-			{
-				if ((this._VchMas_ApprovedBy != value))
-				{
-					this.OnVchMas_ApprovedByChanging(value);
-					this.SendPropertyChanging();
-					this._VchMas_ApprovedBy = value;
-					this.SendPropertyChanged("VchMas_ApprovedBy");
-					this.OnVchMas_ApprovedByChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_ApprovedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> VchMas_ApprovedDate
-		{
-			get
-			{
-				return this._VchMas_ApprovedDate;
-			}
-			set
-			{
-				if ((this._VchMas_ApprovedDate != value))
-				{
-					this.OnVchMas_ApprovedDateChanging(value);
-					this.SendPropertyChanging();
-					this._VchMas_ApprovedDate = value;
-					this.SendPropertyChanged("VchMas_ApprovedDate");
-					this.OnVchMas_ApprovedDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GL_VchrMaster_GL_VchrDetail", Storage="_GL_VchrDetails", ThisKey="VchMas_Id", OtherKey="VchMas_Id")]
-		public EntitySet<GL_VchrDetail> GL_VchrDetails
-		{
-			get
-			{
-				return this._GL_VchrDetails;
-			}
-			set
-			{
-				this._GL_VchrDetails.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_GL_VchrMaster", Storage="_SETUP_Company", ThisKey="Cmp_Id", OtherKey="Cmp_Id", IsForeignKey=true)]
-		public SETUP_Company SETUP_Company
-		{
-			get
-			{
-				return this._SETUP_Company.Entity;
-			}
-			set
-			{
-				SETUP_Company previousValue = this._SETUP_Company.Entity;
-				if (((previousValue != value) 
-							|| (this._SETUP_Company.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SETUP_Company.Entity = null;
-						previousValue.GL_VchrMasters.Remove(this);
-					}
-					this._SETUP_Company.Entity = value;
-					if ((value != null))
-					{
-						value.GL_VchrMasters.Add(this);
-						this._Cmp_Id = value.Cmp_Id;
-					}
-					else
-					{
-						this._Cmp_Id = default(string);
-					}
-					this.SendPropertyChanged("SETUP_Company");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_GL_VchrMaster", Storage="_SETUP_Location", ThisKey="Loc_Id", OtherKey="Loc_Id", IsForeignKey=true)]
-		public SETUP_Location SETUP_Location
-		{
-			get
-			{
-				return this._SETUP_Location.Entity;
-			}
-			set
-			{
-				SETUP_Location previousValue = this._SETUP_Location.Entity;
-				if (((previousValue != value) 
-							|| (this._SETUP_Location.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SETUP_Location.Entity = null;
-						previousValue.GL_VchrMasters.Remove(this);
-					}
-					this._SETUP_Location.Entity = value;
-					if ((value != null))
-					{
-						value.GL_VchrMasters.Add(this);
-						this._Loc_Id = value.Loc_Id;
-					}
-					else
-					{
-						this._Loc_Id = default(string);
-					}
-					this.SendPropertyChanged("SETUP_Location");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_VoucherType_GL_VchrMaster", Storage="_SETUP_VoucherType", ThisKey="VchrType_Id", OtherKey="VchrType_Id", IsForeignKey=true)]
-		public SETUP_VoucherType SETUP_VoucherType
-		{
-			get
-			{
-				return this._SETUP_VoucherType.Entity;
-			}
-			set
-			{
-				SETUP_VoucherType previousValue = this._SETUP_VoucherType.Entity;
-				if (((previousValue != value) 
-							|| (this._SETUP_VoucherType.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SETUP_VoucherType.Entity = null;
-						previousValue.GL_VchrMasters.Remove(this);
-					}
-					this._SETUP_VoucherType.Entity = value;
-					if ((value != null))
-					{
-						value.GL_VchrMasters.Add(this);
-						this._VchrType_Id = value.VchrType_Id;
-					}
-					else
-					{
-						this._VchrType_Id = default(string);
-					}
-					this.SendPropertyChanged("SETUP_VoucherType");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_GL_VchrDetails(GL_VchrDetail entity)
-		{
-			this.SendPropertyChanging();
-			entity.GL_VchrMaster = this;
-		}
-		
-		private void detach_GL_VchrDetails(GL_VchrDetail entity)
-		{
-			this.SendPropertyChanging();
-			entity.GL_VchrMaster = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.pbcatcol")]
-	public partial class pbcatcol
-	{
-		
-		private string _pbc_tnam;
-		
-		private System.Nullable<int> _pbc_tid;
-		
-		private string _pbc_ownr;
-		
-		private string _pbc_cnam;
-		
-		private System.Nullable<short> _pbc_cid;
-		
-		private string _pbc_labl;
-		
-		private System.Nullable<short> _pbc_lpos;
-		
-		private string _pbc_hdr;
-		
-		private System.Nullable<short> _pbc_hpos;
-		
-		private System.Nullable<short> _pbc_jtfy;
-		
-		private string _pbc_mask;
-		
-		private System.Nullable<short> _pbc_case;
-		
-		private System.Nullable<short> _pbc_hght;
-		
-		private System.Nullable<short> _pbc_wdth;
-		
-		private string _pbc_ptrn;
-		
-		private System.Nullable<char> _pbc_bmap;
-		
-		private string _pbc_init;
-		
-		private string _pbc_cmnt;
-		
-		private string _pbc_edit;
-		
-		private string _pbc_tag;
-		
-		public pbcatcol()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbc_tnam", DbType="Char(30)")]
-		public string pbc_tnam
-		{
-			get
-			{
-				return this._pbc_tnam;
-			}
-			set
-			{
-				if ((this._pbc_tnam != value))
-				{
-					this._pbc_tnam = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbc_tid", DbType="Int")]
-		public System.Nullable<int> pbc_tid
-		{
-			get
-			{
-				return this._pbc_tid;
-			}
-			set
-			{
-				if ((this._pbc_tid != value))
-				{
-					this._pbc_tid = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbc_ownr", DbType="Char(30)")]
-		public string pbc_ownr
-		{
-			get
-			{
-				return this._pbc_ownr;
-			}
-			set
-			{
-				if ((this._pbc_ownr != value))
-				{
-					this._pbc_ownr = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbc_cnam", DbType="Char(30)")]
-		public string pbc_cnam
-		{
-			get
-			{
-				return this._pbc_cnam;
-			}
-			set
-			{
-				if ((this._pbc_cnam != value))
-				{
-					this._pbc_cnam = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbc_cid", DbType="SmallInt")]
-		public System.Nullable<short> pbc_cid
-		{
-			get
-			{
-				return this._pbc_cid;
-			}
-			set
-			{
-				if ((this._pbc_cid != value))
-				{
-					this._pbc_cid = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbc_labl", DbType="VarChar(254)")]
-		public string pbc_labl
-		{
-			get
-			{
-				return this._pbc_labl;
-			}
-			set
-			{
-				if ((this._pbc_labl != value))
-				{
-					this._pbc_labl = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbc_lpos", DbType="SmallInt")]
-		public System.Nullable<short> pbc_lpos
-		{
-			get
-			{
-				return this._pbc_lpos;
-			}
-			set
-			{
-				if ((this._pbc_lpos != value))
-				{
-					this._pbc_lpos = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbc_hdr", DbType="VarChar(254)")]
-		public string pbc_hdr
-		{
-			get
-			{
-				return this._pbc_hdr;
-			}
-			set
-			{
-				if ((this._pbc_hdr != value))
-				{
-					this._pbc_hdr = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbc_hpos", DbType="SmallInt")]
-		public System.Nullable<short> pbc_hpos
-		{
-			get
-			{
-				return this._pbc_hpos;
-			}
-			set
-			{
-				if ((this._pbc_hpos != value))
-				{
-					this._pbc_hpos = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbc_jtfy", DbType="SmallInt")]
-		public System.Nullable<short> pbc_jtfy
-		{
-			get
-			{
-				return this._pbc_jtfy;
-			}
-			set
-			{
-				if ((this._pbc_jtfy != value))
-				{
-					this._pbc_jtfy = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbc_mask", DbType="VarChar(31)")]
-		public string pbc_mask
-		{
-			get
-			{
-				return this._pbc_mask;
-			}
-			set
-			{
-				if ((this._pbc_mask != value))
-				{
-					this._pbc_mask = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbc_case", DbType="SmallInt")]
-		public System.Nullable<short> pbc_case
-		{
-			get
-			{
-				return this._pbc_case;
-			}
-			set
-			{
-				if ((this._pbc_case != value))
-				{
-					this._pbc_case = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbc_hght", DbType="SmallInt")]
-		public System.Nullable<short> pbc_hght
-		{
-			get
-			{
-				return this._pbc_hght;
-			}
-			set
-			{
-				if ((this._pbc_hght != value))
-				{
-					this._pbc_hght = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbc_wdth", DbType="SmallInt")]
-		public System.Nullable<short> pbc_wdth
-		{
-			get
-			{
-				return this._pbc_wdth;
-			}
-			set
-			{
-				if ((this._pbc_wdth != value))
-				{
-					this._pbc_wdth = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbc_ptrn", DbType="VarChar(31)")]
-		public string pbc_ptrn
-		{
-			get
-			{
-				return this._pbc_ptrn;
-			}
-			set
-			{
-				if ((this._pbc_ptrn != value))
-				{
-					this._pbc_ptrn = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbc_bmap", DbType="Char(1)")]
-		public System.Nullable<char> pbc_bmap
-		{
-			get
-			{
-				return this._pbc_bmap;
-			}
-			set
-			{
-				if ((this._pbc_bmap != value))
-				{
-					this._pbc_bmap = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbc_init", DbType="VarChar(254)")]
-		public string pbc_init
-		{
-			get
-			{
-				return this._pbc_init;
-			}
-			set
-			{
-				if ((this._pbc_init != value))
-				{
-					this._pbc_init = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbc_cmnt", DbType="VarChar(254)")]
-		public string pbc_cmnt
-		{
-			get
-			{
-				return this._pbc_cmnt;
-			}
-			set
-			{
-				if ((this._pbc_cmnt != value))
-				{
-					this._pbc_cmnt = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbc_edit", DbType="VarChar(31)")]
-		public string pbc_edit
-		{
-			get
-			{
-				return this._pbc_edit;
-			}
-			set
-			{
-				if ((this._pbc_edit != value))
-				{
-					this._pbc_edit = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbc_tag", DbType="VarChar(254)")]
-		public string pbc_tag
-		{
-			get
-			{
-				return this._pbc_tag;
-			}
-			set
-			{
-				if ((this._pbc_tag != value))
-				{
-					this._pbc_tag = value;
-				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.pbcatedt")]
-	public partial class pbcatedt
-	{
-		
-		private string _pbe_name;
-		
-		private string _pbe_edit;
-		
-		private short _pbe_type;
-		
-		private System.Nullable<int> _pbe_cntr;
-		
-		private short _pbe_seqn;
-		
-		private System.Nullable<int> _pbe_flag;
-		
-		private string _pbe_work;
-		
-		public pbcatedt()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbe_name", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
-		public string pbe_name
-		{
-			get
-			{
-				return this._pbe_name;
-			}
-			set
-			{
-				if ((this._pbe_name != value))
-				{
-					this._pbe_name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbe_edit", DbType="VarChar(254)")]
-		public string pbe_edit
-		{
-			get
-			{
-				return this._pbe_edit;
-			}
-			set
-			{
-				if ((this._pbe_edit != value))
-				{
-					this._pbe_edit = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbe_type", DbType="SmallInt NOT NULL")]
-		public short pbe_type
-		{
-			get
-			{
-				return this._pbe_type;
-			}
-			set
-			{
-				if ((this._pbe_type != value))
-				{
-					this._pbe_type = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbe_cntr", DbType="Int")]
-		public System.Nullable<int> pbe_cntr
-		{
-			get
-			{
-				return this._pbe_cntr;
-			}
-			set
-			{
-				if ((this._pbe_cntr != value))
-				{
-					this._pbe_cntr = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbe_seqn", DbType="SmallInt NOT NULL")]
-		public short pbe_seqn
-		{
-			get
-			{
-				return this._pbe_seqn;
-			}
-			set
-			{
-				if ((this._pbe_seqn != value))
-				{
-					this._pbe_seqn = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbe_flag", DbType="Int")]
-		public System.Nullable<int> pbe_flag
-		{
-			get
-			{
-				return this._pbe_flag;
-			}
-			set
-			{
-				if ((this._pbe_flag != value))
-				{
-					this._pbe_flag = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbe_work", DbType="Char(32)")]
-		public string pbe_work
-		{
-			get
-			{
-				return this._pbe_work;
-			}
-			set
-			{
-				if ((this._pbe_work != value))
-				{
-					this._pbe_work = value;
-				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.pbcatfmt")]
-	public partial class pbcatfmt
-	{
-		
-		private string _pbf_name;
-		
-		private string _pbf_frmt;
-		
-		private short _pbf_type;
-		
-		private System.Nullable<int> _pbf_cntr;
-		
-		public pbcatfmt()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbf_name", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
-		public string pbf_name
-		{
-			get
-			{
-				return this._pbf_name;
-			}
-			set
-			{
-				if ((this._pbf_name != value))
-				{
-					this._pbf_name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbf_frmt", DbType="VarChar(254) NOT NULL", CanBeNull=false)]
-		public string pbf_frmt
-		{
-			get
-			{
-				return this._pbf_frmt;
-			}
-			set
-			{
-				if ((this._pbf_frmt != value))
-				{
-					this._pbf_frmt = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbf_type", DbType="SmallInt NOT NULL")]
-		public short pbf_type
-		{
-			get
-			{
-				return this._pbf_type;
-			}
-			set
-			{
-				if ((this._pbf_type != value))
-				{
-					this._pbf_type = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbf_cntr", DbType="Int")]
-		public System.Nullable<int> pbf_cntr
-		{
-			get
-			{
-				return this._pbf_cntr;
-			}
-			set
-			{
-				if ((this._pbf_cntr != value))
-				{
-					this._pbf_cntr = value;
-				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.pbcattbl")]
-	public partial class pbcattbl
-	{
-		
-		private string _pbt_tnam;
-		
-		private System.Nullable<int> _pbt_tid;
-		
-		private string _pbt_ownr;
-		
-		private System.Nullable<short> _pbd_fhgt;
-		
-		private System.Nullable<short> _pbd_fwgt;
-		
-		private System.Nullable<char> _pbd_fitl;
-		
-		private System.Nullable<char> _pbd_funl;
-		
-		private System.Nullable<short> _pbd_fchr;
-		
-		private System.Nullable<short> _pbd_fptc;
-		
-		private string _pbd_ffce;
-		
-		private System.Nullable<short> _pbh_fhgt;
-		
-		private System.Nullable<short> _pbh_fwgt;
-		
-		private System.Nullable<char> _pbh_fitl;
-		
-		private System.Nullable<char> _pbh_funl;
-		
-		private System.Nullable<short> _pbh_fchr;
-		
-		private System.Nullable<short> _pbh_fptc;
-		
-		private string _pbh_ffce;
-		
-		private System.Nullable<short> _pbl_fhgt;
-		
-		private System.Nullable<short> _pbl_fwgt;
-		
-		private System.Nullable<char> _pbl_fitl;
-		
-		private System.Nullable<char> _pbl_funl;
-		
-		private System.Nullable<short> _pbl_fchr;
-		
-		private System.Nullable<short> _pbl_fptc;
-		
-		private string _pbl_ffce;
-		
-		private string _pbt_cmnt;
-		
-		public pbcattbl()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbt_tnam", DbType="Char(30)")]
-		public string pbt_tnam
-		{
-			get
-			{
-				return this._pbt_tnam;
-			}
-			set
-			{
-				if ((this._pbt_tnam != value))
-				{
-					this._pbt_tnam = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbt_tid", DbType="Int")]
-		public System.Nullable<int> pbt_tid
-		{
-			get
-			{
-				return this._pbt_tid;
-			}
-			set
-			{
-				if ((this._pbt_tid != value))
-				{
-					this._pbt_tid = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbt_ownr", DbType="Char(30)")]
-		public string pbt_ownr
-		{
-			get
-			{
-				return this._pbt_ownr;
-			}
-			set
-			{
-				if ((this._pbt_ownr != value))
-				{
-					this._pbt_ownr = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbd_fhgt", DbType="SmallInt")]
-		public System.Nullable<short> pbd_fhgt
-		{
-			get
-			{
-				return this._pbd_fhgt;
-			}
-			set
-			{
-				if ((this._pbd_fhgt != value))
-				{
-					this._pbd_fhgt = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbd_fwgt", DbType="SmallInt")]
-		public System.Nullable<short> pbd_fwgt
-		{
-			get
-			{
-				return this._pbd_fwgt;
-			}
-			set
-			{
-				if ((this._pbd_fwgt != value))
-				{
-					this._pbd_fwgt = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbd_fitl", DbType="Char(1)")]
-		public System.Nullable<char> pbd_fitl
-		{
-			get
-			{
-				return this._pbd_fitl;
-			}
-			set
-			{
-				if ((this._pbd_fitl != value))
-				{
-					this._pbd_fitl = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbd_funl", DbType="Char(1)")]
-		public System.Nullable<char> pbd_funl
-		{
-			get
-			{
-				return this._pbd_funl;
-			}
-			set
-			{
-				if ((this._pbd_funl != value))
-				{
-					this._pbd_funl = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbd_fchr", DbType="SmallInt")]
-		public System.Nullable<short> pbd_fchr
-		{
-			get
-			{
-				return this._pbd_fchr;
-			}
-			set
-			{
-				if ((this._pbd_fchr != value))
-				{
-					this._pbd_fchr = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbd_fptc", DbType="SmallInt")]
-		public System.Nullable<short> pbd_fptc
-		{
-			get
-			{
-				return this._pbd_fptc;
-			}
-			set
-			{
-				if ((this._pbd_fptc != value))
-				{
-					this._pbd_fptc = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbd_ffce", DbType="Char(32)")]
-		public string pbd_ffce
-		{
-			get
-			{
-				return this._pbd_ffce;
-			}
-			set
-			{
-				if ((this._pbd_ffce != value))
-				{
-					this._pbd_ffce = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbh_fhgt", DbType="SmallInt")]
-		public System.Nullable<short> pbh_fhgt
-		{
-			get
-			{
-				return this._pbh_fhgt;
-			}
-			set
-			{
-				if ((this._pbh_fhgt != value))
-				{
-					this._pbh_fhgt = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbh_fwgt", DbType="SmallInt")]
-		public System.Nullable<short> pbh_fwgt
-		{
-			get
-			{
-				return this._pbh_fwgt;
-			}
-			set
-			{
-				if ((this._pbh_fwgt != value))
-				{
-					this._pbh_fwgt = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbh_fitl", DbType="Char(1)")]
-		public System.Nullable<char> pbh_fitl
-		{
-			get
-			{
-				return this._pbh_fitl;
-			}
-			set
-			{
-				if ((this._pbh_fitl != value))
-				{
-					this._pbh_fitl = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbh_funl", DbType="Char(1)")]
-		public System.Nullable<char> pbh_funl
-		{
-			get
-			{
-				return this._pbh_funl;
-			}
-			set
-			{
-				if ((this._pbh_funl != value))
-				{
-					this._pbh_funl = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbh_fchr", DbType="SmallInt")]
-		public System.Nullable<short> pbh_fchr
-		{
-			get
-			{
-				return this._pbh_fchr;
-			}
-			set
-			{
-				if ((this._pbh_fchr != value))
-				{
-					this._pbh_fchr = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbh_fptc", DbType="SmallInt")]
-		public System.Nullable<short> pbh_fptc
-		{
-			get
-			{
-				return this._pbh_fptc;
-			}
-			set
-			{
-				if ((this._pbh_fptc != value))
-				{
-					this._pbh_fptc = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbh_ffce", DbType="Char(32)")]
-		public string pbh_ffce
-		{
-			get
-			{
-				return this._pbh_ffce;
-			}
-			set
-			{
-				if ((this._pbh_ffce != value))
-				{
-					this._pbh_ffce = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbl_fhgt", DbType="SmallInt")]
-		public System.Nullable<short> pbl_fhgt
-		{
-			get
-			{
-				return this._pbl_fhgt;
-			}
-			set
-			{
-				if ((this._pbl_fhgt != value))
-				{
-					this._pbl_fhgt = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbl_fwgt", DbType="SmallInt")]
-		public System.Nullable<short> pbl_fwgt
-		{
-			get
-			{
-				return this._pbl_fwgt;
-			}
-			set
-			{
-				if ((this._pbl_fwgt != value))
-				{
-					this._pbl_fwgt = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbl_fitl", DbType="Char(1)")]
-		public System.Nullable<char> pbl_fitl
-		{
-			get
-			{
-				return this._pbl_fitl;
-			}
-			set
-			{
-				if ((this._pbl_fitl != value))
-				{
-					this._pbl_fitl = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbl_funl", DbType="Char(1)")]
-		public System.Nullable<char> pbl_funl
-		{
-			get
-			{
-				return this._pbl_funl;
-			}
-			set
-			{
-				if ((this._pbl_funl != value))
-				{
-					this._pbl_funl = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbl_fchr", DbType="SmallInt")]
-		public System.Nullable<short> pbl_fchr
-		{
-			get
-			{
-				return this._pbl_fchr;
-			}
-			set
-			{
-				if ((this._pbl_fchr != value))
-				{
-					this._pbl_fchr = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbl_fptc", DbType="SmallInt")]
-		public System.Nullable<short> pbl_fptc
-		{
-			get
-			{
-				return this._pbl_fptc;
-			}
-			set
-			{
-				if ((this._pbl_fptc != value))
-				{
-					this._pbl_fptc = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbl_ffce", DbType="Char(32)")]
-		public string pbl_ffce
-		{
-			get
-			{
-				return this._pbl_ffce;
-			}
-			set
-			{
-				if ((this._pbl_ffce != value))
-				{
-					this._pbl_ffce = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbt_cmnt", DbType="VarChar(254)")]
-		public string pbt_cmnt
-		{
-			get
-			{
-				return this._pbt_cmnt;
-			}
-			set
-			{
-				if ((this._pbt_cmnt != value))
-				{
-					this._pbt_cmnt = value;
-				}
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.pbcatvld")]
-	public partial class pbcatvld
-	{
-		
-		private string _pbv_name;
-		
-		private string _pbv_vald;
-		
-		private short _pbv_type;
-		
-		private System.Nullable<int> _pbv_cntr;
-		
-		private string _pbv_msg;
-		
-		public pbcatvld()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbv_name", DbType="VarChar(30) NOT NULL", CanBeNull=false)]
-		public string pbv_name
-		{
-			get
-			{
-				return this._pbv_name;
-			}
-			set
-			{
-				if ((this._pbv_name != value))
-				{
-					this._pbv_name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbv_vald", DbType="VarChar(254) NOT NULL", CanBeNull=false)]
-		public string pbv_vald
-		{
-			get
-			{
-				return this._pbv_vald;
-			}
-			set
-			{
-				if ((this._pbv_vald != value))
-				{
-					this._pbv_vald = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbv_type", DbType="SmallInt NOT NULL")]
-		public short pbv_type
-		{
-			get
-			{
-				return this._pbv_type;
-			}
-			set
-			{
-				if ((this._pbv_type != value))
-				{
-					this._pbv_type = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbv_cntr", DbType="Int")]
-		public System.Nullable<int> pbv_cntr
-		{
-			get
-			{
-				return this._pbv_cntr;
-			}
-			set
-			{
-				if ((this._pbv_cntr != value))
-				{
-					this._pbv_cntr = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pbv_msg", DbType="VarChar(254)")]
-		public string pbv_msg
-		{
-			get
-			{
-				return this._pbv_msg;
-			}
-			set
-			{
-				if ((this._pbv_msg != value))
-				{
-					this._pbv_msg = value;
-				}
-			}
 		}
 	}
 	
@@ -5436,8 +3776,6 @@ namespace SCMSDataLayer.DB
 		
 		private System.Nullable<int> _Cmp_SortOrder;
 		
-		private EntitySet<GL_VchrMaster> _GL_VchrMasters;
-		
 		private EntitySet<SECURITY_User> _SECURITY_Users;
 		
 		private EntitySet<SECURITY_UserGroup> _SECURITY_UserGroups;
@@ -5463,6 +3801,8 @@ namespace SCMSDataLayer.DB
 		private EntitySet<SETUP_SupplierType> _SETUP_SupplierTypes;
 		
 		private EntitySet<SETUP_VoucherType> _SETUP_VoucherTypes;
+		
+		private EntitySet<GL_VchrMaster> _GL_VchrMasters;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -5492,7 +3832,6 @@ namespace SCMSDataLayer.DB
 		
 		public SETUP_Company()
 		{
-			this._GL_VchrMasters = new EntitySet<GL_VchrMaster>(new Action<GL_VchrMaster>(this.attach_GL_VchrMasters), new Action<GL_VchrMaster>(this.detach_GL_VchrMasters));
 			this._SECURITY_Users = new EntitySet<SECURITY_User>(new Action<SECURITY_User>(this.attach_SECURITY_Users), new Action<SECURITY_User>(this.detach_SECURITY_Users));
 			this._SECURITY_UserGroups = new EntitySet<SECURITY_UserGroup>(new Action<SECURITY_UserGroup>(this.attach_SECURITY_UserGroups), new Action<SECURITY_UserGroup>(this.detach_SECURITY_UserGroups));
 			this._SETUP_Banks = new EntitySet<SETUP_Bank>(new Action<SETUP_Bank>(this.attach_SETUP_Banks), new Action<SETUP_Bank>(this.detach_SETUP_Banks));
@@ -5506,6 +3845,7 @@ namespace SCMSDataLayer.DB
 			this._SETUP_Suppliers = new EntitySet<SETUP_Supplier>(new Action<SETUP_Supplier>(this.attach_SETUP_Suppliers), new Action<SETUP_Supplier>(this.detach_SETUP_Suppliers));
 			this._SETUP_SupplierTypes = new EntitySet<SETUP_SupplierType>(new Action<SETUP_SupplierType>(this.attach_SETUP_SupplierTypes), new Action<SETUP_SupplierType>(this.detach_SETUP_SupplierTypes));
 			this._SETUP_VoucherTypes = new EntitySet<SETUP_VoucherType>(new Action<SETUP_VoucherType>(this.attach_SETUP_VoucherTypes), new Action<SETUP_VoucherType>(this.detach_SETUP_VoucherTypes));
+			this._GL_VchrMasters = new EntitySet<GL_VchrMaster>(new Action<GL_VchrMaster>(this.attach_GL_VchrMasters), new Action<GL_VchrMaster>(this.detach_GL_VchrMasters));
 			OnCreated();
 		}
 		
@@ -5709,19 +4049,6 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_GL_VchrMaster", Storage="_GL_VchrMasters", ThisKey="Cmp_Id", OtherKey="Cmp_Id")]
-		public EntitySet<GL_VchrMaster> GL_VchrMasters
-		{
-			get
-			{
-				return this._GL_VchrMasters;
-			}
-			set
-			{
-				this._GL_VchrMasters.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SECURITY_User", Storage="_SECURITY_Users", ThisKey="Cmp_Id", OtherKey="Cmp_Id")]
 		public EntitySet<SECURITY_User> SECURITY_Users
 		{
@@ -5891,6 +4218,19 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_GL_VchrMaster", Storage="_GL_VchrMasters", ThisKey="Cmp_Id", OtherKey="Cmp_Id")]
+		public EntitySet<GL_VchrMaster> GL_VchrMasters
+		{
+			get
+			{
+				return this._GL_VchrMasters;
+			}
+			set
+			{
+				this._GL_VchrMasters.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -5909,18 +4249,6 @@ namespace SCMSDataLayer.DB
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_GL_VchrMasters(GL_VchrMaster entity)
-		{
-			this.SendPropertyChanging();
-			entity.SETUP_Company = this;
-		}
-		
-		private void detach_GL_VchrMasters(GL_VchrMaster entity)
-		{
-			this.SendPropertyChanging();
-			entity.SETUP_Company = null;
 		}
 		
 		private void attach_SECURITY_Users(SECURITY_User entity)
@@ -6074,6 +4402,18 @@ namespace SCMSDataLayer.DB
 		}
 		
 		private void detach_SETUP_VoucherTypes(SETUP_VoucherType entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Company = null;
+		}
+		
+		private void attach_GL_VchrMasters(GL_VchrMaster entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Company = this;
+		}
+		
+		private void detach_GL_VchrMasters(GL_VchrMaster entity)
 		{
 			this.SendPropertyChanging();
 			entity.SETUP_Company = null;
@@ -7138,8 +5478,6 @@ namespace SCMSDataLayer.DB
 		
 		private System.Nullable<int> _Loc_SortOrder;
 		
-		private EntitySet<GL_VchrMaster> _GL_VchrMasters;
-		
 		private EntitySet<SECURITY_User> _SECURITY_Users;
 		
 		private EntitySet<SECURITY_UserGroup> _SECURITY_UserGroups;
@@ -7164,6 +5502,8 @@ namespace SCMSDataLayer.DB
 		
 		private EntitySet<SETUP_VoucherType> _SETUP_VoucherTypes;
 		
+		private EntitySet<GL_VchrMaster> _GL_VchrMasters;
+		
 		private EntityRef<SETUP_Company> _SETUP_Company;
 		
     #region Extensibility Method Definitions
@@ -7186,7 +5526,6 @@ namespace SCMSDataLayer.DB
 		
 		public SETUP_Location()
 		{
-			this._GL_VchrMasters = new EntitySet<GL_VchrMaster>(new Action<GL_VchrMaster>(this.attach_GL_VchrMasters), new Action<GL_VchrMaster>(this.detach_GL_VchrMasters));
 			this._SECURITY_Users = new EntitySet<SECURITY_User>(new Action<SECURITY_User>(this.attach_SECURITY_Users), new Action<SECURITY_User>(this.detach_SECURITY_Users));
 			this._SECURITY_UserGroups = new EntitySet<SECURITY_UserGroup>(new Action<SECURITY_UserGroup>(this.attach_SECURITY_UserGroups), new Action<SECURITY_UserGroup>(this.detach_SECURITY_UserGroups));
 			this._SETUP_Banks = new EntitySet<SETUP_Bank>(new Action<SETUP_Bank>(this.attach_SETUP_Banks), new Action<SETUP_Bank>(this.detach_SETUP_Banks));
@@ -7199,6 +5538,7 @@ namespace SCMSDataLayer.DB
 			this._SETUP_Suppliers = new EntitySet<SETUP_Supplier>(new Action<SETUP_Supplier>(this.attach_SETUP_Suppliers), new Action<SETUP_Supplier>(this.detach_SETUP_Suppliers));
 			this._SETUP_SupplierTypes = new EntitySet<SETUP_SupplierType>(new Action<SETUP_SupplierType>(this.attach_SETUP_SupplierTypes), new Action<SETUP_SupplierType>(this.detach_SETUP_SupplierTypes));
 			this._SETUP_VoucherTypes = new EntitySet<SETUP_VoucherType>(new Action<SETUP_VoucherType>(this.attach_SETUP_VoucherTypes), new Action<SETUP_VoucherType>(this.detach_SETUP_VoucherTypes));
+			this._GL_VchrMasters = new EntitySet<GL_VchrMaster>(new Action<GL_VchrMaster>(this.attach_GL_VchrMasters), new Action<GL_VchrMaster>(this.detach_GL_VchrMasters));
 			this._SETUP_Company = default(EntityRef<SETUP_Company>);
 			OnCreated();
 		}
@@ -7324,19 +5664,6 @@ namespace SCMSDataLayer.DB
 					this.SendPropertyChanged("Loc_SortOrder");
 					this.OnLoc_SortOrderChanged();
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_GL_VchrMaster", Storage="_GL_VchrMasters", ThisKey="Loc_Id", OtherKey="Loc_Id")]
-		public EntitySet<GL_VchrMaster> GL_VchrMasters
-		{
-			get
-			{
-				return this._GL_VchrMasters;
-			}
-			set
-			{
-				this._GL_VchrMasters.Assign(value);
 			}
 		}
 		
@@ -7496,6 +5823,19 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_GL_VchrMaster", Storage="_GL_VchrMasters", ThisKey="Loc_Id", OtherKey="Loc_Id")]
+		public EntitySet<GL_VchrMaster> GL_VchrMasters
+		{
+			get
+			{
+				return this._GL_VchrMasters;
+			}
+			set
+			{
+				this._GL_VchrMasters.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SETUP_Location", Storage="_SETUP_Company", ThisKey="Cmp_Id", OtherKey="Cmp_Id", IsForeignKey=true)]
 		public SETUP_Company SETUP_Company
 		{
@@ -7548,18 +5888,6 @@ namespace SCMSDataLayer.DB
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_GL_VchrMasters(GL_VchrMaster entity)
-		{
-			this.SendPropertyChanging();
-			entity.SETUP_Location = this;
-		}
-		
-		private void detach_GL_VchrMasters(GL_VchrMaster entity)
-		{
-			this.SendPropertyChanging();
-			entity.SETUP_Location = null;
 		}
 		
 		private void attach_SECURITY_Users(SECURITY_User entity)
@@ -7701,6 +6029,18 @@ namespace SCMSDataLayer.DB
 		}
 		
 		private void detach_SETUP_VoucherTypes(SETUP_VoucherType entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Location = null;
+		}
+		
+		private void attach_GL_VchrMasters(GL_VchrMaster entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Location = this;
+		}
+		
+		private void detach_GL_VchrMasters(GL_VchrMaster entity)
 		{
 			this.SendPropertyChanging();
 			entity.SETUP_Location = null;
@@ -8585,9 +6925,9 @@ namespace SCMSDataLayer.DB
 		
 		private System.Nullable<int> _VchrType_CodeInitialization;
 		
-		private EntitySet<GL_VchrMaster> _GL_VchrMasters;
-		
 		private EntitySet<SETUP_VoucherTypeNarration> _SETUP_VoucherTypeNarrations;
+		
+		private EntitySet<GL_VchrMaster> _GL_VchrMasters;
 		
 		private EntityRef<SETUP_Company> _SETUP_Company;
 		
@@ -8619,8 +6959,8 @@ namespace SCMSDataLayer.DB
 		
 		public SETUP_VoucherType()
 		{
-			this._GL_VchrMasters = new EntitySet<GL_VchrMaster>(new Action<GL_VchrMaster>(this.attach_GL_VchrMasters), new Action<GL_VchrMaster>(this.detach_GL_VchrMasters));
 			this._SETUP_VoucherTypeNarrations = new EntitySet<SETUP_VoucherTypeNarration>(new Action<SETUP_VoucherTypeNarration>(this.attach_SETUP_VoucherTypeNarrations), new Action<SETUP_VoucherTypeNarration>(this.detach_SETUP_VoucherTypeNarrations));
+			this._GL_VchrMasters = new EntitySet<GL_VchrMaster>(new Action<GL_VchrMaster>(this.attach_GL_VchrMasters), new Action<GL_VchrMaster>(this.detach_GL_VchrMasters));
 			this._SETUP_Company = default(EntityRef<SETUP_Company>);
 			this._SETUP_Location = default(EntityRef<SETUP_Location>);
 			OnCreated();
@@ -8814,19 +7154,6 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_VoucherType_GL_VchrMaster", Storage="_GL_VchrMasters", ThisKey="VchrType_Id", OtherKey="VchrType_Id")]
-		public EntitySet<GL_VchrMaster> GL_VchrMasters
-		{
-			get
-			{
-				return this._GL_VchrMasters;
-			}
-			set
-			{
-				this._GL_VchrMasters.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_VoucherType_SETUP_VoucherTypeNarration", Storage="_SETUP_VoucherTypeNarrations", ThisKey="VchrType_Id", OtherKey="VchrType_Id")]
 		public EntitySet<SETUP_VoucherTypeNarration> SETUP_VoucherTypeNarrations
 		{
@@ -8837,6 +7164,19 @@ namespace SCMSDataLayer.DB
 			set
 			{
 				this._SETUP_VoucherTypeNarrations.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_VoucherType_GL_VchrMaster", Storage="_GL_VchrMasters", ThisKey="VchrType_Id", OtherKey="VchrType_Id")]
+		public EntitySet<GL_VchrMaster> GL_VchrMasters
+		{
+			get
+			{
+				return this._GL_VchrMasters;
+			}
+			set
+			{
+				this._GL_VchrMasters.Assign(value);
 			}
 		}
 		
@@ -8928,18 +7268,6 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
-		private void attach_GL_VchrMasters(GL_VchrMaster entity)
-		{
-			this.SendPropertyChanging();
-			entity.SETUP_VoucherType = this;
-		}
-		
-		private void detach_GL_VchrMasters(GL_VchrMaster entity)
-		{
-			this.SendPropertyChanging();
-			entity.SETUP_VoucherType = null;
-		}
-		
 		private void attach_SETUP_VoucherTypeNarrations(SETUP_VoucherTypeNarration entity)
 		{
 			this.SendPropertyChanging();
@@ -8947,6 +7275,18 @@ namespace SCMSDataLayer.DB
 		}
 		
 		private void detach_SETUP_VoucherTypeNarrations(SETUP_VoucherTypeNarration entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_VoucherType = null;
+		}
+		
+		private void attach_GL_VchrMasters(GL_VchrMaster entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_VoucherType = this;
+		}
+		
+		private void detach_GL_VchrMasters(GL_VchrMaster entity)
 		{
 			this.SendPropertyChanging();
 			entity.SETUP_VoucherType = null;
@@ -9544,6 +7884,483 @@ namespace SCMSDataLayer.DB
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GL_VchrMaster")]
+	public partial class GL_VchrMaster : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _VchMas_Id;
+		
+		private string _VchMas_Code;
+		
+		private System.Nullable<System.DateTime> _VchMas_Date;
+		
+		private string _Cmp_Id;
+		
+		private string _Loc_Id;
+		
+		private string _VchrType_Id;
+		
+		private string _VchMas_Remarks;
+		
+		private string _VchMas_Status;
+		
+		private string _VchMas_EnteredBy;
+		
+		private System.Nullable<System.DateTime> _VchMas_EnteredDate;
+		
+		private string _VchMas_ApprovedBy;
+		
+		private System.Nullable<System.DateTime> _VchMas_ApprovedDate;
+		
+		private EntitySet<GL_VchrDetail> _GL_VchrDetails;
+		
+		private EntityRef<SETUP_Company> _SETUP_Company;
+		
+		private EntityRef<SETUP_Location> _SETUP_Location;
+		
+		private EntityRef<SETUP_VoucherType> _SETUP_VoucherType;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnVchMas_IdChanging(string value);
+    partial void OnVchMas_IdChanged();
+    partial void OnVchMas_CodeChanging(string value);
+    partial void OnVchMas_CodeChanged();
+    partial void OnVchMas_DateChanging(System.Nullable<System.DateTime> value);
+    partial void OnVchMas_DateChanged();
+    partial void OnCmp_IdChanging(string value);
+    partial void OnCmp_IdChanged();
+    partial void OnLoc_IdChanging(string value);
+    partial void OnLoc_IdChanged();
+    partial void OnVchrType_IdChanging(string value);
+    partial void OnVchrType_IdChanged();
+    partial void OnVchMas_RemarksChanging(string value);
+    partial void OnVchMas_RemarksChanged();
+    partial void OnVchMas_StatusChanging(string value);
+    partial void OnVchMas_StatusChanged();
+    partial void OnVchMas_EnteredByChanging(string value);
+    partial void OnVchMas_EnteredByChanged();
+    partial void OnVchMas_EnteredDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnVchMas_EnteredDateChanged();
+    partial void OnVchMas_ApprovedByChanging(string value);
+    partial void OnVchMas_ApprovedByChanged();
+    partial void OnVchMas_ApprovedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnVchMas_ApprovedDateChanged();
+    #endregion
+		
+		public GL_VchrMaster()
+		{
+			this._GL_VchrDetails = new EntitySet<GL_VchrDetail>(new Action<GL_VchrDetail>(this.attach_GL_VchrDetails), new Action<GL_VchrDetail>(this.detach_GL_VchrDetails));
+			this._SETUP_Company = default(EntityRef<SETUP_Company>);
+			this._SETUP_Location = default(EntityRef<SETUP_Location>);
+			this._SETUP_VoucherType = default(EntityRef<SETUP_VoucherType>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string VchMas_Id
+		{
+			get
+			{
+				return this._VchMas_Id;
+			}
+			set
+			{
+				if ((this._VchMas_Id != value))
+				{
+					this.OnVchMas_IdChanging(value);
+					this.SendPropertyChanging();
+					this._VchMas_Id = value;
+					this.SendPropertyChanged("VchMas_Id");
+					this.OnVchMas_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Code", DbType="VarChar(50)")]
+		public string VchMas_Code
+		{
+			get
+			{
+				return this._VchMas_Code;
+			}
+			set
+			{
+				if ((this._VchMas_Code != value))
+				{
+					this.OnVchMas_CodeChanging(value);
+					this.SendPropertyChanging();
+					this._VchMas_Code = value;
+					this.SendPropertyChanged("VchMas_Code");
+					this.OnVchMas_CodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> VchMas_Date
+		{
+			get
+			{
+				return this._VchMas_Date;
+			}
+			set
+			{
+				if ((this._VchMas_Date != value))
+				{
+					this.OnVchMas_DateChanging(value);
+					this.SendPropertyChanging();
+					this._VchMas_Date = value;
+					this.SendPropertyChanged("VchMas_Date");
+					this.OnVchMas_DateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cmp_Id", DbType="VarChar(50)")]
+		public string Cmp_Id
+		{
+			get
+			{
+				return this._Cmp_Id;
+			}
+			set
+			{
+				if ((this._Cmp_Id != value))
+				{
+					if (this._SETUP_Company.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCmp_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Cmp_Id = value;
+					this.SendPropertyChanged("Cmp_Id");
+					this.OnCmp_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id", DbType="VarChar(50)")]
+		public string Loc_Id
+		{
+			get
+			{
+				return this._Loc_Id;
+			}
+			set
+			{
+				if ((this._Loc_Id != value))
+				{
+					if (this._SETUP_Location.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnLoc_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Loc_Id = value;
+					this.SendPropertyChanged("Loc_Id");
+					this.OnLoc_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchrType_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string VchrType_Id
+		{
+			get
+			{
+				return this._VchrType_Id;
+			}
+			set
+			{
+				if ((this._VchrType_Id != value))
+				{
+					if (this._SETUP_VoucherType.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnVchrType_IdChanging(value);
+					this.SendPropertyChanging();
+					this._VchrType_Id = value;
+					this.SendPropertyChanged("VchrType_Id");
+					this.OnVchrType_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Remarks", DbType="VarChar(200)")]
+		public string VchMas_Remarks
+		{
+			get
+			{
+				return this._VchMas_Remarks;
+			}
+			set
+			{
+				if ((this._VchMas_Remarks != value))
+				{
+					this.OnVchMas_RemarksChanging(value);
+					this.SendPropertyChanging();
+					this._VchMas_Remarks = value;
+					this.SendPropertyChanged("VchMas_Remarks");
+					this.OnVchMas_RemarksChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Status", DbType="VarChar(50)")]
+		public string VchMas_Status
+		{
+			get
+			{
+				return this._VchMas_Status;
+			}
+			set
+			{
+				if ((this._VchMas_Status != value))
+				{
+					this.OnVchMas_StatusChanging(value);
+					this.SendPropertyChanging();
+					this._VchMas_Status = value;
+					this.SendPropertyChanged("VchMas_Status");
+					this.OnVchMas_StatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_EnteredBy", DbType="VarChar(100)")]
+		public string VchMas_EnteredBy
+		{
+			get
+			{
+				return this._VchMas_EnteredBy;
+			}
+			set
+			{
+				if ((this._VchMas_EnteredBy != value))
+				{
+					this.OnVchMas_EnteredByChanging(value);
+					this.SendPropertyChanging();
+					this._VchMas_EnteredBy = value;
+					this.SendPropertyChanged("VchMas_EnteredBy");
+					this.OnVchMas_EnteredByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_EnteredDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> VchMas_EnteredDate
+		{
+			get
+			{
+				return this._VchMas_EnteredDate;
+			}
+			set
+			{
+				if ((this._VchMas_EnteredDate != value))
+				{
+					this.OnVchMas_EnteredDateChanging(value);
+					this.SendPropertyChanging();
+					this._VchMas_EnteredDate = value;
+					this.SendPropertyChanged("VchMas_EnteredDate");
+					this.OnVchMas_EnteredDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_ApprovedBy", DbType="VarChar(100)")]
+		public string VchMas_ApprovedBy
+		{
+			get
+			{
+				return this._VchMas_ApprovedBy;
+			}
+			set
+			{
+				if ((this._VchMas_ApprovedBy != value))
+				{
+					this.OnVchMas_ApprovedByChanging(value);
+					this.SendPropertyChanging();
+					this._VchMas_ApprovedBy = value;
+					this.SendPropertyChanged("VchMas_ApprovedBy");
+					this.OnVchMas_ApprovedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_ApprovedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> VchMas_ApprovedDate
+		{
+			get
+			{
+				return this._VchMas_ApprovedDate;
+			}
+			set
+			{
+				if ((this._VchMas_ApprovedDate != value))
+				{
+					this.OnVchMas_ApprovedDateChanging(value);
+					this.SendPropertyChanging();
+					this._VchMas_ApprovedDate = value;
+					this.SendPropertyChanged("VchMas_ApprovedDate");
+					this.OnVchMas_ApprovedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="GL_VchrMaster_GL_VchrDetail", Storage="_GL_VchrDetails", ThisKey="VchMas_Id", OtherKey="VchMas_Id")]
+		public EntitySet<GL_VchrDetail> GL_VchrDetails
+		{
+			get
+			{
+				return this._GL_VchrDetails;
+			}
+			set
+			{
+				this._GL_VchrDetails.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_GL_VchrMaster", Storage="_SETUP_Company", ThisKey="Cmp_Id", OtherKey="Cmp_Id", IsForeignKey=true)]
+		public SETUP_Company SETUP_Company
+		{
+			get
+			{
+				return this._SETUP_Company.Entity;
+			}
+			set
+			{
+				SETUP_Company previousValue = this._SETUP_Company.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Company.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Company.Entity = null;
+						previousValue.GL_VchrMasters.Remove(this);
+					}
+					this._SETUP_Company.Entity = value;
+					if ((value != null))
+					{
+						value.GL_VchrMasters.Add(this);
+						this._Cmp_Id = value.Cmp_Id;
+					}
+					else
+					{
+						this._Cmp_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Company");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_GL_VchrMaster", Storage="_SETUP_Location", ThisKey="Loc_Id", OtherKey="Loc_Id", IsForeignKey=true)]
+		public SETUP_Location SETUP_Location
+		{
+			get
+			{
+				return this._SETUP_Location.Entity;
+			}
+			set
+			{
+				SETUP_Location previousValue = this._SETUP_Location.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Location.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Location.Entity = null;
+						previousValue.GL_VchrMasters.Remove(this);
+					}
+					this._SETUP_Location.Entity = value;
+					if ((value != null))
+					{
+						value.GL_VchrMasters.Add(this);
+						this._Loc_Id = value.Loc_Id;
+					}
+					else
+					{
+						this._Loc_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Location");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_VoucherType_GL_VchrMaster", Storage="_SETUP_VoucherType", ThisKey="VchrType_Id", OtherKey="VchrType_Id", IsForeignKey=true)]
+		public SETUP_VoucherType SETUP_VoucherType
+		{
+			get
+			{
+				return this._SETUP_VoucherType.Entity;
+			}
+			set
+			{
+				SETUP_VoucherType previousValue = this._SETUP_VoucherType.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_VoucherType.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_VoucherType.Entity = null;
+						previousValue.GL_VchrMasters.Remove(this);
+					}
+					this._SETUP_VoucherType.Entity = value;
+					if ((value != null))
+					{
+						value.GL_VchrMasters.Add(this);
+						this._VchrType_Id = value.VchrType_Id;
+					}
+					else
+					{
+						this._VchrType_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_VoucherType");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_GL_VchrDetails(GL_VchrDetail entity)
+		{
+			this.SendPropertyChanging();
+			entity.GL_VchrMaster = this;
+		}
+		
+		private void detach_GL_VchrDetails(GL_VchrDetail entity)
+		{
+			this.SendPropertyChanging();
+			entity.GL_VchrMaster = null;
+		}
+	}
+	
 	public partial class sp_GetCityListResult
 	{
 		
@@ -9655,140 +8472,6 @@ namespace SCMSDataLayer.DB
 				if ((this._City_SortOrder != value))
 				{
 					this._City_SortOrder = value;
-				}
-			}
-		}
-	}
-	
-	public partial class sp_VoucherEntryConsoleResult
-	{
-		
-		private string _Loc_Title;
-		
-		private string _VchrType_Title;
-		
-		private string _VchMas_Id;
-		
-		private string _VchMas_Code;
-		
-		private System.Nullable<System.DateTime> _VchMas_Date;
-		
-		private string _VchMas_Remarks;
-		
-		private System.Nullable<int> _VchMas_Status;
-		
-		public sp_VoucherEntryConsoleResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Title", DbType="VarChar(100)")]
-		public string Loc_Title
-		{
-			get
-			{
-				return this._Loc_Title;
-			}
-			set
-			{
-				if ((this._Loc_Title != value))
-				{
-					this._Loc_Title = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchrType_Title", DbType="VarChar(100)")]
-		public string VchrType_Title
-		{
-			get
-			{
-				return this._VchrType_Title;
-			}
-			set
-			{
-				if ((this._VchrType_Title != value))
-				{
-					this._VchrType_Title = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string VchMas_Id
-		{
-			get
-			{
-				return this._VchMas_Id;
-			}
-			set
-			{
-				if ((this._VchMas_Id != value))
-				{
-					this._VchMas_Id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Code", DbType="VarChar(50)")]
-		public string VchMas_Code
-		{
-			get
-			{
-				return this._VchMas_Code;
-			}
-			set
-			{
-				if ((this._VchMas_Code != value))
-				{
-					this._VchMas_Code = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Date", DbType="DateTime")]
-		public System.Nullable<System.DateTime> VchMas_Date
-		{
-			get
-			{
-				return this._VchMas_Date;
-			}
-			set
-			{
-				if ((this._VchMas_Date != value))
-				{
-					this._VchMas_Date = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Remarks", DbType="VarChar(200)")]
-		public string VchMas_Remarks
-		{
-			get
-			{
-				return this._VchMas_Remarks;
-			}
-			set
-			{
-				if ((this._VchMas_Remarks != value))
-				{
-					this._VchMas_Remarks = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Status", DbType="Int")]
-		public System.Nullable<int> VchMas_Status
-		{
-			get
-			{
-				return this._VchMas_Status;
-			}
-			set
-			{
-				if ((this._VchMas_Status != value))
-				{
-					this._VchMas_Status = value;
 				}
 			}
 		}
@@ -13455,6 +12138,140 @@ namespace SCMSDataLayer.DB
 				if ((this._VchMas_CrAmount != value))
 				{
 					this._VchMas_CrAmount = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_VoucherEntryConsoleResult
+	{
+		
+		private string _Loc_Title;
+		
+		private string _VchrType_Title;
+		
+		private string _VchMas_Id;
+		
+		private string _VchMas_Code;
+		
+		private System.Nullable<System.DateTime> _VchMas_Date;
+		
+		private string _VchMas_Remarks;
+		
+		private string _VchMas_Status;
+		
+		public sp_VoucherEntryConsoleResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Title", DbType="VarChar(100)")]
+		public string Loc_Title
+		{
+			get
+			{
+				return this._Loc_Title;
+			}
+			set
+			{
+				if ((this._Loc_Title != value))
+				{
+					this._Loc_Title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchrType_Title", DbType="VarChar(100)")]
+		public string VchrType_Title
+		{
+			get
+			{
+				return this._VchrType_Title;
+			}
+			set
+			{
+				if ((this._VchrType_Title != value))
+				{
+					this._VchrType_Title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string VchMas_Id
+		{
+			get
+			{
+				return this._VchMas_Id;
+			}
+			set
+			{
+				if ((this._VchMas_Id != value))
+				{
+					this._VchMas_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Code", DbType="VarChar(50)")]
+		public string VchMas_Code
+		{
+			get
+			{
+				return this._VchMas_Code;
+			}
+			set
+			{
+				if ((this._VchMas_Code != value))
+				{
+					this._VchMas_Code = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> VchMas_Date
+		{
+			get
+			{
+				return this._VchMas_Date;
+			}
+			set
+			{
+				if ((this._VchMas_Date != value))
+				{
+					this._VchMas_Date = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Remarks", DbType="VarChar(200)")]
+		public string VchMas_Remarks
+		{
+			get
+			{
+				return this._VchMas_Remarks;
+			}
+			set
+			{
+				if ((this._VchMas_Remarks != value))
+				{
+					this._VchMas_Remarks = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Status", DbType="VarChar(50)")]
+		public string VchMas_Status
+		{
+			get
+			{
+				return this._VchMas_Status;
+			}
+			set
+			{
+				if ((this._VchMas_Status != value))
+				{
+					this._VchMas_Status = value;
 				}
 			}
 		}

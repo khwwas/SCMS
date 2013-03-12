@@ -912,7 +912,6 @@
     <Content Include="Views\VoucherType\GridData.ascx" />
     <Content Include="Views\VoucherType\VoucherType.aspx" />
     <Content Include="Views\Voucher\GridData.ascx" />
-    <Content Include="Views\Voucher\Index.aspx" />
     <Content Include="Views\Voucher\VoucherEntry.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

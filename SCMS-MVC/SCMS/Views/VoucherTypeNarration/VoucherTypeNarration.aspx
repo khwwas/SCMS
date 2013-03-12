@@ -27,7 +27,7 @@
                 return;
             }
             else {
-                var Url = document.getElementById('frm_LocationSetup').action;
+                var Url = document.getElementById('frm_VoucherTypeNarrationSetup').action;
                 Url += "VoucherTypeNarration/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&ps_Title=" + lcnt_txtTitle.value + "&ps_CmpId=" + lcnt_Cmp.value.toString();
                 document.getElementById("Waiting_Image").style.display = "block";
                 document.getElementById("btn_Save").style.display = "none";
@@ -114,7 +114,7 @@
         }
 
     </script>
-    <form id="frm_LocationSetup" action='<%=Url.Content("~/") %>'>
+    <form id="frm_VoucherTypeNarrationSetup" action='<%=Url.Content("~/") %>'>
     <input type="hidden" id="txt_SelectedCode" name="txt_SelectedCode" value="" />
     <div class="box round first fullpage grid">
         <h2>
