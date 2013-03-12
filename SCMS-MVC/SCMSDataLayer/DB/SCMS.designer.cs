@@ -402,13 +402,6 @@ namespace SCMSDataLayer.DB
 			return ((ISingleResult<sp_ReportChartOfAccountResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_ReportLedgerDetail")]
-		public ISingleResult<sp_ReportLedgerDetailResult> sp_ReportLedgerDetail()
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-			return ((ISingleResult<sp_ReportLedgerDetailResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_ReportTrialBalance")]
 		public ISingleResult<sp_ReportTrialBalanceResult> sp_ReportTrialBalance([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AllLocation", DbType="Int")] System.Nullable<int> allLocation, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="LocationId", DbType="VarChar(1)")] string locationId, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AllVoucherType", DbType="Int")] System.Nullable<int> allVoucherType, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="VoucherTypeId", DbType="VarChar(1)")] string voucherTypeId, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AllDate", DbType="Int")] System.Nullable<int> allDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="DateFrom", DbType="VarChar(1)")] string dateFrom, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="DateTo", DbType="VarChar(1)")] string dateTo)
 		{
@@ -421,6 +414,13 @@ namespace SCMSDataLayer.DB
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), allLocation, locationId, allVoucherType, voucherTypeId, allDate, dateFrom, dateTo);
 			return ((ISingleResult<sp_VoucherEntryConsoleResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_ReportLedgerDetail")]
+		public ISingleResult<sp_ReportLedgerDetailResult> sp_ReportLedgerDetail()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<sp_ReportLedgerDetailResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -11227,6 +11227,256 @@ namespace SCMSDataLayer.DB
 		}
 	}
 	
+	public partial class sp_ReportTrialBalanceResult
+	{
+		
+		private string _ChrtAcc_Id;
+		
+		private string _ChrtAcc_Code;
+		
+		private string _ChrtAcc_Title;
+		
+		private System.Nullable<int> _ChrtAcc_Level;
+		
+		private System.Nullable<decimal> _VchMas_DrAmount;
+		
+		private System.Nullable<decimal> _VchMas_CrAmount;
+		
+		public sp_ReportTrialBalanceResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChrtAcc_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string ChrtAcc_Id
+		{
+			get
+			{
+				return this._ChrtAcc_Id;
+			}
+			set
+			{
+				if ((this._ChrtAcc_Id != value))
+				{
+					this._ChrtAcc_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChrtAcc_Code", DbType="VarChar(50)")]
+		public string ChrtAcc_Code
+		{
+			get
+			{
+				return this._ChrtAcc_Code;
+			}
+			set
+			{
+				if ((this._ChrtAcc_Code != value))
+				{
+					this._ChrtAcc_Code = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChrtAcc_Title", DbType="VarChar(100)")]
+		public string ChrtAcc_Title
+		{
+			get
+			{
+				return this._ChrtAcc_Title;
+			}
+			set
+			{
+				if ((this._ChrtAcc_Title != value))
+				{
+					this._ChrtAcc_Title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChrtAcc_Level", DbType="Int")]
+		public System.Nullable<int> ChrtAcc_Level
+		{
+			get
+			{
+				return this._ChrtAcc_Level;
+			}
+			set
+			{
+				if ((this._ChrtAcc_Level != value))
+				{
+					this._ChrtAcc_Level = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_DrAmount", DbType="Decimal(38,6)")]
+		public System.Nullable<decimal> VchMas_DrAmount
+		{
+			get
+			{
+				return this._VchMas_DrAmount;
+			}
+			set
+			{
+				if ((this._VchMas_DrAmount != value))
+				{
+					this._VchMas_DrAmount = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_CrAmount", DbType="Decimal(38,6)")]
+		public System.Nullable<decimal> VchMas_CrAmount
+		{
+			get
+			{
+				return this._VchMas_CrAmount;
+			}
+			set
+			{
+				if ((this._VchMas_CrAmount != value))
+				{
+					this._VchMas_CrAmount = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_VoucherEntryConsoleResult
+	{
+		
+		private string _Loc_Title;
+		
+		private string _VchrType_Title;
+		
+		private string _VchMas_Id;
+		
+		private string _VchMas_Code;
+		
+		private System.Nullable<System.DateTime> _VchMas_Date;
+		
+		private string _VchMas_Remarks;
+		
+		private string _VchMas_Status;
+		
+		public sp_VoucherEntryConsoleResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Title", DbType="VarChar(100)")]
+		public string Loc_Title
+		{
+			get
+			{
+				return this._Loc_Title;
+			}
+			set
+			{
+				if ((this._Loc_Title != value))
+				{
+					this._Loc_Title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchrType_Title", DbType="VarChar(100)")]
+		public string VchrType_Title
+		{
+			get
+			{
+				return this._VchrType_Title;
+			}
+			set
+			{
+				if ((this._VchrType_Title != value))
+				{
+					this._VchrType_Title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string VchMas_Id
+		{
+			get
+			{
+				return this._VchMas_Id;
+			}
+			set
+			{
+				if ((this._VchMas_Id != value))
+				{
+					this._VchMas_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Code", DbType="VarChar(50)")]
+		public string VchMas_Code
+		{
+			get
+			{
+				return this._VchMas_Code;
+			}
+			set
+			{
+				if ((this._VchMas_Code != value))
+				{
+					this._VchMas_Code = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> VchMas_Date
+		{
+			get
+			{
+				return this._VchMas_Date;
+			}
+			set
+			{
+				if ((this._VchMas_Date != value))
+				{
+					this._VchMas_Date = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Remarks", DbType="VarChar(200)")]
+		public string VchMas_Remarks
+		{
+			get
+			{
+				return this._VchMas_Remarks;
+			}
+			set
+			{
+				if ((this._VchMas_Remarks != value))
+				{
+					this._VchMas_Remarks = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Status", DbType="VarChar(50)")]
+		public string VchMas_Status
+		{
+			get
+			{
+				return this._VchMas_Status;
+			}
+			set
+			{
+				if ((this._VchMas_Status != value))
+				{
+					this._VchMas_Status = value;
+				}
+			}
+		}
+	}
+	
 	public partial class sp_ReportLedgerDetailResult
 	{
 		
@@ -11244,7 +11494,7 @@ namespace SCMSDataLayer.DB
 		
 		private string _VchMas_Remarks;
 		
-		private System.Nullable<int> _VchMas_Status;
+		private string _VchMas_Status;
 		
 		private string _VchMas_EnteredBy;
 		
@@ -11434,8 +11684,8 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Status", DbType="Int")]
-		public System.Nullable<int> VchMas_Status
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Status", DbType="VarChar(50)")]
+		public string VchMas_Status
 		{
 			get
 			{
@@ -12022,256 +12272,6 @@ namespace SCMSDataLayer.DB
 				if ((this._ChrtAcc_Active != value))
 				{
 					this._ChrtAcc_Active = value;
-				}
-			}
-		}
-	}
-	
-	public partial class sp_ReportTrialBalanceResult
-	{
-		
-		private string _ChrtAcc_Id;
-		
-		private string _ChrtAcc_Code;
-		
-		private string _ChrtAcc_Title;
-		
-		private System.Nullable<int> _ChrtAcc_Level;
-		
-		private System.Nullable<decimal> _VchMas_DrAmount;
-		
-		private System.Nullable<decimal> _VchMas_CrAmount;
-		
-		public sp_ReportTrialBalanceResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChrtAcc_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string ChrtAcc_Id
-		{
-			get
-			{
-				return this._ChrtAcc_Id;
-			}
-			set
-			{
-				if ((this._ChrtAcc_Id != value))
-				{
-					this._ChrtAcc_Id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChrtAcc_Code", DbType="VarChar(50)")]
-		public string ChrtAcc_Code
-		{
-			get
-			{
-				return this._ChrtAcc_Code;
-			}
-			set
-			{
-				if ((this._ChrtAcc_Code != value))
-				{
-					this._ChrtAcc_Code = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChrtAcc_Title", DbType="VarChar(100)")]
-		public string ChrtAcc_Title
-		{
-			get
-			{
-				return this._ChrtAcc_Title;
-			}
-			set
-			{
-				if ((this._ChrtAcc_Title != value))
-				{
-					this._ChrtAcc_Title = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChrtAcc_Level", DbType="Int")]
-		public System.Nullable<int> ChrtAcc_Level
-		{
-			get
-			{
-				return this._ChrtAcc_Level;
-			}
-			set
-			{
-				if ((this._ChrtAcc_Level != value))
-				{
-					this._ChrtAcc_Level = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_DrAmount", DbType="Decimal(38,6)")]
-		public System.Nullable<decimal> VchMas_DrAmount
-		{
-			get
-			{
-				return this._VchMas_DrAmount;
-			}
-			set
-			{
-				if ((this._VchMas_DrAmount != value))
-				{
-					this._VchMas_DrAmount = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_CrAmount", DbType="Decimal(38,6)")]
-		public System.Nullable<decimal> VchMas_CrAmount
-		{
-			get
-			{
-				return this._VchMas_CrAmount;
-			}
-			set
-			{
-				if ((this._VchMas_CrAmount != value))
-				{
-					this._VchMas_CrAmount = value;
-				}
-			}
-		}
-	}
-	
-	public partial class sp_VoucherEntryConsoleResult
-	{
-		
-		private string _Loc_Title;
-		
-		private string _VchrType_Title;
-		
-		private string _VchMas_Id;
-		
-		private string _VchMas_Code;
-		
-		private System.Nullable<System.DateTime> _VchMas_Date;
-		
-		private string _VchMas_Remarks;
-		
-		private string _VchMas_Status;
-		
-		public sp_VoucherEntryConsoleResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Title", DbType="VarChar(100)")]
-		public string Loc_Title
-		{
-			get
-			{
-				return this._Loc_Title;
-			}
-			set
-			{
-				if ((this._Loc_Title != value))
-				{
-					this._Loc_Title = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchrType_Title", DbType="VarChar(100)")]
-		public string VchrType_Title
-		{
-			get
-			{
-				return this._VchrType_Title;
-			}
-			set
-			{
-				if ((this._VchrType_Title != value))
-				{
-					this._VchrType_Title = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string VchMas_Id
-		{
-			get
-			{
-				return this._VchMas_Id;
-			}
-			set
-			{
-				if ((this._VchMas_Id != value))
-				{
-					this._VchMas_Id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Code", DbType="VarChar(50)")]
-		public string VchMas_Code
-		{
-			get
-			{
-				return this._VchMas_Code;
-			}
-			set
-			{
-				if ((this._VchMas_Code != value))
-				{
-					this._VchMas_Code = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Date", DbType="DateTime")]
-		public System.Nullable<System.DateTime> VchMas_Date
-		{
-			get
-			{
-				return this._VchMas_Date;
-			}
-			set
-			{
-				if ((this._VchMas_Date != value))
-				{
-					this._VchMas_Date = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Remarks", DbType="VarChar(200)")]
-		public string VchMas_Remarks
-		{
-			get
-			{
-				return this._VchMas_Remarks;
-			}
-			set
-			{
-				if ((this._VchMas_Remarks != value))
-				{
-					this._VchMas_Remarks = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Status", DbType="VarChar(50)")]
-		public string VchMas_Status
-		{
-			get
-			{
-				return this._VchMas_Status;
-			}
-			set
-			{
-				if ((this._VchMas_Status != value))
-				{
-					this._VchMas_Status = value;
 				}
 			}
 		}

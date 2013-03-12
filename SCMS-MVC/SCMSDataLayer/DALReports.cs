@@ -222,6 +222,25 @@ namespace SCMSDataLayer
                 _cmd.Connection = con;
                 _cmd.CommandType = CommandType.StoredProcedure;
                 _cmd.CommandText = "sp_ReportTrialBalance";
+
+                //_ReportDocument.SetParameterValue("@AllLocation", 1);
+                //_ReportDocument.SetParameterValue("@LocationId", "''");
+                //_ReportDocument.SetParameterValue("@AllVoucherType", 1);
+                //_ReportDocument.SetParameterValue("@VoucherTypeId", "''");
+                //_ReportDocument.SetParameterValue("@AllDate", 1);
+                //_ReportDocument.SetParameterValue("@DateFrom", "''");
+                //_ReportDocument.SetParameterValue("@DateTo", "''");
+
+                _cmd.Parameters.Add(new SqlParameter("@AllLocation", SqlDbType.Int)).Value = 1;
+                _cmd.Parameters.Add(new SqlParameter("@LocationId", SqlDbType.VarChar)).Value = " ";
+
+                _cmd.Parameters.Add(new SqlParameter("@AllVoucherType", SqlDbType.Int)).Value = 1;
+                _cmd.Parameters.Add(new SqlParameter("@VoucherTypeId", SqlDbType.VarChar)).Value = " ";
+
+                _cmd.Parameters.Add(new SqlParameter("@AllDate", SqlDbType.Int)).Value = 1;
+                _cmd.Parameters.Add(new SqlParameter("@DateFrom", SqlDbType.VarChar)).Value = " ";
+                _cmd.Parameters.Add(new SqlParameter("@DateTo", SqlDbType.VarChar)).Value = " ";
+
                 _cmd.ExecuteNonQuery();
 
                 SqlDataAdapter da = new SqlDataAdapter(_cmd);

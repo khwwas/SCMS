@@ -557,6 +557,41 @@
       <Column Name="AccNatr_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.sp_ReportTrialBalance" Method="sp_ReportTrialBalance">
+    <Parameter Name="AllLocation" Parameter="allLocation" Type="System.Int32" DbType="Int" />
+    <Parameter Name="LocationId" Parameter="locationId" Type="System.String" DbType="VarChar(1)" />
+    <Parameter Name="AllVoucherType" Parameter="allVoucherType" Type="System.Int32" DbType="Int" />
+    <Parameter Name="VoucherTypeId" Parameter="voucherTypeId" Type="System.String" DbType="VarChar(1)" />
+    <Parameter Name="AllDate" Parameter="allDate" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DateFrom" Parameter="dateFrom" Type="System.String" DbType="VarChar(1)" />
+    <Parameter Name="DateTo" Parameter="dateTo" Type="System.String" DbType="VarChar(1)" />
+    <ElementType Name="sp_ReportTrialBalanceResult">
+      <Column Name="ChrtAcc_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ChrtAcc_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ChrtAcc_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ChrtAcc_Level" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VchMas_DrAmount" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
+      <Column Name="VchMas_CrAmount" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_VoucherEntryConsole" Method="sp_VoucherEntryConsole">
+    <Parameter Name="AllLocation" Parameter="allLocation" Type="System.Int32" DbType="Int" />
+    <Parameter Name="LocationId" Parameter="locationId" Type="System.String" DbType="VarChar(1)" />
+    <Parameter Name="AllVoucherType" Parameter="allVoucherType" Type="System.Int32" DbType="Int" />
+    <Parameter Name="VoucherTypeId" Parameter="voucherTypeId" Type="System.String" DbType="VarChar(1)" />
+    <Parameter Name="AllDate" Parameter="allDate" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DateFrom" Parameter="dateFrom" Type="System.String" DbType="VarChar(1)" />
+    <Parameter Name="DateTo" Parameter="dateTo" Type="System.String" DbType="VarChar(1)" />
+    <ElementType Name="sp_VoucherEntryConsoleResult">
+      <Column Name="Loc_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="VchrType_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="VchMas_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="VchMas_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="VchMas_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="VchMas_Remarks" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="VchMas_Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
   <Function Name="dbo.sp_ReportLedgerDetail" Method="sp_ReportLedgerDetail">
     <ElementType Name="sp_ReportLedgerDetailResult">
       <Column Name="VchMas_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
@@ -566,7 +601,7 @@
       <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="VchrType_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="VchMas_Remarks" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
-      <Column Name="VchMas_Status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VchMas_Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="VchMas_EnteredBy" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="VchMas_EnteredDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="VchMas_ApprovedBy" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
@@ -603,41 +638,6 @@
       <Column Name="ChrtAcc_Level" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ChrtAcc_BudgetLevel" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ChrtAcc_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.sp_ReportTrialBalance" Method="sp_ReportTrialBalance">
-    <Parameter Name="AllLocation" Parameter="allLocation" Type="System.Int32" DbType="Int" />
-    <Parameter Name="LocationId" Parameter="locationId" Type="System.String" DbType="VarChar(1)" />
-    <Parameter Name="AllVoucherType" Parameter="allVoucherType" Type="System.Int32" DbType="Int" />
-    <Parameter Name="VoucherTypeId" Parameter="voucherTypeId" Type="System.String" DbType="VarChar(1)" />
-    <Parameter Name="AllDate" Parameter="allDate" Type="System.Int32" DbType="Int" />
-    <Parameter Name="DateFrom" Parameter="dateFrom" Type="System.String" DbType="VarChar(1)" />
-    <Parameter Name="DateTo" Parameter="dateTo" Type="System.String" DbType="VarChar(1)" />
-    <ElementType Name="sp_ReportTrialBalanceResult">
-      <Column Name="ChrtAcc_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="ChrtAcc_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="ChrtAcc_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="ChrtAcc_Level" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="VchMas_DrAmount" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
-      <Column Name="VchMas_CrAmount" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.sp_VoucherEntryConsole" Method="sp_VoucherEntryConsole">
-    <Parameter Name="AllLocation" Parameter="allLocation" Type="System.Int32" DbType="Int" />
-    <Parameter Name="LocationId" Parameter="locationId" Type="System.String" DbType="VarChar(1)" />
-    <Parameter Name="AllVoucherType" Parameter="allVoucherType" Type="System.Int32" DbType="Int" />
-    <Parameter Name="VoucherTypeId" Parameter="voucherTypeId" Type="System.String" DbType="VarChar(1)" />
-    <Parameter Name="AllDate" Parameter="allDate" Type="System.Int32" DbType="Int" />
-    <Parameter Name="DateFrom" Parameter="dateFrom" Type="System.String" DbType="VarChar(1)" />
-    <Parameter Name="DateTo" Parameter="dateTo" Type="System.String" DbType="VarChar(1)" />
-    <ElementType Name="sp_VoucherEntryConsoleResult">
-      <Column Name="Loc_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="VchrType_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="VchMas_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="VchMas_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="VchMas_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="VchMas_Remarks" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
-      <Column Name="VchMas_Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>
