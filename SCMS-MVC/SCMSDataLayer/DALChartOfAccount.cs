@@ -52,7 +52,7 @@ namespace SCMSDataLayer
                 SCMSDataContext dbSCMS = Connection.Create();
                 li_ReturnValue = dbSCMS.ExecuteCommand("Delete From Setup_ChartOfAccount where ChrtAcc_Id='" + ps_Id + "'");
             }
-            catch
+            catch (Exception ex)
             {
                 li_ReturnValue = 0;
             }
@@ -78,11 +78,24 @@ namespace SCMSDataLayer
 
         public List<SETUP_ChartOfAccount> GetChartOfAccountForDropDown()
         {
+            string _Sql = "";
             try
             {
+
+
+                // ChrtAcc_Type
+
+                _Sql += "  Select SETUP_ChartOfAccount.ChrtAcc_Id, ";
+                _Sql += "         SETUP_ChartOfAccount.ChrtAcc_Title + ' [' + SETUP_ChartOfAccount.ChrtAcc_Code + ']'  as ChrtAcc_Title ";
+                _Sql += "    From SETUP_ChartOfAccount ";
+                _Sql += "   Where ( IsNULL( SETUP_ChartOfAccount.ChrtAcc_Type, 0 ) = 2 ) ";
+                _Sql += "Order By SETUP_ChartOfAccount.ChrtAcc_Code, ";
+                _Sql += "         SETUP_ChartOfAccount.ChrtAcc_Level";
+
+
                 SCMSDataContext dbSCMS = Connection.Create();
                 List<SETUP_ChartOfAccount> ChartOfAccountList = new List<SETUP_ChartOfAccount>();
-                ChartOfAccountList = dbSCMS.ExecuteQuery<SETUP_ChartOfAccount>("Select ChrtAcc_Id,ChrtAcc_Title+'['+ChrtAcc_Code+']' as ChrtAcc_Title From SETUP_ChartOfAccount Where ChrtAcc_Level = 5 Order By ChrtAcc_Code,ChrtAcc_Level").ToList();
+                ChartOfAccountList = dbSCMS.ExecuteQuery<SETUP_ChartOfAccount>(_Sql).ToList();
                 return ChartOfAccountList;
             }
             catch

@@ -72,14 +72,7 @@
                 <%=DataRow.VchMas_Remarks%>
             </td>
             <td id="txt_Status<%=DataRow.VchMas_Id%>" style="vertical-align: middle;">
-                <%if (DataRow.VchMas_Status == 1)
-                  {
-                      Response.Write("Pending");
-                  }
-                  else
-                  {
-                      Response.Write("Approved");
-                  } %>
+                <%=DataRow.VchMas_Status%>
             </td>
         </tr>
         <%}

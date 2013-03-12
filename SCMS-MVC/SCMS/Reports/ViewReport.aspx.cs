@@ -84,6 +84,7 @@ namespace SCMS.Reports
                 //_br.Close();
                 _fs.Close();
                 #endregion
+
                 #region Company
                 if (ReportName.ToLower() == "Company".ToLower())
                 {
@@ -107,12 +108,14 @@ namespace SCMS.Reports
                     if (_dsCompany == null || _dsCompany.Tables == null || _dsCompany.Tables.Count <= 0)
                     {
                         MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
+                        return;
                     }
 
                     _ReportDocument.SetDataSource(_dsCompany);
                     _ReportDocument.SummaryInfo.ReportTitle = "List Of Companies";
                 }
                 #endregion
+
                 #region Location
                 if (ReportName.ToLower() == "Location".ToLower())
                 {
@@ -136,12 +139,14 @@ namespace SCMS.Reports
                     if (_dsLocation == null || _dsLocation.Tables == null || _dsLocation.Tables.Count <= 0)
                     {
                         MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
+                        return;
                     }
 
                     _ReportDocument.SetDataSource(_dsLocation);
                     _ReportDocument.SummaryInfo.ReportTitle = "List Of Locations";
                 }
                 #endregion
+
                 #region City
                 if (ReportName.ToLower() == "City".ToLower())
                 {
@@ -165,12 +170,14 @@ namespace SCMS.Reports
                     if (_dsCity == null || _dsCity.Tables == null || _dsCity.Tables.Count <= 0)
                     {
                         MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
+                        return;
                     }
 
                     _ReportDocument.SetDataSource(_dsCity);
                     _ReportDocument.SummaryInfo.ReportTitle = "List Of Cities";
                 }
                 #endregion
+
                 #region Voucher Types
                 if (ReportName.ToLower() == "VoucherTypes".ToLower())
                 {
@@ -194,12 +201,14 @@ namespace SCMS.Reports
                     if (_dsVoucherTypes == null || _dsVoucherTypes.Tables == null || _dsVoucherTypes.Tables.Count <= 0)
                     {
                         MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
+                        return;
                     }
 
                     _ReportDocument.SetDataSource(_dsVoucherTypes);
                     _ReportDocument.SummaryInfo.ReportTitle = "List Of Voucher Types";
                 }
                 #endregion
+
                 #region Chart Of Account
                 if (ReportName.ToLower() == "ChartOfAccount".ToLower())
                 {
@@ -223,6 +232,7 @@ namespace SCMS.Reports
                     if (_dsChartOfAccount == null || _dsChartOfAccount.Tables == null || _dsChartOfAccount.Tables.Count <= 0)
                     {
                         MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
+                        return;
                     }
 
                     _ReportDocument.SetDataSource(_dsChartOfAccount);
@@ -234,7 +244,7 @@ namespace SCMS.Reports
                 #region Ledger Detail
                 else if (ReportName.ToLower() == "LedgerDetail".ToLower())
                 {
-                    Reps.rptLedger _rptLedger = new Reps.rptLedger();
+                    _ReportDocument.Load(Server.MapPath("/Reports/Reps/rptLedger.rpt"));
                     Datasets.dsLedger _dsLedger = new Datasets.dsLedger();
                     string LocationCode = "";
 
@@ -253,29 +263,22 @@ namespace SCMS.Reports
                     _ds = _dalReports.LedgerDetail();
                     _dsLedger.Tables.Add(_ds.Tables[0].Copy());
                     _dsLedger.Tables[0].TableName = "LedgerDetail";
-                    _rptLedger.SetDataSource(_dsLedger);
 
                     if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
                     {
                         MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
+                        return;
                     }
 
-
-
-                    _rptLedger.SummaryInfo.ReportTitle = ls_Company;
-                    _rptLedger.SummaryInfo.ReportSubject = "Ledger Detail";
-                    _rptLedger.SummaryInfo.ReportComments = ls_ApplicationName;
-                    _rptLedger.SummaryInfo.ReportAuthor = ls_User;
-
-                    crvReports.ReportSource = _rptLedger;
-                    crvReports.DataBind();
+                    _ReportDocument.SetDataSource(_dsLedger);
+                    _ReportDocument.SummaryInfo.ReportTitle = "Ledger Deail";
                 }
                 #endregion
 
                 #region Trial Balance
                 else if (ReportName.ToLower() == "TrialBalance".ToLower())
                 {
-                    Reps.rptTrialBalance _rptTrialBalance = new Reps.rptTrialBalance();
+                    _ReportDocument.Load(Server.MapPath("/Reports/Reps/rptTrialBalance.rpt"));
                     Datasets.dsTrialBalance _dsTrialBalance = new Datasets.dsTrialBalance();
                     string LocationCode = "";
 
@@ -292,23 +295,17 @@ namespace SCMS.Reports
                     }
 
                     _ds = _dalReports.TrialBalance();
+                    _dsTrialBalance.Tables.Add(_ds.Tables[0].Copy());
+                    _dsTrialBalance.Tables[0].TableName = "TrialBalance";
 
                     if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
                     {
                         MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
+                        return;
                     }
 
-                    _dsTrialBalance.Tables.Add(_ds.Tables[0].Copy());
-                    _dsTrialBalance.Tables[0].TableName = "TrialBalance";
-                    _rptTrialBalance.SetDataSource(_dsTrialBalance);
-
-                    _rptTrialBalance.SummaryInfo.ReportTitle = ls_Company;
-                    _rptTrialBalance.SummaryInfo.ReportSubject = "Trial Balance";
-                    _rptTrialBalance.SummaryInfo.ReportComments = ls_ApplicationName;
-                    _rptTrialBalance.SummaryInfo.ReportAuthor = ls_User;
-
-                    crvReports.ReportSource = _rptTrialBalance;
-                    crvReports.DataBind();
+                    _ReportDocument.SetDataSource(_dsTrialBalance);
+                    _ReportDocument.SummaryInfo.ReportTitle = "Trial Balance";
                 }
                 #endregion
 

@@ -2,7 +2,7 @@
     Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    SCMS - Voucher Entry
+    Voucher Entry
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContenct" runat="server">
 </asp:Content>
@@ -312,8 +312,8 @@
             Status</div>
         <div class="CustomCell" style="width: 320px; height: 30px;">
             <select id="ddl_Status" name="ddl_Status" class="CustomText" style="width: 251px;">
-                <option value="1">Pending </option>
-                <option value="2">Approved </option>
+                <option value="Pending">Pending </option>
+                <option value="Approved">Approved </option>
             </select>
         </div>
         <div class="Clear">

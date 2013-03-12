@@ -126,7 +126,7 @@ namespace SCMS.Controllers
             return Response;
         }
 
-        public ActionResult SaveVoucher(String VoucherMasterCode, DateTime VoucherDate, int Status, String VoucherType, String LocationId, String Remarks, String[] VoucherDetailRows)
+        public ActionResult SaveVoucher(String VoucherMasterCode, DateTime VoucherDate, string Status, String VoucherType, String LocationId, String Remarks, String[] VoucherDetailRows)
         {
             DALVoucherEntry objDalVoucherEntry = new DALVoucherEntry();
             Int32 li_ReturnValue = 0;

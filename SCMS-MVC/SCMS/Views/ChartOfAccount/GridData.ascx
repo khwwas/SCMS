@@ -98,6 +98,31 @@
                 <%=lRow_Data.ChrtAcc_Code%>
             </td>
             <td id="txt_Title<%=lRow_Data.ChrtAcc_Id%>" style="vertical-align: middle;">
+                <%if (lRow_Data.ChrtAcc_Level == 2)
+                  {
+                      lRow_Data.ChrtAcc_Title = "&nbsp; " + lRow_Data.ChrtAcc_Title;
+                  }
+                %>
+                <%else if (lRow_Data.ChrtAcc_Level == 3)
+                  {
+                      lRow_Data.ChrtAcc_Title = "&nbsp; &nbsp; " + lRow_Data.ChrtAcc_Title;
+                  }
+                %>
+                <%else if (lRow_Data.ChrtAcc_Level == 4)
+                  {
+                      lRow_Data.ChrtAcc_Title = "&nbsp; &nbsp; &nbsp; " + lRow_Data.ChrtAcc_Title;
+                  }
+                %>
+                <%else if (lRow_Data.ChrtAcc_Level == 5)
+                  {
+                      lRow_Data.ChrtAcc_Title = "&nbsp; &nbsp; &nbsp; &nbsp; " + lRow_Data.ChrtAcc_Title;
+                  }
+                %>
+                <%else if (lRow_Data.ChrtAcc_Level == 6)
+                  {
+                      lRow_Data.ChrtAcc_Title = "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;" + lRow_Data.ChrtAcc_Title;
+                  }
+                %>
                 <%=lRow_Data.ChrtAcc_Title%>
             </td>
             <td id="txt_AccountLevel<%=lRow_Data.ChrtAcc_Id%>" style="vertical-align: middle;">
