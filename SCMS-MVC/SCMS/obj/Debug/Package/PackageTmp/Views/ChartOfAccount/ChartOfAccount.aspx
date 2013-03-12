@@ -7,7 +7,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#txt_Code").inputmask({ "mask": "99-999-9999-99999-99999-99999" });
+            $("#txt_Code").inputmask({ "mask": "99-999-999-9999-9999-9999" });
             document.getElementById("txt_Code").focus();
         });
 
@@ -194,7 +194,7 @@
                 <input type="text" class="CustomText" style="width: 240px;" id="txt_Code" name="txt_Code"
                     maxlength="50" onblur="SetLevel()" />
                 <script type="text/javascript">
-                    $("#txt_Code").inputmask({ "mask": "99-999-9999-99999-99999-99999" });
+                    $("#txt_Code").inputmask({ "mask": "99-999-999-9999-9999-9999" });
                 </script>
             </div>
             <div class="CustomCell" style="width: 40px;">
