@@ -271,7 +271,7 @@ namespace SCMS.Reports
                     }
 
                     _ReportDocument.SetDataSource(_dsLedger);
-                    _ReportDocument.SummaryInfo.ReportTitle = "Ledger Deail";
+                    _ReportDocument.SummaryInfo.ReportTitle = "Ledger Detail";
                 }
                 #endregion
 

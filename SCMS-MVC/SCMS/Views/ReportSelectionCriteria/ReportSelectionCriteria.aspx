@@ -13,14 +13,45 @@
             SetCriteria();
         });
 
+        function CheckAllCode() {
+            if (document.getElementById('chk_AllAccCode').checked == true) {
+                document.getElementById('ddl_AccCodeFrom').disabled = true;
+                document.getElementById('ddl_AccCodeTo').disabled = true;
+            }
+            else {
+                document.getElementById('ddl_AccCodeFrom').disabled = false;
+                document.getElementById('ddl_AccCodeTo').disabled = false;
+            }
+        };
+
+        function CheckAllDate() {
+            if (document.getElementById('chk_AllDate').checked == true) {
+                document.getElementById('txt_DateFrom').disabled = true;
+                document.getElementById('txt_DateTo').disabled = true;
+            }
+            else {
+                document.getElementById('txt_DateFrom').disabled = false;
+                document.getElementById('txt_DateTo').disabled = false;
+            }
+        };
+
         function SetCriteria() {
             if (ps_ReportName == "ChartOfAccount") {
                 document.getElementById('div_Location').style.display = "block";
             }
             else if (ps_ReportName == "LedgerDetail") {
                 document.getElementById('div_Location').style.display = "block";
+                document.getElementById('div_AccCodeFrom').style.display = "block";
+                document.getElementById('div_AccCodeTo').style.display = "block";
+                document.getElementById('div_DateRange').style.display = "block";
+
+                document.getElementById('ddl_AccCodeFrom').disabled = true;
+                document.getElementById('ddl_AccCodeTo').disabled = true;
+
+                document.getElementById('txt_DateFrom').disabled = true;
+                document.getElementById('txt_DateTo').disabled = true;
             }
-        }
+        };
 
         function ViewReport() {
             if (ps_ReportName == "Company") {
@@ -45,7 +76,7 @@
             else if (ps_ReportName == "TrialBalance") {
                 var pcnt_Location = document.getElementById('ddl_location');
                 var Url = "../ReportSelectionCriteria/SetParameter?ps_ReportName=" + ps_ReportName + "&ps_Location=" + pcnt_Location.value;
-            }
+            };
 
             $.ajax({
                 type: "GET",
@@ -77,21 +108,49 @@
             <div class="Clear">
             </div>
             <div id="div_Location" style="display: none;">
-                <div class="CustomCell" style="width: 100px; height: 30px">
+                <div class="CustomCell" style="width: 150px; height: 30px;">
                     Location</div>
                 <%= Html.DropDownList("ddl_location", null, new { style = "width:955px;" })%>
             </div>
-            <%-- <div id="div_AccCodeFrom" runat="server" visible="false">
-                <div class="CustomCell" style="width: 150px; height: 30px">
+            <div id="div_AccCodeFrom" style="display: none;">
+                <div class="CustomCell" style="width: 150px; height: 30px;">
                     Account Code From</div>
                 <%= Html.DropDownList("ddl_AccCodeFrom", null, new { style = "width:955px;" })%>
             </div>
-            <div id="div_AccCodeTo" runat="server" visible="true">
-                <div class="CustomCell" style="width: 150px; height: 30px">
+            <div id="div_AccCodeTo" style="display: none;">
+                <div class="CustomCell" style="width: 150px; height: 30px;">
                     Account Code To</div>
                 <%= Html.DropDownList("ddl_AccCodeTo", null, new { style = "width:955px;" })%>
-                <input type="checkbox" class="checkbox" id="chk_AllAccCode" name="chk_AllAccCode" />
-            </div>--%>
+                <input type="checkbox" class="checkbox" id="chk_AllAccCode" name="chk_AllAccCode"
+                    onclick="CheckAllCode()" checked="checked" />
+            </div>
+            <div id="div_DateRange" style="display: none;">
+                <div class="CustomCell" style="width: 150px; height: 30px;">
+                    Date From</div>
+                <div class="CustomCell" style="width: 282px; height: 30px;">
+                    <input type="text" class="CustomText" style="width: 220px;" id="txt_DateFrom" name="txt_DateFrom"
+                        value="<%=ViewData["CurrentDate"]%>" maxlength="50" />
+                </div>
+                <script type="text/javascript">
+                    $('#txt_DateFrom').Zebra_DatePicker({
+                        format: 'd/m/Y'
+                    });
+                </script>
+                &nbsp;
+                <div class="CustomCell" style="width: 150px; height: 30px;">
+                    Date To</div>
+                <div class="CustomCell" style="width: 282px; height: 30px;">
+                    <input type="text" class="CustomText" style="width: 220px;" id="txt_DateTo" name="txt_DateTo"
+                        value="<%=ViewData["CurrentDate"]%>" maxlength="50" />
+                </div>
+                <script type="text/javascript">
+                    $('#txt_DateTo').Zebra_DatePicker({
+                        format: 'd/m/Y'
+                    });
+                </script>
+                <input type="checkbox" class="checkbox" id="chk_AllDate" name="chk_AllDate" onclick="CheckAllDate()"
+                    checked="checked" />
+            </div>
         </div>
     </div>
     </form>
