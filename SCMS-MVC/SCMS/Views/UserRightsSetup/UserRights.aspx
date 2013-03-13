@@ -16,7 +16,28 @@
     <script type="text/javascript" src="../../Widgets/jqwidgets/jqxtree.js"></script>
     <script type="text/javascript" src="../../Widgets/jqwidgets/jqxcheckbox.js"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
+        //        $(document).ready(function () {
+        //            
+        //        });
+
+        function GetUserMenu(obj) {
+            var Url = document.getElementById('frm_UserMenuSetup').action;
+            Url += "UserRightsSetup/GetUserMenus?GroupId=" + obj.value;
+            $.ajax({
+                type: "GET",
+                url: Url,
+                success: function (response) {
+                    html = response;
+                    $("#jqxTree").html(response);
+                    SetTree();
+                },
+                error: function (rs, e) {
+
+                }
+            });
+        }
+
+        function SetTree() {
             // Create jqxTree 
             var theme = getDemoTheme();
             // create jqxTree
@@ -27,111 +48,42 @@
                 $('#jqxTree').jqxTree({ hasThreeStates: checked });
             });
             $("#jqxTree").jqxTree('selectItem', $("#home")[0]);
-        });
+        }
     </script>
     <form id="frm_UserMenuSetup" action='<%=Url.Content("~/") %>'>
     <div class="box round first fullpage grid" style="overflow: auto;">
         <h2>
-            User Setup</h2>
+            User Menu Rights Setup</h2>
         <div class="block">
             <div id="MessageBox">
             </div>
-            <div id='jqxWidget'>
+            <div id='jqxWidget' style="overflow: auto; clear: both; margin-bottom: 5px;">
                 <div style='float: left;'>
-                    <div id='jqxTree' style='float: left; margin-left: 20px;'>
-                        <ul>
-                            <li id='home'>Home</li>
-                            <li item-checked='true' item-expanded='true'>Solutions
-                                <ul>
-                                    <li>Education</li>
-                                    <li>Financial services</li>
-                                    <li>Government</li>
-                                    <li item-checked='false'>Manufacturing</li>
-                                    <li>Solutions
-                                        <ul>
-                                            <li>Consumer photo and video</li>
-                                            <li>Mobile</li>
-                                            <li>Rich Internet applications</li>
-                                            <li>Technical communication</li>
-                                            <li>Training and eLearning</li>
-                                            <li>Web conferencing</li>
-                                        </ul>
-                                    </li>
-                                    <li>All industries and solutions</li>
-                                </ul>
-                            </li>
-                            <li>Products
-                                <ul>
-                                    <li>PC products</li>
-                                    <li>Mobile products</li>
-                                    <li>All products</li>
-                                </ul>
-                            </li>
-                            <li>Support
-                                <ul>
-                                    <li>Support home</li>
-                                    <li>Customer Service</li>
-                                    <li>Knowledge base</li>
-                                    <li>Books</li>
-                                    <li>Training and certification</li>
-                                    <li>Support programs</li>
-                                    <li>Forums</li>
-                                    <li>Documentation</li>
-                                    <li>Updates</li>
-                                </ul>
-                            </li>
-                            <li>Communities
-                                <ul>
-                                    <li>Designers</li>
-                                    <li>Developers</li>
-                                    <li>Educators and students</li>
-                                    <li>Partners</li>
-                                    <li>By resource
-                                        <ul>
-                                            <li>Labs</li>
-                                            <li>TV</li>
-                                            <li>Forums</li>
-                                            <li>Exchange</li>
-                                            <li>Blogs</li>
-                                            <li>Experience Design</li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>Company
-                                <ul>
-                                    <li>About Us</li>
-                                    <li>Press</li>
-                                    <li>Investor Relations</li>
-                                    <li>Corporate Affairs</li>
-                                    <li>Careers</li>
-                                    <li>Showcase</li>
-                                    <li>Events</li>
-                                    <li>Contact Us</li>
-                                    <li>Become an affiliate</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <div style='margin-left: 60px; float: left;'>
-                        <div style='margin-top: 10px;'>
-                            <select>
-                                <option>1</option>
-                            </select>
-                            <div class="Clear">
-                            </div>
-                            <div style="float: left; margin-right: 5px;">
-                                <input id="btn_Save" type="button" value="Save" class="btn btn-blue" onclick="SaveRecord();"
-                                    style="width: 90px; height: 35px; padding-top: 5px; color: White; font-weight: bold;
-                                    font-size: 11pt;" />
-                                <img alt="" id="Waiting_Image" src="../../img/Ajax_Loading.gif" style="display: none;
-                                    margin-left: 10" /></div>
-                            <div style="float: left;">
-                                <input type="button" value="Reset" class="btn btn-grey" onclick="ResetForm();" style="width: 90px;
-                                    height: 35px; padding-top: 5px; color: White; font-weight: bold; font-size: 11pt;" />
-                            </div>
+                    <div style='margin-left: 0px;'>
+                        <div style='margin-top: 0px;'>
+                            <div class="CustomCell" style="width: 70px; height: 30px">
+                                User Group</div>
+                            <%=Html.DropDownList("ddl_UserGroups", null, new { @style = "width:259px;", @onchange = "GetUserMenu(this)" })%>
+                            <script type="text/javascript">
+                                GetUserMenu(document.getElementById('ddl_UserGroups'));
+                            </script>
                         </div>
                     </div>
+                    <div id='jqxTree' style='margin-left: 0px;'>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div style="float: right">
+                <div style="float: left; margin-right: 5px;">
+                    <input id="btn_Save" type="button" value="Save" class="btn btn-blue" onclick="SaveRecord();"
+                        style="width: 90px; height: 35px; padding-top: 5px; color: White; font-weight: bold;
+                        font-size: 11pt;" />
+                    <img alt="" id="Waiting_Image" src="../../img/Ajax_Loading.gif" style="display: none;
+                        margin-left: 10" /></div>
+                <div style="float: left;">
+                    <input type="button" value="Reset" class="btn btn-grey" onclick="ResetForm();" style="width: 90px;
+                        height: 35px; padding-top: 5px; color: White; font-weight: bold; font-size: 11pt;" />
                 </div>
             </div>
         </div>
