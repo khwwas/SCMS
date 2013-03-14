@@ -30,7 +30,7 @@ namespace SCMS.Controllers
         //{
         //    List<sp_GetUserMenuRightsResult> MenuRights = new DALUserMenuRights().GetUserMenuRights(GroupId).OrderBy(c => c.Mnu_Level).ToList();
         //    string UserMenuList = "";
-            
+
         //    return UserMenuList;
         //}
 

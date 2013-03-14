@@ -15,9 +15,9 @@ namespace SCMS.Controllers
 
         public ActionResult Index(string ps_ReportName)
         {
-            ViewData["ddl_Location"] = new SelectList(new DALLocation().PopulateData(), "Loc_Id", "Loc_Title", "ddl_Location");
-            ViewData["ddl_AccCodeFrom"] = new SelectList(new DALChartOfAccount().GetChartOfAccountForDropDown(), "ChrtAcc_Id", "ChrtAcc_Title", "ddl_AccCodeFrom");
-            ViewData["ddl_AccCodeTo"] = new SelectList(new DALChartOfAccount().GetChartOfAccountForDropDown(), "ChrtAcc_Id", "ChrtAcc_Title", "ddl_AccCodeTo");
+            ViewData["ddl_Location"] = new SelectList(new DALLocation().PopulateData(), "Loc_Id", "Loc_Title");
+            ViewData["ddl_AccCodeFrom"] = new SelectList(new DALChartOfAccount().GetChartOfAccountForDropDown(), "ChrtAcc_Id", "ChrtAcc_Title");
+            ViewData["ddl_AccCodeTo"] = new SelectList(new DALChartOfAccount().GetChartOfAccountForDropDown(), "ChrtAcc_Id", "ChrtAcc_Title");
             ViewData["ReportName"] = ps_ReportName;
 
             //ViewData["ddl_AccCodeFrom"] = new SelectList(new DALChartOfAccount().PopulateData(), "ChrtAcc_Id", "ChrtAcc_Title", "ddl_AccCodeFrom");
@@ -37,6 +37,15 @@ namespace SCMS.Controllers
             Response.Redirect("../ViewReport.aspx?ps_ReportName='" + ps_ReportName + "'", false);
             return null;
         }
+
+
+
+        #region Setups
+        public void SetParam_Company(String ps_ReportName)
+        {
+            Reports.ReportParameters.ReportName = ps_ReportName;
+        }
+        #endregion
 
         public void SetParameter(String ps_ReportName, String ps_Location)
         {
