@@ -17,5 +17,10 @@ namespace SCMS.Reports
             get;
             set;
         }
+        public static int Level  
+        {
+            get;
+            set;
+        }
     }
 }

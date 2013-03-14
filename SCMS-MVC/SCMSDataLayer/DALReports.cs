@@ -138,7 +138,7 @@ namespace SCMSDataLayer
 
             return _ds;
         }
-        public DataSet ListOfChartOfAccounts()
+        public DataSet ListOfChartOfAccounts(int pi_Level)
         {
             SqlConnection con = new SqlConnection();
             SqlCommand _cmd = new SqlCommand();
@@ -156,6 +156,7 @@ namespace SCMSDataLayer
                 _cmd.Connection = con;
                 _cmd.CommandType = CommandType.StoredProcedure;
                 _cmd.CommandText = "sp_ReportChartOfAccount";
+                _cmd.Parameters.Add(new SqlParameter("@Level", SqlDbType.Int)).Value = pi_Level;
                 _cmd.ExecuteNonQuery();
 
                 SqlDataAdapter da = new SqlDataAdapter(_cmd);

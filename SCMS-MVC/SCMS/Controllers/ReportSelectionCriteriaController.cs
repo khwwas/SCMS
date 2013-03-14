@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using SCMSDataLayer;
 using SCMSDataLayer.DB;
+
 namespace SCMS.Controllers
 {
     public class ReportSelectionCriteriaController : Controller
@@ -38,13 +39,18 @@ namespace SCMS.Controllers
             return null;
         }
 
-
-
         #region Setups
-        public void SetParam_Company(String ps_ReportName)
+        public void SetParam_Setups(String ps_ReportName)
         {
             Reports.ReportParameters.ReportName = ps_ReportName;
         }
+
+        public void SetParam_ChartOfAccount(String ps_ReportName, int pi_Level)
+        {
+            Reports.ReportParameters.ReportName = ps_ReportName;
+            Reports.ReportParameters.Level = pi_Level;
+        }
+        
         #endregion
 
         public void SetParameter(String ps_ReportName, String ps_Location)

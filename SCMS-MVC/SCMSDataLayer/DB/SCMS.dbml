@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="SCMS" Class="SCMSDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=WAQAS\KHAWAJAWAQAS;Initial Catalog=SCMS;Persist Security Info=True;User ID=sa" SettingsObjectName="SCMSDataLayer.Properties.Settings" SettingsPropertyName="SCMSConnectionString2" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=AWAIS-PC\SQLEXPRESS;Initial Catalog=SCMS;Persist Security Info=True;User ID=sa" SettingsObjectName="SCMSDataLayer.Properties.Settings" SettingsPropertyName="SCMSConnectionString4" Provider="System.Data.SqlClient" />
   <Table Name="dbo.GL_VchrDetail" Member="GL_VchrDetails">
     <Type Name="GL_VchrDetail">
       <Column Name="VchDet_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -663,31 +663,6 @@
       <Column Name="VchrType_CodeInitialization" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.sp_ReportChartOfAccount" Method="sp_ReportChartOfAccount">
-    <ElementType Name="sp_ReportChartOfAccountResult">
-      <Column Name="ChrtAcc_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="ChrtAcc_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Cmp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Natr_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="AccNatr_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="ChrtAcc_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="ChrtAcc_Type" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ChrtAcc_Level" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ChrtAcc_BudgetLevel" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ChrtAcc_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Natr_Id1" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Natr_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Natr_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="Natr_Default" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Natr_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="AccNatr_Id1" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="AccNatr_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="AccNatr_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="AccNatr_Default" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="AccNatr_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.sp_ReportLedgerDetail" Method="sp_ReportLedgerDetail">
     <ElementType Name="sp_ReportLedgerDetailResult">
       <Column Name="VchMas_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
@@ -750,6 +725,19 @@
       <Column Name="ChrtAcc_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="VchMas_DrAmount" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
       <Column Name="VchMas_CrAmount" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_ReportChartOfAccount" Method="sp_ReportChartOfAccount">
+    <Parameter Name="Level" Parameter="level" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_ReportChartOfAccountResult">
+      <Column Name="ChrtAcc_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ChrtAcc_Code" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="ChrtAcc_Title" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="ChrtAcc_Level" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ChrtAcc_BudgetLevel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ChrtAcc_Type" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Natr_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="AccNatr_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

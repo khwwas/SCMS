@@ -225,7 +225,7 @@ namespace SCMS.Reports
                         _dsChartOfAccount.Tables.Remove("ChartOfAccount");
                     }
 
-                    _ds = _dalReports.ListOfChartOfAccounts();
+                    _ds = _dalReports.ListOfChartOfAccounts(ReportParameters.Level);
                     _dsChartOfAccount.Tables.Add(_ds.Tables["ChartOfAccount"].Copy());
                     _dsChartOfAccount.Tables.Add(_dtImage.Copy());
 

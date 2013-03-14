@@ -37,7 +37,7 @@
 
         function SetCriteria() {
             if (ps_ReportName == "ChartOfAccount") {
-                document.getElementById('div_Location').style.display = "block";
+                document.getElementById('div_Level').style.display = "block";
             }
             else if (ps_ReportName == "LedgerDetail") {
                 document.getElementById('div_Location').style.display = "block";
@@ -54,21 +54,13 @@
         };
 
         function ViewReport() {
-            if (ps_ReportName == "Company") {
-                //var Url = "../ReportSelectionCriteria/SetParameter?ps_ReportName=" + ps_ReportName + "&ps_Location=''";
-                var Url = "../ReportSelectionCriteria/SetParam_Company?ps_ReportName=" + ps_ReportName;
-            }
-            else if (ps_ReportName == "Location") {
-                var Url = "../ReportSelectionCriteria/SetParameter?ps_ReportName=" + ps_ReportName + "&ps_Location=''";
-            }
-            else if (ps_ReportName == "City") {
-                var Url = "../ReportSelectionCriteria/SetParameter?ps_ReportName=" + ps_ReportName + "&ps_Location=''";
-            }
-            else if (ps_ReportName == "VoucherTypes") {
-                var Url = "../ReportSelectionCriteria/SetParameter?ps_ReportName=" + ps_ReportName + "&ps_Location=''";
+            if (ps_ReportName == "Company" || ps_ReportName == "Location" || ps_ReportName == "City" ||
+                ps_ReportName == "VoucherTypes") {
+                var Url = "../ReportSelectionCriteria/SetParam_Setups?ps_ReportName=" + ps_ReportName;
             }
             else if (ps_ReportName == "ChartOfAccount") {
-                var Url = "../ReportSelectionCriteria/SetParameter?ps_ReportName=" + ps_ReportName + "&ps_Location=''";
+                var pcnt_ChartOfAccount = document.getElementById('txt_Level');
+                var Url = "../ReportSelectionCriteria/SetParam_ChartOfAccount?ps_ReportName=" + ps_ReportName + "&pi_Level=" + pcnt_ChartOfAccount.value;
             }
             else if (ps_ReportName == "LedgerDetail") {
                 var pcnt_Location = document.getElementById('ddl_location');
@@ -96,12 +88,13 @@
     <form id="frm_ReportSelectionCriteria" action='<%=Url.Content("~/") %>'>
     <div class="box round first fullpage grid">
         <h2>
-            Report Selection Criteria</h2>
+            Report Selection Criteria for
+            <%= ViewData["ReportName"] %></h2>
         <div class="block">
             <div style="float: right; margin-bottom: 10px;">
                 <div style="float: left; margin-right: 5px;">
                     <input id="btn_ViewReport" type="button" value="View Report" class="btn btn-blue"
-                        onclick="ViewReport();" style="width: 100px; height: 35px; padding-top: 5px;
+                        onclick="ViewReport();" style="width: 120px; height: 35px; padding-top: 5px;
                         color: White; font-weight: bold; font-size: 11pt;" />
                     <img alt="" id="Waiting_Image" src="../../img/Ajax_Loading.gif" style="display: none;
                         margin-left: 10" /></div>
@@ -152,7 +145,27 @@
                 <input type="checkbox" class="checkbox" id="chk_AllDate" name="chk_AllDate" onclick="CheckAllDate()"
                     checked="checked" />
             </div>
+            <div id="div_Level" style="display: none;">
+                <div class="CustomCell" style="width: 150px;">
+                    Level</div>
+                <div class="CustomCell" style="width: 42px;">
+                    <input type="text" class="CustomText" id="txt_Level" name="txt_Level" maxlength="1"
+                        style="width: 35px; border-right: 0px;" value="1" disabled="disabled" />
+                </div>
+                <div class="CustomCell" style="border: 1px solid #ccc; width: 20px; height: 28px;
+                    margin-right: 12px;">
+                    <div style="background-image: url('../../img/ArrowUp.png'); background-position: center;
+                        height: 14px; background-repeat: no-repeat; cursor: pointer;" onclick="ValuePlus('txt_Level');">
+                        &nbsp;
+                    </div>
+                    <div style="background-image: url('../../img/ArrowDown.png'); background-position: center;
+                        height: 14px; background-repeat: no-repeat; cursor: pointer;" onclick="ValueMinus('txt_Level');">
+                        &nbsp;
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
     </div>
     </form>
 </asp:Content>

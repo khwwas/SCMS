@@ -13,7 +13,7 @@ function ValueMinus(id) {
 }
 function ValuePlus(id) {
     var val = $('#' + id).val();
-    if (parseInt(val) < 5) {
+    if (parseInt(val) < 6) {
         document.getElementById(id).value = parseInt(val) + 1;
     }
 }
