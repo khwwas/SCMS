@@ -38,6 +38,15 @@ namespace SCMS.Controllers
             return null;
         }
 
+
+
+        #region Setups
+        public void SetParam_Company(String ps_ReportName)
+        {
+            Reports.ReportParameters.ReportName = ps_ReportName;
+        }
+        #endregion
+
         public void SetParameter(String ps_ReportName, String ps_Location)
         {
             Reports.ReportParameters.ReportName = ps_ReportName;

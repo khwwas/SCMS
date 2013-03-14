@@ -55,7 +55,8 @@
 
         function ViewReport() {
             if (ps_ReportName == "Company") {
-                var Url = "../ReportSelectionCriteria/SetParameter?ps_ReportName=" + ps_ReportName + "&ps_Location=''";
+                //var Url = "../ReportSelectionCriteria/SetParameter?ps_ReportName=" + ps_ReportName + "&ps_Location=''";
+                var Url = "../ReportSelectionCriteria/SetParam_Company?ps_ReportName=" + ps_ReportName;
             }
             else if (ps_ReportName == "Location") {
                 var Url = "../ReportSelectionCriteria/SetParameter?ps_ReportName=" + ps_ReportName + "&ps_Location=''";
