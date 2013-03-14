@@ -16,28 +16,7 @@
     <script type="text/javascript" src="../../Widgets/jqwidgets/jqxtree.js"></script>
     <script type="text/javascript" src="../../Widgets/jqwidgets/jqxcheckbox.js"></script>
     <script type="text/javascript">
-        //        $(document).ready(function () {
-        //            
-        //        });
-
-        function GetUserMenu(obj) {
-            var Url = document.getElementById('frm_UserMenuSetup').action;
-            Url += "UserRightsSetup/GetUserMenus?GroupId=" + obj.value;
-            $.ajax({
-                type: "GET",
-                url: Url,
-                success: function (response) {
-                    html = response;
-                    $("#jqxTree").html(response);
-                    SetTree();
-                },
-                error: function (rs, e) {
-
-                }
-            });
-        }
-
-        function SetTree() {
+        $(document).ready(function () {
             // Create jqxTree 
             var theme = getDemoTheme();
             // create jqxTree
@@ -47,7 +26,11 @@
                 var checked = event.args.checked;
                 $('#jqxTree').jqxTree({ hasThreeStates: checked });
             });
-            $("#jqxTree").jqxTree('selectItem', $("#home")[0]);
+
+        });
+
+        function GetUserMenu(value) {
+            window.location = "../UserRightsSetup?SelectedGroup=" + value;
         }
     </script>
     <form id="frm_UserMenuSetup" action='<%=Url.Content("~/") %>'>
@@ -63,13 +46,43 @@
                         <div style='margin-top: 0px;'>
                             <div class="CustomCell" style="width: 70px; height: 30px">
                                 User Group</div>
-                            <%=Html.DropDownList("ddl_UserGroups", null, new { @style = "width:259px;", @onchange = "GetUserMenu(this)" })%>
-                            <script type="text/javascript">
-                                GetUserMenu(document.getElementById('ddl_UserGroups'));
-                            </script>
+                            <%=Html.DropDownList("ddl_UserGroups", null, new { @style = "width:259px;", @onchange = "GetUserMenu(this.value)" })%>
                         </div>
                     </div>
                     <div id='jqxTree' style='margin-left: 0px;'>
+                        <% 
+                            List<SCMSDataLayer.DB.sp_GetUserMenuRightsResult> MenuRights = (List<SCMSDataLayer.DB.sp_GetUserMenuRightsResult>)ViewData["UserMenuRights"];
+                            if (MenuRights != null && MenuRights.Count > 0)
+                            {
+                                int count = 0;
+                                Response.Write("<ul>");
+                                foreach (SCMSDataLayer.DB.sp_GetUserMenuRightsResult row in MenuRights)
+                                {
+                                    count++;
+                                    string node = row.Mnu_Level.Contains(".") ? "Child" : "Parent";
+                                    if (node == "Parent")
+                                    {
+                                        if (count > 1)
+                                        {
+                                            Response.Write("</ul>");
+                                            Response.Write("</li>");
+                                        }
+                                        Response.Write("<li item-checked='" + (row.SelectedMenu > 0 ? "true" : "false") + "' item-expanded='true'>" + row.Mnu_Description);
+                                        Response.Write("<ul>");
+                                    }
+                                    else if (node == "Child")
+                                    {
+                                        Response.Write("<li item-checked='" + (row.SelectedMenu > 0 ? "true" : "false") + "'>" + row.Mnu_Description + "</li>");
+                                        if (count == MenuRights.Count)
+                                        {
+                                            Response.Write("</ul>");
+                                            Response.Write("</li>");
+                                        }
+                                    }
+                                }
+                                Response.Write("</ul>");
+                            }
+                        %>
                     </div>
                 </div>
             </div>

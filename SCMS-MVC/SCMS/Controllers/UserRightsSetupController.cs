@@ -13,9 +13,10 @@ namespace SCMS.Controllers
         //
         // GET: /UserRightsSetup/
 
-        public ActionResult Index()
+        public ActionResult Index(string SelectedGroup)
         {
             List<sp_GetUserGroupListResult> userGroups = new DALUserGroup().GetAllData().ToList();
+<<<<<<< HEAD
             ViewData["ddl_UserGroups"] = new SelectList(userGroups, "UsrGrp_Id", "UsrGrp_Title", "");
             return View("UserRights");
         }
@@ -55,7 +56,25 @@ namespace SCMS.Controllers
             //    UserMenuList += "</ul>";
             //}
             return UserMenuList;
+=======
+            if (String.IsNullOrEmpty(SelectedGroup))
+            {
+                SelectedGroup = userGroups[0].UsrGrp_Id;
+            }
+            ViewData["ddl_UserGroups"] = new SelectList(userGroups, "UsrGrp_Id", "UsrGrp_Title", SelectedGroup);
+            List<sp_GetUserMenuRightsResult> MenuRights = new DALUserMenuRights().GetUserMenuRights(SelectedGroup).OrderBy(c => c.Mnu_Level).ToList();
+            ViewData["UserMenuRights"] = MenuRights;
+            return View("UserRights");
+>>>>>>> ced69bb335154e3ea4aa4f28f74e2e1645b45fbc
         }
+
+        //public string GetUserMenus(string GroupId)
+        //{
+        //    List<sp_GetUserMenuRightsResult> MenuRights = new DALUserMenuRights().GetUserMenuRights(GroupId).OrderBy(c => c.Mnu_Level).ToList();
+        //    string UserMenuList = "";
+            
+        //    return UserMenuList;
+        //}
 
     }
 }

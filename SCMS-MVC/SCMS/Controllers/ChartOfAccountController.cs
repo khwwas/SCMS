@@ -29,7 +29,11 @@ namespace SCMS.Controllers
                                        Int32 pi_Type, string ps_Nature, string ps_AccountNature)
         {
             Int32 li_ReturnValue = 0;
-
+            bool isEdit = false;
+            if (!string.IsNullOrEmpty(ps_Id))
+            {
+                isEdit = true;
+            }
             try
             {
                 SETUP_ChartOfAccount lrow_ChartOfAccount = new SETUP_ChartOfAccount();
@@ -51,11 +55,18 @@ namespace SCMS.Controllers
                     lrow_ChartOfAccount.ChrtAcc_BudgetLevel = pi_BudgetLevel;
                     lrow_ChartOfAccount.ChrtAcc_Type = pi_Type;
                     lrow_ChartOfAccount.Natr_Id = ps_Nature;
-                    lrow_ChartOfAccount.AccNatr_Id = ps_AccountNature;
+                    //lrow_ChartOfAccount.AccNatr_Id = ps_AccountNature;
                     lrow_ChartOfAccount.ChrtAcc_Active = 1;
-
-                    li_ReturnValue = objDalChartOfAccount.SaveRecord(lrow_ChartOfAccount);
-                    ViewData["SaveResult"] = li_ReturnValue;
+                    var ChartOfAccountCode = objDalChartOfAccount.GetAllRecords().Where(c => c.ChrtAcc_Code.Equals(lrow_ChartOfAccount.ChrtAcc_Code)).ToList();
+                    if (isEdit == false && ChartOfAccountCode != null && ChartOfAccountCode.Count > 0)
+                    {
+                        ViewData["SaveResult"] = -1;
+                    }
+                    else
+                    {
+                        li_ReturnValue = objDalChartOfAccount.SaveRecord(lrow_ChartOfAccount);
+                        ViewData["SaveResult"] = li_ReturnValue;
+                    }
                 }
 
                 return PartialView("GridData");

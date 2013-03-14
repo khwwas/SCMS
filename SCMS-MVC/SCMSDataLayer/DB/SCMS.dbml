@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="SCMS" Class="SCMSDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=AWAIS-PC\SQLEXPRESS;Initial Catalog=SCMS;Persist Security Info=True;User ID=sa" SettingsObjectName="SCMSDataLayer.Properties.Settings" SettingsPropertyName="SCMSConnectionString4" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=WAQAS\KHAWAJAWAQAS;Initial Catalog=SCMS;Persist Security Info=True;User ID=sa" SettingsObjectName="SCMSDataLayer.Properties.Settings" SettingsPropertyName="SCMSConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.GL_VchrDetail" Member="GL_VchrDetails">
     <Type Name="GL_VchrDetail">
       <Column Name="VchDet_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -8,8 +8,8 @@
       <Column Name="VchMas_DrAmount" Type="System.Decimal" DbType="Decimal(20,6)" CanBeNull="true" />
       <Column Name="VchMas_CrAmount" Type="System.Decimal" DbType="Decimal(20,6)" CanBeNull="true" />
       <Column Name="VchDet_Remarks" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
-      <Association Name="SETUP_ChartOfAccount_GL_VchrDetail" Member="SETUP_ChartOfAccount" ThisKey="ChrtAcc_Id" OtherKey="ChrtAcc_Id" Type="SETUP_ChartOfAccount" IsForeignKey="true" />
       <Association Name="GL_VchrMaster_GL_VchrDetail" Member="GL_VchrMaster" ThisKey="VchMas_Id" OtherKey="VchMas_Id" Type="GL_VchrMaster" IsForeignKey="true" />
+      <Association Name="SETUP_ChartOfAccount_GL_VchrDetail" Member="SETUP_ChartOfAccount" ThisKey="ChrtAcc_Id" OtherKey="ChrtAcc_Id" Type="SETUP_ChartOfAccount" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.SYSTEM_Nature" Member="SYSTEM_Natures">
@@ -20,6 +20,120 @@
       <Column Name="Natr_Default" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Natr_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="SYSTEM_Nature_SETUP_ChartOfAccount" Member="SETUP_ChartOfAccounts" ThisKey="Natr_Id" OtherKey="Natr_Id" Type="SETUP_ChartOfAccount" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GL_VchrMaster" Member="GL_VchrMasters">
+    <Type Name="GL_VchrMaster">
+      <Column Name="VchMas_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="VchMas_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="VchMas_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Cmp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="VchrType_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="VchMas_Remarks" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="VchMas_Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="VchMas_EnteredBy" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="VchMas_EnteredDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="VchMas_ApprovedBy" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="VchMas_ApprovedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="GL_VchrMaster_GL_VchrDetail" Member="GL_VchrDetails" ThisKey="VchMas_Id" OtherKey="VchMas_Id" Type="GL_VchrDetail" />
+      <Association Name="SETUP_Company_GL_VchrMaster" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
+      <Association Name="SETUP_Location_GL_VchrMaster" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
+      <Association Name="SETUP_VoucherType_GL_VchrMaster" Member="SETUP_VoucherType" ThisKey="VchrType_Id" OtherKey="VchrType_Id" Type="SETUP_VoucherType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.pbcatcol" Member="pbcatcols">
+    <Type Name="pbcatcol">
+      <Column Name="pbc_tnam" Type="System.String" DbType="Char(30)" CanBeNull="true" />
+      <Column Name="pbc_tid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="pbc_ownr" Type="System.String" DbType="Char(30)" CanBeNull="true" />
+      <Column Name="pbc_cnam" Type="System.String" DbType="Char(30)" CanBeNull="true" />
+      <Column Name="pbc_cid" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="pbc_labl" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
+      <Column Name="pbc_lpos" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="pbc_hdr" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
+      <Column Name="pbc_hpos" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="pbc_jtfy" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="pbc_mask" Type="System.String" DbType="VarChar(31)" CanBeNull="true" />
+      <Column Name="pbc_case" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="pbc_hght" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="pbc_wdth" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="pbc_ptrn" Type="System.String" DbType="VarChar(31)" CanBeNull="true" />
+      <Column Name="pbc_bmap" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="pbc_init" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
+      <Column Name="pbc_cmnt" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
+      <Column Name="pbc_edit" Type="System.String" DbType="VarChar(31)" CanBeNull="true" />
+      <Column Name="pbc_tag" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.pbcatedt" Member="pbcatedts">
+    <Type Name="pbcatedt">
+      <Column Name="pbe_name" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="pbe_edit" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
+      <Column Name="pbe_type" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="pbe_cntr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="pbe_seqn" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="pbe_flag" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="pbe_work" Type="System.String" DbType="Char(32)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.pbcatfmt" Member="pbcatfmts">
+    <Type Name="pbcatfmt">
+      <Column Name="pbf_name" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="pbf_frmt" Type="System.String" DbType="VarChar(254) NOT NULL" CanBeNull="false" />
+      <Column Name="pbf_type" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="pbf_cntr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.pbcattbl" Member="pbcattbls">
+    <Type Name="pbcattbl">
+      <Column Name="pbt_tnam" Type="System.String" DbType="Char(30)" CanBeNull="true" />
+      <Column Name="pbt_tid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="pbt_ownr" Type="System.String" DbType="Char(30)" CanBeNull="true" />
+      <Column Name="pbd_fhgt" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="pbd_fwgt" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="pbd_fitl" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="pbd_funl" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="pbd_fchr" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="pbd_fptc" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="pbd_ffce" Type="System.String" DbType="Char(32)" CanBeNull="true" />
+      <Column Name="pbh_fhgt" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="pbh_fwgt" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="pbh_fitl" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="pbh_funl" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="pbh_fchr" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="pbh_fptc" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="pbh_ffce" Type="System.String" DbType="Char(32)" CanBeNull="true" />
+      <Column Name="pbl_fhgt" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="pbl_fwgt" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="pbl_fitl" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="pbl_funl" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="pbl_fchr" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="pbl_fptc" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="pbl_ffce" Type="System.String" DbType="Char(32)" CanBeNull="true" />
+      <Column Name="pbt_cmnt" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.pbcatvld" Member="pbcatvlds">
+    <Type Name="pbcatvld">
+      <Column Name="pbv_name" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="pbv_vald" Type="System.String" DbType="VarChar(254) NOT NULL" CanBeNull="false" />
+      <Column Name="pbv_type" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="pbv_cntr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="pbv_msg" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Security_MenuOptions" Member="Security_MenuOptions">
+    <Type Name="Security_MenuOption">
+      <Column Name="Mnu_Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Mnu_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Mnu_Description" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Mnu_Level" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Mnu_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Mnu_TargetUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="Mnu_IsLineBreak" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Mnu_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Security_MenuOption_Security_UserRight" Member="Security_UserRights" ThisKey="Mnu_Id" OtherKey="Mnu_Id" Type="Security_UserRight" />
     </Type>
   </Table>
   <Table Name="dbo.SECURITY_User" Member="SECURITY_Users">
@@ -50,6 +164,16 @@
       <Association Name="SECURITY_UserGroup_SECURITY_User" Member="SECURITY_Users" ThisKey="UsrGrp_Id" OtherKey="UsrGrp_Id" Type="SECURITY_User" />
       <Association Name="SETUP_Company_SECURITY_UserGroup" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
       <Association Name="SETUP_Location_SECURITY_UserGroup" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Security_UserRights" Member="Security_UserRights">
+    <Type Name="Security_UserRight">
+      <Column Name="UsrSec_Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UsrSec_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Grp_Id" Type="System.Int64" DbType="BigInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Mnu_Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="UsrSec_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Security_MenuOption_Security_UserRight" Member="Security_MenuOption" ThisKey="Mnu_Id" OtherKey="Mnu_Id" Type="Security_MenuOption" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.SETUP_Bank" Member="SETUP_Banks">
@@ -158,6 +282,7 @@
       <Column Name="Cmp_Fax" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="Cmp_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Cmp_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SETUP_Company_GL_VchrMaster" Member="GL_VchrMasters" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="GL_VchrMaster" />
       <Association Name="SETUP_Company_SECURITY_User" Member="SECURITY_Users" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SECURITY_User" />
       <Association Name="SETUP_Company_SECURITY_UserGroup" Member="SECURITY_UserGroups" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SECURITY_UserGroup" />
       <Association Name="SETUP_Company_SETUP_Bank" Member="SETUP_Banks" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Bank" />
@@ -171,7 +296,6 @@
       <Association Name="SETUP_Company_SETUP_Supplier" Member="SETUP_Suppliers" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Supplier" />
       <Association Name="SETUP_Company_SETUP_SupplierType" Member="SETUP_SupplierTypes" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_SupplierType" />
       <Association Name="SETUP_Company_SETUP_VoucherType" Member="SETUP_VoucherTypes" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_VoucherType" />
-      <Association Name="SETUP_Company_GL_VchrMaster" Member="GL_VchrMasters" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="GL_VchrMaster" />
     </Type>
   </Table>
   <Table Name="dbo.SETUP_Country" Member="SETUP_Countries">
@@ -228,6 +352,7 @@
       <Column Name="Loc_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="Loc_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Loc_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SETUP_Location_GL_VchrMaster" Member="GL_VchrMasters" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="GL_VchrMaster" />
       <Association Name="SETUP_Location_SECURITY_User" Member="SECURITY_Users" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SECURITY_User" />
       <Association Name="SETUP_Location_SECURITY_UserGroup" Member="SECURITY_UserGroups" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SECURITY_UserGroup" />
       <Association Name="SETUP_Location_SETUP_Bank" Member="SETUP_Banks" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Bank" />
@@ -240,7 +365,6 @@
       <Association Name="SETUP_Location_SETUP_Supplier" Member="SETUP_Suppliers" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Supplier" />
       <Association Name="SETUP_Location_SETUP_SupplierType" Member="SETUP_SupplierTypes" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_SupplierType" />
       <Association Name="SETUP_Location_SETUP_VoucherType" Member="SETUP_VoucherTypes" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_VoucherType" />
-      <Association Name="SETUP_Location_GL_VchrMaster" Member="GL_VchrMasters" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="GL_VchrMaster" />
       <Association Name="SETUP_Company_SETUP_Location" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
     </Type>
   </Table>
@@ -291,8 +415,8 @@
       <Column Name="VchrType_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="VchrType_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="VchrType_CodeInitialization" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="SETUP_VoucherType_SETUP_VoucherTypeNarration" Member="SETUP_VoucherTypeNarrations" ThisKey="VchrType_Id" OtherKey="VchrType_Id" Type="SETUP_VoucherTypeNarration" />
       <Association Name="SETUP_VoucherType_GL_VchrMaster" Member="GL_VchrMasters" ThisKey="VchrType_Id" OtherKey="VchrType_Id" Type="GL_VchrMaster" />
+      <Association Name="SETUP_VoucherType_SETUP_VoucherTypeNarration" Member="SETUP_VoucherTypeNarrations" ThisKey="VchrType_Id" OtherKey="VchrType_Id" Type="SETUP_VoucherTypeNarration" />
       <Association Name="SETUP_Company_SETUP_VoucherType" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
       <Association Name="SETUP_Location_SETUP_VoucherType" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
     </Type>
@@ -328,26 +452,6 @@
       <Column Name="CodeGen_AutoTag" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.GL_VchrMaster" Member="GL_VchrMasters">
-    <Type Name="GL_VchrMaster">
-      <Column Name="VchMas_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="VchMas_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="VchMas_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Cmp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="VchrType_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="VchMas_Remarks" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
-      <Column Name="VchMas_Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="VchMas_EnteredBy" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="VchMas_EnteredDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="VchMas_ApprovedBy" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="VchMas_ApprovedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="GL_VchrMaster_GL_VchrDetail" Member="GL_VchrDetails" ThisKey="VchMas_Id" OtherKey="VchMas_Id" Type="GL_VchrDetail" />
-      <Association Name="SETUP_Company_GL_VchrMaster" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
-      <Association Name="SETUP_Location_GL_VchrMaster" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
-      <Association Name="SETUP_VoucherType_GL_VchrMaster" Member="SETUP_VoucherType" ThisKey="VchrType_Id" OtherKey="VchrType_Id" Type="SETUP_VoucherType" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Function Name="dbo.sp_GetCityList" Method="sp_GetCityList">
     <ElementType Name="sp_GetCityListResult">
       <Column Name="City_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
@@ -356,6 +460,24 @@
       <Column Name="City_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="City_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="City_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_VoucherEntryConsole" Method="sp_VoucherEntryConsole">
+    <Parameter Name="AllLocation" Parameter="allLocation" Type="System.Int32" DbType="Int" />
+    <Parameter Name="LocationId" Parameter="locationId" Type="System.String" DbType="VarChar(1)" />
+    <Parameter Name="AllVoucherType" Parameter="allVoucherType" Type="System.Int32" DbType="Int" />
+    <Parameter Name="VoucherTypeId" Parameter="voucherTypeId" Type="System.String" DbType="VarChar(1)" />
+    <Parameter Name="AllDate" Parameter="allDate" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DateFrom" Parameter="dateFrom" Type="System.String" DbType="VarChar(1)" />
+    <Parameter Name="DateTo" Parameter="dateTo" Type="System.String" DbType="VarChar(1)" />
+    <ElementType Name="sp_VoucherEntryConsoleResult">
+      <Column Name="Loc_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="VchrType_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="VchMas_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="VchMas_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="VchMas_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="VchMas_Remarks" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="VchMas_Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </ElementType>
   </Function>
   <Function Name="dbo.sp_GetCompanyList" Method="sp_GetCompanyList">
@@ -423,6 +545,15 @@
       <Column Name="UsrGrp_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.sp_GetUserMenuRights" Method="sp_GetUserMenuRights">
+    <Parameter Name="GroupId" Parameter="groupId" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="sp_GetUserMenuRightsResult">
+      <Column Name="Mnu_Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Mnu_Description" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Mnu_Level" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SelectedMenu" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
   <Function Name="dbo.sp_GetVoucherTypeNarrationList" Method="sp_GetVoucherTypeNarrationList">
     <ElementType Name="sp_GetVoucherTypeNarrationListResult">
       <Column Name="VchrTypeNarr_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
@@ -453,9 +584,9 @@
       <Column Name="VchrType_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="VchrType_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="VchrType_CodeInitialization" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Loc_Id1" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Loc_Id1" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Loc_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Cmp_Id1" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Cmp_Id1" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Loc_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="Loc_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Loc_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -557,41 +688,6 @@
       <Column Name="AccNatr_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.sp_ReportTrialBalance" Method="sp_ReportTrialBalance">
-    <Parameter Name="AllLocation" Parameter="allLocation" Type="System.Int32" DbType="Int" />
-    <Parameter Name="LocationId" Parameter="locationId" Type="System.String" DbType="VarChar(1)" />
-    <Parameter Name="AllVoucherType" Parameter="allVoucherType" Type="System.Int32" DbType="Int" />
-    <Parameter Name="VoucherTypeId" Parameter="voucherTypeId" Type="System.String" DbType="VarChar(1)" />
-    <Parameter Name="AllDate" Parameter="allDate" Type="System.Int32" DbType="Int" />
-    <Parameter Name="DateFrom" Parameter="dateFrom" Type="System.String" DbType="VarChar(1)" />
-    <Parameter Name="DateTo" Parameter="dateTo" Type="System.String" DbType="VarChar(1)" />
-    <ElementType Name="sp_ReportTrialBalanceResult">
-      <Column Name="ChrtAcc_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="ChrtAcc_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="ChrtAcc_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="ChrtAcc_Level" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="VchMas_DrAmount" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
-      <Column Name="VchMas_CrAmount" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.sp_VoucherEntryConsole" Method="sp_VoucherEntryConsole">
-    <Parameter Name="AllLocation" Parameter="allLocation" Type="System.Int32" DbType="Int" />
-    <Parameter Name="LocationId" Parameter="locationId" Type="System.String" DbType="VarChar(1)" />
-    <Parameter Name="AllVoucherType" Parameter="allVoucherType" Type="System.Int32" DbType="Int" />
-    <Parameter Name="VoucherTypeId" Parameter="voucherTypeId" Type="System.String" DbType="VarChar(1)" />
-    <Parameter Name="AllDate" Parameter="allDate" Type="System.Int32" DbType="Int" />
-    <Parameter Name="DateFrom" Parameter="dateFrom" Type="System.String" DbType="VarChar(1)" />
-    <Parameter Name="DateTo" Parameter="dateTo" Type="System.String" DbType="VarChar(1)" />
-    <ElementType Name="sp_VoucherEntryConsoleResult">
-      <Column Name="Loc_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="VchrType_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="VchMas_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="VchMas_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="VchMas_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="VchMas_Remarks" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
-      <Column Name="VchMas_Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.sp_ReportLedgerDetail" Method="sp_ReportLedgerDetail">
     <ElementType Name="sp_ReportLedgerDetailResult">
       <Column Name="VchMas_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
@@ -638,6 +734,22 @@
       <Column Name="ChrtAcc_Level" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ChrtAcc_BudgetLevel" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ChrtAcc_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_ReportTrialBalance" Method="sp_ReportTrialBalance">
+    <Parameter Name="AllLocation" Parameter="allLocation" Type="System.Int32" DbType="Int" />
+    <Parameter Name="LocationId" Parameter="locationId" Type="System.String" DbType="VarChar(1)" />
+    <Parameter Name="AllVoucherType" Parameter="allVoucherType" Type="System.Int32" DbType="Int" />
+    <Parameter Name="VoucherTypeId" Parameter="voucherTypeId" Type="System.String" DbType="VarChar(1)" />
+    <Parameter Name="AllDate" Parameter="allDate" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DateFrom" Parameter="dateFrom" Type="System.String" DbType="VarChar(1)" />
+    <Parameter Name="DateTo" Parameter="dateTo" Type="System.String" DbType="VarChar(1)" />
+    <ElementType Name="sp_ReportTrialBalanceResult">
+      <Column Name="ChrtAcc_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ChrtAcc_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ChrtAcc_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="VchMas_DrAmount" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
+      <Column Name="VchMas_CrAmount" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>
