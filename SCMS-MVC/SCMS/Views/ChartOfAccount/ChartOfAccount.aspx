@@ -223,11 +223,11 @@
             <div class="CustomCell" style="border: 1px solid #ccc; width: 20px; height: 28px;
                 margin-right: 12px;">
                 <div style="background-image: url('../../img/ArrowUp.png'); background-position: center;
-                    height: 14px; background-repeat: no-repeat; cursor: pointer;" onclick="ValueMinus('txt_Level');">
+                    height: 14px; background-repeat: no-repeat; cursor: pointer;" onclick="ValuePlus('txt_Level');">
                     &nbsp;
                 </div>
                 <div style="background-image: url('../../img/ArrowDown.png'); background-position: center;
-                    height: 14px; background-repeat: no-repeat; cursor: pointer;" onclick="ValuePlus('txt_Level');">
+                    height: 14px; background-repeat: no-repeat; cursor: pointer;" onclick="ValueMinus('txt_Level');">
                     &nbsp;
                 </div>
             </div>
@@ -240,11 +240,11 @@
             <div class="CustomCell" style="border: 1px solid #ccc; width: 20px; height: 28px;
                 margin-right: 12px;">
                 <div style="background-image: url('../../img/ArrowUp.png'); background-position: center;
-                    height: 14px; background-repeat: no-repeat; cursor: pointer;" onclick="ValueMinus('txt_BudgetLevel');">
+                    height: 14px; background-repeat: no-repeat; cursor: pointer;" onclick="ValuePlus('txt_BudgetLevel');">
                     &nbsp;
                 </div>
                 <div style="background-image: url('../../img/ArrowDown.png'); background-position: center;
-                    height: 14px; background-repeat: no-repeat; cursor: pointer;" onclick="ValuePlus('txt_BudgetLevel');">
+                    height: 14px; background-repeat: no-repeat; cursor: pointer;" onclick="ValueMinus('txt_BudgetLevel');">
                     &nbsp;
                 </div>
             </div>
