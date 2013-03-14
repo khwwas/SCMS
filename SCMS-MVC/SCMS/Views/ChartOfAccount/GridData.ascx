@@ -22,10 +22,10 @@
             <th style="width: 6%;">
                 Action
             </th>
-            <th style="width: 14%;">
+            <th style="width: 20%;">
                 Code
             </th>
-            <th style="width: 17%;">
+            <th style="width: 23%;">
                 Title
             </th>
             <th style="width: 10%;">
@@ -40,9 +40,9 @@
             <th style="width: 12%;">
                 Nature
             </th>
-            <th style="width: 12%;">
+            <%--<th style="width: 12%;">
                 Account Nature
-            </th>
+            </th>--%>
         </tr>
     </thead>
     <tbody>
@@ -154,7 +154,7 @@
                 %>
                 <input type="hidden" id="Natr_Id<%=lRow_Data.ChrtAcc_Id%>" value="<%=lRow_Data.Natr_Id%>" />
             </td>
-            <td id="txt_AccountNatureId<%=lRow_Data.ChrtAcc_Id%>" style="vertical-align: middle;">
+            <%--<td id="txt_AccountNatureId<%=lRow_Data.ChrtAcc_Id%>" style="vertical-align: middle;">
                 <%String AccountNature = IList_AccountNature.Where(c => c.AccNatr_Id.Equals(lRow_Data.AccNatr_Id)).SingleOrDefault().AccNatr_Title;
                   if (AccountNature == "None")
                   {
@@ -163,7 +163,7 @@
                   Response.Write(AccountNature);
                 %>
                 <input type="hidden" id="AccNatr_Id<%=lRow_Data.ChrtAcc_Id%>" value="<%=lRow_Data.AccNatr_Id%>" />
-            </td>
+            </td>--%>
             <%--<input type="hidden" id="ChrtAcc_Active<%=lRow_Data.ChrtAcc_Id%>" value="<%=lRow_Data.ChrtAcc_Active%>" />--%>
         </tr>
         <%}
@@ -172,3 +172,4 @@
         %>
     </tbody>
 </table>
+<input type="hidden" id="SaveResult" value='<%=ViewData["SaveResult"] %>' />

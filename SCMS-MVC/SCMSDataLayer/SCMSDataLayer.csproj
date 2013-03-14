@@ -58,6 +58,7 @@
     <Compile Include="DALCity.cs" />
     <Compile Include="DALCommon.cs" />
     <Compile Include="DALCompany.cs" />
+    <Compile Include="DALUserMenuRights.cs" />
     <Compile Include="DALVoucherEntry.cs" />
     <Compile Include="DALVoucherType.cs" />
     <Compile Include="DALVoucherTypeNarration.cs" />

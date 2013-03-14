@@ -22,7 +22,7 @@
             var lcnt_TypeGroup = document.getElementById('rdo_Group');
             var lcnt_TypeDetail = document.getElementById('rdo_Detail');
             var lcnt_Nature = document.getElementById('ddl_Nature');
-            var lcnt_AccountNature = document.getElementById('ddl_AccNature');
+            var lcnt_AccountNature = ""; //document.getElementById('ddl_AccNature');
             var li_Type;
 
             if (lcnt_txtTitle.value == "") {
@@ -62,8 +62,20 @@
                         SetGrid();
                         ResetForm();
                         FadeIn(lcnt_MessageBox);
-                        lcnt_MessageBox.innerHTML = "<h5>Success!</h5><p>Record saved successfully.</p>";
-                        lcnt_MessageBox.setAttribute("class", "message success");
+                        if (document.getElementById("SaveResult").value == "1") {
+                            lcnt_MessageBox.innerHTML = "<h5>Success!</h5><p>Record saved successfully.</p>";
+                            lcnt_MessageBox.setAttribute("class", "message success");
+                        }
+                        else if (document.getElementById("SaveResult").value == "-1") {
+                            lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Code already exists.</p>";
+                            lcnt_MessageBox.setAttribute("class", "message error");
+
+                        }
+                        else {
+                            lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Unable to save record.</p>";
+                            lcnt_MessageBox.setAttribute("class", "message error");
+
+                        }
                         document.getElementById("Waiting_Image").style.display = "none";
                         document.getElementById("btn_Save").style.display = "block";
                         scroll(0, 0);
@@ -88,8 +100,9 @@
         }
         function EditRecord(Id, ps_Code) {
             document.getElementById('txt_SelectedCode').value = Id;
-            document.getElementById('txt_Code').value = ps_Code
-            document.getElementById('txt_Title').value = document.getElementById('txt_Title' + Id).innerHTML.trim().toString().replace("&nbsp", "");
+            document.getElementById('txt_Code').value = ps_Code;
+            var txtTitle = document.getElementById('txt_Title' + Id).childNodes[0].nodeValue;
+            document.getElementById('txt_Title').value = txtTitle.trim(); //.replace("&nbsp; &nbsp; &nbsp;", "");
             if (document.getElementById('ChrtAcc_Level' + Id).value == "") {
                 document.getElementById('txt_Level').value = "1";
             }
@@ -102,12 +115,14 @@
             else {
                 document.getElementById('txt_BudgetLevel').value = document.getElementById('ChrtAcc_BudgetLevel' + Id).value;
             }
-            if (document.getElementById('ChrtAcc_Active' + Id).value == "1") {
-                document.getElementById('chk_Active').checked = true;
-            }
-            else {
-                document.getElementById('chk_Active').checked = false;
-            }
+
+            //            if (document.getElementById('ChrtAcc_Active' + Id).value == "1") {
+            //                document.getElementById('chk_Active').checked = true;
+            //            }
+            //            else {
+            //                document.getElementById('chk_Active').checked = false;
+            //            }
+
             if (document.getElementById('ChrtAcc_Type' + Id).value == "1") {
                 document.getElementById('rdo_Group').checked = true;
                 document.getElementById('rdo_Detail').checked = false;
@@ -124,13 +139,13 @@
             else {
                 document.getElementById('ddl_Nature').value = document.getElementById('Natr_Id' + Id).value;
             }
-            if (document.getElementById('AccNatr_Id' + Id).value == "") {
-                document.getElementById('ddl_AccNature').value = "00001";
-            }
-            else {
-                document.getElementById('ddl_AccNature').value = document.getElementById('AccNatr_Id' + Id).value;
-            }
-            document.getElementById('txt_Title').value = document.getElementById('txt_Title' + Id).innerHTML.trim().toString().replace("&nbsp", "");
+            //            if (document.getElementById('AccNatr_Id' + Id).value == "") {
+            //                document.getElementById('ddl_AccNature').value = "00001";
+            //            }
+            //            else {
+            //                document.getElementById('ddl_AccNature').value = document.getElementById('AccNatr_Id' + Id).value;
+            //            }
+            //document.getElementById('txt_Title').value = document.getElementById('txt_Title' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             scroll(0, 0);
         }
         function DeleteRecord(Id) {
@@ -200,7 +215,7 @@
             <div class="CustomCell" style="width: 40px;">
                 Level</div>
             <div class="CustomCell" style="width: 42px;">
-                <input type="text" class="CustomText" id="txt_Level" name="txt_Level" maxlength="1" 
+                <input type="text" class="CustomText" id="txt_Level" name="txt_Level" maxlength="1"
                     style="width: 35px; border-right: 0px;" value="1" disabled="disabled" />
             </div>
             <div class="CustomCell" style="border: 1px solid #ccc; width: 20px; height: 28px;
@@ -259,11 +274,11 @@
             <%= Html.DropDownList("ddl_Nature", null, new { style = "width:955px;" })%>
             <div class="Clear">
             </div>
-            <div class="CustomCell" style="width: 100px; height: 30px">
+            <%-- <div class="CustomCell" style="width: 100px; height: 30px">
                 Account Nature</div>
             <%= Html.DropDownList("ddl_AccNature", null, new { style = "width:955px;" })%>
             <div class="Clear">
-            </div>
+            </div>--%>
             <div style="float: right; margin-bottom: 10px;">
                 <div style="float: left; margin-right: 5px;">
                     <input id="btn_Save" type="button" value="Save" class="btn btn-blue" onclick="SaveRecord();"

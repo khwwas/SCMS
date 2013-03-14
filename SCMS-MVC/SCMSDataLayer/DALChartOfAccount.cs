@@ -25,7 +25,7 @@ namespace SCMSDataLayer
                     lRow_ExistingData.ChrtAcc_Type = pRow_NewData.ChrtAcc_Type;
                     lRow_ExistingData.ChrtAcc_Active = pRow_NewData.ChrtAcc_Active;
                     lRow_ExistingData.Natr_Id = pRow_NewData.Natr_Id;
-                    lRow_ExistingData.AccNatr_Id = pRow_NewData.AccNatr_Id;
+                    //lRow_ExistingData.AccNatr_Id = pRow_NewData.AccNatr_Id;
                 }
                 else
                 {
