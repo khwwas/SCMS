@@ -97,6 +97,8 @@
             document.getElementById('txt_SelectedCode').value = "";
             document.getElementById('txt_Code').value = "";
             document.getElementById('txt_Title').value = "";
+            document.getElementById('txt_Level').value = "1";
+            document.getElementById('txt_BudgetLevel').value = "1";
         }
         function EditRecord(Id, ps_Code) {
             document.getElementById('txt_SelectedCode').value = Id;

@@ -67,13 +67,17 @@
         $(document).ready(function () {
             setupLeftMenu();
             $('.datatable').dataTable({
-                "sPaginationType": "full_numbers"
+                "sPaginationType": "full_numbers",
+                "iDisplayLength": 150,
+                "aLengthMenu": [[150, 200, 250, 300, -1], [150, 200, 250, 300, "All"]]
             });
             //setSidebarHeight();
         });
         function SetGrid() {
             $('.datatable').dataTable({
-                "sPaginationType": "full_numbers"
+                "sPaginationType": "full_numbers",
+                "iDisplayLength": 150,
+                "aLengthMenu": [[150, 200, 250, 300, -1], [150, 200, 250, 300, "All"]]
             });
         }
 

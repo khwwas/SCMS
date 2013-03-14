@@ -17,7 +17,6 @@ namespace SCMS.Controllers
             return View();
         }
 
-
         public ActionResult VoucherEntry(String VoucherId)
         {
             DALVoucherEntry objDalVoucherEntry = new DALVoucherEntry();
@@ -30,7 +29,7 @@ namespace SCMS.Controllers
             Select.VchrType_Title = "";
             VoucherTypes.Insert(0, Select);
 
-            ViewData["ddl_VoucherType"] = new SelectList(VoucherTypes, "VchrType_Id", "VchrType_Title", "");
+            ViewData["ddl_VoucherType"] = new SelectList(VoucherTypes, "VchrType_Id", "VchrType_Title", Session["VoucherTypeForVoucherEntry"]);
             var ChartOfAccounts = new DALChartOfAccount().GetChartOfAccountForDropDown();
             SETUP_ChartOfAccount SelectChartOfAccount = new SETUP_ChartOfAccount();
             SelectChartOfAccount.ChrtAcc_Id = "0";
@@ -38,7 +37,7 @@ namespace SCMS.Controllers
             ChartOfAccounts.Insert(0, SelectChartOfAccount);
             ViewData["ChartOfAccounts"] = ChartOfAccounts;
             ViewData["ddl_Account"] = new SelectList(ChartOfAccounts, "ChrtAcc_Id", "ChrtAcc_Title", "");
-            ViewData["ddl_Location"] = new SelectList(Locations, "Loc_Id", "Loc_Title", "");
+            ViewData["ddl_Location"] = new SelectList(Locations, "Loc_Id", "Loc_Title", Session["LocationIdForVoucherEntry"]);
             if (!String.IsNullOrEmpty(VoucherId))
             {
                 SetVoucherEntryToEdit(VoucherId);
@@ -48,7 +47,8 @@ namespace SCMS.Controllers
                 ViewData["VoucherCode"] = "[Auto]";
                 ViewData["CurrentDate"] = DateTime.Now.ToString("MM/dd/yyyy");
             }
-
+            Session.Remove("VoucherTypeForVoucherEntry");
+            Session.Remove("LocationIdForVoucherEntry");
             return View();
         }
 
@@ -128,6 +128,8 @@ namespace SCMS.Controllers
 
         public ActionResult SaveVoucher(String VoucherMasterCode, DateTime VoucherDate, string Status, String VoucherType, String LocationId, String Remarks, String[] VoucherDetailRows)
         {
+            Session["VoucherTypeForVoucherEntry"] = VoucherType;
+            Session["LocationIdForVoucherEntry"] = LocationId;
             DALVoucherEntry objDalVoucherEntry = new DALVoucherEntry();
             Int32 li_ReturnValue = 0;
             int flag = 0;
