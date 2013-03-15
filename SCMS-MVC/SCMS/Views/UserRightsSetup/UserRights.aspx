@@ -15,24 +15,6 @@
     <script type="text/javascript" src="../../Widgets/jqwidgets/jqxpanel.js"></script>
     <script type="text/javascript" src="../../Widgets/jqwidgets/jqxtree.js"></script>
     <script type="text/javascript" src="../../Widgets/jqwidgets/jqxcheckbox.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            // Create jqxTree 
-            var theme = getDemoTheme();
-            // create jqxTree
-            $('#jqxTree').jqxTree({ height: '400px', hasThreeStates: true, checkboxes: true, width: '330px', theme: theme });
-            $('#jqxCheckBox').jqxCheckBox({ width: '200px', height: '25px', checked: true, theme: theme });
-            $('#jqxCheckBox').on('change', function (event) {
-                var checked = event.args.checked;
-                $('#jqxTree').jqxTree({ hasThreeStates: checked });
-            });
-
-        });
-
-        function GetUserMenu(value) {
-            window.location = "../UserRightsSetup?SelectedGroup=" + value;
-        }
-    </script>
     <form id="frm_UserMenuSetup" action='<%=Url.Content("~/") %>'>
     <div class="box round first fullpage grid" style="overflow: auto;">
         <h2>
@@ -102,4 +84,22 @@
         </div>
     </div>
     </form>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Create jqxTree 
+            var theme = getDemoTheme();
+            // create jqxTree
+            $('#jqxTree').jqxTree({ height: '400px', hasThreeStates: true, checkboxes: true, width: '330px', theme: theme });
+            $('#jqxCheckBox').jqxCheckBox({ width: '200px', height: '25px', checked: true, theme: theme });
+            $('#jqxCheckBox').on('change', function (event) {
+                var checked = event.args.checked;
+                $('#jqxTree').jqxTree({ hasThreeStates: checked });
+            });
+
+        });
+
+        function GetUserMenu(value) {
+            window.location = "../UserRightsSetup?SelectedGroup=" + value;
+        }
+    </script>
 </asp:Content>
