@@ -88,7 +88,9 @@ namespace SCMS.Reports
                 #region Company
                 if (ReportName.ToLower() == "Company".ToLower())
                 {
-                    _ReportDocument.Load(Server.MapPath("/Reports/Reps/rptCompany.rpt"));
+                    // _ReportDocument.Load(Server.MapPath("/Reports/Reps/rptCompany.rpt"));
+                    // _ServerPath
+                    _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptCompany.rpt");
                     Datasets.dsCompany _dsCompany = new Datasets.dsCompany();
 
                     if (_dsCompany.Tables.Contains("Logo"))
@@ -119,7 +121,7 @@ namespace SCMS.Reports
                 #region Location
                 if (ReportName.ToLower() == "Location".ToLower())
                 {
-                    _ReportDocument.Load(Server.MapPath("/Reports/Reps/rptLocation.rpt"));
+                    _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptLocation.rpt");
                     Datasets.dsLocation _dsLocation = new Datasets.dsLocation();
 
                     if (_dsLocation.Tables.Contains("Logo"))
@@ -150,7 +152,7 @@ namespace SCMS.Reports
                 #region City
                 if (ReportName.ToLower() == "City".ToLower())
                 {
-                    _ReportDocument.Load(Server.MapPath("/Reports/Reps/rptCity.rpt"));
+                    _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptCity.rpt");
                     Datasets.dsCity _dsCity = new Datasets.dsCity();
 
                     if (_dsCity.Tables.Contains("Logo"))
@@ -181,7 +183,7 @@ namespace SCMS.Reports
                 #region Voucher Types
                 if (ReportName.ToLower() == "VoucherTypes".ToLower())
                 {
-                    _ReportDocument.Load(Server.MapPath("/Reports/Reps/rptVoucherTypes.rpt"));
+                    _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptVoucherTypes.rpt");
                     Datasets.dsVoucherTypes _dsVoucherTypes = new Datasets.dsVoucherTypes();
 
                     if (_dsVoucherTypes.Tables.Contains("Logo"))
@@ -212,7 +214,7 @@ namespace SCMS.Reports
                 #region Chart Of Account
                 if (ReportName.ToLower() == "ChartOfAccount".ToLower())
                 {
-                    _ReportDocument.Load(Server.MapPath("/Reports/Reps/rptChartOfAccount.rpt"));
+                    _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptChartOfAccount.rpt");
                     Datasets.dsChartOfAccount _dsChartOfAccount = new Datasets.dsChartOfAccount();
 
                     if (_dsChartOfAccount.Tables.Contains("Logo"))
@@ -244,7 +246,7 @@ namespace SCMS.Reports
                 #region Ledger Detail
                 else if (ReportName.ToLower() == "LedgerDetail".ToLower())
                 {
-                    _ReportDocument.Load(Server.MapPath("/Reports/Reps/rptLedger.rpt"));
+                    _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptLedger.rpt");
                     Datasets.dsLedger _dsLedger = new Datasets.dsLedger();
                     string LocationCode = "";
 
@@ -278,7 +280,7 @@ namespace SCMS.Reports
                 #region Trial Balance
                 else if (ReportName.ToLower() == "TrialBalance".ToLower())
                 {
-                    _ReportDocument.Load(Server.MapPath("/Reports/Reps/rptTrialBalance.rpt"));
+                    _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptTrialBalance.rpt");
                     Datasets.dsTrialBalance _dsTrialBalance = new Datasets.dsTrialBalance();
                     string LocationCode = "";
 
