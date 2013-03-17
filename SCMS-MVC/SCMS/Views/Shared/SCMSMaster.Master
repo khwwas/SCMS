@@ -2,6 +2,7 @@
 
 <% 
     SCMSDataLayer.DB.SECURITY_User user = new SCMSDataLayer.DB.SECURITY_User();
+    List<SCMSDataLayer.DB.sp_GetUserMenuRightsResult> userMenus = new List<SCMSDataLayer.DB.sp_GetUserMenuRightsResult>();
     if (Session["user"] == null)
     {
 %>
@@ -12,6 +13,7 @@
     else
     {
         user = (SCMSDataLayer.DB.SECURITY_User)Session["user"];
+        userMenus = new SCMSDataLayer.DALUserMenuRights().GetUserMenuRights(user.UsrGrp_Id);
     }
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -121,16 +123,27 @@
         <div class="grid_12">
             <ul class="nav main">
                 <li class="ic-typography"><a href="../Home"><span>Home</span></a></li>
+                <%if (user.UsrGrp_Id == "00001")
+                  { %>
                 <li class="ic-typography"><a href="javascript:" style="float: left"><span>Security</span></a>
                     <ul>
                         <li><a href="../UserGroup">User Groups</a> </li>
                         <li><a href="../User">Users</a> </li>
-                        <%--<li><a href="../UserRightsSetup">Menu Rights</a> </li>--%>
+                        <li><a href="../UserRightsSetup">Menu Rights</a> </li>
                     </ul>
                 </li>
+                <%} %>
                 <li class="ic-typography"><a href="javascript:"><span>Setups</span></a>
                     <ul>
-                        <li><a href="../Company">Company</a> </li>
+                        <%foreach (SCMSDataLayer.DB.sp_GetUserMenuRightsResult userMenuRow in userMenus)
+                          {
+                              if (userMenuRow.Mnu_Level.Contains("1.") && userMenuRow.SelectedMenu > 0)
+                              {
+                                  Response.Write("<li><a href='" + userMenuRow.Mnu_TargetUrl + "'>" + userMenuRow.Mnu_Description + "</a> </li>");
+                              }
+                          } 
+                        %>
+                        <%--<li><a href="../Company">Company</a> </li>
                         <li><a href="../Location">Location</a> </li>
                         <li><a href="../City">City</a> </li>
                         <li><a href="../SupplierType">Supplier Types</a> </li>
@@ -140,17 +153,35 @@
                         <li><a href="../VoucherType">Voucher Type</a> </li>
                         <li><a href="../VoucherTypeNarration">Voucher Type Narration</a> </li>
                         <li><a href="../ChartOfAccount">Chart Of Account</a> </li>
+                        <li><a href="../Bank">Bank</a> </li>
+                        <li><a href="../BankAccount">Bank Account</a> </li>--%>
                     </ul>
                 </li>
                 <li class="ic-typography"><a href="#"><span>Transactions</span></a>
                     <ul>
-                        <li><a href="../VoucherEntryConsole">Voucher Entry Console</a> </li>
-                        <li><a href="../Voucher/VoucherEntry">Voucher Entry</a> </li>
+                        <%foreach (SCMSDataLayer.DB.sp_GetUserMenuRightsResult userMenuRow in userMenus)
+                          {
+                              if (userMenuRow.Mnu_Level.Contains("2.") && userMenuRow.SelectedMenu > 0)
+                              {
+                                  Response.Write("<li><a href='" + userMenuRow.Mnu_TargetUrl + "'>" + userMenuRow.Mnu_Description + "</a> </li>");
+                              }
+                          } 
+                        %>
+                        <%--<li><a href="../VoucherEntryConsole">Voucher Entry Console</a> </li>
+                        <li><a href="../Voucher/VoucherEntry">Voucher Entry</a> </li>--%>
                     </ul>
                 </li>
                 <li class="ic-typography"><a href="#"><span>Reports</span></a>
                     <ul>
-                        <li><a href="../ReportSelectionCriteria?ps_ReportName=Company">Company</a> </li>
+                        <%foreach (SCMSDataLayer.DB.sp_GetUserMenuRightsResult userMenuRow in userMenus)
+                          {
+                              if (userMenuRow.Mnu_Level.Contains("3.") && userMenuRow.SelectedMenu > 0)
+                              {
+                                  Response.Write("<li><a href='" + userMenuRow.Mnu_TargetUrl + "'>" + userMenuRow.Mnu_Description + "</a> </li>");
+                              }
+                          } 
+                        %>
+                        <%--<li><a href="../ReportSelectionCriteria?ps_ReportName=Company">Company</a> </li>
                         <li><a href="../ReportSelectionCriteria?ps_ReportName=Location">Location</a> </li>
                         <li><a href="../ReportSelectionCriteria?ps_ReportName=City">City</a> </li>
                         <li><a href="../ReportSelectionCriteria?ps_ReportName=VoucherTypes">Voucher Types</a>
@@ -158,11 +189,10 @@
                         <li><a href="../ReportSelectionCriteria?ps_ReportName=ChartOfAccount">Chart Of Account</a>
                         </li>
                         <li><a href="../ReportSelectionCriteria?ps_ReportName=LedgerDetail">Ledger</a> </li>
-                        <li><a href="../ReportSelectionCriteria?ps_ReportName=TrialBalance">Trial Balance</a>
-                        </li>
-                    </ul>
+                        <li><a href="../ReportSelectionCriteria?ps_ReportName=TrialBalance">Trial Balance</a>--%>
                 </li>
             </ul>
+            </li> </ul>
         </div>
         <div class="clear">
         </div>

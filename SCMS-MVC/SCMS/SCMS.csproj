@@ -893,7 +893,7 @@
     <Content Include="Views\ReportSelectionCriteria\ReportSelectionCriteria.aspx" />
     <Content Include="Views\Supplier\GridData.ascx" />
     <Content Include="Views\Supplier\Supplier.aspx" />
-    <Content Include="Views\UserRightsSetup\test.htm" />
+    <Content Include="Views\UserRightsSetup\TreeView.ascx" />
     <Content Include="Views\UserRightsSetup\UserRights.aspx" />
     <Content Include="Views\User\GridData.ascx" />
     <Content Include="Views\User\User.aspx" />
