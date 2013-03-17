@@ -129,3 +129,4 @@
         %>
     </tbody>
 </table>
+<input type="hidden" id="SaveResult" value='<%=ViewData["SaveResult"] %>' />

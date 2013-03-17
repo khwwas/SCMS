@@ -154,7 +154,11 @@
                         <li><a href="../VoucherTypeNarration">Voucher Type Narration</a> </li>
                         <li><a href="../ChartOfAccount">Chart Of Account</a> </li>
                         <li><a href="../Bank">Bank</a> </li>
+<<<<<<< HEAD
                         <li><a href="../BankAccount">Bank Account</a> </li>--%>
+=======
+                        <li><a href="../BankAccount">BankAccount</a> </li>
+>>>>>>> f5959106d030a09ec7bcee28c5e6c8c5bd05a84b
                     </ul>
                 </li>
                 <li class="ic-typography"><a href="#"><span>Transactions</span></a>

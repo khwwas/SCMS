@@ -66,6 +66,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\BankAccountController.cs" />
+    <Compile Include="Controllers\BankController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\ChartOfAccountController.cs" />
@@ -881,12 +883,14 @@
     <Content Include="Scripts\tiny-mce\utils\mctabs.js" />
     <Content Include="Scripts\tiny-mce\utils\validate.js" />
     <Content Include="Scripts\zebra_datepicker.js" />
+    <Content Include="Views\BankAccount\BankAccount.aspx" />
+    <Content Include="Views\BankAccount\GridData.ascx" />
     <Content Include="Views\City\City.aspx" />
     <Content Include="Views\City\GridData.ascx" />
     <Content Include="Views\Company\Company.aspx" />
     <Content Include="Views\ChartOfAccount\ChartOfAccount.aspx" />
     <Content Include="Views\ChartOfAccount\GridData.ascx" />
-    <Content Include="Views\Bank\ChartOfAccount.aspx" />
+    <Content Include="Views\Bank\Bank.aspx" />
     <Content Include="Views\Bank\GridData.ascx" />
     <Content Include="Views\Customer\Customer.aspx" />
     <Content Include="Views\Customer\GridData.ascx" />
