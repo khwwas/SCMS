@@ -44,7 +44,7 @@ namespace SCMSDataLayer
             }
             catch
             {
-                li_ReturnValue = 0;
+                li_ReturnValue = -1;
             }
 
             return li_ReturnValue;

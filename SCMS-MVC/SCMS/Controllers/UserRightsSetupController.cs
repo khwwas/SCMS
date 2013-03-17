@@ -40,7 +40,7 @@ namespace SCMS.Controllers
                 string[] UserMenuIds = UserMenus.Split(',');
                 DALUserMenuRights objUserMenuRights = new DALUserMenuRights();
                 int Success = objUserMenuRights.DeleteRecordByGroupId(GroupId);
-                if (Success > 0)
+                if (Success >= 0)
                 {
                     foreach (string userMenuId in UserMenuIds)
                     {
