@@ -22,7 +22,7 @@ namespace SCMS.Controllers
         // public ActionResult SaveVoucherType(String Code, String Title, String Prefix, String LocId)
         public ActionResult SaveVoucherType(String Code, String Title, String Prefix, int CodeInitilization)
         {
-            String VoucherTypeId = "0";
+            Int32 VoucherTypeId = 0;
 
             try
             {
@@ -47,8 +47,8 @@ namespace SCMS.Controllers
                     setupVoucherTypeRow.VchrType_SortOrder = 1;
                     setupVoucherTypeRow.VchrType_Active = 1;
 
-                    VoucherTypeId = objDALVoucherType.SaveVoucherType(setupVoucherTypeRow).ToString();
-                    ViewData["VoucherTypeId"] = VoucherTypeId;
+                    VoucherTypeId = objDALVoucherType.SaveVoucherType(setupVoucherTypeRow);
+                    ViewData["SaveResult"] = VoucherTypeId;
                 }
                 return PartialView("GridData");
             }

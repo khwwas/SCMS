@@ -140,6 +140,8 @@
                         <li><a href="../VoucherType">Voucher Type</a> </li>
                         <li><a href="../VoucherTypeNarration">Voucher Type Narration</a> </li>
                         <li><a href="../ChartOfAccount">Chart Of Account</a> </li>
+                        <li><a href="../Bank">Bank</a> </li>
+                        <li><a href="../BankAccount">BankAccount</a> </li>
                     </ul>
                 </li>
                 <li class="ic-typography"><a href="#"><span>Transactions</span></a>

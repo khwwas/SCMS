@@ -2,33 +2,57 @@
     Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    Voucher Type Narration Setup
+    Bank Account Setup
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <script type="text/javascript">
 
-        $(document).ready(function () {
-            document.getElementById("txt_Title").focus();
-        });
-
         function SaveRecord() {
+            
             var lcnt_MessageBox = document.getElementById('MessageBox');
             var lcnt_txtSelectedCode = document.getElementById("txt_SelectedCode");
-            var lcnt_txtTitle = document.getElementById('txt_Title');
-            var lcnt_Cmp = document.getElementById('ddl_VoucherType');
-
-            if (lcnt_txtTitle.value == "") {
+            var txt_Title = document.getElementById('txt_Title');
+            var ddl_Company = document.getElementById('ddl_Company');
+            var ddl_location = document.getElementById('ddl_location');
+            var ddl_bank = document.getElementById('ddl_bank');
+            
+            if (ddl_Company.value == 0) {
+                FadeIn(lcnt_MessageBox);
+                lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! select company</p>";
+                lcnt_MessageBox.setAttribute("class", "message error");
+                scroll(0, 0);
+                FadeOut(lcnt_MessageBox);
+                ddl_Company.focus();
+                return;
+            } else if (ddl_location.value == 0) {
+                FadeIn(lcnt_MessageBox);
+                lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! select location</p>";
+                lcnt_MessageBox.setAttribute("class", "message error");
+                scroll(0, 0);
+                FadeOut(lcnt_MessageBox);
+                ddl_location.focus();
+                return;
+            } else if (ddl_bank.value == 0) {
+                FadeIn(lcnt_MessageBox);
+                lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! select bank</p>";
+                lcnt_MessageBox.setAttribute("class", "message error");
+                scroll(0, 0);
+                FadeOut(lcnt_MessageBox);
+                ddl_bank.focus();
+                return;
+            }
+             else if (txt_Title.value == "") {
                 FadeIn(lcnt_MessageBox);
                 lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! enter title</p>";
                 lcnt_MessageBox.setAttribute("class", "message error");
                 scroll(0, 0);
                 FadeOut(lcnt_MessageBox);
-                lcnt_txtTitle.focus();
+                txt_Title.focus();
                 return;
-            }
+            } 
             else {
-                var Url = document.getElementById('frm_VoucherTypeNarrationSetup').action;
-                Url += "VoucherTypeNarration/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&ps_Title=" + lcnt_txtTitle.value + "&ps_CmpId=" + lcnt_Cmp.value.toString();
+                var Url = document.getElementById('frm_BankAccountSetup').action;
+                Url += "BankAccount/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&Comapany=" + ddl_Company.value + "&Location=" + ddl_location.value + "&Bank=" + ddl_bank.value + "&Title=" + txt_Title.value;
                 document.getElementById("Waiting_Image").style.display = "block";
                 document.getElementById("btn_Save").style.display = "none";
                 $.ajax({
@@ -40,6 +64,7 @@
                         SetGrid();
                         ResetForm();
                         FadeIn(lcnt_MessageBox);
+
                         if (document.getElementById("SaveResult").value == "0") {
                             lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Unable to save record.</p>";
                             lcnt_MessageBox.setAttribute("class", "message error");
@@ -68,15 +93,17 @@
             lcnt_MessageBox.innerHTML = "";
 
             document.getElementById('txt_SelectedCode').value = "";
-            document.getElementById('txt_Code').value = "[Auto]";
             document.getElementById('txt_Title').value = "";
+            document.getElementById('ddl_Company').value = "";
+            document.getElementById('ddl_location').value = "";
         }
 
         function EditRecord(Id) {
             document.getElementById('txt_SelectedCode').value = Id;
-            document.getElementById('txt_Code').value = Id;
             document.getElementById('txt_Title').value = document.getElementById('txt_Title' + Id).innerHTML.trim().toString().replace("&nbsp", "");
-            document.getElementById('ddl_VoucherType').value = document.getElementById('ddl_VoucherType' + Id).innerHTML.trim().toString().replace("&nbsp", "");
+            document.getElementById('ddl_Company').value = document.getElementById('ddl_Company' + Id).innerHTML.trim().toString().replace("&nbsp", "");
+            document.getElementById('ddl_location').value = document.getElementById('ddl_location' + Id).innerHTML.trim().toString().replace("&nbsp", "");
+            document.getElementById('ddl_bank').value = document.getElementById('ddl_bank' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             scroll(0, 0);
         }
 
@@ -84,9 +111,9 @@
             if (confirm("Do you really want to delete this record")) {
 
                 var lcnt_MessageBox = document.getElementById('MessageBox');
-                var Url = document.getElementById('frm_VoucherTypeNarrationSetup').action;
+                var Url = document.getElementById('frm_BankAccountSetup').action;
 
-                Url += "VoucherTypeNarration/DeleteRecord?_pId=" + Id;
+                Url += "Bank/DeleteRecord?_pId=" + Id;
                 $.ajax({
                     type: "GET",
                     url: Url,
@@ -113,42 +140,49 @@
         }
 
     </script>
-    <form id="frm_VoucherTypeNarrationSetup" action='<%=Url.Content("~/") %>'>
+    <form id="frm_BankAccountSetup" action='<%=Url.Content("~/") %>'>
     <input type="hidden" id="txt_SelectedCode" name="txt_SelectedCode" value="" />
     <div class="box round first fullpage grid">
         <h2>
-            Voucher Type Narration Setup</h2>
+            Bank Account Setup</h2>
         <div class="block">
             <div id="MessageBox">
             </div>
-            <div class="CustomCell" style="width: 100px; height: 30px">
-                Code</div>
-            <input type="text" class="CustomText" style="width: 100px;" id="txt_Code" name="txt_Code"
-                maxlength="100" value="[Auto]" readonly="readonly" />
+            <div class="CustomCell" style="width: 314px; height: 30px">
+                Company</div>
+
+                <div class="CustomCell" style="width: 314px; height: 30px; padding-left:7px;">
+                Location</div>
+                <div class="CustomCell" style="width: 314px; height: 30px; padding-left:7px;">
+                Bank</div>
+                <div class="Clear">
+            </div>
+            <%= Html.DropDownList("ddl_Company", null, new { style = "width:314px;" })%>
+            
+            
+            <%= Html.DropDownList("ddl_location", null, new { style = "width:314px; margin-left: 9px;" })%>
+
+            <%= Html.DropDownList("ddl_bank", null, new { style = "width:314px; margin-left: 9px;" })%>
             <div class="Clear">
             </div>
-            <div class="CustomCell" style="width: 100px; height: 30px">
+            <div class="CustomCell">
                 Title</div>
-            <input type="text" class="CustomText" style="width: 940px;" id="txt_Title" name="txt_Title"
-                maxlength="1500" />
             <div class="Clear">
             </div>
-            <div class="CustomCell" style="width: 100px; height: 30px">
-                Voucher Type</div>
-            <%= Html.DropDownList("ddl_VoucherType", null, new { style = "width:955px;" })%>
+            <input type="text" class="CustomText" style="width: 952px;" id="txt_Title" name="txt_Title"
+                maxlength="100" />
             <div class="Clear">
             </div>
             <div style="float: right; margin-bottom: 10px;">
                 <div style="float: left; margin-right: 5px;">
                     <input id="btn_Save" type="button" value="Save" class="btn btn-blue" onclick="SaveRecord();"
                         style="width: 90px; height: 35px; padding-top: 5px; color: White; font-weight: bold;
-                        font-size: 11pt" />
+                        font-size: 11pt;" />
                     <img alt="" id="Waiting_Image" src="../../img/Ajax_Loading.gif" style="display: none;
-                        margin-left: 10" />
-                </div>
+                        margin-left: 10" /></div>
                 <div style="float: left;">
                     <input type="button" value="Reset" class="btn btn-grey" onclick="ResetForm();" style="width: 90px;
-                        height: 35px; padding-top: 5px; color: White; font-weight: bold; font-size: 11pt" />
+                        height: 35px; padding-top: 5px; color: White; font-weight: bold; font-size: 11pt;" />
                 </div>
             </div>
             <hr />
