@@ -88,8 +88,6 @@ namespace SCMS.Reports
                 #region Company
                 if (ReportName.ToLower() == "Company".ToLower())
                 {
-                    // _ReportDocument.Load(Server.MapPath("/Reports/Reps/rptCompany.rpt"));
-                    // _ServerPath
                     _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptCompany.rpt");
                     Datasets.dsCompany _dsCompany = new Datasets.dsCompany();
 
@@ -248,9 +246,17 @@ namespace SCMS.Reports
                 {
                     _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptLedger.rpt");
                     Datasets.dsLedger _dsLedger = new Datasets.dsLedger();
-                    string LocationCode = "";
+                    string ls_Location = "", ls_AccCodeFrom = "", ls_AccCodeTo = "";
+                    int li_AllAccCode = 0, li_AllDate = 0;
+                    DateTime ldt_DateFrom, ldt_Dateto;
 
-                    LocationCode = SCMS.Reports.ReportParameters.Location;
+                    ls_Location = SCMS.Reports.ReportParameters.Location;
+                    li_AllAccCode = SCMS.Reports.ReportParameters.AllAccCode;
+                    ls_AccCodeFrom = SCMS.Reports.ReportParameters.AccCodeFrom;
+                    ls_AccCodeTo = SCMS.Reports.ReportParameters.AccCodeTo;
+                    li_AllDate = SCMS.Reports.ReportParameters.AllDate;
+                    ldt_DateFrom = SCMS.Reports.ReportParameters.DateFrom;
+                    ldt_Dateto = SCMS.Reports.ReportParameters.DateTo;
 
                     if (_dsLedger.Tables.Contains("Logo"))
                     {
@@ -262,7 +268,7 @@ namespace SCMS.Reports
                         _dsLedger.Tables.Remove("LedgerDetail");
                     }
 
-                    _ds = _dalReports.LedgerDetail();
+                    _ds = _dalReports.LedgerDetail(ls_Location, li_AllAccCode, ls_AccCodeFrom, ls_AccCodeTo, li_AllDate, ldt_DateFrom, ldt_Dateto);
                     _dsLedger.Tables.Add(_ds.Tables[0].Copy());
                     _dsLedger.Tables[0].TableName = "LedgerDetail";
 
