@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="SCMS" Class="SCMSDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=WAQAS\KHAWAJAWAQAS;Initial Catalog=SCMS;Persist Security Info=True;User ID=sa" SettingsObjectName="SCMSDataLayer.Properties.Settings" SettingsPropertyName="SCMSConnectionString2" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=Home_PC_2;Initial Catalog=SCMS;Persist Security Info=True;User ID=sa" SettingsObjectName="SCMSDataLayer.Properties.Settings" SettingsPropertyName="SCMSConnectionString5" Provider="System.Data.SqlClient" />
   <Table Name="dbo.GL_VchrDetail" Member="GL_VchrDetails">
     <Type Name="GL_VchrDetail">
       <Column Name="VchDet_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -36,6 +36,7 @@
       <Column Name="VchMas_EnteredDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="VchMas_ApprovedBy" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="VchMas_ApprovedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="SyncStatus" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="GL_VchrMaster_GL_VchrDetail" Member="GL_VchrDetails" ThisKey="VchMas_Id" OtherKey="VchMas_Id" Type="GL_VchrDetail" />
       <Association Name="SETUP_Company_GL_VchrMaster" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
       <Association Name="SETUP_Location_GL_VchrMaster" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
@@ -612,6 +613,7 @@
       <Column Name="VchMas_EnteredDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="VchMas_ApprovedBy" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="VchMas_ApprovedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="SyncStatus" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="VchDet_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="VchMas_Id1" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="ChrtAcc_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />

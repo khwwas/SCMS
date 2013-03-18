@@ -105,7 +105,7 @@ namespace SCMSDataLayer.DB
     #endregion
 		
 		public SCMSDataContext() : 
-				base(global::SCMSDataLayer.Properties.Settings.Default.SCMSConnectionString2, mappingSource)
+				base(global::SCMSDataLayer.Properties.Settings.Default.SCMSConnectionString5, mappingSource)
 		{
 			OnCreated();
 		}
@@ -933,6 +933,8 @@ namespace SCMSDataLayer.DB
 		
 		private System.Nullable<System.DateTime> _VchMas_ApprovedDate;
 		
+		private bool _SyncStatus;
+		
 		private EntitySet<GL_VchrDetail> _GL_VchrDetails;
 		
 		private EntityRef<SETUP_Company> _SETUP_Company;
@@ -969,6 +971,8 @@ namespace SCMSDataLayer.DB
     partial void OnVchMas_ApprovedByChanged();
     partial void OnVchMas_ApprovedDateChanging(System.Nullable<System.DateTime> value);
     partial void OnVchMas_ApprovedDateChanged();
+    partial void OnSyncStatusChanging(bool value);
+    partial void OnSyncStatusChanged();
     #endregion
 		
 		public GL_VchrMaster()
@@ -1228,6 +1232,26 @@ namespace SCMSDataLayer.DB
 					this._VchMas_ApprovedDate = value;
 					this.SendPropertyChanged("VchMas_ApprovedDate");
 					this.OnVchMas_ApprovedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SyncStatus", DbType="Bit NOT NULL")]
+		public bool SyncStatus
+		{
+			get
+			{
+				return this._SyncStatus;
+			}
+			set
+			{
+				if ((this._SyncStatus != value))
+				{
+					this.OnSyncStatusChanging(value);
+					this.SendPropertyChanging();
+					this._SyncStatus = value;
+					this.SendPropertyChanged("SyncStatus");
+					this.OnSyncStatusChanged();
 				}
 			}
 		}
@@ -11774,6 +11798,8 @@ namespace SCMSDataLayer.DB
 		
 		private System.Nullable<System.DateTime> _VchMas_ApprovedDate;
 		
+		private bool _SyncStatus;
+		
 		private string _VchDet_Id;
 		
 		private string _VchMas_Id1;
@@ -12030,6 +12056,22 @@ namespace SCMSDataLayer.DB
 				if ((this._VchMas_ApprovedDate != value))
 				{
 					this._VchMas_ApprovedDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SyncStatus", DbType="Bit NOT NULL")]
+		public bool SyncStatus
+		{
+			get
+			{
+				return this._SyncStatus;
+			}
+			set
+			{
+				if ((this._SyncStatus != value))
+				{
+					this._SyncStatus = value;
 				}
 			}
 		}

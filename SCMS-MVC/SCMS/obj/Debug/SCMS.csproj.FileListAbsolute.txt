@@ -1,0 +1,9 @@
+C:\DotNet\MyPersnalProjects\Projects\SCMS\SCMS-MVC\SCMS\bin\SCMS.dll
+C:\DotNet\MyPersnalProjects\Projects\SCMS\SCMS-MVC\SCMS\bin\SCMS.pdb
+C:\DotNet\MyPersnalProjects\Projects\SCMS\SCMS-MVC\SCMS\bin\EntityFramework.dll
+C:\DotNet\MyPersnalProjects\Projects\SCMS\SCMS-MVC\SCMS\bin\SCMSDataLayer.dll
+C:\DotNet\MyPersnalProjects\Projects\SCMS\SCMS-MVC\SCMS\bin\SCMSDataLayer.pdb
+C:\DotNet\MyPersnalProjects\Projects\SCMS\SCMS-MVC\SCMS\bin\EntityFramework.xml
+C:\DotNet\MyPersnalProjects\Projects\SCMS\SCMS-MVC\SCMS\obj\Debug\SCMS.csprojResolveAssemblyReference.cache
+C:\DotNet\MyPersnalProjects\Projects\SCMS\SCMS-MVC\SCMS\obj\Debug\SCMS.dll
+C:\DotNet\MyPersnalProjects\Projects\SCMS\SCMS-MVC\SCMS\obj\Debug\SCMS.pdb
