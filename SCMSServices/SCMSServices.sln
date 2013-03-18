@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCMSService", "SCMSService\SCMSService.csproj", "{4740AB3D-B2E7-4F2B-AD26-2C4BECBFC556}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebugApp", "DebugApp\DebugApp.csproj", "{A96A88E4-0A5D-4095-8A61-25164147F8EC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4740AB3D-B2E7-4F2B-AD26-2C4BECBFC556}.Debug|x86.ActiveCfg = Debug|x86
+		{4740AB3D-B2E7-4F2B-AD26-2C4BECBFC556}.Debug|x86.Build.0 = Debug|x86
+		{4740AB3D-B2E7-4F2B-AD26-2C4BECBFC556}.Release|x86.ActiveCfg = Release|x86
+		{4740AB3D-B2E7-4F2B-AD26-2C4BECBFC556}.Release|x86.Build.0 = Release|x86
+		{A96A88E4-0A5D-4095-8A61-25164147F8EC}.Debug|x86.ActiveCfg = Debug|x86
+		{A96A88E4-0A5D-4095-8A61-25164147F8EC}.Debug|x86.Build.0 = Debug|x86
+		{A96A88E4-0A5D-4095-8A61-25164147F8EC}.Release|x86.ActiveCfg = Release|x86
+		{A96A88E4-0A5D-4095-8A61-25164147F8EC}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

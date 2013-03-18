@@ -1,0 +1,4 @@
+C:\DotNet\MyPersnalProjects\Projects\SCMSServices\SCMSService\bin\Debug\SCMSService.exe
+C:\DotNet\MyPersnalProjects\Projects\SCMSServices\SCMSService\bin\Debug\SCMSService.pdb
+C:\DotNet\MyPersnalProjects\Projects\SCMSServices\SCMSService\obj\x86\Debug\SCMSService.exe
+C:\DotNet\MyPersnalProjects\Projects\SCMSServices\SCMSService\obj\x86\Debug\SCMSService.pdb
