@@ -1,0 +1,10 @@
+C:\DotNet\MyPersnalProjects\Projects\SCMSServices\DebugApp\bin\Debug\DebugApp.exe
+C:\DotNet\MyPersnalProjects\Projects\SCMSServices\DebugApp\bin\Debug\DebugApp.pdb
+C:\DotNet\MyPersnalProjects\Projects\SCMSServices\DebugApp\bin\Debug\SCMSService.exe
+C:\DotNet\MyPersnalProjects\Projects\SCMSServices\DebugApp\bin\Debug\SCMSService.pdb
+C:\DotNet\MyPersnalProjects\Projects\SCMSServices\DebugApp\obj\x86\Debug\DebugApp.csprojResolveAssemblyReference.cache
+C:\DotNet\MyPersnalProjects\Projects\SCMSServices\DebugApp\obj\x86\Debug\DebugApp.Properties.Resources.resources
+C:\DotNet\MyPersnalProjects\Projects\SCMSServices\DebugApp\obj\x86\Debug\DebugApp.csproj.GenerateResource.Cache
+C:\DotNet\MyPersnalProjects\Projects\SCMSServices\DebugApp\obj\x86\Debug\DebugApp.exe
+C:\DotNet\MyPersnalProjects\Projects\SCMSServices\DebugApp\obj\x86\Debug\DebugApp.pdb
+C:\DotNet\MyPersnalProjects\Projects\SCMSServices\DebugApp\obj\x86\Debug\DebugApp.Form1.resources

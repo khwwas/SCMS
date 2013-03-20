@@ -16,7 +16,7 @@ namespace SCMSDataLayer
             SqlConnection con = new SqlConnection();
             SqlCommand _cmd = new SqlCommand();
             DataSet _ds = new DataSet();
-          
+
             try
             {
                 con = Connection.ReportConnection("Open");
@@ -197,8 +197,8 @@ namespace SCMSDataLayer
                 _cmd.Parameters.Add(new SqlParameter("@AccCodeFrom", SqlDbType.VarChar)).Value = ps_AccCodeFrom;
                 _cmd.Parameters.Add(new SqlParameter("@AccCodeTo", SqlDbType.VarChar)).Value = ps_AccCodeTo;
                 _cmd.Parameters.Add(new SqlParameter("@AllDate", SqlDbType.Int)).Value = pi_AllDate;
-                _cmd.Parameters.Add(new SqlParameter("@DateFrom", SqlDbType.VarChar)).Value = pdt_DateFrom;
-                _cmd.Parameters.Add(new SqlParameter("@DateTo", SqlDbType.VarChar)).Value = pdt_DateTo;
+                _cmd.Parameters.Add(new SqlParameter("@DateFrom", SqlDbType.DateTime)).Value = pdt_DateFrom;
+                _cmd.Parameters.Add(new SqlParameter("@DateTo", SqlDbType.DateTime)).Value = pdt_DateTo;
 
                 _cmd.ExecuteNonQuery();
 
@@ -217,7 +217,7 @@ namespace SCMSDataLayer
         #endregion
 
         #region Trial Balance
-        public DataSet  TrialBalance()
+        public DataSet TrialBalance()
         {
             SqlConnection con = new SqlConnection();
             SqlCommand _cmd = new SqlCommand();

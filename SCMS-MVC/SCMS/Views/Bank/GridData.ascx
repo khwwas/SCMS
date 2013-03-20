@@ -16,39 +16,68 @@
 <table id="CityGrid" class="data display datatable">
     <thead>
         <tr>
-            <th style="width: 6%;">
+            <th style="width: 10%;">
                 Action
             </th>
-            <th style="width: 6%;">
-                Code
+            <th style="width: 10%;">
+                Company
             </th>
-            <th style="width: 88%;">
+            <th style="width: 10%;">
+                Location
+            </th>
+            <th style="width: 10%;">
                 Title
             </th>
         </tr>
     </thead>
     <tbody>
-        <%var lList_Data = new SCMSDataLayer.DALCity().GetAllRecords();
-          if (lList_Data != null && lList_Data.Count > 0)
-          {
-              foreach (SCMSDataLayer.DB.SETUP_City lRow_Data in lList_Data)
-              {%>
+        <% 
+            
+            var lList_Data = new SCMSDataLayer.DALBank().GetAllRecords();
+
+            // Get location name show in list
+            List<SCMSDataLayer.DB.SETUP_Location> ListLocations = new List<SCMSDataLayer.DB.SETUP_Location>();
+            ListLocations = new SCMSDataLayer.DALLocation().GetAllLocation().ToList();
+
+            // Get Company name show in list
+            List<SCMSDataLayer.DB.SETUP_Company> ListCompanies = new List<SCMSDataLayer.DB.SETUP_Company>();
+            ListCompanies = new SCMSDataLayer.DALCompany().GetAllCompanies().ToList();
+
+            if (lList_Data != null && lList_Data.Count > 0)
+            {
+                foreach (SCMSDataLayer.DB.SETUP_Bank lRow_Data in lList_Data)
+                {
+                    SCMSDataLayer.DB.SETUP_Company CompanyRow = ListCompanies.Where(c => c.Cmp_Id.Equals(lRow_Data.Cmp_Id)).SingleOrDefault();
+                    SCMSDataLayer.DB.SETUP_Location LocationRow = ListLocations.Where(L => L.Loc_Id.Equals(lRow_Data.Loc_Id)).SingleOrDefault();
+                  
+                  
+        %>
         <tr class='odd gradeX' style='line-height: 15px;'>
             <td>
-                <div onclick="javascript:return EditRecord('<%=lRow_Data.City_Id %>')" style="width: 22px;
+                <div onclick="javascript:return EditRecord('<%=lRow_Data.Bank_Id%>')" style="width: 22px;
                     padding-right: 5px; float: left; cursor: pointer;">
                     <img alt="Edit" src="../../img/edit.png" style="width: 22px; vertical-align: middle" />
                 </div>
-                <div onclick="javascript:return DeleteRecord('<%=lRow_Data.City_Id %>')" style="width: 22px;
+                <div onclick="javascript:return DeleteRecord('<%=lRow_Data.Bank_Id%>')" style="width: 22px;
                     float: left; cursor: pointer;">
                     <img alt="Delete" src="../../img/delete.png" style="width: 22px; vertical-align: middle" />
                 </div>
             </td>
-            <td id="txt_Code<%=lRow_Data.City_Code%>" style="vertical-align: middle;">
-                <%=lRow_Data.City_Code%>
+            <td id="ddl_Company<%=lRow_Data.Bank_Id%>" style="vertical-align: middle;">
+                <%if (CompanyRow != null)
+                  { %>
+                <%=CompanyRow.Cmp_Title%>
+                <%} %>
             </td>
-            <td id="txt_Title<%=lRow_Data.City_Title%>" style="vertical-align: middle;">
-                <%=lRow_Data.City_Title%>
+            <td id="ddl_location<%=lRow_Data.Bank_Id%>" style="vertical-align: middle;">
+            <%if (LocationRow != null)
+                  { %>
+                <%=LocationRow.Loc_Title%>
+                <%} %>
+                
+            </td>
+            <td id="txt_Title<%=lRow_Data.Bank_Id%>" style="vertical-align: middle;">
+                <%=lRow_Data.Bank_Title%>
             </td>
         </tr>
         <%}
@@ -57,3 +86,4 @@
         %>
     </tbody>
 </table>
+<input type="hidden" id="SaveResult" value='<%=ViewData["SaveResult"] %>' />

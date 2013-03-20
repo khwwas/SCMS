@@ -26,13 +26,43 @@ namespace SCMS.Controllers
             return View("UserRights");
         }
 
-        //public string GetUserMenus(string GroupId)
-        //{
-        //    List<sp_GetUserMenuRightsResult> MenuRights = new DALUserMenuRights().GetUserMenuRights(GroupId).OrderBy(c => c.Mnu_Level).ToList();
-        //    string UserMenuList = "";
+        public ActionResult GetUserMenus(string GroupId)
+        {
+            List<sp_GetUserMenuRightsResult> MenuRights = new DALUserMenuRights().GetUserMenuRights(GroupId).OrderBy(c => c.Mnu_Level).ToList();
+            ViewData["UserMenuRights"] = MenuRights;
+            return PartialView("TreeView");
+        }
 
-        //    return UserMenuList;
-        //}
+        public string SaveUserRights(int GroupId, string UserMenus)
+        {
+            try
+            {
+                string[] UserMenuIds = UserMenus.Split(',');
+                DALUserMenuRights objUserMenuRights = new DALUserMenuRights();
+                int Success = objUserMenuRights.DeleteRecordByGroupId(GroupId);
+                if (Success >= 0)
+                {
+                    foreach (string userMenuId in UserMenuIds)
+                    {
+                        Security_UserRight userRightRow = new Security_UserRight();
+                        string Code = "";
+                        if (DALCommon.AutoCodeGeneration("Security_UserRights") == 1)
+                        {
+                            Code = DALCommon.GetMaximumCode("Security_UserRights");
+                        }
+                        userRightRow.UsrSec_Code = Code;
+                        userRightRow.Grp_Id = GroupId;
+                        userRightRow.Mnu_Id = Convert.ToInt32(userMenuId);
+                        objUserMenuRights.SaveRecord(userRightRow);
+                    }
+                }
+                return "1";
+            }
+            catch
+            {
+                return "0";
+            }
+        }
 
     }
 }

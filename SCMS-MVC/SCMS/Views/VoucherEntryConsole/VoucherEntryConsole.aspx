@@ -26,8 +26,14 @@
                     SetGrid();
                     ResetForm();
                     FadeIn(MessageBox);
-                    MessageBox.innerHTML = "<h5>Success!</h5><p>Record saved successfully.</p>";
-                    MessageBox.setAttribute("class", "message success");
+                    if (document.getElementById("SaveResult").value == "0") {
+                        MessageBox.innerHTML = "<h5>Error!</h5><p>Unable to save record.</p>";
+                        MessageBox.setAttribute("class", "message error");
+
+                    } else {
+                        MessageBox.innerHTML = "<h5>Success!</h5><p>Record saved successfully.</p>";
+                        MessageBox.setAttribute("class", "message success");
+                    }
                     document.getElementById("Waiting_Image").style.display = "none";
                     document.getElementById("btn_Search").style.display = "block";
                     scroll(0, 0);

@@ -2,28 +2,47 @@
     Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    City Setup
+    Bank Setup
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <script type="text/javascript">
 
         function SaveRecord() {
+            
             var lcnt_MessageBox = document.getElementById('MessageBox');
             var lcnt_txtSelectedCode = document.getElementById("txt_SelectedCode");
-            var lcnt_txtTitle = document.getElementById('txt_Title');
-
-           if (lcnt_txtTitle.value == "") {
+            var txt_Title = document.getElementById('txt_Title');
+            var ddl_Company = document.getElementById('ddl_Company');
+            var ddl_location = document.getElementById('ddl_location');
+            
+            if (ddl_Company.value == 0) {
+                FadeIn(lcnt_MessageBox);
+                lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! select company</p>";
+                lcnt_MessageBox.setAttribute("class", "message error");
+                scroll(0, 0);
+                FadeOut(lcnt_MessageBox);
+                ddl_Company.focus();
+                return;
+            } else if (ddl_location.value == 0) {
+                FadeIn(lcnt_MessageBox);
+                lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! select location</p>";
+                lcnt_MessageBox.setAttribute("class", "message error");
+                scroll(0, 0);
+                FadeOut(lcnt_MessageBox);
+                ddl_location.focus();
+                return;
+            } else if (txt_Title.value == "") {
                 FadeIn(lcnt_MessageBox);
                 lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! enter title</p>";
                 lcnt_MessageBox.setAttribute("class", "message error");
                 scroll(0, 0);
                 FadeOut(lcnt_MessageBox);
-                lcnt_txtTitle.focus();
+                txt_Title.focus();
                 return;
-            }
+            } 
             else {
-                var Url = document.getElementById('frm_CitySetup').action;
-                Url += "City/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&ps_Title=" + lcnt_txtTitle.value;
+                var Url = document.getElementById('frm_BankSetup').action;
+                Url += "Bank/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&Comapany=" + ddl_Company.value + "&Location=" + ddl_location.value + "&Title=" + txt_Title.value;
                 document.getElementById("Waiting_Image").style.display = "block";
                 document.getElementById("btn_Save").style.display = "none";
                 $.ajax({
@@ -35,8 +54,15 @@
                         SetGrid();
                         ResetForm();
                         FadeIn(lcnt_MessageBox);
-                        lcnt_MessageBox.innerHTML = "<h5>Success!</h5><p>Record saved successfully.</p>";
-                        lcnt_MessageBox.setAttribute("class", "message success");
+
+                        if (document.getElementById("SaveResult").value == "0") {
+                            lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Unable to save record.</p>";
+                            lcnt_MessageBox.setAttribute("class", "message error");
+
+                        } else {
+                            lcnt_MessageBox.innerHTML = "<h5>Success!</h5><p>Record saved successfully.</p>";
+                            lcnt_MessageBox.setAttribute("class", "message success");
+                        }
                         document.getElementById("Waiting_Image").style.display = "none";
                         document.getElementById("btn_Save").style.display = "block";
                         scroll(0, 0);
@@ -58,11 +84,15 @@
 
             document.getElementById('txt_SelectedCode').value = "";
             document.getElementById('txt_Title').value = "";
+            document.getElementById('ddl_Company').value = "";
+            document.getElementById('ddl_location').value = "";
         }
 
         function EditRecord(Id) {
             document.getElementById('txt_SelectedCode').value = Id;
             document.getElementById('txt_Title').value = document.getElementById('txt_Title' + Id).innerHTML.trim().toString().replace("&nbsp", "");
+            document.getElementById('ddl_Company').value = document.getElementById('ddl_Company' + Id).innerHTML.trim().toString().replace("&nbsp", "");
+            document.getElementById('ddl_location').value = document.getElementById('ddl_location' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             scroll(0, 0);
         }
 
@@ -70,9 +100,9 @@
             if (confirm("Do you really want to delete this record")) {
 
                 var lcnt_MessageBox = document.getElementById('MessageBox');
-                var Url = document.getElementById('frm_CitySetup').action;
+                var Url = document.getElementById('frm_BankSetup').action;
 
-                Url += "City/DeleteRecord?_pId=" + Id;
+                Url += "Bank/DeleteRecord?_pId=" + Id;
                 $.ajax({
                     type: "GET",
                     url: Url,
@@ -99,13 +129,26 @@
         }
 
     </script>
-    <form id="frm_CitySetup" action='<%=Url.Content("~/") %>'>
+    <form id="frm_BankSetup" action='<%=Url.Content("~/") %>'>
     <input type="hidden" id="txt_SelectedCode" name="txt_SelectedCode" value="" />
     <div class="box round first fullpage grid">
         <h2>
-            City Setup</h2>
+            Bank Setup</h2>
         <div class="block">
             <div id="MessageBox">
+            </div>
+            <div class="CustomCell" style="width: 470px; height: 30px">
+                Company</div>
+
+                <div class="CustomCell" style="width: 470px; height: 30px; padding-left:7px;">
+                Location</div>
+                <div class="Clear">
+            </div>
+            <%= Html.DropDownList("ddl_Company", null, new { style = "width:470px;" })%>
+            
+            
+            <%= Html.DropDownList("ddl_location", null, new { style = "width:470px; margin-left: 9px;" })%>
+            <div class="Clear">
             </div>
             <div class="CustomCell">
                 Title</div>

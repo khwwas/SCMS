@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="SCMS" Class="SCMSDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=AWAIS-PC\SQLEXPRESS;Initial Catalog=SCMS;Persist Security Info=True;User ID=sa" SettingsObjectName="SCMSDataLayer.Properties.Settings" SettingsPropertyName="SCMSConnectionString4" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=Home_PC_2;Initial Catalog=SCMS;Persist Security Info=True;User ID=sa" SettingsObjectName="SCMSDataLayer.Properties.Settings" SettingsPropertyName="SCMSConnectionString5" Provider="System.Data.SqlClient" />
   <Table Name="dbo.GL_VchrDetail" Member="GL_VchrDetails">
     <Type Name="GL_VchrDetail">
       <Column Name="VchDet_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -36,91 +36,11 @@
       <Column Name="VchMas_EnteredDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="VchMas_ApprovedBy" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="VchMas_ApprovedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="SyncStatus" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="GL_VchrMaster_GL_VchrDetail" Member="GL_VchrDetails" ThisKey="VchMas_Id" OtherKey="VchMas_Id" Type="GL_VchrDetail" />
       <Association Name="SETUP_Company_GL_VchrMaster" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
       <Association Name="SETUP_Location_GL_VchrMaster" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
       <Association Name="SETUP_VoucherType_GL_VchrMaster" Member="SETUP_VoucherType" ThisKey="VchrType_Id" OtherKey="VchrType_Id" Type="SETUP_VoucherType" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.pbcatcol" Member="pbcatcols">
-    <Type Name="pbcatcol">
-      <Column Name="pbc_tnam" Type="System.String" DbType="Char(30)" CanBeNull="true" />
-      <Column Name="pbc_tid" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="pbc_ownr" Type="System.String" DbType="Char(30)" CanBeNull="true" />
-      <Column Name="pbc_cnam" Type="System.String" DbType="Char(30)" CanBeNull="true" />
-      <Column Name="pbc_cid" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
-      <Column Name="pbc_labl" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
-      <Column Name="pbc_lpos" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
-      <Column Name="pbc_hdr" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
-      <Column Name="pbc_hpos" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
-      <Column Name="pbc_jtfy" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
-      <Column Name="pbc_mask" Type="System.String" DbType="VarChar(31)" CanBeNull="true" />
-      <Column Name="pbc_case" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
-      <Column Name="pbc_hght" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
-      <Column Name="pbc_wdth" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
-      <Column Name="pbc_ptrn" Type="System.String" DbType="VarChar(31)" CanBeNull="true" />
-      <Column Name="pbc_bmap" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
-      <Column Name="pbc_init" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
-      <Column Name="pbc_cmnt" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
-      <Column Name="pbc_edit" Type="System.String" DbType="VarChar(31)" CanBeNull="true" />
-      <Column Name="pbc_tag" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.pbcatedt" Member="pbcatedts">
-    <Type Name="pbcatedt">
-      <Column Name="pbe_name" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="pbe_edit" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
-      <Column Name="pbe_type" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
-      <Column Name="pbe_cntr" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="pbe_seqn" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
-      <Column Name="pbe_flag" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="pbe_work" Type="System.String" DbType="Char(32)" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.pbcatfmt" Member="pbcatfmts">
-    <Type Name="pbcatfmt">
-      <Column Name="pbf_name" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="pbf_frmt" Type="System.String" DbType="VarChar(254) NOT NULL" CanBeNull="false" />
-      <Column Name="pbf_type" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
-      <Column Name="pbf_cntr" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.pbcattbl" Member="pbcattbls">
-    <Type Name="pbcattbl">
-      <Column Name="pbt_tnam" Type="System.String" DbType="Char(30)" CanBeNull="true" />
-      <Column Name="pbt_tid" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="pbt_ownr" Type="System.String" DbType="Char(30)" CanBeNull="true" />
-      <Column Name="pbd_fhgt" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
-      <Column Name="pbd_fwgt" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
-      <Column Name="pbd_fitl" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
-      <Column Name="pbd_funl" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
-      <Column Name="pbd_fchr" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
-      <Column Name="pbd_fptc" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
-      <Column Name="pbd_ffce" Type="System.String" DbType="Char(32)" CanBeNull="true" />
-      <Column Name="pbh_fhgt" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
-      <Column Name="pbh_fwgt" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
-      <Column Name="pbh_fitl" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
-      <Column Name="pbh_funl" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
-      <Column Name="pbh_fchr" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
-      <Column Name="pbh_fptc" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
-      <Column Name="pbh_ffce" Type="System.String" DbType="Char(32)" CanBeNull="true" />
-      <Column Name="pbl_fhgt" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
-      <Column Name="pbl_fwgt" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
-      <Column Name="pbl_fitl" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
-      <Column Name="pbl_funl" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
-      <Column Name="pbl_fchr" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
-      <Column Name="pbl_fptc" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
-      <Column Name="pbl_ffce" Type="System.String" DbType="Char(32)" CanBeNull="true" />
-      <Column Name="pbt_cmnt" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.pbcatvld" Member="pbcatvlds">
-    <Type Name="pbcatvld">
-      <Column Name="pbv_name" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="pbv_vald" Type="System.String" DbType="VarChar(254) NOT NULL" CanBeNull="false" />
-      <Column Name="pbv_type" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
-      <Column Name="pbv_cntr" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="pbv_msg" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Security_MenuOptions" Member="Security_MenuOptions">
@@ -550,6 +470,7 @@
     <ElementType Name="sp_GetUserMenuRightsResult">
       <Column Name="Mnu_Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="Mnu_Description" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Mnu_TargetUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
       <Column Name="Mnu_Level" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="SelectedMenu" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
     </ElementType>
@@ -663,6 +584,21 @@
       <Column Name="VchrType_CodeInitialization" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.sp_ReportChartOfAccount" Method="sp_ReportChartOfAccount">
+    <Parameter Name="Level" Parameter="level" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_ReportChartOfAccountResult">
+      <Column Name="ChrtAcc_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ChrtAcc_Code" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="ChrtAcc_Title" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="ChrtAcc_Level" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ChrtAcc_BudgetLevel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ChrtAcc_Type" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Natr_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Natr_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="AccNatr_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="AccNatr_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </ElementType>
+  </Function>
   <Function Name="dbo.sp_ReportLedgerDetail" Method="sp_ReportLedgerDetail">
     <ElementType Name="sp_ReportLedgerDetailResult">
       <Column Name="VchMas_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
@@ -677,6 +613,7 @@
       <Column Name="VchMas_EnteredDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="VchMas_ApprovedBy" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="VchMas_ApprovedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="SyncStatus" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="VchDet_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="VchMas_Id1" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="ChrtAcc_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
@@ -725,19 +662,6 @@
       <Column Name="ChrtAcc_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="VchMas_DrAmount" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
       <Column Name="VchMas_CrAmount" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.sp_ReportChartOfAccount" Method="sp_ReportChartOfAccount">
-    <Parameter Name="Level" Parameter="level" Type="System.Int32" DbType="Int" />
-    <ElementType Name="sp_ReportChartOfAccountResult">
-      <Column Name="ChrtAcc_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="ChrtAcc_Code" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
-      <Column Name="ChrtAcc_Title" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
-      <Column Name="ChrtAcc_Level" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ChrtAcc_BudgetLevel" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ChrtAcc_Type" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Natr_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="AccNatr_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

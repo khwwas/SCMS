@@ -39,8 +39,14 @@
                         SetGrid();
                         ResetForm();
                         FadeIn(lcnt_MessageBox);
-                        lcnt_MessageBox.innerHTML = "<h5>Success!</h5><p>Record saved successfully.</p>";
-                        lcnt_MessageBox.setAttribute("class", "message success");
+                        if (document.getElementById("SaveResult").value == "0") {
+                            lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Unable to save record.</p>";
+                            lcnt_MessageBox.setAttribute("class", "message error");
+
+                        } else {
+                            lcnt_MessageBox.innerHTML = "<h5>Success!</h5><p>Record saved successfully.</p>";
+                            lcnt_MessageBox.setAttribute("class", "message success");
+                        }
                         document.getElementById("Waiting_Image").style.display = "none";
                         document.getElementById("btn_Save").style.display = "block";
                         scroll(0, 0);

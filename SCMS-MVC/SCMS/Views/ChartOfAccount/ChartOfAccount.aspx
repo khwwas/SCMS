@@ -62,9 +62,9 @@
                         SetGrid();
                         ResetForm();
                         FadeIn(lcnt_MessageBox);
-                        if (document.getElementById("SaveResult").value == "1") {
-                            lcnt_MessageBox.innerHTML = "<h5>Success!</h5><p>Record saved successfully.</p>";
-                            lcnt_MessageBox.setAttribute("class", "message success");
+                        if (document.getElementById("SaveResult").value == "0") {
+                            lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Unable to save record.</p>";
+                            lcnt_MessageBox.setAttribute("class", "message error");
                         }
                         else if (document.getElementById("SaveResult").value == "-1") {
                             lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Code already exists.</p>";
@@ -72,9 +72,8 @@
 
                         }
                         else {
-                            lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Unable to save record.</p>";
-                            lcnt_MessageBox.setAttribute("class", "message error");
-
+                            lcnt_MessageBox.innerHTML = "<h5>Success!</h5><p>Record saved successfully.</p>";
+                            lcnt_MessageBox.setAttribute("class", "message success");                            
                         }
                         document.getElementById("Waiting_Image").style.display = "none";
                         document.getElementById("btn_Save").style.display = "block";
@@ -192,9 +191,23 @@
         }
 
         function SetLevel() {
-            var Level = document.getElementById("txt_Level");
-            var Code = document.getElementById("txt_Code");
+            var CodeVal = $("#txt_Code").val();
+            CodeVal = replaceCharacters(CodeVal, "_", "");
+            var temp = CodeVal.split("-");
+            for (var val in temp) {
+                if (temp[val] != "") {
+                    document.getElementById("txt_Level").value = parseInt(val, 10) +1;
+                }
+            }
         }
+
+
+        function replaceCharacters(origString , inChar, outChar) {
+            var newString = origString.split(inChar);
+            newString = newString.join(outChar);
+            return newString;
+        }
+
 
     </script>
     <form id="frm_ChartOfAccountSetup" action='<%=Url.Content("~/") %>'>
@@ -208,8 +221,9 @@
             <div class="CustomCell" style="width: 97px; height: 30px;">
                 Code</div>
             <div class="CustomCell" style="width: 270px; height: 30px;">
+              
                 <input type="text" class="CustomText" style="width: 240px;" id="txt_Code" name="txt_Code"
-                    maxlength="50" onblur="SetLevel()" />
+                    maxlength="50" onkeyup="SetLevel()" onkeydown="SetLevel()" />
                 <script type="text/javascript">
                     $("#txt_Code").inputmask({ "mask": "99-999-9999-99999-99999-99999" });
                 </script>

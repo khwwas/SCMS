@@ -1,0 +1,53 @@
+<?xml version="1.0" standalone="yes"?>
+<VchMasterDetails>
+  <xs:schema id="VchMasterDetails" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="VchMasterDetails" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="GL_VchrMaster">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="VchMas_Id" type="xs:string" minOccurs="0" />
+                <xs:element name="VchMas_Code" type="xs:string" minOccurs="0" />
+                <xs:element name="VchMas_Date" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="Cmp_Id" type="xs:string" minOccurs="0" />
+                <xs:element name="Loc_Id" type="xs:string" minOccurs="0" />
+                <xs:element name="VchrType_Id" type="xs:string" minOccurs="0" />
+                <xs:element name="VchMas_Remarks" type="xs:string" minOccurs="0" />
+                <xs:element name="VchMas_Status" type="xs:int" minOccurs="0" />
+                <xs:element name="VchMas_EnteredBy" type="xs:string" minOccurs="0" />
+                <xs:element name="VchMas_EnteredDate" type="xs:dateTime" minOccurs="0" />
+                <xs:element name="VchMas_ApprovedBy" type="xs:string" minOccurs="0" />
+                <xs:element name="VchMas_ApprovedDate" type="xs:dateTime" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="GL_VchrDetail">
+            <xs:complexType>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <GL_VchrMaster>
+    <VchMas_Id>0000001</VchMas_Id>
+    <VchMas_Code>PB110000001</VchMas_Code>
+    <VchMas_Date>2013-03-14T00:00:00+05:00</VchMas_Date>
+    <Loc_Id>00001</Loc_Id>
+    <VchrType_Id>00001</VchrType_Id>
+    <VchMas_Remarks>saas</VchMas_Remarks>
+    <VchMas_Status>0</VchMas_Status>
+    <VchMas_EnteredDate>2013-03-16T01:34:24.96+05:00</VchMas_EnteredDate>
+  </GL_VchrMaster>
+  <GL_VchrMaster>
+    <VchMas_Id>0000002</VchMas_Id>
+    <VchMas_Code>PB110000002</VchMas_Code>
+    <VchMas_Date>2013-03-14T00:00:00+05:00</VchMas_Date>
+    <Loc_Id>00001</Loc_Id>
+    <VchrType_Id>00001</VchrType_Id>
+    <VchMas_Remarks>cxcxzc</VchMas_Remarks>
+    <VchMas_Status>0</VchMas_Status>
+    <VchMas_EnteredDate>2013-03-16T01:36:59.997+05:00</VchMas_EnteredDate>
+  </GL_VchrMaster>
+</VchMasterDetails>

@@ -19,7 +19,7 @@ namespace SCMS.Controllers
 
         public ActionResult SaveCompany(String Code, String Name, String Address1, String Address2, String Email, String Phone, String Fax)
         {
-            String companyId = "0";
+            Int32 li_ReturnValue = 0;
 
             try
             {
@@ -44,8 +44,8 @@ namespace SCMS.Controllers
                     setupCompanyRow.Cmp_Phone = Phone;
                     setupCompanyRow.Cmp_Fax = Fax;
                     setupCompanyRow.Cmp_Active = 1;
-                    companyId = objDalCompany.SaveCompany(setupCompanyRow).ToString();
-                    ViewData["companyId"] = companyId;
+                    li_ReturnValue = objDalCompany.SaveCompany(setupCompanyRow);
+                    ViewData["SaveResult"] = li_ReturnValue;
                 }
                 return PartialView("GridData");
             }
