@@ -8,3 +8,13 @@ C:\DotNet\MyPersnalProjects\Projects\SCMSServices\DebugApp\obj\x86\Debug\DebugAp
 C:\DotNet\MyPersnalProjects\Projects\SCMSServices\DebugApp\obj\x86\Debug\DebugApp.exe
 C:\DotNet\MyPersnalProjects\Projects\SCMSServices\DebugApp\obj\x86\Debug\DebugApp.pdb
 C:\DotNet\MyPersnalProjects\Projects\SCMSServices\DebugApp\obj\x86\Debug\DebugApp.Form1.resources
+D:\Projects\SCMS\SCMSServices\DebugApp\obj\x86\Debug\DebugApp.exe
+D:\Projects\SCMS\SCMSServices\DebugApp\obj\x86\Debug\DebugApp.pdb
+D:\Projects\SCMS\SCMSServices\DebugApp\bin\Debug\DebugApp.exe
+D:\Projects\SCMS\SCMSServices\DebugApp\bin\Debug\DebugApp.pdb
+D:\Projects\SCMS\SCMSServices\DebugApp\bin\Debug\SCMSService.exe
+D:\Projects\SCMS\SCMSServices\DebugApp\bin\Debug\SCMSService.pdb
+D:\Projects\SCMS\SCMSServices\DebugApp\obj\x86\Debug\DebugApp.csprojResolveAssemblyReference.cache
+D:\Projects\SCMS\SCMSServices\DebugApp\obj\x86\Debug\DebugApp.Form1.resources
+D:\Projects\SCMS\SCMSServices\DebugApp\obj\x86\Debug\DebugApp.Properties.Resources.resources
+D:\Projects\SCMS\SCMSServices\DebugApp\obj\x86\Debug\DebugApp.csproj.GenerateResource.Cache

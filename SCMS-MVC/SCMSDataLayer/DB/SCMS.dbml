@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="SCMS" Class="SCMSDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=Home_PC_2;Initial Catalog=SCMS;Persist Security Info=True;User ID=sa" SettingsObjectName="SCMSDataLayer.Properties.Settings" SettingsPropertyName="SCMSConnectionString5" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=WAQAS\KHAWAJAWAQAS;Initial Catalog=SCMS;Persist Security Info=True;User ID=sa" SettingsObjectName="SCMSDataLayer.Properties.Settings" SettingsPropertyName="SCMSConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.GL_VchrDetail" Member="GL_VchrDetails">
     <Type Name="GL_VchrDetail">
       <Column Name="VchDet_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -138,6 +138,7 @@
       <Column Name="Cldr_DateEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Cldr_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Cldr_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CldrType_Level" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="SETUP_CalendarType_SETUP_Calendar" Member="SETUP_CalendarType" ThisKey="CldrType_Id" OtherKey="CldrType_Id" Type="SETUP_CalendarType" IsForeignKey="true" />
       <Association Name="SETUP_Company_SETUP_Calendar" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
       <Association Name="SETUP_Location_SETUP_Calendar" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
@@ -152,6 +153,7 @@
       <Column Name="CldrType_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="CldrType_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CldrType_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CldrType_Level" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="SETUP_CalendarType_SETUP_Calendar" Member="SETUP_Calendars" ThisKey="CldrType_Id" OtherKey="CldrType_Id" Type="SETUP_Calendar" />
       <Association Name="SETUP_Company_SETUP_CalendarType" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
       <Association Name="SETUP_Location_SETUP_CalendarType" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
