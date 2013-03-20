@@ -1,2 +1,0 @@
-Alter Table SETUP_Calendar
-Add Cldr_Prefix varchar(10)
