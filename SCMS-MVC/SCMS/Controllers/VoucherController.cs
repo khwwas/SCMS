@@ -45,7 +45,7 @@ namespace SCMS.Controllers
             else
             {
                 ViewData["VoucherCode"] = "[Auto]";
-                ViewData["CurrentDate"] = DateTime.Now.ToString("MM/dd/yyyy");
+                ViewData["CurrentDate"] = DateTime.Now.ToString("dd/MM/yyyy");
             }
             Session.Remove("VoucherTypeForVoucherEntry");
             Session.Remove("LocationIdForVoucherEntry");

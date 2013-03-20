@@ -188,6 +188,7 @@
                         </li>
                         <li><a href="../ReportSelectionCriteria?ps_ReportName=ChartOfAccount">Chart Of Account</a>
                         </li>
+                         <li><a href="../ReportSelectionCriteria?ps_ReportName=VoucherDoc">Voucher</a> </li>
                         <li><a href="../ReportSelectionCriteria?ps_ReportName=LedgerDetail">Ledger</a> </li>
                         <li><a href="../ReportSelectionCriteria?ps_ReportName=TrialBalance">Trial Balance</a></li>--%>
                     </ul>
