@@ -8,3 +8,5 @@ C:\DotNet\MyPersnalProjects\Projects\SCMSServices\DebugApp\obj\x86\Debug\DebugAp
 C:\DotNet\MyPersnalProjects\Projects\SCMSServices\DebugApp\obj\x86\Debug\DebugApp.exe
 C:\DotNet\MyPersnalProjects\Projects\SCMSServices\DebugApp\obj\x86\Debug\DebugApp.pdb
 C:\DotNet\MyPersnalProjects\Projects\SCMSServices\DebugApp\obj\x86\Debug\DebugApp.Form1.resources
+C:\DotNet\MyPersnalProjects\Projects\SCMS\SCMSServices\DebugApp\obj\x86\Debug\DebugApp.exe
+C:\DotNet\MyPersnalProjects\Projects\SCMS\SCMSServices\DebugApp\obj\x86\Debug\DebugApp.pdb

@@ -240,13 +240,13 @@ namespace SCMSApp.Repositories
             try
             {
 
-                string sql = "UPDATE GL_VchrMaster SET SyncStatus = @SyncStatus WHERE where VchMas_Id=@id";
+                string sql = "UPDATE GL_VchrMaster SET SyncStatus = @SyncStatus WHERE VchMas_Id=@id";
               
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@id", id);
                 cmd.Parameters.AddWithValue("@SyncStatus", "1");
 
-                SqlDataAdapter ad = new SqlDataAdapter(cmd);
+                cmd.ExecuteNonQuery();
                
 
             }

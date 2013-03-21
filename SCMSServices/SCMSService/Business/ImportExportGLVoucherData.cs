@@ -25,7 +25,7 @@ namespace SCMSApp.Business
                 DataTable dtGL_Details = new SCMSRepository().GetGL_VchrDetailsData();
                 if (dtGL_Master != null && dtGL_Master.Rows.Count > 0)
                 {
-                       ExportVouchersDataToXML(dtGL_Master, dtGL_Details);
+                       // ExportVouchersDataToXML(dtGL_Master, dtGL_Details);
                        foreach (DataRow drow in dtGL_Master.Rows)
                         {
                             int VchMas_Id = Convert.ToInt32(drow["VchMas_Id"]);
