@@ -154,14 +154,9 @@
                         <li><a href="../VoucherTypeNarration">Voucher Type Narration</a> </li>
                         <li><a href="../ChartOfAccount">Chart Of Account</a> </li>
                         <li><a href="../Bank">Bank</a> </li>
-<<<<<<< HEAD
                         <li><a href="../BankAccount">BankAccount</a> </li>
                         <li><a href="../CalendarType">CalendarType</a> </li>
-                        <li><a href="../Calendar">Calendar</a> </li>
-                        
-=======
-                        <li><a href="../BankAccount">Bank Account</a> </li>--%>
->>>>>>> b91248b245becf9c7a2599c068cb746da03d430a
+                        <li><a href="../Calendar">Calendar</a> </li>--%>
                     </ul>
                 </li>
                 <li class="ic-typography"><a href="#"><span>Transactions</span></a>
