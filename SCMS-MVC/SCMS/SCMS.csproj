@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Controllers\BankAccountController.cs" />
     <Compile Include="Controllers\BankController.cs" />
+    <Compile Include="Controllers\CalendarTypeController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\ChartOfAccountController.cs" />
@@ -885,6 +886,8 @@
     <Content Include="Scripts\zebra_datepicker.js" />
     <Content Include="Views\BankAccount\BankAccount.aspx" />
     <Content Include="Views\BankAccount\GridData.ascx" />
+    <Content Include="Views\CalendarType\CalendarType.aspx" />
+    <Content Include="Views\CalendarType\GridData.ascx" />
     <Content Include="Views\City\City.aspx" />
     <Content Include="Views\City\GridData.ascx" />
     <Content Include="Views\Company\Company.aspx" />
