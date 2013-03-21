@@ -31,3 +31,8 @@ D:\Development\SCMS\SCMS-MVC\SCMSDataLayer\bin\Debug\SCMSDataLayer.pdb
 D:\Development\SCMS\SCMS-MVC\SCMSDataLayer\obj\Debug\ResolveAssemblyReference.cache
 D:\Development\SCMS\SCMS-MVC\SCMSDataLayer\obj\Debug\SCMSDataLayer.dll
 D:\Development\SCMS\SCMS-MVC\SCMSDataLayer\obj\Debug\SCMSDataLayer.pdb
+C:\DotNet\MyPersnalProjects\Projects\SCMS\SCMS-MVC\SCMSDataLayer\bin\Debug\SCMSDataLayer.dll.config
+C:\DotNet\MyPersnalProjects\Projects\SCMS\SCMS-MVC\SCMSDataLayer\bin\Debug\SCMSDataLayer.dll
+C:\DotNet\MyPersnalProjects\Projects\SCMS\SCMS-MVC\SCMSDataLayer\bin\Debug\SCMSDataLayer.pdb
+C:\DotNet\MyPersnalProjects\Projects\SCMS\SCMS-MVC\SCMSDataLayer\obj\Debug\SCMSDataLayer.dll
+C:\DotNet\MyPersnalProjects\Projects\SCMS\SCMS-MVC\SCMSDataLayer\obj\Debug\SCMSDataLayer.pdb

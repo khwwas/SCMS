@@ -1,0 +1,2 @@
+Alter Table GL_VchrMaster
+   Add SyncStatus bit NOT NULL Default 0

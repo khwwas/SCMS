@@ -45,10 +45,17 @@
     <Setting Name="SCMSConnectionString5" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+<<<<<<< HEAD
   &lt;ConnectionString&gt;Data Source=JAWAD\JAWAD;Initial Catalog=SCMS;Persist Security Info=True;User ID=sa;Password=admin123&lt;/ConnectionString&gt;
   &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=JAWAD\JAWAD;Initial Catalog=SCMS;Persist Security Info=True;User ID=sa;Password=admin123</Value>
+=======
+  &lt;ConnectionString&gt;Data Source=Home_PC_2;Initial Catalog=SCMS;Persist Security Info=True;User ID=sa;Password=Boingo36!&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=Home_PC_2;Initial Catalog=SCMS;Persist Security Info=True;User ID=sa;Password=Boingo36!</Value>
+>>>>>>> b91248b245becf9c7a2599c068cb746da03d430a
     </Setting>
   </Settings>
 </SettingsFile>
