@@ -300,11 +300,11 @@
                 Date</div>
             <div class="CustomCell" style="width: 282px; height: 30px;">
                 <input type="text" class="CustomText" style="width: 220px;" id="txt_Date" name="txt_Date"
-                    value="<%=ViewData["CurrentDate"]%>" maxlength="50" />
+                    value="<%=ViewData["CurrentDate"]%>" maxlength="50"  />
             </div>
             <script type="text/javascript">
                 $('#txt_Date').Zebra_DatePicker({
-                    format: 'm/d/Y'
+                    format: 'd/m/Y'
                 });
             </script>
         </div>

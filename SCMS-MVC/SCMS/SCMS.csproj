@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Controllers\BankAccountController.cs" />
     <Compile Include="Controllers\BankController.cs" />
+    <Compile Include="Controllers\CalendarTypeController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\ChartOfAccountController.cs" />
@@ -91,82 +92,88 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports\Datasets\dsChartOfAccount.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>dsChartOfAccount.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Reports\Datasets\dsCity.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>dsCity.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Reports\Datasets\dsCompany.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>dsCompany.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Reports\Datasets\dsLedger1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>dsLedger.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Reports\Datasets\dsLocation.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>dsLocation.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Reports\Datasets\dsTrialBalance.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>dsTrialBalance.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Reports\Datasets\dsVoucherTypes.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>dsVoucherTypes.xsd</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Reports\ReportParameters.cs" />
     <Compile Include="Reports\Reps\rptChartOfAccount.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>rptChartOfAccount.rpt</DependentUpon>
       <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Reports\Reps\rptCity.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>rptCity.rpt</DependentUpon>
       <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Reports\Reps\rptCompany.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>rptCompany.rpt</DependentUpon>
       <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Reports\Reps\rptLedger1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>rptLedger.rpt</DependentUpon>
       <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Reports\Reps\rptLocation.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>rptLocation.rpt</DependentUpon>
       <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Reports\Reps\rptTrialBalance.cs">
+      <DependentUpon>rptTrialBalance.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Reports\Reps\rptVoucherDocument.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>rptTrialBalance.rpt</DependentUpon>
+      <DependentUpon>rptVoucherDocument.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\Reps\rptVoucherTypes.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>rptVoucherTypes.rpt</DependentUpon>
       <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Reports\ViewReport.aspx.cs">
       <DependentUpon>ViewReport.aspx</DependentUpon>
@@ -885,6 +892,8 @@
     <Content Include="Scripts\zebra_datepicker.js" />
     <Content Include="Views\BankAccount\BankAccount.aspx" />
     <Content Include="Views\BankAccount\GridData.ascx" />
+    <Content Include="Views\CalendarType\CalendarType.aspx" />
+    <Content Include="Views\CalendarType\GridData.ascx" />
     <Content Include="Views\City\City.aspx" />
     <Content Include="Views\City\GridData.ascx" />
     <Content Include="Views\Company\Company.aspx" />
@@ -1485,6 +1494,61 @@
     <Content Include="Widgets\tests\jqxtree\jqxtree-Tests.htm" />
     <Content Include="Widgets\tests\jqxvalidator\jqxvalidation-Tests.htm" />
     <Content Include="Widgets\tests\jqxwindow\jqwindow-Tests.htm" />
+    <None Include="Reports\Datasets\dsChartOfAccount.xsc">
+      <DependentUpon>dsChartOfAccount.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\Datasets\dsChartOfAccount.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsChartOfAccount.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\Datasets\dsChartOfAccount.xss">
+      <DependentUpon>dsChartOfAccount.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\Datasets\dsCity.xsc">
+      <DependentUpon>dsCity.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\Datasets\dsCity.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsCity.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\Datasets\dsCity.xss">
+      <DependentUpon>dsCity.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\Datasets\dsCompany.xsc">
+      <DependentUpon>dsCompany.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\Datasets\dsCompany.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsCompany.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\Datasets\dsCompany.xss">
+      <DependentUpon>dsCompany.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\Datasets\dsLedger.xsc">
+      <DependentUpon>dsLedger.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\Datasets\dsLedger.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsLedger1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\Datasets\dsLedger.xss">
+      <DependentUpon>dsLedger.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\Datasets\dsLocation.xsc">
+      <DependentUpon>dsLocation.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\Datasets\dsLocation.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsLocation.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\Datasets\dsLocation.xss">
+      <DependentUpon>dsLocation.xsd</DependentUpon>
+    </None>
     <None Include="Reports\Datasets\dsTrialBalance.xsc">
       <DependentUpon>dsTrialBalance.xsd</DependentUpon>
     </None>
@@ -1495,6 +1559,17 @@
     </None>
     <None Include="Reports\Datasets\dsTrialBalance.xss">
       <DependentUpon>dsTrialBalance.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\Datasets\dsVoucherTypes.xsc">
+      <DependentUpon>dsVoucherTypes.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\Datasets\dsVoucherTypes.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsVoucherTypes.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\Datasets\dsVoucherTypes.xss">
+      <DependentUpon>dsVoucherTypes.xsd</DependentUpon>
     </None>
     <None Include="Widgets\EULA.pdf" />
     <None Include="Widgets\phpdemos\bind_chart_to_mysql_database\connect.php" />
@@ -1572,78 +1647,15 @@
     <None Include="img\gallery\thumbs_small\Thumbs.db" />
     <None Include="img\pretty-photo\.DS_Store" />
     <None Include="img\pretty-photo\fullscreen\.DS_Store" />
-    <None Include="Reports\Datasets\dsChartOfAccount.xsc">
-      <DependentUpon>dsChartOfAccount.xsd</DependentUpon>
-    </None>
-    <None Include="Reports\Datasets\dsChartOfAccount.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsChartOfAccount.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Reports\Datasets\dsChartOfAccount.xss">
-      <DependentUpon>dsChartOfAccount.xsd</DependentUpon>
-    </None>
-    <None Include="Reports\Datasets\dsCity.xsc">
-      <DependentUpon>dsCity.xsd</DependentUpon>
-    </None>
-    <None Include="Reports\Datasets\dsCity.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsCity.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Reports\Datasets\dsCity.xss">
-      <DependentUpon>dsCity.xsd</DependentUpon>
-    </None>
-    <None Include="Reports\Datasets\dsCompany.xsc">
-      <DependentUpon>dsCompany.xsd</DependentUpon>
-    </None>
-    <None Include="Reports\Datasets\dsCompany.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsCompany.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Reports\Datasets\dsCompany.xss">
-      <DependentUpon>dsCompany.xsd</DependentUpon>
-    </None>
-    <None Include="Reports\Datasets\dsLedger.xsc">
-      <DependentUpon>dsLedger.xsd</DependentUpon>
-    </None>
-    <None Include="Reports\Datasets\dsLedger.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsLedger1.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Reports\Datasets\dsLedger.xss">
-      <DependentUpon>dsLedger.xsd</DependentUpon>
-    </None>
-    <None Include="Reports\Datasets\dsLocation.xsc">
-      <DependentUpon>dsLocation.xsd</DependentUpon>
-    </None>
-    <None Include="Reports\Datasets\dsLocation.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsLocation.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Reports\Datasets\dsLocation.xss">
-      <DependentUpon>dsLocation.xsd</DependentUpon>
-    </None>
-    <None Include="Reports\Datasets\dsVoucherTypes.xsc">
-      <DependentUpon>dsVoucherTypes.xsd</DependentUpon>
-    </None>
-    <None Include="Reports\Datasets\dsVoucherTypes.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsVoucherTypes.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Reports\Datasets\dsVoucherTypes.xss">
-      <DependentUpon>dsVoucherTypes.xsd</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SCMSDataLayer\SCMSDataLayer.csproj">
       <Project>{919A57A4-70E9-4D32-A223-CD184A956C75}</Project>
       <Name>SCMSDataLayer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Reports\Reps\rptChartOfAccount.rpt">
@@ -1654,10 +1666,6 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptCity.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\Reps\rptLocation.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>rptLocation.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Reps\rptCompany.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptCompany.cs</LastGenOutput>
@@ -1666,17 +1674,22 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptLedger1.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Reps\rptLocation.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptLocation.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Reps\rptTrialBalance.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptTrialBalance.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Reps\rptVoucherDocument.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptVoucherDocument.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Reps\rptVoucherTypes.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptVoucherTypes.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -24,6 +24,17 @@
             }
         };
 
+        function CheckAllVchrDoc() {
+            if (document.getElementById('chk_AllVchrDoc').checked == true) {
+                document.getElementById('ddl_VchrDocFrom').disabled = true;
+                document.getElementById('ddl_VchrDocTo').disabled = true;
+            }
+            else {
+                document.getElementById('ddl_VchrDocFrom').disabled = false;
+                document.getElementById('ddl_VchrDocTo').disabled = false;
+            }
+        };
+        
         function CheckAllDate() {
             if (document.getElementById('chk_AllDate').checked == true) {
                 document.getElementById('txt_DateFrom').disabled = true;
@@ -51,6 +62,19 @@
                 document.getElementById('txt_DateFrom').disabled = true;
                 document.getElementById('txt_DateTo').disabled = true;
             }
+            else if (ps_ReportName == "VoucherDoc") {
+                document.getElementById('div_VoucherTypes').style.display = "block";
+
+
+                document.getElementById('div_VchrDocFrom').style.display = "block";
+                document.getElementById('div_VchrDocTo').style.display = "block";
+                document.getElementById('ddl_VchrDocFrom').disabled = true;
+                document.getElementById('ddl_VchrDocTo').disabled = true;
+
+                document.getElementById('div_DateRange').style.display = "block";
+                document.getElementById('txt_DateFrom').disabled = true;
+                document.getElementById('txt_DateTo').disabled = true;
+            }
         };
 
         function ViewReport() {
@@ -62,9 +86,27 @@
                 var pcnt_ChartOfAccount = document.getElementById('txt_Level');
                 var Url = "../ReportSelectionCriteria/SetParam_ChartOfAccount?ps_ReportName=" + ps_ReportName + "&pi_Level=" + pcnt_ChartOfAccount.value;
             }
+            else if (ps_ReportName == "VoucherDoc") {
+                var pcnt_Location = document.getElementById('ddl_location');
+                var pcnt_AllDate = document.getElementById('chk_AllDate');
+                var pcnt_DateFrom = document.getElementById('txt_DateFrom');
+                var pcnt_DateTo = document.getElementById('txt_DateTo');
+                var pcnt_AllAccCode = document.getElementById('chk_AllAccCode');
+                var pcnt_AccCodeFrom = document.getElementById('ddl_AccCodeFrom');
+                var pcnt_AccCodeTo = document.getElementById('ddl_AccCodeTo');
+            }
             else if (ps_ReportName == "LedgerDetail") {
                 var pcnt_Location = document.getElementById('ddl_location');
-                var Url = "../ReportSelectionCriteria/SetParameter?ps_ReportName=" + ps_ReportName + "&ps_Location=" + pcnt_Location.value;
+                var pcnt_AllDate = document.getElementById('chk_AllDate');
+                var pcnt_DateFrom = document.getElementById('txt_DateFrom');
+                var pcnt_DateTo = document.getElementById('txt_DateTo');
+                var pcnt_AllAccCode = document.getElementById('chk_AllAccCode');
+                var pcnt_AccCodeFrom = document.getElementById('ddl_AccCodeFrom');
+                var pcnt_AccCodeTo = document.getElementById('ddl_AccCodeTo');
+
+                var Url = "../ReportSelectionCriteria/SetParam_LedgerDetail?ps_ReportName=" + ps_ReportName + "&ps_Location=" + pcnt_Location.value +
+                          "&pi_AllAccCode=" + pcnt_AllAccCode.value + "&ps_AccCodeFrom=" + pcnt_AccCodeFrom.value + "&ps_AccCodeTo=" + pcnt_AccCodeTo.value +
+                          "&pi_AllDate=" + pcnt_AllDate.value + "&pdt_DateFrom=" + pcnt_DateFrom.value + "&pdt_DateTo=" + pcnt_DateTo.value;
             }
             else if (ps_ReportName == "TrialBalance") {
                 var pcnt_Location = document.getElementById('ddl_location');
@@ -106,6 +148,11 @@
                     Location</div>
                 <%= Html.DropDownList("ddl_location", null, new { style = "width:955px;" })%>
             </div>
+            <div id="div_VoucherTypes" style="display: none;">
+                <div class="CustomCell" style="width: 150px; height: 30px;">
+                    Voucher Type</div>
+                <%= Html.DropDownList("ddl_VoucherTypes", null, new { style = "width:955px;" })%>
+            </div>
             <div id="div_AccCodeFrom" style="display: none;">
                 <div class="CustomCell" style="width: 150px; height: 30px;">
                     Account Code From</div>
@@ -117,6 +164,18 @@
                 <%= Html.DropDownList("ddl_AccCodeTo", null, new { style = "width:955px;" })%>
                 <input type="checkbox" class="checkbox" id="chk_AllAccCode" name="chk_AllAccCode"
                     onclick="CheckAllCode()" checked="checked" />
+            </div>
+            <div id="div_VchrDocFrom" style="display: none;">
+                <div class="CustomCell" style="width: 150px; height: 30px;">
+                    Document From</div>
+                <%= Html.DropDownList("ddl_VchrDocFrom", null, new { style = "width:955px;" })%>
+            </div>
+            <div id="div_VchrDocTo" style="display: none;">
+                <div class="CustomCell" style="width: 150px; height: 30px;">
+                    Document To</div>
+                <%= Html.DropDownList("ddl_VchrDocTo", null, new { style = "width:955px;" })%>
+                <input type="checkbox" class="checkbox" id="chk_AllVchrDoc" name="chk_AllVchrDoc"
+                    onclick="CheckAllVchrDoc()" checked="checked" />
             </div>
             <div id="div_DateRange" style="display: none;">
                 <div class="CustomCell" style="width: 150px; height: 30px;">
@@ -165,7 +224,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
     </form>
 </asp:Content>
