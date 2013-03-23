@@ -22,6 +22,7 @@ namespace SCMSDataLayer
                     existingVoucherMaster.VchrType_Id = newVoucherMaster.VchrType_Id;
                     existingVoucherMaster.VchMas_Remarks = newVoucherMaster.VchMas_Remarks;
                     existingVoucherMaster.Loc_Id = newVoucherMaster.Loc_Id;
+                    existingVoucherMaster.SyncStatus = false;
                 }
                 else
                 {

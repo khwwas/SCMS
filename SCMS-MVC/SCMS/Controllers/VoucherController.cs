@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using SCMSDataLayer;
 using SCMSDataLayer.DB;
+using CrystalDecisions.Shared.Json;
 
 namespace SCMS.Controllers
 {
@@ -37,6 +38,17 @@ namespace SCMS.Controllers
             ChartOfAccounts.Insert(0, SelectChartOfAccount);
             ViewData["ChartOfAccounts"] = ChartOfAccounts;
             ViewData["ddl_Account"] = new SelectList(ChartOfAccounts, "ChrtAcc_Id", "ChrtAcc_Title", "");
+            var NarrationList = new DALVoucherTypeNarration().GetAllData().ToList();
+            string[] nList = new string[NarrationList.Count];
+            if (NarrationList != null && NarrationList.Count > 0)
+            {
+                for (int index = 0; index < NarrationList.Count; index++)
+                {
+                    nList[index] = NarrationList[index].VchrTypeNarr_Title;
+                }
+                System.Web.Script.Serialization.JavaScriptSerializer se = new System.Web.Script.Serialization.JavaScriptSerializer();
+                ViewData["Narrations"] = se.Serialize(nList);
+            }
             ViewData["ddl_Location"] = new SelectList(Locations, "Loc_Id", "Loc_Title", Session["LocationIdForVoucherEntry"]);
             if (!String.IsNullOrEmpty(VoucherId))
             {
@@ -45,7 +57,7 @@ namespace SCMS.Controllers
             else
             {
                 ViewData["VoucherCode"] = "[Auto]";
-                ViewData["CurrentDate"] = DateTime.Now.ToString("dd/MM/yyyy");
+                ViewData["CurrentDate"] = DateTime.Now.ToString("MM/dd/yyyy");
             }
             Session.Remove("VoucherTypeForVoucherEntry");
             Session.Remove("LocationIdForVoucherEntry");
@@ -102,24 +114,24 @@ namespace SCMS.Controllers
             Response += "</div>";
             Response += "<div class='CustomCell' style='width: 118px; height: 30px;'>";
             Response += "<input type='text' class='CustomText' style='width: 100px;' id='txt_Debit" + RowNo.ToString() + "' name='txt_Debit'";
-            if (Debit != "")
+            if (Credit != "")
             {
-                Response += "maxlength='50' value='" + Debit + "' onblur='SetTotals(this.id)' />";
+                Response += "maxlength='50' onblur='SetTotals(this.id)' disabled='disabled' />";
             }
             else
             {
-                Response += "maxlength='50' onblur='SetTotals(this.id)' disabled='disabled' />";
+                Response += "maxlength='50' value='" + Debit + "' onblur='SetTotals(this.id)' />";
             }
             Response += "</div>";
             Response += "<div class='CustomCell' style='width: 118px; height: 30px;'>";
             Response += "<input type='text' class='CustomText' style='width: 100px;' id='txt_Credit" + RowNo.ToString() + "' name='txt_Credit'";
-            if (Credit != "")
+            if (Debit != "")
             {
-                Response += "maxlength='50' value='" + Credit + "' onblur='SetTotals(this.id)' />";
+                Response += "maxlength='50'  onblur='SetTotals(this.id)' disabled='disabled' />";
             }
             else
             {
-                Response += "maxlength='50'  onblur='SetTotals(this.id)' disabled='disabled' />";
+                Response += "maxlength='50' value='" + Credit + "' onblur='SetTotals(this.id)' />";
             }
             Response += "</div>";
             // Response += "</div>";
@@ -192,7 +204,7 @@ namespace SCMS.Controllers
                                 GL_Detail.ChrtAcc_Id = Columns[0].ToString(); //Columns[0] has AccountId from Account Title drop down;
                                 GL_Detail.VchMas_DrAmount = (Columns[1] != null && Columns[1] != "") ? Convert.ToDecimal(Columns[1]) : 0; // Columns[1] has Debit Amount
                                 GL_Detail.VchMas_CrAmount = (Columns[2] != null && Columns[2] != "") ? Convert.ToDecimal(Columns[2]) : 0; // Columns[2] has Debit Amount
-                                GL_Detail.VchDet_Remarks = (Columns[3] != null && Columns[3] != "") ? Columns[3].ToString() : ""; // Columns[3] has Remarks
+                                GL_Detail.VchDet_Remarks = (Columns[3] != null && Columns[3] != "") ? Columns[3].ToString().Replace("π", ",") : ""; // Columns[3] has Remarks
                                 objDalVoucherEntry.SaveVoucherDetail(GL_Detail);
                             }
                         }

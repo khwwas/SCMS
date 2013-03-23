@@ -90,6 +90,7 @@
                 }
 
                 if (txt_Details != null) {
+                    txt_Details.value = txt_Details.value.replace(/,/g, "π");
                     VoucherDetailRows[0] += txt_Details.value;
                 }
                 else {
@@ -125,13 +126,13 @@
                     }
 
                     if (txt_Details != null) {
+                        txt_Details.value = txt_Details.value.replace(/,/g, "π");
                         VoucherDetailRows[index] += txt_Details.value;
                     }
                     else {
                         VoucherDetailRows[index] += "NULL";
                     }
                 }
-
                 var Url = document.getElementById('frm_VoucherEntry').action;
                 Url += "Voucher/SaveVoucher?VoucherMasterCode=" + txt_SelectedMasterCode.value + "&VoucherDate=" + txt_Date.value + "&Status=" + ddl_Status.value + "&VoucherType=" + ddl_VoucherType.value + "&LocationId=" + ddl_Location.value + "&Remarks=" + txt_Remarks.value + "&VoucherDetailRows=" + VoucherDetailRows;
                 $.ajax({
@@ -191,6 +192,19 @@
             $("#ddl_Account1").combobox();
             $("#ddl_Account2").combobox();
             $("#ddl_Account3").combobox();
+            var data = JSON.parse(document.getElementById('NarrationTitles').value);
+            $("#txt_Details").autocomplete({
+                source: data
+            });
+            $("#txt_Details1").autocomplete({
+                source: data
+            });
+            $("#txt_Details2").autocomplete({
+                source: data
+            });
+            $("#txt_Details3").autocomplete({
+                source: data
+            });
         });
 
         function AddDetailRow(RowNo, AccountId, Detail, Debit, Credit) {
@@ -212,6 +226,9 @@
                     Div.innerHTML += response;
                     document.getElementById("DetailContainer").appendChild(Div);
                     $("#ddl_Account" + RowNo).combobox();
+                    $("#txt_Details" + RowNo).autocomplete({
+                        source: JSON.parse(document.getElementById('NarrationTitles').value)
+                    });
                 },
                 error: function (rs, e) {
 
@@ -284,6 +301,7 @@
     <form id="frm_VoucherEntry" action='<%=Url.Content("~/") %>'>
     <input type="hidden" id="txt_SelectedMasterCode" name="txt_SelectedMasterCode" value='<%=ViewData["VoucherId"] %>' />
     <input type="hidden" id="txt_SelectedDetailCode" name="txt_SelectedDetailCode" value="" />
+    <input type="hidden" id="NarrationTitles" name="NarrationTitles" value='<%=ViewData["Narrations"] %>' />
     <div class="box round first fullpage grid">
         <h2>
             Voucher Entry</h2>
@@ -300,11 +318,11 @@
                 Date</div>
             <div class="CustomCell" style="width: 282px; height: 30px;">
                 <input type="text" class="CustomText" style="width: 220px;" id="txt_Date" name="txt_Date"
-                    value="<%=ViewData["CurrentDate"]%>" maxlength="50"  />
+                    value="<%=ViewData["CurrentDate"]%>" maxlength="50" />
             </div>
             <script type="text/javascript">
                 $('#txt_Date').Zebra_DatePicker({
-                    format: 'd/m/Y'
+                    format: 'm/d/Y'
                 });
             </script>
         </div>

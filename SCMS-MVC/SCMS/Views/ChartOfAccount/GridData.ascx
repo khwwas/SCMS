@@ -54,6 +54,19 @@
               int count = 0;
               foreach (SCMSDataLayer.DB.SETUP_ChartOfAccount lRow_Data in lList_Data)
               {
+                  string tempValue = "";
+                  for (int index = 0; index < lRow_Data.ChrtAcc_Code.Length; index++)
+                  {
+                      if (index == 2 || index == 5 || index == 9 || index == 14 || index == 19 || index == 24)
+                      {
+                          tempValue += "-" + lRow_Data.ChrtAcc_Code[index];
+                      }
+                      else
+                      {
+                          tempValue += lRow_Data.ChrtAcc_Code[index];
+                      }
+                  }
+                  lRow_Data.ChrtAcc_Code = tempValue;
                   count++;%>
         <tr class='odd' style='line-height: 15px;'>
             <td style="display: none;">
