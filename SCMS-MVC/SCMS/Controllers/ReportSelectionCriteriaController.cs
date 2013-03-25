@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using SCMSDataLayer;
 using SCMSDataLayer.DB;
+using System.Globalization;
 
 namespace SCMS.Controllers
 {
@@ -22,9 +23,9 @@ namespace SCMS.Controllers
             ViewData["ddl_AccCodeTo"] = new SelectList(new DALChartOfAccount().GetChartOfAccountForDropDown(), "ChrtAcc_Id", "ChrtAcc_Title");
             ViewData["ddl_VchrDocFrom"] = new SelectList(new DALVoucherEntry().GetAllMasterRecords(), "VchMas_Id", "VchMas_Code");
             ViewData["ddl_VchrDocTo"] = new SelectList(new DALVoucherEntry().GetAllMasterRecords(), "VchMas_Id", "VchMas_Code");
-            
+
             ViewData["ReportName"] = ps_ReportName;
-            ViewData["CurrentDate"] = DateTime.Now.ToString("dd/MM/yyyy");
+            ViewData["CurrentDate"] = DateTime.Now.ToString("MM/dd/yyyy");
 
             //ViewData["ddl_AccCodeFrom"] = new SelectList(new DALChartOfAccount().PopulateData(), "ChrtAcc_Id", "ChrtAcc_Title", "ddl_AccCodeFrom");
             //ViewData["ddl_AccCodeTo"] = new SelectList(new DALChartOfAccount().PopulateData(), "ChrtAcc_Id", "ChrtAcc_Title", "ddl_AccCodeTo");
@@ -45,51 +46,55 @@ namespace SCMS.Controllers
         }
 
         #region Setups
-        public void SetParam_Setups(String ps_ReportName)
+        public string SetParam_Setups(String ps_ReportName)
         {
             Reports.ReportParameters.ReportName = ps_ReportName;
+            return "OK";
         }
 
-        public void SetParam_ChartOfAccount(String ps_ReportName, int pi_Level)
+        public string SetParam_ChartOfAccount(String ps_ReportName, int pi_Level)
         {
             Reports.ReportParameters.ReportName = ps_ReportName;
             Reports.ReportParameters.Level = pi_Level;
+            return "OK";
         }
         #endregion
 
         #region Ledger Datail
-        public void SetParam_LedgerDetail(String ps_ReportName, String ps_Location, int pi_AllAccCode, string ps_AccCodeFrom, string ps_AccCodeTo,
-                                          int pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo)
+        public string SetParam_LedgerDetail(String ps_ReportName, String ps_Location, string pi_AllAccCode, string ps_AccCodeFrom, string ps_AccCodeTo,
+                                              string pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo)
         {
             Reports.ReportParameters.ReportName = ps_ReportName;
             Reports.ReportParameters.Location = ps_Location;
 
-            if (pi_AllAccCode == 1)
+            if (pi_AllAccCode == "1")
             {
-                Reports.ReportParameters.AllAccCode = pi_AllAccCode;
+
+                Reports.ReportParameters.AllAccCode = 1;
                 Reports.ReportParameters.AccCodeFrom = "''";
                 Reports.ReportParameters.AccCodeTo = "''";
             }
             else
             {
-                Reports.ReportParameters.AllAccCode = pi_AllAccCode;
+                Reports.ReportParameters.AllAccCode = 0;
                 Reports.ReportParameters.AccCodeFrom = ps_AccCodeFrom;
                 Reports.ReportParameters.AccCodeTo = ps_AccCodeTo;
             }
 
-            if (pi_AllDate == 1)
+            if (pi_AllDate == "1")
             {
-                Reports.ReportParameters.AllDate = pi_AllDate;
+                Reports.ReportParameters.AllDate = 1;
                 Reports.ReportParameters.DateFrom = Convert.ToDateTime("01/01/1900");
                 Reports.ReportParameters.DateTo = Convert.ToDateTime("01/01/1900");
             }
             else
             {
-                Reports.ReportParameters.AllDate = pi_AllDate;
+                Reports.ReportParameters.AllDate = 0;
                 Reports.ReportParameters.DateFrom = pdt_DateFrom;
                 Reports.ReportParameters.DateTo = pdt_DateTo;
             }
 
+            return "OK";
         }
         #endregion
 

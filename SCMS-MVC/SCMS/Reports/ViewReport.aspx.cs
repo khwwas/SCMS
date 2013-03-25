@@ -17,6 +17,8 @@ using System.ComponentModel;
 //using System.Collection.Generic.List;
 using System.Reflection;
 
+using System.Globalization;
+
 namespace SCMS.Reports
 {
     public partial class ViewReport : System.Web.UI.Page
