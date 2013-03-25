@@ -95,7 +95,6 @@
         <div class="grid_12 header-repeat">
             <div id="branding">
                 <div class="floatleft">
-                    <%--<img src="../../img/logo.png" alt="Logo" />--%>
                     <h1 style="color: White;">
                         Financial Management System - v1.0</h1>
                 </div>
@@ -107,11 +106,8 @@
                             <li>Hello
                                 <%if (user != null)
                                       Response.Write(user.User_Title); %></li>
-                            <%--<li><a href="#">Settings</a></li>--%>
                             <li><a href="../Login/Logout">Logout</a></li>
                         </ul>
-                        <%--<br />
-                        <span class="small grey">Last Login: 3 hours ago</span>--%>
                     </div>
                 </div>
                 <div class="clear">
@@ -143,20 +139,6 @@
                               }
                           } 
                         %>
-                        <%--<li><a href="../Company">Company</a> </li>
-                        <li><a href="../Location">Location</a> </li>
-                        <li><a href="../City">City</a> </li>
-                        <li><a href="../SupplierType">Supplier Types</a> </li>
-                        <li><a href="../Supplier">Suppliers</a> </li>
-                        <li><a href="../CustomerType">Customer Types</a> </li>
-                        <li><a href="../Customer">Customers</a> </li>
-                        <li><a href="../VoucherType">Voucher Type</a> </li>
-                        <li><a href="../VoucherTypeNarration">Voucher Type Narration</a> </li>
-                        <li><a href="../ChartOfAccount">Chart Of Account</a> </li>
-                        <li><a href="../Bank">Bank</a> </li>
-                        <li><a href="../BankAccount">BankAccount</a> </li>
-                        <li><a href="../CalendarType">Calendar Type</a> </li>
-                        <li><a href="../Calendar">Calendar</a> </li>--%>
                     </ul>
                 </li>
                 <li class="ic-typography"><a href="#"><span>Transactions</span></a>
@@ -169,8 +151,6 @@
                               }
                           } 
                         %>
-                        <%--<li><a href="../VoucherEntryConsole">Voucher Entry Console</a> </li>
-                        <li><a href="../Voucher/VoucherEntry">Voucher Entry</a> </li>--%>
                     </ul>
                 </li>
                 <li class="ic-typography"><a href="#"><span>Reports</span></a>
@@ -183,16 +163,6 @@
                               }
                           } 
                         %>
-                        <%--<li><a href="../ReportSelectionCriteria?ps_ReportName=Company">Company</a> </li>
-                        <li><a href="../ReportSelectionCriteria?ps_ReportName=Location">Location</a> </li>
-                        <li><a href="../ReportSelectionCriteria?ps_ReportName=City">City</a> </li>
-                        <li><a href="../ReportSelectionCriteria?ps_ReportName=VoucherTypes">Voucher Types</a>
-                        </li>
-                        <li><a href="../ReportSelectionCriteria?ps_ReportName=ChartOfAccount">Chart Of Account</a>
-                        </li>
-                         <li><a href="../ReportSelectionCriteria?ps_ReportName=VoucherDoc">Voucher</a> </li>
-                        <li><a href="../ReportSelectionCriteria?ps_ReportName=LedgerDetail">Ledger</a> </li>
-                        <li><a href="../ReportSelectionCriteria?ps_ReportName=TrialBalance">Trial Balance</a></li>--%>
                     </ul>
                 </li>
             </ul>
