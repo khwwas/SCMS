@@ -12,6 +12,16 @@ namespace SCMSDataLayer
         Year = 1,
         Month = 2
     }
+
+    public enum CalenderLevel
+    {
+        Yearly = 1,
+        Monthly = 2,
+        Fornigthtly = 3,
+        Weekly = 4,
+        Daily = 5
+    }
+
     public static class DALCommon
     {
         public static Int32 AutoCodeGeneration(String ps_TableName)

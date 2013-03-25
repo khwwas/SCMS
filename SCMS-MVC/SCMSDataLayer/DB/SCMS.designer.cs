@@ -104,12 +104,6 @@ namespace SCMSDataLayer.DB
     partial void DeleteSYSTEM_CodeGeneration(SYSTEM_CodeGeneration instance);
     #endregion
 		
-		public SCMSDataContext() : 
-				base(global::SCMSDataLayer.Properties.Settings.Default.SCMSConnectionString2, mappingSource)
-		{
-			OnCreated();
-		}
-		
 		public SCMSDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
@@ -937,12 +931,6 @@ namespace SCMSDataLayer.DB
 		
 		private EntitySet<GL_VchrDetail> _GL_VchrDetails;
 		
-		private EntityRef<SETUP_Company> _SETUP_Company;
-		
-		private EntityRef<SETUP_Location> _SETUP_Location;
-		
-		private EntityRef<SETUP_VoucherType> _SETUP_VoucherType;
-		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -978,9 +966,6 @@ namespace SCMSDataLayer.DB
 		public GL_VchrMaster()
 		{
 			this._GL_VchrDetails = new EntitySet<GL_VchrDetail>(new Action<GL_VchrDetail>(this.attach_GL_VchrDetails), new Action<GL_VchrDetail>(this.detach_GL_VchrDetails));
-			this._SETUP_Company = default(EntityRef<SETUP_Company>);
-			this._SETUP_Location = default(EntityRef<SETUP_Location>);
-			this._SETUP_VoucherType = default(EntityRef<SETUP_VoucherType>);
 			OnCreated();
 		}
 		
@@ -1055,10 +1040,6 @@ namespace SCMSDataLayer.DB
 			{
 				if ((this._Cmp_Id != value))
 				{
-					if (this._SETUP_Company.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnCmp_IdChanging(value);
 					this.SendPropertyChanging();
 					this._Cmp_Id = value;
@@ -1079,10 +1060,6 @@ namespace SCMSDataLayer.DB
 			{
 				if ((this._Loc_Id != value))
 				{
-					if (this._SETUP_Location.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnLoc_IdChanging(value);
 					this.SendPropertyChanging();
 					this._Loc_Id = value;
@@ -1103,10 +1080,6 @@ namespace SCMSDataLayer.DB
 			{
 				if ((this._VchrType_Id != value))
 				{
-					if (this._SETUP_VoucherType.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnVchrType_IdChanging(value);
 					this.SendPropertyChanging();
 					this._VchrType_Id = value;
@@ -1266,108 +1239,6 @@ namespace SCMSDataLayer.DB
 			set
 			{
 				this._GL_VchrDetails.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_GL_VchrMaster", Storage="_SETUP_Company", ThisKey="Cmp_Id", OtherKey="Cmp_Id", IsForeignKey=true)]
-		public SETUP_Company SETUP_Company
-		{
-			get
-			{
-				return this._SETUP_Company.Entity;
-			}
-			set
-			{
-				SETUP_Company previousValue = this._SETUP_Company.Entity;
-				if (((previousValue != value) 
-							|| (this._SETUP_Company.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SETUP_Company.Entity = null;
-						previousValue.GL_VchrMasters.Remove(this);
-					}
-					this._SETUP_Company.Entity = value;
-					if ((value != null))
-					{
-						value.GL_VchrMasters.Add(this);
-						this._Cmp_Id = value.Cmp_Id;
-					}
-					else
-					{
-						this._Cmp_Id = default(string);
-					}
-					this.SendPropertyChanged("SETUP_Company");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_GL_VchrMaster", Storage="_SETUP_Location", ThisKey="Loc_Id", OtherKey="Loc_Id", IsForeignKey=true)]
-		public SETUP_Location SETUP_Location
-		{
-			get
-			{
-				return this._SETUP_Location.Entity;
-			}
-			set
-			{
-				SETUP_Location previousValue = this._SETUP_Location.Entity;
-				if (((previousValue != value) 
-							|| (this._SETUP_Location.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SETUP_Location.Entity = null;
-						previousValue.GL_VchrMasters.Remove(this);
-					}
-					this._SETUP_Location.Entity = value;
-					if ((value != null))
-					{
-						value.GL_VchrMasters.Add(this);
-						this._Loc_Id = value.Loc_Id;
-					}
-					else
-					{
-						this._Loc_Id = default(string);
-					}
-					this.SendPropertyChanged("SETUP_Location");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_VoucherType_GL_VchrMaster", Storage="_SETUP_VoucherType", ThisKey="VchrType_Id", OtherKey="VchrType_Id", IsForeignKey=true)]
-		public SETUP_VoucherType SETUP_VoucherType
-		{
-			get
-			{
-				return this._SETUP_VoucherType.Entity;
-			}
-			set
-			{
-				SETUP_VoucherType previousValue = this._SETUP_VoucherType.Entity;
-				if (((previousValue != value) 
-							|| (this._SETUP_VoucherType.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SETUP_VoucherType.Entity = null;
-						previousValue.GL_VchrMasters.Remove(this);
-					}
-					this._SETUP_VoucherType.Entity = value;
-					if ((value != null))
-					{
-						value.GL_VchrMasters.Add(this);
-						this._VchrType_Id = value.VchrType_Id;
-					}
-					else
-					{
-						this._VchrType_Id = default(string);
-					}
-					this.SendPropertyChanged("SETUP_VoucherType");
-				}
 			}
 		}
 		
@@ -3253,6 +3124,8 @@ namespace SCMSDataLayer.DB
 		
 		private System.Nullable<int> _CldrType_Level;
 		
+		private string _Cldr_Prefix;
+		
 		private EntityRef<SETUP_CalendarType> _SETUP_CalendarType;
 		
 		private EntityRef<SETUP_Company> _SETUP_Company;
@@ -3287,6 +3160,8 @@ namespace SCMSDataLayer.DB
     partial void OnCldr_SortOrderChanged();
     partial void OnCldrType_LevelChanging(System.Nullable<int> value);
     partial void OnCldrType_LevelChanged();
+    partial void OnCldr_PrefixChanging(string value);
+    partial void OnCldr_PrefixChanged();
     #endregion
 		
 		public SETUP_Calendar()
@@ -3545,6 +3420,26 @@ namespace SCMSDataLayer.DB
 					this._CldrType_Level = value;
 					this.SendPropertyChanged("CldrType_Level");
 					this.OnCldrType_LevelChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cldr_Prefix", DbType="VarChar(10)")]
+		public string Cldr_Prefix
+		{
+			get
+			{
+				return this._Cldr_Prefix;
+			}
+			set
+			{
+				if ((this._Cldr_Prefix != value))
+				{
+					this.OnCldr_PrefixChanging(value);
+					this.SendPropertyChanging();
+					this._Cldr_Prefix = value;
+					this.SendPropertyChanged("Cldr_Prefix");
+					this.OnCldr_PrefixChanged();
 				}
 			}
 		}
@@ -4811,8 +4706,6 @@ namespace SCMSDataLayer.DB
 		
 		private System.Nullable<int> _Cmp_SortOrder;
 		
-		private EntitySet<GL_VchrMaster> _GL_VchrMasters;
-		
 		private EntitySet<SECURITY_User> _SECURITY_Users;
 		
 		private EntitySet<SECURITY_UserGroup> _SECURITY_UserGroups;
@@ -4867,7 +4760,6 @@ namespace SCMSDataLayer.DB
 		
 		public SETUP_Company()
 		{
-			this._GL_VchrMasters = new EntitySet<GL_VchrMaster>(new Action<GL_VchrMaster>(this.attach_GL_VchrMasters), new Action<GL_VchrMaster>(this.detach_GL_VchrMasters));
 			this._SECURITY_Users = new EntitySet<SECURITY_User>(new Action<SECURITY_User>(this.attach_SECURITY_Users), new Action<SECURITY_User>(this.detach_SECURITY_Users));
 			this._SECURITY_UserGroups = new EntitySet<SECURITY_UserGroup>(new Action<SECURITY_UserGroup>(this.attach_SECURITY_UserGroups), new Action<SECURITY_UserGroup>(this.detach_SECURITY_UserGroups));
 			this._SETUP_Banks = new EntitySet<SETUP_Bank>(new Action<SETUP_Bank>(this.attach_SETUP_Banks), new Action<SETUP_Bank>(this.detach_SETUP_Banks));
@@ -5084,19 +4976,6 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_GL_VchrMaster", Storage="_GL_VchrMasters", ThisKey="Cmp_Id", OtherKey="Cmp_Id")]
-		public EntitySet<GL_VchrMaster> GL_VchrMasters
-		{
-			get
-			{
-				return this._GL_VchrMasters;
-			}
-			set
-			{
-				this._GL_VchrMasters.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SECURITY_User", Storage="_SECURITY_Users", ThisKey="Cmp_Id", OtherKey="Cmp_Id")]
 		public EntitySet<SECURITY_User> SECURITY_Users
 		{
@@ -5284,18 +5163,6 @@ namespace SCMSDataLayer.DB
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_GL_VchrMasters(GL_VchrMaster entity)
-		{
-			this.SendPropertyChanging();
-			entity.SETUP_Company = this;
-		}
-		
-		private void detach_GL_VchrMasters(GL_VchrMaster entity)
-		{
-			this.SendPropertyChanging();
-			entity.SETUP_Company = null;
 		}
 		
 		private void attach_SECURITY_Users(SECURITY_User entity)
@@ -6513,8 +6380,6 @@ namespace SCMSDataLayer.DB
 		
 		private System.Nullable<int> _Loc_SortOrder;
 		
-		private EntitySet<GL_VchrMaster> _GL_VchrMasters;
-		
 		private EntitySet<SECURITY_User> _SECURITY_Users;
 		
 		private EntitySet<SECURITY_UserGroup> _SECURITY_UserGroups;
@@ -6561,7 +6426,6 @@ namespace SCMSDataLayer.DB
 		
 		public SETUP_Location()
 		{
-			this._GL_VchrMasters = new EntitySet<GL_VchrMaster>(new Action<GL_VchrMaster>(this.attach_GL_VchrMasters), new Action<GL_VchrMaster>(this.detach_GL_VchrMasters));
 			this._SECURITY_Users = new EntitySet<SECURITY_User>(new Action<SECURITY_User>(this.attach_SECURITY_Users), new Action<SECURITY_User>(this.detach_SECURITY_Users));
 			this._SECURITY_UserGroups = new EntitySet<SECURITY_UserGroup>(new Action<SECURITY_UserGroup>(this.attach_SECURITY_UserGroups), new Action<SECURITY_UserGroup>(this.detach_SECURITY_UserGroups));
 			this._SETUP_Banks = new EntitySet<SETUP_Bank>(new Action<SETUP_Bank>(this.attach_SETUP_Banks), new Action<SETUP_Bank>(this.detach_SETUP_Banks));
@@ -6699,19 +6563,6 @@ namespace SCMSDataLayer.DB
 					this.SendPropertyChanged("Loc_SortOrder");
 					this.OnLoc_SortOrderChanged();
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_GL_VchrMaster", Storage="_GL_VchrMasters", ThisKey="Loc_Id", OtherKey="Loc_Id")]
-		public EntitySet<GL_VchrMaster> GL_VchrMasters
-		{
-			get
-			{
-				return this._GL_VchrMasters;
-			}
-			set
-			{
-				this._GL_VchrMasters.Assign(value);
 			}
 		}
 		
@@ -6923,18 +6774,6 @@ namespace SCMSDataLayer.DB
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_GL_VchrMasters(GL_VchrMaster entity)
-		{
-			this.SendPropertyChanging();
-			entity.SETUP_Location = this;
-		}
-		
-		private void detach_GL_VchrMasters(GL_VchrMaster entity)
-		{
-			this.SendPropertyChanging();
-			entity.SETUP_Location = null;
 		}
 		
 		private void attach_SECURITY_Users(SECURITY_User entity)
@@ -7960,8 +7799,6 @@ namespace SCMSDataLayer.DB
 		
 		private System.Nullable<int> _VchrType_CodeInitialization;
 		
-		private EntitySet<GL_VchrMaster> _GL_VchrMasters;
-		
 		private EntitySet<SETUP_VoucherTypeNarration> _SETUP_VoucherTypeNarrations;
 		
 		private EntityRef<SETUP_Company> _SETUP_Company;
@@ -7994,7 +7831,6 @@ namespace SCMSDataLayer.DB
 		
 		public SETUP_VoucherType()
 		{
-			this._GL_VchrMasters = new EntitySet<GL_VchrMaster>(new Action<GL_VchrMaster>(this.attach_GL_VchrMasters), new Action<GL_VchrMaster>(this.detach_GL_VchrMasters));
 			this._SETUP_VoucherTypeNarrations = new EntitySet<SETUP_VoucherTypeNarration>(new Action<SETUP_VoucherTypeNarration>(this.attach_SETUP_VoucherTypeNarrations), new Action<SETUP_VoucherTypeNarration>(this.detach_SETUP_VoucherTypeNarrations));
 			this._SETUP_Company = default(EntityRef<SETUP_Company>);
 			this._SETUP_Location = default(EntityRef<SETUP_Location>);
@@ -8189,19 +8025,6 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_VoucherType_GL_VchrMaster", Storage="_GL_VchrMasters", ThisKey="VchrType_Id", OtherKey="VchrType_Id")]
-		public EntitySet<GL_VchrMaster> GL_VchrMasters
-		{
-			get
-			{
-				return this._GL_VchrMasters;
-			}
-			set
-			{
-				this._GL_VchrMasters.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_VoucherType_SETUP_VoucherTypeNarration", Storage="_SETUP_VoucherTypeNarrations", ThisKey="VchrType_Id", OtherKey="VchrType_Id")]
 		public EntitySet<SETUP_VoucherTypeNarration> SETUP_VoucherTypeNarrations
 		{
@@ -8301,18 +8124,6 @@ namespace SCMSDataLayer.DB
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_GL_VchrMasters(GL_VchrMaster entity)
-		{
-			this.SendPropertyChanging();
-			entity.SETUP_VoucherType = this;
-		}
-		
-		private void detach_GL_VchrMasters(GL_VchrMaster entity)
-		{
-			this.SendPropertyChanging();
-			entity.SETUP_VoucherType = null;
 		}
 		
 		private void attach_SETUP_VoucherTypeNarrations(SETUP_VoucherTypeNarration entity)
