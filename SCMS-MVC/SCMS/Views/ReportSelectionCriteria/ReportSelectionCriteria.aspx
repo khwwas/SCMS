@@ -122,9 +122,9 @@
                     li_AllDate = 0;
                 }
 
-                ps_Url = "../ReportSelectionCriteria/SetParam_LedgerDetail?ps_ReportName=" + ps_ReportName + "&ps_Location='" + pcnt_Location.value +
-                         "'&pi_AllAccCode=" + li_AllCode.toString() + "&ps_AccCodeFrom='" + pcnt_AccCodeFrom.value + "'&ps_AccCodeTo='" + pcnt_AccCodeTo.value +
-                         "'&pi_AllDate=" + li_AllDate.toString() + "&pdt_DateFrom=" + pcnt_DateFrom.value + "&pdt_DateTo=" + pcnt_DateTo.value + "";
+                ps_Url = "../ReportSelectionCriteria/SetParam_LedgerDetail?ps_ReportName=" + ps_ReportName + "&ps_Location=" + pcnt_Location.value +
+                         "&pi_AllAccCode=" + li_AllCode.toString() + "&ps_AccCodeFrom=" + pcnt_AccCodeFrom.value + "&ps_AccCodeTo=" + pcnt_AccCodeTo.value +
+                         "&pi_AllDate=" + li_AllDate.toString() + "&pdt_DateFrom=" + pcnt_DateFrom.value + "&pdt_DateTo=" + pcnt_DateTo.value + "";
             }
             else if (ps_ReportName.toLowerCase() == "TrialBalance".toLowerCase()) {
                 var pcnt_Location = document.getElementById('ddl_location');

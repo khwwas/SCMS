@@ -71,8 +71,8 @@ namespace SCMS.Controllers
             {
 
                 Reports.ReportParameters.AllAccCode = 1;
-                Reports.ReportParameters.AccCodeFrom = "''";
-                Reports.ReportParameters.AccCodeTo = "''";
+                Reports.ReportParameters.AccCodeFrom = "";
+                Reports.ReportParameters.AccCodeTo = "";
             }
             else
             {
