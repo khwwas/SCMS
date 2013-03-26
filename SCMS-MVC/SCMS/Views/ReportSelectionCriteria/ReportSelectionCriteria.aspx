@@ -50,7 +50,8 @@
             if (ps_ReportName.toLowerCase() == "ChartOfAccount".toLowerCase()) {
                 document.getElementById('div_Level').style.display = "block";
             }
-            else if (ps_ReportName.toLowerCase() == "LedgerDetail".toLowerCase()) {
+            else if (ps_ReportName.toLowerCase() == "LedgerDtLocWise".toLowerCase() ||
+                     ps_ReportName.toLowerCase() == "LedgerDtAccWise".toLowerCase()) {
                 document.getElementById('div_Location').style.display = "block";
                 document.getElementById('div_AccCodeFrom').style.display = "block";
                 document.getElementById('div_AccCodeTo').style.display = "block";
@@ -95,7 +96,8 @@
                 var pcnt_AccCodeFrom = document.getElementById('ddl_AccCodeFrom');
                 var pcnt_AccCodeTo = document.getElementById('ddl_AccCodeTo');
             }
-            else if (ps_ReportName == "LedgerDetail") {
+            else if (ps_ReportName.toLowerCase() == "LedgerDtLocWise".toLowerCase() ||
+                     ps_ReportName.toLowerCase() == "LedgerDtAccWise".toLowerCase()) {
                 var pcnt_Location = document.getElementById('ddl_location');
 
                 var pcnt_AllAccCode = document.getElementById('chk_AllAccCode').checked;

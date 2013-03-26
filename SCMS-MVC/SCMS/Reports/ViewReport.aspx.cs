@@ -243,10 +243,11 @@ namespace SCMS.Reports
                 #endregion
                 #endregion
 
-                #region Ledger Detail
-                else if (ReportName.ToLower() == "LedgerDetail".ToLower())
+                #region Ledger Detail - Location Wise
+                else if (ReportName.ToLower() == "LedgerDtLocWise".ToLower())
                 {
-                    _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptLedger.rpt");
+
+                    _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptLedger_LocWise.rpt");
                     Datasets.dsLedger _dsLedger = new Datasets.dsLedger();
                     string ls_Location = "", ls_AccCodeFrom = "", ls_AccCodeTo = "";
                     int li_AllAccCode = 0, li_AllDate = 0;
@@ -270,7 +271,7 @@ namespace SCMS.Reports
                         _dsLedger.Tables.Remove("LedgerDetail");
                     }
 
-                    _ds = _dalReports.LedgerDetail(ls_Location, li_AllAccCode, ls_AccCodeFrom, ls_AccCodeTo, li_AllDate, ldt_DateFrom, ldt_Dateto);
+                    _ds = _dalReports.LedgerDetail_LocWise(ls_Location, li_AllAccCode, ls_AccCodeFrom, ls_AccCodeTo, li_AllDate, ldt_DateFrom, ldt_Dateto);
                     _dsLedger.Tables.Add(_ds.Tables[0].Copy());
                     _dsLedger.Tables[0].TableName = "LedgerDetail";
 
@@ -281,7 +282,49 @@ namespace SCMS.Reports
                     }
 
                     _ReportDocument.SetDataSource(_dsLedger);
-                    _ReportDocument.SummaryInfo.ReportTitle = "Ledger Detail";
+                    _ReportDocument.SummaryInfo.ReportTitle = "Ledger Detail - Location Wise";
+                }
+                #endregion
+
+                #region Ledger Detail - Account Wise
+                else if (ReportName.ToLower() == "LedgerDtAccWise".ToLower())
+                {
+                    _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptLedger_AccWise.rpt");
+                    Datasets.dsLedger _dsLedger = new Datasets.dsLedger();
+                    string ls_Location = "", ls_AccCodeFrom = "", ls_AccCodeTo = "";
+                    int li_AllAccCode = 0, li_AllDate = 0;
+                    DateTime ldt_DateFrom, ldt_Dateto;
+
+                    ls_Location = SCMS.Reports.ReportParameters.Location;
+                    li_AllAccCode = SCMS.Reports.ReportParameters.AllAccCode;
+                    ls_AccCodeFrom = SCMS.Reports.ReportParameters.AccCodeFrom;
+                    ls_AccCodeTo = SCMS.Reports.ReportParameters.AccCodeTo;
+                    li_AllDate = SCMS.Reports.ReportParameters.AllDate;
+                    ldt_DateFrom = SCMS.Reports.ReportParameters.DateFrom;
+                    ldt_Dateto = SCMS.Reports.ReportParameters.DateTo;
+
+                    if (_dsLedger.Tables.Contains("Logo"))
+                    {
+                        _dsLedger.Tables.Remove("Logo");
+                    }
+
+                    if (_dsLedger.Tables.Contains("LedgerDetail"))
+                    {
+                        _dsLedger.Tables.Remove("LedgerDetail");
+                    }
+
+                    _ds = _dalReports.LedgerDetail_AccWise(ls_Location, li_AllAccCode, ls_AccCodeFrom, ls_AccCodeTo, li_AllDate, ldt_DateFrom, ldt_Dateto);
+                    _dsLedger.Tables.Add(_ds.Tables[0].Copy());
+                    _dsLedger.Tables[0].TableName = "LedgerDetail";
+
+                    if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
+                    {
+                        MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
+                        return;
+                    }
+
+                    _ReportDocument.SetDataSource(_dsLedger);
+                    _ReportDocument.SummaryInfo.ReportTitle = "Ledger Detail - Account Wise";
                 }
                 #endregion
 
