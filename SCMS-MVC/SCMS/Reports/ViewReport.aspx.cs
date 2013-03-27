@@ -333,9 +333,17 @@ namespace SCMS.Reports
                 {
                     _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptTrialBalance.rpt");
                     Datasets.dsTrialBalance _dsTrialBalance = new Datasets.dsTrialBalance();
-                    string LocationCode = "";
+                    string ls_Location = "", ls_AccCodeFrom = "", ls_AccCodeTo = "";
+                    int li_AllAccCode = 0, li_AllDate = 0;
+                    DateTime ldt_DateFrom, ldt_Dateto;
 
-                    LocationCode = SCMS.Reports.ReportParameters.Location;
+                    ls_Location = SCMS.Reports.ReportParameters.Location;
+                    li_AllAccCode = SCMS.Reports.ReportParameters.AllAccCode;
+                    ls_AccCodeFrom = SCMS.Reports.ReportParameters.AccCodeFrom;
+                    ls_AccCodeTo = SCMS.Reports.ReportParameters.AccCodeTo;
+                    li_AllDate = SCMS.Reports.ReportParameters.AllDate;
+                    ldt_DateFrom = SCMS.Reports.ReportParameters.DateFrom;
+                    ldt_Dateto = SCMS.Reports.ReportParameters.DateTo;
 
                     if (_dsTrialBalance.Tables.Contains("Logo"))
                     {
@@ -347,7 +355,7 @@ namespace SCMS.Reports
                         _dsTrialBalance.Tables.Remove("TrialBalance");
                     }
 
-                    _ds = _dalReports.TrialBalance();
+                    _ds = _dalReports.TrialBalance(ls_Location, li_AllAccCode, ls_AccCodeFrom, ls_AccCodeTo, li_AllDate, ldt_DateFrom, ldt_Dateto);
                     _dsTrialBalance.Tables.Add(_ds.Tables[0].Copy());
                     _dsTrialBalance.Tables[0].TableName = "TrialBalance";
 

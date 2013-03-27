@@ -76,6 +76,18 @@
                 document.getElementById('txt_DateFrom').disabled = true;
                 document.getElementById('txt_DateTo').disabled = true;
             }
+            else if (ps_ReportName.toLowerCase() == "TrialBalance".toLowerCase()) {
+                document.getElementById('div_Location').style.display = "block";
+                document.getElementById('div_AccCodeFrom').style.display = "block";
+                document.getElementById('div_AccCodeTo').style.display = "block";
+                document.getElementById('div_DateRange').style.display = "block";
+
+                document.getElementById('ddl_AccCodeFrom').disabled = true;
+                document.getElementById('ddl_AccCodeTo').disabled = true;
+
+                document.getElementById('txt_DateFrom').disabled = true;
+                document.getElementById('txt_DateTo').disabled = true;
+            }
         };
 
         function ViewReport() {
@@ -130,7 +142,34 @@
             }
             else if (ps_ReportName.toLowerCase() == "TrialBalance".toLowerCase()) {
                 var pcnt_Location = document.getElementById('ddl_location');
-                ps_Url = "../ReportSelectionCriteria/SetParameter?ps_ReportName=" + ps_ReportName + "&ps_Location=" + pcnt_Location.value;
+
+                var pcnt_AllAccCode = document.getElementById('chk_AllAccCode').checked;
+                var pcnt_AccCodeFrom = document.getElementById('ddl_AccCodeFrom');
+                var pcnt_AccCodeTo = document.getElementById('ddl_AccCodeTo');
+
+                var pcnt_AllDate = document.getElementById('chk_AllDate').checked;
+                var pcnt_DateFrom = document.getElementById('txt_DateFrom');
+                var pcnt_DateTo = document.getElementById('txt_DateTo');
+
+                var li_AllCode, li_AllDate;
+
+                if (pcnt_AllAccCode.toString() == "true") {
+                    li_AllCode = 1;
+                }
+                else {
+                    li_AllCode = 0;
+                }
+
+                if (pcnt_AllDate.toString() == "true") {
+                    li_AllDate = 1;
+                }
+                else {
+                    li_AllDate = 0;
+                }
+
+                ps_Url = "../ReportSelectionCriteria/SetParam_TrialBalance?ps_ReportName=" + ps_ReportName + "&ps_Location=" + pcnt_Location.value +
+                         "&pi_AllAccCode=" + li_AllCode.toString() + "&ps_AccCodeFrom=" + pcnt_AccCodeFrom.value + "&ps_AccCodeTo=" + pcnt_AccCodeTo.value +
+                         "&pi_AllDate=" + li_AllDate.toString() + "&pdt_DateFrom=" + pcnt_DateFrom.value + "&pdt_DateTo=" + pcnt_DateTo.value + "";
             };
 //            alert(ps_Url);
             $.ajax({
