@@ -6,7 +6,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <script type="text/javascript">
-        var ps_ReportName;
+        var ps_ReportName, ps_Url;
         ps_ReportName = '<%= ViewData["ReportName"] %>';
 
         $(document).ready(function () {
@@ -34,7 +34,7 @@
                 document.getElementById('ddl_VchrDocTo').disabled = false;
             }
         };
-        
+
         function CheckAllDate() {
             if (document.getElementById('chk_AllDate').checked == true) {
                 document.getElementById('txt_DateFrom').disabled = true;
@@ -47,10 +47,11 @@
         };
 
         function SetCriteria() {
-            if (ps_ReportName == "ChartOfAccount") {
+            if (ps_ReportName.toLowerCase() == "ChartOfAccount".toLowerCase()) {
                 document.getElementById('div_Level').style.display = "block";
             }
-            else if (ps_ReportName == "LedgerDetail") {
+            else if (ps_ReportName.toLowerCase() == "LedgerDtLocWise".toLowerCase() ||
+                     ps_ReportName.toLowerCase() == "LedgerDtAccWise".toLowerCase()) {
                 document.getElementById('div_Location').style.display = "block";
                 document.getElementById('div_AccCodeFrom').style.display = "block";
                 document.getElementById('div_AccCodeTo').style.display = "block";
@@ -62,7 +63,7 @@
                 document.getElementById('txt_DateFrom').disabled = true;
                 document.getElementById('txt_DateTo').disabled = true;
             }
-            else if (ps_ReportName == "VoucherDoc") {
+            else if (ps_ReportName.toLowerCase() == "VoucherDoc".toLowerCase()) {
                 document.getElementById('div_VoucherTypes').style.display = "block";
 
 
@@ -75,18 +76,30 @@
                 document.getElementById('txt_DateFrom').disabled = true;
                 document.getElementById('txt_DateTo').disabled = true;
             }
+            else if (ps_ReportName.toLowerCase() == "TrialBalance".toLowerCase()) {
+                document.getElementById('div_Location').style.display = "block";
+                document.getElementById('div_AccCodeFrom').style.display = "block";
+                document.getElementById('div_AccCodeTo').style.display = "block";
+                document.getElementById('div_DateRange').style.display = "block";
+
+                document.getElementById('ddl_AccCodeFrom').disabled = true;
+                document.getElementById('ddl_AccCodeTo').disabled = true;
+
+                document.getElementById('txt_DateFrom').disabled = true;
+                document.getElementById('txt_DateTo').disabled = true;
+            }
         };
 
         function ViewReport() {
-            if (ps_ReportName == "Company" || ps_ReportName == "Location" || ps_ReportName == "City" ||
-                ps_ReportName == "VoucherTypes") {
-                var Url = "../ReportSelectionCriteria/SetParam_Setups?ps_ReportName=" + ps_ReportName;
+            if (ps_ReportName.toLowerCase() == "Company".toLowerCase() || ps_ReportName.toLowerCase() == "Location".toLowerCase() ||
+                ps_ReportName.toLowerCase() == "City".toLowerCase() || ps_ReportName.toLowerCase() == "VoucherTypes".toLowerCase()) {
+                ps_Url = "../ReportSelectionCriteria/SetParam_Setups?ps_ReportName=" + ps_ReportName;
             }
-            else if (ps_ReportName == "ChartOfAccount") {
+            else if (ps_ReportName.toLowerCase() == "ChartOfAccount".toLowerCase()) {
                 var pcnt_ChartOfAccount = document.getElementById('txt_Level');
-                var Url = "../ReportSelectionCriteria/SetParam_ChartOfAccount?ps_ReportName=" + ps_ReportName + "&pi_Level=" + pcnt_ChartOfAccount.value;
+                ps_Url = "../ReportSelectionCriteria/SetParam_ChartOfAccount?ps_ReportName=" + ps_ReportName + "&pi_Level=" + pcnt_ChartOfAccount.value;
             }
-            else if (ps_ReportName == "VoucherDoc") {
+            else if (ps_ReportName.toLowerCase() == "VoucherDoc".toLowerCase()) {
                 var pcnt_Location = document.getElementById('ddl_location');
                 var pcnt_AllDate = document.getElementById('chk_AllDate');
                 var pcnt_DateFrom = document.getElementById('txt_DateFrom');
@@ -95,36 +108,84 @@
                 var pcnt_AccCodeFrom = document.getElementById('ddl_AccCodeFrom');
                 var pcnt_AccCodeTo = document.getElementById('ddl_AccCodeTo');
             }
-            else if (ps_ReportName == "LedgerDetail") {
+            else if (ps_ReportName.toLowerCase() == "LedgerDtLocWise".toLowerCase() ||
+                     ps_ReportName.toLowerCase() == "LedgerDtAccWise".toLowerCase()) {
                 var pcnt_Location = document.getElementById('ddl_location');
-                var pcnt_AllDate = document.getElementById('chk_AllDate');
-                var pcnt_DateFrom = document.getElementById('txt_DateFrom');
-                var pcnt_DateTo = document.getElementById('txt_DateTo');
-                var pcnt_AllAccCode = document.getElementById('chk_AllAccCode');
+
+                var pcnt_AllAccCode = document.getElementById('chk_AllAccCode').checked;
                 var pcnt_AccCodeFrom = document.getElementById('ddl_AccCodeFrom');
                 var pcnt_AccCodeTo = document.getElementById('ddl_AccCodeTo');
 
-                var Url = "../ReportSelectionCriteria/SetParam_LedgerDetail?ps_ReportName=" + ps_ReportName + "&ps_Location=" + pcnt_Location.value +
-                          "&pi_AllAccCode=" + pcnt_AllAccCode.value + "&ps_AccCodeFrom=" + pcnt_AccCodeFrom.value + "&ps_AccCodeTo=" + pcnt_AccCodeTo.value +
-                          "&pi_AllDate=" + pcnt_AllDate.value + "&pdt_DateFrom=" + pcnt_DateFrom.value + "&pdt_DateTo=" + pcnt_DateTo.value;
+                var pcnt_AllDate = document.getElementById('chk_AllDate').checked;
+                var pcnt_DateFrom = document.getElementById('txt_DateFrom');
+                var pcnt_DateTo = document.getElementById('txt_DateTo');
+
+                var li_AllCode, li_AllDate;
+
+                if (pcnt_AllAccCode.toString() == "true") {
+                    li_AllCode = 1;
+                }
+                else {
+                    li_AllCode = 0;
+                }
+
+                if (pcnt_AllDate.toString() == "true") {
+                    li_AllDate = 1;
+                }
+                else {
+                    li_AllDate = 0;
+                }
+
+                ps_Url = "../ReportSelectionCriteria/SetParam_LedgerDetail?ps_ReportName=" + ps_ReportName + "&ps_Location=" + pcnt_Location.value +
+                         "&pi_AllAccCode=" + li_AllCode.toString() + "&ps_AccCodeFrom=" + pcnt_AccCodeFrom.value + "&ps_AccCodeTo=" + pcnt_AccCodeTo.value +
+                         "&pi_AllDate=" + li_AllDate.toString() + "&pdt_DateFrom=" + pcnt_DateFrom.value + "&pdt_DateTo=" + pcnt_DateTo.value + "";
             }
-            else if (ps_ReportName == "TrialBalance") {
+            else if (ps_ReportName.toLowerCase() == "TrialBalance".toLowerCase()) {
                 var pcnt_Location = document.getElementById('ddl_location');
-                var Url = "../ReportSelectionCriteria/SetParameter?ps_ReportName=" + ps_ReportName + "&ps_Location=" + pcnt_Location.value;
+
+                var pcnt_AllAccCode = document.getElementById('chk_AllAccCode').checked;
+                var pcnt_AccCodeFrom = document.getElementById('ddl_AccCodeFrom');
+                var pcnt_AccCodeTo = document.getElementById('ddl_AccCodeTo');
+
+                var pcnt_AllDate = document.getElementById('chk_AllDate').checked;
+                var pcnt_DateFrom = document.getElementById('txt_DateFrom');
+                var pcnt_DateTo = document.getElementById('txt_DateTo');
+
+                var li_AllCode, li_AllDate;
+
+                if (pcnt_AllAccCode.toString() == "true") {
+                    li_AllCode = 1;
+                }
+                else {
+                    li_AllCode = 0;
+                }
+
+                if (pcnt_AllDate.toString() == "true") {
+                    li_AllDate = 1;
+                }
+                else {
+                    li_AllDate = 0;
+                }
+
+                ps_Url = "../ReportSelectionCriteria/SetParam_TrialBalance?ps_ReportName=" + ps_ReportName + "&ps_Location=" + pcnt_Location.value +
+                         "&pi_AllAccCode=" + li_AllCode.toString() + "&ps_AccCodeFrom=" + pcnt_AccCodeFrom.value + "&ps_AccCodeTo=" + pcnt_AccCodeTo.value +
+                         "&pi_AllDate=" + li_AllDate.toString() + "&pdt_DateFrom=" + pcnt_DateFrom.value + "&pdt_DateTo=" + pcnt_DateTo.value + "";
             };
-
+//            alert(ps_Url);
             $.ajax({
                 type: "GET",
-                url: Url,
+                url: ps_Url,
                 success: function (response) {
                     html = response;
+                    if (response == "OK") {
+                        window.open("../Reports/ViewReport.aspx");
+                    }
                 },
                 error: function (rs, e) {
+                    alert("Parameters not set");
                 }
             });
-            var Url = "../Reports/ViewReport.aspx";
-            window.open(Url);
-            return false;
+
         }
     </script>
     <form id="frm_ReportSelectionCriteria" action='<%=Url.Content("~/") %>'>
@@ -186,7 +247,7 @@
                 </div>
                 <script type="text/javascript">
                     $('#txt_DateFrom').Zebra_DatePicker({
-                        format: 'd/m/Y'
+                        format: 'm/d/Y'
                     });
                 </script>
                 &nbsp;
@@ -198,7 +259,7 @@
                 </div>
                 <script type="text/javascript">
                     $('#txt_DateTo').Zebra_DatePicker({
-                        format: 'd/m/Y'
+                        format: 'm/d/Y'
                     });
                 </script>
                 <input type="checkbox" class="checkbox" id="chk_AllDate" name="chk_AllDate" onclick="CheckAllDate()"

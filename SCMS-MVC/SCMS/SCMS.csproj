@@ -127,6 +127,12 @@
       <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Reports\ReportParameters.cs" />
+    <Compile Include="Reports\Reps\rptLedger_AccWise.cs">
+      <DependentUpon>rptLedger_AccWise.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reports\Reps\rptChartOfAccount.cs">
       <DependentUpon>rptChartOfAccount.rpt</DependentUpon>
       <SubType>Component</SubType>
@@ -145,8 +151,8 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="Reports\Reps\rptLedger1.cs">
-      <DependentUpon>rptLedger.rpt</DependentUpon>
+    <Compile Include="Reports\Reps\rptLedger_LocWise.cs">
+      <DependentUpon>rptLedger_LocWise.rpt</DependentUpon>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -1658,6 +1664,10 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reports\Reps\rptLedger_AccWise.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptLedger_AccWise.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Reps\rptChartOfAccount.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptChartOfAccount.cs</LastGenOutput>
@@ -1670,9 +1680,9 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptCompany.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\Reps\rptLedger.rpt">
+    <EmbeddedResource Include="Reports\Reps\rptLedger_LocWise.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>rptLedger1.cs</LastGenOutput>
+      <LastGenOutput>rptLedger_LocWise.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Reps\rptLocation.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
