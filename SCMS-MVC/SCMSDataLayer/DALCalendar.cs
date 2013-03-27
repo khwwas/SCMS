@@ -8,29 +8,32 @@ namespace SCMSDataLayer
 {
    public class DALCalendar
     {
-        public int SaveRecord(SETUP_CalendarType lrow_CalendarType)
+       public int SaveRecord(SETUP_Calendar lrow_Calendar)
         {
             int li_ReturnValue = 0;
 
             try
             {
                 SCMSDataContext dbSCMS = Connection.Create();
-                SETUP_CalendarType lRow_ExistingData = dbSCMS.SETUP_CalendarTypes.Where(b => b.CldrType_Id.Equals(lrow_CalendarType.CldrType_Id)).SingleOrDefault();
+                SETUP_Calendar lRow_ExistingData = dbSCMS.SETUP_Calendars.Where(b => b.Cldr_Id.Equals(lrow_Calendar.Cldr_Id)).SingleOrDefault();
 
                 if (lRow_ExistingData != null)
                 {
-                    lRow_ExistingData.CldrType_Title = lrow_CalendarType.CldrType_Title;
-                    lRow_ExistingData.Loc_Id = lrow_CalendarType.Loc_Id;
-                    lRow_ExistingData.Cmp_Id = lrow_CalendarType.Cmp_Id;
-                    lRow_ExistingData.CldrType_Level = lrow_CalendarType.CldrType_Level;
+                    lRow_ExistingData.Loc_Id = lrow_Calendar.Loc_Id;
+                    lRow_ExistingData.Cmp_Id = lrow_Calendar.Cmp_Id;
+                    lRow_ExistingData.Cldr_Title = lrow_Calendar.Cldr_Title;
+                    lRow_ExistingData.Cldr_Prefix = lrow_Calendar.Cldr_Prefix;
+                    lRow_ExistingData.Cldr_DateStart = lrow_Calendar.Cldr_DateStart;
+                    lRow_ExistingData.Cldr_DateEnd = lrow_Calendar.Cldr_DateEnd;
+                    lRow_ExistingData.CldrType_Id = lrow_Calendar.CldrType_Id;
                 }
                 else
                 {
-                    dbSCMS.SETUP_CalendarTypes.InsertOnSubmit(lrow_CalendarType);
+                    dbSCMS.SETUP_Calendars.InsertOnSubmit(lrow_Calendar);
                 }
                 dbSCMS.SubmitChanges();
 
-                li_ReturnValue = Convert.ToInt32(lrow_CalendarType.CldrType_Id);
+                li_ReturnValue = Convert.ToInt32(lrow_Calendar.Cldr_Id);
             }
             catch
             {
@@ -40,12 +43,12 @@ namespace SCMSDataLayer
             return li_ReturnValue;
         }
 
-        public List<SETUP_CalendarType> GetAllRecords()
+        public List<SETUP_Calendar> GetAllRecords()
         {
             try
             {
                 SCMSDataContext dbSCMS = Connection.Create();
-                return dbSCMS.SETUP_CalendarTypes.Where(c => c.CldrType_Active == 1).OrderBy(c => c.CldrType_Code).ToList();
+                return dbSCMS.SETUP_Calendars.Where(c => c.Cldr_Active == 1).OrderBy(c => c.Cldr_Code).ToList();
             }
             catch (Exception ex)
             {
@@ -86,7 +89,7 @@ namespace SCMSDataLayer
             try
             {
                 SCMSDataContext dbSCMS = Connection.Create();
-                li_ReturnValue = dbSCMS.ExecuteCommand("Delete From Setup_CalendarType where CldrType_Id='" + ps_Id + "'");
+                li_ReturnValue = dbSCMS.ExecuteCommand("Delete From SETUP_Calendar where Cldr_Id='" + ps_Id + "'");
             }
             catch
             {

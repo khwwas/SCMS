@@ -20,12 +20,10 @@ namespace SCMSDataLayer.DB
                 if (Row_ExistingData != null)
                 {
                     Row_ExistingData.Supp_Code = row_Supplier.Supp_Code;
-                    Row_ExistingData.Cmp_Id = row_Supplier.Cmp_Id;
                     Row_ExistingData.Loc_Id = row_Supplier.Loc_Id;
                     Row_ExistingData.SuppType_Id = row_Supplier.Supp_Id;
                     Row_ExistingData.Supp_Title = row_Supplier.Supp_Title;
                     Row_ExistingData.Supp_Address1 = row_Supplier.Supp_Address1;
-                    Row_ExistingData.Supp_Address2 = row_Supplier.Supp_Address2;
                     Row_ExistingData.Supp_Email = row_Supplier.Supp_Email;
                     Row_ExistingData.Supp_Phone = row_Supplier.Supp_Phone;
                     Row_ExistingData.Supp_Fax = row_Supplier.Supp_Fax;

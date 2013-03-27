@@ -20,7 +20,7 @@
                 Action
             </th>
             <th style="width: 10%;">
-                Company
+                Title
             </th>
             <th style="width: 10%;">
                 Location
@@ -28,9 +28,7 @@
             <th style="width: 10%;">
                 Bank
             </th>
-            <th style="width: 10%;">
-                Title
-            </th>
+
         </tr>
     </thead>
     <tbody>
@@ -42,9 +40,6 @@
             List<SCMSDataLayer.DB.SETUP_Location> ListLocations = new List<SCMSDataLayer.DB.SETUP_Location>();
             ListLocations = new SCMSDataLayer.DALLocation().GetAllLocation().ToList();
 
-            // Get Company name show in list
-            List<SCMSDataLayer.DB.SETUP_Company> ListCompanies = new List<SCMSDataLayer.DB.SETUP_Company>();
-            ListCompanies = new SCMSDataLayer.DALCompany().GetAllCompanies().ToList();
 
             // Get Bank name show in list
             List<SCMSDataLayer.DB.SETUP_Bank> ListBanks = new List<SCMSDataLayer.DB.SETUP_Bank>();
@@ -54,7 +49,6 @@
             {
                 foreach (SCMSDataLayer.DB.SETUP_BankAccount lRow_Data in lList_Data)
                 {
-                    SCMSDataLayer.DB.SETUP_Company CompanyRow = ListCompanies.Where(c => c.Cmp_Id.Equals(lRow_Data.Cmp_Id)).SingleOrDefault();
                     SCMSDataLayer.DB.SETUP_Location LocationRow = ListLocations.Where(L => L.Loc_Id.Equals(lRow_Data.Loc_Id)).SingleOrDefault();
                     SCMSDataLayer.DB.SETUP_Bank BankRow = ListBanks.Where(B => B.Bank_Id.Equals(lRow_Data.Bank_Id)).SingleOrDefault();
                   
@@ -71,11 +65,8 @@
                     <img alt="Delete" src="../../img/delete.png" style="width: 22px; vertical-align: middle" />
                 </div>
             </td>
-            <td id="ddl_Company<%=lRow_Data.BankAcc_Id%>" style="vertical-align: middle;">
-                <%if (CompanyRow != null)
-                  { %>
-                <%=CompanyRow.Cmp_Title%>
-                <%} %>
+            <td id="txt_Title<%=lRow_Data.BankAcc_Id%>" style="vertical-align: middle;">
+                <%=lRow_Data.BankAcc_Title%>
             </td>
             <td id="ddl_location<%=lRow_Data.BankAcc_Id%>" style="vertical-align: middle;">
             <%if (LocationRow != null)
@@ -91,9 +82,7 @@
                 <%} %>
                 
             </td>
-            <td id="txt_Title<%=lRow_Data.BankAcc_Id%>" style="vertical-align: middle;">
-                <%=lRow_Data.BankAcc_Title%>
-            </td>
+
         </tr>
         <%}
           }

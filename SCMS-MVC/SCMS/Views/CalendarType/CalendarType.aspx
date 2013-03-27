@@ -148,17 +148,19 @@
         <div class="block">
             <div id="MessageBox">
             </div>
-            <div class="CustomCell" style="width: 314px; height: 30px">
+            <div class="CustomCell" style="width: 115px; height: 30px">
                 Company</div>
-            <div class="CustomCell" style="width: 314px; height: 30px; padding-left: 7px;">
-                Location</div>
-            <div class="CustomCell" style="width: 314px; height: 30px; padding-left: 7px;">
-                Level</div>
+            <%= Html.DropDownList("ddl_Company", null, new { style = "width:900px; padding: 4px;" })%>
             <div class="Clear">
             </div>
-            <%= Html.DropDownList("ddl_Company", null, new { style = "width:314px;" })%>
-            <%= Html.DropDownList("ddl_location", null, new { style = "width:314px; margin-left: 9px;" })%>
-            <select name="ddl_level" id="ddl_level" style="width: 314px;">
+            <div class="CustomCell" style="width: 115px; height: 30px;">
+                Location</div>
+            <%= Html.DropDownList("ddl_location", null, new { style = "width:900px; padding: 4px;" })%>
+            <div class="Clear">
+            </div>
+            <div class="CustomCell" style="width: 115px; height: 30px;">
+                Level</div>
+            <select name="ddl_level" id="ddl_level" style="width: 900px;">
                 <option value="">Select Level</option>
                 <option value="1">Yearly</option>
                 <option value="2">Monthly</option>
@@ -168,11 +170,9 @@
             </select>
             <div class="Clear">
             </div>
-            <div class="CustomCell">
+            <div class="CustomCell" style="width: 115px; height: 30px;">
                 Title</div>
-            <div class="Clear">
-            </div>
-            <input type="text" class="CustomText" style="width: 940px;" id="txt_Title" name="txt_Title"
+            <input type="text" class="CustomText" style="width: 888px;" id="txt_Title" name="txt_Title"
                 maxlength="100" />
             <div class="Clear">
             </div>

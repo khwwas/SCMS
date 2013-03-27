@@ -20,25 +20,16 @@
                 Action
             </th>
             <th style="width: 10%;">
-                Company
-            </th>
-            <th style="width: 10%;">
                 Location
             </th>
             <th style="width: 10%;">
                 Supplier Type
             </th>
             <th style="width: 10%;">
-                City
-            </th>
-            <th style="width: 10%;">
                 Title
             </th>
             <th style="width: 10%;">
-                Address 1
-            </th>
-            <th style="width: 10%;">
-                Address 2
+                Address 
             </th>
             <th style="width: 10%;">
                 Email
@@ -59,10 +50,6 @@
           List<SCMSDataLayer.DB.SETUP_Location> ListLocations = new List<SCMSDataLayer.DB.SETUP_Location>();
           ListLocations = new SCMSDataLayer.DALLocation().GetAllLocation().ToList();
 
-          // Get Company name show in list
-          List<SCMSDataLayer.DB.SETUP_Company> ListCompanies = new List<SCMSDataLayer.DB.SETUP_Company>();
-          ListCompanies = new SCMSDataLayer.DALCompany().GetAllCompanies().ToList();
-
           // Get all Supplier type
           List<SCMSDataLayer.DB.SETUP_SupplierType> ListSupplierType = new List<SCMSDataLayer.DB.SETUP_SupplierType>();
           ListSupplierType = new SCMSDataLayer.DALSupplierType().GetAllSupplierType().ToList();
@@ -75,7 +62,6 @@
           {
               foreach (SCMSDataLayer.DB.SETUP_Supplier RowSupplier in SupplierData)
               {
-                  SCMSDataLayer.DB.SETUP_Company CompanyRow = ListCompanies.Where(c => c.Cmp_Id.Equals(RowSupplier.Cmp_Id)).SingleOrDefault();
                   SCMSDataLayer.DB.SETUP_Location LocationRow = ListLocations.Where(L => L.Loc_Id.Equals(RowSupplier.Loc_Id)).SingleOrDefault();
                   SCMSDataLayer.DB.SETUP_SupplierType SupplierTypeRow = ListSupplierType.Where(CT => CT.SuppType_Id.Equals(RowSupplier.SuppType_Id)).SingleOrDefault();
                   SCMSDataLayer.DB.SETUP_City CityRow = ListCity.Where(C => C.City_Id.Equals(RowSupplier.City_Id)).SingleOrDefault();
@@ -92,26 +78,17 @@
                     <img alt="Delete" src="../../img/delete.png" style="width: 22px; vertical-align: middle" />
                 </div>
             </td>
-            <td id="ddl_Company<%=RowSupplier.Supp_Id%>" style="vertical-align: middle;">
-                <%=CompanyRow.Cmp_Title%>
-            </td>
             <td id="ddl_location<%=RowSupplier.Supp_Id%>" style="vertical-align: middle;">
                 <%=LocationRow.Loc_Title%>
             </td>
             <td id="ddl_SupplierType<%=RowSupplier.Supp_Id%>" style="vertical-align: middle;">
                 <%=SupplierTypeRow.SuppType_Title%>
             </td>
-            <td id="ddl_City<%=RowSupplier.Supp_Id%>" style="vertical-align: middle;">
-                <%=CityRow.City_Title%>
-            </td>
             <td id="txt_Title<%=RowSupplier.Supp_Id%>" style="vertical-align: middle;">
                 <%=RowSupplier.Supp_Title%>
             </td>
-            <td id="txt_Address1<%=RowSupplier.Supp_Id%>" style="vertical-align: middle;">
+            <td id="txt_Address<%=RowSupplier.Supp_Id%>" style="vertical-align: middle;">
                 <%=RowSupplier.Supp_Address1%>
-            </td>
-            <td id="txt_Address2<%=RowSupplier.Supp_Id%>" style="vertical-align: middle;">
-                <%=RowSupplier.Supp_Address2%>
             </td>
             <td id="txt_Email<%=RowSupplier.Supp_Id%>" style="vertical-align: middle;">
                 <%=RowSupplier.Supp_Email%>

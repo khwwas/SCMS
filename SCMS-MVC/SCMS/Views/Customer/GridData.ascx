@@ -20,7 +20,7 @@
                 Action
             </th>
             <th style="width: 10%;">
-                Company
+                Title
             </th>
             <th style="width: 10%;">
                 Location
@@ -28,17 +28,9 @@
             <th style="width: 10%;">
                 Customer Type
             </th>
+            
             <th style="width: 10%;">
-                City
-            </th>
-            <th style="width: 10%;">
-                Title
-            </th>
-            <th style="width: 10%;">
-                Address 1
-            </th>
-            <th style="width: 10%;">
-                Address 2
+                Address 
             </th>
             <th style="width: 10%;">
                 Email
@@ -58,27 +50,17 @@
           // Get location name show in list
           List<SCMSDataLayer.DB.SETUP_Location> ListLocations = new List<SCMSDataLayer.DB.SETUP_Location>();
           ListLocations = new SCMSDataLayer.DALLocation().GetAllLocation().ToList();
-
-          // Get Company name show in list
-          List<SCMSDataLayer.DB.SETUP_Company> ListCompanies = new List<SCMSDataLayer.DB.SETUP_Company>();
-          ListCompanies = new SCMSDataLayer.DALCompany().GetAllCompanies().ToList();
           
           // Get all customer type
           List<SCMSDataLayer.DB.SETUP_CustomerType> ListCutomerType = new List<SCMSDataLayer.DB.SETUP_CustomerType>();
           ListCutomerType = new SCMSDataLayer.DALCustomerType().GetAllCustomerType().ToList();
-          
-          // Get all cities
-          List<SCMSDataLayer.DB.SETUP_City> ListCity = new List<SCMSDataLayer.DB.SETUP_City>();
-          ListCity = new SCMSDataLayer.DALCity().GetCities().ToList();
 
           if (CustomerData != null && CustomerData.Count > 0)
           {
               foreach (SCMSDataLayer.DB.SETUP_Customer RowCustomer in CustomerData)
               {
-                  SCMSDataLayer.DB.SETUP_Company CompanyRow = ListCompanies.Where(c => c.Cmp_Id.Equals(RowCustomer.Cmp_Id)).SingleOrDefault();
                   SCMSDataLayer.DB.SETUP_Location LocationRow = ListLocations.Where(L => L.Loc_Id.Equals(RowCustomer.Loc_Id)).SingleOrDefault();
                   SCMSDataLayer.DB.SETUP_CustomerType CustomerTypeRow = ListCutomerType.Where(CT => CT.CustType_Id.Equals(RowCustomer.CustType_Id)).SingleOrDefault();
-                  SCMSDataLayer.DB.SETUP_City CityRow = ListCity.Where(C => C.City_Id.Equals(RowCustomer.City_Id)).SingleOrDefault();
                   
                   %>
         <tr class='odd gradeX' style='line-height: 15px;'>
@@ -92,8 +74,8 @@
                     <img alt="Delete" src="../../img/delete.png" style="width: 22px; vertical-align: middle" />
                 </div>
             </td>
-            <td id="ddl_Company<%=RowCustomer.Cust_Id%>" style="vertical-align: middle;">
-                <%=CompanyRow.Cmp_Title%>
+                        <td id="txt_Title<%=RowCustomer.Cust_Id%>" style="vertical-align: middle;">
+                <%=RowCustomer.Cust_Title%>
             </td>
             <td id="ddl_location<%=RowCustomer.Cust_Id%>" style="vertical-align: middle;">
                 <%=LocationRow.Loc_Title%>
@@ -101,17 +83,9 @@
             <td id="ddl_CustomerType<%=RowCustomer.Cust_Id%>" style="vertical-align: middle;">
                 <%=CustomerTypeRow.CustType_Title%>
             </td>
-            <td id="ddl_City<%=RowCustomer.Cust_Id%>" style="vertical-align: middle;">
-                <%=CityRow.City_Title%>
-            </td>
-            <td id="txt_Title<%=RowCustomer.Cust_Id%>" style="vertical-align: middle;">
-                <%=RowCustomer.Cust_Title%>
-            </td>
-            <td id="txt_Address1<%=RowCustomer.Cust_Id%>" style="vertical-align: middle;">
+
+            <td id="txt_Address<%=RowCustomer.Cust_Id%>" style="vertical-align: middle;">
                 <%=RowCustomer.Cust_Address1%>
-            </td>
-            <td id="txt_Address2<%=RowCustomer.Cust_Id%>" style="vertical-align: middle;">
-                <%=RowCustomer.Cust_Address2%>
             </td>
             <td id="txt_Email<%=RowCustomer.Cust_Id%>" style="vertical-align: middle;">
                 <%=RowCustomer.Cust_Email%>

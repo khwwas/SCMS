@@ -15,13 +15,12 @@ namespace SCMS.Controllers
         DALBank objDalBank = new DALBank();
         public ActionResult Index()
         {
-            ViewData["ddl_Company"] = new SelectList(new DALCompany().PopulateData(), "Cmp_Id", "Cmp_Title", "ddl_Company");
             ViewData["ddl_location"] = new SelectList(new DALLocation().PopulateData(), "Loc_Id", "Loc_Title", "ddl_Location");
             return View("Bank");
         }
 
         // Insertion
-        public ActionResult SaveRecord(String ps_Code, String Comapany, String Location, String Title)
+        public ActionResult SaveRecord(String ps_Code, String Location, String Title)
         {
             Int32 li_ReturnValue = 0;
 
@@ -43,7 +42,6 @@ namespace SCMS.Controllers
                     lrow_Bank.Bank_Id = ps_Code;
                     lrow_Bank.Bank_Code = ps_Code;
                     lrow_Bank.Bank_Title = Title;
-                    lrow_Bank.Cmp_Id = Comapany;
                     lrow_Bank.Loc_Id = Location;
                     lrow_Bank.Bank_Active = 1;
 

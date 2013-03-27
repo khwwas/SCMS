@@ -12,19 +12,10 @@
             var lcnt_MessageBox = document.getElementById('MessageBox');
             var lcnt_txtSelectedCode = document.getElementById("txt_SelectedCode");
             var txt_Title = document.getElementById('txt_Title');
-            var ddl_Company = document.getElementById('ddl_Company');
             var ddl_location = document.getElementById('ddl_location');
             var ddl_bank = document.getElementById('ddl_bank');
             
-            if (ddl_Company.value == 0) {
-                FadeIn(lcnt_MessageBox);
-                lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! select company</p>";
-                lcnt_MessageBox.setAttribute("class", "message error");
-                scroll(0, 0);
-                FadeOut(lcnt_MessageBox);
-                ddl_Company.focus();
-                return;
-            } else if (ddl_location.value == 0) {
+            if (ddl_location.value == 0) {
                 FadeIn(lcnt_MessageBox);
                 lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! select location</p>";
                 lcnt_MessageBox.setAttribute("class", "message error");
@@ -52,7 +43,7 @@
             } 
             else {
                 var Url = document.getElementById('frm_BankAccountSetup').action;
-                Url += "BankAccount/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&Comapany=" + ddl_Company.value + "&Location=" + ddl_location.value + "&Bank=" + ddl_bank.value + "&Title=" + txt_Title.value;
+                Url += "BankAccount/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&Location=" + ddl_location.value + "&Bank=" + ddl_bank.value + "&Title=" + txt_Title.value;
                 document.getElementById("Waiting_Image").style.display = "block";
                 document.getElementById("btn_Save").style.display = "none";
                 $.ajax({
@@ -94,14 +85,12 @@
 
             document.getElementById('txt_SelectedCode').value = "";
             document.getElementById('txt_Title').value = "";
-            document.getElementById('ddl_Company').value = "";
             document.getElementById('ddl_location').value = "";
         }
 
         function EditRecord(Id) {
             document.getElementById('txt_SelectedCode').value = Id;
             document.getElementById('txt_Title').value = document.getElementById('txt_Title' + Id).innerHTML.trim().toString().replace("&nbsp", "");
-            document.getElementById('ddl_Company').value = document.getElementById('ddl_Company' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             document.getElementById('ddl_location').value = document.getElementById('ddl_location' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             document.getElementById('ddl_bank').value = document.getElementById('ddl_bank' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             scroll(0, 0);
@@ -113,7 +102,7 @@
                 var lcnt_MessageBox = document.getElementById('MessageBox');
                 var Url = document.getElementById('frm_BankAccountSetup').action;
 
-                Url += "Bank/DeleteRecord?_pId=" + Id;
+                Url += "BankAccount/DeleteRecord?_pId=" + Id;
                 $.ajax({
                     type: "GET",
                     url: Url,
@@ -148,28 +137,25 @@
         <div class="block">
             <div id="MessageBox">
             </div>
-            <div class="CustomCell" style="width: 314px; height: 30px">
-                Company</div>
-
-                <div class="CustomCell" style="width: 314px; height: 30px; padding-left:7px;">
+            <div class="CustomCell" style="width: 115px; height: 30px">
+                Code</div>
+            <input type="text" class="CustomText" style="width: 100px;" id="txt_Code" name="txt_Code"
+                maxlength="100" value="[Auto]" readonly="readonly" /> 
+                 <div class="Clear">
+            </div>
+                <div class="CustomCell" style="width: 115px; height: 30px;">
                 Location</div>
-                <div class="CustomCell" style="width: 314px; height: 30px; padding-left:7px;">
+                <%= Html.DropDownList("ddl_location", null, new { style = "width:900px; padding: 4px;" })%>
+                 <div class="Clear">
+            </div>
+                <div class="CustomCell" style="width: 115px; height: 30px;">
                 Bank</div>
+                 <%= Html.DropDownList("ddl_bank", null, new { style = "width:900px; padding: 4px;" })%>
                 <div class="Clear">
             </div>
-            <%= Html.DropDownList("ddl_Company", null, new { style = "width:314px;" })%>
-            
-            
-            <%= Html.DropDownList("ddl_location", null, new { style = "width:314px; margin-left: 9px;" })%>
-
-            <%= Html.DropDownList("ddl_bank", null, new { style = "width:314px; margin-left: 9px;" })%>
-            <div class="Clear">
-            </div>
-            <div class="CustomCell">
+            <div class="CustomCell" style="width: 115px; height: 30px;">
                 Title</div>
-            <div class="Clear">
-            </div>
-            <input type="text" class="CustomText" style="width: 952px;" id="txt_Title" name="txt_Title"
+            <input type="text" class="CustomText" style="width: 888px;" id="txt_Title" name="txt_Title"
                 maxlength="100" />
             <div class="Clear">
             </div>

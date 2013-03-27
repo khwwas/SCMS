@@ -10,26 +10,15 @@
         function SaveRecord() {
             var lcnt_MessageBox = document.getElementById('MessageBox');
             var lcnt_txtSelectedCode = document.getElementById("txt_SelectedCode");
-            var ddl_Company = document.getElementById('ddl_Company');
             var ddl_location = document.getElementById('ddl_location');
-            var ddl_City = document.getElementById('ddl_City');
             var ddl_SupplierType = document.getElementById('ddl_SupplierType');
             var txt_Title = document.getElementById('txt_Title');
-            var txt_Address1 = document.getElementById('txt_Address1');
-            var txt_Address2 = document.getElementById('txt_Address2');
+            var txt_Address = document.getElementById('txt_Address');
             var txt_Email = document.getElementById('txt_Email');
             var txt_Phone = document.getElementById('txt_Phone');
             var txt_Fax = document.getElementById('txt_Fax');
 
-            if (ddl_Company.value == 0) {
-                FadeIn(lcnt_MessageBox);
-                lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! Select Company</p>";
-                lcnt_MessageBox.setAttribute("class", "message error");
-                scroll(0, 0);
-                FadeOut(lcnt_MessageBox);
-                ddl_Company.focus();
-                return;
-            } else if (ddl_location.value == 0) {
+            if (ddl_location.value == 0) {
                 FadeIn(lcnt_MessageBox);
                 lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! Select Location</p>";
                 lcnt_MessageBox.setAttribute("class", "message error");
@@ -56,7 +45,7 @@
             } 
             else {
                 var Url = document.getElementById('frm_SupplierSetup').action;
-                Url += "Supplier/SaveSupplierRecord?Code=" + lcnt_txtSelectedCode.value + "&Company=" + ddl_Company.value + "&location=" + ddl_location.value + "&SupplierType=" + ddl_SupplierType.value + "&City=" + ddl_City.value + "&Title=" + txt_Title.value + "&Address1=" + txt_Address1.value + "&Address2=" + txt_Address2.value + "&Email=" + txt_Email.value + "&Phone=" + txt_Phone.value + "&Fax=" + txt_Fax.value;
+                Url += "Supplier/SaveSupplierRecord?Code=" + lcnt_txtSelectedCode.value + "&location=" + ddl_location.value + "&SupplierType=" + ddl_SupplierType.value + "&Title=" + txt_Title.value + "&Address=" + txt_Address.value + "&Email=" + txt_Email.value + "&Phone=" + txt_Phone.value + "&Fax=" + txt_Fax.value;
                 document.getElementById("Waiting_Image").style.display = "block";
                 document.getElementById("btn_Save").style.display = "none";
                 $.ajax({
@@ -68,6 +57,7 @@
                         SetGrid();
                         ResetForm();
                         FadeIn(lcnt_MessageBox);
+                        alert(document.getElementById("SaveResult").value);
                         if (document.getElementById("SaveResult").value == "0") {
                             lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Unable to save record.</p>";
                             lcnt_MessageBox.setAttribute("class", "message error");
@@ -96,13 +86,10 @@
             lcnt_MessageBox.innerHTML = "";
 
             document.getElementById('txt_SelectedCode').value = "";
-            document.getElementById('ddl_Company').value = "";
             document.getElementById('ddl_location').value = "";
-            document.getElementById('ddl_City').value = "";
             document.getElementById('ddl_SupplierType').value = "";
             document.getElementById('txt_Title').value = "";
-            document.getElementById('txt_Address1').value = "";
-            document.getElementById('txt_Address2').value = "";
+            document.getElementById('txt_Address').value = "";
             document.getElementById('txt_Email').value = "";
             document.getElementById('txt_Phone').value = "";
             document.getElementById('txt_Fax').value = "";
@@ -112,13 +99,10 @@
         function EditRecord(Id) {
             document.getElementById('txt_SelectedCode').value = Id;
             //document.getElementById('txt_Code').value = Id;
-            document.getElementById('ddl_Company').value = document.getElementById('ddl_Company' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             document.getElementById('ddl_location').value = document.getElementById('ddl_location' + Id).innerHTML.trim().toString().replace("&nbsp", "");
-            document.getElementById('ddl_City').value = document.getElementById('ddl_City' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             document.getElementById('ddl_SupplierType').value = document.getElementById('ddl_SupplierType' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             document.getElementById('txt_Title').value = document.getElementById('txt_Title' + Id).innerHTML.trim().toString().replace("&nbsp", "");
-            document.getElementById('txt_Address1').value = document.getElementById('txt_Address1' + Id).innerHTML.trim().toString().replace("&nbsp", "");
-            document.getElementById('txt_Address2').value = document.getElementById('txt_Address2' + Id).innerHTML.trim().toString().replace("&nbsp", "");
+            document.getElementById('txt_Address').value = document.getElementById('txt_Address' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             document.getElementById('txt_Email').value = document.getElementById('txt_Email' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             document.getElementById('txt_Phone').value = document.getElementById('txt_Phone' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             document.getElementById('txt_Fax').value = document.getElementById('txt_Fax' + Id).innerHTML.trim().toString().replace("&nbsp", "");
@@ -166,66 +150,48 @@
         <div class="block">
             <div id="MessageBox">
             </div>
-           <!-- <div class="CustomCell" style="width: 100px; height: 30px">
+            <div class="CustomCell" style="width: 115px; height: 30px">
                 Code</div>
             <input type="text" class="CustomText" style="width: 100px;" id="txt_Code" name="txt_Code"
-                maxlength="100" value="[Auto]" readonly="readonly" /> -->
-                <div class="CustomCell" style="width: 314px; height: 30px">
-                Company</div>
-
-                <div class="CustomCell" style="width: 314px; height: 30px; padding-left:7px;">
+                maxlength="100" value="[Auto]" readonly="readonly" /> 
+                 <div class="Clear">
+            </div>
+                <div class="CustomCell" style="width: 115px; height: 30px;">
                 Location</div>
-
-                <div class="CustomCell" style="width: 314px; height: 30px; padding-left:7px;">
-                Supplier Type</div>
+                <%= Html.DropDownList("ddl_location", null, new { style = "width:900px; padding: 4px;" })%>
                 <div class="Clear">
             </div>
-            <%= Html.DropDownList("ddl_Company", null, new { style = "width:314px;" })%>
-            
-            
-            <%= Html.DropDownList("ddl_location", null, new { style = "width:314px; margin-left: 9px;" })%>
-
-
-            <%= Html.DropDownList("ddl_SupplierType", null, new { style = "width:314px;margin-left: 9px;" })%>
+                <div class="CustomCell" style="width: 115px; height: 30px;">
+                Supplier Type</div>
+                <%= Html.DropDownList("ddl_SupplierType", null, new { style = "width:900px; padding: 4px;" })%>
             <div class="Clear">
             </div>
-            <div class="CustomCell" style="width: 320px; height: 30px; margin-top:8px;">
-                City</div>
-            <div class="CustomCell" style="width: 320px; height: 30px; margin-top:8px;">
+            <div class="CustomCell" style="width: 107px; height: 30px; margin-top:8px;">
                 Title</div>
-            <div class="CustomCell" style="width: 314px; height: 30px; margin-top:8px; padding-left:5px;">
-                Address 1</div>
-            <div class="Clear">
-            </div>
-            <%= Html.DropDownList("ddl_City", null, new { style = "width:314px;" })%>
-            <input type="text" class="CustomText" style="width: 300px; margin-left:7px;" id="txt_Title" name="txt_Title"
-                maxlength="100" />
-            <input type="text" class="CustomText" style="width: 300px; margin-left:7px;" id="txt_Address1" name="txt_Address1"
+            <input type="text" class="CustomText" style="width: 890px; margin-left:7px;" id="txt_Title" name="txt_Title"
                 maxlength="100" />
             <div class="Clear">
             </div>
-            <div class="CustomCell" style="width: 320px; height: 30px; margin-top:8px;">
-                Address 2</div>
-            <div class="CustomCell" style="width: 320px; height: 30px; margin-top:8px;">
+            <div class="CustomCell" style="width: 107px; height: 30px; margin-top:8px;">
+                Address</div>
+            <input type="text" class="CustomText" style="width: 890px; margin-left:7px;" id="txt_Address" name="txt_Address"
+                maxlength="100" />
+            <div class="Clear">
+            </div>
+            <div class="CustomCell">
                 Email</div>
-            <div class="CustomCell" style="width: 314px; height: 30px; margin-top:8px; padding-left:5px;">
+            <div class="CustomCell">
                 Phone</div>
-            <div class="Clear">
-            </div>
-            <input type="text" class="CustomText" style="width: 300px;" id="txt_Address2" name="txt_Address2"
-                maxlength="100" />
-            <input type="text" class="CustomText" style="width: 300px;" id="txt_Email" name="txt_Email"
-                maxlength="100" />
-            <input type="text" class="CustomText" style="width: 300px; margin-left:7px;" id="txt_Phone" name="txt_Phone"
-                maxlength="100" />
-            <div class="Clear">
-            </div>
-            <div class="CustomCell" style="width: 314px; height: 30px; margin-top:5px;">
+            <div class="CustomCell">
                 Fax</div>
-           <div class="Clear">
+            <div class="Clear">
+            </div>
+            <input type="text" class="CustomText" id="txt_Email" name="txt_Email" maxlength="100" />
+            <input type="text" class="CustomText" id="txt_Phone" name="txt_Phone" maxlength="100" />
+            <input type="text" class="CustomText" id="txt_Fax" name="txt_Fax" maxlength="100" />
+            <div class="Clear">
             </div>     
-            <input type="text" class="CustomText" style="width: 960px;" id="txt_Fax" name="txt_Fax"
-                maxlength="100" />
+            
             <div style="float: right; margin-bottom: 10px;">
                 <div style="float: left; margin-right: 5px;">
                     <input id="btn_Save" type="button" value="Save" class="btn btn-blue" onclick="SaveRecord();"

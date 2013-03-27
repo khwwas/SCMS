@@ -287,7 +287,7 @@
             </div>
             <div class="CustomCell" style="width: 100px; height: 30px">
                 Nature</div>
-            <%= Html.DropDownList("ddl_Nature", null, new { style = "width:955px;" })%>
+            <%= Html.DropDownList("ddl_Nature", null, new { style = "width:955px; padding: 4px;" })%>
             <div class="Clear">
             </div>
             <%-- <div class="CustomCell" style="width: 100px; height: 30px">
