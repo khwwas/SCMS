@@ -68,7 +68,7 @@
                         document.getElementById("btn_Login").style.display = "block";
                     }
                     else {
-                        location.href = "../Home";
+                        location.href = "../Dashboard";
                     }
                 },
                 error: function (rs, e) {

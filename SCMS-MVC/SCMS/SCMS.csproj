@@ -73,6 +73,7 @@
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\ChartOfAccountController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\DashBoardController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ReportSelectionCriteriaController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
@@ -909,6 +910,7 @@
     <Content Include="Views\Bank\GridData.ascx" />
     <Content Include="Views\Customer\Customer.aspx" />
     <Content Include="Views\Customer\GridData.ascx" />
+    <Content Include="Views\DashBoard\Index.aspx" />
     <Content Include="Views\ReportSelectionCriteria\ReportSelectionCriteria.aspx" />
     <Content Include="Views\Supplier\GridData.ascx" />
     <Content Include="Views\Supplier\Supplier.aspx" />
@@ -1577,6 +1579,7 @@
     <None Include="Reports\Datasets\dsVoucherTypes.xss">
       <DependentUpon>dsVoucherTypes.xsd</DependentUpon>
     </None>
+    <Content Include="Views\Shared\DashBoardMaster.Master" />
     <None Include="Widgets\EULA.pdf" />
     <None Include="Widgets\phpdemos\bind_chart_to_mysql_database\connect.php" />
     <None Include="Widgets\phpdemos\bind_chart_to_mysql_database\data.php" />
