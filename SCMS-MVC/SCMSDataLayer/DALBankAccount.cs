@@ -21,7 +21,6 @@ namespace SCMSDataLayer
                 {
                     lRow_ExistingData.BankAcc_Title = lrow_BankAccount.BankAcc_Title;
                     lRow_ExistingData.Loc_Id = lrow_BankAccount.Loc_Id;
-                    lRow_ExistingData.Cmp_Id = lrow_BankAccount.Cmp_Id;
                     lRow_ExistingData.Bank_Id = lrow_BankAccount.Bank_Id;
                 }
                 else
@@ -59,19 +58,6 @@ namespace SCMSDataLayer
             {
                 SCMSDataContext dbSCMS = Connection.Create();
                 return dbSCMS.SETUP_Locations.Where(c => c.Loc_Active == 1).ToList();
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        public List<SETUP_Company> GetAllCompanies()
-        {
-            try
-            {
-                SCMSDataContext dbSCMS = Connection.Create();
-                return dbSCMS.SETUP_Companies.Where(c => c.Cmp_Active == 1).ToList();
             }
             catch
             {

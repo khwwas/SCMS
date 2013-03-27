@@ -21,7 +21,6 @@ namespace SCMSDataLayer
                {
                    lRow_ExistingData.Bank_Title = lrow_Bank.Bank_Title;
                    lRow_ExistingData.Loc_Id = lrow_Bank.Loc_Id;
-                   lRow_ExistingData.Cmp_Id = lrow_Bank.Cmp_Id;
                }
                else
                {
@@ -65,18 +64,6 @@ namespace SCMSDataLayer
            }
        }
 
-       public List<SETUP_Company> GetAllCompanies()
-       {
-           try
-           {
-               SCMSDataContext dbSCMS = Connection.Create();
-               return dbSCMS.SETUP_Companies.Where(c => c.Cmp_Active == 1).ToList();
-           }
-           catch
-           {
-               return null;
-           }
-       }
 
        public int DeleteRecordById(String ps_Id)
        {

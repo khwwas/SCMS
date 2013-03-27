@@ -135,7 +135,7 @@
             </div>
             <div class="CustomCell" style="width: 100px; height: 30px">
                 Voucher Type</div>
-            <%= Html.DropDownList("ddl_VoucherType", null, new { style = "width:955px;" })%>
+            <%= Html.DropDownList("ddl_VoucherType", null, new { style = "width:955px; padding: 4px;" })%>
             <div class="Clear">
             </div>
             <div style="float: right; margin-bottom: 10px;">

@@ -20,12 +20,10 @@ namespace SCMSDataLayer.DB
                 if (Row_ExistingData != null)
                 {
                     Row_ExistingData.Cust_Code = row_Customer.Cust_Code;
-                    Row_ExistingData.Cmp_Id = row_Customer.Cmp_Id;
                     Row_ExistingData.Loc_Id = row_Customer.Loc_Id;
                     Row_ExistingData.CustType_Id = row_Customer.CustType_Id;
                     Row_ExistingData.Cust_Title = row_Customer.Cust_Title;
                     Row_ExistingData.Cust_Address1 = row_Customer.Cust_Address1;
-                    Row_ExistingData.Cust_Address2 = row_Customer.Cust_Address2;
                     Row_ExistingData.Cust_Email = row_Customer.Cust_Email;
                     Row_ExistingData.Cust_Phone = row_Customer.Cust_Phone;
                     Row_ExistingData.Cust_Fax = row_Customer.Cust_Fax;

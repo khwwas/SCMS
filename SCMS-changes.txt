@@ -1,0 +1,7 @@
+Customer
+
+- City_Id Allow Null (True)
+
+Supplier
+
+- City_Id Allow Null (True)
