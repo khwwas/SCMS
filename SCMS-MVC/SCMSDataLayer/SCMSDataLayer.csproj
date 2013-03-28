@@ -46,6 +46,7 @@
     <Compile Include="DALAccountNature.cs" />
     <Compile Include="DALBank.cs" />
     <Compile Include="DALBankAccount.cs" />
+    <Compile Include="DALCalendar.cs" />
     <Compile Include="DALCalendarType.cs" />
     <Compile Include="DALCustomer.cs" />
     <Compile Include="DALNature.cs" />

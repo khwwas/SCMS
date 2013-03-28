@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Controllers\BankAccountController.cs" />
     <Compile Include="Controllers\BankController.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\CalendarTypeController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\CityController.cs" />
@@ -408,6 +409,7 @@
     <Content Include="img\gallery\thumbs_small\image_28.png" />
     <Content Include="img\gallery\thumbs_small\image_29.png" />
     <Content Include="img\gallery\thumbs_small\image_30.png" />
+    <Content Include="img\GL.png" />
     <Content Include="img\gradient_red.gif" />
     <Content Include="img\header-repeat.jpg" />
     <Content Include="img\header_inner.png" />
@@ -440,6 +442,7 @@
     <Content Include="img\metallic\disabled-date.png" />
     <Content Include="img\metallic\header.png" />
     <Content Include="img\metallic\selected-date.png" />
+    <Content Include="img\MG.png" />
     <Content Include="img\minus.png" />
     <Content Include="img\nav-repeat2.jpg" />
     <Content Include="img\nav_bg.png" />
@@ -548,6 +551,7 @@
     <Content Include="img\textarea-r-over.png" />
     <Content Include="img\textarea-tl.png" />
     <Content Include="img\textarea-tr.png" />
+    <Content Include="img\TM.png" />
     <Content Include="img\ui-icons_454545_256x240.png" />
     <Content Include="img\vertical.jpg" />
     <Content Include="img\View.png" />
@@ -901,6 +905,8 @@
     <Content Include="Views\BankAccount\GridData.ascx" />
     <Content Include="Views\CalendarType\CalendarType.aspx" />
     <Content Include="Views\CalendarType\GridData.ascx" />
+    <Content Include="Views\Calendar\Calendar.aspx" />
+    <Content Include="Views\Calendar\GridData.ascx" />
     <Content Include="Views\City\City.aspx" />
     <Content Include="Views\City\GridData.ascx" />
     <Content Include="Views\Company\Company.aspx" />

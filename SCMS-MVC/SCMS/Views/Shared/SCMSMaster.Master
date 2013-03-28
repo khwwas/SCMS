@@ -119,6 +119,7 @@
         <div class="grid_12">
             <ul class="nav main">
                 <li class="ic-typography"><a href="../Home"><span>Home</span></a></li>
+                <li class="ic-typography"><a href="../Dashboard"><span>Dashboard</span></a></li>
                 <%if (user.UsrGrp_Id == "00001")
                   { %>
                 <li class="ic-typography"><a href="javascript:" style="float: left"><span>Security</span></a>
