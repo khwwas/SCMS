@@ -33,14 +33,20 @@ namespace SCMSDataLayer
             return li_ReturnValue;
         }
 
-        public int DeleteRecordByGroupId(int Grp_Id)
+        public List<Security_MenuOption> MenuOptions()
+        {
+            SCMSDataContext dbSCMS = Connection.Create();
+            return dbSCMS.Security_MenuOptions.ToList();
+        }
+
+        public int DeleteRecordByGroupId(int Grp_Id, int ModuleId)
         {
             int li_ReturnValue = 0;
 
             try
             {
                 SCMSDataContext dbSCMS = Connection.Create();
-                li_ReturnValue = dbSCMS.ExecuteCommand("Delete From Security_UserRights where Grp_Id=" + Grp_Id);
+                li_ReturnValue = dbSCMS.ExecuteCommand("Delete From Security_UserRights where Grp_Id=" + Grp_Id + " And Mod_Id=" + ModuleId);
             }
             catch
             {

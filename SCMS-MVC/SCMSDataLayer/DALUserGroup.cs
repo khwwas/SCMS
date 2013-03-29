@@ -72,7 +72,7 @@ namespace SCMSDataLayer
             try
             {
                 SCMSDataContext dbSCMS = Connection.Create();
-                return dbSCMS.sp_GetUserGroupList().ToList();
+                return dbSCMS.sp_GetUserGroupList().ToList();//.Where(c => c.UsrGrp_Id != "00001").ToList();
             }
             catch
             {
@@ -85,7 +85,7 @@ namespace SCMSDataLayer
             try
             {
                 SCMSDataContext dbSCMS = Connection.Create();
-                return dbSCMS.sp_PopulateUserGroupList().ToList();
+                return dbSCMS.sp_PopulateUserGroupList().ToList();//.Where(c => c.UsrGrp_Id != "00001").ToList();
             }
             catch
             {

@@ -13,6 +13,8 @@ namespace SCMS.Controllers
 
         public ActionResult Index()
         {
+            var user = (SCMSDataLayer.DB.SECURITY_User)Session["user"];
+            ViewData["Modules"] = new SCMSDataLayer.DALModules().GetUserModules(user.UsrGrp_Id);
             return View();
         }
 

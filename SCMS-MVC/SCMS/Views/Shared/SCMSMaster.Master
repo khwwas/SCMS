@@ -13,7 +13,7 @@
     else
     {
         user = (SCMSDataLayer.DB.SECURITY_User)Session["user"];
-        userMenus = new SCMSDataLayer.DALUserMenuRights().GetUserMenuRights(user.UsrGrp_Id);
+        userMenus = new SCMSDataLayer.DALUserMenuRights().GetUserMenuRights(user.UsrGrp_Id).Where(c => c.Mod_Id == SCMSDataLayer.DALCommon.ModuleId).ToList();
     }
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">

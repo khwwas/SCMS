@@ -47,7 +47,7 @@
                 </div>
                 <div onclick="javascript:return DeleteRecord('<%=lRow_Data.User_Id %>')" style="width: 22px;
                     float: left; cursor: pointer;">
-                    <img alt="Delete" src="../../img/delete.png" style="width: 22px; vertical-align: middle" />
+                    <%-- <img alt="Delete" src="../../img/delete.png" style="width: 22px; vertical-align: middle" />--%>
                 </div>
             </td>
             <td id="txt_Code<%=lRow_Data.User_Id%>" style="vertical-align: middle;">

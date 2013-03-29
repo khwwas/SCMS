@@ -72,6 +72,9 @@ namespace SCMSDataLayer.DB
     partial void InsertSETUP_Company(SETUP_Company instance);
     partial void UpdateSETUP_Company(SETUP_Company instance);
     partial void DeleteSETUP_Company(SETUP_Company instance);
+    partial void InsertSETUP_CompanyModule(SETUP_CompanyModule instance);
+    partial void UpdateSETUP_CompanyModule(SETUP_CompanyModule instance);
+    partial void DeleteSETUP_CompanyModule(SETUP_CompanyModule instance);
     partial void InsertSETUP_Country(SETUP_Country instance);
     partial void UpdateSETUP_Country(SETUP_Country instance);
     partial void DeleteSETUP_Country(SETUP_Country instance);
@@ -84,6 +87,9 @@ namespace SCMSDataLayer.DB
     partial void InsertSETUP_Location(SETUP_Location instance);
     partial void UpdateSETUP_Location(SETUP_Location instance);
     partial void DeleteSETUP_Location(SETUP_Location instance);
+    partial void InsertSETUP_Module(SETUP_Module instance);
+    partial void UpdateSETUP_Module(SETUP_Module instance);
+    partial void DeleteSETUP_Module(SETUP_Module instance);
     partial void InsertSETUP_Supplier(SETUP_Supplier instance);
     partial void UpdateSETUP_Supplier(SETUP_Supplier instance);
     partial void DeleteSETUP_Supplier(SETUP_Supplier instance);
@@ -103,6 +109,12 @@ namespace SCMSDataLayer.DB
     partial void UpdateSYSTEM_CodeGeneration(SYSTEM_CodeGeneration instance);
     partial void DeleteSYSTEM_CodeGeneration(SYSTEM_CodeGeneration instance);
     #endregion
+		
+		public SCMSDataContext() : 
+				base(global::SCMSDataLayer.Properties.Settings.Default.SCMSConnectionString2, mappingSource)
+		{
+			OnCreated();
+		}
 		
 		public SCMSDataContext(string connection) : 
 				base(connection, mappingSource)
@@ -240,6 +252,14 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		public System.Data.Linq.Table<SETUP_CompanyModule> SETUP_CompanyModules
+		{
+			get
+			{
+				return this.GetTable<SETUP_CompanyModule>();
+			}
+		}
+		
 		public System.Data.Linq.Table<SETUP_Country> SETUP_Countries
 		{
 			get
@@ -269,6 +289,14 @@ namespace SCMSDataLayer.DB
 			get
 			{
 				return this.GetTable<SETUP_Location>();
+			}
+		}
+		
+		public System.Data.Linq.Table<SETUP_Module> SETUP_Modules
+		{
+			get
+			{
+				return this.GetTable<SETUP_Module>();
 			}
 		}
 		
@@ -433,9 +461,9 @@ namespace SCMSDataLayer.DB
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_ReportLedgerDetail")]
-		public ISingleResult<sp_ReportLedgerDetailResult> sp_ReportLedgerDetail()
+		public ISingleResult<sp_ReportLedgerDetailResult> sp_ReportLedgerDetail([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Location", DbType="VarChar(1)")] string location, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AllAccCode", DbType="Int")] System.Nullable<int> allAccCode, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AccCodeFrom", DbType="VarChar(1)")] string accCodeFrom, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AccCodeTo", DbType="VarChar(1)")] string accCodeTo, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AllDate", DbType="Int")] System.Nullable<int> allDate, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="DateFrom", DbType="DateTime")] System.Nullable<System.DateTime> dateFrom, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="DateTo", DbType="DateTime")] System.Nullable<System.DateTime> dateTo)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), location, allAccCode, accCodeFrom, accCodeTo, allDate, dateFrom, dateTo);
 			return ((ISingleResult<sp_ReportLedgerDetailResult>)(result.ReturnValue));
 		}
 		
@@ -931,6 +959,12 @@ namespace SCMSDataLayer.DB
 		
 		private EntitySet<GL_VchrDetail> _GL_VchrDetails;
 		
+		private EntityRef<SETUP_Company> _SETUP_Company;
+		
+		private EntityRef<SETUP_Location> _SETUP_Location;
+		
+		private EntityRef<SETUP_VoucherType> _SETUP_VoucherType;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -966,6 +1000,9 @@ namespace SCMSDataLayer.DB
 		public GL_VchrMaster()
 		{
 			this._GL_VchrDetails = new EntitySet<GL_VchrDetail>(new Action<GL_VchrDetail>(this.attach_GL_VchrDetails), new Action<GL_VchrDetail>(this.detach_GL_VchrDetails));
+			this._SETUP_Company = default(EntityRef<SETUP_Company>);
+			this._SETUP_Location = default(EntityRef<SETUP_Location>);
+			this._SETUP_VoucherType = default(EntityRef<SETUP_VoucherType>);
 			OnCreated();
 		}
 		
@@ -1040,6 +1077,10 @@ namespace SCMSDataLayer.DB
 			{
 				if ((this._Cmp_Id != value))
 				{
+					if (this._SETUP_Company.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnCmp_IdChanging(value);
 					this.SendPropertyChanging();
 					this._Cmp_Id = value;
@@ -1060,6 +1101,10 @@ namespace SCMSDataLayer.DB
 			{
 				if ((this._Loc_Id != value))
 				{
+					if (this._SETUP_Location.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnLoc_IdChanging(value);
 					this.SendPropertyChanging();
 					this._Loc_Id = value;
@@ -1080,6 +1125,10 @@ namespace SCMSDataLayer.DB
 			{
 				if ((this._VchrType_Id != value))
 				{
+					if (this._SETUP_VoucherType.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnVchrType_IdChanging(value);
 					this.SendPropertyChanging();
 					this._VchrType_Id = value;
@@ -1242,6 +1291,108 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_GL_VchrMaster", Storage="_SETUP_Company", ThisKey="Cmp_Id", OtherKey="Cmp_Id", IsForeignKey=true)]
+		public SETUP_Company SETUP_Company
+		{
+			get
+			{
+				return this._SETUP_Company.Entity;
+			}
+			set
+			{
+				SETUP_Company previousValue = this._SETUP_Company.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Company.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Company.Entity = null;
+						previousValue.GL_VchrMasters.Remove(this);
+					}
+					this._SETUP_Company.Entity = value;
+					if ((value != null))
+					{
+						value.GL_VchrMasters.Add(this);
+						this._Cmp_Id = value.Cmp_Id;
+					}
+					else
+					{
+						this._Cmp_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Company");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_GL_VchrMaster", Storage="_SETUP_Location", ThisKey="Loc_Id", OtherKey="Loc_Id", IsForeignKey=true)]
+		public SETUP_Location SETUP_Location
+		{
+			get
+			{
+				return this._SETUP_Location.Entity;
+			}
+			set
+			{
+				SETUP_Location previousValue = this._SETUP_Location.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Location.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Location.Entity = null;
+						previousValue.GL_VchrMasters.Remove(this);
+					}
+					this._SETUP_Location.Entity = value;
+					if ((value != null))
+					{
+						value.GL_VchrMasters.Add(this);
+						this._Loc_Id = value.Loc_Id;
+					}
+					else
+					{
+						this._Loc_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Location");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_VoucherType_GL_VchrMaster", Storage="_SETUP_VoucherType", ThisKey="VchrType_Id", OtherKey="VchrType_Id", IsForeignKey=true)]
+		public SETUP_VoucherType SETUP_VoucherType
+		{
+			get
+			{
+				return this._SETUP_VoucherType.Entity;
+			}
+			set
+			{
+				SETUP_VoucherType previousValue = this._SETUP_VoucherType.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_VoucherType.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_VoucherType.Entity = null;
+						previousValue.GL_VchrMasters.Remove(this);
+					}
+					this._SETUP_VoucherType.Entity = value;
+					if ((value != null))
+					{
+						value.GL_VchrMasters.Add(this);
+						this._VchrType_Id = value.VchrType_Id;
+					}
+					else
+					{
+						this._VchrType_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_VoucherType");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1297,6 +1448,8 @@ namespace SCMSDataLayer.DB
 		
 		private System.Nullable<int> _Mnu_Active;
 		
+		private System.Nullable<int> _Mod_Id;
+		
 		private EntitySet<Security_UserRight> _Security_UserRights;
 		
     #region Extensibility Method Definitions
@@ -1319,6 +1472,8 @@ namespace SCMSDataLayer.DB
     partial void OnMnu_IsLineBreakChanged();
     partial void OnMnu_ActiveChanging(System.Nullable<int> value);
     partial void OnMnu_ActiveChanged();
+    partial void OnMod_IdChanging(System.Nullable<int> value);
+    partial void OnMod_IdChanged();
     #endregion
 		
 		public Security_MenuOption()
@@ -1483,6 +1638,26 @@ namespace SCMSDataLayer.DB
 					this._Mnu_Active = value;
 					this.SendPropertyChanged("Mnu_Active");
 					this.OnMnu_ActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_Id", DbType="Int")]
+		public System.Nullable<int> Mod_Id
+		{
+			get
+			{
+				return this._Mod_Id;
+			}
+			set
+			{
+				if ((this._Mod_Id != value))
+				{
+					this.OnMod_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Mod_Id = value;
+					this.SendPropertyChanged("Mod_Id");
+					this.OnMod_IdChanged();
 				}
 			}
 		}
@@ -2242,6 +2417,8 @@ namespace SCMSDataLayer.DB
 		
 		private System.Nullable<int> _UsrSec_Active;
 		
+		private System.Nullable<int> _Mod_Id;
+		
 		private EntityRef<Security_MenuOption> _Security_MenuOption;
 		
     #region Extensibility Method Definitions
@@ -2258,6 +2435,8 @@ namespace SCMSDataLayer.DB
     partial void OnMnu_IdChanged();
     partial void OnUsrSec_ActiveChanging(System.Nullable<int> value);
     partial void OnUsrSec_ActiveChanged();
+    partial void OnMod_IdChanging(System.Nullable<int> value);
+    partial void OnMod_IdChanged();
     #endregion
 		
 		public Security_UserRight()
@@ -2366,6 +2545,26 @@ namespace SCMSDataLayer.DB
 					this._UsrSec_Active = value;
 					this.SendPropertyChanged("UsrSec_Active");
 					this.OnUsrSec_ActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_Id", DbType="Int")]
+		public System.Nullable<int> Mod_Id
+		{
+			get
+			{
+				return this._Mod_Id;
+			}
+			set
+			{
+				if ((this._Mod_Id != value))
+				{
+					this.OnMod_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Mod_Id = value;
+					this.SendPropertyChanged("Mod_Id");
+					this.OnMod_IdChanged();
 				}
 			}
 		}
@@ -4706,6 +4905,8 @@ namespace SCMSDataLayer.DB
 		
 		private System.Nullable<int> _Cmp_SortOrder;
 		
+		private EntitySet<GL_VchrMaster> _GL_VchrMasters;
+		
 		private EntitySet<SECURITY_User> _SECURITY_Users;
 		
 		private EntitySet<SECURITY_UserGroup> _SECURITY_UserGroups;
@@ -4760,6 +4961,7 @@ namespace SCMSDataLayer.DB
 		
 		public SETUP_Company()
 		{
+			this._GL_VchrMasters = new EntitySet<GL_VchrMaster>(new Action<GL_VchrMaster>(this.attach_GL_VchrMasters), new Action<GL_VchrMaster>(this.detach_GL_VchrMasters));
 			this._SECURITY_Users = new EntitySet<SECURITY_User>(new Action<SECURITY_User>(this.attach_SECURITY_Users), new Action<SECURITY_User>(this.detach_SECURITY_Users));
 			this._SECURITY_UserGroups = new EntitySet<SECURITY_UserGroup>(new Action<SECURITY_UserGroup>(this.attach_SECURITY_UserGroups), new Action<SECURITY_UserGroup>(this.detach_SECURITY_UserGroups));
 			this._SETUP_Banks = new EntitySet<SETUP_Bank>(new Action<SETUP_Bank>(this.attach_SETUP_Banks), new Action<SETUP_Bank>(this.detach_SETUP_Banks));
@@ -4976,6 +5178,19 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_GL_VchrMaster", Storage="_GL_VchrMasters", ThisKey="Cmp_Id", OtherKey="Cmp_Id")]
+		public EntitySet<GL_VchrMaster> GL_VchrMasters
+		{
+			get
+			{
+				return this._GL_VchrMasters;
+			}
+			set
+			{
+				this._GL_VchrMasters.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SECURITY_User", Storage="_SECURITY_Users", ThisKey="Cmp_Id", OtherKey="Cmp_Id")]
 		public EntitySet<SECURITY_User> SECURITY_Users
 		{
@@ -5165,6 +5380,18 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		private void attach_GL_VchrMasters(GL_VchrMaster entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Company = this;
+		}
+		
+		private void detach_GL_VchrMasters(GL_VchrMaster entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Company = null;
+		}
+		
 		private void attach_SECURITY_Users(SECURITY_User entity)
 		{
 			this.SendPropertyChanging();
@@ -5319,6 +5546,164 @@ namespace SCMSDataLayer.DB
 		{
 			this.SendPropertyChanging();
 			entity.SETUP_Company = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SETUP_CompanyModule")]
+	public partial class SETUP_CompanyModule : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _CmpMod_Id;
+		
+		private int _Mod_Id;
+		
+		private string _Cmp_Id;
+		
+		private bool _CmpMod_Active;
+		
+		private System.Nullable<int> _CmpMod_SortOrder;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCmpMod_IdChanging(int value);
+    partial void OnCmpMod_IdChanged();
+    partial void OnMod_IdChanging(int value);
+    partial void OnMod_IdChanged();
+    partial void OnCmp_IdChanging(string value);
+    partial void OnCmp_IdChanged();
+    partial void OnCmpMod_ActiveChanging(bool value);
+    partial void OnCmpMod_ActiveChanged();
+    partial void OnCmpMod_SortOrderChanging(System.Nullable<int> value);
+    partial void OnCmpMod_SortOrderChanged();
+    #endregion
+		
+		public SETUP_CompanyModule()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CmpMod_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int CmpMod_Id
+		{
+			get
+			{
+				return this._CmpMod_Id;
+			}
+			set
+			{
+				if ((this._CmpMod_Id != value))
+				{
+					this.OnCmpMod_IdChanging(value);
+					this.SendPropertyChanging();
+					this._CmpMod_Id = value;
+					this.SendPropertyChanged("CmpMod_Id");
+					this.OnCmpMod_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_Id", DbType="Int NOT NULL")]
+		public int Mod_Id
+		{
+			get
+			{
+				return this._Mod_Id;
+			}
+			set
+			{
+				if ((this._Mod_Id != value))
+				{
+					this.OnMod_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Mod_Id = value;
+					this.SendPropertyChanged("Mod_Id");
+					this.OnMod_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cmp_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Cmp_Id
+		{
+			get
+			{
+				return this._Cmp_Id;
+			}
+			set
+			{
+				if ((this._Cmp_Id != value))
+				{
+					this.OnCmp_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Cmp_Id = value;
+					this.SendPropertyChanged("Cmp_Id");
+					this.OnCmp_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CmpMod_Active", DbType="Bit NOT NULL")]
+		public bool CmpMod_Active
+		{
+			get
+			{
+				return this._CmpMod_Active;
+			}
+			set
+			{
+				if ((this._CmpMod_Active != value))
+				{
+					this.OnCmpMod_ActiveChanging(value);
+					this.SendPropertyChanging();
+					this._CmpMod_Active = value;
+					this.SendPropertyChanged("CmpMod_Active");
+					this.OnCmpMod_ActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CmpMod_SortOrder", DbType="Int")]
+		public System.Nullable<int> CmpMod_SortOrder
+		{
+			get
+			{
+				return this._CmpMod_SortOrder;
+			}
+			set
+			{
+				if ((this._CmpMod_SortOrder != value))
+				{
+					this.OnCmpMod_SortOrderChanging(value);
+					this.SendPropertyChanging();
+					this._CmpMod_SortOrder = value;
+					this.SendPropertyChanged("CmpMod_SortOrder");
+					this.OnCmpMod_SortOrderChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -5705,7 +6090,7 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City_Id", DbType="VarChar(50)")]
 		public string City_Id
 		{
 			get
@@ -6380,6 +6765,8 @@ namespace SCMSDataLayer.DB
 		
 		private System.Nullable<int> _Loc_SortOrder;
 		
+		private EntitySet<GL_VchrMaster> _GL_VchrMasters;
+		
 		private EntitySet<SECURITY_User> _SECURITY_Users;
 		
 		private EntitySet<SECURITY_UserGroup> _SECURITY_UserGroups;
@@ -6426,6 +6813,7 @@ namespace SCMSDataLayer.DB
 		
 		public SETUP_Location()
 		{
+			this._GL_VchrMasters = new EntitySet<GL_VchrMaster>(new Action<GL_VchrMaster>(this.attach_GL_VchrMasters), new Action<GL_VchrMaster>(this.detach_GL_VchrMasters));
 			this._SECURITY_Users = new EntitySet<SECURITY_User>(new Action<SECURITY_User>(this.attach_SECURITY_Users), new Action<SECURITY_User>(this.detach_SECURITY_Users));
 			this._SECURITY_UserGroups = new EntitySet<SECURITY_UserGroup>(new Action<SECURITY_UserGroup>(this.attach_SECURITY_UserGroups), new Action<SECURITY_UserGroup>(this.detach_SECURITY_UserGroups));
 			this._SETUP_Banks = new EntitySet<SETUP_Bank>(new Action<SETUP_Bank>(this.attach_SETUP_Banks), new Action<SETUP_Bank>(this.detach_SETUP_Banks));
@@ -6563,6 +6951,19 @@ namespace SCMSDataLayer.DB
 					this.SendPropertyChanged("Loc_SortOrder");
 					this.OnLoc_SortOrderChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_GL_VchrMaster", Storage="_GL_VchrMasters", ThisKey="Loc_Id", OtherKey="Loc_Id")]
+		public EntitySet<GL_VchrMaster> GL_VchrMasters
+		{
+			get
+			{
+				return this._GL_VchrMasters;
+			}
+			set
+			{
+				this._GL_VchrMasters.Assign(value);
 			}
 		}
 		
@@ -6776,6 +7177,18 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		private void attach_GL_VchrMasters(GL_VchrMaster entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Location = this;
+		}
+		
+		private void detach_GL_VchrMasters(GL_VchrMaster entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Location = null;
+		}
+		
 		private void attach_SECURITY_Users(SECURITY_User entity)
 		{
 			this.SendPropertyChanging();
@@ -6918,6 +7331,212 @@ namespace SCMSDataLayer.DB
 		{
 			this.SendPropertyChanging();
 			entity.SETUP_Location = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SETUP_Module")]
+	public partial class SETUP_Module : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Mod_Id;
+		
+		private string _Mod_Code;
+		
+		private string _Mod_Desc;
+		
+		private System.Nullable<bool> _Mod_Active;
+		
+		private System.Nullable<int> _Mod_SortOrder;
+		
+		private string _Mod_Url;
+		
+		private string _Mod_ImagePath;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnMod_IdChanging(int value);
+    partial void OnMod_IdChanged();
+    partial void OnMod_CodeChanging(string value);
+    partial void OnMod_CodeChanged();
+    partial void OnMod_DescChanging(string value);
+    partial void OnMod_DescChanged();
+    partial void OnMod_ActiveChanging(System.Nullable<bool> value);
+    partial void OnMod_ActiveChanged();
+    partial void OnMod_SortOrderChanging(System.Nullable<int> value);
+    partial void OnMod_SortOrderChanged();
+    partial void OnMod_UrlChanging(string value);
+    partial void OnMod_UrlChanged();
+    partial void OnMod_ImagePathChanging(string value);
+    partial void OnMod_ImagePathChanged();
+    #endregion
+		
+		public SETUP_Module()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Mod_Id
+		{
+			get
+			{
+				return this._Mod_Id;
+			}
+			set
+			{
+				if ((this._Mod_Id != value))
+				{
+					this.OnMod_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Mod_Id = value;
+					this.SendPropertyChanged("Mod_Id");
+					this.OnMod_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_Code", DbType="VarChar(50)")]
+		public string Mod_Code
+		{
+			get
+			{
+				return this._Mod_Code;
+			}
+			set
+			{
+				if ((this._Mod_Code != value))
+				{
+					this.OnMod_CodeChanging(value);
+					this.SendPropertyChanging();
+					this._Mod_Code = value;
+					this.SendPropertyChanged("Mod_Code");
+					this.OnMod_CodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_Desc", DbType="VarChar(500) NOT NULL", CanBeNull=false)]
+		public string Mod_Desc
+		{
+			get
+			{
+				return this._Mod_Desc;
+			}
+			set
+			{
+				if ((this._Mod_Desc != value))
+				{
+					this.OnMod_DescChanging(value);
+					this.SendPropertyChanging();
+					this._Mod_Desc = value;
+					this.SendPropertyChanged("Mod_Desc");
+					this.OnMod_DescChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_Active", DbType="Bit")]
+		public System.Nullable<bool> Mod_Active
+		{
+			get
+			{
+				return this._Mod_Active;
+			}
+			set
+			{
+				if ((this._Mod_Active != value))
+				{
+					this.OnMod_ActiveChanging(value);
+					this.SendPropertyChanging();
+					this._Mod_Active = value;
+					this.SendPropertyChanged("Mod_Active");
+					this.OnMod_ActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_SortOrder", DbType="Int")]
+		public System.Nullable<int> Mod_SortOrder
+		{
+			get
+			{
+				return this._Mod_SortOrder;
+			}
+			set
+			{
+				if ((this._Mod_SortOrder != value))
+				{
+					this.OnMod_SortOrderChanging(value);
+					this.SendPropertyChanging();
+					this._Mod_SortOrder = value;
+					this.SendPropertyChanged("Mod_SortOrder");
+					this.OnMod_SortOrderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_Url", DbType="VarChar(50)")]
+		public string Mod_Url
+		{
+			get
+			{
+				return this._Mod_Url;
+			}
+			set
+			{
+				if ((this._Mod_Url != value))
+				{
+					this.OnMod_UrlChanging(value);
+					this.SendPropertyChanging();
+					this._Mod_Url = value;
+					this.SendPropertyChanged("Mod_Url");
+					this.OnMod_UrlChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_ImagePath", DbType="VarChar(50)")]
+		public string Mod_ImagePath
+		{
+			get
+			{
+				return this._Mod_ImagePath;
+			}
+			set
+			{
+				if ((this._Mod_ImagePath != value))
+				{
+					this.OnMod_ImagePathChanging(value);
+					this.SendPropertyChanging();
+					this._Mod_ImagePath = value;
+					this.SendPropertyChanged("Mod_ImagePath");
+					this.OnMod_ImagePathChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -7118,7 +7737,7 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City_Id", DbType="VarChar(50)")]
 		public string City_Id
 		{
 			get
@@ -7799,6 +8418,8 @@ namespace SCMSDataLayer.DB
 		
 		private System.Nullable<int> _VchrType_CodeInitialization;
 		
+		private EntitySet<GL_VchrMaster> _GL_VchrMasters;
+		
 		private EntitySet<SETUP_VoucherTypeNarration> _SETUP_VoucherTypeNarrations;
 		
 		private EntityRef<SETUP_Company> _SETUP_Company;
@@ -7831,6 +8452,7 @@ namespace SCMSDataLayer.DB
 		
 		public SETUP_VoucherType()
 		{
+			this._GL_VchrMasters = new EntitySet<GL_VchrMaster>(new Action<GL_VchrMaster>(this.attach_GL_VchrMasters), new Action<GL_VchrMaster>(this.detach_GL_VchrMasters));
 			this._SETUP_VoucherTypeNarrations = new EntitySet<SETUP_VoucherTypeNarration>(new Action<SETUP_VoucherTypeNarration>(this.attach_SETUP_VoucherTypeNarrations), new Action<SETUP_VoucherTypeNarration>(this.detach_SETUP_VoucherTypeNarrations));
 			this._SETUP_Company = default(EntityRef<SETUP_Company>);
 			this._SETUP_Location = default(EntityRef<SETUP_Location>);
@@ -8025,6 +8647,19 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_VoucherType_GL_VchrMaster", Storage="_GL_VchrMasters", ThisKey="VchrType_Id", OtherKey="VchrType_Id")]
+		public EntitySet<GL_VchrMaster> GL_VchrMasters
+		{
+			get
+			{
+				return this._GL_VchrMasters;
+			}
+			set
+			{
+				this._GL_VchrMasters.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_VoucherType_SETUP_VoucherTypeNarration", Storage="_SETUP_VoucherTypeNarrations", ThisKey="VchrType_Id", OtherKey="VchrType_Id")]
 		public EntitySet<SETUP_VoucherTypeNarration> SETUP_VoucherTypeNarrations
 		{
@@ -8124,6 +8759,18 @@ namespace SCMSDataLayer.DB
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_GL_VchrMasters(GL_VchrMaster entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_VoucherType = this;
+		}
+		
+		private void detach_GL_VchrMasters(GL_VchrMaster entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_VoucherType = null;
 		}
 		
 		private void attach_SETUP_VoucherTypeNarrations(SETUP_VoucherTypeNarration entity)
@@ -9905,6 +10552,8 @@ namespace SCMSDataLayer.DB
 		
 		private string _Mnu_Level;
 		
+		private System.Nullable<int> _Mod_Id;
+		
 		private long _SelectedMenu;
 		
 		public sp_GetUserMenuRightsResult()
@@ -9971,6 +10620,22 @@ namespace SCMSDataLayer.DB
 				if ((this._Mnu_Level != value))
 				{
 					this._Mnu_Level = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_Id", DbType="Int")]
+		public System.Nullable<int> Mod_Id
+		{
+			get
+			{
+				return this._Mod_Id;
+			}
+			set
+			{
+				if ((this._Mod_Id != value))
+				{
+					this._Mod_Id = value;
 				}
 			}
 		}

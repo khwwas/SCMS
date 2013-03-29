@@ -15,7 +15,7 @@
             border-radius: 8px;
             -moz-border-radius: 8px;
             background-repeat: no-repeat;
-            background-position: center;
+            background-position: top;
             padding-bottom: 8px;
             -webkit-box-shadow: 0 0 10px silver;
             -moz-box-shadow: 0 0 10px silver;
@@ -40,72 +40,32 @@
         <h2>
             Dashboard</h2>
         <div class="block" style="min-height: 410px; overflow: auto;">
-            <div style="background-image: url('../img/GL.png');" class="ModuleBox" onclick="javascript:window.location='../Home'">
+            <% 
+                var modules = (List<SCMSDataLayer.DB.SETUP_Module>)ViewData["Modules"];
+                if (modules != null && modules.Count > 0)
+                {
+                    if (modules.Count > 1)
+                    {
+                        foreach (SCMSDataLayer.DB.SETUP_Module mod in modules)
+                        { 
+            %>
+            <div style="background-image: url('<%=mod.Mod_ImagePath%>');" class="ModuleBox" onclick="javascript:window.location='<%=mod.Mod_Url %>?ModId=<%=mod.Mod_Id %>'">
                 <div class="ModuleTitle">
-                    General Ledger</div>
+                    <%=mod.Mod_Desc%></div>
             </div>
-            <div class="ModuleBox" style="background-image: url('../img/TM.png'); background-position: top;">
-                <div class="ModuleTitle">
-                    Time Management</div>
-            </div>
-            <div class="ModuleBox" style="background-image: url('../img/MG.png'); background-position: top;">
-                <div class="ModuleTitle">
-                    Campus Management</div>
-            </div>
-            <div class="ModuleBox" style="background-image: url('../img/MG.png'); background-position: top;">
-                <div class="ModuleTitle">
-                    Module 4</div>
-            </div>
-            <div class="ModuleBox" style="background-image: url('../img/MG.png'); background-position: top;">
-                <div class="ModuleTitle">
-                    Module 5</div>
-            </div>
-            <div class="ModuleBox" style="background-image: url('../img/MG.png'); background-position: top;">
-                <div class="ModuleTitle">
-                    Module 6</div>
-            </div>
-            <div class="ModuleBox" style="background-image: url('../img/MG.png'); background-position: top;">
-                <div class="ModuleTitle">
-                    Module 7</div>
-            </div>
-            <div class="ModuleBox" style="background-image: url('../img/MG.png'); background-position: top;">
-                <div class="ModuleTitle">
-                    Module 8</div>
-            </div>
-            <div style="clear: both; height: 20px;">
-            </div>
-            <div class="ModuleBox" style="background-image: url('../img/MG.png'); background-position: top;">
-                <div class="ModuleTitle">
-                    Module 9</div>
-            </div>
-            <div class="ModuleBox" style="background-image: url('../img/MG.png'); background-position: top;">
-                <div class="ModuleTitle">
-                    Module 10</div>
-            </div>
-            <div class="ModuleBox" style="background-image: url('../img/MG.png'); background-position: top;">
-                <div class="ModuleTitle">
-                    Module 11</div>
-            </div>
-            <div class="ModuleBox" style="background-image: url('../img/MG.png'); background-position: top;">
-                <div class="ModuleTitle">
-                    Module 12</div>
-            </div>
-            <div class="ModuleBox" style="background-image: url('../img/MG.png'); background-position: top;">
-                <div class="ModuleTitle">
-                    Module 13</div>
-            </div>
-            <div class="ModuleBox" style="background-image: url('../img/MG.png'); background-position: top;">
-                <div class="ModuleTitle">
-                    Module 14</div>
-            </div>
-            <div class="ModuleBox" style="background-image: url('../img/MG.png'); background-position: top;">
-                <div class="ModuleTitle">
-                    Module 15</div>
-            </div>
-            <div class="ModuleBox" style="background-image: url('../img/MG.png'); background-position: top;">
-                <div class="ModuleTitle">
-                    Module 16</div>
-            </div>
+            <%--<div style="clear: both; height: 20px;">
+            </div>--%>
+            <%}
+                    }
+                    else
+                    {
+                        //SCMSDataLayer.DALCommon.ModuleId = modules[0].Mod_Id;
+            %>
+            <script type="text/javascript">
+                window.location = '../Home?ModId=<%=modules[0].Mod_Id %>';
+            </script>
+            <%}
+                }%>
         </div>
     </div>
 </asp:Content>

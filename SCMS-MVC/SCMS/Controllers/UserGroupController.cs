@@ -11,8 +11,8 @@ namespace SCMS.Controllers
     {
         //
         // GET: /User Group/
-        DALUserGroup objDal  = new DALUserGroup();
-       
+        DALUserGroup objDal = new DALUserGroup();
+
         public ActionResult Index()
         {
             return View("UserGroup");
@@ -20,12 +20,12 @@ namespace SCMS.Controllers
 
         public ActionResult SaveRecord(String ps_Code, String ps_Title)
         {
-            Int32  li_ReturnValue = 0;
+            Int32 li_ReturnValue = 0;
 
             try
             {
-                SECURITY_UserGroup lrow_Data  = new SECURITY_UserGroup();
-                
+                SECURITY_UserGroup lrow_Data = new SECURITY_UserGroup();
+
                 if (String.IsNullOrEmpty(ps_Code))
                 {
                     if (DALCommon.AutoCodeGeneration("SECURITY_UserGroup") == 1)
@@ -44,7 +44,7 @@ namespace SCMS.Controllers
                     li_ReturnValue = objDal.SaveRecord(lrow_Data);
                     ViewData["SaveResult"] = li_ReturnValue;
                 }
-               
+
                 return PartialView("GridData");
             }
             catch
@@ -61,7 +61,7 @@ namespace SCMS.Controllers
             {
                 li_ReturnValue = objDal.DeleteRecordById(_pId);
                 ViewData["DeleteResult"] = li_ReturnValue;
-                
+
                 return PartialView("GridData");
             }
             catch

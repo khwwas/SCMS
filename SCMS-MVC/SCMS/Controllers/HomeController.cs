@@ -11,8 +11,12 @@ namespace SCMS.Controllers
         //
         // GET: /Home/
 
-        public ActionResult Index()
+        public ActionResult Index(int? ModId)
         {
+            if (ModId != null)
+            {
+                SCMSDataLayer.DALCommon.ModuleId = Convert.ToInt32(ModId);
+            }
             return View();
         }
 
