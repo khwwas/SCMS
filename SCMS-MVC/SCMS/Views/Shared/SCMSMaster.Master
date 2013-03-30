@@ -96,7 +96,14 @@
             <div id="branding">
                 <div class="floatleft">
                     <h1 style="color: White;">
+                        <%if (SCMSDataLayer.DALCommon.ModuleId == 1)
+                          { %>
                         Financial Management System - v1.0</h1>
+                    <%}
+                          else if (SCMSDataLayer.DALCommon.ModuleId == 2)
+                          { %>
+                    Time Management System - v1.0</h1>
+                    <%} %>
                 </div>
                 <div class="floatright">
                     <div class="floatleft">
