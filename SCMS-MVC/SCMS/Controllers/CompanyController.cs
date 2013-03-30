@@ -57,10 +57,11 @@ namespace SCMS.Controllers
 
         public ActionResult DeleteCompany(String companyId)
         {
+            Int32 li_ReturnValue = 0;
             try
             {
-                int result = objDalCompany.DeleteCompanyByCompanyId(companyId);
-                ViewData["result"] = result;
+                li_ReturnValue = objDalCompany.DeleteCompanyByCompanyId(companyId);
+                ViewData["SaveResult"] = li_ReturnValue;
                 return PartialView("GridData");
             }
             catch

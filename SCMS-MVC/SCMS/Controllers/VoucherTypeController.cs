@@ -61,10 +61,11 @@ namespace SCMS.Controllers
 
         public ActionResult DeleteVoucherType(String VoucherTypeId)
         {
+            Int32 li_ReturnValue = 0;
             try
             {
-                int result = objDALVoucherType.DeleteVoucherTypeById(VoucherTypeId);
-                ViewData["result"] = result;
+                li_ReturnValue = objDALVoucherType.DeleteVoucherTypeById(VoucherTypeId);
+                ViewData["SaveResult"] = li_ReturnValue;
                 return PartialView("GridData");
             }
             catch

@@ -67,7 +67,7 @@ namespace SCMS.Controllers
             try
             {
                 li_ReturnValue = objDALCustomer.DeleteRecordById(CusID);
-                ViewData["DeleteResult"] = li_ReturnValue;
+                ViewData["SaveResult"] = li_ReturnValue;
 
                 return PartialView("GridData");
             }

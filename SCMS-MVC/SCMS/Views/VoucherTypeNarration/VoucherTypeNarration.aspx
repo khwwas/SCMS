@@ -96,8 +96,14 @@
                         SetGrid();
                         ResetForm();
                         FadeIn(lcnt_MessageBox);
-                        lcnt_MessageBox.innerHTML = "<h5>Success!</h5><p>Record deleted successfully.</p>";
-                        lcnt_MessageBox.setAttribute("class", "message success");
+                        if (document.getElementById("SaveResult").value == "0") {
+                            lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Unable to delete record.</p>";
+                            lcnt_MessageBox.setAttribute("class", "message error");
+
+                        } else {
+                            lcnt_MessageBox.innerHTML = "<h5>Success!</h5><p>Record deleted successfully.</p>";
+                            lcnt_MessageBox.setAttribute("class", "message success");
+                        }
                         scroll(0, 0);
                         FadeOut(lcnt_MessageBox);
                     },
