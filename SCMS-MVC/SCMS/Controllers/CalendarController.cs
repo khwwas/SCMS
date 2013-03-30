@@ -80,7 +80,7 @@ namespace SCMS.Controllers
             try
             {
                 li_ReturnValue = objDalCalendar.DeleteRecordById(_pId);
-                ViewData["DeleteResult"] = li_ReturnValue;
+                ViewData["SaveResult"] = li_ReturnValue;
 
                 return PartialView("GridData");
             }
