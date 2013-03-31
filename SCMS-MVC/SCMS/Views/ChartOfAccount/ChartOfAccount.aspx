@@ -73,7 +73,7 @@
                         }
                         else {
                             lcnt_MessageBox.innerHTML = "<h5>Success!</h5><p>Record saved successfully.</p>";
-                            lcnt_MessageBox.setAttribute("class", "message success");                            
+                            lcnt_MessageBox.setAttribute("class", "message success");
                         }
                         document.getElementById("Waiting_Image").style.display = "none";
                         document.getElementById("btn_Save").style.display = "block";
@@ -164,8 +164,14 @@
                         SetGrid();
                         ResetForm();
                         FadeIn(lcnt_MessageBox);
-                        lcnt_MessageBox.innerHTML = "<h5>Success!</h5><p>Record deleted successfully.</p>";
-                        lcnt_MessageBox.setAttribute("class", "message success");
+                        if (document.getElementById("SaveResult").value == "0") {
+                            lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Unable to delete record.</p>";
+                            lcnt_MessageBox.setAttribute("class", "message error");
+                        }
+                        else {
+                            lcnt_MessageBox.innerHTML = "<h5>Success!</h5><p>Record deleted successfully.</p>";
+                            lcnt_MessageBox.setAttribute("class", "message success");
+                        }
                         scroll(0, 0);
                         FadeOut(lcnt_MessageBox);
                     },
@@ -196,13 +202,13 @@
             var temp = CodeVal.split("-");
             for (var val in temp) {
                 if (temp[val] != "") {
-                    document.getElementById("txt_Level").value = parseInt(val, 10) +1;
+                    document.getElementById("txt_Level").value = parseInt(val, 10) + 1;
                 }
             }
         }
 
 
-        function replaceCharacters(origString , inChar, outChar) {
+        function replaceCharacters(origString, inChar, outChar) {
             var newString = origString.split(inChar);
             newString = newString.join(outChar);
             return newString;
@@ -221,7 +227,6 @@
             <div class="CustomCell" style="width: 97px; height: 30px;">
                 Code</div>
             <div class="CustomCell" style="width: 270px; height: 30px;">
-              
                 <input type="text" class="CustomText" style="width: 240px;" id="txt_Code" name="txt_Code"
                     maxlength="50" onkeyup="SetLevel()" onkeydown="SetLevel()" />
                 <script type="text/javascript">

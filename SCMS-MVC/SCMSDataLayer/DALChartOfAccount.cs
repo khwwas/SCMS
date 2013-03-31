@@ -50,7 +50,11 @@ namespace SCMSDataLayer
             try
             {
                 SCMSDataContext dbSCMS = Connection.Create();
-                li_ReturnValue = dbSCMS.ExecuteCommand("Delete From Setup_ChartOfAccount where ChrtAcc_Id='" + ps_Id + "'");
+                List<SETUP_ChartOfAccount> chartOfAccountList = (List<SETUP_ChartOfAccount>)dbSCMS.ExecuteQuery<SETUP_ChartOfAccount>("Select * from SETUP_ChartOfAccount where ChrtAcc_Code like (Select ChrtAcc_Code From SETUP_ChartOfAccount where ChrtAcc_Id = '" + ps_Id + "')+'%'", "").ToList();
+                if (chartOfAccountList != null && chartOfAccountList.Count == 1)
+                {
+                    li_ReturnValue = dbSCMS.ExecuteCommand("Delete From Setup_ChartOfAccount where ChrtAcc_Id='" + ps_Id + "'");
+                }
             }
             catch (Exception ex)
             {
