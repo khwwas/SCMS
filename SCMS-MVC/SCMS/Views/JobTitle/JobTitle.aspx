@@ -91,7 +91,7 @@
                 var lcnt_MessageBox = document.getElementById('MessageBox');
                 var Url = document.getElementById('frm_JobTitleSetup').action;
 
-                Url += "Bank/DeleteRecord?_pId=" + Id;
+                Url += "JobTitle/DeleteRecord?_pId=" + Id;
                 $.ajax({
                     type: "GET",
                     url: Url,
