@@ -1,0 +1,52 @@
+
+
+
+USE [SCMS]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetJobPositionList]    Script Date: 03/31/2013 16:23:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[sp_GetJobPositionList]
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * From SETUP_JobPosition 
+	  LEFT JOIN SETUP_Location ON SETUP_JobPosition.Loc_Id = SETUP_Location.Loc_Id
+	  LEFT JOIN SETUP_Department ON SETUP_JobPosition.Dpt_Id = SETUP_Department.Dpt_Id
+	  LEFT JOIN SETUP_FunctionalArea ON SETUP_JobPosition.FA_Id = SETUP_FunctionalArea.FA_Id
+	  LEFT JOIN SETUP_JobTitle ON SETUP_JobPosition.JT_Id = SETUP_JobTitle.JT_Id
+	  
+	   
+END
+
+
+
+.................................................................................................................
+
+
+USE [SCMS]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetFunctionalAreaList]    Script Date: 03/31/2013 16:23:56 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[sp_GetFunctionalAreaList]
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT *
+	  From SETUP_FunctionalArea Left Join
+	       SETUP_Location 
+	 On SETUP_FunctionalArea.Loc_Id = SETUP_Location.Loc_Id
+END
