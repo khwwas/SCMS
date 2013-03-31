@@ -33,7 +33,7 @@
             } 
             else {
                 var Url = document.getElementById('frm_JobTitleSetup').action;
-                Url += "Bank/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&Location=" + ddl_location.value + "&Title=" + txt_Title.value;
+                Url += "JobTitle/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&Location=" + ddl_location.value + "&Title=" + txt_Title.value;
                 document.getElementById("Waiting_Image").style.display = "block";
                 document.getElementById("btn_Save").style.display = "none";
                 $.ajax({

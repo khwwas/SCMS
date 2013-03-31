@@ -15,8 +15,8 @@
             var txt_Remarks = document.getElementById('txt_Remarks');
             var ddl_location = document.getElementById('ddl_location');
             var ddl_functionalarea = document.getElementById('ddl_functionalarea');
-            //var ddl_jobtitle = document.getElementById('ddl_jobtitle');
-            //var ddl_department = document.getElementById('ddl_department');
+            var ddl_jobtitle = document.getElementById('ddl_jobtitle');
+            var ddl_department = document.getElementById('ddl_departement');
 
            
             if (txt_Title.value == "") {
@@ -41,7 +41,7 @@
             else
             {
                 var Url = document.getElementById('frm_JobPosition').action;
-                Url += "JobPosition/SaveJobPosition?Code=" + txt_SelectedCode.value + "&Title=" + txt_Title.value + "&Remarks=" + txt_Remarks.value + "&location=" + ddl_location.value + "&Department=&Job=&functionalarea=" + ddl_functionalarea.value;
+                Url += "JobPosition/SaveJobPosition?Code=" + txt_SelectedCode.value + "&Title=" + txt_Title.value + "&Remarks=" + txt_Remarks.value + "&location=" + ddl_location.value + "&Department=" + ddl_department.value + "&Job=" + ddl_jobtitle.value + "&functionalarea=" + ddl_functionalarea.value;
                 document.getElementById("Waiting_Image").style.display = "block";
                 document.getElementById("btn_Save").style.display = "none";
                 $.ajax({
@@ -103,7 +103,7 @@
             if (confirm("Do you really want to delete this record")) {
                 var MessageBox = document.getElementById('MessageBox');
                 var Url = document.getElementById('frm_JobPosition').action;
-                Url += "JobPosition/DeleteJobPosition?JobPositionId=" + Id;
+                Url += "JobPosition/DeleteJobPosition?JobPosition=" + Id;
                 $.ajax({
                     type: "GET",
                     url: Url,
@@ -156,21 +156,21 @@
               <div class="Clear">
             </div>
             
-            <%--<div class="CustomCell" style="width: 115px; height: 30px;">
+            <div class="CustomCell" style="width: 115px; height: 30px;">
                 Departement</div>
                 <%= Html.DropDownList("ddl_departement", null, new { style = "width:900px; padding: 4px;" })%>
               <div class="Clear"></div>
-            --%>  
+              
             <div class="CustomCell" style="width: 115px; height: 30px;">
                 Functional Area</div>
                 <%= Html.DropDownList("ddl_functionalarea", null, new { style = "width:900px; padding: 4px;" })%>
               <div class="Clear"></div> 
 
-            <%--<div class="CustomCell" style="width: 115px; height: 30px;">
+            <div class="CustomCell" style="width: 115px; height: 30px;">
                 Job Title</div>
                 <%= Html.DropDownList("ddl_jobtitle", null, new { style = "width:900px; padding: 4px;" })%>
               <div class="Clear"></div>
-            --%>
+            
 
             <div class="CustomCell" style="width: 115px; height: 30px">
                 Title</div>

@@ -15,9 +15,9 @@ namespace SCMS.Controllers
         public ActionResult Index()
         {
             ViewData["ddl_location"] = new SelectList(new DALLocation().PopulateData(), "Loc_Id", "Loc_Title", "ddl_Location");
-            ViewData["ddl_departement"] = null; //new SelectList(null, "Dpt_Id", "Dpt_Title", "ddl_departement");
+            ViewData["ddl_departement"] = new SelectList(new DALDepartment().GetAllRecords(), "Dpt_Id", "Dpt_Title", "ddl_departement");
             ViewData["ddl_functionalarea"] = new SelectList(new DALFunctionalArea().PopulateData(), "FA_Id", "FA_Title", "ddl_functionalarea");
-            ViewData["ddl_jobtitle"] = null; //new SelectList(null, "JT_Id", "JT_Title", "ddl_jobtitle");
+            ViewData["ddl_jobtitle"] = new SelectList(new DALJobTitle().GetAllRecords(), "JT_Id", "JT_Title", "ddl_jobtitle");
 
             return View("JobPosition");
         }
@@ -47,8 +47,8 @@ namespace SCMS.Controllers
                     setupJobPositionRow.JP_SortOrder = 1;
                     setupJobPositionRow.JP_Active = 1;
                     setupJobPositionRow.JP_Remarks = Remarks;
-                    // setupJobPositionRow.JT_Id = Job;
-                   // setupJobPositionRow.Dpt_Id = Department;
+                    setupJobPositionRow.JT_Id = Job;
+                    setupJobPositionRow.Dpt_Id = Department;
                     setupJobPositionRow.FA_Id = functionalarea;
                     setupJobPositionRow.Loc_Id = location;
 
