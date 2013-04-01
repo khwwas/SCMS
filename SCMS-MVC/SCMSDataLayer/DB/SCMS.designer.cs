@@ -15501,59 +15501,13 @@ namespace SCMSDataLayer.DB
 		
 		private System.Nullable<int> _JP_SortOrder;
 		
-		private string _Loc_Id1;
-		
-		private string _Loc_Code;
-		
-		private string _Cmp_Id1;
-		
 		private string _Loc_Title;
-		
-		private System.Nullable<int> _Loc_Active;
-		
-		private System.Nullable<int> _Loc_SortOrder;
-		
-		private string _Dpt_Id1;
-		
-		private string _Dpt_Code;
-		
-		private string _Cmp_Id2;
-		
-		private string _Loc_Id2;
 		
 		private string _Dpt_Title;
 		
-		private System.Nullable<int> _Dpt_Active;
-		
-		private System.Nullable<int> _Dpt_SortOrder;
-		
-		private string _FA_Id1;
-		
-		private string _FA_Code;
-		
-		private string _Cmp_Id3;
-		
-		private string _Loc_Id3;
-		
 		private string _FA_Title;
 		
-		private System.Nullable<int> _FA_Active;
-		
-		private System.Nullable<int> _FA_SortOrder;
-		
-		private string _JT_Id1;
-		
-		private string _JT_Code;
-		
-		private string _Cmp_Id4;
-		
-		private string _Loc_Id4;
-		
 		private string _JT_Title;
-		
-		private System.Nullable<int> _JT_Active;
-		
-		private System.Nullable<int> _JT_SortOrder;
 		
 		public sp_GetJobPositionListResult()
 		{
@@ -15735,54 +15689,6 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id1", DbType="VarChar(50)")]
-		public string Loc_Id1
-		{
-			get
-			{
-				return this._Loc_Id1;
-			}
-			set
-			{
-				if ((this._Loc_Id1 != value))
-				{
-					this._Loc_Id1 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Code", DbType="VarChar(50)")]
-		public string Loc_Code
-		{
-			get
-			{
-				return this._Loc_Code;
-			}
-			set
-			{
-				if ((this._Loc_Code != value))
-				{
-					this._Loc_Code = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cmp_Id1", DbType="VarChar(50)")]
-		public string Cmp_Id1
-		{
-			get
-			{
-				return this._Cmp_Id1;
-			}
-			set
-			{
-				if ((this._Cmp_Id1 != value))
-				{
-					this._Cmp_Id1 = value;
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Title", DbType="VarChar(100)")]
 		public string Loc_Title
 		{
@@ -15795,102 +15701,6 @@ namespace SCMSDataLayer.DB
 				if ((this._Loc_Title != value))
 				{
 					this._Loc_Title = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Active", DbType="Int")]
-		public System.Nullable<int> Loc_Active
-		{
-			get
-			{
-				return this._Loc_Active;
-			}
-			set
-			{
-				if ((this._Loc_Active != value))
-				{
-					this._Loc_Active = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_SortOrder", DbType="Int")]
-		public System.Nullable<int> Loc_SortOrder
-		{
-			get
-			{
-				return this._Loc_SortOrder;
-			}
-			set
-			{
-				if ((this._Loc_SortOrder != value))
-				{
-					this._Loc_SortOrder = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dpt_Id1", DbType="VarChar(50)")]
-		public string Dpt_Id1
-		{
-			get
-			{
-				return this._Dpt_Id1;
-			}
-			set
-			{
-				if ((this._Dpt_Id1 != value))
-				{
-					this._Dpt_Id1 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dpt_Code", DbType="VarChar(50)")]
-		public string Dpt_Code
-		{
-			get
-			{
-				return this._Dpt_Code;
-			}
-			set
-			{
-				if ((this._Dpt_Code != value))
-				{
-					this._Dpt_Code = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cmp_Id2", DbType="VarChar(50)")]
-		public string Cmp_Id2
-		{
-			get
-			{
-				return this._Cmp_Id2;
-			}
-			set
-			{
-				if ((this._Cmp_Id2 != value))
-				{
-					this._Cmp_Id2 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id2", DbType="VarChar(50)")]
-		public string Loc_Id2
-		{
-			get
-			{
-				return this._Loc_Id2;
-			}
-			set
-			{
-				if ((this._Loc_Id2 != value))
-				{
-					this._Loc_Id2 = value;
 				}
 			}
 		}
@@ -15911,102 +15721,6 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dpt_Active", DbType="Int")]
-		public System.Nullable<int> Dpt_Active
-		{
-			get
-			{
-				return this._Dpt_Active;
-			}
-			set
-			{
-				if ((this._Dpt_Active != value))
-				{
-					this._Dpt_Active = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dpt_SortOrder", DbType="Int")]
-		public System.Nullable<int> Dpt_SortOrder
-		{
-			get
-			{
-				return this._Dpt_SortOrder;
-			}
-			set
-			{
-				if ((this._Dpt_SortOrder != value))
-				{
-					this._Dpt_SortOrder = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FA_Id1", DbType="VarChar(50)")]
-		public string FA_Id1
-		{
-			get
-			{
-				return this._FA_Id1;
-			}
-			set
-			{
-				if ((this._FA_Id1 != value))
-				{
-					this._FA_Id1 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FA_Code", DbType="VarChar(50)")]
-		public string FA_Code
-		{
-			get
-			{
-				return this._FA_Code;
-			}
-			set
-			{
-				if ((this._FA_Code != value))
-				{
-					this._FA_Code = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cmp_Id3", DbType="VarChar(50)")]
-		public string Cmp_Id3
-		{
-			get
-			{
-				return this._Cmp_Id3;
-			}
-			set
-			{
-				if ((this._Cmp_Id3 != value))
-				{
-					this._Cmp_Id3 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id3", DbType="VarChar(50)")]
-		public string Loc_Id3
-		{
-			get
-			{
-				return this._Loc_Id3;
-			}
-			set
-			{
-				if ((this._Loc_Id3 != value))
-				{
-					this._Loc_Id3 = value;
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FA_Title", DbType="VarChar(100)")]
 		public string FA_Title
 		{
@@ -16023,102 +15737,6 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FA_Active", DbType="Int")]
-		public System.Nullable<int> FA_Active
-		{
-			get
-			{
-				return this._FA_Active;
-			}
-			set
-			{
-				if ((this._FA_Active != value))
-				{
-					this._FA_Active = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FA_SortOrder", DbType="Int")]
-		public System.Nullable<int> FA_SortOrder
-		{
-			get
-			{
-				return this._FA_SortOrder;
-			}
-			set
-			{
-				if ((this._FA_SortOrder != value))
-				{
-					this._FA_SortOrder = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_JT_Id1", DbType="VarChar(50)")]
-		public string JT_Id1
-		{
-			get
-			{
-				return this._JT_Id1;
-			}
-			set
-			{
-				if ((this._JT_Id1 != value))
-				{
-					this._JT_Id1 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_JT_Code", DbType="VarChar(50)")]
-		public string JT_Code
-		{
-			get
-			{
-				return this._JT_Code;
-			}
-			set
-			{
-				if ((this._JT_Code != value))
-				{
-					this._JT_Code = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cmp_Id4", DbType="VarChar(50)")]
-		public string Cmp_Id4
-		{
-			get
-			{
-				return this._Cmp_Id4;
-			}
-			set
-			{
-				if ((this._Cmp_Id4 != value))
-				{
-					this._Cmp_Id4 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id4", DbType="VarChar(50)")]
-		public string Loc_Id4
-		{
-			get
-			{
-				return this._Loc_Id4;
-			}
-			set
-			{
-				if ((this._Loc_Id4 != value))
-				{
-					this._Loc_Id4 = value;
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_JT_Title", DbType="VarChar(100)")]
 		public string JT_Title
 		{
@@ -16131,38 +15749,6 @@ namespace SCMSDataLayer.DB
 				if ((this._JT_Title != value))
 				{
 					this._JT_Title = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_JT_Active", DbType="Int")]
-		public System.Nullable<int> JT_Active
-		{
-			get
-			{
-				return this._JT_Active;
-			}
-			set
-			{
-				if ((this._JT_Active != value))
-				{
-					this._JT_Active = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_JT_SortOrder", DbType="Int")]
-		public System.Nullable<int> JT_SortOrder
-		{
-			get
-			{
-				return this._JT_SortOrder;
-			}
-			set
-			{
-				if ((this._JT_SortOrder != value))
-				{
-					this._JT_SortOrder = value;
 				}
 			}
 		}

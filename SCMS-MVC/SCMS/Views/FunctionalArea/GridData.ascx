@@ -56,8 +56,9 @@
                 <%=FunctionalAreaRow.FA_Title%>
             </td>
            
-            <td id="txt_Location<%=FunctionalAreaRow.FA_Id%>" style="vertical-align: middle;">
+            <td style="vertical-align: middle;">
                 <%=FunctionalAreaRow.Loc_Title%>
+                 <input type="hidden" id="ddl_location<%=FunctionalAreaRow.FA_Id%>" value="<%=FunctionalAreaRow.Loc_Id%>" />
             </td>
         </tr>
         <%}

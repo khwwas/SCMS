@@ -49,6 +49,11 @@
     <Compile Include="DALCalendar.cs" />
     <Compile Include="DALCalendarType.cs" />
     <Compile Include="DALCustomer.cs" />
+    <Compile Include="DALDepartment.cs" />
+    <Compile Include="DALFunctionalArea.cs" />
+    <Compile Include="DALJobPosition.cs" />
+    <Compile Include="DALJobTitle.cs" />
+    <Compile Include="DALLeaveGroup.cs" />
     <Compile Include="DALModules.cs" />
     <Compile Include="DALNature.cs" />
     <Compile Include="DALLogin.cs" />
@@ -63,6 +68,7 @@
     <Compile Include="DALCity.cs" />
     <Compile Include="DALCommon.cs" />
     <Compile Include="DALCompany.cs" />
+    <Compile Include="DalUserMenu.cs" />
     <Compile Include="DALUserMenuRights.cs" />
     <Compile Include="DALVoucherEntry.cs" />
     <Compile Include="DALVoucherType.cs" />

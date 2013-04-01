@@ -75,6 +75,11 @@
     <Compile Include="Controllers\ChartOfAccountController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DashBoardController.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\FunctionalAreaController.cs" />
+    <Compile Include="Controllers\JobPositionController.cs" />
+    <Compile Include="Controllers\JobTitleController.cs" />
+    <Compile Include="Controllers\LeaveGroupController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ReportSelectionCriteriaController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
@@ -84,6 +89,7 @@
     <Compile Include="Controllers\SupplierTypeController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserMenuController.cs" />
     <Compile Include="Controllers\UserRightsSetupController.cs" />
     <Compile Include="Controllers\VoucherController.cs" />
     <Compile Include="Controllers\VoucherEntryConsoleController.cs" />
@@ -917,6 +923,16 @@
     <Content Include="Views\Customer\Customer.aspx" />
     <Content Include="Views\Customer\GridData.ascx" />
     <Content Include="Views\DashBoard\Index.aspx" />
+    <Content Include="Views\Department\Department.aspx" />
+    <Content Include="Views\Department\GridData.ascx" />
+    <Content Include="Views\FunctionalArea\FunctionalArea.aspx" />
+    <Content Include="Views\FunctionalArea\GridData.ascx" />
+    <Content Include="Views\JobPosition\GridData.ascx" />
+    <Content Include="Views\JobPosition\JobPosition.aspx" />
+    <Content Include="Views\JobTitle\GridData.ascx" />
+    <Content Include="Views\JobTitle\JobTitle.aspx" />
+    <Content Include="Views\LeaveGroup\GridData.ascx" />
+    <Content Include="Views\LeaveGroup\LeaveGroup.aspx" />
     <Content Include="Views\ReportSelectionCriteria\ReportSelectionCriteria.aspx" />
     <Content Include="Views\Supplier\GridData.ascx" />
     <Content Include="Views\Supplier\Supplier.aspx" />

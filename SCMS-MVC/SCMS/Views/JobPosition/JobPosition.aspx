@@ -86,6 +86,8 @@
             document.getElementById('txt_Remarks').value = "";
             document.getElementById('ddl_location').value = "";
             document.getElementById('ddl_functionalarea').value = "";
+            document.getElementById('ddl_departement').value = "";
+            document.getElementById('ddl_jobtitle').value = "";
 
         }
 
@@ -96,6 +98,8 @@
             document.getElementById('txt_Remarks').value = document.getElementById('txt_Remarks' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             document.getElementById('ddl_location').value = document.getElementById('ddl_location' + Id).value;
             document.getElementById('ddl_functionalarea').value = document.getElementById('ddl_functionalarea' + Id).value;
+            document.getElementById('ddl_departement').value = document.getElementById('ddl_departement' + Id).value;
+            document.getElementById('ddl_jobtitle').value = document.getElementById('ddl_jobtitle' + Id).value;
             scroll(0, 0);
         }
 

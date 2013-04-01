@@ -810,33 +810,10 @@
       <Column Name="JP_Remarks" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
       <Column Name="JP_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="JP_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Loc_Id1" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Loc_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Cmp_Id1" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Loc_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="Loc_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Loc_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Dpt_Id1" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Dpt_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Cmp_Id2" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Loc_Id2" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Dpt_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="Dpt_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Dpt_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="FA_Id1" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="FA_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Cmp_Id3" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Loc_Id3" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="FA_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="FA_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="FA_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="JT_Id1" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="JT_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Cmp_Id4" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Loc_Id4" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="JT_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="JT_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="JT_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>
