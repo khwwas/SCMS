@@ -172,7 +172,7 @@
                             lcnt_MessageBox.innerHTML = "<h5>Success!</h5><p>Record deleted successfully.</p>";
                             lcnt_MessageBox.setAttribute("class", "message success");
                         }
-                        scroll(0, 0);
+                        //scroll(0, 0);
                         FadeOut(lcnt_MessageBox);
                     },
                     error: function (rs, e) {
@@ -222,7 +222,7 @@
         <h2>
             Chart of Account Setup</h2>
         <div class="block">
-            <div id="MessageBox">
+            <div id="MessageBox" style="position: fixed; top: 0px; width: 95%;">
             </div>
             <div class="CustomCell" style="width: 97px; height: 30px;">
                 Code</div>
@@ -313,7 +313,7 @@
                         font-size: 11pt;" />
                     <img alt="" id="Img1" src="../../img/Ajax_Loading.gif" style="display: none; margin-left: 10" /></div>
                 <div style="float: left;">
-                    <input type="button" value="Reset" class="btn btn-grey" onclick="ResetForm();" style="width: 90px;
+                    <input type="button" value="Cancel" class="btn btn-grey" onclick="ResetForm();" style="width: 90px;
                         height: 35px; padding-top: 5px; color: White; font-weight: bold; font-size: 11pt;" />
                 </div>
             </div>
