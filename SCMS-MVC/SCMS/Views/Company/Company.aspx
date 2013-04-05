@@ -180,7 +180,7 @@
                     <img alt="" id="Waiting_Image" src="../../img/Ajax_Loading.gif" style="display: none;
                         margin-left: 10" /></div>
                 <div style="float: left;">
-                    <input type="button" value="Reset" class="btn btn-grey" onclick="ResetForm();" style="width: 90px;
+                    <input type="button" value="Cancel" class="btn btn-grey" onclick="ResetForm();" style="width: 90px;
                         height: 35px; padding-top: 5px; color: White; font-weight: bold; font-size: 11pt;" />
                 </div>
             </div>

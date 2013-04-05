@@ -110,7 +110,7 @@ namespace SCMS.Controllers
             Response += "</div>";
             Response += "<div class='CustomCell' style='width: 565px; height: 30px;'>";
             Response += "<input type='text' class='CustomText' style='width: 545px;' id='txt_Details" + RowNo.ToString() + "' name='txt_Details'";
-            Response += "maxlength='50' value='" + Narration + "' />";
+            Response += "maxlength='200' value='" + Narration + "' />";
             Response += "</div>";
             Response += "<div class='CustomCell' style='width: 118px; height: 30px;'>";
             Response += "<input type='text' class='CustomText' style='width: 100px;' id='txt_Debit" + RowNo.ToString() + "' name='txt_Debit'";
