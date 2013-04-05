@@ -186,7 +186,7 @@
             <div class="CustomCell" style="width: 115px; height: 30px">
                 Remarks</div>
             <input type="text" class="CustomText" style="width: 940px;" id="txt_Remarks" name="txt_Remarks"
-                maxlength="100" />
+                maxlength="1800" />
             
             <div class="Clear">
             </div>
