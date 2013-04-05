@@ -57,7 +57,7 @@
                         SetGrid();
                         ResetForm();
                         FadeIn(lcnt_MessageBox);
-                        alert(document.getElementById("SaveResult").value);
+//                        alert(document.getElementById("SaveResult").value);
                         if (document.getElementById("SaveResult").value == "0") {
                             lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Unable to save record.</p>";
                             lcnt_MessageBox.setAttribute("class", "message error");

@@ -318,7 +318,7 @@
                 Date</div>
             <div class="CustomCell" style="width: 282px; height: 30px;">
                 <input type="text" class="CustomText" style="width: 220px;" id="txt_Date" name="txt_Date"
-                    value="<%=ViewData["CurrentDate"]%>" maxlength="50" />
+                    value="<%=ViewData["CurrentDate"]%>" maxlength="180" />
             </div>
             <script type="text/javascript">
                 $('#txt_Date').Zebra_DatePicker({
@@ -354,7 +354,7 @@
             Remarks</div>
         <div class="CustomCell" style="width: 960px; height: 30px;">
             <input type="text" value="<%=ViewData["Remarks"] %>" class="CustomText" style="width: 940px;"
-                id="txt_Remarks" name="txt_Remarks" maxlength="50" />
+                id="txt_Remarks" name="txt_Remarks" maxlength="180" />
         </div>
         <hr style="padding: 0; margin-bottom: 5px;" />
         <div class="CustomCell" style="width: 252px;">
@@ -375,7 +375,7 @@
                 </div>
                 <div class="CustomCell" style="width: 565px; height: 30px;">
                     <input type="text" class="CustomText" style="width: 545px;" id="txt_Details" name="txt_Details"
-                        maxlength="50" />
+                        maxlength="180" />
                 </div>
                 <div class="CustomCell" style="width: 118px; height: 30px;">
                     <input type="text" class="CustomText" style="width: 100px;" id="txt_Debit" name="txt_Debit"
