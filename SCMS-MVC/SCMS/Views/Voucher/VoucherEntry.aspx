@@ -374,12 +374,8 @@
                     <%= Html.DropDownList("ddl_Account", null, new { style ="width:250px;" })%>
                 </div>
                 <div class="CustomCell" style="width: 565px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 545px;" id="txt_Details" name="txt_Details"
-<<<<<<< HEAD
-                        maxlength="180" />
-=======
+                    <input type="text" class="CustomText" style="width: 545px;" id="txt_sDetails" name="txt_Details"
                         maxlength="200" />
->>>>>>> a23fe48e4b04228aeb26d844b15974a6edcd1a08
                 </div>
                 <div class="CustomCell" style="width: 118px; height: 30px;">
                     <input type="text" class="CustomText" style="width: 100px;" id="txt_Debit" name="txt_Debit"
