@@ -318,7 +318,7 @@
                 Date</div>
             <div class="CustomCell" style="width: 282px; height: 30px;">
                 <input type="text" class="CustomText" style="width: 220px;" id="txt_Date" name="txt_Date"
-                    value="<%=ViewData["CurrentDate"]%>" maxlength="50" />
+                    value="<%=ViewData["CurrentDate"]%>" maxlength="180" />
             </div>
             <script type="text/javascript">
                 $('#txt_Date').Zebra_DatePicker({
@@ -354,7 +354,7 @@
             Remarks</div>
         <div class="CustomCell" style="width: 960px; height: 30px;">
             <input type="text" value="<%=ViewData["Remarks"] %>" class="CustomText" style="width: 940px;"
-                id="txt_Remarks" name="txt_Remarks" maxlength="50" />
+                id="txt_Remarks" name="txt_Remarks" maxlength="180" />
         </div>
         <hr style="padding: 0; margin-bottom: 5px;" />
         <div class="CustomCell" style="width: 252px;">
@@ -374,8 +374,8 @@
                     <%= Html.DropDownList("ddl_Account", null, new { style ="width:250px;" })%>
                 </div>
                 <div class="CustomCell" style="width: 565px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 545px;" id="txt_Details" name="txt_Details"
-                        maxlength="50" />
+                    <input type="text" class="CustomText" style="width: 545px;" id="txt_sDetails" name="txt_Details"
+                        maxlength="200" />
                 </div>
                 <div class="CustomCell" style="width: 118px; height: 30px;">
                     <input type="text" class="CustomText" style="width: 100px;" id="txt_Debit" name="txt_Debit"
@@ -393,7 +393,7 @@
                 </div>
                 <div class="CustomCell" style="width: 565px; height: 30px;">
                     <input type="text" class="CustomText" style="width: 545px;" id="txt_Details1" name="txt_Details"
-                        maxlength="50" />
+                        maxlength="200" />
                 </div>
                 <div class="CustomCell" style="width: 118px; height: 30px;">
                     <input type="text" class="CustomText" style="width: 100px;" id="txt_Debit1" name="txt_Debit"
@@ -411,7 +411,7 @@
                 </div>
                 <div class="CustomCell" style="width: 565px; height: 30px;">
                     <input type="text" class="CustomText" style="width: 545px;" id="txt_Details2" name="txt_Details"
-                        maxlength="50" />
+                        maxlength="200" />
                 </div>
                 <div class="CustomCell" style="width: 118px; height: 30px;">
                     <input type="text" class="CustomText" style="width: 100px;" id="txt_Debit2" name="txt_Debit"
@@ -429,7 +429,7 @@
                 </div>
                 <div class="CustomCell" style="width: 565px; height: 30px;">
                     <input type="text" class="CustomText" style="width: 545px;" id="txt_Details3" name="txt_Details"
-                        maxlength="50" />
+                        maxlength="200" />
                 </div>
                 <div class="CustomCell" style="width: 118px; height: 30px;">
                     <input type="text" class="CustomText" style="width: 100px;" id="txt_Debit3" name="txt_Debit"
@@ -474,7 +474,7 @@
                 <img alt="" id="Waiting_Image" src="../../img/Ajax_Loading.gif" style="display: none;
                     margin-left: 10" /></div>
             <div style="float: left;">
-                <input type="button" value="Reset" class="btn btn-grey" onclick="ResetForm();" style="width: 90px;
+                <input type="button" value="Cancel" class="btn btn-grey" onclick="ResetForm();" style="width: 90px;
                     height: 35px; padding-top: 5px; color: White; font-weight: bold; font-size: 11pt;" />
             </div>
         </div>

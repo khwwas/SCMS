@@ -86,6 +86,8 @@
             document.getElementById('txt_Remarks').value = "";
             document.getElementById('ddl_location').value = "";
             document.getElementById('ddl_functionalarea').value = "";
+            document.getElementById('ddl_departement').value = "";
+            document.getElementById('ddl_jobtitle').value = "";
 
         }
 
@@ -96,6 +98,8 @@
             document.getElementById('txt_Remarks').value = document.getElementById('txt_Remarks' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             document.getElementById('ddl_location').value = document.getElementById('ddl_location' + Id).value;
             document.getElementById('ddl_functionalarea').value = document.getElementById('ddl_functionalarea' + Id).value;
+            document.getElementById('ddl_departement').value = document.getElementById('ddl_departement' + Id).value;
+            document.getElementById('ddl_jobtitle').value = document.getElementById('ddl_jobtitle' + Id).value;
             scroll(0, 0);
         }
 
@@ -182,7 +186,7 @@
             <div class="CustomCell" style="width: 115px; height: 30px">
                 Remarks</div>
             <input type="text" class="CustomText" style="width: 940px;" id="txt_Remarks" name="txt_Remarks"
-                maxlength="100" />
+                maxlength="1800" />
             
             <div class="Clear">
             </div>
@@ -198,7 +202,7 @@
                     <img alt="" id="Waiting_Image" src="../../img/Ajax_Loading.gif" style="display: none;
                         margin-left: 10" /></div>
                 <div style="float: left;">
-                    <input type="button" value="Reset" class="btn btn-grey" onclick="ResetForm();" style="width: 90px;
+                    <input type="button" value="Cancel" class="btn btn-grey" onclick="ResetForm();" style="width: 90px;
                         height: 35px; padding-top: 5px; color: White; font-weight: bold; font-size: 11pt;" />
                 </div>
             </div>

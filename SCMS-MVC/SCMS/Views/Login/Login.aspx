@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head id="Head1" runat="server">
-    <title>Financial Management System - v1.0</title>
+    <title>Login</title>
     <link rel="stylesheet" href="<%=Url.Content("~/Content/Login.css")%>" type="text/css" />
     <script type="text/javascript" src="<%=Url.Content("~/Scripts/jquery-1.5.1.js")%>"></script>
     <script src="<%=Url.Content("~/Scripts/SCMS.js")%>" type="text/javascript"></script>
@@ -93,7 +93,7 @@
                 <div class="login-header">
                     <div class="logo clear">
                         <img src="<%=ResolveUrl("~/img/logo.png") %>" alt="" class="picture" />
-                        <span class="title">Punjab Daanish Schools & Centers of Excellence Authority</span>
+                        <span class="title">Time & Xcess</span>
                     </div>
                 </div>
                 <form action="" method="post">

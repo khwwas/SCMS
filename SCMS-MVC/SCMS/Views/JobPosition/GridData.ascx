@@ -69,17 +69,22 @@
             </td>
 
             <td style="vertical-align: middle;">
-                <input type="hidden" id="txt_Location<%=JobPositionRow.JP_Id%>" value="<%=JobPositionRow.Loc_Id%>" />
                 <%=JobPositionRow.Loc_Title%>
             </td>
 
             <td  style="vertical-align: middle;">
-                <input type="hidden" id="ddl_functionalarea<%=JobPositionRow.JP_Id%>" value="<%=JobPositionRow.FA_Id%>" />
                 <%=JobPositionRow.FA_Title%>
+
+                <input type="hidden" id="ddl_location<%=JobPositionRow.JP_Id%>" value="<%=JobPositionRow.Loc_Id%>" />
+                <input type="hidden" id="ddl_functionalarea<%=JobPositionRow.JP_Id%>" value="<%=JobPositionRow.FA_Id%>" />
+                <input type="hidden" id="ddl_departement<%=JobPositionRow.JP_Id%>" value="<%=JobPositionRow.Dpt_Id%>" />
+                <input type="hidden" id="ddl_jobtitle<%=JobPositionRow.JP_Id%>" value="<%=JobPositionRow.JT_Id%>" />
+
             </td>
             
 
         </tr>
+              
         <%}
         }
         %>

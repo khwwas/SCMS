@@ -41,29 +41,87 @@
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.Routing" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.Entity">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Entity">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.ApplicationServices">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Abstractions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Services">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.EnterpriseServices">
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BankAccountController.cs" />
@@ -75,8 +133,19 @@
     <Compile Include="Controllers\ChartOfAccountController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DashBoardController.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\EmployeeTypeController.cs" />
+    <Compile Include="Controllers\FunctionalAreaController.cs" />
+    <Compile Include="Controllers\GenderController.cs" />
+    <Compile Include="Controllers\JobPositionController.cs" />
+    <Compile Include="Controllers\JobTitleController.cs" />
+    <Compile Include="Controllers\LeaveGroupController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MaritalStatusController.cs" />
+    <Compile Include="Controllers\NationalityController.cs" />
+    <Compile Include="Controllers\ReligionController.cs" />
     <Compile Include="Controllers\ReportSelectionCriteriaController.cs" />
+    <Compile Include="Controllers\ShiftController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserGroupController.cs" />
@@ -84,6 +153,7 @@
     <Compile Include="Controllers\SupplierTypeController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserMenuController.cs" />
     <Compile Include="Controllers\UserRightsSetupController.cs" />
     <Compile Include="Controllers\VoucherController.cs" />
     <Compile Include="Controllers\VoucherEntryConsoleController.cs" />
@@ -128,6 +198,7 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="SystemParameters.cs" />
     <Compile Include="Reports\ReportParameters.cs" />
     <Compile Include="Reports\Reps\rptLedger_AccWise.cs">
       <DependentUpon>rptLedger_AccWise.rpt</DependentUpon>
@@ -194,10 +265,14 @@
   <ItemGroup>
     <Content Include="bootstrap\css\bootstrap-responsive.css" />
     <Content Include="bootstrap\css\bootstrap-responsive.min.css" />
+    <Content Include="bootstrap\css\bootstrap-timepicker.css" />
+    <Content Include="bootstrap\css\bootstrap-timepicker.min.css" />
     <Content Include="bootstrap\css\bootstrap.css" />
     <Content Include="bootstrap\css\bootstrap.min.css" />
     <Content Include="bootstrap\img\glyphicons-halflings-white.png" />
     <Content Include="bootstrap\img\glyphicons-halflings.png" />
+    <Content Include="bootstrap\js\bootstrap-timepicker.js" />
+    <Content Include="bootstrap\js\bootstrap-timepicker.min.js" />
     <Content Include="bootstrap\js\bootstrap.js" />
     <Content Include="bootstrap\js\bootstrap.min.js" />
     <Content Include="Content\960.css" />
@@ -914,9 +989,31 @@
     <Content Include="Views\ChartOfAccount\GridData.ascx" />
     <Content Include="Views\Bank\Bank.aspx" />
     <Content Include="Views\Bank\GridData.ascx" />
+    <Content Include="Views\Nationality\Nationality.aspx" />
+    <Content Include="Views\Nationality\GridData.ascx" />
+    <Content Include="Views\MaritalStatus\GridData.ascx" />
+    <Content Include="Views\MaritalStatus\MaritalStatus.aspx" />
+    <Content Include="Views\Religion\Religion.aspx" />
+    <Content Include="Views\Religion\GridData.ascx" />
+    <Content Include="Views\Gender\Gender.aspx" />
+    <Content Include="Views\Gender\GridData.ascx" />
+    <Content Include="Views\EmployeeType\GridData.ascx" />
+    <Content Include="Views\EmployeeType\EmployeeType.aspx" />
+    <Content Include="Views\Shift\GridData.ascx" />
+    <Content Include="Views\Shift\Shift.aspx" />
     <Content Include="Views\Customer\Customer.aspx" />
     <Content Include="Views\Customer\GridData.ascx" />
     <Content Include="Views\DashBoard\Index.aspx" />
+    <Content Include="Views\Department\Department.aspx" />
+    <Content Include="Views\Department\GridData.ascx" />
+    <Content Include="Views\FunctionalArea\FunctionalArea.aspx" />
+    <Content Include="Views\FunctionalArea\GridData.ascx" />
+    <Content Include="Views\JobPosition\GridData.ascx" />
+    <Content Include="Views\JobPosition\JobPosition.aspx" />
+    <Content Include="Views\JobTitle\GridData.ascx" />
+    <Content Include="Views\JobTitle\JobTitle.aspx" />
+    <Content Include="Views\LeaveGroup\GridData.ascx" />
+    <Content Include="Views\LeaveGroup\LeaveGroup.aspx" />
     <Content Include="Views\ReportSelectionCriteria\ReportSelectionCriteria.aspx" />
     <Content Include="Views\Supplier\GridData.ascx" />
     <Content Include="Views\Supplier\Supplier.aspx" />
@@ -1508,6 +1605,7 @@
     <Content Include="Widgets\tests\jqxtree\jqxtree-Tests.htm" />
     <Content Include="Widgets\tests\jqxvalidator\jqxvalidation-Tests.htm" />
     <Content Include="Widgets\tests\jqxwindow\jqwindow-Tests.htm" />
+    <Content Include="Views\Shared\DashBoardMaster.Master" />
     <None Include="Reports\Datasets\dsChartOfAccount.xsc">
       <DependentUpon>dsChartOfAccount.xsd</DependentUpon>
     </None>
@@ -1585,7 +1683,6 @@
     <None Include="Reports\Datasets\dsVoucherTypes.xss">
       <DependentUpon>dsVoucherTypes.xsd</DependentUpon>
     </None>
-    <Content Include="Views\Shared\DashBoardMaster.Master" />
     <None Include="Widgets\EULA.pdf" />
     <None Include="Widgets\phpdemos\bind_chart_to_mysql_database\connect.php" />
     <None Include="Widgets\phpdemos\bind_chart_to_mysql_database\data.php" />
@@ -1709,6 +1806,9 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptVoucherTypes.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

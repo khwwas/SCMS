@@ -86,7 +86,7 @@
             document.getElementById('txt_SelectedCode').value = Id;
             document.getElementById('txt_Code').value = Id;
             document.getElementById('txt_Title').value = document.getElementById('txt_Title' + Id).innerHTML.trim().toString().replace("&nbsp", "");
-            document.getElementById('ddl_location').value = document.getElementById('ddl_location' + Id).innerHTML.trim().toString().replace("&nbsp", "");
+            document.getElementById('ddl_location').value = document.getElementById('ddl_location' + Id).value;
             
             scroll(0, 0);
         }
@@ -165,7 +165,7 @@
                     <img alt="" id="Waiting_Image" src="../../img/Ajax_Loading.gif" style="display: none;
                         margin-left: 10" /></div>
                 <div style="float: left;">
-                    <input type="button" value="Reset" class="btn btn-grey" onclick="ResetForm();" style="width: 90px;
+                    <input type="button" value="Cancel" class="btn btn-grey" onclick="ResetForm();" style="width: 90px;
                         height: 35px; padding-top: 5px; color: White; font-weight: bold; font-size: 11pt;" />
                 </div>
             </div>
