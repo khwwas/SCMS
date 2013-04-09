@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using SCMSDataLayer;
 using SCMSDataLayer.DB;
 using CrystalDecisions.Shared.Json;
+using System.Web.Script.Serialization;
 
 namespace SCMS.Controllers
 {
@@ -138,8 +139,20 @@ namespace SCMS.Controllers
             return Response;
         }
 
-        public ActionResult SaveVoucher(String VoucherMasterCode, DateTime VoucherDate, string Status, String VoucherType, String LocationId, String Remarks, String[] VoucherDetailRows)
+
+        //public ActionResult SaveVoucher(String VoucherMasterCode, DateTime VoucherDate, string Status, String VoucherType, String LocationId, String Remarks, String[] VoucherDetailRows)
+        [HttpPost]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public string SaveVoucher(IEnumerable<string> VoucherDetailRows)
         {
+            String[] MasterRow = VoucherDetailRows.Last().Split('║');
+            String VoucherMasterCode = MasterRow[0];
+            DateTime VoucherDate = MasterRow[1] != null ? Convert.ToDateTime(MasterRow[1]) : DateTime.Now;
+            string Status = MasterRow[2];
+            String VoucherType = MasterRow[3];
+            String LocationId = MasterRow[4];
+            String Remarks = MasterRow[5];
+
             Session["VoucherTypeForVoucherEntry"] = VoucherType;
             Session["LocationIdForVoucherEntry"] = LocationId;
             DALVoucherEntry objDalVoucherEntry = new DALVoucherEntry();
@@ -182,10 +195,11 @@ namespace SCMS.Controllers
                         {
                             objDalVoucherEntry.DeleteDetailRecordByMasterId(VoucherMasterCode);
                         }
-                        String[] DetailRows = VoucherDetailRows[0].Split(',');
-                        foreach (String Row in DetailRows)
+
+                        for (int index = 0; index < VoucherDetailRows.ToList().Count - 1; index++)
                         {
-                            String[] Columns = Row.Split('~');
+                            string Row = VoucherDetailRows.ToList()[index];
+                            String[] Columns = Row.Split('║');
                             String VoucherDetailCode = "";
 
                             if (String.IsNullOrEmpty(VoucherDetailCode))
@@ -204,19 +218,28 @@ namespace SCMS.Controllers
                                 GL_Detail.ChrtAcc_Id = Columns[0].ToString(); //Columns[0] has AccountId from Account Title drop down;
                                 GL_Detail.VchMas_DrAmount = (Columns[1] != null && Columns[1] != "") ? Convert.ToDecimal(Columns[1]) : 0; // Columns[1] has Debit Amount
                                 GL_Detail.VchMas_CrAmount = (Columns[2] != null && Columns[2] != "") ? Convert.ToDecimal(Columns[2]) : 0; // Columns[2] has Debit Amount
-                                GL_Detail.VchDet_Remarks = (Columns[3] != null && Columns[3] != "") ? Columns[3].ToString().Replace("π", ",") : ""; // Columns[3] has Remarks
+                                GL_Detail.VchDet_Remarks = (Columns[3] != null && Columns[3] != "") ? Columns[3].ToString() : ""; // Columns[3] has Remarks
                                 objDalVoucherEntry.SaveVoucherDetail(GL_Detail);
                             }
                         }
                     }
                 }
                 ViewData["SaveResult"] = li_ReturnValue;
-                return PartialView("GridData");
+                //return PartialView("GridData");
+                //string result = ViewData["VoucherId"].ToString(); //+ "|" + ViewData["VoucherCode"].ToString() + "|" + ViewData["SaveResult"].ToString();
+                string[] rList = new string[3];
+                rList[0] = ViewData["VoucherId"].ToString();
+                rList[1] = ViewData["VoucherCode"].ToString();
+                rList[2] = ViewData["SaveResult"].ToString();
+                System.Web.Script.Serialization.JavaScriptSerializer se = new System.Web.Script.Serialization.JavaScriptSerializer();
+                string result = se.Serialize(rList);
+                return result;
             }
             catch
             {
-                ViewData["SaveResult"] = 0;
-                return PartialView("GridData");
+                //ViewData["SaveResult"] = 0;
+                //return PartialView("GridData");
+                return "0";
             }
         }
 

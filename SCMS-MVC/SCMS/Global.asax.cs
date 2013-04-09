@@ -35,6 +35,7 @@ namespace SCMS
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+            ValueProviderFactories.Factories.Add(new JsonValueProviderFactory());
         }
     }
 }
