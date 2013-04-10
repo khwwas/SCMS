@@ -37,7 +37,7 @@ namespace SCMS.Reports
                     if (SCMS.SystemParameters.CurrentAppName == null ||
                         SCMS.SystemParameters.CurrentAppName.Trim() == "")
                     {
-                        ls_ApplicationName = "Time Management System";
+                        ls_ApplicationName = "Application";
                     }
                     else
                     {
@@ -47,7 +47,7 @@ namespace SCMS.Reports
                     if (SCMS.SystemParameters.CurrentCmpName == null ||
                         SCMS.SystemParameters.CurrentCmpName.Trim() == "")
                     {
-                        ls_Company = "Time & Xcess";
+                        ls_Company = "Demo. Company";
                     }
                     else
                     {
@@ -55,7 +55,7 @@ namespace SCMS.Reports
                     }
 
                     if (SCMS.SystemParameters.CurrentUserName == null ||
-                       SCMS.SystemParameters.CurrentUserName.Trim() == "")
+                        SCMS.SystemParameters.CurrentUserName.Trim() == "")
                     {
                         ls_User = "Administrator";
                     }
@@ -400,7 +400,7 @@ namespace SCMS.Reports
                 }
                 #endregion
 
- 
+
                 _ReportDocument.SetParameterValue("pm_CompanyName", ls_Company);
                 _ReportDocument.SummaryInfo.ReportComments = ls_ApplicationName;
                 _ReportDocument.SummaryInfo.ReportAuthor = ls_User;

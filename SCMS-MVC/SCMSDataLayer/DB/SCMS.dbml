@@ -415,17 +415,6 @@
       <Column Name="MS_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.SETUP_Module" Member="SETUP_Modules">
-    <Type Name="SETUP_Module">
-      <Column Name="Mod_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Mod_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Mod_Desc" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
-      <Column Name="Mod_Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="Mod_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Mod_Url" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Mod_ImagePath" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.SETUP_Nationality" Member="SETUP_Nationalities">
     <Type Name="SETUP_Nationality">
       <Column Name="Natn_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -540,6 +529,18 @@
       <Column Name="CodeGen_Prefix" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
       <Column Name="CodeGen_Length" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CodeGen_AutoTag" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SETUP_Module" Member="SETUP_Modules">
+    <Type Name="SETUP_Module">
+      <Column Name="Mod_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Mod_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Mod_Desc" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="Mod_Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Mod_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Mod_Url" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Mod_ImagePath" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Mod_Abbreviation" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
   <Function Name="dbo.sp_GetCityList" Method="sp_GetCityList">

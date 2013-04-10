@@ -104,5 +104,18 @@ namespace SCMSDataLayer
             }
         }
 
+        public List<SETUP_Company> GetCmpByCode(string ps_Code)
+        {
+            try
+            {
+                SCMSDataContext dbSCMS = Connection.Create();
+                return dbSCMS.SETUP_Companies.Where(c => c.Cmp_Code == ps_Code).ToList();
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
     }
 }

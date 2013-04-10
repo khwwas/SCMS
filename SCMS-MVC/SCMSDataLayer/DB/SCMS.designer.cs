@@ -111,9 +111,6 @@ namespace SCMSDataLayer.DB
     partial void InsertSETUP_MaritalStatus(SETUP_MaritalStatus instance);
     partial void UpdateSETUP_MaritalStatus(SETUP_MaritalStatus instance);
     partial void DeleteSETUP_MaritalStatus(SETUP_MaritalStatus instance);
-    partial void InsertSETUP_Module(SETUP_Module instance);
-    partial void UpdateSETUP_Module(SETUP_Module instance);
-    partial void DeleteSETUP_Module(SETUP_Module instance);
     partial void InsertSETUP_Nationality(SETUP_Nationality instance);
     partial void UpdateSETUP_Nationality(SETUP_Nationality instance);
     partial void DeleteSETUP_Nationality(SETUP_Nationality instance);
@@ -141,6 +138,9 @@ namespace SCMSDataLayer.DB
     partial void InsertSYSTEM_CodeGeneration(SYSTEM_CodeGeneration instance);
     partial void UpdateSYSTEM_CodeGeneration(SYSTEM_CodeGeneration instance);
     partial void DeleteSYSTEM_CodeGeneration(SYSTEM_CodeGeneration instance);
+    partial void InsertSETUP_Module(SETUP_Module instance);
+    partial void UpdateSETUP_Module(SETUP_Module instance);
+    partial void DeleteSETUP_Module(SETUP_Module instance);
     #endregion
 		
 		public SCMSDataContext() : 
@@ -389,14 +389,6 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
-		public System.Data.Linq.Table<SETUP_Module> SETUP_Modules
-		{
-			get
-			{
-				return this.GetTable<SETUP_Module>();
-			}
-		}
-		
 		public System.Data.Linq.Table<SETUP_Nationality> SETUP_Nationalities
 		{
 			get
@@ -466,6 +458,14 @@ namespace SCMSDataLayer.DB
 			get
 			{
 				return this.GetTable<SYSTEM_CodeGeneration>();
+			}
+		}
+		
+		public System.Data.Linq.Table<SETUP_Module> SETUP_Modules
+		{
+			get
+			{
+				return this.GetTable<SETUP_Module>();
 			}
 		}
 		
@@ -9969,212 +9969,6 @@ namespace SCMSDataLayer.DB
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SETUP_Module")]
-	public partial class SETUP_Module : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Mod_Id;
-		
-		private string _Mod_Code;
-		
-		private string _Mod_Desc;
-		
-		private System.Nullable<bool> _Mod_Active;
-		
-		private System.Nullable<int> _Mod_SortOrder;
-		
-		private string _Mod_Url;
-		
-		private string _Mod_ImagePath;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnMod_IdChanging(int value);
-    partial void OnMod_IdChanged();
-    partial void OnMod_CodeChanging(string value);
-    partial void OnMod_CodeChanged();
-    partial void OnMod_DescChanging(string value);
-    partial void OnMod_DescChanged();
-    partial void OnMod_ActiveChanging(System.Nullable<bool> value);
-    partial void OnMod_ActiveChanged();
-    partial void OnMod_SortOrderChanging(System.Nullable<int> value);
-    partial void OnMod_SortOrderChanged();
-    partial void OnMod_UrlChanging(string value);
-    partial void OnMod_UrlChanged();
-    partial void OnMod_ImagePathChanging(string value);
-    partial void OnMod_ImagePathChanged();
-    #endregion
-		
-		public SETUP_Module()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Mod_Id
-		{
-			get
-			{
-				return this._Mod_Id;
-			}
-			set
-			{
-				if ((this._Mod_Id != value))
-				{
-					this.OnMod_IdChanging(value);
-					this.SendPropertyChanging();
-					this._Mod_Id = value;
-					this.SendPropertyChanged("Mod_Id");
-					this.OnMod_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_Code", DbType="VarChar(50)")]
-		public string Mod_Code
-		{
-			get
-			{
-				return this._Mod_Code;
-			}
-			set
-			{
-				if ((this._Mod_Code != value))
-				{
-					this.OnMod_CodeChanging(value);
-					this.SendPropertyChanging();
-					this._Mod_Code = value;
-					this.SendPropertyChanged("Mod_Code");
-					this.OnMod_CodeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_Desc", DbType="VarChar(500) NOT NULL", CanBeNull=false)]
-		public string Mod_Desc
-		{
-			get
-			{
-				return this._Mod_Desc;
-			}
-			set
-			{
-				if ((this._Mod_Desc != value))
-				{
-					this.OnMod_DescChanging(value);
-					this.SendPropertyChanging();
-					this._Mod_Desc = value;
-					this.SendPropertyChanged("Mod_Desc");
-					this.OnMod_DescChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_Active", DbType="Bit")]
-		public System.Nullable<bool> Mod_Active
-		{
-			get
-			{
-				return this._Mod_Active;
-			}
-			set
-			{
-				if ((this._Mod_Active != value))
-				{
-					this.OnMod_ActiveChanging(value);
-					this.SendPropertyChanging();
-					this._Mod_Active = value;
-					this.SendPropertyChanged("Mod_Active");
-					this.OnMod_ActiveChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_SortOrder", DbType="Int")]
-		public System.Nullable<int> Mod_SortOrder
-		{
-			get
-			{
-				return this._Mod_SortOrder;
-			}
-			set
-			{
-				if ((this._Mod_SortOrder != value))
-				{
-					this.OnMod_SortOrderChanging(value);
-					this.SendPropertyChanging();
-					this._Mod_SortOrder = value;
-					this.SendPropertyChanged("Mod_SortOrder");
-					this.OnMod_SortOrderChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_Url", DbType="VarChar(50)")]
-		public string Mod_Url
-		{
-			get
-			{
-				return this._Mod_Url;
-			}
-			set
-			{
-				if ((this._Mod_Url != value))
-				{
-					this.OnMod_UrlChanging(value);
-					this.SendPropertyChanging();
-					this._Mod_Url = value;
-					this.SendPropertyChanged("Mod_Url");
-					this.OnMod_UrlChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_ImagePath", DbType="VarChar(50)")]
-		public string Mod_ImagePath
-		{
-			get
-			{
-				return this._Mod_ImagePath;
-			}
-			set
-			{
-				if ((this._Mod_ImagePath != value))
-				{
-					this.OnMod_ImagePathChanging(value);
-					this.SendPropertyChanging();
-					this._Mod_ImagePath = value;
-					this.SendPropertyChanged("Mod_ImagePath");
-					this.OnMod_ImagePathChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SETUP_Nationality")]
 	public partial class SETUP_Nationality : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -12581,6 +12375,236 @@ namespace SCMSDataLayer.DB
 					this._CodeGen_AutoTag = value;
 					this.SendPropertyChanged("CodeGen_AutoTag");
 					this.OnCodeGen_AutoTagChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SETUP_Module")]
+	public partial class SETUP_Module : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Mod_Id;
+		
+		private string _Mod_Code;
+		
+		private string _Mod_Desc;
+		
+		private System.Nullable<bool> _Mod_Active;
+		
+		private System.Nullable<int> _Mod_SortOrder;
+		
+		private string _Mod_Url;
+		
+		private string _Mod_ImagePath;
+		
+		private string _Mod_Abbreviation;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnMod_IdChanging(int value);
+    partial void OnMod_IdChanged();
+    partial void OnMod_CodeChanging(string value);
+    partial void OnMod_CodeChanged();
+    partial void OnMod_DescChanging(string value);
+    partial void OnMod_DescChanged();
+    partial void OnMod_ActiveChanging(System.Nullable<bool> value);
+    partial void OnMod_ActiveChanged();
+    partial void OnMod_SortOrderChanging(System.Nullable<int> value);
+    partial void OnMod_SortOrderChanged();
+    partial void OnMod_UrlChanging(string value);
+    partial void OnMod_UrlChanged();
+    partial void OnMod_ImagePathChanging(string value);
+    partial void OnMod_ImagePathChanged();
+    partial void OnMod_AbbreviationChanging(string value);
+    partial void OnMod_AbbreviationChanged();
+    #endregion
+		
+		public SETUP_Module()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Mod_Id
+		{
+			get
+			{
+				return this._Mod_Id;
+			}
+			set
+			{
+				if ((this._Mod_Id != value))
+				{
+					this.OnMod_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Mod_Id = value;
+					this.SendPropertyChanged("Mod_Id");
+					this.OnMod_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_Code", DbType="VarChar(50)")]
+		public string Mod_Code
+		{
+			get
+			{
+				return this._Mod_Code;
+			}
+			set
+			{
+				if ((this._Mod_Code != value))
+				{
+					this.OnMod_CodeChanging(value);
+					this.SendPropertyChanging();
+					this._Mod_Code = value;
+					this.SendPropertyChanged("Mod_Code");
+					this.OnMod_CodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_Desc", DbType="VarChar(500) NOT NULL", CanBeNull=false)]
+		public string Mod_Desc
+		{
+			get
+			{
+				return this._Mod_Desc;
+			}
+			set
+			{
+				if ((this._Mod_Desc != value))
+				{
+					this.OnMod_DescChanging(value);
+					this.SendPropertyChanging();
+					this._Mod_Desc = value;
+					this.SendPropertyChanged("Mod_Desc");
+					this.OnMod_DescChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_Active", DbType="Bit")]
+		public System.Nullable<bool> Mod_Active
+		{
+			get
+			{
+				return this._Mod_Active;
+			}
+			set
+			{
+				if ((this._Mod_Active != value))
+				{
+					this.OnMod_ActiveChanging(value);
+					this.SendPropertyChanging();
+					this._Mod_Active = value;
+					this.SendPropertyChanged("Mod_Active");
+					this.OnMod_ActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_SortOrder", DbType="Int")]
+		public System.Nullable<int> Mod_SortOrder
+		{
+			get
+			{
+				return this._Mod_SortOrder;
+			}
+			set
+			{
+				if ((this._Mod_SortOrder != value))
+				{
+					this.OnMod_SortOrderChanging(value);
+					this.SendPropertyChanging();
+					this._Mod_SortOrder = value;
+					this.SendPropertyChanged("Mod_SortOrder");
+					this.OnMod_SortOrderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_Url", DbType="VarChar(50)")]
+		public string Mod_Url
+		{
+			get
+			{
+				return this._Mod_Url;
+			}
+			set
+			{
+				if ((this._Mod_Url != value))
+				{
+					this.OnMod_UrlChanging(value);
+					this.SendPropertyChanging();
+					this._Mod_Url = value;
+					this.SendPropertyChanged("Mod_Url");
+					this.OnMod_UrlChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_ImagePath", DbType="VarChar(50)")]
+		public string Mod_ImagePath
+		{
+			get
+			{
+				return this._Mod_ImagePath;
+			}
+			set
+			{
+				if ((this._Mod_ImagePath != value))
+				{
+					this.OnMod_ImagePathChanging(value);
+					this.SendPropertyChanging();
+					this._Mod_ImagePath = value;
+					this.SendPropertyChanged("Mod_ImagePath");
+					this.OnMod_ImagePathChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_Abbreviation", DbType="VarChar(50)")]
+		public string Mod_Abbreviation
+		{
+			get
+			{
+				return this._Mod_Abbreviation;
+			}
+			set
+			{
+				if ((this._Mod_Abbreviation != value))
+				{
+					this.OnMod_AbbreviationChanging(value);
+					this.SendPropertyChanging();
+					this._Mod_Abbreviation = value;
+					this.SendPropertyChanged("Mod_Abbreviation");
+					this.OnMod_AbbreviationChanged();
 				}
 			}
 		}

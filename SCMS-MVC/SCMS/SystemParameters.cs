@@ -12,8 +12,6 @@ namespace SCMS
             get;
             set;
         }
-
-
         public static string CurrentCmpId
         {
             get;
@@ -44,6 +42,20 @@ namespace SCMS
             get;
             set;
         }
-
+        public static int ModuleId
+        {
+            get;
+            set;
+        }
+        public static string  ModuleDesc
+        {
+            get;
+            set;
+        }
+        public static string ModuleAbbr
+        {
+            get;
+            set;
+        }
     }
 }
