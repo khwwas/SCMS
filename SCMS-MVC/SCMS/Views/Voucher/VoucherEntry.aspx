@@ -33,7 +33,7 @@
                 MessageBox.setAttribute("class", "message error");
                 scroll(0, 0);
                 FadeOut(MessageBox);
-                txt_CompanyName.focus();
+                txt_Date.focus();
                 return;
             }
             else if (ddl_Status.value == "0") {
@@ -42,7 +42,7 @@
                 MessageBox.setAttribute("class", "message error");
                 scroll(0, 0);
                 FadeOut(MessageBox);
-                txt_CompanyName.focus();
+                ddl_Status.focus();
                 return;
             }
             else if (ddl_VoucherType.value == "0") {
@@ -51,7 +51,7 @@
                 MessageBox.setAttribute("class", "message error");
                 scroll(0, 0);
                 FadeOut(MessageBox);
-                txt_CompanyName.focus();
+                ddl_VoucherType.focus();
                 return;
             }
             else if (ddl_Status.value == "2" && (txt_Difference.value == "" || txt_Difference.value != "0")) {
@@ -60,108 +60,103 @@
                 MessageBox.setAttribute("class", "message error");
                 scroll(0, 0);
                 FadeOut(MessageBox);
-                txt_CompanyName.focus();
+                ddl_Status.focus();
                 return;
             }
             else {
                 var DivArr = $("[id^=DetailRow]");
                 var RowCount = DivArr.length;
-                var VoucherDetailRows = new Array(RowCount);
+                var VoucherDetailRows = [];
 
                 if (ddl_Account != null) {
-                    VoucherDetailRows[0] = ddl_Account.value + "~";
+                    VoucherDetailRows[0] = ddl_Account.value + "║";
                 }
                 else {
-                    VoucherDetailRows[0] = "NULL" + "~";
+                    VoucherDetailRows[0] = "NULL" + "║";
                 }
 
                 if (txt_Debit != null) {
-                    VoucherDetailRows[0] += txt_Debit.value + "~";
+                    VoucherDetailRows[0] += txt_Debit.value + "║";
                 }
                 else {
-                    VoucherDetailRows[0] += "NULL" + "~";
+                    VoucherDetailRows[0] += "NULL" + "║";
                 }
 
                 if (txt_Credit != null) {
-                    VoucherDetailRows[0] += txt_Credit.value + "~";
+                    VoucherDetailRows[0] += txt_Credit.value + "║";
                 }
                 else {
-                    VoucherDetailRows[0] += "NULL" + "~";
+                    VoucherDetailRows[0] += "NULL" + "║";
                 }
 
                 if (txt_Details != null) {
-                    txt_Details.value = txt_Details.value.replace(/,/g, "π");
+                    //txt_Details.value = txt_Details.value.replace(/,/g, "π");
                     VoucherDetailRows[0] += txt_Details.value;
                 }
                 else {
                     VoucherDetailRows[0] += "NULL";
                 }
+                if (RowCount > 1) {
+                    for (var index = 1; index < RowCount; index++) {
 
-                for (var index = 1; index < RowCount; index++) {
+                        var ddl_Account = document.getElementById('ddl_Account' + index);
+                        var txt_Debit = document.getElementById('txt_Debit' + index);
+                        var txt_Credit = document.getElementById('txt_Credit' + index);
+                        var txt_Details = document.getElementById('txt_Details' + index);
 
-                    var ddl_Account = document.getElementById('ddl_Account' + index);
-                    var txt_Debit = document.getElementById('txt_Debit' + index);
-                    var txt_Credit = document.getElementById('txt_Credit' + index);
-                    var txt_Details = document.getElementById('txt_Details' + index);
+                        if (ddl_Account != null) {
+                            VoucherDetailRows[index] = ddl_Account.value + "║";
+                        }
+                        else {
+                            VoucherDetailRows[index] = "NULL" + "║";
+                        }
 
-                    if (ddl_Account != null) {
-                        VoucherDetailRows[index] = ddl_Account.value + "~";
-                    }
-                    else {
-                        VoucherDetailRows[index] = "NULL" + "~";
-                    }
+                        if (txt_Debit != null) {
+                            VoucherDetailRows[index] += txt_Debit.value + "║";
+                        }
+                        else {
+                            VoucherDetailRows[index] += "NULL" + "║";
+                        }
 
-                    if (txt_Debit != null) {
-                        VoucherDetailRows[index] += txt_Debit.value + "~";
-                    }
-                    else {
-                        VoucherDetailRows[index] += "NULL" + "~";
-                    }
+                        if (txt_Credit != null) {
+                            VoucherDetailRows[index] += txt_Credit.value + "║";
+                        }
+                        else {
+                            VoucherDetailRows[index] += "NULL" + "║";
+                        }
 
-                    if (txt_Credit != null) {
-                        VoucherDetailRows[index] += txt_Credit.value + "~";
-                    }
-                    else {
-                        VoucherDetailRows[index] += "NULL" + "~";
-                    }
-
-                    if (txt_Details != null) {
-                        txt_Details.value = txt_Details.value.replace(/,/g, "π");
-                        VoucherDetailRows[index] += txt_Details.value;
-                    }
-                    else {
-                        VoucherDetailRows[index] += "NULL";
+                        if (txt_Details != null) {
+                            //txt_Details.value = txt_Details.value.replace(/,/g, "π");
+                            VoucherDetailRows[index] += txt_Details.value;
+                        }
+                        else {
+                            VoucherDetailRows[index] += "NULL";
+                        }
                     }
                 }
-                var Url = document.getElementById('frm_VoucherEntry').action;
-                Url += "Voucher/SaveVoucher?VoucherMasterCode=" + txt_SelectedMasterCode.value + "&VoucherDate=" + txt_Date.value + "&Status=" + ddl_Status.value + "&VoucherType=" + ddl_VoucherType.value + "&LocationId=" + ddl_Location.value + "&Remarks=" + txt_Remarks.value + "&VoucherDetailRows=" + VoucherDetailRows;
+                //Url += "Voucher/SaveVoucher?VoucherMasterCode=" + txt_SelectedMasterCode.value + "&VoucherDate=" + txt_Date.value + "&Status=" + ddl_Status.value + "&VoucherType=" + ddl_VoucherType.value + "&LocationId='" + ddl_Location.value + "'&Remarks='" + txt_Remarks.value + "'&VoucherDetailRows='" + VoucherDetailRows + "'";
+                VoucherDetailRows[RowCount] = txt_SelectedMasterCode.value + "║" + txt_Date.value + "║" + ddl_Status.value + "║" + ddl_VoucherType.value + "║" + ddl_Location.value + "║" + txt_Remarks.value;
+                document.getElementById("Waiting_Image").style.display = "block";
+                document.getElementById("btn_Save").style.display = "none";
                 $.ajax({
-                    type: "GET",
-                    url: Url,
+                    type: "POST",
+                    url: "../Voucher/SaveVoucher",
+                    data: JSON.stringify(VoucherDetailRows),
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
                     success: function (response) {
-                        html = response;
-                        //$("#GridContainer").html(response);
-                        //SetGrid();
-                        //ResetForm();
-                        var Div = document.createElement("div");
-                        var VoucherId = "";
-                        var VoucherCode = "[Auto]";
-                        var ReturnValue = 0;
-                        Div.innerHTML = html;
-                        var InputArray = Div.getElementsByTagName("input");
-                        for (var index = 0; index < InputArray.length; index++) {
-                            if (InputArray[index].id == "VoucherId") {
-                                VoucherId = InputArray[index].value;
-                            }
-                            if (InputArray[index].id == "VoucherCode") {
-                                VoucherCode = InputArray[index].value;
-                            }
-                            if (InputArray[index].id == "ReturnValue") {
-                                ReturnValue = InputArray[index].value;
-                            }
-                        }
                         FadeIn(MessageBox);
-                        if (ReturnValue != "0") {
+                        var Arr = response.toString().split(",");
+                        if (Arr[0] != null) {
+                            document.getElementById("txt_SelectedMasterCode").value = Arr[0];
+                        }
+                        if (Arr[1] != null) {
+                            document.getElementById("txt_Code").value = Arr[1];
+                        }
+                        else {
+                            document.getElementById("txt_Code").value = "[Auto]";
+                        }
+                        if (Arr[2] != null && Arr[2] != "0") {
                             MessageBox.innerHTML = "<h5>Success!</h5><p>Record saved successfully.</p>";
                             MessageBox.setAttribute("class", "message success");
                         }
@@ -173,12 +168,6 @@
                         document.getElementById("btn_Save").style.display = "block";
                         scroll(0, 0);
                         FadeOut(MessageBox);
-                        document.getElementById("txt_Code").value = VoucherCode;
-                        document.getElementById("txt_SelectedMasterCode").value = VoucherId;
-                    },
-                    error: function (rs, e) {
-                        document.getElementById("Waiting_Image").style.display = "none";
-                        document.getElementById("btn_Save").style.display = "block";
                     }
                 });
             }
@@ -235,6 +224,7 @@
                 }
             });
         }
+
         function SetTotals(Id) {
             var txt_TotalDebit = document.getElementById('txt_TotalDebit');
             var txt_TotalCredit = document.getElementById('txt_TotalCredit');
@@ -374,7 +364,7 @@
                     <%= Html.DropDownList("ddl_Account", null, new { style ="width:250px;" })%>
                 </div>
                 <div class="CustomCell" style="width: 565px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 545px;" id="txt_sDetails" name="txt_Details"
+                    <input type="text" class="CustomText" style="width: 545px;" id="txt_Details" name="txt_Details"
                         maxlength="200" />
                 </div>
                 <div class="CustomCell" style="width: 118px; height: 30px;">
