@@ -13,7 +13,6 @@ namespace SCMS.Controllers
         //
         // GET: /Login/
 
-        DALLogin objDal = new DALLogin();
         public ActionResult Index()
         {
             return View("Login");
@@ -22,9 +21,10 @@ namespace SCMS.Controllers
         #region Functions
         public int ValidateUser(string ps_UserName, string ps_Password)
         {
+            DALLogin objDal = new DALLogin();
+
             try
             {
-
                 SECURITY_User user = objDal.ValidateUser(ps_UserName, ps_Password);
 
                 if (user != null)
@@ -36,7 +36,6 @@ namespace SCMS.Controllers
                 {
                     Int32 li_Id = 0;
                     return li_Id = Convert.ToInt32(user.User_Id);
-                    //return 0;
                 }
             }
             catch

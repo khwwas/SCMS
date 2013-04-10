@@ -49,20 +49,19 @@
                         foreach (SCMSDataLayer.DB.SETUP_Module mod in modules)
                         { 
             %>
-            <div style="background-image: url('<%=mod.Mod_ImagePath%>');" class="ModuleBox" onclick="javascript:window.location='<%=mod.Mod_Url %>?ModId=<%=mod.Mod_Id %>'">
+            <div style="background-image: url('<%=mod.Mod_ImagePath%>');" class="ModuleBox" onclick="javascript:window.location='<%=mod.Mod_Url %>?ModId=<%=mod.Mod_Id %>&ModDesc=<%=modules[0].Mod_Desc %>&ModAbbr=<%=modules[0].Mod_Abbreviation %>'">
                 <div class="ModuleTitle">
-                    <%=mod.Mod_Desc%></div>
+                    <%=mod.Mod_Abbreviation%></div>
             </div>
-            <%--<div style="clear: both; height: 20px;">
-            </div>--%>
             <%}
                     }
                     else
                     {
-                        //SCMSDataLayer.DALCommon.ModuleId = modules[0].Mod_Id;
+                       
             %>
             <script type="text/javascript">
-                window.location = '../Home?ModId=<%=modules[0].Mod_Id %>';
+                alert( <%=modules[0].Mod_Desc%>);
+                window.location = '../Home?ModId=<%=modules[0].Mod_Id %>&ModDesc=<%=modules[0].Mod_Desc %>&ModAbbr=<%=modules[0].Mod_Abbreviation %>';
             </script>
             <%}
                 }%>

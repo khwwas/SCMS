@@ -11,11 +11,13 @@ namespace SCMS.Controllers
         //
         // GET: /Home/
 
-        public ActionResult Index(int? ModId)
+        public ActionResult Index(int? ModId, string ModDesc, string ModAbbr)
         {
             if (ModId != null)
             {
-                SCMSDataLayer.DALCommon.ModuleId = Convert.ToInt32(ModId);
+                SystemParameters.ModuleId = Convert.ToInt32(ModId);
+                SystemParameters.ModuleDesc = ModDesc;
+                SystemParameters.ModuleAbbr = ModAbbr;
             }
             return View();
         }

@@ -13,7 +13,7 @@
     else
     {
         user = (SCMSDataLayer.DB.SECURITY_User)Session["user"];
-        userMenus = new SCMSDataLayer.DALUserMenuRights().GetUserMenuRights(user.UsrGrp_Id).Where(c => c.Mod_Id == SCMSDataLayer.DALCommon.ModuleId).ToList();
+        userMenus = new SCMSDataLayer.DALUserMenuRights().GetUserMenuRights(user.UsrGrp_Id).Where(c => c.Mod_Id == SCMS.SystemParameters.ModuleId).ToList();
     }
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -100,15 +100,16 @@
         <div class="grid_12 header-repeat">
             <div id="branding">
                 <div class="floatleft">
-                    <%if (SCMSDataLayer.DALCommon.ModuleId == 1)
+                    <%if (SCMS.SystemParameters.ModuleAbbr.ToLower() == "GL".ToLower())
                       { %>
                     <h1 style="color: White;">
-                        Financial Management System</h1>
+                        NeviGL
+                    </h1>
                     <%}
-                      else if (SCMSDataLayer.DALCommon.ModuleId == 2)
+                      else if (SCMS.SystemParameters.ModuleAbbr.ToLower() == "TMS".ToLower())
                       { %>
                     <h1 style="color: White;">
-                        Time Management System</h1>
+                        NeviTMS</h1>
                     <%} %>
                 </div>
                 <div class="floatright">

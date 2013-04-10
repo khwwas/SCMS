@@ -5,6 +5,7 @@ using System.Text;
 using SCMSDataLayer.DB;
 using System.Data;
 using System.Data.SqlClient;
+
 namespace SCMSDataLayer
 {
     public enum CodeInitialization
@@ -122,11 +123,11 @@ namespace SCMSDataLayer
             return _ReturnValue;
         }
 
-        public static int ModuleId
-        {
-            get;
-            set;
-        }
+        //public static int ModuleId
+        //{
+        //    get;
+        //    set;
+        //}
 
         //public static String aGetMaximumCode(String ps_TableName, String ps_ColumnName)
         //{
