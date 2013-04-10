@@ -7,6 +7,14 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContenct" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <style type="text/css">
+        .ui-autocomplete
+        {
+            max-height: 200px;
+            overflow-y: auto;
+            width: auto;
+        }
+    </style>
     <script type="text/javascript">
         $(document).ready(function () {
             document.getElementById("ddl_VoucherType").focus();
