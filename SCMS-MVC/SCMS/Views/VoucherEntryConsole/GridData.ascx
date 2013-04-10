@@ -19,22 +19,31 @@
             <th style="width: 6%;">
                 Action
             </th>
-            <th style="width: 15%;">
+            <th style="width: 10%;">
                 Location
             </th>
-            <th style="width: 15%;">
+            <th style="width: 10%;">
                 Voucher Type
             </th>
-            <th style="width: 15%;">
+            <th style="width: 8%;">
                 Code
             </th>
-            <th style="width: 13%;">
+            <th style="width: 8%;">
                 Date
             </th>
-            <th style="width: 25%;">
+            <th style="width: 10%;">
+                Dr.
+            </th>
+            <th style="width: 10%;">
+                Cr.
+            </th>
+            <th style="width: 15%;">
+                Diff
+            </th>
+            <th style="width: 13%;">
                 Remarks
             </th>
-            <th style="width: 11%;">
+            <th style="width: 10%;">
                 Status
             </th>
         </tr>
@@ -67,6 +76,15 @@
             </td>
             <td id="txt_Date<%=DataRow.VchMas_Id%>" style="vertical-align: middle;">
                 <%=Convert.ToDateTime(DataRow.VchMas_Date).ToString("MM/dd/yyyy")%>
+            </td>
+            <td id="txt_TotalDrAmount" style="vertical-align: middle;">
+                <%=DataRow.TotalDrAmount%>
+            </td>
+            <td id="txt_TotalCrAmount" style="vertical-align: middle;">
+                <%=DataRow.TotalCrAmount%>
+            </td>
+            <td id="txt_DiffAmount" style="vertical-align: middle;">
+                <%=DataRow.DifferenceAmount%>
             </td>
             <td id="txt_Remarks<%=DataRow.VchMas_Id%>" style="vertical-align: middle;">
                 <%=DataRow.VchMas_Remarks%>

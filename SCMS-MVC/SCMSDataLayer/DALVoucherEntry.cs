@@ -126,7 +126,7 @@ namespace SCMSDataLayer
         }
 
         public List<sp_VoucherEntryConsoleResult> GetVoucherEntryConsoleData(int ps_AllLocation, string ps_Location, int ps_AllVoucherType, string ps_VoucherType,
-                                                                     int ps_AllDate, string ps_DateFrom, string ps_DateTo)
+                                                                             int ps_AllDate, string ps_DateFrom, string ps_DateTo)
         {
             try
             {
