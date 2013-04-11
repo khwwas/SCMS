@@ -38,7 +38,7 @@
     </style>
     <div class="box round first fullpage grid">
         <h2>
-            Dashboard</h2>
+            Application Dashboard</h2>
         <div class="block" style="min-height: 410px; overflow: auto;">
             <% 
                 var modules = (List<SCMSDataLayer.DB.SETUP_Module>)ViewData["Modules"];

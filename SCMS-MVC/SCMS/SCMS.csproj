@@ -131,9 +131,16 @@
     <Compile Include="Controllers\BankController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\CalendarTypeController.cs" />
+    <Compile Include="Controllers\CodeAnalysis1Controller.cs" />
+    <Compile Include="Controllers\CodeAnalysis2Controller.cs" />
+    <Compile Include="Controllers\CodeAnalysis3Controller.cs" />
+    <Compile Include="Controllers\CodeAnalysis4Controller.cs" />
+    <Compile Include="Controllers\CodeAnalysis5Controller.cs" />
+    <Compile Include="Controllers\CodeAnalysis6Controller.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\ChartOfAccountController.cs" />
+    <Compile Include="Controllers\ChartOfAccountModController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DashBoardController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
@@ -205,6 +212,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>rptCompany.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\Reps\rptTrialBalance.cs">
       <AutoGen>True</AutoGen>
@@ -986,11 +994,25 @@
     <Content Include="Views\Calendar\GridData.ascx" />
     <Content Include="Views\City\City.aspx" />
     <Content Include="Views\City\GridData.ascx" />
+    <Content Include="Views\CodeAnalysis1\CodeAnalysis1.aspx" />
+    <Content Include="Views\CodeAnalysis1\GridData.ascx" />
+    <Content Include="Views\CodeAnalysis2\CodeAnalysis2.aspx" />
+    <Content Include="Views\CodeAnalysis2\GridData.ascx" />
+    <Content Include="Views\CodeAnalysis3\CodeAnalysis3.aspx" />
+    <Content Include="Views\CodeAnalysis3\GridData.ascx" />
+    <Content Include="Views\CodeAnalysis4\CodeAnalysis4.aspx" />
+    <Content Include="Views\CodeAnalysis4\GridData.ascx" />
+    <Content Include="Views\CodeAnalysis5\CodeAnalysis5.aspx" />
+    <Content Include="Views\CodeAnalysis5\GridData.ascx" />
+    <Content Include="Views\CodeAnalysis6\CodeAnalysis6.aspx" />
+    <Content Include="Views\CodeAnalysis6\GridData.ascx" />
     <Content Include="Views\Company\Company.aspx" />
     <Content Include="Views\ChartOfAccount\ChartOfAccount.aspx" />
     <Content Include="Views\ChartOfAccount\GridData.ascx" />
     <Content Include="Views\Bank\Bank.aspx" />
     <Content Include="Views\Bank\GridData.ascx" />
+    <Content Include="Views\ChartOfAccountModification\ChartOfAccountMod.aspx" />
+    <Content Include="Views\ChartOfAccountModification\GridData.ascx" />
     <Content Include="Views\Nationality\Nationality.aspx" />
     <Content Include="Views\Nationality\GridData.ascx" />
     <Content Include="Views\MaritalStatus\GridData.ascx" />

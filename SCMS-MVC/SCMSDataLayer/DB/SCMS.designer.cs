@@ -518,13 +518,6 @@ namespace SCMSDataLayer.DB
 			return ((ISingleResult<sp_GetUserListResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetUserMenuRights")]
-		public ISingleResult<sp_GetUserMenuRightsResult> sp_GetUserMenuRights([global::System.Data.Linq.Mapping.ParameterAttribute(Name="GroupId", DbType="VarChar(50)")] string groupId)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), groupId);
-			return ((ISingleResult<sp_GetUserMenuRightsResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetVoucherTypeNarrationList")]
 		public ISingleResult<sp_GetVoucherTypeNarrationListResult> sp_GetVoucherTypeNarrationList()
 		{
@@ -607,6 +600,13 @@ namespace SCMSDataLayer.DB
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), allLocation, locationId, allVoucherType, voucherTypeId, allDate, dateFrom, dateTo);
 			return ((ISingleResult<sp_VoucherEntryConsoleResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetUserMenuRights")]
+		public ISingleResult<sp_GetUserMenuRightsResult> sp_GetUserMenuRights([global::System.Data.Linq.Mapping.ParameterAttribute(Name="GroupId", DbType="VarChar(50)")] string groupId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), groupId);
+			return ((ISingleResult<sp_GetUserMenuRightsResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -14180,122 +14180,6 @@ namespace SCMSDataLayer.DB
 		}
 	}
 	
-	public partial class sp_GetUserMenuRightsResult
-	{
-		
-		private long _Mnu_Id;
-		
-		private string _Mnu_Description;
-		
-		private string _Mnu_TargetUrl;
-		
-		private string _Mnu_Level;
-		
-		private System.Nullable<int> _Mod_Id;
-		
-		private long _SelectedMenu;
-		
-		public sp_GetUserMenuRightsResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mnu_Id", DbType="BigInt NOT NULL")]
-		public long Mnu_Id
-		{
-			get
-			{
-				return this._Mnu_Id;
-			}
-			set
-			{
-				if ((this._Mnu_Id != value))
-				{
-					this._Mnu_Id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mnu_Description", DbType="VarChar(100)")]
-		public string Mnu_Description
-		{
-			get
-			{
-				return this._Mnu_Description;
-			}
-			set
-			{
-				if ((this._Mnu_Description != value))
-				{
-					this._Mnu_Description = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mnu_TargetUrl", DbType="VarChar(500)")]
-		public string Mnu_TargetUrl
-		{
-			get
-			{
-				return this._Mnu_TargetUrl;
-			}
-			set
-			{
-				if ((this._Mnu_TargetUrl != value))
-				{
-					this._Mnu_TargetUrl = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mnu_Level", DbType="VarChar(50)")]
-		public string Mnu_Level
-		{
-			get
-			{
-				return this._Mnu_Level;
-			}
-			set
-			{
-				if ((this._Mnu_Level != value))
-				{
-					this._Mnu_Level = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_Id", DbType="Int")]
-		public System.Nullable<int> Mod_Id
-		{
-			get
-			{
-				return this._Mod_Id;
-			}
-			set
-			{
-				if ((this._Mod_Id != value))
-				{
-					this._Mod_Id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SelectedMenu", DbType="BigInt NOT NULL")]
-		public long SelectedMenu
-		{
-			get
-			{
-				return this._SelectedMenu;
-			}
-			set
-			{
-				if ((this._SelectedMenu != value))
-				{
-					this._SelectedMenu = value;
-				}
-			}
-		}
-	}
-	
 	public partial class sp_GetVoucherTypeNarrationListResult
 	{
 		
@@ -17033,6 +16917,158 @@ namespace SCMSDataLayer.DB
 				if ((this._DifferenceAmount != value))
 				{
 					this._DifferenceAmount = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_GetUserMenuRightsResult
+	{
+		
+		private long _Mnu_Id;
+		
+		private string _Mnu_Description;
+		
+		private string _Mnu_TargetUrl;
+		
+		private string _Mnu_Level;
+		
+		private System.Nullable<int> _Mnu_SortOrder;
+		
+		private string _Mnu_IsLineBreak;
+		
+		private System.Nullable<int> _Mod_Id;
+		
+		private long _SelectedMenu;
+		
+		public sp_GetUserMenuRightsResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mnu_Id", DbType="BigInt NOT NULL")]
+		public long Mnu_Id
+		{
+			get
+			{
+				return this._Mnu_Id;
+			}
+			set
+			{
+				if ((this._Mnu_Id != value))
+				{
+					this._Mnu_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mnu_Description", DbType="VarChar(100)")]
+		public string Mnu_Description
+		{
+			get
+			{
+				return this._Mnu_Description;
+			}
+			set
+			{
+				if ((this._Mnu_Description != value))
+				{
+					this._Mnu_Description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mnu_TargetUrl", DbType="VarChar(500)")]
+		public string Mnu_TargetUrl
+		{
+			get
+			{
+				return this._Mnu_TargetUrl;
+			}
+			set
+			{
+				if ((this._Mnu_TargetUrl != value))
+				{
+					this._Mnu_TargetUrl = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mnu_Level", DbType="VarChar(50)")]
+		public string Mnu_Level
+		{
+			get
+			{
+				return this._Mnu_Level;
+			}
+			set
+			{
+				if ((this._Mnu_Level != value))
+				{
+					this._Mnu_Level = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mnu_SortOrder", DbType="Int")]
+		public System.Nullable<int> Mnu_SortOrder
+		{
+			get
+			{
+				return this._Mnu_SortOrder;
+			}
+			set
+			{
+				if ((this._Mnu_SortOrder != value))
+				{
+					this._Mnu_SortOrder = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mnu_IsLineBreak", DbType="VarChar(50)")]
+		public string Mnu_IsLineBreak
+		{
+			get
+			{
+				return this._Mnu_IsLineBreak;
+			}
+			set
+			{
+				if ((this._Mnu_IsLineBreak != value))
+				{
+					this._Mnu_IsLineBreak = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_Id", DbType="Int")]
+		public System.Nullable<int> Mod_Id
+		{
+			get
+			{
+				return this._Mod_Id;
+			}
+			set
+			{
+				if ((this._Mod_Id != value))
+				{
+					this._Mod_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SelectedMenu", DbType="BigInt NOT NULL")]
+		public long SelectedMenu
+		{
+			get
+			{
+				return this._SelectedMenu;
+			}
+			set
+			{
+				if ((this._SelectedMenu != value))
+				{
+					this._SelectedMenu = value;
 				}
 			}
 		}

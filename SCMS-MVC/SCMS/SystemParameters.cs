@@ -7,11 +7,6 @@ namespace SCMS
 {
     public static class SystemParameters
     {
-        //public static string CurrentAppName
-        //{
-        //    get;
-        //    set;
-        //}
         public static string CurrentCmpId
         {
             get;
@@ -32,6 +27,12 @@ namespace SCMS
             get;
             set;
         }
+        public static string CurrentUserGrpId
+        {
+            get;
+            set;
+        }
+
         public static string CurrentUserCode
         {
             get;
@@ -47,7 +48,7 @@ namespace SCMS
             get;
             set;
         }
-        public static string  ModuleDesc
+        public static string ModuleDesc
         {
             get;
             set;

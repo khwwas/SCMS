@@ -404,7 +404,6 @@ namespace SCMS.Reports
                 _ReportDocument.SetParameterValue("pm_CompanyName", ls_Company);
                 _ReportDocument.SummaryInfo.ReportComments = ls_ApplicationName;
                 _ReportDocument.SummaryInfo.ReportAuthor = ls_User;
-
                 crvReports.ReportSource = _ReportDocument;
                 crvReports.DataBind();
             }

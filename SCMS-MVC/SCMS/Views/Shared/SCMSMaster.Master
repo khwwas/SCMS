@@ -1,9 +1,9 @@
 ﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
 
 <% 
-    SCMSDataLayer.DB.SECURITY_User user = new SCMSDataLayer.DB.SECURITY_User();
     List<SCMSDataLayer.DB.sp_GetUserMenuRightsResult> userMenus = new List<SCMSDataLayer.DB.sp_GetUserMenuRightsResult>();
-    if (Session["user"] == null)
+    if (SCMS.SystemParameters.CurrentUserId == null ||
+        SCMS.SystemParameters.CurrentUserId.ToString().Trim() == "")
     {
 %>
 <script type="text/javascript">
@@ -12,8 +12,7 @@
 <% }
     else
     {
-        user = (SCMSDataLayer.DB.SECURITY_User)Session["user"];
-        userMenus = new SCMSDataLayer.DALUserMenuRights().GetUserMenuRights(user.UsrGrp_Id).Where(c => c.Mod_Id == SCMS.SystemParameters.ModuleId).ToList();
+        userMenus = new SCMSDataLayer.DALUserMenuRights().GetUserMenuRights(SCMS.SystemParameters.CurrentUserGrpId).Where(c => c.Mod_Id == SCMS.SystemParameters.ModuleId).ToList();
     }
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -100,17 +99,14 @@
         <div class="grid_12 header-repeat">
             <div id="branding">
                 <div class="floatleft">
-                    <%if (SCMS.SystemParameters.ModuleAbbr.ToLower() == "GL".ToLower())
-                      { %>
+                    <% if (SCMS.SystemParameters.ModuleDesc.ToString() != null &&
+                           SCMS.SystemParameters.ModuleDesc.ToString().Trim() != "")
+                       { %>
                     <h1 style="color: White;">
-                        NeviGL
+                        <%
+                           Response.Write(SCMS.SystemParameters.ModuleDesc.ToString());
+                       }%>
                     </h1>
-                    <%}
-                      else if (SCMS.SystemParameters.ModuleAbbr.ToLower() == "TMS".ToLower())
-                      { %>
-                    <h1 style="color: White;">
-                        NeviTMS</h1>
-                    <%} %>
                 </div>
                 <div class="floatright">
                     <div class="floatleft">
@@ -118,8 +114,11 @@
                     <div class="floatleft marginleft10">
                         <ul class="inline-ul floatleft">
                             <li>Hello
-                                <%if (user != null)
-                                      Response.Write(user.User_Title); %></li>
+                                <%if (SCMS.SystemParameters.CurrentUserName != null &&
+                                      SCMS.SystemParameters.CurrentUserName.ToString().Trim() != "")
+                                      Response.Write(SCMS.SystemParameters.CurrentUserName);
+                                %>
+                            </li>
                             <li><a href="../Login/Logout">Logout</a></li>
                         </ul>
                     </div>
@@ -133,9 +132,7 @@
         <div class="grid_12">
             <ul class="nav main">
                 <li class="ic-typography"><a href="../Home"><span>Home</span></a></li>
-                <li class="ic-typography"><a href="../Dashboard"><span>Dashboard</span></a></li>
-                <%if (user.UsrGrp_Id == "00001")
-                  { %>
+                <li class="ic-typography"><a href="../Dashboard"><span>Application Dashboard</span></a></li>
                 <li class="ic-typography"><a href="javascript:" style="float: left"><span>Security</span></a>
                     <ul>
                         <li><a href="../UserGroup">User Groups</a> </li>
@@ -143,7 +140,6 @@
                         <li><a href="../UserRightsSetup">Menu Rights</a> </li>
                     </ul>
                 </li>
-                <%} %>
                 <li class="ic-typography"><a href="javascript:"><span>Setups</span></a>
                     <ul>
                         <%foreach (SCMSDataLayer.DB.sp_GetUserMenuRightsResult userMenuRow in userMenus)

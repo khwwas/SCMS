@@ -48,6 +48,12 @@
     <Compile Include="DALBankAccount.cs" />
     <Compile Include="DALCalendar.cs" />
     <Compile Include="DALCalendarType.cs" />
+    <Compile Include="DALCodeAnalysis1.cs" />
+    <Compile Include="DALCodeAnalysis2.cs" />
+    <Compile Include="DALCodeAnalysis3.cs" />
+    <Compile Include="DALCodeAnalysis4.cs" />
+    <Compile Include="DALCodeAnalysis5.cs" />
+    <Compile Include="DALCodeAnalysis6.cs" />
     <Compile Include="DALCustomer.cs" />
     <Compile Include="DALDepartment.cs" />
     <Compile Include="DALEmployeeType.cs" />

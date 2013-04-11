@@ -107,5 +107,45 @@ namespace SCMSDataLayer
                 return null;
             }
         }
+
+        #region Chart of Account Modification
+        public List<SETUP_ChartOfAccount> GetAllRecordsFirstLevel()
+        {
+            try
+            {
+                SCMSDataContext dbSCMS = Connection.Create();
+                List<SETUP_ChartOfAccount> chartOfAccountList = new List<SETUP_ChartOfAccount>();
+                chartOfAccountList = dbSCMS.ExecuteQuery<SETUP_ChartOfAccount>("Select * From SETUP_ChartOfAccount Where ChrtAcc_Level = 1 Order By ChrtAcc_Code,ChrtAcc_Level").ToList();
+                return chartOfAccountList;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public int ReplaceOldCode_WithNewCode(String ps_OldCode, string ps_NewCode)
+        {
+            int li_ReturnValue = 0;
+            string _Sql = "";
+
+            try
+            {
+                SCMSDataContext dbSCMS = Connection.Create();
+
+                _Sql += "  Update Setup_ChartOfAccount ";
+                _Sql += "     Set '" + ps_NewCode + "' + SubString(ChrtAcc_Code, LEN( '" + ps_NewCode + "' ) + 1, LEN( ChrtAcc_Code ) ) ";
+                _Sql += "   Where Left( ChrtAcc_Code, Len( '" + ps_OldCode + "' ) ) = '" + ps_OldCode + "' ";
+
+                li_ReturnValue = dbSCMS.ExecuteCommand(_Sql);
+            }
+            catch (Exception ex)
+            {
+                li_ReturnValue = 0;
+            }
+
+            return li_ReturnValue;
+        }
+        #endregion
     }
 }

@@ -1,8 +1,7 @@
 ﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
 
 <% 
-    SCMSDataLayer.DB.SECURITY_User user = new SCMSDataLayer.DB.SECURITY_User();
-    List<SCMSDataLayer.DB.sp_GetUserMenuRightsResult> userMenus = new List<SCMSDataLayer.DB.sp_GetUserMenuRightsResult>();
+   
     if (Session["user"] == null)
     {
 %>
@@ -10,11 +9,7 @@
     window.location = "../Login";
 </script>
 <% }
-    else
-    {
-        user = (SCMSDataLayer.DB.SECURITY_User)Session["user"];
-        userMenus = new SCMSDataLayer.DALUserMenuRights().GetUserMenuRights(user.UsrGrp_Id);
-    }
+   
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -45,11 +40,6 @@
     </style>
     <link href="../../Content/Custom.css" rel="stylesheet" type="text/css" />
     <!-- BEGIN: load jquery -->
-    <%if (Request.Url.OriginalString.Contains("ChartOfAccount") ||
-          Request.Url.OriginalString.Contains("ReportSelectionCriteria"))
-      { %>
-    <script src="../../Scripts/jquery-1.6.4.min.js" type="text/javascript"></script>
-    <%}%>
     <script type="text/javascript" src="../../Scripts/jquery-ui/jquery.ui.core.min.js"></script>
     <script src="../../Scripts/jquery-ui/jquery.ui.widget.min.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery-ui/jquery.ui.accordion.min.js" type="text/javascript"></script>
@@ -57,11 +47,6 @@
     <script src="../../Scripts/jquery-ui/jquery.effects.slide.min.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery-ui/jquery.ui.mouse.min.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery-ui/jquery.ui.sortable.min.js" type="text/javascript"></script>
-    <%if (!Request.Url.OriginalString.Contains("ChartOfAccount"))
-      { %>
-    <script src="../../Scripts/jquery-ui-1.8.11.js" type="text/javascript"></script>
-    <script src="../../Scripts/jquery-ui-1.8.11.min.js" type="text/javascript"></script>
-    <%} %>
     <script src="../../Scripts/table/jquery.dataTables.min.js" type="text/javascript"></script>
     <!-- END: load jquery -->
     <script src="../../Scripts/setup.js" type="text/javascript"></script>
@@ -96,7 +81,7 @@
             <div id="branding">
                 <div class="floatleft">
                     <h1 style="color: White;">
-                        Supply Chain Management System - v1.0</h1>
+                        Supply Chain Management System</h1>
                 </div>
                 <div class="floatright">
                     <div class="floatleft">
@@ -104,8 +89,11 @@
                     <div class="floatleft marginleft10">
                         <ul class="inline-ul floatleft">
                             <li>Hello
-                                <%if (user != null)
-                                      Response.Write(user.User_Title); %></li>
+                                <%if (SCMS.SystemParameters.CurrentUserName != null &&
+                                      SCMS.SystemParameters.CurrentUserName.ToString().Trim() != "")
+                                      Response.Write(SCMS.SystemParameters.CurrentUserName);
+                                %>
+                            </li>
                             <li><a href="../Login/Logout">Logout</a></li>
                         </ul>
                     </div>
@@ -131,7 +119,7 @@
     </div>
     <div id="site_info" style="text-align: center;">
         <p>
-            Copyright @2013. All Rights Reserved.
+            © 2013 - All Rights Reserveds
         </p>
     </div>
 </body>

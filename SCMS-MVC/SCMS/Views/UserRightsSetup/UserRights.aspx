@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/SCMSMaster.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    SCMS - User Menu Rights
+    User Menu Rights
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContenct" runat="server">
 </asp:Content>
@@ -106,7 +106,7 @@
                     <div style='float: left;'>
                         <%=Html.DropDownList("ddl_UserGroups", null, new { @style = "width:259px;", @onchange = "GetUserMenu(this.value)" })%>
                     </div>
-                    <div id="TreeContainer" style="float: left; margin-left: 5px;">
+                    <div id="TreeContainer" style="float: left; margin-left: 5px; width: 300px;">
                         <%Html.RenderPartial("TreeView"); %>
                     </div>
                 </div>

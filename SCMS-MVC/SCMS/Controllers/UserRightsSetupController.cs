@@ -21,14 +21,14 @@ namespace SCMS.Controllers
                 SelectedGroup = userGroups[0].UsrGrp_Id;
             }
             ViewData["ddl_UserGroups"] = new SelectList(userGroups, "UsrGrp_Id", "UsrGrp_Title", SelectedGroup);
-            List<sp_GetUserMenuRightsResult> MenuRights = new DALUserMenuRights().GetUserMenuRights(SelectedGroup).Where(c => c.Mod_Id == SystemParameters.ModuleId).OrderBy(c => c.Mnu_Level).ToList();
+            List<sp_GetUserMenuRightsResult> MenuRights = new DALUserMenuRights().GetUserMenuRights(SelectedGroup).Where(c => c.Mod_Id == SystemParameters.ModuleId).ToList();
             ViewData["UserMenuRights"] = MenuRights;
             return View("UserRights");
         }
 
         public ActionResult GetUserMenus(string GroupId)
         {
-            List<sp_GetUserMenuRightsResult> MenuRights = new DALUserMenuRights().GetUserMenuRights(GroupId).Where(c => c.Mod_Id == SystemParameters.ModuleId).OrderBy(c => c.Mnu_Level).ToList();
+            List<sp_GetUserMenuRightsResult> MenuRights = new DALUserMenuRights().GetUserMenuRights(GroupId).Where(c => c.Mod_Id == SystemParameters.ModuleId).ToList();
             ViewData["UserMenuRights"] = MenuRights;
             return PartialView("TreeView");
         }

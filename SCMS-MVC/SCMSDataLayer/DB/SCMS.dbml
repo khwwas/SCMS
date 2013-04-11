@@ -654,17 +654,6 @@
       <Column Name="UsrGrp_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.sp_GetUserMenuRights" Method="sp_GetUserMenuRights">
-    <Parameter Name="GroupId" Parameter="groupId" Type="System.String" DbType="VarChar(50)" />
-    <ElementType Name="sp_GetUserMenuRightsResult">
-      <Column Name="Mnu_Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="Mnu_Description" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="Mnu_TargetUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
-      <Column Name="Mnu_Level" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Mod_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="SelectedMenu" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.sp_GetVoucherTypeNarrationList" Method="sp_GetVoucherTypeNarrationList">
     <ElementType Name="sp_GetVoucherTypeNarrationListResult">
       <Column Name="VchrTypeNarr_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
@@ -880,6 +869,19 @@
       <Column Name="TotalDrAmount" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
       <Column Name="TotalCrAmount" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
       <Column Name="DifferenceAmount" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GetUserMenuRights" Method="sp_GetUserMenuRights">
+    <Parameter Name="GroupId" Parameter="groupId" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="sp_GetUserMenuRightsResult">
+      <Column Name="Mnu_Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Mnu_Description" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Mnu_TargetUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="Mnu_Level" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Mnu_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Mnu_IsLineBreak" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Mod_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SelectedMenu" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
 </Database>
