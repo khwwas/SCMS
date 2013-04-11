@@ -143,6 +143,7 @@
     <Compile Include="Controllers\JobPositionController.cs" />
     <Compile Include="Controllers\JobTitleController.cs" />
     <Compile Include="Controllers\LeaveGroupController.cs" />
+    <Compile Include="Controllers\LeaveTypeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MaritalStatusController.cs" />
     <Compile Include="Controllers\NationalityController.cs" />
@@ -992,6 +993,8 @@
     <Content Include="Views\ChartOfAccount\GridData.ascx" />
     <Content Include="Views\Bank\Bank.aspx" />
     <Content Include="Views\Bank\GridData.ascx" />
+    <Content Include="Views\LeaveType\GridData.ascx" />
+    <Content Include="Views\LeaveType\LeaveType.aspx" />
     <Content Include="Views\Nationality\Nationality.aspx" />
     <Content Include="Views\Nationality\GridData.ascx" />
     <Content Include="Views\MaritalStatus\GridData.ascx" />
