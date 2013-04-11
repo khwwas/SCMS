@@ -7,11 +7,11 @@ namespace SCMS
 {
     public static class SystemParameters
     {
-        public static string CurrentAppName
-        {
-            get;
-            set;
-        }
+        //public static string CurrentAppName
+        //{
+        //    get;
+        //    set;
+        //}
         public static string CurrentCmpId
         {
             get;

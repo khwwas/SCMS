@@ -201,6 +201,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="Reports\Reps\rptCompany.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptCompany.rpt</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Reps\rptTrialBalance.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -223,12 +228,6 @@
     </Compile>
     <Compile Include="Reports\Reps\rptCity.cs">
       <DependentUpon>rptCity.rpt</DependentUpon>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="Reports\Reps\rptCompany.cs">
-      <DependentUpon>rptCompany.rpt</DependentUpon>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

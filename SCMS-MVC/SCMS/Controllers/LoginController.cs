@@ -15,6 +15,17 @@ namespace SCMS.Controllers
 
         public ActionResult Index()
         {
+            List<SETUP_Company> CompaniesList = new SCMSDataLayer.DALCompany().GetCmpByCode("00001");
+
+            if( CompaniesList != null && 
+                CompaniesList.Count > 0 &&
+                CompaniesList[0].Cmp_Title != null &&
+                CompaniesList[0].Cmp_Title.ToString() != "")
+            {
+                SCMS.SystemParameters.CurrentCmpName = CompaniesList[0].Cmp_Title;
+                ViewData["CmpDesc"] = CompaniesList[0].Cmp_Title;
+            }
+            
             return View("Login");
         }
 

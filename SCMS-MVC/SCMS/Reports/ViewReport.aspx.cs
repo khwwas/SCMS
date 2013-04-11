@@ -34,14 +34,14 @@ namespace SCMS.Reports
                 {
                     ls_ReportName = SCMS.Reports.ReportParameters.ReportName;
 
-                    if (SCMS.SystemParameters.CurrentAppName == null ||
-                        SCMS.SystemParameters.CurrentAppName.Trim() == "")
+                    if (SCMS.SystemParameters.ModuleDesc == null ||
+                        SCMS.SystemParameters.ModuleDesc.Trim() == "")
                     {
                         ls_ApplicationName = "Application";
                     }
                     else
                     {
-                        ls_ApplicationName = SCMS.SystemParameters.CurrentAppName;
+                        ls_ApplicationName = SCMS.SystemParameters.ModuleDesc;
                     }
 
                     if (SCMS.SystemParameters.CurrentCmpName == null ||
