@@ -306,6 +306,17 @@
         <div class="block">
             <div id="MessageBox">
             </div>
+            <div class="CustomCell" style="width: 85px; height: 30px;">
+                Last Voucher</div>
+            <div class="CustomCell" style="width: 420px; height: 30px;">
+                <%=ViewData["Code"]%>
+                , Created On
+                <%=ViewData["Date"]%>
+                , Status is
+                <%=ViewData["Status"]%>
+            </div>
+            <div class="Clear" style="border-bottom: 1px solid #ccc; margin-bottom: 5px;">
+            </div>
             <div class="CustomCell" style="width: 97px; height: 30px;">
                 Code</div>
             <div class="CustomCell" style="width: 320px; height: 30px;">
