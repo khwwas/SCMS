@@ -60,7 +60,6 @@
                        
             %>
             <script type="text/javascript">
-                alert( <%=modules[0].Mod_Desc%>);
                 window.location = '../Home?ModId=<%=modules[0].Mod_Id %>&ModDesc=<%=modules[0].Mod_Desc %>&ModAbbr=<%=modules[0].Mod_Abbreviation %>';
             </script>
             <%}

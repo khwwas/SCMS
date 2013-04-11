@@ -93,17 +93,7 @@
                 <div class="login-header">
                     <div class="logo clear">
                         <img src="<%=ResolveUrl("~/img/logo.png") %>" alt="" class="picture" />
-                        <span class="title">
-                            <%var CompaniesList = new SCMSDataLayer.DALCompany().GetCmpByCode("00001");
-                              if (CompaniesList != null && CompaniesList.Count > 0)
-                              {
-                                  foreach (SCMSDataLayer.DB.SETUP_Company CompanyRow in CompaniesList)
-                                  {%>
-                            <%=CompanyRow.Cmp_Title%>
-                            <%}
-
-                              } %>
-                        </span>
+                        <span class="title"><%= ViewData["CmpDesc"]%> </span>
                     </div>
                 </div>
                 <form action="" method="post">
