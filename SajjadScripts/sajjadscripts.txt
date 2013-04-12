@@ -1,4 +1,56 @@
 
+-----------------------------------------------------------------------------------------------------------
+Dated 04/13/2013
+..........................................................................................................
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetLeaveTypesList]    Script Date: 04/12/2013 00:23:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[sp_GetLeaveTypesList]
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT *
+	  From SETUP_LeaveType Left Join
+	       SETUP_Location 
+	 On SETUP_LeaveType.Loc_Id = SETUP_Location.Loc_Id
+END
+
+-----------------------------------------------------------------------------------------------------------
+Dated 04/13/2013
+..........................................................................................................
+
+
+CREATE TABLE [dbo].[SETUP_LeaveType](
+	[LevTyp_Id] [varchar](50) NOT NULL,
+	[LevTyp_Code] [varchar](50) NULL,
+	[Cmp_Id] [varchar](50) NULL,
+	[Loc_Id] [varchar](50) NULL,
+	[LevTyp_Title] [varchar](100) NULL,
+	[LevTyp_Active] [int] NULL,
+	[LevTyp_SortOrder] [int] NULL,
+	[LevTyp_Abbreviation] [varchar](50) NULL,
+	[LevTyp_Count] [varchar](100) NULL,
+ CONSTRAINT [PK_SETUPLeaveType_LevTypId] PRIMARY KEY CLUSTERED 
+(
+	[LevTyp_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+
+
+-----------------------------------------------------------------------------------------------------------
+Dated 04/01/2013 12:07:49
+..........................................................................................................
 
 
 USE [SCMS]

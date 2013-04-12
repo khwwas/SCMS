@@ -62,6 +62,7 @@
     <Compile Include="DALJobPosition.cs" />
     <Compile Include="DALJobTitle.cs" />
     <Compile Include="DALLeaveGroup.cs" />
+    <Compile Include="DALLeaveType.cs" />
     <Compile Include="DALMaritalStatus.cs" />
     <Compile Include="DALModules.cs" />
     <Compile Include="DALNationality.cs" />
