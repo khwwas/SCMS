@@ -17,15 +17,15 @@ namespace SCMSDataLayer
                 SCMSDataContext dbSCMS = Connection.Create();
 
                 SETUP_CodeAnalysis2 lRow_ExistingData = dbSCMS.SETUP_CodeAnalysis2s.Where(c => c.CA_Id.Equals(lrow_CodeAnalysis2.CA_Id)).SingleOrDefault();
-                    if (lRow_ExistingData != null)
-                    {
-                        lRow_ExistingData.CA_Title = lrow_CodeAnalysis2.CA_Title;
-                        lRow_ExistingData.Loc_Id = lrow_CodeAnalysis2.Loc_Id;
-                    }
-                    else
-                    {
-                        dbSCMS.SETUP_CodeAnalysis2s.InsertOnSubmit(lrow_CodeAnalysis2);
-                    }
+                if (lRow_ExistingData != null)
+                {
+                    lRow_ExistingData.CA_Title = lrow_CodeAnalysis2.CA_Title;
+                    lRow_ExistingData.Loc_Id = lrow_CodeAnalysis2.Loc_Id;
+                }
+                else
+                {
+                    dbSCMS.SETUP_CodeAnalysis2s.InsertOnSubmit(lrow_CodeAnalysis2);
+                }
                 dbSCMS.SubmitChanges();
 
                 li_ReturnValue = Convert.ToInt32(lrow_CodeAnalysis2.CA_Id);
@@ -81,6 +81,6 @@ namespace SCMSDataLayer
 
             return li_ReturnValue;
         }
-               
+
     }
 }

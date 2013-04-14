@@ -141,6 +141,27 @@ namespace SCMSDataLayer.DB
     partial void InsertSETUP_Module(SETUP_Module instance);
     partial void UpdateSETUP_Module(SETUP_Module instance);
     partial void DeleteSETUP_Module(SETUP_Module instance);
+    partial void InsertSETUP_CodeAnalysis1(SETUP_CodeAnalysis1 instance);
+    partial void UpdateSETUP_CodeAnalysis1(SETUP_CodeAnalysis1 instance);
+    partial void DeleteSETUP_CodeAnalysis1(SETUP_CodeAnalysis1 instance);
+    partial void InsertSETUP_CodeAnalysis6(SETUP_CodeAnalysis6 instance);
+    partial void UpdateSETUP_CodeAnalysis6(SETUP_CodeAnalysis6 instance);
+    partial void DeleteSETUP_CodeAnalysis6(SETUP_CodeAnalysis6 instance);
+    partial void InsertSETUP_CodeAnalysis2(SETUP_CodeAnalysis2 instance);
+    partial void UpdateSETUP_CodeAnalysis2(SETUP_CodeAnalysis2 instance);
+    partial void DeleteSETUP_CodeAnalysis2(SETUP_CodeAnalysis2 instance);
+    partial void InsertSETUP_CodeAnalysis3(SETUP_CodeAnalysis3 instance);
+    partial void UpdateSETUP_CodeAnalysis3(SETUP_CodeAnalysis3 instance);
+    partial void DeleteSETUP_CodeAnalysis3(SETUP_CodeAnalysis3 instance);
+    partial void InsertSETUP_CodeAnalysis4(SETUP_CodeAnalysis4 instance);
+    partial void UpdateSETUP_CodeAnalysis4(SETUP_CodeAnalysis4 instance);
+    partial void DeleteSETUP_CodeAnalysis4(SETUP_CodeAnalysis4 instance);
+    partial void InsertSETUP_CodeAnalysis5(SETUP_CodeAnalysis5 instance);
+    partial void UpdateSETUP_CodeAnalysis5(SETUP_CodeAnalysis5 instance);
+    partial void DeleteSETUP_CodeAnalysis5(SETUP_CodeAnalysis5 instance);
+    partial void InsertSETUP_LeaveType(SETUP_LeaveType instance);
+    partial void UpdateSETUP_LeaveType(SETUP_LeaveType instance);
+    partial void DeleteSETUP_LeaveType(SETUP_LeaveType instance);
     #endregion
 		
 		public SCMSDataContext() : 
@@ -469,6 +490,62 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		public System.Data.Linq.Table<SETUP_CodeAnalysis1> SETUP_CodeAnalysis1s
+		{
+			get
+			{
+				return this.GetTable<SETUP_CodeAnalysis1>();
+			}
+		}
+		
+		public System.Data.Linq.Table<SETUP_CodeAnalysis6> SETUP_CodeAnalysis6s
+		{
+			get
+			{
+				return this.GetTable<SETUP_CodeAnalysis6>();
+			}
+		}
+		
+		public System.Data.Linq.Table<SETUP_CodeAnalysis2> SETUP_CodeAnalysis2s
+		{
+			get
+			{
+				return this.GetTable<SETUP_CodeAnalysis2>();
+			}
+		}
+		
+		public System.Data.Linq.Table<SETUP_CodeAnalysis3> SETUP_CodeAnalysis3s
+		{
+			get
+			{
+				return this.GetTable<SETUP_CodeAnalysis3>();
+			}
+		}
+		
+		public System.Data.Linq.Table<SETUP_CodeAnalysis4> SETUP_CodeAnalysis4s
+		{
+			get
+			{
+				return this.GetTable<SETUP_CodeAnalysis4>();
+			}
+		}
+		
+		public System.Data.Linq.Table<SETUP_CodeAnalysis5> SETUP_CodeAnalysis5s
+		{
+			get
+			{
+				return this.GetTable<SETUP_CodeAnalysis5>();
+			}
+		}
+		
+		public System.Data.Linq.Table<SETUP_LeaveType> SETUP_LeaveTypes
+		{
+			get
+			{
+				return this.GetTable<SETUP_LeaveType>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetCityList")]
 		public ISingleResult<sp_GetCityListResult> sp_GetCityList()
 		{
@@ -607,6 +684,13 @@ namespace SCMSDataLayer.DB
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), groupId);
 			return ((ISingleResult<sp_GetUserMenuRightsResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetLeaveTypesList")]
+		public ISingleResult<sp_GetLeaveTypesListResult> sp_GetLeaveTypesList()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<sp_GetLeaveTypesListResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -5078,6 +5162,18 @@ namespace SCMSDataLayer.DB
 		
 		private EntitySet<SETUP_VoucherType> _SETUP_VoucherTypes;
 		
+		private EntitySet<SETUP_CodeAnalysis1> _SETUP_CodeAnalysis1s;
+		
+		private EntitySet<SETUP_CodeAnalysis6> _SETUP_CodeAnalysis6s;
+		
+		private EntitySet<SETUP_CodeAnalysis2> _SETUP_CodeAnalysis2s;
+		
+		private EntitySet<SETUP_CodeAnalysis3> _SETUP_CodeAnalysis3s;
+		
+		private EntitySet<SETUP_CodeAnalysis4> _SETUP_CodeAnalysis4s;
+		
+		private EntitySet<SETUP_CodeAnalysis5> _SETUP_CodeAnalysis5s;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -5125,6 +5221,12 @@ namespace SCMSDataLayer.DB
 			this._SETUP_Suppliers = new EntitySet<SETUP_Supplier>(new Action<SETUP_Supplier>(this.attach_SETUP_Suppliers), new Action<SETUP_Supplier>(this.detach_SETUP_Suppliers));
 			this._SETUP_SupplierTypes = new EntitySet<SETUP_SupplierType>(new Action<SETUP_SupplierType>(this.attach_SETUP_SupplierTypes), new Action<SETUP_SupplierType>(this.detach_SETUP_SupplierTypes));
 			this._SETUP_VoucherTypes = new EntitySet<SETUP_VoucherType>(new Action<SETUP_VoucherType>(this.attach_SETUP_VoucherTypes), new Action<SETUP_VoucherType>(this.detach_SETUP_VoucherTypes));
+			this._SETUP_CodeAnalysis1s = new EntitySet<SETUP_CodeAnalysis1>(new Action<SETUP_CodeAnalysis1>(this.attach_SETUP_CodeAnalysis1s), new Action<SETUP_CodeAnalysis1>(this.detach_SETUP_CodeAnalysis1s));
+			this._SETUP_CodeAnalysis6s = new EntitySet<SETUP_CodeAnalysis6>(new Action<SETUP_CodeAnalysis6>(this.attach_SETUP_CodeAnalysis6s), new Action<SETUP_CodeAnalysis6>(this.detach_SETUP_CodeAnalysis6s));
+			this._SETUP_CodeAnalysis2s = new EntitySet<SETUP_CodeAnalysis2>(new Action<SETUP_CodeAnalysis2>(this.attach_SETUP_CodeAnalysis2s), new Action<SETUP_CodeAnalysis2>(this.detach_SETUP_CodeAnalysis2s));
+			this._SETUP_CodeAnalysis3s = new EntitySet<SETUP_CodeAnalysis3>(new Action<SETUP_CodeAnalysis3>(this.attach_SETUP_CodeAnalysis3s), new Action<SETUP_CodeAnalysis3>(this.detach_SETUP_CodeAnalysis3s));
+			this._SETUP_CodeAnalysis4s = new EntitySet<SETUP_CodeAnalysis4>(new Action<SETUP_CodeAnalysis4>(this.attach_SETUP_CodeAnalysis4s), new Action<SETUP_CodeAnalysis4>(this.detach_SETUP_CodeAnalysis4s));
+			this._SETUP_CodeAnalysis5s = new EntitySet<SETUP_CodeAnalysis5>(new Action<SETUP_CodeAnalysis5>(this.attach_SETUP_CodeAnalysis5s), new Action<SETUP_CodeAnalysis5>(this.detach_SETUP_CodeAnalysis5s));
 			OnCreated();
 		}
 		
@@ -5575,6 +5677,84 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SETUP_CodeAnalysis1", Storage="_SETUP_CodeAnalysis1s", ThisKey="Cmp_Id", OtherKey="Cmp_Id")]
+		public EntitySet<SETUP_CodeAnalysis1> SETUP_CodeAnalysis1s
+		{
+			get
+			{
+				return this._SETUP_CodeAnalysis1s;
+			}
+			set
+			{
+				this._SETUP_CodeAnalysis1s.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SETUP_CodeAnalysis6", Storage="_SETUP_CodeAnalysis6s", ThisKey="Cmp_Id", OtherKey="Cmp_Id")]
+		public EntitySet<SETUP_CodeAnalysis6> SETUP_CodeAnalysis6s
+		{
+			get
+			{
+				return this._SETUP_CodeAnalysis6s;
+			}
+			set
+			{
+				this._SETUP_CodeAnalysis6s.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SETUP_CodeAnalysis2", Storage="_SETUP_CodeAnalysis2s", ThisKey="Cmp_Id", OtherKey="Cmp_Id")]
+		public EntitySet<SETUP_CodeAnalysis2> SETUP_CodeAnalysis2s
+		{
+			get
+			{
+				return this._SETUP_CodeAnalysis2s;
+			}
+			set
+			{
+				this._SETUP_CodeAnalysis2s.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SETUP_CodeAnalysis3", Storage="_SETUP_CodeAnalysis3s", ThisKey="Cmp_Id", OtherKey="Cmp_Id")]
+		public EntitySet<SETUP_CodeAnalysis3> SETUP_CodeAnalysis3s
+		{
+			get
+			{
+				return this._SETUP_CodeAnalysis3s;
+			}
+			set
+			{
+				this._SETUP_CodeAnalysis3s.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SETUP_CodeAnalysis4", Storage="_SETUP_CodeAnalysis4s", ThisKey="Cmp_Id", OtherKey="Cmp_Id")]
+		public EntitySet<SETUP_CodeAnalysis4> SETUP_CodeAnalysis4s
+		{
+			get
+			{
+				return this._SETUP_CodeAnalysis4s;
+			}
+			set
+			{
+				this._SETUP_CodeAnalysis4s.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SETUP_CodeAnalysis5", Storage="_SETUP_CodeAnalysis5s", ThisKey="Cmp_Id", OtherKey="Cmp_Id")]
+		public EntitySet<SETUP_CodeAnalysis5> SETUP_CodeAnalysis5s
+		{
+			get
+			{
+				return this._SETUP_CodeAnalysis5s;
+			}
+			set
+			{
+				this._SETUP_CodeAnalysis5s.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -5818,6 +5998,78 @@ namespace SCMSDataLayer.DB
 		}
 		
 		private void detach_SETUP_VoucherTypes(SETUP_VoucherType entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Company = null;
+		}
+		
+		private void attach_SETUP_CodeAnalysis1s(SETUP_CodeAnalysis1 entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Company = this;
+		}
+		
+		private void detach_SETUP_CodeAnalysis1s(SETUP_CodeAnalysis1 entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Company = null;
+		}
+		
+		private void attach_SETUP_CodeAnalysis6s(SETUP_CodeAnalysis6 entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Company = this;
+		}
+		
+		private void detach_SETUP_CodeAnalysis6s(SETUP_CodeAnalysis6 entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Company = null;
+		}
+		
+		private void attach_SETUP_CodeAnalysis2s(SETUP_CodeAnalysis2 entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Company = this;
+		}
+		
+		private void detach_SETUP_CodeAnalysis2s(SETUP_CodeAnalysis2 entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Company = null;
+		}
+		
+		private void attach_SETUP_CodeAnalysis3s(SETUP_CodeAnalysis3 entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Company = this;
+		}
+		
+		private void detach_SETUP_CodeAnalysis3s(SETUP_CodeAnalysis3 entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Company = null;
+		}
+		
+		private void attach_SETUP_CodeAnalysis4s(SETUP_CodeAnalysis4 entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Company = this;
+		}
+		
+		private void detach_SETUP_CodeAnalysis4s(SETUP_CodeAnalysis4 entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Company = null;
+		}
+		
+		private void attach_SETUP_CodeAnalysis5s(SETUP_CodeAnalysis5 entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Company = this;
+		}
+		
+		private void detach_SETUP_CodeAnalysis5s(SETUP_CodeAnalysis5 entity)
 		{
 			this.SendPropertyChanging();
 			entity.SETUP_Company = null;
@@ -9114,6 +9366,18 @@ namespace SCMSDataLayer.DB
 		
 		private EntitySet<SETUP_VoucherType> _SETUP_VoucherTypes;
 		
+		private EntitySet<SETUP_CodeAnalysis1> _SETUP_CodeAnalysis1s;
+		
+		private EntitySet<SETUP_CodeAnalysis6> _SETUP_CodeAnalysis6s;
+		
+		private EntitySet<SETUP_CodeAnalysis2> _SETUP_CodeAnalysis2s;
+		
+		private EntitySet<SETUP_CodeAnalysis3> _SETUP_CodeAnalysis3s;
+		
+		private EntitySet<SETUP_CodeAnalysis4> _SETUP_CodeAnalysis4s;
+		
+		private EntitySet<SETUP_CodeAnalysis5> _SETUP_CodeAnalysis5s;
+		
 		private EntityRef<SETUP_Company> _SETUP_Company;
 		
     #region Extensibility Method Definitions
@@ -9154,6 +9418,12 @@ namespace SCMSDataLayer.DB
 			this._SETUP_Suppliers = new EntitySet<SETUP_Supplier>(new Action<SETUP_Supplier>(this.attach_SETUP_Suppliers), new Action<SETUP_Supplier>(this.detach_SETUP_Suppliers));
 			this._SETUP_SupplierTypes = new EntitySet<SETUP_SupplierType>(new Action<SETUP_SupplierType>(this.attach_SETUP_SupplierTypes), new Action<SETUP_SupplierType>(this.detach_SETUP_SupplierTypes));
 			this._SETUP_VoucherTypes = new EntitySet<SETUP_VoucherType>(new Action<SETUP_VoucherType>(this.attach_SETUP_VoucherTypes), new Action<SETUP_VoucherType>(this.detach_SETUP_VoucherTypes));
+			this._SETUP_CodeAnalysis1s = new EntitySet<SETUP_CodeAnalysis1>(new Action<SETUP_CodeAnalysis1>(this.attach_SETUP_CodeAnalysis1s), new Action<SETUP_CodeAnalysis1>(this.detach_SETUP_CodeAnalysis1s));
+			this._SETUP_CodeAnalysis6s = new EntitySet<SETUP_CodeAnalysis6>(new Action<SETUP_CodeAnalysis6>(this.attach_SETUP_CodeAnalysis6s), new Action<SETUP_CodeAnalysis6>(this.detach_SETUP_CodeAnalysis6s));
+			this._SETUP_CodeAnalysis2s = new EntitySet<SETUP_CodeAnalysis2>(new Action<SETUP_CodeAnalysis2>(this.attach_SETUP_CodeAnalysis2s), new Action<SETUP_CodeAnalysis2>(this.detach_SETUP_CodeAnalysis2s));
+			this._SETUP_CodeAnalysis3s = new EntitySet<SETUP_CodeAnalysis3>(new Action<SETUP_CodeAnalysis3>(this.attach_SETUP_CodeAnalysis3s), new Action<SETUP_CodeAnalysis3>(this.detach_SETUP_CodeAnalysis3s));
+			this._SETUP_CodeAnalysis4s = new EntitySet<SETUP_CodeAnalysis4>(new Action<SETUP_CodeAnalysis4>(this.attach_SETUP_CodeAnalysis4s), new Action<SETUP_CodeAnalysis4>(this.detach_SETUP_CodeAnalysis4s));
+			this._SETUP_CodeAnalysis5s = new EntitySet<SETUP_CodeAnalysis5>(new Action<SETUP_CodeAnalysis5>(this.attach_SETUP_CodeAnalysis5s), new Action<SETUP_CodeAnalysis5>(this.detach_SETUP_CodeAnalysis5s));
 			this._SETUP_Company = default(EntityRef<SETUP_Company>);
 			OnCreated();
 		}
@@ -9516,6 +9786,84 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_SETUP_CodeAnalysis1", Storage="_SETUP_CodeAnalysis1s", ThisKey="Loc_Id", OtherKey="Loc_Id")]
+		public EntitySet<SETUP_CodeAnalysis1> SETUP_CodeAnalysis1s
+		{
+			get
+			{
+				return this._SETUP_CodeAnalysis1s;
+			}
+			set
+			{
+				this._SETUP_CodeAnalysis1s.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_SETUP_CodeAnalysis6", Storage="_SETUP_CodeAnalysis6s", ThisKey="Loc_Id", OtherKey="Loc_Id")]
+		public EntitySet<SETUP_CodeAnalysis6> SETUP_CodeAnalysis6s
+		{
+			get
+			{
+				return this._SETUP_CodeAnalysis6s;
+			}
+			set
+			{
+				this._SETUP_CodeAnalysis6s.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_SETUP_CodeAnalysis2", Storage="_SETUP_CodeAnalysis2s", ThisKey="Loc_Id", OtherKey="Loc_Id")]
+		public EntitySet<SETUP_CodeAnalysis2> SETUP_CodeAnalysis2s
+		{
+			get
+			{
+				return this._SETUP_CodeAnalysis2s;
+			}
+			set
+			{
+				this._SETUP_CodeAnalysis2s.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_SETUP_CodeAnalysis3", Storage="_SETUP_CodeAnalysis3s", ThisKey="Loc_Id", OtherKey="Loc_Id")]
+		public EntitySet<SETUP_CodeAnalysis3> SETUP_CodeAnalysis3s
+		{
+			get
+			{
+				return this._SETUP_CodeAnalysis3s;
+			}
+			set
+			{
+				this._SETUP_CodeAnalysis3s.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_SETUP_CodeAnalysis4", Storage="_SETUP_CodeAnalysis4s", ThisKey="Loc_Id", OtherKey="Loc_Id")]
+		public EntitySet<SETUP_CodeAnalysis4> SETUP_CodeAnalysis4s
+		{
+			get
+			{
+				return this._SETUP_CodeAnalysis4s;
+			}
+			set
+			{
+				this._SETUP_CodeAnalysis4s.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_SETUP_CodeAnalysis5", Storage="_SETUP_CodeAnalysis5s", ThisKey="Loc_Id", OtherKey="Loc_Id")]
+		public EntitySet<SETUP_CodeAnalysis5> SETUP_CodeAnalysis5s
+		{
+			get
+			{
+				return this._SETUP_CodeAnalysis5s;
+			}
+			set
+			{
+				this._SETUP_CodeAnalysis5s.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SETUP_Location", Storage="_SETUP_Company", ThisKey="Cmp_Id", OtherKey="Cmp_Id", IsForeignKey=true)]
 		public SETUP_Company SETUP_Company
 		{
@@ -9781,6 +10129,78 @@ namespace SCMSDataLayer.DB
 		}
 		
 		private void detach_SETUP_VoucherTypes(SETUP_VoucherType entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Location = null;
+		}
+		
+		private void attach_SETUP_CodeAnalysis1s(SETUP_CodeAnalysis1 entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Location = this;
+		}
+		
+		private void detach_SETUP_CodeAnalysis1s(SETUP_CodeAnalysis1 entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Location = null;
+		}
+		
+		private void attach_SETUP_CodeAnalysis6s(SETUP_CodeAnalysis6 entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Location = this;
+		}
+		
+		private void detach_SETUP_CodeAnalysis6s(SETUP_CodeAnalysis6 entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Location = null;
+		}
+		
+		private void attach_SETUP_CodeAnalysis2s(SETUP_CodeAnalysis2 entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Location = this;
+		}
+		
+		private void detach_SETUP_CodeAnalysis2s(SETUP_CodeAnalysis2 entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Location = null;
+		}
+		
+		private void attach_SETUP_CodeAnalysis3s(SETUP_CodeAnalysis3 entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Location = this;
+		}
+		
+		private void detach_SETUP_CodeAnalysis3s(SETUP_CodeAnalysis3 entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Location = null;
+		}
+		
+		private void attach_SETUP_CodeAnalysis4s(SETUP_CodeAnalysis4 entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Location = this;
+		}
+		
+		private void detach_SETUP_CodeAnalysis4s(SETUP_CodeAnalysis4 entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Location = null;
+		}
+		
+		private void attach_SETUP_CodeAnalysis5s(SETUP_CodeAnalysis5 entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Location = this;
+		}
+		
+		private void detach_SETUP_CodeAnalysis5s(SETUP_CodeAnalysis5 entity)
 		{
 			this.SendPropertyChanging();
 			entity.SETUP_Location = null;
@@ -12605,6 +13025,1988 @@ namespace SCMSDataLayer.DB
 					this._Mod_Abbreviation = value;
 					this.SendPropertyChanged("Mod_Abbreviation");
 					this.OnMod_AbbreviationChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SETUP_CodeAnalysis1")]
+	public partial class SETUP_CodeAnalysis1 : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _CA_Id;
+		
+		private string _CA_Code;
+		
+		private string _Cmp_Id;
+		
+		private string _Loc_Id;
+		
+		private string _CA_Title;
+		
+		private System.Nullable<int> _CA_Active;
+		
+		private System.Nullable<int> _CA_SortOrder;
+		
+		private EntityRef<SETUP_Company> _SETUP_Company;
+		
+		private EntityRef<SETUP_Location> _SETUP_Location;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCA_IdChanging(string value);
+    partial void OnCA_IdChanged();
+    partial void OnCA_CodeChanging(string value);
+    partial void OnCA_CodeChanged();
+    partial void OnCmp_IdChanging(string value);
+    partial void OnCmp_IdChanged();
+    partial void OnLoc_IdChanging(string value);
+    partial void OnLoc_IdChanged();
+    partial void OnCA_TitleChanging(string value);
+    partial void OnCA_TitleChanged();
+    partial void OnCA_ActiveChanging(System.Nullable<int> value);
+    partial void OnCA_ActiveChanged();
+    partial void OnCA_SortOrderChanging(System.Nullable<int> value);
+    partial void OnCA_SortOrderChanged();
+    #endregion
+		
+		public SETUP_CodeAnalysis1()
+		{
+			this._SETUP_Company = default(EntityRef<SETUP_Company>);
+			this._SETUP_Location = default(EntityRef<SETUP_Location>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string CA_Id
+		{
+			get
+			{
+				return this._CA_Id;
+			}
+			set
+			{
+				if ((this._CA_Id != value))
+				{
+					this.OnCA_IdChanging(value);
+					this.SendPropertyChanging();
+					this._CA_Id = value;
+					this.SendPropertyChanged("CA_Id");
+					this.OnCA_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_Code", DbType="VarChar(50)")]
+		public string CA_Code
+		{
+			get
+			{
+				return this._CA_Code;
+			}
+			set
+			{
+				if ((this._CA_Code != value))
+				{
+					this.OnCA_CodeChanging(value);
+					this.SendPropertyChanging();
+					this._CA_Code = value;
+					this.SendPropertyChanged("CA_Code");
+					this.OnCA_CodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cmp_Id", DbType="VarChar(50)")]
+		public string Cmp_Id
+		{
+			get
+			{
+				return this._Cmp_Id;
+			}
+			set
+			{
+				if ((this._Cmp_Id != value))
+				{
+					if (this._SETUP_Company.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCmp_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Cmp_Id = value;
+					this.SendPropertyChanged("Cmp_Id");
+					this.OnCmp_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id", DbType="VarChar(50)")]
+		public string Loc_Id
+		{
+			get
+			{
+				return this._Loc_Id;
+			}
+			set
+			{
+				if ((this._Loc_Id != value))
+				{
+					if (this._SETUP_Location.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnLoc_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Loc_Id = value;
+					this.SendPropertyChanged("Loc_Id");
+					this.OnLoc_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_Title", DbType="VarChar(100)")]
+		public string CA_Title
+		{
+			get
+			{
+				return this._CA_Title;
+			}
+			set
+			{
+				if ((this._CA_Title != value))
+				{
+					this.OnCA_TitleChanging(value);
+					this.SendPropertyChanging();
+					this._CA_Title = value;
+					this.SendPropertyChanged("CA_Title");
+					this.OnCA_TitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_Active", DbType="Int")]
+		public System.Nullable<int> CA_Active
+		{
+			get
+			{
+				return this._CA_Active;
+			}
+			set
+			{
+				if ((this._CA_Active != value))
+				{
+					this.OnCA_ActiveChanging(value);
+					this.SendPropertyChanging();
+					this._CA_Active = value;
+					this.SendPropertyChanged("CA_Active");
+					this.OnCA_ActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_SortOrder", DbType="Int")]
+		public System.Nullable<int> CA_SortOrder
+		{
+			get
+			{
+				return this._CA_SortOrder;
+			}
+			set
+			{
+				if ((this._CA_SortOrder != value))
+				{
+					this.OnCA_SortOrderChanging(value);
+					this.SendPropertyChanging();
+					this._CA_SortOrder = value;
+					this.SendPropertyChanged("CA_SortOrder");
+					this.OnCA_SortOrderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SETUP_CodeAnalysis1", Storage="_SETUP_Company", ThisKey="Cmp_Id", OtherKey="Cmp_Id", IsForeignKey=true)]
+		public SETUP_Company SETUP_Company
+		{
+			get
+			{
+				return this._SETUP_Company.Entity;
+			}
+			set
+			{
+				SETUP_Company previousValue = this._SETUP_Company.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Company.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Company.Entity = null;
+						previousValue.SETUP_CodeAnalysis1s.Remove(this);
+					}
+					this._SETUP_Company.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_CodeAnalysis1s.Add(this);
+						this._Cmp_Id = value.Cmp_Id;
+					}
+					else
+					{
+						this._Cmp_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Company");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_SETUP_CodeAnalysis1", Storage="_SETUP_Location", ThisKey="Loc_Id", OtherKey="Loc_Id", IsForeignKey=true)]
+		public SETUP_Location SETUP_Location
+		{
+			get
+			{
+				return this._SETUP_Location.Entity;
+			}
+			set
+			{
+				SETUP_Location previousValue = this._SETUP_Location.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Location.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Location.Entity = null;
+						previousValue.SETUP_CodeAnalysis1s.Remove(this);
+					}
+					this._SETUP_Location.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_CodeAnalysis1s.Add(this);
+						this._Loc_Id = value.Loc_Id;
+					}
+					else
+					{
+						this._Loc_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Location");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SETUP_CodeAnalysis6")]
+	public partial class SETUP_CodeAnalysis6 : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _CA_Id;
+		
+		private string _CA_Code;
+		
+		private string _Cmp_Id;
+		
+		private string _Loc_Id;
+		
+		private string _CA_Title;
+		
+		private System.Nullable<int> _CA_Active;
+		
+		private System.Nullable<int> _CA_SortOrder;
+		
+		private EntityRef<SETUP_Company> _SETUP_Company;
+		
+		private EntityRef<SETUP_Location> _SETUP_Location;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCA_IdChanging(string value);
+    partial void OnCA_IdChanged();
+    partial void OnCA_CodeChanging(string value);
+    partial void OnCA_CodeChanged();
+    partial void OnCmp_IdChanging(string value);
+    partial void OnCmp_IdChanged();
+    partial void OnLoc_IdChanging(string value);
+    partial void OnLoc_IdChanged();
+    partial void OnCA_TitleChanging(string value);
+    partial void OnCA_TitleChanged();
+    partial void OnCA_ActiveChanging(System.Nullable<int> value);
+    partial void OnCA_ActiveChanged();
+    partial void OnCA_SortOrderChanging(System.Nullable<int> value);
+    partial void OnCA_SortOrderChanged();
+    #endregion
+		
+		public SETUP_CodeAnalysis6()
+		{
+			this._SETUP_Company = default(EntityRef<SETUP_Company>);
+			this._SETUP_Location = default(EntityRef<SETUP_Location>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string CA_Id
+		{
+			get
+			{
+				return this._CA_Id;
+			}
+			set
+			{
+				if ((this._CA_Id != value))
+				{
+					this.OnCA_IdChanging(value);
+					this.SendPropertyChanging();
+					this._CA_Id = value;
+					this.SendPropertyChanged("CA_Id");
+					this.OnCA_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_Code", DbType="VarChar(50)")]
+		public string CA_Code
+		{
+			get
+			{
+				return this._CA_Code;
+			}
+			set
+			{
+				if ((this._CA_Code != value))
+				{
+					this.OnCA_CodeChanging(value);
+					this.SendPropertyChanging();
+					this._CA_Code = value;
+					this.SendPropertyChanged("CA_Code");
+					this.OnCA_CodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cmp_Id", DbType="VarChar(50)")]
+		public string Cmp_Id
+		{
+			get
+			{
+				return this._Cmp_Id;
+			}
+			set
+			{
+				if ((this._Cmp_Id != value))
+				{
+					if (this._SETUP_Company.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCmp_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Cmp_Id = value;
+					this.SendPropertyChanged("Cmp_Id");
+					this.OnCmp_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id", DbType="VarChar(50)")]
+		public string Loc_Id
+		{
+			get
+			{
+				return this._Loc_Id;
+			}
+			set
+			{
+				if ((this._Loc_Id != value))
+				{
+					if (this._SETUP_Location.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnLoc_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Loc_Id = value;
+					this.SendPropertyChanged("Loc_Id");
+					this.OnLoc_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_Title", DbType="VarChar(100)")]
+		public string CA_Title
+		{
+			get
+			{
+				return this._CA_Title;
+			}
+			set
+			{
+				if ((this._CA_Title != value))
+				{
+					this.OnCA_TitleChanging(value);
+					this.SendPropertyChanging();
+					this._CA_Title = value;
+					this.SendPropertyChanged("CA_Title");
+					this.OnCA_TitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_Active", DbType="Int")]
+		public System.Nullable<int> CA_Active
+		{
+			get
+			{
+				return this._CA_Active;
+			}
+			set
+			{
+				if ((this._CA_Active != value))
+				{
+					this.OnCA_ActiveChanging(value);
+					this.SendPropertyChanging();
+					this._CA_Active = value;
+					this.SendPropertyChanged("CA_Active");
+					this.OnCA_ActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_SortOrder", DbType="Int")]
+		public System.Nullable<int> CA_SortOrder
+		{
+			get
+			{
+				return this._CA_SortOrder;
+			}
+			set
+			{
+				if ((this._CA_SortOrder != value))
+				{
+					this.OnCA_SortOrderChanging(value);
+					this.SendPropertyChanging();
+					this._CA_SortOrder = value;
+					this.SendPropertyChanged("CA_SortOrder");
+					this.OnCA_SortOrderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SETUP_CodeAnalysis6", Storage="_SETUP_Company", ThisKey="Cmp_Id", OtherKey="Cmp_Id", IsForeignKey=true)]
+		public SETUP_Company SETUP_Company
+		{
+			get
+			{
+				return this._SETUP_Company.Entity;
+			}
+			set
+			{
+				SETUP_Company previousValue = this._SETUP_Company.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Company.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Company.Entity = null;
+						previousValue.SETUP_CodeAnalysis6s.Remove(this);
+					}
+					this._SETUP_Company.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_CodeAnalysis6s.Add(this);
+						this._Cmp_Id = value.Cmp_Id;
+					}
+					else
+					{
+						this._Cmp_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Company");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_SETUP_CodeAnalysis6", Storage="_SETUP_Location", ThisKey="Loc_Id", OtherKey="Loc_Id", IsForeignKey=true)]
+		public SETUP_Location SETUP_Location
+		{
+			get
+			{
+				return this._SETUP_Location.Entity;
+			}
+			set
+			{
+				SETUP_Location previousValue = this._SETUP_Location.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Location.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Location.Entity = null;
+						previousValue.SETUP_CodeAnalysis6s.Remove(this);
+					}
+					this._SETUP_Location.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_CodeAnalysis6s.Add(this);
+						this._Loc_Id = value.Loc_Id;
+					}
+					else
+					{
+						this._Loc_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Location");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SETUP_CodeAnalysis2")]
+	public partial class SETUP_CodeAnalysis2 : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _CA_Id;
+		
+		private string _CA_Code;
+		
+		private string _Cmp_Id;
+		
+		private string _Loc_Id;
+		
+		private string _CA_Title;
+		
+		private System.Nullable<int> _CA_Active;
+		
+		private System.Nullable<int> _CA_SortOrder;
+		
+		private EntityRef<SETUP_Company> _SETUP_Company;
+		
+		private EntityRef<SETUP_Location> _SETUP_Location;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCA_IdChanging(string value);
+    partial void OnCA_IdChanged();
+    partial void OnCA_CodeChanging(string value);
+    partial void OnCA_CodeChanged();
+    partial void OnCmp_IdChanging(string value);
+    partial void OnCmp_IdChanged();
+    partial void OnLoc_IdChanging(string value);
+    partial void OnLoc_IdChanged();
+    partial void OnCA_TitleChanging(string value);
+    partial void OnCA_TitleChanged();
+    partial void OnCA_ActiveChanging(System.Nullable<int> value);
+    partial void OnCA_ActiveChanged();
+    partial void OnCA_SortOrderChanging(System.Nullable<int> value);
+    partial void OnCA_SortOrderChanged();
+    #endregion
+		
+		public SETUP_CodeAnalysis2()
+		{
+			this._SETUP_Company = default(EntityRef<SETUP_Company>);
+			this._SETUP_Location = default(EntityRef<SETUP_Location>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string CA_Id
+		{
+			get
+			{
+				return this._CA_Id;
+			}
+			set
+			{
+				if ((this._CA_Id != value))
+				{
+					this.OnCA_IdChanging(value);
+					this.SendPropertyChanging();
+					this._CA_Id = value;
+					this.SendPropertyChanged("CA_Id");
+					this.OnCA_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_Code", DbType="VarChar(50)")]
+		public string CA_Code
+		{
+			get
+			{
+				return this._CA_Code;
+			}
+			set
+			{
+				if ((this._CA_Code != value))
+				{
+					this.OnCA_CodeChanging(value);
+					this.SendPropertyChanging();
+					this._CA_Code = value;
+					this.SendPropertyChanged("CA_Code");
+					this.OnCA_CodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cmp_Id", DbType="VarChar(50)")]
+		public string Cmp_Id
+		{
+			get
+			{
+				return this._Cmp_Id;
+			}
+			set
+			{
+				if ((this._Cmp_Id != value))
+				{
+					if (this._SETUP_Company.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCmp_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Cmp_Id = value;
+					this.SendPropertyChanged("Cmp_Id");
+					this.OnCmp_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id", DbType="VarChar(50)")]
+		public string Loc_Id
+		{
+			get
+			{
+				return this._Loc_Id;
+			}
+			set
+			{
+				if ((this._Loc_Id != value))
+				{
+					if (this._SETUP_Location.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnLoc_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Loc_Id = value;
+					this.SendPropertyChanged("Loc_Id");
+					this.OnLoc_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_Title", DbType="VarChar(100)")]
+		public string CA_Title
+		{
+			get
+			{
+				return this._CA_Title;
+			}
+			set
+			{
+				if ((this._CA_Title != value))
+				{
+					this.OnCA_TitleChanging(value);
+					this.SendPropertyChanging();
+					this._CA_Title = value;
+					this.SendPropertyChanged("CA_Title");
+					this.OnCA_TitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_Active", DbType="Int")]
+		public System.Nullable<int> CA_Active
+		{
+			get
+			{
+				return this._CA_Active;
+			}
+			set
+			{
+				if ((this._CA_Active != value))
+				{
+					this.OnCA_ActiveChanging(value);
+					this.SendPropertyChanging();
+					this._CA_Active = value;
+					this.SendPropertyChanged("CA_Active");
+					this.OnCA_ActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_SortOrder", DbType="Int")]
+		public System.Nullable<int> CA_SortOrder
+		{
+			get
+			{
+				return this._CA_SortOrder;
+			}
+			set
+			{
+				if ((this._CA_SortOrder != value))
+				{
+					this.OnCA_SortOrderChanging(value);
+					this.SendPropertyChanging();
+					this._CA_SortOrder = value;
+					this.SendPropertyChanged("CA_SortOrder");
+					this.OnCA_SortOrderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SETUP_CodeAnalysis2", Storage="_SETUP_Company", ThisKey="Cmp_Id", OtherKey="Cmp_Id", IsForeignKey=true)]
+		public SETUP_Company SETUP_Company
+		{
+			get
+			{
+				return this._SETUP_Company.Entity;
+			}
+			set
+			{
+				SETUP_Company previousValue = this._SETUP_Company.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Company.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Company.Entity = null;
+						previousValue.SETUP_CodeAnalysis2s.Remove(this);
+					}
+					this._SETUP_Company.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_CodeAnalysis2s.Add(this);
+						this._Cmp_Id = value.Cmp_Id;
+					}
+					else
+					{
+						this._Cmp_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Company");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_SETUP_CodeAnalysis2", Storage="_SETUP_Location", ThisKey="Loc_Id", OtherKey="Loc_Id", IsForeignKey=true)]
+		public SETUP_Location SETUP_Location
+		{
+			get
+			{
+				return this._SETUP_Location.Entity;
+			}
+			set
+			{
+				SETUP_Location previousValue = this._SETUP_Location.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Location.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Location.Entity = null;
+						previousValue.SETUP_CodeAnalysis2s.Remove(this);
+					}
+					this._SETUP_Location.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_CodeAnalysis2s.Add(this);
+						this._Loc_Id = value.Loc_Id;
+					}
+					else
+					{
+						this._Loc_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Location");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SETUP_CodeAnalysis3")]
+	public partial class SETUP_CodeAnalysis3 : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _CA_Id;
+		
+		private string _CA_Code;
+		
+		private string _Cmp_Id;
+		
+		private string _Loc_Id;
+		
+		private string _CA_Title;
+		
+		private System.Nullable<int> _CA_Active;
+		
+		private System.Nullable<int> _CA_SortOrder;
+		
+		private EntityRef<SETUP_Company> _SETUP_Company;
+		
+		private EntityRef<SETUP_Location> _SETUP_Location;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCA_IdChanging(string value);
+    partial void OnCA_IdChanged();
+    partial void OnCA_CodeChanging(string value);
+    partial void OnCA_CodeChanged();
+    partial void OnCmp_IdChanging(string value);
+    partial void OnCmp_IdChanged();
+    partial void OnLoc_IdChanging(string value);
+    partial void OnLoc_IdChanged();
+    partial void OnCA_TitleChanging(string value);
+    partial void OnCA_TitleChanged();
+    partial void OnCA_ActiveChanging(System.Nullable<int> value);
+    partial void OnCA_ActiveChanged();
+    partial void OnCA_SortOrderChanging(System.Nullable<int> value);
+    partial void OnCA_SortOrderChanged();
+    #endregion
+		
+		public SETUP_CodeAnalysis3()
+		{
+			this._SETUP_Company = default(EntityRef<SETUP_Company>);
+			this._SETUP_Location = default(EntityRef<SETUP_Location>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string CA_Id
+		{
+			get
+			{
+				return this._CA_Id;
+			}
+			set
+			{
+				if ((this._CA_Id != value))
+				{
+					this.OnCA_IdChanging(value);
+					this.SendPropertyChanging();
+					this._CA_Id = value;
+					this.SendPropertyChanged("CA_Id");
+					this.OnCA_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_Code", DbType="VarChar(50)")]
+		public string CA_Code
+		{
+			get
+			{
+				return this._CA_Code;
+			}
+			set
+			{
+				if ((this._CA_Code != value))
+				{
+					this.OnCA_CodeChanging(value);
+					this.SendPropertyChanging();
+					this._CA_Code = value;
+					this.SendPropertyChanged("CA_Code");
+					this.OnCA_CodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cmp_Id", DbType="VarChar(50)")]
+		public string Cmp_Id
+		{
+			get
+			{
+				return this._Cmp_Id;
+			}
+			set
+			{
+				if ((this._Cmp_Id != value))
+				{
+					if (this._SETUP_Company.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCmp_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Cmp_Id = value;
+					this.SendPropertyChanged("Cmp_Id");
+					this.OnCmp_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id", DbType="VarChar(50)")]
+		public string Loc_Id
+		{
+			get
+			{
+				return this._Loc_Id;
+			}
+			set
+			{
+				if ((this._Loc_Id != value))
+				{
+					if (this._SETUP_Location.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnLoc_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Loc_Id = value;
+					this.SendPropertyChanged("Loc_Id");
+					this.OnLoc_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_Title", DbType="VarChar(100)")]
+		public string CA_Title
+		{
+			get
+			{
+				return this._CA_Title;
+			}
+			set
+			{
+				if ((this._CA_Title != value))
+				{
+					this.OnCA_TitleChanging(value);
+					this.SendPropertyChanging();
+					this._CA_Title = value;
+					this.SendPropertyChanged("CA_Title");
+					this.OnCA_TitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_Active", DbType="Int")]
+		public System.Nullable<int> CA_Active
+		{
+			get
+			{
+				return this._CA_Active;
+			}
+			set
+			{
+				if ((this._CA_Active != value))
+				{
+					this.OnCA_ActiveChanging(value);
+					this.SendPropertyChanging();
+					this._CA_Active = value;
+					this.SendPropertyChanged("CA_Active");
+					this.OnCA_ActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_SortOrder", DbType="Int")]
+		public System.Nullable<int> CA_SortOrder
+		{
+			get
+			{
+				return this._CA_SortOrder;
+			}
+			set
+			{
+				if ((this._CA_SortOrder != value))
+				{
+					this.OnCA_SortOrderChanging(value);
+					this.SendPropertyChanging();
+					this._CA_SortOrder = value;
+					this.SendPropertyChanged("CA_SortOrder");
+					this.OnCA_SortOrderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SETUP_CodeAnalysis3", Storage="_SETUP_Company", ThisKey="Cmp_Id", OtherKey="Cmp_Id", IsForeignKey=true)]
+		public SETUP_Company SETUP_Company
+		{
+			get
+			{
+				return this._SETUP_Company.Entity;
+			}
+			set
+			{
+				SETUP_Company previousValue = this._SETUP_Company.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Company.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Company.Entity = null;
+						previousValue.SETUP_CodeAnalysis3s.Remove(this);
+					}
+					this._SETUP_Company.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_CodeAnalysis3s.Add(this);
+						this._Cmp_Id = value.Cmp_Id;
+					}
+					else
+					{
+						this._Cmp_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Company");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_SETUP_CodeAnalysis3", Storage="_SETUP_Location", ThisKey="Loc_Id", OtherKey="Loc_Id", IsForeignKey=true)]
+		public SETUP_Location SETUP_Location
+		{
+			get
+			{
+				return this._SETUP_Location.Entity;
+			}
+			set
+			{
+				SETUP_Location previousValue = this._SETUP_Location.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Location.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Location.Entity = null;
+						previousValue.SETUP_CodeAnalysis3s.Remove(this);
+					}
+					this._SETUP_Location.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_CodeAnalysis3s.Add(this);
+						this._Loc_Id = value.Loc_Id;
+					}
+					else
+					{
+						this._Loc_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Location");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SETUP_CodeAnalysis4")]
+	public partial class SETUP_CodeAnalysis4 : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _CA_Id;
+		
+		private string _CA_Code;
+		
+		private string _Cmp_Id;
+		
+		private string _Loc_Id;
+		
+		private string _CA_Title;
+		
+		private System.Nullable<int> _CA_Active;
+		
+		private System.Nullable<int> _CA_SortOrder;
+		
+		private EntityRef<SETUP_Company> _SETUP_Company;
+		
+		private EntityRef<SETUP_Location> _SETUP_Location;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCA_IdChanging(string value);
+    partial void OnCA_IdChanged();
+    partial void OnCA_CodeChanging(string value);
+    partial void OnCA_CodeChanged();
+    partial void OnCmp_IdChanging(string value);
+    partial void OnCmp_IdChanged();
+    partial void OnLoc_IdChanging(string value);
+    partial void OnLoc_IdChanged();
+    partial void OnCA_TitleChanging(string value);
+    partial void OnCA_TitleChanged();
+    partial void OnCA_ActiveChanging(System.Nullable<int> value);
+    partial void OnCA_ActiveChanged();
+    partial void OnCA_SortOrderChanging(System.Nullable<int> value);
+    partial void OnCA_SortOrderChanged();
+    #endregion
+		
+		public SETUP_CodeAnalysis4()
+		{
+			this._SETUP_Company = default(EntityRef<SETUP_Company>);
+			this._SETUP_Location = default(EntityRef<SETUP_Location>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string CA_Id
+		{
+			get
+			{
+				return this._CA_Id;
+			}
+			set
+			{
+				if ((this._CA_Id != value))
+				{
+					this.OnCA_IdChanging(value);
+					this.SendPropertyChanging();
+					this._CA_Id = value;
+					this.SendPropertyChanged("CA_Id");
+					this.OnCA_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_Code", DbType="VarChar(50)")]
+		public string CA_Code
+		{
+			get
+			{
+				return this._CA_Code;
+			}
+			set
+			{
+				if ((this._CA_Code != value))
+				{
+					this.OnCA_CodeChanging(value);
+					this.SendPropertyChanging();
+					this._CA_Code = value;
+					this.SendPropertyChanged("CA_Code");
+					this.OnCA_CodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cmp_Id", DbType="VarChar(50)")]
+		public string Cmp_Id
+		{
+			get
+			{
+				return this._Cmp_Id;
+			}
+			set
+			{
+				if ((this._Cmp_Id != value))
+				{
+					if (this._SETUP_Company.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCmp_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Cmp_Id = value;
+					this.SendPropertyChanged("Cmp_Id");
+					this.OnCmp_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id", DbType="VarChar(50)")]
+		public string Loc_Id
+		{
+			get
+			{
+				return this._Loc_Id;
+			}
+			set
+			{
+				if ((this._Loc_Id != value))
+				{
+					if (this._SETUP_Location.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnLoc_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Loc_Id = value;
+					this.SendPropertyChanged("Loc_Id");
+					this.OnLoc_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_Title", DbType="VarChar(100)")]
+		public string CA_Title
+		{
+			get
+			{
+				return this._CA_Title;
+			}
+			set
+			{
+				if ((this._CA_Title != value))
+				{
+					this.OnCA_TitleChanging(value);
+					this.SendPropertyChanging();
+					this._CA_Title = value;
+					this.SendPropertyChanged("CA_Title");
+					this.OnCA_TitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_Active", DbType="Int")]
+		public System.Nullable<int> CA_Active
+		{
+			get
+			{
+				return this._CA_Active;
+			}
+			set
+			{
+				if ((this._CA_Active != value))
+				{
+					this.OnCA_ActiveChanging(value);
+					this.SendPropertyChanging();
+					this._CA_Active = value;
+					this.SendPropertyChanged("CA_Active");
+					this.OnCA_ActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_SortOrder", DbType="Int")]
+		public System.Nullable<int> CA_SortOrder
+		{
+			get
+			{
+				return this._CA_SortOrder;
+			}
+			set
+			{
+				if ((this._CA_SortOrder != value))
+				{
+					this.OnCA_SortOrderChanging(value);
+					this.SendPropertyChanging();
+					this._CA_SortOrder = value;
+					this.SendPropertyChanged("CA_SortOrder");
+					this.OnCA_SortOrderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SETUP_CodeAnalysis4", Storage="_SETUP_Company", ThisKey="Cmp_Id", OtherKey="Cmp_Id", IsForeignKey=true)]
+		public SETUP_Company SETUP_Company
+		{
+			get
+			{
+				return this._SETUP_Company.Entity;
+			}
+			set
+			{
+				SETUP_Company previousValue = this._SETUP_Company.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Company.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Company.Entity = null;
+						previousValue.SETUP_CodeAnalysis4s.Remove(this);
+					}
+					this._SETUP_Company.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_CodeAnalysis4s.Add(this);
+						this._Cmp_Id = value.Cmp_Id;
+					}
+					else
+					{
+						this._Cmp_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Company");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_SETUP_CodeAnalysis4", Storage="_SETUP_Location", ThisKey="Loc_Id", OtherKey="Loc_Id", IsForeignKey=true)]
+		public SETUP_Location SETUP_Location
+		{
+			get
+			{
+				return this._SETUP_Location.Entity;
+			}
+			set
+			{
+				SETUP_Location previousValue = this._SETUP_Location.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Location.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Location.Entity = null;
+						previousValue.SETUP_CodeAnalysis4s.Remove(this);
+					}
+					this._SETUP_Location.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_CodeAnalysis4s.Add(this);
+						this._Loc_Id = value.Loc_Id;
+					}
+					else
+					{
+						this._Loc_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Location");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SETUP_CodeAnalysis5")]
+	public partial class SETUP_CodeAnalysis5 : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _CA_Id;
+		
+		private string _CA_Code;
+		
+		private string _Cmp_Id;
+		
+		private string _Loc_Id;
+		
+		private string _CA_Title;
+		
+		private System.Nullable<int> _CA_Active;
+		
+		private System.Nullable<int> _CA_SortOrder;
+		
+		private EntityRef<SETUP_Company> _SETUP_Company;
+		
+		private EntityRef<SETUP_Location> _SETUP_Location;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCA_IdChanging(string value);
+    partial void OnCA_IdChanged();
+    partial void OnCA_CodeChanging(string value);
+    partial void OnCA_CodeChanged();
+    partial void OnCmp_IdChanging(string value);
+    partial void OnCmp_IdChanged();
+    partial void OnLoc_IdChanging(string value);
+    partial void OnLoc_IdChanged();
+    partial void OnCA_TitleChanging(string value);
+    partial void OnCA_TitleChanged();
+    partial void OnCA_ActiveChanging(System.Nullable<int> value);
+    partial void OnCA_ActiveChanged();
+    partial void OnCA_SortOrderChanging(System.Nullable<int> value);
+    partial void OnCA_SortOrderChanged();
+    #endregion
+		
+		public SETUP_CodeAnalysis5()
+		{
+			this._SETUP_Company = default(EntityRef<SETUP_Company>);
+			this._SETUP_Location = default(EntityRef<SETUP_Location>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string CA_Id
+		{
+			get
+			{
+				return this._CA_Id;
+			}
+			set
+			{
+				if ((this._CA_Id != value))
+				{
+					this.OnCA_IdChanging(value);
+					this.SendPropertyChanging();
+					this._CA_Id = value;
+					this.SendPropertyChanged("CA_Id");
+					this.OnCA_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_Code", DbType="VarChar(50)")]
+		public string CA_Code
+		{
+			get
+			{
+				return this._CA_Code;
+			}
+			set
+			{
+				if ((this._CA_Code != value))
+				{
+					this.OnCA_CodeChanging(value);
+					this.SendPropertyChanging();
+					this._CA_Code = value;
+					this.SendPropertyChanged("CA_Code");
+					this.OnCA_CodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cmp_Id", DbType="VarChar(50)")]
+		public string Cmp_Id
+		{
+			get
+			{
+				return this._Cmp_Id;
+			}
+			set
+			{
+				if ((this._Cmp_Id != value))
+				{
+					if (this._SETUP_Company.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCmp_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Cmp_Id = value;
+					this.SendPropertyChanged("Cmp_Id");
+					this.OnCmp_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id", DbType="VarChar(50)")]
+		public string Loc_Id
+		{
+			get
+			{
+				return this._Loc_Id;
+			}
+			set
+			{
+				if ((this._Loc_Id != value))
+				{
+					if (this._SETUP_Location.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnLoc_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Loc_Id = value;
+					this.SendPropertyChanged("Loc_Id");
+					this.OnLoc_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_Title", DbType="VarChar(100)")]
+		public string CA_Title
+		{
+			get
+			{
+				return this._CA_Title;
+			}
+			set
+			{
+				if ((this._CA_Title != value))
+				{
+					this.OnCA_TitleChanging(value);
+					this.SendPropertyChanging();
+					this._CA_Title = value;
+					this.SendPropertyChanged("CA_Title");
+					this.OnCA_TitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_Active", DbType="Int")]
+		public System.Nullable<int> CA_Active
+		{
+			get
+			{
+				return this._CA_Active;
+			}
+			set
+			{
+				if ((this._CA_Active != value))
+				{
+					this.OnCA_ActiveChanging(value);
+					this.SendPropertyChanging();
+					this._CA_Active = value;
+					this.SendPropertyChanged("CA_Active");
+					this.OnCA_ActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CA_SortOrder", DbType="Int")]
+		public System.Nullable<int> CA_SortOrder
+		{
+			get
+			{
+				return this._CA_SortOrder;
+			}
+			set
+			{
+				if ((this._CA_SortOrder != value))
+				{
+					this.OnCA_SortOrderChanging(value);
+					this.SendPropertyChanging();
+					this._CA_SortOrder = value;
+					this.SendPropertyChanged("CA_SortOrder");
+					this.OnCA_SortOrderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SETUP_CodeAnalysis5", Storage="_SETUP_Company", ThisKey="Cmp_Id", OtherKey="Cmp_Id", IsForeignKey=true)]
+		public SETUP_Company SETUP_Company
+		{
+			get
+			{
+				return this._SETUP_Company.Entity;
+			}
+			set
+			{
+				SETUP_Company previousValue = this._SETUP_Company.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Company.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Company.Entity = null;
+						previousValue.SETUP_CodeAnalysis5s.Remove(this);
+					}
+					this._SETUP_Company.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_CodeAnalysis5s.Add(this);
+						this._Cmp_Id = value.Cmp_Id;
+					}
+					else
+					{
+						this._Cmp_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Company");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_SETUP_CodeAnalysis5", Storage="_SETUP_Location", ThisKey="Loc_Id", OtherKey="Loc_Id", IsForeignKey=true)]
+		public SETUP_Location SETUP_Location
+		{
+			get
+			{
+				return this._SETUP_Location.Entity;
+			}
+			set
+			{
+				SETUP_Location previousValue = this._SETUP_Location.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Location.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Location.Entity = null;
+						previousValue.SETUP_CodeAnalysis5s.Remove(this);
+					}
+					this._SETUP_Location.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_CodeAnalysis5s.Add(this);
+						this._Loc_Id = value.Loc_Id;
+					}
+					else
+					{
+						this._Loc_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Location");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SETUP_LeaveType")]
+	public partial class SETUP_LeaveType : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _LevTyp_Id;
+		
+		private string _LevTyp_Code;
+		
+		private string _Cmp_Id;
+		
+		private string _Loc_Id;
+		
+		private string _LevTyp_Title;
+		
+		private System.Nullable<int> _LevTyp_Active;
+		
+		private System.Nullable<int> _LevTyp_SortOrder;
+		
+		private string _LevTyp_Abbreviation;
+		
+		private string _LevTyp_Count;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnLevTyp_IdChanging(string value);
+    partial void OnLevTyp_IdChanged();
+    partial void OnLevTyp_CodeChanging(string value);
+    partial void OnLevTyp_CodeChanged();
+    partial void OnCmp_IdChanging(string value);
+    partial void OnCmp_IdChanged();
+    partial void OnLoc_IdChanging(string value);
+    partial void OnLoc_IdChanged();
+    partial void OnLevTyp_TitleChanging(string value);
+    partial void OnLevTyp_TitleChanged();
+    partial void OnLevTyp_ActiveChanging(System.Nullable<int> value);
+    partial void OnLevTyp_ActiveChanged();
+    partial void OnLevTyp_SortOrderChanging(System.Nullable<int> value);
+    partial void OnLevTyp_SortOrderChanged();
+    partial void OnLevTyp_AbbreviationChanging(string value);
+    partial void OnLevTyp_AbbreviationChanged();
+    partial void OnLevTyp_CountChanging(string value);
+    partial void OnLevTyp_CountChanged();
+    #endregion
+		
+		public SETUP_LeaveType()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevTyp_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string LevTyp_Id
+		{
+			get
+			{
+				return this._LevTyp_Id;
+			}
+			set
+			{
+				if ((this._LevTyp_Id != value))
+				{
+					this.OnLevTyp_IdChanging(value);
+					this.SendPropertyChanging();
+					this._LevTyp_Id = value;
+					this.SendPropertyChanged("LevTyp_Id");
+					this.OnLevTyp_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevTyp_Code", DbType="VarChar(50)")]
+		public string LevTyp_Code
+		{
+			get
+			{
+				return this._LevTyp_Code;
+			}
+			set
+			{
+				if ((this._LevTyp_Code != value))
+				{
+					this.OnLevTyp_CodeChanging(value);
+					this.SendPropertyChanging();
+					this._LevTyp_Code = value;
+					this.SendPropertyChanged("LevTyp_Code");
+					this.OnLevTyp_CodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cmp_Id", DbType="VarChar(50)")]
+		public string Cmp_Id
+		{
+			get
+			{
+				return this._Cmp_Id;
+			}
+			set
+			{
+				if ((this._Cmp_Id != value))
+				{
+					this.OnCmp_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Cmp_Id = value;
+					this.SendPropertyChanged("Cmp_Id");
+					this.OnCmp_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id", DbType="VarChar(50)")]
+		public string Loc_Id
+		{
+			get
+			{
+				return this._Loc_Id;
+			}
+			set
+			{
+				if ((this._Loc_Id != value))
+				{
+					this.OnLoc_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Loc_Id = value;
+					this.SendPropertyChanged("Loc_Id");
+					this.OnLoc_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevTyp_Title", DbType="VarChar(100)")]
+		public string LevTyp_Title
+		{
+			get
+			{
+				return this._LevTyp_Title;
+			}
+			set
+			{
+				if ((this._LevTyp_Title != value))
+				{
+					this.OnLevTyp_TitleChanging(value);
+					this.SendPropertyChanging();
+					this._LevTyp_Title = value;
+					this.SendPropertyChanged("LevTyp_Title");
+					this.OnLevTyp_TitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevTyp_Active", DbType="Int")]
+		public System.Nullable<int> LevTyp_Active
+		{
+			get
+			{
+				return this._LevTyp_Active;
+			}
+			set
+			{
+				if ((this._LevTyp_Active != value))
+				{
+					this.OnLevTyp_ActiveChanging(value);
+					this.SendPropertyChanging();
+					this._LevTyp_Active = value;
+					this.SendPropertyChanged("LevTyp_Active");
+					this.OnLevTyp_ActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevTyp_SortOrder", DbType="Int")]
+		public System.Nullable<int> LevTyp_SortOrder
+		{
+			get
+			{
+				return this._LevTyp_SortOrder;
+			}
+			set
+			{
+				if ((this._LevTyp_SortOrder != value))
+				{
+					this.OnLevTyp_SortOrderChanging(value);
+					this.SendPropertyChanging();
+					this._LevTyp_SortOrder = value;
+					this.SendPropertyChanged("LevTyp_SortOrder");
+					this.OnLevTyp_SortOrderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevTyp_Abbreviation", DbType="VarChar(50)")]
+		public string LevTyp_Abbreviation
+		{
+			get
+			{
+				return this._LevTyp_Abbreviation;
+			}
+			set
+			{
+				if ((this._LevTyp_Abbreviation != value))
+				{
+					this.OnLevTyp_AbbreviationChanging(value);
+					this.SendPropertyChanging();
+					this._LevTyp_Abbreviation = value;
+					this.SendPropertyChanged("LevTyp_Abbreviation");
+					this.OnLevTyp_AbbreviationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevTyp_Count", DbType="VarChar(100)")]
+		public string LevTyp_Count
+		{
+			get
+			{
+				return this._LevTyp_Count;
+			}
+			set
+			{
+				if ((this._LevTyp_Count != value))
+				{
+					this.OnLevTyp_CountChanging(value);
+					this.SendPropertyChanging();
+					this._LevTyp_Count = value;
+					this.SendPropertyChanged("LevTyp_Count");
+					this.OnLevTyp_CountChanged();
 				}
 			}
 		}
@@ -17069,6 +19471,248 @@ namespace SCMSDataLayer.DB
 				if ((this._SelectedMenu != value))
 				{
 					this._SelectedMenu = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_GetLeaveTypesListResult
+	{
+		
+		private string _LevTyp_Id;
+		
+		private string _LevTyp_Code;
+		
+		private string _Cmp_Id;
+		
+		private string _Loc_Id;
+		
+		private string _LevTyp_Title;
+		
+		private System.Nullable<int> _LevTyp_Active;
+		
+		private System.Nullable<int> _LevTyp_SortOrder;
+		
+		private string _Loc_Id1;
+		
+		private string _Loc_Code;
+		
+		private string _Cmp_Id1;
+		
+		private string _Loc_Title;
+		
+		private System.Nullable<int> _Loc_Active;
+		
+		private System.Nullable<int> _Loc_SortOrder;
+		
+		public sp_GetLeaveTypesListResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevTyp_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string LevTyp_Id
+		{
+			get
+			{
+				return this._LevTyp_Id;
+			}
+			set
+			{
+				if ((this._LevTyp_Id != value))
+				{
+					this._LevTyp_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevTyp_Code", DbType="VarChar(50)")]
+		public string LevTyp_Code
+		{
+			get
+			{
+				return this._LevTyp_Code;
+			}
+			set
+			{
+				if ((this._LevTyp_Code != value))
+				{
+					this._LevTyp_Code = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cmp_Id", DbType="VarChar(50)")]
+		public string Cmp_Id
+		{
+			get
+			{
+				return this._Cmp_Id;
+			}
+			set
+			{
+				if ((this._Cmp_Id != value))
+				{
+					this._Cmp_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id", DbType="VarChar(50)")]
+		public string Loc_Id
+		{
+			get
+			{
+				return this._Loc_Id;
+			}
+			set
+			{
+				if ((this._Loc_Id != value))
+				{
+					this._Loc_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevTyp_Title", DbType="VarChar(100)")]
+		public string LevTyp_Title
+		{
+			get
+			{
+				return this._LevTyp_Title;
+			}
+			set
+			{
+				if ((this._LevTyp_Title != value))
+				{
+					this._LevTyp_Title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevTyp_Active", DbType="Int")]
+		public System.Nullable<int> LevTyp_Active
+		{
+			get
+			{
+				return this._LevTyp_Active;
+			}
+			set
+			{
+				if ((this._LevTyp_Active != value))
+				{
+					this._LevTyp_Active = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevTyp_SortOrder", DbType="Int")]
+		public System.Nullable<int> LevTyp_SortOrder
+		{
+			get
+			{
+				return this._LevTyp_SortOrder;
+			}
+			set
+			{
+				if ((this._LevTyp_SortOrder != value))
+				{
+					this._LevTyp_SortOrder = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id1", DbType="VarChar(50)")]
+		public string Loc_Id1
+		{
+			get
+			{
+				return this._Loc_Id1;
+			}
+			set
+			{
+				if ((this._Loc_Id1 != value))
+				{
+					this._Loc_Id1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Code", DbType="VarChar(50)")]
+		public string Loc_Code
+		{
+			get
+			{
+				return this._Loc_Code;
+			}
+			set
+			{
+				if ((this._Loc_Code != value))
+				{
+					this._Loc_Code = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cmp_Id1", DbType="VarChar(50)")]
+		public string Cmp_Id1
+		{
+			get
+			{
+				return this._Cmp_Id1;
+			}
+			set
+			{
+				if ((this._Cmp_Id1 != value))
+				{
+					this._Cmp_Id1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Title", DbType="VarChar(100)")]
+		public string Loc_Title
+		{
+			get
+			{
+				return this._Loc_Title;
+			}
+			set
+			{
+				if ((this._Loc_Title != value))
+				{
+					this._Loc_Title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Active", DbType="Int")]
+		public System.Nullable<int> Loc_Active
+		{
+			get
+			{
+				return this._Loc_Active;
+			}
+			set
+			{
+				if ((this._Loc_Active != value))
+				{
+					this._Loc_Active = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_SortOrder", DbType="Int")]
+		public System.Nullable<int> Loc_SortOrder
+		{
+			get
+			{
+				return this._Loc_SortOrder;
+			}
+			set
+			{
+				if ((this._Loc_SortOrder != value))
+				{
+					this._Loc_SortOrder = value;
 				}
 			}
 		}

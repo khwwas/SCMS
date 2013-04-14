@@ -25,17 +25,19 @@ namespace SCMS.Controllers
 
             var VoucherTypes = new DALVoucherType().GetAllData();
             var Locations = new DALLocation().GetAllLocation();
-            var Voucher = new DALVoucherEntry().GetAllMasterRecords().Last();
-            if (Voucher != null)
+            var Voucher = new DALVoucherEntry().GetLastRecordsByVchrType();
+
+            if (Voucher != null && Voucher.Count > 0)
             {
-                ViewData["Code"] = Voucher.VchMas_Code;
-                ViewData["Date"] = Voucher.VchMas_Date != null ? Convert.ToDateTime(Voucher.VchMas_Date).ToShortDateString() : "";
-                ViewData["Status"] = Voucher.VchMas_Status;
+                var LastRecord = Voucher.Last();
+                ViewData["Code"] = LastRecord.VchMas_Code;
+                ViewData["Date"] = LastRecord.VchMas_Date != null ? Convert.ToDateTime(LastRecord.VchMas_Date).ToString("dd/MMM/yyyy") : "";
+                ViewData["Status"] = LastRecord.VchMas_Status;
             }
-            sp_GetVoucherTypesListResult Select = new sp_GetVoucherTypesListResult();
-            Select.VchrType_Id = "0";
-            Select.VchrType_Title = "";
-            VoucherTypes.Insert(0, Select);
+            //sp_GetVoucherTypesListResult Select = new sp_GetVoucherTypesListResult();
+            //Select.VchrType_Id = "0";
+            //Select.VchrType_Title = "";
+            //VoucherTypes.Insert(0, Select);
 
             ViewData["ddl_VoucherType"] = new SelectList(VoucherTypes, "VchrType_Id", "VchrType_Title", Session["VoucherTypeForVoucherEntry"]);
             var ChartOfAccounts = new DALChartOfAccount().GetChartOfAccountForDropDown();
@@ -158,23 +160,27 @@ namespace SCMS.Controllers
             String VoucherType = MasterRow[3];
             String LocationId = MasterRow[4];
             String Remarks = MasterRow[5];
+            string ls_VchrTypId = "";
 
             Session["VoucherTypeForVoucherEntry"] = VoucherType;
             Session["LocationIdForVoucherEntry"] = LocationId;
             DALVoucherEntry objDalVoucherEntry = new DALVoucherEntry();
             Int32 li_ReturnValue = 0;
             int flag = 0;
+
             try
             {
                 GL_VchrMaster GL_Master = new GL_VchrMaster();
                 GL_VchrDetail GL_Detail = new GL_VchrDetail();
                 String Prefix = new DALVoucherType().GetAllData().Where(c => c.VchrType_Id.Equals(VoucherType)).SingleOrDefault().VchrType_Prefix;
+                ls_VchrTypId = Convert.ToString(Convert.ToInt32(VoucherType));
 
                 if (String.IsNullOrEmpty(VoucherMasterCode))
                 {
                     if (DALCommon.AutoCodeGeneration("GL_VchrMaster") == 1)
                     {
-                        VoucherMasterCode = DALCommon.GetMaximumCode("GL_VchrMaster");
+                        //VoucherMasterCode = DALCommon.GetMaximumCode("GL_VchrMaster");
+                        VoucherMasterCode = DALCommon.GetMaxVoucherCode("GL_VchrMaster", VoucherType, "");
                     }
                 }
                 else
@@ -212,7 +218,8 @@ namespace SCMS.Controllers
                             {
                                 if (DALCommon.AutoCodeGeneration("GL_VchrDetail") == 1)
                                 {
-                                    VoucherDetailCode = DALCommon.GetMaximumCode("GL_VchrDetail");
+                                    //VoucherDetailCode = DALCommon.GetMaximumCode("GL_VchrDetail");
+                                    VoucherDetailCode = VoucherMasterCode;
                                 }
                             }
 
