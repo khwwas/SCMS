@@ -188,6 +188,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="Reports\Datasets\dsIncomeStatement.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsIncomeStatement.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Datasets\dsLedger1.Designer.cs">
       <DependentUpon>dsLedger.xsd</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -208,10 +213,10 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="Reports\Reps\rptTrialBalance.cs">
+    <Compile Include="Reports\Reps\rptIncomeStatement.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>rptTrialBalance.rpt</DependentUpon>
+      <DependentUpon>rptIncomeStatement.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="SystemParameters.cs" />
@@ -1653,6 +1658,17 @@
     <None Include="Reports\Datasets\dsCompany.xss">
       <DependentUpon>dsCompany.xsd</DependentUpon>
     </None>
+    <None Include="Reports\Datasets\dsIncomeStatement.xsc">
+      <DependentUpon>dsIncomeStatement.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\Datasets\dsIncomeStatement.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsIncomeStatement.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\Datasets\dsIncomeStatement.xss">
+      <DependentUpon>dsIncomeStatement.xsd</DependentUpon>
+    </None>
     <None Include="Reports\Datasets\dsLedger.xsc">
       <DependentUpon>dsLedger.xsd</DependentUpon>
     </None>
@@ -1784,6 +1800,10 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reports\Reps\rptIncomeStatement.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptIncomeStatement.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Reps\rptLedger_AccWise.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptLedger_AccWise.cs</LastGenOutput>
@@ -1807,10 +1827,6 @@
     <EmbeddedResource Include="Reports\Reps\rptLocation.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptLocation.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\Reps\rptTrialBalance.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>rptTrialBalance.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Reps\rptVoucherDocument.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

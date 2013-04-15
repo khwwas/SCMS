@@ -20341,6 +20341,47 @@ namespace SCMSDataLayer.DB
 				}
 			}
 		}
+<<<<<<< HEAD
+	}
+	
+	public partial class sp_GetLeaveTypesListResult
+	{
+		
+		private string _LevTyp_Id;
+		
+		private string _LevTyp_Code;
+		
+		private string _Cmp_Id;
+		
+		private string _Loc_Id;
+		
+		private string _LevTyp_Title;
+		
+		private System.Nullable<int> _LevTyp_Active;
+		
+		private System.Nullable<int> _LevTyp_SortOrder;
+		
+		private string _LevTyp_Abbreviation;
+		
+		private string _LevTyp_Count;
+		
+		private string _Loc_Id1;
+		
+		private string _Loc_Code;
+		
+		private string _Cmp_Id1;
+		
+		private string _Loc_Title;
+		
+		private System.Nullable<int> _Loc_Active;
+		
+		private System.Nullable<int> _Loc_SortOrder;
+		
+		public sp_GetLeaveTypesListResult()
+		{
+		}
+=======
+>>>>>>> 9c3c108a7526a64bb90639a0ee2067fa969479b8
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id3", DbType="VarChar(50)")]
 		public string Loc_Id3
@@ -20454,8 +20495,45 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+<<<<<<< HEAD
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevTyp_Abbreviation", DbType="VarChar(50)")]
+		public string LevTyp_Abbreviation
+		{
+			get
+			{
+				return this._LevTyp_Abbreviation;
+			}
+			set
+			{
+				if ((this._LevTyp_Abbreviation != value))
+				{
+					this._LevTyp_Abbreviation = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevTyp_Count", DbType="VarChar(100)")]
+		public string LevTyp_Count
+		{
+			get
+			{
+				return this._LevTyp_Count;
+			}
+			set
+			{
+				if ((this._LevTyp_Count != value))
+				{
+					this._LevTyp_Count = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id1", DbType="VarChar(50)")]
+		public string Loc_Id1
+=======
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChrtAcc_Active", DbType="Int")]
 		public System.Nullable<int> ChrtAcc_Active
+>>>>>>> 9c3c108a7526a64bb90639a0ee2067fa969479b8
 		{
 			get
 			{
