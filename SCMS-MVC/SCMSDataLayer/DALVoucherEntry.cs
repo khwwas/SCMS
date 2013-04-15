@@ -138,5 +138,19 @@ namespace SCMSDataLayer
                 return null;
             }
         }
+
+        public List<GL_VchrMaster> GetLastRecordsByVchrType()
+        {
+            try
+            {
+                SCMSDataContext dbSCMS = Connection.Create();
+                return dbSCMS.GL_VchrMasters.OrderBy(c => c.VchMas_Date).ToList();
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
     }
 }

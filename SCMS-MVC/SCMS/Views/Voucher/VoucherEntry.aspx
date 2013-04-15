@@ -305,15 +305,20 @@
         <div class="block">
             <div id="MessageBox">
             </div>
+<<<<<<< HEAD
             <%if (ViewData["Code"] != null && ViewData["Code"] != "")
               { %>
             <div class="CustomCell" style="width: 85px; height: 30px;">
                 Last Voucher</div>
             <div class="CustomCell" style="width: 420px; height: 30px;">
+=======
+            <div class="CustomCell" style="width: 600px; height: 30px; font-family: Tahoma;">
+                <b>Voucher # :</b>
+>>>>>>> 12863db4383cf8429d8ff172e5a9962e1082eaa7
                 <%=ViewData["Code"]%>
-                , Created On
+                <b>, Date : </b>
                 <%=ViewData["Date"]%>
-                , Status is
+                <b>, Status : </b>
                 <%=ViewData["Status"]%>
             </div>
             <div class="Clear" style="border-bottom: 1px solid #ccc; margin-bottom: 5px;">
@@ -322,8 +327,8 @@
             <div class="CustomCell" style="width: 97px; height: 30px;">
                 Code</div>
             <div class="CustomCell" style="width: 320px; height: 30px;">
-                <input type="text" class="CustomText" style="width: 250px;" id="txt_Code" name="txt_Code"
-                    maxlength="15" readonly="readonly" value='<%=ViewData["VoucherCode"] %>' />
+                <input type="text" class="CustomText" style="width: 250px; font-weight: bold;" id="txt_Code"
+                    name="txt_Code" maxlength="15" readonly="readonly" value='<%=ViewData["VoucherCode"] %>' />
             </div>
             <div class="CustomCell" style="width: 40px; height: 30px;">
                 Date</div>

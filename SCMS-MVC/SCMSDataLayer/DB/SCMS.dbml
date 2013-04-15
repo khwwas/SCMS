@@ -313,6 +313,12 @@
       <Association Name="SETUP_Company_SETUP_Supplier" Member="SETUP_Suppliers" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Supplier" />
       <Association Name="SETUP_Company_SETUP_SupplierType" Member="SETUP_SupplierTypes" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_SupplierType" />
       <Association Name="SETUP_Company_SETUP_VoucherType" Member="SETUP_VoucherTypes" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_VoucherType" />
+      <Association Name="SETUP_Company_SETUP_CodeAnalysis1" Member="SETUP_CodeAnalysis1s" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_CodeAnalysis1" />
+      <Association Name="SETUP_Company_SETUP_CodeAnalysis6" Member="SETUP_CodeAnalysis6s" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_CodeAnalysis6" />
+      <Association Name="SETUP_Company_SETUP_CodeAnalysis2" Member="SETUP_CodeAnalysis2s" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_CodeAnalysis2" />
+      <Association Name="SETUP_Company_SETUP_CodeAnalysis3" Member="SETUP_CodeAnalysis3s" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_CodeAnalysis3" />
+      <Association Name="SETUP_Company_SETUP_CodeAnalysis4" Member="SETUP_CodeAnalysis4s" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_CodeAnalysis4" />
+      <Association Name="SETUP_Company_SETUP_CodeAnalysis5" Member="SETUP_CodeAnalysis5s" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_CodeAnalysis5" />
     </Type>
   </Table>
   <Table Name="dbo.SETUP_CompanyModule" Member="SETUP_CompanyModules">
@@ -511,6 +517,12 @@
       <Association Name="SETUP_Location_SETUP_Supplier" Member="SETUP_Suppliers" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Supplier" />
       <Association Name="SETUP_Location_SETUP_SupplierType" Member="SETUP_SupplierTypes" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_SupplierType" />
       <Association Name="SETUP_Location_SETUP_VoucherType" Member="SETUP_VoucherTypes" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_VoucherType" />
+      <Association Name="SETUP_Location_SETUP_CodeAnalysis1" Member="SETUP_CodeAnalysis1s" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_CodeAnalysis1" />
+      <Association Name="SETUP_Location_SETUP_CodeAnalysis6" Member="SETUP_CodeAnalysis6s" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_CodeAnalysis6" />
+      <Association Name="SETUP_Location_SETUP_CodeAnalysis2" Member="SETUP_CodeAnalysis2s" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_CodeAnalysis2" />
+      <Association Name="SETUP_Location_SETUP_CodeAnalysis3" Member="SETUP_CodeAnalysis3s" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_CodeAnalysis3" />
+      <Association Name="SETUP_Location_SETUP_CodeAnalysis4" Member="SETUP_CodeAnalysis4s" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_CodeAnalysis4" />
+      <Association Name="SETUP_Location_SETUP_CodeAnalysis5" Member="SETUP_CodeAnalysis5s" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_CodeAnalysis5" />
       <Association Name="SETUP_Company_SETUP_Location" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
     </Type>
   </Table>
@@ -661,6 +673,97 @@
       <Column Name="Natr_Default" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Natr_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="SYSTEM_Nature_SETUP_ChartOfAccount" Member="SETUP_ChartOfAccounts" ThisKey="Natr_Id" OtherKey="Natr_Id" Type="SETUP_ChartOfAccount" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SETUP_CodeAnalysis1" Member="SETUP_CodeAnalysis1s">
+    <Type Name="SETUP_CodeAnalysis1">
+      <Column Name="CA_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CA_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cmp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CA_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="CA_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CA_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SETUP_Company_SETUP_CodeAnalysis1" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
+      <Association Name="SETUP_Location_SETUP_CodeAnalysis1" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SETUP_CodeAnalysis6" Member="SETUP_CodeAnalysis6s">
+    <Type Name="SETUP_CodeAnalysis6">
+      <Column Name="CA_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CA_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cmp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CA_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="CA_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CA_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SETUP_Company_SETUP_CodeAnalysis6" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
+      <Association Name="SETUP_Location_SETUP_CodeAnalysis6" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SETUP_CodeAnalysis2" Member="SETUP_CodeAnalysis2s">
+    <Type Name="SETUP_CodeAnalysis2">
+      <Column Name="CA_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CA_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cmp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CA_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="CA_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CA_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SETUP_Company_SETUP_CodeAnalysis2" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
+      <Association Name="SETUP_Location_SETUP_CodeAnalysis2" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SETUP_CodeAnalysis3" Member="SETUP_CodeAnalysis3s">
+    <Type Name="SETUP_CodeAnalysis3">
+      <Column Name="CA_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CA_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cmp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CA_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="CA_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CA_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SETUP_Company_SETUP_CodeAnalysis3" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
+      <Association Name="SETUP_Location_SETUP_CodeAnalysis3" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SETUP_CodeAnalysis4" Member="SETUP_CodeAnalysis4s">
+    <Type Name="SETUP_CodeAnalysis4">
+      <Column Name="CA_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CA_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cmp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CA_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="CA_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CA_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SETUP_Company_SETUP_CodeAnalysis4" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
+      <Association Name="SETUP_Location_SETUP_CodeAnalysis4" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SETUP_CodeAnalysis5" Member="SETUP_CodeAnalysis5s">
+    <Type Name="SETUP_CodeAnalysis5">
+      <Column Name="CA_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CA_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cmp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CA_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="CA_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CA_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SETUP_Company_SETUP_CodeAnalysis5" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
+      <Association Name="SETUP_Location_SETUP_CodeAnalysis5" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SETUP_LeaveType" Member="SETUP_LeaveTypes">
+    <Type Name="SETUP_LeaveType">
+      <Column Name="LevTyp_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="LevTyp_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cmp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LevTyp_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="LevTyp_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LevTyp_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LevTyp_Abbreviation" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LevTyp_Count" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
     </Type>
   </Table>
   <Function Name="dbo.sp_GetCityList" Method="sp_GetCityList">
@@ -1036,6 +1139,23 @@
       <Column Name="LevTyp_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="LevTyp_Abbreviation" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="LevTyp_Count" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Loc_Id1" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cmp_Id1" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Loc_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Loc_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GetLeaveTypesList" Method="sp_GetLeaveTypesList">
+    <ElementType Name="sp_GetLeaveTypesListResult">
+      <Column Name="LevTyp_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LevTyp_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cmp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LevTyp_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="LevTyp_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LevTyp_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Loc_Id1" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Loc_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Cmp_Id1" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />

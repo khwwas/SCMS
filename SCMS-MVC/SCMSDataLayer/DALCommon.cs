@@ -123,6 +123,76 @@ namespace SCMSDataLayer
             return _ReturnValue;
         }
 
+        public static String GetMaxVoucherCode(string ps_TableName, string ps_VoucherType, string ps_Year)
+        {
+            string _Sql = "", _ReturnValue = ""; // _ColumnName = "",
+            Int32 _CodeLength = 0, _MaxCode = 0; //_AutoCodeTag = 0, , 
+            DataSet _ds = new DataSet();
+
+            try
+            {
+                var dbSCMS = Connection.Create();
+                SqlConnection con = (SqlConnection)dbSCMS.Connection;
+                con.Open();
+
+                _Sql += " Select * ";
+                _Sql += "   From SYSTEM_CodeGeneration ";
+                _Sql += "  Where ( Lower( SYSTEM_CodeGeneration.CodeGen_TableName ) = Lower( '" + ps_TableName + "' ) ) ";
+
+                SqlCommand cmd = new SqlCommand(_Sql, con);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(_ds);
+
+                if (_ds != null && _ds.Tables != null && _ds.Tables.Count > 0)
+                {
+                    //    if (_ds.Tables[0].Rows[0]["CodeGen_ColumnName"] != null &&
+                    //        _ds.Tables[0].Rows[0]["CodeGen_ColumnName"].ToString() != "")
+                    //    {
+                    //        _ColumnName = _ds.Tables[0].Rows[0]["CodeGen_ColumnName"].ToString();
+                    //    }
+
+                    //    if (_ds.Tables[0].Rows[0]["CodeGen_AutoTag"] != null &&
+                    //        _ds.Tables[0].Rows[0]["CodeGen_AutoTag"].ToString() != "")
+                    //    {
+                    //        _AutoCodeTag = Convert.ToInt32(_ds.Tables[0].Rows[0]["CodeGen_AutoTag"].ToString());
+                    //    }
+
+                    if (_ds.Tables[0].Rows[0]["CodeGen_Length"] != null &&
+                        _ds.Tables[0].Rows[0]["CodeGen_Length"].ToString() != "")
+                    {
+                        _CodeLength = Convert.ToInt32(_ds.Tables[0].Rows[0]["CodeGen_Length"].ToString());
+                    }
+
+                    _Sql = "";
+                    _Sql += " Select IsNULL( Max( IsNULL( GL_VchrMaster.VchMas_Id, 0 ) ), 0 ) + 1 ";
+                    _Sql += "   From GL_VchrMaster ";
+                    _Sql += "  Where ( GL_VchrMaster.VchrType_Id = '" + ps_VoucherType + "' )";
+
+                    cmd = new SqlCommand(_Sql, con);
+                    _MaxCode = (Int32)cmd.ExecuteScalar();
+                    if (_MaxCode == 1)
+                    {
+                        _ReturnValue = Convert.ToString(Convert.ToInt32(ps_VoucherType)) + _MaxCode.ToString().PadLeft(_CodeLength, '0');
+                    }
+                    else
+                    {
+                        //_MaxCode = _MaxCode.Substring(2, _CodeLength);
+                        //_ReturnValue = _MaxCode.PadLeft(_CodeLength, '0');
+                        //_ReturnValue += Convert.ToString(Convert.ToInt32(ps_VoucherType)) + _ReturnValue;
+                        _ReturnValue = _MaxCode.ToString();
+                    }
+                }
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                return _ReturnValue;
+            }
+
+            return _ReturnValue;
+        }
+
         //public static int ModuleId
         //{
         //    get;
