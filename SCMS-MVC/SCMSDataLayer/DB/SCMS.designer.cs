@@ -19493,6 +19493,10 @@ namespace SCMSDataLayer.DB
 		
 		private System.Nullable<int> _LevTyp_SortOrder;
 		
+		private string _LevTyp_Abbreviation;
+		
+		private string _LevTyp_Count;
+		
 		private string _Loc_Id1;
 		
 		private string _Loc_Code;
@@ -19617,6 +19621,38 @@ namespace SCMSDataLayer.DB
 				if ((this._LevTyp_SortOrder != value))
 				{
 					this._LevTyp_SortOrder = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevTyp_Abbreviation", DbType="VarChar(50)")]
+		public string LevTyp_Abbreviation
+		{
+			get
+			{
+				return this._LevTyp_Abbreviation;
+			}
+			set
+			{
+				if ((this._LevTyp_Abbreviation != value))
+				{
+					this._LevTyp_Abbreviation = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevTyp_Count", DbType="VarChar(100)")]
+		public string LevTyp_Count
+		{
+			get
+			{
+				return this._LevTyp_Count;
+			}
+			set
+			{
+				if ((this._LevTyp_Count != value))
+				{
+					this._LevTyp_Count = value;
 				}
 			}
 		}

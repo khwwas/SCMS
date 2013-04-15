@@ -996,6 +996,8 @@
       <Column Name="LevTyp_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="LevTyp_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="LevTyp_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LevTyp_Abbreviation" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LevTyp_Count" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="Loc_Id1" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Loc_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Cmp_Id1" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
