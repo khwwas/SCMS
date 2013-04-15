@@ -25,14 +25,12 @@ namespace SCMS.Controllers
 
             var VoucherTypes = new DALVoucherType().GetAllData();
             var Locations = new DALLocation().GetAllLocation();
-            var Voucher = new DALVoucherEntry().GetLastRecordsByVchrType();
-
+            var Voucher = new DALVoucherEntry().GetAllMasterRecords();
             if (Voucher != null && Voucher.Count > 0)
             {
-                var LastRecord = Voucher.Last();
-                ViewData["Code"] = LastRecord.VchMas_Code;
-                ViewData["Date"] = LastRecord.VchMas_Date != null ? Convert.ToDateTime(LastRecord.VchMas_Date).ToString("dd/MMM/yyyy") : "";
-                ViewData["Status"] = LastRecord.VchMas_Status;
+                ViewData["Code"] = Voucher.Last().VchMas_Code;
+                ViewData["Date"] = Voucher.Last().VchMas_Date != null ? Convert.ToDateTime(Voucher.Last().VchMas_Date).ToShortDateString() : "";
+                ViewData["Status"] = Voucher.Last().VchMas_Status;
             }
             //sp_GetVoucherTypesListResult Select = new sp_GetVoucherTypesListResult();
             //Select.VchrType_Id = "0";
@@ -41,6 +39,18 @@ namespace SCMS.Controllers
 
             ViewData["ddl_VoucherType"] = new SelectList(VoucherTypes, "VchrType_Id", "VchrType_Title", Session["VoucherTypeForVoucherEntry"]);
             var ChartOfAccounts = new DALChartOfAccount().GetChartOfAccountForDropDown();
+            string ChartOfAccountCodes = "";
+            foreach (SETUP_ChartOfAccount COA in ChartOfAccounts)
+            {
+                if (ChartOfAccountCodes.Length > 0)
+                {
+                    ChartOfAccountCodes += "," + COA.ChrtAcc_Id + ":" + COA.ChrtAcc_Title;
+                }
+                {
+                    ChartOfAccountCodes += COA.ChrtAcc_Id + ":" + COA.ChrtAcc_Title;
+                }
+            }
+            ViewData["ChartOfAccountCodesWithTitles"] = ChartOfAccountCodes;
             SETUP_ChartOfAccount SelectChartOfAccount = new SETUP_ChartOfAccount();
             SelectChartOfAccount.ChrtAcc_Id = "0";
             SelectChartOfAccount.ChrtAcc_Code = "";
@@ -146,7 +156,6 @@ namespace SCMS.Controllers
             // Response += "</div>";
             return Response;
         }
-
 
         //public ActionResult SaveVoucher(String VoucherMasterCode, DateTime VoucherDate, string Status, String VoucherType, String LocationId, String Remarks, String[] VoucherDetailRows)
         [HttpPost]
