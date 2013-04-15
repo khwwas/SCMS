@@ -131,6 +131,12 @@
     <Compile Include="Controllers\BankController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\CalendarTypeController.cs" />
+    <Compile Include="Controllers\CodeAnalysis1Controller.cs" />
+    <Compile Include="Controllers\CodeAnalysis2Controller.cs" />
+    <Compile Include="Controllers\CodeAnalysis3Controller.cs" />
+    <Compile Include="Controllers\CodeAnalysis4Controller.cs" />
+    <Compile Include="Controllers\CodeAnalysis5Controller.cs" />
+    <Compile Include="Controllers\CodeAnalysis6Controller.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\ChartOfAccountController.cs" />
@@ -1044,8 +1050,10 @@
     <Content Include="Views\VoucherTypeNarration\VoucherTypeNarration.aspx" />
     <Content Include="Views\VoucherType\GridData.ascx" />
     <Content Include="Views\VoucherType\VoucherType.aspx" />
-    <Content Include="Views\Voucher\GridData.ascx" />
+    <Content Include="Views\Voucher\VoucherEntryRow.ascx" />
     <Content Include="Views\Voucher\VoucherEntry.aspx" />
+    <Content Include="Views\Voucher\GridData.ascx" />
+    <Content Include="Views\Voucher\VoucherEntry-Back.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
