@@ -305,16 +305,12 @@
         <div class="block">
             <div id="MessageBox">
             </div>
-<<<<<<< HEAD
             <%if (ViewData["Code"] != null && ViewData["Code"] != "")
               { %>
             <div class="CustomCell" style="width: 85px; height: 30px;">
                 Last Voucher</div>
-            <div class="CustomCell" style="width: 420px; height: 30px;">
-=======
             <div class="CustomCell" style="width: 600px; height: 30px; font-family: Tahoma;">
                 <b>Voucher # :</b>
->>>>>>> 12863db4383cf8429d8ff172e5a9962e1082eaa7
                 <%=ViewData["Code"]%>
                 <b>, Date : </b>
                 <%=ViewData["Date"]%>

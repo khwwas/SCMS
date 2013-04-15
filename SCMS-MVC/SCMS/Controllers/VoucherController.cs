@@ -25,23 +25,12 @@ namespace SCMS.Controllers
 
             var VoucherTypes = new DALVoucherType().GetAllData();
             var Locations = new DALLocation().GetAllLocation();
-<<<<<<< HEAD
             var Voucher = new DALVoucherEntry().GetAllMasterRecords();
             if (Voucher != null && Voucher.Count > 0)
             {
                 ViewData["Code"] = Voucher.Last().VchMas_Code;
                 ViewData["Date"] = Voucher.Last().VchMas_Date != null ? Convert.ToDateTime(Voucher.Last().VchMas_Date).ToShortDateString() : "";
                 ViewData["Status"] = Voucher.Last().VchMas_Status;
-=======
-            var Voucher = new DALVoucherEntry().GetLastRecordsByVchrType();
-
-            if (Voucher != null && Voucher.Count > 0)
-            {
-                var LastRecord = Voucher.Last();
-                ViewData["Code"] = LastRecord.VchMas_Code;
-                ViewData["Date"] = LastRecord.VchMas_Date != null ? Convert.ToDateTime(LastRecord.VchMas_Date).ToString("dd/MMM/yyyy") : "";
-                ViewData["Status"] = LastRecord.VchMas_Status;
->>>>>>> 12863db4383cf8429d8ff172e5a9962e1082eaa7
             }
             //sp_GetVoucherTypesListResult Select = new sp_GetVoucherTypesListResult();
             //Select.VchrType_Id = "0";
