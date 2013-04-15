@@ -227,8 +227,8 @@ namespace SCMS.Controllers
                             {
                                 if (DALCommon.AutoCodeGeneration("GL_VchrDetail") == 1)
                                 {
-                                    //VoucherDetailCode = DALCommon.GetMaximumCode("GL_VchrDetail");
-                                    VoucherDetailCode = VoucherMasterCode;
+                                    VoucherDetailCode = DALCommon.GetMaximumCode("GL_VchrDetail");
+                                    //VoucherDetailCode = VoucherMasterCode;
                                 }
                             }
 
@@ -278,23 +278,8 @@ namespace SCMS.Controllers
                 ViewData["LocationId"] = VoucherEntryRow.Loc_Id;
                 ViewData["Remarks"] = VoucherEntryRow.VchMas_Remarks;
                 var VoucherDetailRows = new DALVoucherEntry().GetAllDetailRecords().Where(c => c.VchMas_Id.Equals(VoucherId)).ToList().OrderBy(c => c.VchDet_Id).ToList();
-                if (VoucherDetailRows != null && VoucherDetailRows.Count > 0)
-                {
-                    ViewData["RowsCount"] = VoucherDetailRows.Count;
-                    String Count = "";
-                    foreach (GL_VchrDetail DetailRow in VoucherDetailRows)
-                    {
-                        ViewData["AccountId" + Count] = DetailRow.ChrtAcc_Id;
-                        ViewData["txt_Details" + Count] = DetailRow.VchDet_Remarks;
-                        ViewData["txt_Debit" + Count] = DetailRow.VchMas_DrAmount;
-                        ViewData["txt_Credit" + Count] = DetailRow.VchMas_CrAmount;
-                        if (Count == "")
-                        {
-                            Count = "0";
-                        }
-                        Count = (Convert.ToInt32(Count) + 1).ToString();
-                    }
-                }
+                ViewData["DetailRecords"] = VoucherDetailRows;
+                ViewData["Edit"] = "OK";
             }
         }
 

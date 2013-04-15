@@ -376,9 +376,109 @@
         <div class="Clear">
         </div>
         <div id="DetailContainer">
+            <%if (ViewData["Edit"] != null && ViewData["Edit"] != "")
+              {
+                  List<SCMSDataLayer.DB.GL_VchrDetail> voucherDetails = new List<SCMSDataLayer.DB.GL_VchrDetail>();
+                  if (ViewData["DetailRecords"] != null)
+                  {
+                      voucherDetails = (List<SCMSDataLayer.DB.GL_VchrDetail>)ViewData["DetailRecords"];
+                  }
+                  if (voucherDetails != null && voucherDetails.Count > 0)
+                  {
+                      foreach (SCMSDataLayer.DB.GL_VchrDetail row in voucherDetails)
+                      {
+            %>
             <div class="detailRow" style="float: left; width: auto;">
                 <div class="CustomCell" style="width: 250px; height: 30px;">
-                    <%= Html.DropDownList("ddl_Account", null, new { style ="width:250px;"})%>
+                    <%ViewData["ddl_Account"] = new SelectList((List<SCMSDataLayer.DB.SETUP_ChartOfAccount>)ViewData["ChartOfAccounts"], "ChrtAcc_Id", "ChrtAcc_Title", row.ChrtAcc_Id);%>
+                    <%= Html.DropDownList("ddl_Account", null, new { style = "width:250px;" })%>
+                </div>
+                <div class="CustomCell" style="width: 565px; height: 30px;">
+                    <input type="text" class="CustomText" style="width: 545px;" name="txt_Details" value='<%=row.VchDet_Remarks %>'
+                        maxlength="200" />
+                </div>
+                <div class="CustomCell" style="width: 118px; height: 30px;">
+                    <%if (row.VchMas_CrAmount > 0)
+                      {
+                    %>
+                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Debit" disabled="disabled"
+                        maxlength="50" />
+                    <%}
+                      else
+                      {%>
+                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Debit" value="<%=row.VchMas_DrAmount %>"
+                        maxlength="50" />
+                    <%} %>
+                </div>
+                <div class="CustomCell" style="width: 118px; height: 30px;">
+                    <%if (row.VchMas_DrAmount > 0)
+                      { %>
+                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Credit" disabled="disabled"
+                        maxlength="50" />
+                    <%}
+                      else
+                      { %>
+                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Credit" value="<%=row.VchMas_CrAmount %>"
+                        maxlength="50" />
+                    <%} %>
+                </div>
+            </div>
+            <%}
+                  }
+            %>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    if ($("#txt_TotalDebit").val() == "") {
+                        $("#txt_TotalDebit").val("0");
+                    }
+                    if ($("#txt_TotalCredit").val() == "") {
+                        $("#txt_TotalCredit").val("0");
+                    }
+
+                    var sum = 0;
+                    $("input[name=txt_Debit]").each(function () {
+                        if ($(this).val() != "") {
+                            sum += parseFloat($(this).val());
+                        }
+                    });
+                    $("#txt_TotalDebit").val(sum);
+
+                    sum = 0;
+                    $("input[name=txt_Credit]").each(function () {
+                        if ($(this).val() != "") {
+                            sum += parseFloat($(this).val());
+                        }
+                    });
+                    $("#txt_TotalCredit").val(sum);
+
+                    $("#txt_TotalDebit").css("color", "green");
+                    $("#txt_TotalCredit").css("color", "green");
+                    $("#txt_Difference").css("color", "green");
+                    if ($("#txt_TotalDebit").val() < $("#txt_TotalCredit").val()) {
+                        $("#txt_TotalDebit").css("color", "red");
+                        $("#txt_TotalCredit").css("color", "green");
+                    }
+                    if ($("#txt_TotalCredit").val() < $("#txt_TotalDebit").val()) {
+                        $("#txt_TotalDebit").css("color", "green");
+                        $("#txt_TotalCredit").css("color", "red");
+                    }
+
+                    $("#txt_Difference").val(parseFloat($("#txt_TotalDebit").val()) - parseFloat($("#txt_TotalCredit").val()));
+                    if ($("#txt_Difference").val() < 0) {
+                        $("#txt_Difference").val(parseFloat($("#txt_TotalCredit").val()) - parseFloat($("#txt_TotalDebit").val()));
+                    }
+                    if ($("#txt_Difference").val() > 0) {
+                        $("#txt_Difference").css("color", "red");
+                    }
+                });
+
+            </script>
+            <%}
+              else
+              {%>
+            <div class="detailRow" style="float: left; width: auto;">
+                <div class="CustomCell" style="width: 250px; height: 30px;">
+                    <%= Html.DropDownList("ddl_Account", null, new { style = "width:250px;" })%>
                 </div>
                 <div class="CustomCell" style="width: 565px; height: 30px;">
                     <input type="text" class="CustomText" style="width: 545px;" name="txt_Details" maxlength="200" />
@@ -392,7 +492,7 @@
             </div>
             <div class="detailRow" style="float: left; width: auto;">
                 <div class="CustomCell" style="width: 250px; height: 30px;">
-                    <%= Html.DropDownList("ddl_Account", null, new { style ="width:250px;"})%>
+                    <%= Html.DropDownList("ddl_Account", null, new { style = "width:250px;" })%>
                 </div>
                 <div class="CustomCell" style="width: 565px; height: 30px;">
                     <input type="text" class="CustomText" style="width: 545px;" name="txt_Details" maxlength="200" />
@@ -406,7 +506,7 @@
             </div>
             <div class="detailRow" style="float: left; width: auto;">
                 <div class="CustomCell" style="width: 250px; height: 30px;">
-                    <%= Html.DropDownList("ddl_Account", null, new { style ="width:250px;"})%>
+                    <%= Html.DropDownList("ddl_Account", null, new { style = "width:250px;" })%>
                 </div>
                 <div class="CustomCell" style="width: 565px; height: 30px;">
                     <input type="text" class="CustomText" style="width: 545px;" name="txt_Details" maxlength="200" />
@@ -420,7 +520,7 @@
             </div>
             <div class="detailRow" style="float: left; width: auto;">
                 <div class="CustomCell" style="width: 250px; height: 30px;">
-                    <%= Html.DropDownList("ddl_Account", null, new { style ="width:250px;"})%>
+                    <%= Html.DropDownList("ddl_Account", null, new { style = "width:250px;" })%>
                 </div>
                 <div class="CustomCell" style="width: 565px; height: 30px;">
                     <input type="text" class="CustomText" style="width: 545px;" name="txt_Details" maxlength="200" />
@@ -432,6 +532,7 @@
                     <input type="text" class="CustomText" style="width: 100px;" name="txt_Credit" maxlength="50" />
                 </div>
             </div>
+            <%} %>
             <div style="float: left;">
                 <img id="btn_AddNewRow" alt="Add New" src="../../img/add.png" style="width: 30px;
                     cursor: pointer;" />
