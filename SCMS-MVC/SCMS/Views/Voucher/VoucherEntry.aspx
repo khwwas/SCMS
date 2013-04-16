@@ -207,7 +207,7 @@
                 ddl_VoucherType.focus();
                 return;
             }
-            else if (ddl_Status.value == "2" && (txt_Difference.value == "" || txt_Difference.value != "0")) {
+            else if (ddl_Status.value == "Approved" && (txt_Difference.value == "" || txt_Difference.value != "0")) {
                 FadeIn(MessageBox);
                 MessageBox.innerHTML = "<h5>Error!</h5><p>Debit and Credit values should be equal.</p>";
                 MessageBox.setAttribute("class", "message error");
@@ -411,7 +411,7 @@
                     <%}
                       else
                       {%>
-                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Debit" value="<%=row.VchMas_DrAmount %>"
+                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Debit" value="<%=  Math.Round(Convert.ToDecimal(row.VchMas_DrAmount), 2) %>"
                         maxlength="50" />
                     <%} %>
                 </div>
@@ -423,7 +423,7 @@
                     <%}
                       else
                       { %>
-                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Credit" value="<%=row.VchMas_CrAmount %>"
+                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Credit" value="<%= Math.Round(Convert.ToDecimal(row.VchMas_CrAmount), 2) %>"
                         maxlength="50" />
                     <%} %>
                 </div>
@@ -486,7 +486,8 @@
                     <%= Html.DropDownList("ddl_Account", null, new { style = "width:250px;" })%>
                 </div>
                 <div class="CustomCell" style="width: 565px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 545px;" name="txt_Details" maxlength="200" />
+                    <input id="test" type="text" class="CustomText" style="width: 545px;" name="txt_Details"
+                        maxlength="200" />
                 </div>
                 <div class="CustomCell" style="width: 118px; height: 30px;">
                     <input type="text" class="CustomText" style="width: 100px;" name="txt_Debit" maxlength="50" />
