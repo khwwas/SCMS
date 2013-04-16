@@ -21,9 +21,14 @@
                 format: 'm/d/Y'
             });
             $("[name=ddl_Account]").combobox();
-            var data = JSON.parse(document.getElementById('NarrationTitles').value);
+            var Titles = document.getElementById('NarrationTitles').value;
+            var data = "";
+            if (Titles != "") {
+                data = JSON.parse(Titles);
+            }
             $("[name=txt_Details]").autocomplete({ source: data });
             $("#btn_AddNewRow").click(function () {
+
                 var comboData = $("#AccountCodesList").val().split(',');
                 var htmlStr = "<div class='detailRow' style='float: left; width: auto;'>";
                 htmlStr += "<div class='CustomCell' style='width: 250px; height: 30px;'>";
