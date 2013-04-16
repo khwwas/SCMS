@@ -99,5 +99,16 @@ namespace SCMSDataLayer.Properties {
                 return ((string)(this["DA_GLConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=awais-pc\\mssql2008;Initial Catalog=GL;Persist Security Info=True;User" +
+            " ID=sa;Password=Door123")]
+        public string GLConnectionString {
+            get {
+                return ((string)(this["GLConnectionString"]));
+            }
+        }
     }
 }

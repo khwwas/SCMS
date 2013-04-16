@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="SCMS" Class="SCMSDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=WAQAS\KHAWAJAWAQAS;Initial Catalog=SCMS;Persist Security Info=True;User ID=sa" SettingsObjectName="SCMSDataLayer.Properties.Settings" SettingsPropertyName="SCMSConnectionString2" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="GL" Class="SCMSDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=awais-pc\mssql2008;Initial Catalog=GL;Persist Security Info=True;User ID=sa" SettingsObjectName="SCMSDataLayer.Properties.Settings" SettingsPropertyName="GLConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.GL_VchrDetail" Member="GL_VchrDetails">
     <Type Name="GL_VchrDetail">
       <Column Name="VchDet_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -51,7 +51,7 @@
       <Column Name="Mnu_Level" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Mnu_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Mnu_TargetUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
-      <Column Name="Mnu_IsLineBreak" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Mnu_IsLineBreak" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Mnu_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Mod_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Security_MenuOption_Security_UserRight" Member="Security_UserRights" ThisKey="Mnu_Id" OtherKey="Mnu_Id" Type="Security_UserRight" />
@@ -205,9 +205,7 @@
       <Column Name="CA_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CA_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="SETUP_Company_SETUP_CodeAnalysis1" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
-      <Association Name="SETUP_Company_SETUP_CodeAnalysis11" Member="SETUP_Company1" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
       <Association Name="SETUP_Location_SETUP_CodeAnalysis1" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
-      <Association Name="SETUP_Location_SETUP_CodeAnalysis11" Member="SETUP_Location1" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.SETUP_CodeAnalysis2" Member="SETUP_CodeAnalysis2s">
@@ -296,7 +294,6 @@
       <Association Name="SETUP_Company_SETUP_CalendarType" Member="SETUP_CalendarTypes" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_CalendarType" />
       <Association Name="SETUP_Company_SETUP_ChartOfAccount" Member="SETUP_ChartOfAccounts" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_ChartOfAccount" />
       <Association Name="SETUP_Company_SETUP_CodeAnalysis1" Member="SETUP_CodeAnalysis1s" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_CodeAnalysis1" />
-      <Association Name="SETUP_Company_SETUP_CodeAnalysis11" Member="SETUP_CodeAnalysis1s1" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_CodeAnalysis1" />
       <Association Name="SETUP_Company_SETUP_CodeAnalysis2" Member="SETUP_CodeAnalysis2s" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_CodeAnalysis2" />
       <Association Name="SETUP_Company_SETUP_CodeAnalysis3" Member="SETUP_CodeAnalysis3s" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_CodeAnalysis3" />
       <Association Name="SETUP_Company_SETUP_CodeAnalysis4" Member="SETUP_CodeAnalysis4s" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_CodeAnalysis4" />
@@ -495,7 +492,6 @@
       <Association Name="SETUP_Location_SETUP_CalendarType" Member="SETUP_CalendarTypes" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_CalendarType" />
       <Association Name="SETUP_Location_SETUP_ChartOfAccount" Member="SETUP_ChartOfAccounts" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_ChartOfAccount" />
       <Association Name="SETUP_Location_SETUP_CodeAnalysis1" Member="SETUP_CodeAnalysis1s" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_CodeAnalysis1" />
-      <Association Name="SETUP_Location_SETUP_CodeAnalysis11" Member="SETUP_CodeAnalysis1s1" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_CodeAnalysis1" />
       <Association Name="SETUP_Location_SETUP_CodeAnalysis2" Member="SETUP_CodeAnalysis2s" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_CodeAnalysis2" />
       <Association Name="SETUP_Location_SETUP_CodeAnalysis3" Member="SETUP_CodeAnalysis3s" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_CodeAnalysis3" />
       <Association Name="SETUP_Location_SETUP_CodeAnalysis4" Member="SETUP_CodeAnalysis4s" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_CodeAnalysis4" />
@@ -660,6 +656,9 @@
       <Column Name="Natr_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="Natr_Default" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Natr_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Natr_Abbreviation" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Natr_SystemTitle" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Natr_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="SYSTEM_Nature_SETUP_ChartOfAccount" Member="SETUP_ChartOfAccounts" ThisKey="Natr_Id" OtherKey="Natr_Id" Type="SETUP_ChartOfAccount" />
     </Type>
   </Table>
@@ -1044,60 +1043,4 @@
       <Column Name="VchMas_CrAmount" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
     </ElementType>
   </Function>
-<<<<<<< HEAD
-  <Function Name="dbo.sp_VoucherEntryConsole" Method="sp_VoucherEntryConsole">
-    <Parameter Name="AllLocation" Parameter="allLocation" Type="System.Int32" DbType="Int" />
-    <Parameter Name="LocationId" Parameter="locationId" Type="System.String" DbType="VarChar(1)" />
-    <Parameter Name="AllVoucherType" Parameter="allVoucherType" Type="System.Int32" DbType="Int" />
-    <Parameter Name="VoucherTypeId" Parameter="voucherTypeId" Type="System.String" DbType="VarChar(1)" />
-    <Parameter Name="AllDate" Parameter="allDate" Type="System.Int32" DbType="Int" />
-    <Parameter Name="DateFrom" Parameter="dateFrom" Type="System.String" DbType="VarChar(1)" />
-    <Parameter Name="DateTo" Parameter="dateTo" Type="System.String" DbType="VarChar(1)" />
-    <ElementType Name="sp_VoucherEntryConsoleResult">
-      <Column Name="Loc_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="VchrType_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="VchMas_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="VchMas_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="VchMas_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="VchMas_Remarks" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
-      <Column Name="VchMas_Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="TotalDrAmount" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
-      <Column Name="TotalCrAmount" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
-      <Column Name="DifferenceAmount" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.sp_GetUserMenuRights" Method="sp_GetUserMenuRights">
-    <Parameter Name="GroupId" Parameter="groupId" Type="System.String" DbType="VarChar(50)" />
-    <ElementType Name="sp_GetUserMenuRightsResult">
-      <Column Name="Mnu_Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="Mnu_Description" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="Mnu_TargetUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
-      <Column Name="Mnu_Level" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Mnu_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Mnu_IsLineBreak" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Mod_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="SelectedMenu" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.sp_GetLeaveTypesList" Method="sp_GetLeaveTypesList">
-    <ElementType Name="sp_GetLeaveTypesListResult">
-      <Column Name="LevTyp_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="LevTyp_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Cmp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="LevTyp_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="LevTyp_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="LevTyp_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="LevTyp_Abbreviation" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="LevTyp_Count" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="Loc_Id1" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Loc_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Cmp_Id1" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Loc_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="Loc_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Loc_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </ElementType>
-  </Function>
-=======
->>>>>>> 9c3c108a7526a64bb90639a0ee2067fa969479b8
 </Database>
