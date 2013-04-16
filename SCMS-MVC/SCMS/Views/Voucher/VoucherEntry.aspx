@@ -23,7 +23,7 @@
             $("[name=ddl_Account]").combobox();
             var Titles = document.getElementById('NarrationTitles').value;
             var data = "";
-            if (Titles != "") {
+            if (Titles != null && Titles != "") {
                 data = JSON.parse(Titles);
             }
             $("[name=txt_Details]").autocomplete({ source: data });
