@@ -392,6 +392,8 @@
                   {
                       foreach (SCMSDataLayer.DB.GL_VchrDetail row in voucherDetails)
                       {
+                          string Remarks = row.VchDet_Remarks.Replace("'", "&#39");
+                          
             %>
             <div class="detailRow" style="float: left; width: auto;">
                 <div class="CustomCell" style="width: 250px; height: 30px;">
@@ -399,7 +401,7 @@
                     <%= Html.DropDownList("ddl_Account", null, new { style = "width:250px;" })%>
                 </div>
                 <div class="CustomCell" style="width: 565px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 545px;" name="txt_Details" value='<%=row.VchDet_Remarks %>'
+                    <input type="text" class="CustomText" style="width: 545px;" name="txt_Details" value='<%=Remarks %>'
                         maxlength="200" />
                 </div>
                 <div class="CustomCell" style="width: 118px; height: 30px;">
