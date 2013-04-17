@@ -16,14 +16,14 @@ namespace SCMS.Reports.Reps {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class rptLedger_AccWise : ReportClass {
+    public class rptTrialBalance : ReportClass {
         
-        public rptLedger_AccWise() {
+        public rptTrialBalance() {
         }
         
         public override string ResourceName {
             get {
-                return "rptLedger_AccWise.rpt";
+                return "rptTrialBalance.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace SCMS.Reports.Reps {
         
         public override string FullResourceName {
             get {
-                return "SCMS.Reports.Reps.rptLedger_AccWise.rpt";
+                return "SCMS.Reports.Reps.rptTrialBalance.rpt";
             }
             set {
                 // Do nothing
@@ -66,7 +66,7 @@ namespace SCMS.Reports.Reps {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection2 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
             get {
                 return this.ReportDefinition.Sections[2];
             }
@@ -74,7 +74,7 @@ namespace SCMS.Reports.Reps {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
@@ -82,25 +82,9 @@ namespace SCMS.Reports.Reps {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection2 {
-            get {
-                return this.ReportDefinition.Sections[4];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
-            get {
-                return this.ReportDefinition.Sections[5];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public CrystalDecisions.CrystalReports.Engine.Section Section5 {
             get {
-                return this.ReportDefinition.Sections[6];
+                return this.ReportDefinition.Sections[4];
             }
         }
         
@@ -114,9 +98,9 @@ namespace SCMS.Reports.Reps {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedrptLedger_AccWise : Component, ICachedReport {
+    public class CachedrptTrialBalance : Component, ICachedReport {
         
-        public CachedrptLedger_AccWise() {
+        public CachedrptTrialBalance() {
         }
         
         [Browsable(false)]
@@ -153,7 +137,7 @@ namespace SCMS.Reports.Reps {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            rptLedger_AccWise rpt = new rptLedger_AccWise();
+            rptTrialBalance rpt = new rptTrialBalance();
             rpt.Site = this.Site;
             return rpt;
         }

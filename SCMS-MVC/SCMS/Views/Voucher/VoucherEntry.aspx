@@ -25,8 +25,9 @@
             var data = "";
             if (Titles != null && Titles != "") {
                 data = JSON.parse(Titles);
+                $("[name=txt_Details]").autocomplete({ source: data });
             }
-            $("[name=txt_Details]").autocomplete({ source: data });
+            
             $("#btn_AddNewRow").click(function () {
 
                 var comboData = $("#AccountCodesList").val().split(',');
