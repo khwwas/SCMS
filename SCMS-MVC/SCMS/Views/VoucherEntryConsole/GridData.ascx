@@ -78,13 +78,13 @@
                 <%=Convert.ToDateTime(DataRow.VchMas_Date).ToString("MM/dd/yyyy")%>
             </td>
             <td id="txt_TotalDrAmount" style="vertical-align: middle;">
-                <%=DataRow.TotalDrAmount%>
+                <%=string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N0}", Convert.ToInt32(DataRow.TotalDrAmount))%>
             </td>
             <td id="txt_TotalCrAmount" style="vertical-align: middle;">
-                <%=DataRow.TotalCrAmount%>
+                <%=string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N0}", Convert.ToInt32(DataRow.TotalCrAmount))%>
             </td>
             <td id="txt_DiffAmount" style="vertical-align: middle;">
-                <%=DataRow.DifferenceAmount%>
+                <%=string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N0}", Convert.ToInt32(DataRow.DifferenceAmount))%>
             </td>
             <td id="txt_Remarks<%=DataRow.VchMas_Id%>" style="vertical-align: middle;">
                 <%=DataRow.VchMas_Remarks%>
