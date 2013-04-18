@@ -26,6 +26,9 @@ namespace SCMS.Controllers
             var VoucherTypes = new DALVoucherType().GetAllData();
             var Locations = new DALLocation().GetAllLocation();
             var Voucher = new DALVoucherEntry().GetAllMasterRecords();
+            //if( ddl_VoucherType.
+            //var Voucher = new DALVoucherEntry().GetLastRecordByVchrType();
+            
             if (Voucher != null && Voucher.Count > 0)
             {
                 ViewData["Code"] = Voucher.Last().VchMas_Code;

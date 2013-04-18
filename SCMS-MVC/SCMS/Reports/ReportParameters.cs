@@ -54,5 +54,22 @@ namespace SCMS.Reports
             get;
             set;
         }
+
+        public static int AllDoc
+        {
+            get;
+            set;
+        }
+        public static string DocFrom
+        {
+            get;
+            set;
+        }
+        public static string DocTo
+        {
+            get;
+            set;
+        }
+
     }
 }

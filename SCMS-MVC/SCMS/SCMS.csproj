@@ -204,9 +204,14 @@
       <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Reports\Datasets\dsTrialBalance.Designer.cs">
-      <DependentUpon>dsTrialBalance.xsd</DependentUpon>
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsTrialBalance.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Datasets\dsVoucherDocument.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsVoucherDocument.xsd</DependentUpon>
     </Compile>
     <Compile Include="Reports\Datasets\dsVoucherTypes.Designer.cs">
       <DependentUpon>dsVoucherTypes.xsd</DependentUpon>
@@ -223,26 +228,49 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>rptCity.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\Reps\rptCompany.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>rptCompany.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\Reps\rptLedger_AccWise.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>rptLedger_AccWise.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\Reps\rptLedger_LocWise.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>rptLedger_LocWise.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\Reps\rptTrialBalance1.cs">
+    <Compile Include="Reports\Reps\rptLocation.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptLocation.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Reps\rptTrialBalance.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>rptTrialBalance.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Reps\rptVoucherDocument.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptVoucherDocument.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Reps\rptVoucherTypes.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptVoucherTypes.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="SystemParameters.cs" />
     <Compile Include="Reports\ReportParameters.cs" />
@@ -974,8 +1002,22 @@
     <Content Include="Views\CalendarType\GridData.ascx" />
     <Content Include="Views\Calendar\Calendar.aspx" />
     <Content Include="Views\Calendar\GridData.ascx" />
+    <Content Include="Views\ChartOfAccountModification\ChartOfAccountMod.aspx" />
+    <Content Include="Views\ChartOfAccountModification\GridData.ascx" />
     <Content Include="Views\City\City.aspx" />
     <Content Include="Views\City\GridData.ascx" />
+    <Content Include="Views\CodeAnalysis1\CodeAnalysis1.aspx" />
+    <Content Include="Views\CodeAnalysis1\GridData.ascx" />
+    <Content Include="Views\CodeAnalysis2\CodeAnalysis2.aspx" />
+    <Content Include="Views\CodeAnalysis2\GridData.ascx" />
+    <Content Include="Views\CodeAnalysis3\CodeAnalysis3.aspx" />
+    <Content Include="Views\CodeAnalysis3\GridData.ascx" />
+    <Content Include="Views\CodeAnalysis4\CodeAnalysis4.aspx" />
+    <Content Include="Views\CodeAnalysis4\GridData.ascx" />
+    <Content Include="Views\CodeAnalysis5\CodeAnalysis5.aspx" />
+    <Content Include="Views\CodeAnalysis5\GridData.ascx" />
+    <Content Include="Views\CodeAnalysis6\CodeAnalysis6.aspx" />
+    <Content Include="Views\CodeAnalysis6\GridData.ascx" />
     <Content Include="Views\Company\Company.aspx" />
     <Content Include="Views\ChartOfAccount\ChartOfAccount.aspx" />
     <Content Include="Views\ChartOfAccount\GridData.ascx" />
@@ -1679,6 +1721,17 @@
     <None Include="Reports\Datasets\dsTrialBalance.xss">
       <DependentUpon>dsTrialBalance.xsd</DependentUpon>
     </None>
+    <None Include="Reports\Datasets\dsVoucherDocument.xsc">
+      <DependentUpon>dsVoucherDocument.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\Datasets\dsVoucherDocument.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsVoucherDocument.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\Datasets\dsVoucherDocument.xss">
+      <DependentUpon>dsVoucherDocument.xsd</DependentUpon>
+    </None>
     <None Include="Reports\Datasets\dsVoucherTypes.xsc">
       <DependentUpon>dsVoucherTypes.xsd</DependentUpon>
     </None>
@@ -1810,7 +1863,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Reps\rptTrialBalance.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>rptTrialBalance1.cs</LastGenOutput>
+      <LastGenOutput>rptTrialBalance.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Reps\rptVoucherDocument.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

@@ -27,7 +27,7 @@
                 data = JSON.parse(Titles);
                 $("[name=txt_Details]").autocomplete({ source: data });
             }
-            
+
             $("#btn_AddNewRow").click(function () {
 
                 var comboData = $("#AccountCodesList").val().split(',');
@@ -208,7 +208,7 @@
                 ddl_VoucherType.focus();
                 return;
             }
-            else if (ddl_Status.value == "2" && (txt_Difference.value == "" || txt_Difference.value != "0")) {
+            else if (ddl_Status.value == "Approved" && (txt_Difference.value == "" || txt_Difference.value != "0")) {
                 FadeIn(MessageBox);
                 MessageBox.innerHTML = "<h5>Error!</h5><p>Debit and Credit values should be equal.</p>";
                 MessageBox.setAttribute("class", "message error");
@@ -313,9 +313,7 @@
             </div>
             <%if (ViewData["Code"] != null && ViewData["Code"] != "")
               { %>
-            <div class="CustomCell" style="width: 85px; height: 30px;">
-                Last Voucher</div>
-            <div class="CustomCell" style="width: 600px; height: 30px; font-family: Tahoma;">
+            <div class="CustomCell" style="width: 800px; height: 30px; font-family: Tahoma;">
                 <b>Voucher # :</b>
                 <%=ViewData["Code"]%>
                 <b>, Date : </b>
@@ -393,6 +391,8 @@
                   {
                       foreach (SCMSDataLayer.DB.GL_VchrDetail row in voucherDetails)
                       {
+                          string Remarks = row.VchDet_Remarks.Replace("'", "&#39");
+                          
             %>
             <div class="detailRow" style="float: left; width: auto;">
                 <div class="CustomCell" style="width: 250px; height: 30px;">
@@ -400,7 +400,7 @@
                     <%= Html.DropDownList("ddl_Account", null, new { style = "width:250px;" })%>
                 </div>
                 <div class="CustomCell" style="width: 565px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 545px;" name="txt_Details" value='<%=row.VchDet_Remarks %>'
+                    <input type="text" class="CustomText" style="width: 545px;" name="txt_Details" value='<%=Remarks %>'
                         maxlength="200" />
                 </div>
                 <div class="CustomCell" style="width: 118px; height: 30px;">
@@ -412,7 +412,7 @@
                     <%}
                       else
                       {%>
-                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Debit" value="<%=row.VchMas_DrAmount %>"
+                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Debit" value="<%=  Math.Round(Convert.ToDecimal(row.VchMas_DrAmount), 2) %>"
                         maxlength="50" />
                     <%} %>
                 </div>
@@ -424,7 +424,7 @@
                     <%}
                       else
                       { %>
-                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Credit" value="<%=row.VchMas_CrAmount %>"
+                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Credit" value="<%= Math.Round(Convert.ToDecimal(row.VchMas_CrAmount), 2) %>"
                         maxlength="50" />
                     <%} %>
                 </div>
@@ -487,7 +487,8 @@
                     <%= Html.DropDownList("ddl_Account", null, new { style = "width:250px;" })%>
                 </div>
                 <div class="CustomCell" style="width: 565px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 545px;" name="txt_Details" maxlength="200" />
+                    <input id="test" type="text" class="CustomText" style="width: 545px;" name="txt_Details"
+                        maxlength="200" />
                 </div>
                 <div class="CustomCell" style="width: 118px; height: 30px;">
                     <input type="text" class="CustomText" style="width: 100px;" name="txt_Debit" maxlength="50" />

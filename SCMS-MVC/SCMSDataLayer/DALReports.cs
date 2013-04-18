@@ -173,6 +173,64 @@ namespace SCMSDataLayer
         }
         #endregion
 
+        #region Voucher Document
+        public DataSet VoucherDocument(string ps_Location, int pi_AllDoc, string ps_DocFrom, string ps_DocTo,
+                                       int pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo)
+        {
+            SqlConnection con = new SqlConnection();
+            SqlCommand _cmd = new SqlCommand();
+            DataSet _ds = new DataSet();
+            string _Sql = "";
+
+            try
+            {
+                con = Connection.ReportConnection("Open");
+                if (con.State != System.Data.ConnectionState.Open)
+                {
+                    return null;
+                }
+
+                _Sql += "   Select GL_VchrMaster.VchMas_Id, ";
+                _Sql += "          GL_VchrMaster.VchMas_Code, ";
+                _Sql += "          GL_VchrMaster.VchMas_Date, ";
+                _Sql += "          SETUP_VoucherType.VchrType_Title, ";
+                _Sql += "          GL_VchrMaster.VchMas_Status, ";
+                _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Code, ";
+                _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Title, ";
+                _Sql += "          GL_VchrDetail.VchDet_Remarks, ";
+                _Sql += "          GL_VchrDetail.VchMas_DrAmount, ";
+                _Sql += "          GL_VchrDetail.VchMas_CrAmount ";
+                _Sql += "          From GL_VchrMaster, ";
+                _Sql += "          GL_VchrDetail, ";
+                _Sql += "          SETUP_VoucherType, ";
+                _Sql += "          SETUP_ChartOfAccount ";
+                _Sql += "          Where ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) And ";
+                _Sql += "          ( GL_VchrMaster.VchrType_Id = SETUP_VoucherType.VchrType_Id ) And ";
+                _Sql += "          ( GL_VchrDetail.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And ";
+                _Sql += "          ( GL_VchrMaster.Loc_Id = '" + ps_Location + "' ) And ";
+                _Sql += "          ( " + pi_AllDate + " = 1 Or Convert( datetime, Convert( Char, GL_VchrMaster.VchMas_Date, 103 ), 103 ) Between ";
+                _Sql += "                                      Convert( datetime, Convert( Char, '" + pdt_DateFrom.ToString() + "', 103 ), 103 ) And ";
+                _Sql += "                                      Convert( datetime, Convert( Char, '" + pdt_DateTo.ToString() + "', 103 ), 103 ) ) And ";
+                _Sql += "          ( " + pi_AllDoc + " = 1 Or GL_VchrMaster.VchMas_Id Between '" + ps_DocFrom + "' And '" + ps_DocTo + "' ) ";
+                //_Sql += "          ( SETUP_VoucherType.VchrType_Id = '' ) And ";
+                //_Sql += "          ( Lower( GL_VchrMaster.VchMas_Status ) = Lower( '' ) )  ";
+                _Sql += "          Order By GL_VchrMaster.VchMas_Date, ";
+                _Sql += "          GL_VchrDetail.VchDet_Id ";
+
+                SqlDataAdapter da = new SqlDataAdapter(_Sql, con);
+                da.Fill(_ds, "VoucherDocument");
+
+                Connection.ReportConnection("Close");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message.ToString());
+            }
+
+            return _ds;
+        }
+        #endregion
+
         #region Ledger Detail - Location Wise
         public DataSet LedgerDetail_LocWise(string ps_Location, int pi_AllAccCode, string ps_AccCodeFrom, string ps_AccCodeTo,
                                     int pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo)

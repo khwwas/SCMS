@@ -50,6 +50,20 @@
             if (ps_ReportName.toLowerCase() == "ChartOfAccount".toLowerCase()) {
                 document.getElementById('div_Level').style.display = "block";
             }
+            else if (ps_ReportName.toLowerCase() == "VoucherDocument".toLowerCase()) {
+                document.getElementById('div_Location').style.display = "block";
+                document.getElementById('div_VoucherTypes').style.display = "block";
+
+
+                document.getElementById('div_VchrDocFrom').style.display = "block";
+                document.getElementById('div_VchrDocTo').style.display = "block";
+                document.getElementById('ddl_VchrDocFrom').disabled = true;
+                document.getElementById('ddl_VchrDocTo').disabled = true;
+
+                document.getElementById('div_DateRange').style.display = "block";
+                document.getElementById('txt_DateFrom').disabled = true;
+                document.getElementById('txt_DateTo').disabled = true;
+            }
             else if (ps_ReportName.toLowerCase() == "LedgerDtLocWise".toLowerCase() ||
                      ps_ReportName.toLowerCase() == "LedgerDtAccWise".toLowerCase()) {
                 document.getElementById('div_Location').style.display = "block";
@@ -63,19 +77,7 @@
                 document.getElementById('txt_DateFrom').disabled = true;
                 document.getElementById('txt_DateTo').disabled = true;
             }
-            else if (ps_ReportName.toLowerCase() == "VoucherDoc".toLowerCase()) {
-                document.getElementById('div_VoucherTypes').style.display = "block";
 
-
-                document.getElementById('div_VchrDocFrom').style.display = "block";
-                document.getElementById('div_VchrDocTo').style.display = "block";
-                document.getElementById('ddl_VchrDocFrom').disabled = true;
-                document.getElementById('ddl_VchrDocTo').disabled = true;
-
-                document.getElementById('div_DateRange').style.display = "block";
-                document.getElementById('txt_DateFrom').disabled = true;
-                document.getElementById('txt_DateTo').disabled = true;
-            }
             else if (ps_ReportName.toLowerCase() == "TrialBalance".toLowerCase()) {
                 document.getElementById('div_Location').style.display = "block";
                 document.getElementById('div_AccCodeFrom').style.display = "block";
@@ -99,14 +101,34 @@
                 var pcnt_ChartOfAccount = document.getElementById('txt_Level');
                 ps_Url = "../ReportSelectionCriteria/SetParam_ChartOfAccount?ps_ReportName=" + ps_ReportName + "&pi_Level=" + pcnt_ChartOfAccount.value;
             }
-            else if (ps_ReportName.toLowerCase() == "VoucherDoc".toLowerCase()) {
+            else if (ps_ReportName.toLowerCase() == "VoucherDocument".toLowerCase()) {
                 var pcnt_Location = document.getElementById('ddl_location');
                 var pcnt_AllDate = document.getElementById('chk_AllDate');
                 var pcnt_DateFrom = document.getElementById('txt_DateFrom');
                 var pcnt_DateTo = document.getElementById('txt_DateTo');
-                var pcnt_AllAccCode = document.getElementById('chk_AllAccCode');
-                var pcnt_AccCodeFrom = document.getElementById('ddl_AccCodeFrom');
-                var pcnt_AccCodeTo = document.getElementById('ddl_AccCodeTo');
+                var pcnt_AllDoc = document.getElementById('chk_AllVchrDoc');
+                var pcnt_DocFrom = document.getElementById('ddl_VchrDocFrom');
+                var pcnt_DocTo = document.getElementById('ddl_VchrDocTo');
+
+                var li_AllDoc, li_AllDate;
+                               
+                if (pcnt_AllDoc.checked == true) {
+                    li_AllDoc = 1;
+                }
+                else {
+                    li_AllDoc = 0;
+                }
+
+                if (pcnt_AllDate.checked == true) {
+                    li_AllDate = 1;
+                }
+                else {
+                    li_AllDate = 0;
+                }
+
+                ps_Url = "../ReportSelectionCriteria/SetParam_VoucherDocument?ps_ReportName=" + ps_ReportName + "&ps_Location=" + pcnt_Location.value +
+                         "&pi_AllDoc=" + li_AllDoc.toString() + "&ps_DocFrom=" + pcnt_DocFrom.value + "&ps_DocTo=" + pcnt_DocTo.value +
+                         "&pi_AllDate=" + li_AllDate.toString() + "&pdt_DateFrom=" + pcnt_DateFrom.value + "&pdt_DateTo=" + pcnt_DateTo.value + "";
             }
             else if (ps_ReportName.toLowerCase() == "LedgerDtLocWise".toLowerCase() ||
                      ps_ReportName.toLowerCase() == "LedgerDtAccWise".toLowerCase()) {
@@ -171,7 +193,7 @@
                          "&pi_AllAccCode=" + li_AllCode.toString() + "&ps_AccCodeFrom=" + pcnt_AccCodeFrom.value + "&ps_AccCodeTo=" + pcnt_AccCodeTo.value +
                          "&pi_AllDate=" + li_AllDate.toString() + "&pdt_DateFrom=" + pcnt_DateFrom.value + "&pdt_DateTo=" + pcnt_DateTo.value + "";
             };
-//            alert(ps_Url);
+            //            alert(ps_Url);
             $.ajax({
                 type: "GET",
                 url: ps_Url,

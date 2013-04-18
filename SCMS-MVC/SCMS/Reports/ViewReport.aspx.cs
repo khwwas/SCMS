@@ -273,6 +273,48 @@ namespace SCMS.Reports
                 #endregion
                 #endregion
 
+                #region Voucher Document
+                else if (ls_ReportName.ToLower() == "VoucherDocument".ToLower())
+                {
+
+                    _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptVoucherDocument.rpt");
+                    Datasets.dsVoucherDocument _dsVoucherDocument = new Datasets.dsVoucherDocument();
+                    string ls_Location = "", ls_DocFrom = "", ls_DocTo = "";
+                    int li_AllDoc = 0, li_AllDate = 0;
+                    DateTime ldt_DateFrom, ldt_Dateto;
+
+                    ls_Location = SCMS.Reports.ReportParameters.Location;
+                    li_AllDoc = SCMS.Reports.ReportParameters.AllDoc;
+                    ls_DocFrom = SCMS.Reports.ReportParameters.DocFrom;
+                    ls_DocTo = SCMS.Reports.ReportParameters.DocTo;
+                    li_AllDate = SCMS.Reports.ReportParameters.AllDate;
+                    ldt_DateFrom = SCMS.Reports.ReportParameters.DateFrom;
+                    ldt_Dateto = SCMS.Reports.ReportParameters.DateTo;
+
+                    if (_dsVoucherDocument.Tables.Contains("Logo"))
+                    {
+                        _dsVoucherDocument.Tables.Remove("Logo");
+                    }
+
+                    if (_dsVoucherDocument.Tables.Contains("VoucherDocument"))
+                    {
+                        _dsVoucherDocument.Tables.Remove("VoucherDocument");
+                    }
+
+                    _ds = _dalReports.VoucherDocument(ls_Location, li_AllDoc, ls_DocFrom, ls_DocTo, li_AllDate, ldt_DateFrom, ldt_Dateto);
+                    _dsVoucherDocument.Tables.Add(_ds.Tables[0].Copy());
+                    _dsVoucherDocument.Tables[0].TableName = "VoucherDocument";
+
+                    if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
+                    {
+                        MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
+                        return;
+                    }
+
+                    _ReportDocument.SetDataSource(_dsVoucherDocument);
+                    _ReportDocument.SummaryInfo.ReportTitle = "Voucher";
+                }
+                #endregion
                 #region Ledger Detail - Location Wise
                 else if (ls_ReportName.ToLower() == "LedgerDtLocWise".ToLower())
                 {

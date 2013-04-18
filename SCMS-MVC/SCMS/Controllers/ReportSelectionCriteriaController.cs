@@ -49,6 +49,45 @@ namespace SCMS.Controllers
         }
         #endregion
 
+        #region VoucherDocument
+        public string SetParam_VoucherDocument(string ps_ReportName, string ps_Location, string pi_AllDoc, string ps_DocFrom, string ps_DocTo, 
+                                               string pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo)
+        {
+            ResetParameters();
+            Reports.ReportParameters.ReportName = ps_ReportName;
+            Reports.ReportParameters.Location = ps_Location;
+
+            if (pi_AllDoc == "1")
+            {
+
+                Reports.ReportParameters.AllDoc = 1;
+                Reports.ReportParameters.DocFrom = "";
+                Reports.ReportParameters.DocTo = "";
+            }
+            else
+            {
+                Reports.ReportParameters.AllDoc = 0;
+                Reports.ReportParameters.DocFrom = ps_DocFrom;
+                Reports.ReportParameters.DocTo = ps_DocTo;
+            }
+
+            if (pi_AllDate == "1")
+            {
+                Reports.ReportParameters.AllDate = 1;
+                Reports.ReportParameters.DateFrom = Convert.ToDateTime("01/01/1900");
+                Reports.ReportParameters.DateTo = Convert.ToDateTime("01/01/1900");
+            }
+            else
+            {
+                Reports.ReportParameters.AllDate = 0;
+                Reports.ReportParameters.DateFrom = pdt_DateFrom;
+                Reports.ReportParameters.DateTo = pdt_DateTo;
+            }
+
+            return "OK";
+        }
+        #endregion
+
         #region Ledger Datail
         public string SetParam_LedgerDetail(String ps_ReportName, String ps_Location, string pi_AllAccCode, string ps_AccCodeFrom, string ps_AccCodeTo,
                                               string pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo)
