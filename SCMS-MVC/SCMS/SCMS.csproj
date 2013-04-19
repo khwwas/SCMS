@@ -203,6 +203,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="Reports\Datasets\dsTrialBalance.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsTrialBalance.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Datasets\dsVoucherDocument.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -248,6 +253,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>rptLocation.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Reps\rptTrialBalance.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptTrialBalance.rpt</DependentUpon>
     </Compile>
     <Compile Include="Reports\Reps\rptVoucherDocument.cs">
       <AutoGen>True</AutoGen>
@@ -1699,6 +1709,17 @@
     <None Include="Reports\Datasets\dsLocation.xss">
       <DependentUpon>dsLocation.xsd</DependentUpon>
     </None>
+    <None Include="Reports\Datasets\dsTrialBalance.xsc">
+      <DependentUpon>dsTrialBalance.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\Datasets\dsTrialBalance.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsTrialBalance.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\Datasets\dsTrialBalance.xss">
+      <DependentUpon>dsTrialBalance.xsd</DependentUpon>
+    </None>
     <None Include="Reports\Datasets\dsVoucherDocument.xsc">
       <DependentUpon>dsVoucherDocument.xsd</DependentUpon>
     </None>
@@ -1838,6 +1859,10 @@
     <EmbeddedResource Include="Reports\Reps\rptLocation.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptLocation.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Reps\rptTrialBalance.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptTrialBalance.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Reps\rptVoucherDocument.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
