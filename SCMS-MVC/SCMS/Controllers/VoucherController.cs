@@ -26,19 +26,6 @@ namespace SCMS.Controllers
             var VoucherTypes = new DALVoucherType().GetAllData();
             var Locations = new DALLocation().GetAllLocation();
             var Voucher = new DALVoucherEntry().GetAllMasterRecords();
-            //if( ddl_VoucherType.
-            //var Voucher = new DALVoucherEntry().GetLastRecordByVchrType();
-            
-            if (Voucher != null && Voucher.Count > 0)
-            {
-                ViewData["Code"] = Voucher.Last().VchMas_Code;
-                ViewData["Date"] = Voucher.Last().VchMas_Date != null ? Convert.ToDateTime(Voucher.Last().VchMas_Date).ToShortDateString() : "";
-                ViewData["Status"] = Voucher.Last().VchMas_Status;
-            }
-            //sp_GetVoucherTypesListResult Select = new sp_GetVoucherTypesListResult();
-            //Select.VchrType_Id = "0";
-            //Select.VchrType_Title = "";
-            //VoucherTypes.Insert(0, Select);
 
             ViewData["ddl_VoucherType"] = new SelectList(VoucherTypes, "VchrType_Id", "VchrType_Title", Session["VoucherTypeForVoucherEntry"]);
             var ChartOfAccounts = new DALChartOfAccount().GetChartOfAccountForDropDown();
@@ -160,6 +147,26 @@ namespace SCMS.Controllers
             return Response;
         }
 
+        public String GetLastRecordByVoucherTypeId(string VoucherTypeId)
+        {
+            var Voucher = new DALVoucherEntry().GetLastRecordByVchrType(VoucherTypeId);
+            String LastVoucher = "";
+            if (Voucher != null && Voucher.Count > 0)
+            {
+                LastVoucher += "<div class='CustomCell' style='width: 800px; height: 30px; font-family: Tahoma;'>";
+                LastVoucher += "<b>Voucher # :</b>";
+                LastVoucher += Voucher.Last().VchMas_Code;
+                LastVoucher += "<b>, Date : </b>";
+                LastVoucher += Voucher.Last().VchMas_Date != null ? Convert.ToDateTime(Voucher.Last().VchMas_Date).ToShortDateString() : "";
+                LastVoucher += "<b>, Status : </b>";
+                LastVoucher += Voucher.Last().VchMas_Status;
+                LastVoucher += "</div>";
+                LastVoucher += "<div class='Clear' style='border-bottom: 1px solid #ccc; margin-bottom: 5px;'>";
+                LastVoucher += "</div>";
+            }
+            return LastVoucher;
+        }
+
         //public ActionResult SaveVoucher(String VoucherMasterCode, DateTime VoucherDate, string Status, String VoucherType, String LocationId, String Remarks, String[] VoucherDetailRows)
         [HttpPost]
         [AcceptVerbs(HttpVerbs.Post)]
@@ -241,8 +248,8 @@ namespace SCMS.Controllers
                                 GL_Detail.VchDet_Id = VoucherDetailCode;
                                 GL_Detail.VchMas_Id = VoucherMasterCode;
                                 GL_Detail.ChrtAcc_Id = Columns[0].ToString(); //Columns[0] has AccountId from Account Title drop down;
-                                GL_Detail.VchMas_DrAmount = (Columns[1] != null && Columns[1] != "") ? Convert.ToDecimal(Columns[1]) : 0; // Columns[1] has Debit Amount
-                                GL_Detail.VchMas_CrAmount = (Columns[2] != null && Columns[2] != "") ? Convert.ToDecimal(Columns[2]) : 0; // Columns[2] has Debit Amount
+                                GL_Detail.VchMas_DrAmount = (Columns[1] != null && Columns[1] != "") ? Convert.ToDecimal(Columns[1].Replace(",", "")) : 0; // Columns[1] has Debit Amount
+                                GL_Detail.VchMas_CrAmount = (Columns[2] != null && Columns[2] != "") ? Convert.ToDecimal(Columns[2].Replace(",", "")) : 0; // Columns[2] has Debit Amount
                                 GL_Detail.VchDet_Remarks = (Columns[3] != null && Columns[3] != "") ? Columns[3].ToString() : ""; // Columns[3] has Remarks
                                 objDalVoucherEntry.SaveVoucherDetail(GL_Detail);
                             }

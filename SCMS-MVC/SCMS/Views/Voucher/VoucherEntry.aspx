@@ -17,6 +17,7 @@
     </style>
     <script type="text/javascript">
         $(document).ready(function () {
+            GetLastVoucherByTypeId();
             $('#txt_Date').Zebra_DatePicker({
                 format: 'm/d/Y'
             });
@@ -72,7 +73,7 @@
                     var sum = 0;
                     $("input[name=txt_Debit]").each(function () {
                         if ($(this).val() != "") {
-                            sum += parseFloat($(this).val());
+                            sum += parseFloat($(this).val().replace(/\,/g, ''));
                         }
                     });
                     $("#txt_TotalDebit").val(sum);
@@ -80,7 +81,7 @@
                     sum = 0;
                     $("input[name=txt_Credit]").each(function () {
                         if ($(this).val() != "") {
-                            sum += parseFloat($(this).val());
+                            sum += parseFloat($(this).val().replace(/\,/g, ''));
                         }
                     });
                     $("#txt_TotalCredit").val(sum);
@@ -97,15 +98,26 @@
                         $("#txt_TotalCredit").css("color", "red");
                     }
 
-                    $("#txt_Difference").val(parseFloat($("#txt_TotalDebit").val()) - parseFloat($("#txt_TotalCredit").val()));
+                    $("#txt_Difference").val(parseFloat($("#txt_TotalDebit").val().replace(',', '')) - parseFloat($("#txt_TotalCredit").val().replace(',', '')));
                     if ($("#txt_Difference").val() < 0) {
-                        $("#txt_Difference").val(parseFloat($("#txt_TotalCredit").val()) - parseFloat($("#txt_TotalDebit").val()));
+                        $("#txt_Difference").val(parseFloat($("#txt_TotalCredit").val().replace(',', '')) - parseFloat($("#txt_TotalDebit").val().replace(',', '')));
                     }
                     if ($("#txt_Difference").val() > 0) {
                         $("#txt_Difference").css("color", "red");
                     }
 
+                    $("#txt_TotalDebit").val(formatCurrency($("#txt_TotalDebit").val()));
+                    $("#txt_TotalCredit").val(formatCurrency($("#txt_TotalCredit").val()));
+                    $("#txt_Difference").val(formatCurrency($("#txt_Difference").val()));
                 });
+
+                $(".detailRow").last().find("[name=txt_Debit],[name=txt_Credit]").keyup(function () {
+                    $(this).val(formatCurrency($(this).val()));
+                });
+            });
+
+            $("input[name=txt_Debit],input[name=txt_Credit]").keyup(function () {
+                $(this).val(formatCurrency($(this).val()));
             });
 
             $("input[name=txt_Debit],input[name=txt_Credit]").blur(function () {
@@ -133,7 +145,7 @@
                 var sum = 0;
                 $("input[name=txt_Debit]").each(function () {
                     if ($(this).val() != "") {
-                        sum += parseFloat($(this).val());
+                        sum += parseFloat($(this).val().replace(/\,/g, ''));
                     }
                 });
                 $("#txt_TotalDebit").val(sum);
@@ -141,7 +153,7 @@
                 sum = 0;
                 $("input[name=txt_Credit]").each(function () {
                     if ($(this).val() != "") {
-                        sum += parseFloat($(this).val());
+                        sum += parseFloat($(this).val().replace(/\,/g, ''));
                     }
                 });
                 $("#txt_TotalCredit").val(sum);
@@ -158,18 +170,53 @@
                     $("#txt_TotalCredit").css("color", "red");
                 }
 
-                $("#txt_Difference").val(parseFloat($("#txt_TotalDebit").val()) - parseFloat($("#txt_TotalCredit").val()));
+                $("#txt_Difference").val(parseFloat($("#txt_TotalDebit").val().replace(',', '')) - parseFloat($("#txt_TotalCredit").val().replace(',', '')));
                 if ($("#txt_Difference").val() < 0) {
-                    $("#txt_Difference").val(parseFloat($("#txt_TotalCredit").val()) - parseFloat($("#txt_TotalDebit").val()));
+                    $("#txt_Difference").val(parseFloat($("#txt_TotalCredit").val().replace(',', '')) - parseFloat($("#txt_TotalDebit").val().replace(',', '')));
                 }
                 if ($("#txt_Difference").val() > 0) {
                     $("#txt_Difference").css("color", "red");
                 }
-
+                $("#txt_TotalDebit").val(formatCurrency($("#txt_TotalDebit").val()));
+                $("#txt_TotalCredit").val(formatCurrency($("#txt_TotalCredit").val()));
+                $("#txt_Difference").val(formatCurrency($("#txt_Difference").val()));
             });
 
         });
 
+        function formatCurrency(num) {
+            var num = String(num), fnum = new Array();
+            num = num.match(/\d/g).reverse();
+            i = 1;
+            $.each(num, function (k, v) {
+                fnum.push(v);
+                if (i % 3 == 0) {
+                    if (k < (num.length - 1)) {
+                        fnum.push(",");
+                    }
+                }
+                i++;
+            });
+            fnum = fnum.reverse().join("");
+            return (fnum);
+        }
+
+        function GetLastVoucherByTypeId() {
+            $.ajax({
+                type: "GET",
+                url: "../Voucher/GetLastRecordByVoucherTypeId?VoucherTypeId=" + $("#ddl_VoucherType").val(),
+                success: function (response) {
+                    $("#LastVoucherContainer").html(response);
+                    $("#txt_Date").next().remove("style");
+                    if (response == "") {
+                        $("#txt_Date").next().attr("style", "left: 707.483px; top: 179.6px; display: block;");
+                    }
+                    else {
+                        $("#txt_Date").next().attr("style", "left: 707.483px; top: 220.6px; display: block;");
+                    }
+                }
+            });
+        }
         function SaveVoucher() {
             var MessageBox = document.getElementById('MessageBox');
             var txt_SelectedMasterCode = document.getElementById("txt_SelectedMasterCode");
@@ -289,6 +336,7 @@
                         document.getElementById("Waiting_Image").style.display = "none";
                         document.getElementById("btn_Save").style.display = "block";
                         scroll(0, 0);
+                        GetLastVoucherByTypeId()
                         FadeOut(MessageBox);
                     }
                 });
@@ -311,19 +359,8 @@
         <div class="block">
             <div id="MessageBox">
             </div>
-            <%if (ViewData["Code"] != null && ViewData["Code"] != "")
-              { %>
-            <div class="CustomCell" style="width: 800px; height: 30px; font-family: Tahoma;">
-                <b>Voucher # :</b>
-                <%=ViewData["Code"]%>
-                <b>, Date : </b>
-                <%=ViewData["Date"]%>
-                <b>, Status : </b>
-                <%=ViewData["Status"]%>
+            <div id="LastVoucherContainer">
             </div>
-            <div class="Clear" style="border-bottom: 1px solid #ccc; margin-bottom: 5px;">
-            </div>
-            <%} %>
             <div class="CustomCell" style="width: 97px; height: 30px;">
                 Code</div>
             <div class="CustomCell" style="width: 320px; height: 30px;">
@@ -350,7 +387,7 @@
         <div class="CustomCell" style="width: 97px; height: 30px;">
             Voucher Type</div>
         <div class="CustomCell" style="width: 270px; height: 30px;">
-            <%= Html.DropDownList("ddl_VoucherType", null, new { style = "width:955px;"})%>
+            <%= Html.DropDownList("ddl_VoucherType", null, new { style = "width:955px;", onchange = "GetLastVoucherByTypeId()" })%>
         </div>
         <div class="Clear">
         </div>
@@ -412,7 +449,7 @@
                     <%}
                       else
                       {%>
-                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Debit" value="<%=  Math.Round(Convert.ToDecimal(row.VchMas_DrAmount), 2) %>"
+                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Debit" value="<%= string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N0}", Convert.ToInt32(row.VchMas_DrAmount)) %>"
                         maxlength="50" />
                     <%} %>
                 </div>
@@ -424,7 +461,7 @@
                     <%}
                       else
                       { %>
-                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Credit" value="<%= Math.Round(Convert.ToDecimal(row.VchMas_CrAmount), 2) %>"
+                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Credit" value="<%= string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N0}", Convert.ToInt32(row.VchMas_CrAmount)) %>"
                         maxlength="50" />
                     <%} %>
                 </div>
@@ -433,7 +470,11 @@
                   }
             %>
             <script type="text/javascript">
+                document.getElementById("ddl_Status").value = '<%=ViewData["Status"] %>';
+                document.getElementById("ddl_VoucherType").value = '<%=ViewData["VoucherType"] %>';
+                document.getElementById("ddl_Location").value = '<%=ViewData["LocationId"] %>';
                 $(document).ready(function () {
+
                     if ($("#txt_TotalDebit").val() == "") {
                         $("#txt_TotalDebit").val("0");
                     }
@@ -444,7 +485,7 @@
                     var sum = 0;
                     $("input[name=txt_Debit]").each(function () {
                         if ($(this).val() != "") {
-                            sum += parseFloat($(this).val());
+                            sum += parseFloat($(this).val().replace(/\,/g, ''));
                         }
                     });
                     $("#txt_TotalDebit").val(sum);
@@ -452,7 +493,7 @@
                     sum = 0;
                     $("input[name=txt_Credit]").each(function () {
                         if ($(this).val() != "") {
-                            sum += parseFloat($(this).val());
+                            sum += parseFloat($(this).val().replace(/\,/g, ''));
                         }
                     });
                     $("#txt_TotalCredit").val(sum);
@@ -469,13 +510,16 @@
                         $("#txt_TotalCredit").css("color", "red");
                     }
 
-                    $("#txt_Difference").val(parseFloat($("#txt_TotalDebit").val()) - parseFloat($("#txt_TotalCredit").val()));
+                    $("#txt_Difference").val(parseFloat($("#txt_TotalDebit").val().replace(',', '')) - parseFloat($("#txt_TotalCredit").val().replace(',', '')));
                     if ($("#txt_Difference").val() < 0) {
-                        $("#txt_Difference").val(parseFloat($("#txt_TotalCredit").val()) - parseFloat($("#txt_TotalDebit").val()));
+                        $("#txt_Difference").val(parseFloat($("#txt_TotalCredit").val().replace(',', '')) - parseFloat($("#txt_TotalDebit").val().replace(',', '')));
                     }
                     if ($("#txt_Difference").val() > 0) {
                         $("#txt_Difference").css("color", "red");
                     }
+                    $("#txt_TotalDebit").val(formatCurrency($("#txt_TotalDebit").val()));
+                    $("#txt_TotalCredit").val(formatCurrency($("#txt_TotalCredit").val()));
+                    $("#txt_Difference").val(formatCurrency($("#txt_Difference").val()));
                 });
 
             </script>
