@@ -16,6 +16,14 @@
             var txt_StTime = document.getElementById('txt_StartTime');
             var txt_EdTime = document.getElementById('txt_EndTime');
 
+            var txt_BreakStTime = document.getElementById('txt_BreakStartTime');
+            var txt_BreakEdTime = document.getElementById('txt_BreakEndTime');
+            var txt_BreakDuration = document.getElementById('txt_BreakDuration');
+
+            var txt_GraceIn = document.getElementById('txt_GraceIn');
+            var txt_GraceEarly = document.getElementById('txt_GraceEarly');
+
+
             if (txt_Title.value == "") {
                 FadeIn(lcnt_MessageBox);
                 lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! Enter Title</p>";
@@ -48,9 +56,27 @@
                 FadeOut(lcnt_MessageBox);
                 txt_Title.focus();
                 return;
-            } else {
+            }
+            else if (txt_BreakStTime.value == "") {
+                FadeIn(lcnt_MessageBox);
+                lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! Enter Break Start Time</p>";
+                lcnt_MessageBox.setAttribute("class", "message error");
+                scroll(0, 0);
+                FadeOut(lcnt_MessageBox);
+                txt_Title.focus();
+                return;
+            }
+            else if (txt_BreakEdTime.value == "") {
+                FadeIn(lcnt_MessageBox);
+                lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! Enter Break End Time</p>";
+                lcnt_MessageBox.setAttribute("class", "message error");
+                scroll(0, 0);
+                FadeOut(lcnt_MessageBox);
+                txt_Title.focus();
+                return;
+            }else {
                 var Url = document.getElementById('frm_ShiftSetup').action;
-                Url += "Shift/SaveRecord?Code=" + lcnt_txtSelectedCode.value + "&Title=" + txt_Title.value + "&Abbreviation=" + txt_Abbreviation.value + "&StartTime=" + txt_StTime.value + "&EndTime=" + txt_EdTime.value;
+                Url += "Shift/SaveRecord?Code=" + lcnt_txtSelectedCode.value + "&Title=" + txt_Title.value + "&Abbreviation=" + txt_Abbreviation.value + "&StartTime=" + txt_StTime.value + "&EndTime=" + txt_EdTime.value + "&BreakStartTime=" + txt_BreakStTime.value + "&BreakEndTime=" + txt_BreakEdTime.value + "&BreakDuration=" + txt_BreakDuration.value + "&GraceIn=" + txt_GraceIn.value + "&GraceEarly=" + txt_GraceEarly.value;
                 document.getElementById("Waiting_Image").style.display = "block";
                 document.getElementById("btn_Save").style.display = "none";
                 $.ajax({
@@ -96,16 +122,40 @@
             document.getElementById('txt_Abbreviation').value = "";
             document.getElementById('txt_StartTime').value = "";
             document.getElementById('txt_EndTime').value = "";
+
+            document.getElementById('txt_BreakStartTime').value = "";
+            document.getElementById('txt_BreakEndTime').value = "";
+
+            document.getElementById('txt_BreakDuration').value = "";
+            document.getElementById('txt_GraceIn').value = 1;
+            document.getElementById('txt_GraceEarly').value = 1;
         }
 
         function EditRecord(Id) {
-            document.getElementById('txt_SelectedCode').value = Id;
-            document.getElementById('txt_Code').value = Id;
+           document.getElementById('txt_SelectedCode').value = Id;
+           document.getElementById('txt_Code').value = Id;
            document.getElementById('txt_Title').value = document.getElementById('txt_Title' + Id).innerHTML.trim().toString().replace("&nbsp", "");
            document.getElementById('txt_Abbreviation').value = document.getElementById('txt_Abbreviation' + Id).innerHTML.trim().toString().replace("&nbsp", "");
            document.getElementById('txt_StartTime').value = document.getElementById('txt_StartTime' + Id).innerHTML.trim().toString().replace("&nbsp", "");
            document.getElementById('txt_EndTime').value = document.getElementById('txt_EndTime' + Id).innerHTML.trim().toString().replace("&nbsp", "");
-          
+
+           document.getElementById('txt_BreakStartTime').value = document.getElementById('txt_BreakStartTime' + Id).innerHTML.trim().toString().replace("&nbsp", "");
+           document.getElementById('txt_BreakEndTime').value = document.getElementById('txt_BreakEndTime' + Id).innerHTML.trim().toString().replace("&nbsp", "");
+           document.getElementById('txt_BreakDuration').value = document.getElementById('txt_BreakDuration' + Id).innerHTML.trim().toString().replace("&nbsp", "");
+
+           if (document.getElementById('txt_GraceIn' + Id).value == "") {
+               document.getElementById('txt_GraceIn').value = "1";
+           }
+           else {
+               document.getElementById('txt_GraceIn').value = document.getElementById('txt_GraceIn' + Id).value;
+           }
+
+           if (document.getElementById('txt_GraceEarly' + Id).value == "") {
+               document.getElementById('txt_GraceEarly').value = "1";
+           }
+           else {
+               document.getElementById('txt_GraceEarly').value = document.getElementById('txt_GraceEarly' + Id).value;
+           }
             scroll(0, 0);
         }
 
@@ -147,6 +197,13 @@
             }
         }
 
+        function ValuePlus(id) {
+            var val = $('#' + id).val();
+            if (parseInt(val) < 100) {
+                document.getElementById(id).value = parseInt(val) + 1;
+            }
+        }
+
     </script>
     
     <form id="frm_ShiftSetup" action='<%=Url.Content("~/") %>'>
@@ -178,7 +235,7 @@
            
             <div class="CustomCell" style="width: 115px; height: 30px;">
                Start Time</div>
-            <div class="CustomCell" style="width: 250px; height: 30px;margin-left:0;">
+            <div class="CustomCell" style="width: 215px; height: 30px;margin-left:0;">
                  <div class="input-append bootstrap-timepicker">
                     <input id="txt_StartTime" name="txt_StartTime" type="text" class="input-small">
                     <span class="add-on"><i class="icon-time"></i></span>
@@ -189,17 +246,150 @@
 
             <div class="CustomCell" style="width: 107px; height: 30px;">
                End Time</div>
-            <div class="CustomCell" style="width: 250px; height: 30px;">
+            <div class="CustomCell" style="width: 215px; height: 30px;">
                 <div class="input-append bootstrap-timepicker">
                     <input id="txt_EndTime" name="txt_EndTime" type="text" class="input-small">
                     <span class="add-on"><i class="icon-time"></i></span>
                  </div>
             </div>
 
+             <div class="Clear">
+            </div>
+
+            <div class="CustomCell" style="width: 115px; height: 30px;">
+              Break Start Time</div>
+            <div class="CustomCell" style="width: 215px; height: 30px;margin-left:0;">
+                 <div class="input-append bootstrap-timepicker">
+                    <input id="txt_BreakStartTime" name="txt_BreakStartTime" type="text" class="input-small">
+                    <span class="add-on"><i class="icon-time"></i></span>
+                 </div>
+            </div>
+
+            <div class="CustomCell" style="width: 107px; height: 30px;">
+               Break End Time</div>
+            <div class="CustomCell" style="width: 215px; height: 30px;">
+                <div class="input-append bootstrap-timepicker">
+                    <input id="txt_BreakEndTime" name="txt_BreakEndTime" type="text" class="input-small">
+                    <span class="add-on"><i class="icon-time"></i></span>
+                 </div>
+            </div>
+
+            <div class="CustomCell" style="width: 107px; height: 30px;">
+               Break Duration</div>
+            <div class="CustomCell" style="width: 215px; height: 30px;">
+                <div class="input-append">
+                    <input id="txt_BreakDuration" name="txt_BreakDuration" type="text" class="input-small" readonly="readonly">
+                 </div>
+            </div>
+
+             <div class="Clear">
+             </div>
+
+             <div class="CustomCell" style="width: 113px;">
+                Grace In</div>
+            <div class="CustomCell" style="width: 42px;">
+                <input type="text" class="CustomText" id="txt_GraceIn" name="txt_GraceIn"
+                    maxlength="3" style="width: 35px; border-right: 0px;" value="1" disabled="disabled" />
+            </div>
+             <div class="CustomCell" style="border: 1px solid #ccc; width: 20px; height: 28px;
+                margin-right: 12px;">
+                <div style="background-image: url('../../img/ArrowUp.png'); background-position: center;
+                    height: 14px; background-repeat: no-repeat; cursor: pointer;" onclick="ValuePlus('txt_GraceIn');">
+                    &nbsp;
+                </div>
+                <div style="background-image: url('../../img/ArrowDown.png'); background-position: center;
+                    height: 14px; background-repeat: no-repeat; cursor: pointer;" onclick="ValueMinus('txt_GraceIn');">
+                    &nbsp;
+                </div>
+            </div>
+
+
+             <div class="CustomCell" style="width: 107px;margin-left:139px;">
+                Grace Early</div>
+            <div class="CustomCell" style="width: 42px;">
+                <input type="text" class="CustomText" id="txt_GraceEarly" name="txt_GraceEarly"
+                    maxlength="3" style="width: 35px; border-right: 0px;" value="1" disabled="disabled" />
+            </div>
+             <div class="CustomCell" style="border: 1px solid #ccc; width: 20px; height: 28px;
+                margin-right: 12px;">
+                <div style="background-image: url('../../img/ArrowUp.png'); background-position: center;
+                    height: 14px; background-repeat: no-repeat; cursor: pointer;" onclick="ValuePlus('txt_GraceEarly');">
+                    &nbsp;
+                </div>
+                <div style="background-image: url('../../img/ArrowDown.png'); background-position: center;
+                    height: 14px; background-repeat: no-repeat; cursor: pointer;" onclick="ValueMinus('txt_GraceEarly');">
+                    &nbsp;
+                </div>
+            </div>
 
             <script type="text/javascript">
-                $('#txt_StartTime').timepicker();
-                $('#txt_EndTime').timepicker();
+                $('#txt_StartTime').timepicker({
+                    showSeconds: false,
+                    showMeridian: true
+                });
+
+                $('#txt_EndTime').timepicker({
+                    showSeconds: false,
+                    showMeridian: true
+                });
+
+                $('#txt_BreakStartTime').timepicker({
+                    showSeconds: false,
+                    showMeridian: true
+                }).on('changeTime.timepicker', function (ev) {
+                    var endTime = $('#txt_BreakEndTime').data("timepicker").getTime();
+                    var stTime = $('#txt_BreakStartTime').data("timepicker").getTime();
+                    if (stTime==endTime) {
+                        document.getElementById('txt_BreakDuration').value = "00:00:00";
+                    } else {
+                        document.getElementById('txt_BreakDuration').value = timespan3(stTime, endTime);
+                    }
+                });
+
+                $('#txt_BreakEndTime').timepicker({
+                    showSeconds: false,
+                    showMeridian: true
+                }).on('changeTime.timepicker', function (ev) {
+                    var endTime = $('#txt_BreakEndTime').data("timepicker").getTime();
+                    var stTime = $('#txt_BreakStartTime').data("timepicker").getTime();
+                    if (stTime==endTime) {
+                        document.getElementById('txt_BreakDuration').value = "00:00:00";
+                    } else {
+                        document.getElementById('txt_BreakDuration').value = timespan3(stTime, endTime);
+                    }
+                });
+
+
+                function timespan3(st, ed) {
+
+                    var timeStart = new Date("01/01/2007 " + st);
+                    var timeEnd = new Date("01/01/2007 " + ed);
+
+                    var hh = timeStart.getHours();
+                    var mn = timeStart.getMinutes();
+                    var ss = timeStart.getSeconds();
+
+                    var hh2 = timeEnd.getHours();
+                    var mn2 = timeEnd.getMinutes();
+                    var ss2 = timeEnd.getSeconds();
+
+                    var h = hh2-hh;
+                    var m = mn2-mn;
+                    var s = ss2 - ss;
+                        h = h >= 0 ? h : 0;
+                        m = (h >= 0 && m >= 0) ? m : 0;
+                        s = (h >=0 && m >= 0 && s >= 0) ? s : 0;
+
+                        h = h < 10 ? "0" + h : h; m = m < 10 ? '0' + m : m; s = s < 10 ? '0' + s : s; 
+                    return (h + ":" + m + ":" + s);
+                
+                }
+
+               
+               
+
+
+
             </script>
 
            <div class="Clear">

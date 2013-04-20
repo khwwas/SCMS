@@ -16,21 +16,39 @@
 <table id="CustomerTypeGrid" class="data display datatable">
     <thead>
         <tr>
-            <th style="width: 10%;">
+            <th style="width: 7%;">
                 Action
             </th>
-            <th style="width: 20%;">
+            <th style="width: 15%;">
                 Title
             </th>
             <th style="width: 10%;">
                 Abbreviation
             </th>
-            <th style="width: 15%;">
+            <th style="width: 8%;">
                 Start Time
             </th>
-            <th style="width: 15%;">
+            <th style="width: 8%;">
                 End Time 
             </th>
+
+            <th style="width: 10%;">
+               Break Start Time
+            </th>
+            <th style="width: 10%;">
+               Break End Time 
+            </th>
+            <th style="width: 10%;">
+               Break Duration
+            </th>
+            <th style="width: 8%;">
+              Grace In
+            </th>
+
+            <th style="width: 10%;">
+              Grace Early
+            </th>
+
          </tr>
     </thead>
     <tbody>
@@ -66,7 +84,29 @@
             <td id="txt_EndTime<%=RowShift.Shft_Id%>" style="vertical-align: middle;">
                 <%=Convert.ToDateTime(RowShift.Shft_EndTime).ToShortTimeString()%>
             </td>
-            
+            <td id="txt_BreakStartTime<%=RowShift.Shft_Id%>" style="vertical-align: middle;">
+                <%=Convert.ToDateTime(RowShift.Shift_BreakStartTime).ToShortTimeString()%>
+            </td>
+
+            <td id="txt_BreakEndTime<%=RowShift.Shft_Id%>" style="vertical-align: middle;">
+                <%=Convert.ToDateTime(RowShift.Shift_BreakEndTime).ToShortTimeString()%>
+            </td>
+
+
+            <td id="txt_BreakDuration<%=RowShift.Shft_Id%>" style="vertical-align: middle;">
+                <%=Convert.ToDateTime(RowShift.Shift_BreakDuration).ToString("hh:mm")%>
+            </td>
+
+            <td  style="vertical-align: middle;">
+                <%=RowShift.Shift_GraceIn%>
+                 <input type="hidden" id="txt_GraceIn<%=RowShift.Shft_Id%>" value="<%=RowShift.Shift_GraceIn%>" />
+            </td>
+
+            <td style="vertical-align: middle;">
+                <input type="hidden" id="txt_GraceEarly<%=RowShift.Shft_Id%>" value="<%=RowShift.Shift_GraceEarly%>" />
+                <%=RowShift.Shift_GraceEarly%>
+            </td>
+
         </tr>
         <%}
           }

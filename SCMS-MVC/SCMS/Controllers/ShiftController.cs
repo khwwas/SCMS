@@ -17,7 +17,7 @@ namespace SCMS.Controllers
             return View("Shift");
         }
 
-        public ActionResult SaveRecord(String Code, String Title, String Abbreviation, DateTime StartTime, DateTime EndTime)
+        public ActionResult SaveRecord(String Code, String Title, String Abbreviation, DateTime StartTime, DateTime EndTime,DateTime BreakStartTime,DateTime BreakEndTime,DateTime BreakDuration,String GraceIn,String GraceEarly)
         {
             Int32 li_ReturnValue = 0;
 
@@ -43,6 +43,11 @@ namespace SCMS.Controllers
                     row_Shift.Shft_SortOrder=1;
                     row_Shift.Shft_StartTime = StartTime;
                     row_Shift.Shft_EndTime = EndTime;
+                    row_Shift.Shift_BreakStartTime = BreakStartTime;
+                    row_Shift.Shift_BreakEndTime = BreakEndTime;
+                    row_Shift.Shift_BreakDuration = BreakDuration;
+                    row_Shift.Shift_GraceIn = GraceIn;
+                    row_Shift.Shift_GraceEarly = GraceEarly;
                     li_ReturnValue = objDalShift.SaveShift(row_Shift);
                     ViewData["SaveResult"] = li_ReturnValue;
                 }
