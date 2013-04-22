@@ -22,6 +22,11 @@ namespace SCMSDataLayer
                     existingSetupShift.Shft_SortOrder = newSetupShift.Shft_SortOrder;
                     existingSetupShift.Shft_StartTime = newSetupShift.Shft_StartTime;
                     existingSetupShift.Shft_EndTime = newSetupShift.Shft_EndTime;
+                    existingSetupShift.Shift_BreakStartTime = newSetupShift.Shift_BreakStartTime;
+                    existingSetupShift.Shift_BreakEndTime = newSetupShift.Shift_BreakEndTime;
+                    existingSetupShift.Shift_BreakDuration = newSetupShift.Shift_BreakDuration;
+                    existingSetupShift.Shift_GraceIn = newSetupShift.Shift_GraceIn;
+                    existingSetupShift.Shift_GraceEarly = newSetupShift.Shift_GraceEarly;
                    
                 }
                 else
