@@ -22,7 +22,7 @@ namespace SCMSDataLayer.DB
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="GL")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="DA_GL")]
 	public partial class SCMSDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -141,9 +141,6 @@ namespace SCMSDataLayer.DB
     partial void InsertSETUP_Religion(SETUP_Religion instance);
     partial void UpdateSETUP_Religion(SETUP_Religion instance);
     partial void DeleteSETUP_Religion(SETUP_Religion instance);
-    partial void InsertSETUP_Shift(SETUP_Shift instance);
-    partial void UpdateSETUP_Shift(SETUP_Shift instance);
-    partial void DeleteSETUP_Shift(SETUP_Shift instance);
     partial void InsertSETUP_Supplier(SETUP_Supplier instance);
     partial void UpdateSETUP_Supplier(SETUP_Supplier instance);
     partial void DeleteSETUP_Supplier(SETUP_Supplier instance);
@@ -165,10 +162,13 @@ namespace SCMSDataLayer.DB
     partial void InsertSYSTEM_Nature(SYSTEM_Nature instance);
     partial void UpdateSYSTEM_Nature(SYSTEM_Nature instance);
     partial void DeleteSYSTEM_Nature(SYSTEM_Nature instance);
+    partial void InsertSETUP_Shift(SETUP_Shift instance);
+    partial void UpdateSETUP_Shift(SETUP_Shift instance);
+    partial void DeleteSETUP_Shift(SETUP_Shift instance);
     #endregion
 		
 		public SCMSDataContext() : 
-				base(global::SCMSDataLayer.Properties.Settings.Default.GLConnectionString, mappingSource)
+				base(global::SCMSDataLayer.Properties.Settings.Default.DA_GLConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -493,14 +493,6 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
-		public System.Data.Linq.Table<SETUP_Shift> SETUP_Shifts
-		{
-			get
-			{
-				return this.GetTable<SETUP_Shift>();
-			}
-		}
-		
 		public System.Data.Linq.Table<SETUP_Supplier> SETUP_Suppliers
 		{
 			get
@@ -554,6 +546,14 @@ namespace SCMSDataLayer.DB
 			get
 			{
 				return this.GetTable<SYSTEM_Nature>();
+			}
+		}
+		
+		public System.Data.Linq.Table<SETUP_Shift> SETUP_Shifts
+		{
+			get
+			{
+				return this.GetTable<SETUP_Shift>();
 			}
 		}
 		
@@ -13086,236 +13086,6 @@ namespace SCMSDataLayer.DB
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SETUP_Shift")]
-	public partial class SETUP_Shift : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _Shft_Id;
-		
-		private string _Shft_Code;
-		
-		private string _Shft_Title;
-		
-		private string _Shft_Abbreviation;
-		
-		private System.Nullable<System.DateTime> _Shft_StartTime;
-		
-		private System.Nullable<System.DateTime> _Shft_EndTime;
-		
-		private System.Nullable<int> _Shft_Active;
-		
-		private System.Nullable<int> _Shft_SortOrder;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnShft_IdChanging(string value);
-    partial void OnShft_IdChanged();
-    partial void OnShft_CodeChanging(string value);
-    partial void OnShft_CodeChanged();
-    partial void OnShft_TitleChanging(string value);
-    partial void OnShft_TitleChanged();
-    partial void OnShft_AbbreviationChanging(string value);
-    partial void OnShft_AbbreviationChanged();
-    partial void OnShft_StartTimeChanging(System.Nullable<System.DateTime> value);
-    partial void OnShft_StartTimeChanged();
-    partial void OnShft_EndTimeChanging(System.Nullable<System.DateTime> value);
-    partial void OnShft_EndTimeChanged();
-    partial void OnShft_ActiveChanging(System.Nullable<int> value);
-    partial void OnShft_ActiveChanged();
-    partial void OnShft_SortOrderChanging(System.Nullable<int> value);
-    partial void OnShft_SortOrderChanged();
-    #endregion
-		
-		public SETUP_Shift()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string Shft_Id
-		{
-			get
-			{
-				return this._Shft_Id;
-			}
-			set
-			{
-				if ((this._Shft_Id != value))
-				{
-					this.OnShft_IdChanging(value);
-					this.SendPropertyChanging();
-					this._Shft_Id = value;
-					this.SendPropertyChanged("Shft_Id");
-					this.OnShft_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_Code", DbType="VarChar(50)")]
-		public string Shft_Code
-		{
-			get
-			{
-				return this._Shft_Code;
-			}
-			set
-			{
-				if ((this._Shft_Code != value))
-				{
-					this.OnShft_CodeChanging(value);
-					this.SendPropertyChanging();
-					this._Shft_Code = value;
-					this.SendPropertyChanged("Shft_Code");
-					this.OnShft_CodeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_Title", DbType="VarChar(100)")]
-		public string Shft_Title
-		{
-			get
-			{
-				return this._Shft_Title;
-			}
-			set
-			{
-				if ((this._Shft_Title != value))
-				{
-					this.OnShft_TitleChanging(value);
-					this.SendPropertyChanging();
-					this._Shft_Title = value;
-					this.SendPropertyChanged("Shft_Title");
-					this.OnShft_TitleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_Abbreviation", DbType="VarChar(50)")]
-		public string Shft_Abbreviation
-		{
-			get
-			{
-				return this._Shft_Abbreviation;
-			}
-			set
-			{
-				if ((this._Shft_Abbreviation != value))
-				{
-					this.OnShft_AbbreviationChanging(value);
-					this.SendPropertyChanging();
-					this._Shft_Abbreviation = value;
-					this.SendPropertyChanged("Shft_Abbreviation");
-					this.OnShft_AbbreviationChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_StartTime", DbType="DateTime")]
-		public System.Nullable<System.DateTime> Shft_StartTime
-		{
-			get
-			{
-				return this._Shft_StartTime;
-			}
-			set
-			{
-				if ((this._Shft_StartTime != value))
-				{
-					this.OnShft_StartTimeChanging(value);
-					this.SendPropertyChanging();
-					this._Shft_StartTime = value;
-					this.SendPropertyChanged("Shft_StartTime");
-					this.OnShft_StartTimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_EndTime", DbType="DateTime")]
-		public System.Nullable<System.DateTime> Shft_EndTime
-		{
-			get
-			{
-				return this._Shft_EndTime;
-			}
-			set
-			{
-				if ((this._Shft_EndTime != value))
-				{
-					this.OnShft_EndTimeChanging(value);
-					this.SendPropertyChanging();
-					this._Shft_EndTime = value;
-					this.SendPropertyChanged("Shft_EndTime");
-					this.OnShft_EndTimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_Active", DbType="Int")]
-		public System.Nullable<int> Shft_Active
-		{
-			get
-			{
-				return this._Shft_Active;
-			}
-			set
-			{
-				if ((this._Shft_Active != value))
-				{
-					this.OnShft_ActiveChanging(value);
-					this.SendPropertyChanging();
-					this._Shft_Active = value;
-					this.SendPropertyChanged("Shft_Active");
-					this.OnShft_ActiveChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_SortOrder", DbType="Int")]
-		public System.Nullable<int> Shft_SortOrder
-		{
-			get
-			{
-				return this._Shft_SortOrder;
-			}
-			set
-			{
-				if ((this._Shft_SortOrder != value))
-				{
-					this.OnShft_SortOrderChanging(value);
-					this.SendPropertyChanging();
-					this._Shft_SortOrder = value;
-					this.SendPropertyChanged("Shft_SortOrder");
-					this.OnShft_SortOrderChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SETUP_Supplier")]
 	public partial class SETUP_Supplier : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -15408,6 +15178,356 @@ namespace SCMSDataLayer.DB
 		{
 			this.SendPropertyChanging();
 			entity.SYSTEM_Nature = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SETUP_Shift")]
+	public partial class SETUP_Shift : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Shft_Id;
+		
+		private string _Shft_Code;
+		
+		private string _Shft_Title;
+		
+		private string _Shft_Abbreviation;
+		
+		private System.Nullable<System.DateTime> _Shft_StartTime;
+		
+		private System.Nullable<System.DateTime> _Shft_EndTime;
+		
+		private System.Nullable<int> _Shft_Active;
+		
+		private System.Nullable<int> _Shft_SortOrder;
+		
+		private System.Nullable<System.DateTime> _Shift_BreakStartTime;
+		
+		private System.Nullable<System.DateTime> _Shift_BreakEndTime;
+		
+		private System.Nullable<System.DateTime> _Shift_BreakDuration;
+		
+		private string _Shift_GraceIn;
+		
+		private string _Shift_GraceEarly;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnShft_IdChanging(string value);
+    partial void OnShft_IdChanged();
+    partial void OnShft_CodeChanging(string value);
+    partial void OnShft_CodeChanged();
+    partial void OnShft_TitleChanging(string value);
+    partial void OnShft_TitleChanged();
+    partial void OnShft_AbbreviationChanging(string value);
+    partial void OnShft_AbbreviationChanged();
+    partial void OnShft_StartTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnShft_StartTimeChanged();
+    partial void OnShft_EndTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnShft_EndTimeChanged();
+    partial void OnShft_ActiveChanging(System.Nullable<int> value);
+    partial void OnShft_ActiveChanged();
+    partial void OnShft_SortOrderChanging(System.Nullable<int> value);
+    partial void OnShft_SortOrderChanged();
+    partial void OnShift_BreakStartTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnShift_BreakStartTimeChanged();
+    partial void OnShift_BreakEndTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnShift_BreakEndTimeChanged();
+    partial void OnShift_BreakDurationChanging(System.Nullable<System.DateTime> value);
+    partial void OnShift_BreakDurationChanged();
+    partial void OnShift_GraceInChanging(string value);
+    partial void OnShift_GraceInChanged();
+    partial void OnShift_GraceEarlyChanging(string value);
+    partial void OnShift_GraceEarlyChanged();
+    #endregion
+		
+		public SETUP_Shift()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Shft_Id
+		{
+			get
+			{
+				return this._Shft_Id;
+			}
+			set
+			{
+				if ((this._Shft_Id != value))
+				{
+					this.OnShft_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Shft_Id = value;
+					this.SendPropertyChanged("Shft_Id");
+					this.OnShft_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_Code", DbType="VarChar(50)")]
+		public string Shft_Code
+		{
+			get
+			{
+				return this._Shft_Code;
+			}
+			set
+			{
+				if ((this._Shft_Code != value))
+				{
+					this.OnShft_CodeChanging(value);
+					this.SendPropertyChanging();
+					this._Shft_Code = value;
+					this.SendPropertyChanged("Shft_Code");
+					this.OnShft_CodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_Title", DbType="VarChar(100)")]
+		public string Shft_Title
+		{
+			get
+			{
+				return this._Shft_Title;
+			}
+			set
+			{
+				if ((this._Shft_Title != value))
+				{
+					this.OnShft_TitleChanging(value);
+					this.SendPropertyChanging();
+					this._Shft_Title = value;
+					this.SendPropertyChanged("Shft_Title");
+					this.OnShft_TitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_Abbreviation", DbType="VarChar(50)")]
+		public string Shft_Abbreviation
+		{
+			get
+			{
+				return this._Shft_Abbreviation;
+			}
+			set
+			{
+				if ((this._Shft_Abbreviation != value))
+				{
+					this.OnShft_AbbreviationChanging(value);
+					this.SendPropertyChanging();
+					this._Shft_Abbreviation = value;
+					this.SendPropertyChanged("Shft_Abbreviation");
+					this.OnShft_AbbreviationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_StartTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Shft_StartTime
+		{
+			get
+			{
+				return this._Shft_StartTime;
+			}
+			set
+			{
+				if ((this._Shft_StartTime != value))
+				{
+					this.OnShft_StartTimeChanging(value);
+					this.SendPropertyChanging();
+					this._Shft_StartTime = value;
+					this.SendPropertyChanged("Shft_StartTime");
+					this.OnShft_StartTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_EndTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Shft_EndTime
+		{
+			get
+			{
+				return this._Shft_EndTime;
+			}
+			set
+			{
+				if ((this._Shft_EndTime != value))
+				{
+					this.OnShft_EndTimeChanging(value);
+					this.SendPropertyChanging();
+					this._Shft_EndTime = value;
+					this.SendPropertyChanged("Shft_EndTime");
+					this.OnShft_EndTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_Active", DbType="Int")]
+		public System.Nullable<int> Shft_Active
+		{
+			get
+			{
+				return this._Shft_Active;
+			}
+			set
+			{
+				if ((this._Shft_Active != value))
+				{
+					this.OnShft_ActiveChanging(value);
+					this.SendPropertyChanging();
+					this._Shft_Active = value;
+					this.SendPropertyChanged("Shft_Active");
+					this.OnShft_ActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_SortOrder", DbType="Int")]
+		public System.Nullable<int> Shft_SortOrder
+		{
+			get
+			{
+				return this._Shft_SortOrder;
+			}
+			set
+			{
+				if ((this._Shft_SortOrder != value))
+				{
+					this.OnShft_SortOrderChanging(value);
+					this.SendPropertyChanging();
+					this._Shft_SortOrder = value;
+					this.SendPropertyChanged("Shft_SortOrder");
+					this.OnShft_SortOrderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shift_BreakStartTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Shift_BreakStartTime
+		{
+			get
+			{
+				return this._Shift_BreakStartTime;
+			}
+			set
+			{
+				if ((this._Shift_BreakStartTime != value))
+				{
+					this.OnShift_BreakStartTimeChanging(value);
+					this.SendPropertyChanging();
+					this._Shift_BreakStartTime = value;
+					this.SendPropertyChanged("Shift_BreakStartTime");
+					this.OnShift_BreakStartTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shift_BreakEndTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Shift_BreakEndTime
+		{
+			get
+			{
+				return this._Shift_BreakEndTime;
+			}
+			set
+			{
+				if ((this._Shift_BreakEndTime != value))
+				{
+					this.OnShift_BreakEndTimeChanging(value);
+					this.SendPropertyChanging();
+					this._Shift_BreakEndTime = value;
+					this.SendPropertyChanged("Shift_BreakEndTime");
+					this.OnShift_BreakEndTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shift_BreakDuration", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Shift_BreakDuration
+		{
+			get
+			{
+				return this._Shift_BreakDuration;
+			}
+			set
+			{
+				if ((this._Shift_BreakDuration != value))
+				{
+					this.OnShift_BreakDurationChanging(value);
+					this.SendPropertyChanging();
+					this._Shift_BreakDuration = value;
+					this.SendPropertyChanged("Shift_BreakDuration");
+					this.OnShift_BreakDurationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shift_GraceIn", DbType="VarChar(50)")]
+		public string Shift_GraceIn
+		{
+			get
+			{
+				return this._Shift_GraceIn;
+			}
+			set
+			{
+				if ((this._Shift_GraceIn != value))
+				{
+					this.OnShift_GraceInChanging(value);
+					this.SendPropertyChanging();
+					this._Shift_GraceIn = value;
+					this.SendPropertyChanged("Shift_GraceIn");
+					this.OnShift_GraceInChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shift_GraceEarly", DbType="VarChar(50)")]
+		public string Shift_GraceEarly
+		{
+			get
+			{
+				return this._Shift_GraceEarly;
+			}
+			set
+			{
+				if ((this._Shift_GraceEarly != value))
+				{
+					this.OnShift_GraceEarlyChanging(value);
+					this.SendPropertyChanging();
+					this._Shift_GraceEarly = value;
+					this.SendPropertyChanged("Shift_GraceEarly");
+					this.OnShift_GraceEarlyChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
