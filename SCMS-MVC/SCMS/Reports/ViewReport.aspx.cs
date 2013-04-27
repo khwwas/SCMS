@@ -312,9 +312,10 @@ namespace SCMS.Reports
                     }
 
                     _ReportDocument.SetDataSource(_dsVoucherDocument);
-                    _ReportDocument.SummaryInfo.ReportTitle = "Voucher";
+                    _ReportDocument.SummaryInfo.ReportTitle = "Voucher Document";
                 }
                 #endregion
+
                 #region Ledger Detail - Location Wise
                 else if (ls_ReportName.ToLower() == "LedgerDtLocWise".ToLower())
                 {
@@ -441,7 +442,6 @@ namespace SCMS.Reports
                     _ReportDocument.SummaryInfo.ReportTitle = "Trial Balance";
                 }
                 #endregion
-
 
                 _ReportDocument.SetParameterValue("pm_CompanyName", ls_Company);
                 _ReportDocument.SummaryInfo.ReportComments = ls_ApplicationName;

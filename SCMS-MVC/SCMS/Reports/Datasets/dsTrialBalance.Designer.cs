@@ -26,8 +26,6 @@ namespace SCMS.Reports.Datasets {
         
         private TrialBalanceDataTable tableTrialBalance;
         
-        private LogoDataTable tableLogo;
-        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -59,9 +57,6 @@ namespace SCMS.Reports.Datasets {
                 if ((ds.Tables["TrialBalance"] != null)) {
                     base.Tables.Add(new TrialBalanceDataTable(ds.Tables["TrialBalance"]));
                 }
-                if ((ds.Tables["Logo"] != null)) {
-                    base.Tables.Add(new LogoDataTable(ds.Tables["Logo"]));
-                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -87,16 +82,6 @@ namespace SCMS.Reports.Datasets {
         public TrialBalanceDataTable TrialBalance {
             get {
                 return this.tableTrialBalance;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public LogoDataTable Logo {
-            get {
-                return this.tableLogo;
             }
         }
         
@@ -170,9 +155,6 @@ namespace SCMS.Reports.Datasets {
                 if ((ds.Tables["TrialBalance"] != null)) {
                     base.Tables.Add(new TrialBalanceDataTable(ds.Tables["TrialBalance"]));
                 }
-                if ((ds.Tables["Logo"] != null)) {
-                    base.Tables.Add(new LogoDataTable(ds.Tables["Logo"]));
-                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -212,12 +194,6 @@ namespace SCMS.Reports.Datasets {
                     this.tableTrialBalance.InitVars();
                 }
             }
-            this.tableLogo = ((LogoDataTable)(base.Tables["Logo"]));
-            if ((initTable == true)) {
-                if ((this.tableLogo != null)) {
-                    this.tableLogo.InitVars();
-                }
-            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -230,19 +206,11 @@ namespace SCMS.Reports.Datasets {
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableTrialBalance = new TrialBalanceDataTable();
             base.Tables.Add(this.tableTrialBalance);
-            this.tableLogo = new LogoDataTable();
-            base.Tables.Add(this.tableLogo);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private bool ShouldSerializeTrialBalance() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeLogo() {
             return false;
         }
         
@@ -304,9 +272,6 @@ namespace SCMS.Reports.Datasets {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void TrialBalanceRowChangeEventHandler(object sender, TrialBalanceRowChangeEvent e);
         
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void LogoRowChangeEventHandler(object sender, LogoRowChangeEvent e);
-        
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
@@ -322,11 +287,11 @@ namespace SCMS.Reports.Datasets {
             
             private global::System.Data.DataColumn columnChrtAcc_Level;
             
+            private global::System.Data.DataColumn columnChrtAcc_Type;
+            
             private global::System.Data.DataColumn columnVchMas_DrAmount;
             
             private global::System.Data.DataColumn columnVchMas_CrAmount;
-            
-            private global::System.Data.DataColumn columnChrtAcc_Type;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -395,6 +360,14 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ChrtAcc_TypeColumn {
+                get {
+                    return this.columnChrtAcc_Type;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn VchMas_DrAmountColumn {
                 get {
                     return this.columnVchMas_DrAmount;
@@ -406,14 +379,6 @@ namespace SCMS.Reports.Datasets {
             public global::System.Data.DataColumn VchMas_CrAmountColumn {
                 get {
                     return this.columnVchMas_CrAmount;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ChrtAcc_TypeColumn {
-                get {
-                    return this.columnChrtAcc_Type;
                 }
             }
             
@@ -454,16 +419,16 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public TrialBalanceRow AddTrialBalanceRow(string ChrtAcc_Id, string ChrtAcc_Code, string ChrtAcc_Title, int ChrtAcc_Level, double VchMas_DrAmount, double VchMas_CrAmount, int ChrtAcc_Type) {
+            public TrialBalanceRow AddTrialBalanceRow(string ChrtAcc_Id, string ChrtAcc_Code, string ChrtAcc_Title, int ChrtAcc_Level, int ChrtAcc_Type, double VchMas_DrAmount, double VchMas_CrAmount) {
                 TrialBalanceRow rowTrialBalanceRow = ((TrialBalanceRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ChrtAcc_Id,
                         ChrtAcc_Code,
                         ChrtAcc_Title,
                         ChrtAcc_Level,
+                        ChrtAcc_Type,
                         VchMas_DrAmount,
-                        VchMas_CrAmount,
-                        ChrtAcc_Type};
+                        VchMas_CrAmount};
                 rowTrialBalanceRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowTrialBalanceRow);
                 return rowTrialBalanceRow;
@@ -490,9 +455,9 @@ namespace SCMS.Reports.Datasets {
                 this.columnChrtAcc_Code = base.Columns["ChrtAcc_Code"];
                 this.columnChrtAcc_Title = base.Columns["ChrtAcc_Title"];
                 this.columnChrtAcc_Level = base.Columns["ChrtAcc_Level"];
+                this.columnChrtAcc_Type = base.Columns["ChrtAcc_Type"];
                 this.columnVchMas_DrAmount = base.Columns["VchMas_DrAmount"];
                 this.columnVchMas_CrAmount = base.Columns["VchMas_CrAmount"];
-                this.columnChrtAcc_Type = base.Columns["ChrtAcc_Type"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -506,12 +471,12 @@ namespace SCMS.Reports.Datasets {
                 base.Columns.Add(this.columnChrtAcc_Title);
                 this.columnChrtAcc_Level = new global::System.Data.DataColumn("ChrtAcc_Level", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnChrtAcc_Level);
+                this.columnChrtAcc_Type = new global::System.Data.DataColumn("ChrtAcc_Type", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnChrtAcc_Type);
                 this.columnVchMas_DrAmount = new global::System.Data.DataColumn("VchMas_DrAmount", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnVchMas_DrAmount);
                 this.columnVchMas_CrAmount = new global::System.Data.DataColumn("VchMas_CrAmount", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnVchMas_CrAmount);
-                this.columnChrtAcc_Type = new global::System.Data.DataColumn("ChrtAcc_Type", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnChrtAcc_Type);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -639,253 +604,6 @@ namespace SCMS.Reports.Datasets {
         }
         
         /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class LogoDataTable : global::System.Data.TypedTableBase<LogoRow> {
-            
-            private global::System.Data.DataColumn columnCmpLogo;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public LogoDataTable() {
-                this.TableName = "Logo";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal LogoDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected LogoDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CmpLogoColumn {
-                get {
-                    return this.columnCmpLogo;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public LogoRow this[int index] {
-                get {
-                    return ((LogoRow)(this.Rows[index]));
-                }
-            }
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event LogoRowChangeEventHandler LogoRowChanging;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event LogoRowChangeEventHandler LogoRowChanged;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event LogoRowChangeEventHandler LogoRowDeleting;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event LogoRowChangeEventHandler LogoRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddLogoRow(LogoRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public LogoRow AddLogoRow(string CmpLogo) {
-                LogoRow rowLogoRow = ((LogoRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        CmpLogo};
-                rowLogoRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowLogoRow);
-                return rowLogoRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
-                LogoDataTable cln = ((LogoDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new LogoDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal void InitVars() {
-                this.columnCmpLogo = base.Columns["CmpLogo"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            private void InitClass() {
-                this.columnCmpLogo = new global::System.Data.DataColumn("CmpLogo", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCmpLogo);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public LogoRow NewLogoRow() {
-                return ((LogoRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new LogoRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Type GetRowType() {
-                return typeof(LogoRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.LogoRowChanged != null)) {
-                    this.LogoRowChanged(this, new LogoRowChangeEvent(((LogoRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.LogoRowChanging != null)) {
-                    this.LogoRowChanging(this, new LogoRowChangeEvent(((LogoRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.LogoRowDeleted != null)) {
-                    this.LogoRowDeleted(this, new LogoRowChangeEvent(((LogoRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.LogoRowDeleting != null)) {
-                    this.LogoRowDeleting(this, new LogoRowChangeEvent(((LogoRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveLogoRow(LogoRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                dsTrialBalance ds = new dsTrialBalance();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "LogoDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class TrialBalanceRow : global::System.Data.DataRow {
@@ -965,6 +683,22 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int ChrtAcc_Type {
+                get {
+                    try {
+                        return ((int)(this[this.tableTrialBalance.ChrtAcc_TypeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ChrtAcc_Type\' in table \'TrialBalance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTrialBalance.ChrtAcc_TypeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double VchMas_DrAmount {
                 get {
                     try {
@@ -992,22 +726,6 @@ namespace SCMS.Reports.Datasets {
                 }
                 set {
                     this[this.tableTrialBalance.VchMas_CrAmountColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int ChrtAcc_Type {
-                get {
-                    try {
-                        return ((int)(this[this.tableTrialBalance.ChrtAcc_TypeColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ChrtAcc_Type\' in table \'TrialBalance\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableTrialBalance.ChrtAcc_TypeColumn] = value;
                 }
             }
             
@@ -1061,6 +779,18 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsChrtAcc_TypeNull() {
+                return this.IsNull(this.tableTrialBalance.ChrtAcc_TypeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetChrtAcc_TypeNull() {
+                this[this.tableTrialBalance.ChrtAcc_TypeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsVchMas_DrAmountNull() {
                 return this.IsNull(this.tableTrialBalance.VchMas_DrAmountColumn);
             }
@@ -1081,61 +811,6 @@ namespace SCMS.Reports.Datasets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetVchMas_CrAmountNull() {
                 this[this.tableTrialBalance.VchMas_CrAmountColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsChrtAcc_TypeNull() {
-                return this.IsNull(this.tableTrialBalance.ChrtAcc_TypeColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetChrtAcc_TypeNull() {
-                this[this.tableTrialBalance.ChrtAcc_TypeColumn] = global::System.Convert.DBNull;
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        public partial class LogoRow : global::System.Data.DataRow {
-            
-            private LogoDataTable tableLogo;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal LogoRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableLogo = ((LogoDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string CmpLogo {
-                get {
-                    try {
-                        return ((string)(this[this.tableLogo.CmpLogoColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CmpLogo\' in table \'Logo\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableLogo.CmpLogoColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsCmpLogoNull() {
-                return this.IsNull(this.tableLogo.CmpLogoColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetCmpLogoNull() {
-                this[this.tableLogo.CmpLogoColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1159,40 +834,6 @@ namespace SCMS.Reports.Datasets {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public TrialBalanceRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class LogoRowChangeEvent : global::System.EventArgs {
-            
-            private LogoRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public LogoRowChangeEvent(LogoRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public LogoRow Row {
                 get {
                     return this.eventRow;
                 }
