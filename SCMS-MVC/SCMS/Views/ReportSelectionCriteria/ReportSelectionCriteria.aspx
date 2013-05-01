@@ -54,7 +54,6 @@
                 document.getElementById('div_Location').style.display = "block";
                 document.getElementById('div_VoucherTypes').style.display = "block";
 
-
                 document.getElementById('div_VchrDocFrom').style.display = "block";
                 document.getElementById('div_VchrDocTo').style.display = "block";
                 document.getElementById('ddl_VchrDocFrom').disabled = true;
@@ -77,7 +76,6 @@
                 document.getElementById('txt_DateFrom').disabled = true;
                 document.getElementById('txt_DateTo').disabled = true;
             }
-
             else if (ps_ReportName.toLowerCase() == "TrialBalance".toLowerCase()) {
                 document.getElementById('div_Location').style.display = "block";
                 document.getElementById('div_AccCodeFrom').style.display = "block";
@@ -89,6 +87,11 @@
 
                 document.getElementById('txt_DateFrom').disabled = true;
                 document.getElementById('txt_DateTo').disabled = true;
+            }
+            else if (ps_ReportName.toLowerCase() == "IncomeStatement".toLowerCase()) {
+                document.getElementById('div_Location').style.display = "block";
+                document.getElementById('div_Level').style.display = "block";
+                document.getElementById('div_Year').style.display = "block";
             }
         };
 
@@ -103,6 +106,7 @@
             }
             else if (ps_ReportName.toLowerCase() == "VoucherDocument".toLowerCase()) {
                 var pcnt_Location = document.getElementById('ddl_location');
+                var pcnt_VoucherTypes = document.getElementById('ddl_VoucherTypes');
                 var pcnt_AllDate = document.getElementById('chk_AllDate');
                 var pcnt_DateFrom = document.getElementById('txt_DateFrom');
                 var pcnt_DateTo = document.getElementById('txt_DateTo');
@@ -111,7 +115,7 @@
                 var pcnt_DocTo = document.getElementById('ddl_VchrDocTo');
 
                 var li_AllDoc, li_AllDate;
-                               
+
                 if (pcnt_AllDoc.checked == true) {
                     li_AllDoc = 1;
                 }
@@ -127,7 +131,7 @@
                 }
 
                 ps_Url = "../ReportSelectionCriteria/SetParam_VoucherDocument?ps_ReportName=" + ps_ReportName + "&ps_Location=" + pcnt_Location.value +
-                         "&pi_AllDoc=" + li_AllDoc.toString() + "&ps_DocFrom=" + pcnt_DocFrom.value + "&ps_DocTo=" + pcnt_DocTo.value +
+                         "&ps_VoucherTypes=" + pcnt_VoucherTypes.value + "&pi_AllDoc=" + li_AllDoc.toString() + "&ps_DocFrom=" + pcnt_DocFrom.value + "&ps_DocTo=" + pcnt_DocTo.value +
                          "&pi_AllDate=" + li_AllDate.toString() + "&pdt_DateFrom=" + pcnt_DateFrom.value + "&pdt_DateTo=" + pcnt_DateTo.value + "";
             }
             else if (ps_ReportName.toLowerCase() == "LedgerDtLocWise".toLowerCase() ||
@@ -192,8 +196,16 @@
                 ps_Url = "../ReportSelectionCriteria/SetParam_TrialBalance?ps_ReportName=" + ps_ReportName + "&ps_Location=" + pcnt_Location.value +
                          "&pi_AllAccCode=" + li_AllCode.toString() + "&ps_AccCodeFrom=" + pcnt_AccCodeFrom.value + "&ps_AccCodeTo=" + pcnt_AccCodeTo.value +
                          "&pi_AllDate=" + li_AllDate.toString() + "&pdt_DateFrom=" + pcnt_DateFrom.value + "&pdt_DateTo=" + pcnt_DateTo.value + "";
+            }
+            else if (ps_ReportName.toLowerCase() == "IncomeStatement".toLowerCase()) {
+                var pcnt_Location = document.getElementById('ddl_location');
+                var pcnt_Level = document.getElementById('txt_Level');
+                var pcnt_Year = document.getElementById('ddl_Year');
+
+                ps_Url = "../ReportSelectionCriteria/SetParam_IncomeStatement?ps_ReportName=" + ps_ReportName + "&ps_Location=" + pcnt_Location.value +
+                         "&pi_Level=" + pcnt_Level.value + "&pi_Year=" + pcnt_Year.value;
             };
-            //            alert(ps_Url);
+
             $.ajax({
                 type: "GET",
                 url: ps_Url,
@@ -286,6 +298,19 @@
                 </script>
                 <input type="checkbox" class="checkbox" id="chk_AllDate" name="chk_AllDate" onclick="CheckAllDate()"
                     checked="checked" />
+            </div>
+            <div id="div_Year" style="display: none;">
+                <div class="CustomCell" style="width: 150px; height: 30px;">
+                    Year</div>
+                <select name="ddl_Year" id="ddl_Year" style="width: 955px;">
+                    <option value="2008">2008</option>
+                    <option value="2009">2009</option>
+                    <option value="2010">2010</option>
+                    <option value="2011">2011</option>
+                    <option value="2012">2012</option>
+                    <option value="2013">2013</option>
+                    <option value="2014">2014</option>
+                </select>
             </div>
             <div id="div_Level" style="display: none;">
                 <div class="CustomCell" style="width: 150px;">

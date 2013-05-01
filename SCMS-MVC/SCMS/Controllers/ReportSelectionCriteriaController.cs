@@ -15,6 +15,7 @@ namespace SCMS.Controllers
         public ActionResult Index(string ps_ReportName)
         {
             ViewData["ddl_Location"] = new SelectList(new DALLocation().PopulateData(), "Loc_Id", "Loc_Title");
+            //ViewData["ddl_Year"] = new SelectList(new DALLocation().PopulateData(), "Loc_Id", "Loc_Title");
             ViewData["ddl_VoucherTypes"] = new SelectList(new DALVoucherType().PopulateData(), "VchrType_Id", "VchrType_Title");
             ViewData["ddl_AccCodeFrom"] = new SelectList(new DALChartOfAccount().GetChartOfAccountForDropDown(), "ChrtAcc_Id", "ChrtAcc_Title");
             ViewData["ddl_AccCodeTo"] = new SelectList(new DALChartOfAccount().GetChartOfAccountForDropDown(), "ChrtAcc_Id", "ChrtAcc_Title");
@@ -50,12 +51,13 @@ namespace SCMS.Controllers
         #endregion
 
         #region VoucherDocument
-        public string SetParam_VoucherDocument(string ps_ReportName, string ps_Location, string pi_AllDoc, string ps_DocFrom, string ps_DocTo, 
+        public string SetParam_VoucherDocument(string ps_ReportName, string ps_Location, string ps_VoucherTypes, string pi_AllDoc, string ps_DocFrom, string ps_DocTo,
                                                string pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo)
         {
             ResetParameters();
             Reports.ReportParameters.ReportName = ps_ReportName;
             Reports.ReportParameters.Location = ps_Location;
+            Reports.ReportParameters.VoucherTypes = ps_VoucherTypes;
 
             if (pi_AllDoc == "1")
             {
@@ -166,14 +168,28 @@ namespace SCMS.Controllers
         }
         #endregion
 
+        #region Income Statement
+        public string SetParam_IncomeStatement(string ps_ReportName, string ps_Location, Int32 pi_Level, Int32 pi_Year)
+        {
+            ResetParameters();
+            Reports.ReportParameters.ReportName = ps_ReportName;
+            Reports.ReportParameters.Location = ps_Location;
+            Reports.ReportParameters.Level = pi_Level;
+            Reports.ReportParameters.Year = pi_Year;
+
+            return "OK";
+        }
+        #endregion
+
         #region Functions
         void ResetParameters()
         {
             Reports.ReportParameters.Location = "";
+            Reports.ReportParameters.VoucherTypes = "";
+            Reports.ReportParameters.Level = 0;
             Reports.ReportParameters.AllAccCode = 1;
             Reports.ReportParameters.AccCodeFrom = "";
             Reports.ReportParameters.AccCodeTo = "";
-            Reports.ReportParameters.Level = 0;
             Reports.ReportParameters.AllDate = 1;
             Reports.ReportParameters.DateFrom = Convert.ToDateTime("01/01/1900");
             Reports.ReportParameters.DateTo = Convert.ToDateTime("01/01/1900");

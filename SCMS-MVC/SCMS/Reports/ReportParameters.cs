@@ -17,7 +17,17 @@ namespace SCMS.Reports
             get;
             set;
         }
+        public static string VoucherTypes
+        {
+            get;
+            set;
+        }
         public static int Level
+        {
+            get;
+            set;
+        }
+        public static int Year 
         {
             get;
             set;

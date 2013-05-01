@@ -279,11 +279,12 @@ namespace SCMS.Reports
 
                     _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptVoucherDocument.rpt");
                     Datasets.dsVoucherDocument _dsVoucherDocument = new Datasets.dsVoucherDocument();
-                    string ls_Location = "", ls_DocFrom = "", ls_DocTo = "";
+                    string ls_Location = "", ls_VoucherTypes = "", ls_DocFrom = "", ls_DocTo = "";
                     int li_AllDoc = 0, li_AllDate = 0;
                     DateTime ldt_DateFrom, ldt_Dateto;
 
                     ls_Location = SCMS.Reports.ReportParameters.Location;
+                    ls_VoucherTypes = SCMS.Reports.ReportParameters.VoucherTypes;
                     li_AllDoc = SCMS.Reports.ReportParameters.AllDoc;
                     ls_DocFrom = SCMS.Reports.ReportParameters.DocFrom;
                     ls_DocTo = SCMS.Reports.ReportParameters.DocTo;
@@ -301,7 +302,7 @@ namespace SCMS.Reports
                         _dsVoucherDocument.Tables.Remove("VoucherDocument");
                     }
 
-                    _ds = _dalReports.VoucherDocument(ls_Location, li_AllDoc, ls_DocFrom, ls_DocTo, li_AllDate, ldt_DateFrom, ldt_Dateto);
+                    _ds = _dalReports.VoucherDocument(ls_Location, ls_VoucherTypes, li_AllDoc, ls_DocFrom, ls_DocTo, li_AllDate, ldt_DateFrom, ldt_Dateto);
                     _dsVoucherDocument.Tables.Add(_ds.Tables[0].Copy());
                     _dsVoucherDocument.Tables[0].TableName = "VoucherDocument";
 
@@ -440,6 +441,44 @@ namespace SCMS.Reports
 
                     _ReportDocument.SetDataSource(_dsTrialBalance);
                     _ReportDocument.SummaryInfo.ReportTitle = "Trial Balance";
+                }
+                #endregion
+
+                #region Income Statement
+                else if (ls_ReportName.ToLower() == "IncomeStatement".ToLower())
+                {
+                    _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptIncomeStatement.rpt");
+                    Datasets.dsIncomeStatement _dsIncomeStatement = new Datasets.dsIncomeStatement();
+                    string ls_Location = "";
+                    int li_Level = 0, li_Year = 0;
+                    DateTime ldt_DateFrom, ldt_Dateto;
+
+                    ls_Location = SCMS.Reports.ReportParameters.Location;
+                    li_Level = SCMS.Reports.ReportParameters.Level;
+                    li_Year = SCMS.Reports.ReportParameters.Year;
+                   
+                    if (_dsIncomeStatement.Tables.Contains("Logo"))
+                    {
+                        _dsIncomeStatement.Tables.Remove("Logo");
+                    }
+
+                    if (_dsIncomeStatement.Tables.Contains("IncomeStatement"))
+                    {
+                        _dsIncomeStatement.Tables.Remove("IncomeStatement");
+                    }
+
+                    _ds = _dalReports.IncomeStatement(ls_Location, li_Level, li_Year);
+                    _dsIncomeStatement.Tables.Add(_ds.Tables[0].Copy());
+                    _dsIncomeStatement.Tables[0].TableName = "IncomeStatement";
+
+                    if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
+                    {
+                        MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
+                        return;
+                    }
+
+                    _ReportDocument.SetDataSource(_dsIncomeStatement);
+                    _ReportDocument.SummaryInfo.ReportTitle = "Income Statement";
                 }
                 #endregion
 

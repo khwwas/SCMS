@@ -236,6 +236,12 @@
       <DependentUpon>rptCompany.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\Reps\rptIncomeStatement.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptIncomeStatement.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\Reps\rptLedger_AccWise.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
