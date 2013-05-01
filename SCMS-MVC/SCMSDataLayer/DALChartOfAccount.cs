@@ -19,6 +19,7 @@ namespace SCMSDataLayer
 
                 if (lRow_ExistingData != null)
                 {
+                    lRow_ExistingData.ChrtAcc_Code = pRow_NewData.ChrtAcc_Code;
                     lRow_ExistingData.ChrtAcc_Title = pRow_NewData.ChrtAcc_Title;
                     lRow_ExistingData.ChrtAcc_Level = pRow_NewData.ChrtAcc_Level;
                     lRow_ExistingData.ChrtAcc_BudgetLevel = pRow_NewData.ChrtAcc_BudgetLevel;

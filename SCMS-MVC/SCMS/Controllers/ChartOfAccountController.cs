@@ -20,13 +20,13 @@ namespace SCMS.Controllers
 
         public ActionResult Index()
         {
-            ViewData["ddl_Nature"] = new SelectList(new DALNature().PopulateData(), "Natr_Id", "Natr_Title", "ddl_Nature");
-            ViewData["ddl_AccNature"] = new SelectList(new DALAccountNature().PopulateData(), "AccNatr_Id", "AccNatr_Title", "ddl_AccNature");
+            ViewData["ddl_Nature"] = new SelectList(new DALNature().PopulateData(), "Natr_Id", "Natr_Title");
+            ViewData["ddl_AccNature"] = new SelectList(new DALAccountNature().PopulateData(), "AccNatr_Id", "AccNatr_Title");
             return View("ChartOfAccount");
         }
 
         public ActionResult SaveRecord(string ps_Id, string ps_Code, string ps_Title, Int32 pi_Level, Int32 pi_BudgetLevel, Int32 pi_Active,
-                                       Int32 pi_Type, string ps_Nature, string ps_AccountNature)
+                                       Int32 pi_Type, string ps_Nature, string ps_AccountNature, string ps_CodeBeforeEdit)
         {
             Int32 li_ReturnValue = 0;
             bool isEdit = false;
@@ -59,6 +59,10 @@ namespace SCMS.Controllers
                     lrow_ChartOfAccount.ChrtAcc_Active = 1;
                     var ChartOfAccountCode = objDalChartOfAccount.GetAllRecords().Where(c => c.ChrtAcc_Code.Equals(lrow_ChartOfAccount.ChrtAcc_Code)).ToList();
                     if (isEdit == false && ChartOfAccountCode != null && ChartOfAccountCode.Count > 0)
+                    {
+                        ViewData["SaveResult"] = -1;
+                    }
+                    else if (isEdit == true && ps_Code.Replace("-", "").Replace("_", "") != ps_CodeBeforeEdit.Replace("-", "").Replace("_", "") && ChartOfAccountCode != null && ChartOfAccountCode.Count > 0)
                     {
                         ViewData["SaveResult"] = -1;
                     }
@@ -195,5 +199,5 @@ namespace SCMS.Controllers
                 return PartialView("GridData");
             }
         }
-  }
+    }
 }
