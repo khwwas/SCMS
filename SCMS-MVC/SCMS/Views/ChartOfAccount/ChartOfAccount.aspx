@@ -23,6 +23,7 @@
             var lcnt_TypeDetail = document.getElementById('rdo_Detail');
             var lcnt_Nature = document.getElementById('ddl_Nature');
             var lcnt_AccountNature = ""; //document.getElementById('ddl_AccNature');
+            var lcnt_CodeBeforeEdit = document.getElementById('txt_ExistingCodeBeforeEdit').value;
             var li_Type;
 
             if (lcnt_txtTitle.value == "") {
@@ -49,7 +50,7 @@
                 }
                 Url += "ChartOfAccount/SaveRecord?ps_Id=" + lcnt_txtSelectedCode.value + "&ps_Code=" + lcnt_txtCode.value + "&ps_Title=" + lcnt_txtTitle.value + "&pi_Level=" + lcnt_Level.value +
                                        "&pi_BudgetLevel=" + lcnt_BudgetLevel.value + "&pi_Active=" + Active + "&pi_Type=" + li_Type + "&ps_Nature=" + lcnt_Nature.value +
-                                       "&ps_AccountNature=" + lcnt_AccountNature.value;
+                                       "&ps_AccountNature=" + lcnt_AccountNature.value + "&ps_CodeBeforeEdit=" + lcnt_CodeBeforeEdit;
 
                 document.getElementById("Waiting_Image").style.display = "block";
                 document.getElementById("btn_Save").style.display = "none";
@@ -60,7 +61,9 @@
                         html = response;
                         $("#GridContainer").html(response);
                         SetGrid();
-                        ResetForm();
+                        if (parseInt(document.getElementById("SaveResult").value) > 0) {
+                            ResetForm();
+                        }
                         FadeIn(lcnt_MessageBox);
                         if (document.getElementById("SaveResult").value == "0") {
                             lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Unable to save record.</p>";
@@ -94,6 +97,7 @@
             lcnt_MessageBox.innerHTML = "";
 
             document.getElementById('txt_SelectedCode').value = "";
+            document.getElementById('txt_ExistingCodeBeforeEdit').value = "";
             document.getElementById('txt_Code').value = "";
             document.getElementById('txt_Title').value = "";
             document.getElementById('txt_Level').value = "1";
@@ -102,6 +106,7 @@
         function EditRecord(Id, ps_Code) {
             document.getElementById('txt_SelectedCode').value = Id;
             document.getElementById('txt_Code').value = ps_Code;
+            document.getElementById('txt_ExistingCodeBeforeEdit').value = ps_Code;
             var txtTitle = document.getElementById('txt_Title' + Id).childNodes[0].nodeValue;
             document.getElementById('txt_Title').value = txtTitle.trim(); //.replace("&nbsp; &nbsp; &nbsp;", "");
             if (document.getElementById('ChrtAcc_Level' + Id).value == "") {
@@ -229,6 +234,7 @@
             <div class="CustomCell" style="width: 270px; height: 30px;">
                 <input type="text" class="CustomText" style="width: 240px;" id="txt_Code" name="txt_Code"
                     maxlength="50" onkeyup="SetLevel()" onkeydown="SetLevel()" />
+                <input type="hidden" id="txt_ExistingCodeBeforeEdit" value="" />
                 <script type="text/javascript">
                     $("#txt_Code").inputmask({ "mask": "99-999-9999-99999-99999-99999" });
                 </script>

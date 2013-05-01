@@ -29,6 +29,12 @@
                 $("[name=txt_Details]").autocomplete({ source: data });
             }
 
+            $("[name=txt_Details]").focus(function () {
+                if ($(this).val() == "") {
+                    $(this).val($(this).parent().parent().prev().find($("input[name=txt_Details]")).val().toString());
+                }
+            });
+
             $("#btn_AddNewRow").click(function () {
 
                 var comboData = $("#AccountCodesList").val().split(',');
@@ -55,9 +61,19 @@
                 $(".detailRow").last().after(htmlStr);
                 $(".detailRow").last().find("[name=ddl_Account]").combobox();
                 $(".detailRow").last().find("[name=txt_Details]").autocomplete({ source: data });
+
+                $(".detailRow").last().find("input[name=txt_Details]").focus(function () {
+                    if ($(this).val() == "") {
+                        $(this).val($(this).parent().parent().prev().find($("input[name=txt_Details]")).val().toString());
+                    }
+                });
+
                 $(".detailRow").last().find("[name=txt_Debit],[name=txt_Credit]").blur(function () {
                     if ($(this).attr("name") == "txt_Debit" && $(this).val() != "") {
                         $(this).parent().next().find("input").attr("disabled", "disabled");
+                        if ($(this).parent().parent().next().hasClass("img_Container") == true) {
+                            $("#btn_AddNewRow").trigger("click");
+                        }
                     }
                     else {
                         $(this).parent().next().find("input").removeAttr("disabled");
@@ -65,6 +81,9 @@
 
                     if ($(this).attr("name") == "txt_Credit" && $(this).val() != "") {
                         $(this).parent().prev().find("input").attr("disabled", "disabled");
+                        if ($(this).parent().parent().next().hasClass("img_Container") == true) {
+                            $("#btn_AddNewRow").trigger("click");
+                        }
                     }
                     else {
                         $(this).parent().prev().find("input").removeAttr("disabled");
@@ -123,6 +142,9 @@
             $("input[name=txt_Debit],input[name=txt_Credit]").blur(function () {
                 if ($(this).attr("name") == "txt_Debit" && $(this).val() != "") {
                     $(this).parent().next().find("input").attr("disabled", "disabled");
+                    if ($(this).parent().parent().next().hasClass("img_Container") == true) {
+                        $("#btn_AddNewRow").trigger("click");
+                    }
                 }
                 else {
                     $(this).parent().next().find("input").removeAttr("disabled");
@@ -130,6 +152,9 @@
 
                 if ($(this).attr("name") == "txt_Credit" && $(this).val() != "") {
                     $(this).parent().prev().find("input").attr("disabled", "disabled");
+                    if ($(this).parent().parent().next().hasClass("img_Container") == true) {
+                        $("#btn_AddNewRow").trigger("click");
+                    }
                 }
                 else {
                     $(this).parent().prev().find("input").removeAttr("disabled");
@@ -469,6 +494,8 @@
             <%}
                   }
             %>
+            <div class="img_Container">
+            </div>
             <script type="text/javascript">
                 document.getElementById("ddl_Status").value = '<%=ViewData["Status"] %>';
                 document.getElementById("ddl_VoucherType").value = '<%=ViewData["VoucherType"] %>';
@@ -584,7 +611,7 @@
                 </div>
             </div>
             <%} %>
-            <div style="float: left;">
+            <div class="img_Container" style="float: left;">
                 <img id="btn_AddNewRow" alt="Add New" src="../../img/add.png" style="width: 30px;
                     cursor: pointer;" />
             </div>
