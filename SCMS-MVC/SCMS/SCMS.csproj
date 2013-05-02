@@ -131,6 +131,7 @@
     <Compile Include="Controllers\BankController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\CalendarTypeController.cs" />
+    <Compile Include="Controllers\ChartOfAccountModController.cs" />
     <Compile Include="Controllers\CodeAnalysis1Controller.cs" />
     <Compile Include="Controllers\CodeAnalysis2Controller.cs" />
     <Compile Include="Controllers\CodeAnalysis3Controller.cs" />
@@ -1008,8 +1009,8 @@
     <Content Include="Views\CalendarType\GridData.ascx" />
     <Content Include="Views\Calendar\Calendar.aspx" />
     <Content Include="Views\Calendar\GridData.ascx" />
-    <Content Include="Views\ChartOfAccountModification\ChartOfAccountMod.aspx" />
-    <Content Include="Views\ChartOfAccountModification\GridData.ascx" />
+    <Content Include="Views\ChartOfAccountMod\ChartOfAccountMod.aspx" />
+    <Content Include="Views\ChartOfAccountMod\GridData.ascx" />
     <Content Include="Views\City\City.aspx" />
     <Content Include="Views\City\GridData.ascx" />
     <Content Include="Views\CodeAnalysis1\CodeAnalysis1.aspx" />

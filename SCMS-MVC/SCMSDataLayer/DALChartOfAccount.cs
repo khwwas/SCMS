@@ -135,7 +135,7 @@ namespace SCMSDataLayer
                 SCMSDataContext dbSCMS = Connection.Create();
 
                 _Sql += "  Update Setup_ChartOfAccount ";
-                _Sql += "     Set '" + ps_NewCode + "' + SubString(ChrtAcc_Code, LEN( '" + ps_NewCode + "' ) + 1, LEN( ChrtAcc_Code ) ) ";
+                _Sql += "     Set Setup_ChartOfAccount.ChrtAcc_Code = '" + ps_NewCode + "' + SubString( ChrtAcc_Code, LEN( '" + ps_NewCode + "' ) + 1, LEN( ChrtAcc_Code ) ) ";
                 _Sql += "   Where Left( ChrtAcc_Code, Len( '" + ps_OldCode + "' ) ) = '" + ps_OldCode + "' ";
 
                 li_ReturnValue = dbSCMS.ExecuteCommand(_Sql);
