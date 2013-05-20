@@ -301,6 +301,8 @@ namespace SCMS.Reports.Datasets {
             
             private global::System.Data.DataColumn columnVchDet_Remarks;
             
+            private global::System.Data.DataColumn columnVchDet_Id;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public LedgerDetailDataTable() {
@@ -424,6 +426,14 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn VchDet_IdColumn {
+                get {
+                    return this.columnVchDet_Id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -459,7 +469,7 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public LedgerDetailRow AddLedgerDetailRow(string Loc_Id, string Loc_Title, string ChrtAcc_Id, string ChrtAcc_Code, string ChrtAcc_Title, string VchMas_Id, string VchMas_Code, System.DateTime VchMas_Date, double VchMas_DrAmount, double VchMas_CrAmount, string VchDet_Remarks) {
+            public LedgerDetailRow AddLedgerDetailRow(string Loc_Id, string Loc_Title, string ChrtAcc_Id, string ChrtAcc_Code, string ChrtAcc_Title, string VchMas_Id, string VchMas_Code, System.DateTime VchMas_Date, double VchMas_DrAmount, double VchMas_CrAmount, string VchDet_Remarks, string VchDet_Id) {
                 LedgerDetailRow rowLedgerDetailRow = ((LedgerDetailRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Loc_Id,
@@ -472,7 +482,8 @@ namespace SCMS.Reports.Datasets {
                         VchMas_Date,
                         VchMas_DrAmount,
                         VchMas_CrAmount,
-                        VchDet_Remarks};
+                        VchDet_Remarks,
+                        VchDet_Id};
                 rowLedgerDetailRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowLedgerDetailRow);
                 return rowLedgerDetailRow;
@@ -506,6 +517,7 @@ namespace SCMS.Reports.Datasets {
                 this.columnVchMas_DrAmount = base.Columns["VchMas_DrAmount"];
                 this.columnVchMas_CrAmount = base.Columns["VchMas_CrAmount"];
                 this.columnVchDet_Remarks = base.Columns["VchDet_Remarks"];
+                this.columnVchDet_Id = base.Columns["VchDet_Id"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -533,6 +545,8 @@ namespace SCMS.Reports.Datasets {
                 base.Columns.Add(this.columnVchMas_CrAmount);
                 this.columnVchDet_Remarks = new global::System.Data.DataColumn("VchDet_Remarks", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnVchDet_Remarks);
+                this.columnVchDet_Id = new global::System.Data.DataColumn("VchDet_Id", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnVchDet_Id);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -851,6 +865,22 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string VchDet_Id {
+                get {
+                    try {
+                        return ((string)(this[this.tableLedgerDetail.VchDet_IdColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'VchDet_Id\' in table \'LedgerDetail\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableLedgerDetail.VchDet_IdColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsLoc_IdNull() {
                 return this.IsNull(this.tableLedgerDetail.Loc_IdColumn);
             }
@@ -979,6 +1009,18 @@ namespace SCMS.Reports.Datasets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetVchDet_RemarksNull() {
                 this[this.tableLedgerDetail.VchDet_RemarksColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsVchDet_IdNull() {
+                return this.IsNull(this.tableLedgerDetail.VchDet_IdColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetVchDet_IdNull() {
+                this[this.tableLedgerDetail.VchDet_IdColumn] = global::System.Convert.DBNull;
             }
         }
         

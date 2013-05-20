@@ -387,7 +387,7 @@
             <div id="LastVoucherContainer">
             </div>
             <div class="CustomCell" style="width: 97px; height: 30px;">
-                Code</div>
+                Voucher #</div>
             <div class="CustomCell" style="width: 320px; height: 30px;">
                 <input type="text" class="CustomText" style="width: 250px; font-weight: bold;" id="txt_Code"
                     name="txt_Code" maxlength="15" readonly="readonly" value='<%=ViewData["VoucherCode"] %>' />
@@ -644,7 +644,7 @@
                     <img alt="" id="Waiting_Image" src="../../img/Ajax_Loading.gif" style="display: none;
                         margin-left: 10" /></div>
                 <div style="float: left;">
-                    <input type="button" value="Cancel" class="btn btn-grey" onclick="ResetForm();" style="width: 90px;
+                    <input type="button" value="New" class="btn btn-grey" onclick="ResetForm();" style="width: 90px;
                         height: 35px; padding-top: 5px; color: White; font-weight: bold; font-size: 11pt;" />
                 </div>
             </div>

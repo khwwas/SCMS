@@ -26,7 +26,7 @@
                 Voucher Type
             </th>
             <th style="width: 8%;">
-                Code
+                Voucher #
             </th>
             <th style="width: 8%;">
                 Date
