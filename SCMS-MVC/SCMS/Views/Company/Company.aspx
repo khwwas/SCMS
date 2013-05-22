@@ -39,6 +39,7 @@
                     type: "GET",
                     url: Url,
                     success: function (response) {
+                        //alert(response);
                         html = response;
                         $("#GridContainer").html(response);
                         SetGrid();

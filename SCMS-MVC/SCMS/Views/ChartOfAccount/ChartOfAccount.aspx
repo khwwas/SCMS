@@ -36,7 +36,7 @@
                 return;
             }
             else {
-                var Url = document.getElementById('frm_ChartOfAccountSetup').action;
+                //var Url = document.getElementById('frm_ChartOfAccountSetup').action;
 
                 if (lcnt_TypeGroup.checked == true) {
                     li_Type = 1;
@@ -48,18 +48,20 @@
                 if (lcnt_Active.checked = true) {
                     Active = 1;
                 }
-                Url += "ChartOfAccount/SaveRecord?ps_Id=" + lcnt_txtSelectedCode.value + "&ps_Code=" + lcnt_txtCode.value + "&ps_Title=" + lcnt_txtTitle.value + "&pi_Level=" + lcnt_Level.value +
-                                       "&pi_BudgetLevel=" + lcnt_BudgetLevel.value + "&pi_Active=" + Active + "&pi_Type=" + li_Type + "&ps_Nature=" + lcnt_Nature.value +
-                                       "&ps_AccountNature=" + lcnt_AccountNature.value + "&ps_CodeBeforeEdit=" + lcnt_CodeBeforeEdit;
+                var dataString = [];
+                dataString[0] = lcnt_txtSelectedCode.value + "║" + lcnt_txtCode.value + "║" + lcnt_txtTitle.value + "║" + lcnt_Level.value + "║" + lcnt_BudgetLevel.value + "║" + Active + "║" + li_Type + "║" + lcnt_Nature.value + "║" + lcnt_AccountNature.value + "║" + lcnt_CodeBeforeEdit;
 
                 document.getElementById("Waiting_Image").style.display = "block";
                 document.getElementById("btn_Save").style.display = "none";
                 $.ajax({
-                    type: "GET",
-                    url: Url,
+                    type: "POST",
+                    url: "../ChartOfAccount/SaveRecord",
+                    data: JSON.stringify(dataString),
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
                     success: function (response) {
-                        html = response;
-                        $("#GridContainer").html(response);
+                        //alert(response);
+                        $("#GridContainer").html(response.toString());
                         SetGrid();
                         if (parseInt(document.getElementById("SaveResult").value) > 0) {
                             ResetForm();

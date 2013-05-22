@@ -25,9 +25,24 @@ namespace SCMS.Controllers
             return View("ChartOfAccount");
         }
 
-        public ActionResult SaveRecord(string ps_Id, string ps_Code, string ps_Title, Int32 pi_Level, Int32 pi_BudgetLevel, Int32 pi_Active,
-                                       Int32 pi_Type, string ps_Nature, string ps_AccountNature, string ps_CodeBeforeEdit)
+        [HttpPost]
+        [AcceptVerbs(HttpVerbs.Post)]
+        //public ActionResult SaveRecord(string ps_Id, string ps_Code, string ps_Title, Int32 pi_Level, Int32 pi_BudgetLevel, Int32 pi_Active,
+        //Int32 pi_Type, string ps_Nature, string ps_AccountNature, string ps_CodeBeforeEdit)
+        public string SaveRecord(IEnumerable<string> dataString)
         {
+            String[] Row = dataString.Last().Split('║');
+            string ps_Id = Row[0];
+            string ps_Code = Row[1];
+            string ps_Title = Row[2];
+            int pi_Level = Row[3] != null ? Convert.ToInt32(Row[3]) : 0;
+            int pi_BudgetLevel = Row[4] != null ? Convert.ToInt32(Row[4]) : 0;
+            int pi_Active = Row[5] != null ? Convert.ToInt32(Row[5]) : 0;
+            int pi_Type = Row[6] != null ? Convert.ToInt32(Row[6]) : 0;
+            string ps_Nature = Row[7];
+            string ps_AccountNature = Row[8];
+            string ps_CodeBeforeEdit = Row[9];
+
             Int32 li_ReturnValue = 0;
             bool isEdit = false;
             if (!string.IsNullOrEmpty(ps_Id))
@@ -72,14 +87,193 @@ namespace SCMS.Controllers
                         ViewData["SaveResult"] = li_ReturnValue;
                     }
                 }
+                string[] rList = new string[1];
+                rList[0] = "";
 
-                return PartialView("GridData");
+                rList[0] += "<style type='text/css'>";
+                rList[0] += "select";
+                rList[0] += "{";
+                rList[0] += "background: none;";
+                rList[0] += "width: auto;";
+                rList[0] += "padding: 0;";
+                rList[0] += "margin: 0;";
+                rList[0] += "border-radius: 0px;";
+                rList[0] += "}";
+                rList[0] += "input[type='text']";
+                rList[0] += "{";
+                rList[0] += "margin-bottom: 0;";
+                rList[0] += "}";
+                rList[0] += "</style>";
+                rList[0] += "<table id='ChartOfAccountGrid' class='data display datatable'>";
+                rList[0] += "<thead>";
+                rList[0] += "<tr>";
+                rList[0] += "<th style='width: 5%; display: none;'>";
+                rList[0] += "Sr No.";
+                rList[0] += "</th>";
+                rList[0] += "<th style='width: 6%;'>";
+                rList[0] += "Action";
+                rList[0] += "</th>";
+                rList[0] += "<th style='width: 20%;'>";
+                rList[0] += "Code";
+                rList[0] += "</th>";
+                rList[0] += "<th style='width: 23%;'>";
+                rList[0] += "Title";
+                rList[0] += "</th>";
+                rList[0] += "<th style='width: 10%;'>";
+                rList[0] += "Level";
+                rList[0] += "</th>";
+                rList[0] += "<th style='width: 12%;'>";
+                rList[0] += "Budget Level";
+                rList[0] += "</th>";
+                rList[0] += "<th style='width: 12%;'>";
+                rList[0] += "Type";
+                rList[0] += "</th>";
+                rList[0] += "<th style='width: 12%;'>";
+                rList[0] += "Nature";
+                rList[0] += "</th>";
+                rList[0] += "</tr>";
+                rList[0] += "</thead>";
+                rList[0] += "<tbody>";
+                var lList_Data = new SCMSDataLayer.DALChartOfAccount().GetAllRecords();
+                var IList_AccountNature = new SCMSDataLayer.DALAccountNature().GetAllRecords();
+                var IList_Nature = new SCMSDataLayer.DALNature().GetAllRecords();
+                if (lList_Data != null && lList_Data.Count > 0)
+                {
+                    int count = 0;
+                    foreach (SCMSDataLayer.DB.SETUP_ChartOfAccount lRow_Data in lList_Data)
+                    {
+                        string tempValue = "";
+                        string Title = lRow_Data.ChrtAcc_Title.Replace("'", "&#39");
+                        for (int index = 0; index < lRow_Data.ChrtAcc_Code.Length; index++)
+                        {
+                            if (index == 2 || index == 5 || index == 9 || index == 14 || index == 19 || index == 24)
+                            {
+                                tempValue += "-" + lRow_Data.ChrtAcc_Code[index];
+                            }
+                            else
+                            {
+                                tempValue += lRow_Data.ChrtAcc_Code[index];
+                            }
+                        }
+                        lRow_Data.ChrtAcc_Code = tempValue;
+                        count++;
+                        rList[0] += "<tr class='odd' style='line-height: 15px;'>";
+                        rList[0] += "<td style='display: none;'>";
+                        rList[0] += count;
+                        rList[0] += "</td>";
+                        rList[0] += "<td>";
+                        rList[0] += " <div onclick=\"javascript:return EditRecord('" + lRow_Data.ChrtAcc_Id + "', '" + lRow_Data.ChrtAcc_Code + "')\" ";
+                        rList[0] += " style='width: 22px; padding-right: 5px; float: left; cursor: pointer;'>";
+                        rList[0] += "<img alt='Edit' src='../../img/edit.png' style='width: 22px; vertical-align: middle' />";
+                        rList[0] += "</div>";
+                        rList[0] += "<div onclick=\"javascript:return DeleteRecord('" + lRow_Data.ChrtAcc_Id + "')\" style='width: 22px;";
+                        rList[0] += "float: left; cursor: pointer;'>";
+                        rList[0] += "<img alt='Delete' src='../../img/delete.png' style='width: 22px; vertical-align: middle' />";
+                        rList[0] += "</div>";
+                        rList[0] += "</td>";
+                        rList[0] += "<td id='txt_Code" + lRow_Data.ChrtAcc_Id + "' style='vertical-align: middle;'>";
+                        if (lRow_Data.ChrtAcc_Level == 2)
+                        {
+                            lRow_Data.ChrtAcc_Code = "&nbsp; " + lRow_Data.ChrtAcc_Code;
+                        }
+
+                        else if (lRow_Data.ChrtAcc_Level == 3)
+                        {
+                            lRow_Data.ChrtAcc_Code = "&nbsp; &nbsp; " + lRow_Data.ChrtAcc_Code;
+                        }
+
+                        else if (lRow_Data.ChrtAcc_Level == 4)
+                        {
+                            lRow_Data.ChrtAcc_Code = "&nbsp; &nbsp; &nbsp; " + lRow_Data.ChrtAcc_Code;
+                        }
+
+                        else if (lRow_Data.ChrtAcc_Level == 5)
+                        {
+                            lRow_Data.ChrtAcc_Code = "&nbsp; &nbsp; &nbsp; &nbsp; " + lRow_Data.ChrtAcc_Code;
+                        }
+
+                        else if (lRow_Data.ChrtAcc_Level == 6)
+                        {
+                            lRow_Data.ChrtAcc_Code = "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;" + lRow_Data.ChrtAcc_Code;
+                        }
+
+                        rList[0] += lRow_Data.ChrtAcc_Code;
+                        rList[0] += "</td>";
+                        rList[0] += "<td id='txt_Title" + lRow_Data.ChrtAcc_Id + "' style='vertical-align: middle;'>";
+                        if (lRow_Data.ChrtAcc_Level == 2)
+                        {
+                            lRow_Data.ChrtAcc_Title = "&nbsp; " + lRow_Data.ChrtAcc_Title;
+                        }
+
+                        else if (lRow_Data.ChrtAcc_Level == 3)
+                        {
+                            lRow_Data.ChrtAcc_Title = "&nbsp; &nbsp; " + lRow_Data.ChrtAcc_Title;
+                        }
+
+                        else if (lRow_Data.ChrtAcc_Level == 4)
+                        {
+                            lRow_Data.ChrtAcc_Title = "&nbsp; &nbsp; &nbsp; " + lRow_Data.ChrtAcc_Title;
+                        }
+
+                        else if (lRow_Data.ChrtAcc_Level == 5)
+                        {
+                            lRow_Data.ChrtAcc_Title = "&nbsp; &nbsp; &nbsp; &nbsp; " + lRow_Data.ChrtAcc_Title;
+                        }
+
+                        else if (lRow_Data.ChrtAcc_Level == 6)
+                        {
+                            lRow_Data.ChrtAcc_Title = "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;" + lRow_Data.ChrtAcc_Title;
+                        }
+
+                        rList[0] += Title;
+                        rList[0] += "</td>";
+                        rList[0] += "<td id='txt_AccountLevel" + lRow_Data.ChrtAcc_Id + "' style='vertical-align: middle;'>";
+                        rList[0] += lRow_Data.ChrtAcc_Level;
+                        rList[0] += "<input type='hidden' id='ChrtAcc_Level" + lRow_Data.ChrtAcc_Id + "' value='" + lRow_Data.ChrtAcc_Level + "' />";
+                        rList[0] += "</td>";
+                        rList[0] += "<td id='txt_AccountBudgetLevel'" + lRow_Data.ChrtAcc_Id + "' style='vertical-align: middle;'>";
+                        rList[0] += lRow_Data.ChrtAcc_BudgetLevel;
+                        rList[0] += "<input type='hidden' id='ChrtAcc_BudgetLevel" + lRow_Data.ChrtAcc_Id + "' value='" + lRow_Data.ChrtAcc_BudgetLevel + "' />";
+                        rList[0] += "</td>";
+                        rList[0] += "<td id='txt_AccountType" + lRow_Data.ChrtAcc_Id + "' style='vertical-align: middle;'>";
+                        if (lRow_Data.ChrtAcc_Type == 1)
+                        {
+                            rList[0] += "Group";
+                        }
+                        else
+                        {
+                            rList[0] += "Detail";
+                        }
+                        rList[0] += "<input type='hidden' id='ChrtAcc_Type" + lRow_Data.ChrtAcc_Id + "' value='" + lRow_Data.ChrtAcc_Type + "' />";
+                        rList[0] += "</td>";
+                        rList[0] += "<td id='txt_NatureId" + lRow_Data.ChrtAcc_Id + "' style='vertical-align: middle;'>";
+                        String Nature = IList_Nature.Where(c => c.Natr_Id.Equals(lRow_Data.Natr_Id)).SingleOrDefault().Natr_Title;
+                        if (Nature == "None")
+                        {
+                            Nature = "";
+                        }
+                        rList[0] += Nature;
+
+                        rList[0] += "<input type='hidden' id='Natr_Id" + lRow_Data.ChrtAcc_Id + "' value='" + lRow_Data.Natr_Id + "' />";
+                        rList[0] += "</td>";
+                        rList[0] += "</tr>";
+                    }
+                }
+
+                rList[0] += "</tbody>";
+                rList[0] += "</table>";
+                rList[0] += "<input type='hidden' id='SaveResult' value='" + ViewData["SaveResult"] + "' />";
+
+                System.Web.Script.Serialization.JavaScriptSerializer se = new System.Web.Script.Serialization.JavaScriptSerializer();
+                string result = se.Serialize(rList);
+                return result;
             }
             catch
             {
-                return PartialView("GridData");
+                return "";
             }
         }
+
         [HttpPost]
         public ActionResult ImportData(HttpPostedFileBase txt_File)
         {
