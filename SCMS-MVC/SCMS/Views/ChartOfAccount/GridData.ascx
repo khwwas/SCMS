@@ -55,6 +55,7 @@
               foreach (SCMSDataLayer.DB.SETUP_ChartOfAccount lRow_Data in lList_Data)
               {
                   string tempValue = "";
+                  string Title = lRow_Data.ChrtAcc_Title.Replace("'", "&#39");
                   for (int index = 0; index < lRow_Data.ChrtAcc_Code.Length; index++)
                   {
                       if (index == 2 || index == 5 || index == 9 || index == 14 || index == 19 || index == 24)
@@ -136,7 +137,7 @@
                       lRow_Data.ChrtAcc_Title = "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;" + lRow_Data.ChrtAcc_Title;
                   }
                 %>
-                <%=lRow_Data.ChrtAcc_Title%>
+                <%=Title%>
             </td>
             <td id="txt_AccountLevel<%=lRow_Data.ChrtAcc_Id%>" style="vertical-align: middle;">
                 <%=lRow_Data.ChrtAcc_Level%>
