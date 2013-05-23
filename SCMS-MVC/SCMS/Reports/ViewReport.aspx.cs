@@ -357,6 +357,9 @@ namespace SCMS.Reports
 
                     _ReportDocument.SetDataSource(_dsLedger);
                     _ReportDocument.SummaryInfo.ReportTitle = "Ledger Detail - Location Wise";
+                    _ReportDocument.SetParameterValue("pm_AllDate", li_AllDate);
+                    _ReportDocument.SetParameterValue("pm_DateFrom", ldt_DateFrom);
+                    _ReportDocument.SetParameterValue("pm_DateTo", ldt_Dateto);
                 }
                 #endregion
 
@@ -399,6 +402,9 @@ namespace SCMS.Reports
 
                     _ReportDocument.SetDataSource(_dsLedger);
                     _ReportDocument.SummaryInfo.ReportTitle = "Ledger Detail - Account Wise";
+                    _ReportDocument.SetParameterValue("pm_AllDate", li_AllDate);
+                    _ReportDocument.SetParameterValue("pm_DateFrom", ldt_DateFrom);
+                    _ReportDocument.SetParameterValue("pm_DateTo", ldt_Dateto);
                 }
                 #endregion
 
@@ -441,6 +447,9 @@ namespace SCMS.Reports
 
                     _ReportDocument.SetDataSource(_dsTrialBalance);
                     _ReportDocument.SummaryInfo.ReportTitle = "Trial Balance";
+                    _ReportDocument.SetParameterValue("pm_AllDate", li_AllDate);
+                    _ReportDocument.SetParameterValue("pm_DateFrom", ldt_DateFrom);
+                    _ReportDocument.SetParameterValue("pm_DateTo", ldt_Dateto);
                 }
                 #endregion
 
