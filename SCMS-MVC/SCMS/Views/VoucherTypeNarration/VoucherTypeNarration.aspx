@@ -28,12 +28,14 @@
             }
             else {
                 var Url = document.getElementById('frm_VoucherTypeNarrationSetup').action;
-                Url += "VoucherTypeNarration/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&ps_Title=" + lcnt_txtTitle.value + "&ps_CmpId=" + lcnt_Cmp.value.toString();
+                //Url += "VoucherTypeNarration/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&ps_Title=" + lcnt_txtTitle.value + "&ps_CmpId=" + lcnt_Cmp.value.toString();
+                Url = "VoucherTypeNarration/SaveRecord";
                 document.getElementById("Waiting_Image").style.display = "block";
                 document.getElementById("btn_Save").style.display = "none";
                 $.ajax({
-                    type: "GET",
+                    type: "POST",
                     url: Url,
+                    data: { ps_Code: lcnt_txtSelectedCode.value, ps_Title: lcnt_txtTitle.value, ps_CmpId: lcnt_Cmp.value.toString() },
                     success: function (response) {
                         html = response;
                         $("#GridContainer").html(response);

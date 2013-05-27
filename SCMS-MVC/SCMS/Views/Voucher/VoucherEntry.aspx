@@ -36,7 +36,6 @@
             });
 
             $("#btn_AddNewRow").click(function () {
-
                 var comboData = $("#AccountCodesList").val().split(',');
                 var htmlStr = "<div class='detailRow' style='float: left; width: auto;'>";
                 htmlStr += "<div class='CustomCell' style='width: 250px; height: 30px;'>";
@@ -377,7 +376,8 @@
     <input type="hidden" id="txt_SelectedMasterCode" name="txt_SelectedMasterCode" value='<%=ViewData["VoucherId"] %>' />
     <input type="hidden" id="txt_SelectedDetailCode" name="txt_SelectedDetailCode" value="" />
     <input type="hidden" id="NarrationTitles" name="NarrationTitles" value='<%=ViewData["Narrations"] %>' />
-    <input type="hidden" id="AccountCodesList" name="AccountCodesList" value="<%=ViewData["ChartOfAccountCodesWithTitles"] %>" />
+    <%string AccountCodes = ViewData["ChartOfAccountCodesWithTitles"].ToString().Replace("'", "&#39"); %>
+    <input type="hidden" id="AccountCodesList" name="AccountCodesList" value='<%=AccountCodes %>' />
     <div class="box round first fullpage grid">
         <h2>
             Voucher Entry</h2>

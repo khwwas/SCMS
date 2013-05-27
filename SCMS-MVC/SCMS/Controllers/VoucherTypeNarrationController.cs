@@ -47,7 +47,6 @@ namespace SCMS.Controllers
                     li_ReturnValue = objDal.SaveRecord(lrow_Data);
                     ViewData["SaveResult"] = li_ReturnValue;
                 }
-
                 return PartialView("GridData");
             }
             catch
