@@ -31,13 +31,14 @@
                 return;
             }
             else {
-                var Url = document.getElementById('frm_CompanySetup').action;
-                Url += "Company/SaveCompany?Code=" + txt_SelectedCode.value + "&Name=" + txt_CompanyName.value + "&Address1=" + txt_Address1.value + "&Address2=" + txt_Address2.value + "&Email=" + txt_Email.value + "&Phone=" + txt_Phone.value + "&Fax=" + txt_Fax.value;
+                //var Url = document.getElementById('frm_CompanySetup').action;
+                //Url += "Company/SaveCompany?Code=" + txt_SelectedCode.value + "&Name=" + txt_CompanyName.value + "&Address1=" + txt_Address1.value + "&Address2=" + txt_Address2.value + "&Email=" + txt_Email.value + "&Phone=" + txt_Phone.value + "&Fax=" + txt_Fax.value;
                 document.getElementById("Waiting_Image").style.display = "block";
                 document.getElementById("btn_Save").style.display = "none";
                 $.ajax({
-                    type: "GET",
-                    url: Url,
+                    type: "POST",
+                    url: "Company/SaveCompany",
+                    data: { Code: txt_SelectedCode.value, Name: txt_CompanyName.value, Address1: txt_Address1.value, Address2: txt_Address2.value, Email: txt_Email.value, Phone: txt_Phone.value, Fax: txt_Fax.value },
                     success: function (response) {
                         //alert(response);
                         html = response;
