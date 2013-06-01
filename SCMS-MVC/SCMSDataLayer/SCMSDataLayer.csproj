@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DALEmployee.cs" />
     <Compile Include="DALAccountNature.cs" />
     <Compile Include="DALBank.cs" />
     <Compile Include="DALBankAccount.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="DALCustomer.cs" />
     <Compile Include="DALDepartment.cs" />
     <Compile Include="DALEmployeeType.cs" />
+    <Compile Include="DALEmpPlacement.cs" />
     <Compile Include="DALFunctionalArea.cs" />
     <Compile Include="DALGender.cs" />
     <Compile Include="DALJobPosition.cs" />
