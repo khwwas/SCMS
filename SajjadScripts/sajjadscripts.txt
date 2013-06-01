@@ -1,4 +1,241 @@
 
+Scripts Dated 06/01/2013
+
+--------------------------------------------------------------------------------------------------------
+script# 3
+
+
+
+
+USE [SCMS]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetEmployeePlacements]    Script Date: 06/01/2013 19:30:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[sp_GetEmployeePlacements] 
+@EmpId varchar(50)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT 
+		 SETUP_EmpPlacement.*,
+		 SETUP_Department.Dpt_Title,
+		 SETUP_EmployeeType.EmpTyp_Title,
+		 SETUP_JobTitle.JT_Title,
+		 SETUP_LeaveGroup.LevGrp_Title,
+		 
+		 SETUP_LeaveType.LevTyp_Title,
+		 SETUP_Location.Loc_Title,
+		 SETUP_Shift.Shft_Title
+		 
+		 
+	  From SETUP_EmpPlacement 
+	  LEFT JOIN SETUP_Department ON SETUP_Department.Dpt_Id = SETUP_EmpPlacement.Dpt_Id
+	  LEFT JOIN SETUP_EmployeeType ON SETUP_EmployeeType.EmpTyp_Id = SETUP_EmpPlacement.EmpTyp_Id
+	  LEFT JOIN SETUP_JobTitle ON SETUP_JobTitle.JT_Id = SETUP_EmpPlacement.JT_Id
+	  LEFT JOIN SETUP_LeaveGroup ON SETUP_LeaveGroup.LevGrp_Id = SETUP_EmpPlacement.LevGrp_Id
+	  LEFT JOIN SETUP_LeaveType ON SETUP_LeaveType.LevTyp_Id = SETUP_EmpPlacement.LevTyp_Id
+	  LEFT JOIN SETUP_Location ON SETUP_Location.Loc_Id = SETUP_EmpPlacement.Loc_Id
+	  
+	  LEFT JOIN SETUP_Shift ON SETUP_Shift.Shft_Id = SETUP_EmpPlacement.Shft_Id
+	  
+	  Where SETUP_EmpPlacement.Emp_Id=@EmpId;
+ END
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+script# 2
+
+
+
+USE [SCMS]
+GO
+
+/****** Object:  Table [dbo].[SETUP_EmpPlacement]    Script Date: 06/01/2013 19:29:37 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[SETUP_EmpPlacement](
+	[Plcmt_Id] [varchar](50) NOT NULL,
+	[Plcmt_Code] [varchar](50) NOT NULL,
+	[Emp_Id] [varchar](50) NOT NULL,
+	[Loc_Id] [varchar](50) NULL,
+	[Dpt_Id] [varchar](50) NULL,
+	[Shft_Id] [varchar](50) NULL,
+	[EmpTyp_Id] [varchar](50) NULL,
+	[LevTyp_Id] [varchar](50) NULL,
+	[LevGrp_Id] [varchar](50) NULL,
+	[JT_Id] [varchar](50) NULL,
+ CONSTRAINT [PK_SETUP_EmpPlacement] PRIMARY KEY CLUSTERED 
+(
+	[Plcmt_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[SETUP_EmpPlacement]  WITH CHECK ADD  CONSTRAINT [FK_SETUP_EmpPlacement_SETUP_Department] FOREIGN KEY([Dpt_Id])
+REFERENCES [dbo].[SETUP_Department] ([Dpt_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_EmpPlacement] CHECK CONSTRAINT [FK_SETUP_EmpPlacement_SETUP_Department]
+GO
+
+ALTER TABLE [dbo].[SETUP_EmpPlacement]  WITH CHECK ADD  CONSTRAINT [FK_SETUP_EmpPlacement_SETUP_Employee] FOREIGN KEY([Emp_Id])
+REFERENCES [dbo].[SETUP_Employee] ([Emp_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_EmpPlacement] CHECK CONSTRAINT [FK_SETUP_EmpPlacement_SETUP_Employee]
+GO
+
+ALTER TABLE [dbo].[SETUP_EmpPlacement]  WITH CHECK ADD  CONSTRAINT [FK_SETUP_EmpPlacement_SETUP_EmployeeType] FOREIGN KEY([EmpTyp_Id])
+REFERENCES [dbo].[SETUP_EmployeeType] ([EmpTyp_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_EmpPlacement] CHECK CONSTRAINT [FK_SETUP_EmpPlacement_SETUP_EmployeeType]
+GO
+
+ALTER TABLE [dbo].[SETUP_EmpPlacement]  WITH CHECK ADD  CONSTRAINT [FK_SETUP_EmpPlacement_SETUP_EmpPlacement] FOREIGN KEY([Plcmt_Id])
+REFERENCES [dbo].[SETUP_EmpPlacement] ([Plcmt_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_EmpPlacement] CHECK CONSTRAINT [FK_SETUP_EmpPlacement_SETUP_EmpPlacement]
+GO
+
+ALTER TABLE [dbo].[SETUP_EmpPlacement]  WITH CHECK ADD  CONSTRAINT [FK_SETUP_EmpPlacement_SETUP_JobTitle] FOREIGN KEY([JT_Id])
+REFERENCES [dbo].[SETUP_JobTitle] ([JT_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_EmpPlacement] CHECK CONSTRAINT [FK_SETUP_EmpPlacement_SETUP_JobTitle]
+GO
+
+ALTER TABLE [dbo].[SETUP_EmpPlacement]  WITH CHECK ADD  CONSTRAINT [FK_SETUP_EmpPlacement_SETUP_LeaveGroup] FOREIGN KEY([LevGrp_Id])
+REFERENCES [dbo].[SETUP_LeaveGroup] ([LevGrp_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_EmpPlacement] CHECK CONSTRAINT [FK_SETUP_EmpPlacement_SETUP_LeaveGroup]
+GO
+
+ALTER TABLE [dbo].[SETUP_EmpPlacement]  WITH CHECK ADD  CONSTRAINT [FK_SETUP_EmpPlacement_SETUP_LeaveType] FOREIGN KEY([LevTyp_Id])
+REFERENCES [dbo].[SETUP_LeaveType] ([LevTyp_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_EmpPlacement] CHECK CONSTRAINT [FK_SETUP_EmpPlacement_SETUP_LeaveType]
+GO
+
+ALTER TABLE [dbo].[SETUP_EmpPlacement]  WITH CHECK ADD  CONSTRAINT [FK_SETUP_EmpPlacement_SETUP_Location] FOREIGN KEY([Loc_Id])
+REFERENCES [dbo].[SETUP_Location] ([Loc_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_EmpPlacement] CHECK CONSTRAINT [FK_SETUP_EmpPlacement_SETUP_Location]
+GO
+
+ALTER TABLE [dbo].[SETUP_EmpPlacement]  WITH CHECK ADD  CONSTRAINT [FK_SETUP_EmpPlacement_SETUP_Shift] FOREIGN KEY([Shft_Id])
+REFERENCES [dbo].[SETUP_Shift] ([Shft_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_EmpPlacement] CHECK CONSTRAINT [FK_SETUP_EmpPlacement_SETUP_Shift]
+GO
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+script# 1 
+
+
+USE [SCMS]
+GO
+
+/****** Object:  Table [dbo].[SETUP_Employee]    Script Date: 06/01/2013 19:28:20 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[SETUP_Employee](
+	[Emp_Id] [varchar](50) NOT NULL,
+	[Emp_Code] [varchar](50) NOT NULL,
+	[Emp_DoB] [datetime] NULL,
+	[Emp_Title] [varchar](100) NULL,
+	[Emp_Address] [varchar](150) NULL,
+	[Gndr_Id] [varchar](50) NULL,
+	[MS_Id] [varchar](50) NULL,
+	[Rlgn_Id] [varchar](50) NULL,
+	[Natn_Id] [varchar](50) NULL,
+	[Emp_Phone] [varchar](100) NULL,
+	[Emp_Mobile] [varchar](100) NULL,
+	[Emp_Email] [varchar](100) NULL,
+	[Emp_CNIC] [varchar](100) NULL,
+	[Emp_AptmentDate] [datetime] NULL,
+	[Emp_JoiningDate] [datetime] NULL,
+	[Emp_Months_Probation] [varchar](50) NULL,
+	[Emp_ConfirmDate] [datetime] NULL,
+	[Emp_Months_NoticePerd] [varchar](50) NULL,
+	[Emp_Active] [int] NULL,
+	[Emp_SortOrder] [int] NULL,
+	[Emp_ImagePath] [varchar](200) NULL,
+ CONSTRAINT [PK_SETUP_Employee] PRIMARY KEY CLUSTERED 
+(
+	[Emp_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[SETUP_Employee]  WITH CHECK ADD  CONSTRAINT [FK_SETUP_Employee_SETUP_Gender] FOREIGN KEY([Gndr_Id])
+REFERENCES [dbo].[SETUP_Gender] ([Gndr_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_Employee] CHECK CONSTRAINT [FK_SETUP_Employee_SETUP_Gender]
+GO
+
+ALTER TABLE [dbo].[SETUP_Employee]  WITH CHECK ADD  CONSTRAINT [FK_SETUP_Employee_SETUP_MaritalSatus] FOREIGN KEY([MS_Id])
+REFERENCES [dbo].[SETUP_MaritalStatus] ([MS_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_Employee] CHECK CONSTRAINT [FK_SETUP_Employee_SETUP_MaritalSatus]
+GO
+
+ALTER TABLE [dbo].[SETUP_Employee]  WITH CHECK ADD  CONSTRAINT [FK_SETUP_Employee_SETUP_Nationality] FOREIGN KEY([Natn_Id])
+REFERENCES [dbo].[SETUP_Nationality] ([Natn_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_Employee] CHECK CONSTRAINT [FK_SETUP_Employee_SETUP_Nationality]
+GO
+
+ALTER TABLE [dbo].[SETUP_Employee]  WITH CHECK ADD  CONSTRAINT [FK_SETUP_Employee_SETUP_Religion] FOREIGN KEY([Rlgn_Id])
+REFERENCES [dbo].[SETUP_Religion] ([Rlgn_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_Employee] CHECK CONSTRAINT [FK_SETUP_Employee_SETUP_Religion]
+GO
+
+
+
 
 -----------------------------------------------------------------------------------------------------------
 Dated 04/17/2013
