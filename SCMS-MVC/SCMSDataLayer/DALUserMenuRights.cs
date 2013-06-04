@@ -14,6 +14,12 @@ namespace SCMSDataLayer
             return dbSCMS.sp_GetUserMenuRights(GourpId).ToList();
         }
 
+        public List<sp_GetUserMenuRightsByUserIdResult> GetUserMenuRightsByUserId(string UserId)
+        {
+            SCMSDataContext dbSCMS = Connection.Create();
+            return dbSCMS.sp_GetUserMenuRightsByUserId(UserId).ToList();
+        }
+
         public int SaveRecord(Security_UserRight pRow_NewData)
         {
             int li_ReturnValue = 0;
@@ -39,14 +45,21 @@ namespace SCMSDataLayer
             return dbSCMS.Security_MenuOptions.ToList();
         }
 
-        public int DeleteRecordByGroupId(int Grp_Id, int ModuleId)
+        public int DeleteRecordByGroupId(int Grp_Id, int? UserId, int ModuleId)
         {
             int li_ReturnValue = 0;
 
             try
             {
                 SCMSDataContext dbSCMS = Connection.Create();
-                li_ReturnValue = dbSCMS.ExecuteCommand("Delete From Security_UserRights where Grp_Id=" + Grp_Id + " And Mod_Id=" + ModuleId);
+                if (UserId != null)
+                {
+                    li_ReturnValue = dbSCMS.ExecuteCommand("Delete From Security_UserRights where Grp_Id=" + Grp_Id + " And UsrSec_UserId=" + UserId + " And Mod_Id=" + ModuleId);
+                }
+                else
+                {
+                    li_ReturnValue = dbSCMS.ExecuteCommand("Delete From Security_UserRights where Grp_Id=" + Grp_Id + " And Mod_Id=" + ModuleId);
+                }
             }
             catch
             {

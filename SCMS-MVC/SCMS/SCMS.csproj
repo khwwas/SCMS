@@ -1062,6 +1062,8 @@
     <Content Include="Views\Supplier\Supplier.aspx" />
     <Content Include="Views\UserRightsSetup\TreeView.ascx" />
     <Content Include="Views\UserRightsSetup\UserRights.aspx" />
+    <Content Include="Views\UserRightsSetup\TreeView-Back.ascx" />
+    <Content Include="Views\UserRightsSetup\UserRights-Back.aspx" />
     <Content Include="Views\User\GridData.ascx" />
     <Content Include="Views\User\User.aspx" />
     <Content Include="Views\CustomerType\GridData.ascx" />
