@@ -89,6 +89,17 @@
     <script src="../../Scripts/jquery.inputmask.extensions.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.lightbox_me.js" type="text/javascript"></script>
     <script src="../../Scripts/zebra_datepicker.js" type="text/javascript"></script>
+
+    <%if (Request.Url.OriginalString.Contains("Employee"))
+      { %>
+    <script src="../../bootstrap/js/bootstrap.js" type="text/javascript"></script>
+    <script src="../../bootstrap/js/bootstrap-datepicker.js" type="text/javascript"></script>
+    <link href="../../bootstrap/js/datepicker.css" rel="stylesheet" type="text/css" />
+
+
+
+    <%} %>
+
     <%if (Request.Url.OriginalString.Contains("Shift"))
       { %>
     <link href="../../bootstrap/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
