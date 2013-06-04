@@ -1,0 +1,71 @@
+Scripts Generated On 31 May 2013
+----------------------------------------------------------------------------------------------------------------------
+
+Alter Table Security_UserRights
+Add UsrSec_UserId bit NULL,
+    UsrSec_Add bit NULL,
+    UsrSec_Edit bit NULL,
+    UsrSec_Delete bit NULL,
+    UsrSec_Import bit NULL,
+    UsrSec_Print bit NULL
+    
+ Update Security_UserRights Set UsrSec_Add = 1,UsrSec_Edit = 1,UsrSec_Delete = 1,UsrSec_Import = 1,UsrSec_Print = 1
+
+Alter Table SECURITY_UserRights
+Alter Column UsrSec_UserId varchar(50) Null
+
+----------------------------------------------------------------------------------------------------------------------
+
+Alter Procedure [dbo].[sp_GetUserMenuRights](@GroupId varchar(50))
+As
+Begin
+  Select Security_MenuOptions.Mnu_Id,
+         Security_MenuOptions.Mnu_Description,
+         Security_MenuOptions.Mnu_TargetUrl,
+         Security_MenuOptions.Mnu_Level,
+         Security_MenuOptions.Mnu_SortOrder,
+         Security_MenuOptions.Mnu_IsLineBreak,
+         Security_MenuOptions.Mod_Id,
+         IsNull(Security_UserRights.Mnu_Id,0) as SelectedMenu,
+         Security_UserRights.UsrSec_UserId as UserId,
+          IsNull(Security_UserRights.UsrSec_Add,0) as CanAdd,
+          IsNull(Security_UserRights.UsrSec_Edit,0) as CanEdit,
+          IsNull(Security_UserRights.UsrSec_Delete,0) as CanDelete,
+          IsNull(Security_UserRights.UsrSec_Print,0) as CanPrint,
+          IsNull(Security_UserRights.UsrSec_Import,0) as CanImport
+    From Security_MenuOptions Left Outer Join Security_UserRights On
+              ( Security_UserRights.Mnu_Id = Security_MenuOptions.Mnu_Id ) And
+              ( Security_UserRights.Grp_Id = @GroupId )
+Order By --Security_MenuOptions.Mnu_Level,
+         Security_MenuOptions.Mnu_SortOrder
+ End
+ 
+
+Create Procedure [dbo].[sp_GetUserMenuRightsByUserId](@UserId varchar(50))
+As
+Begin
+  Select Security_MenuOptions.Mnu_Id,
+         Security_MenuOptions.Mnu_Description,
+         Security_MenuOptions.Mnu_TargetUrl,
+         Security_MenuOptions.Mnu_Level,
+         Security_MenuOptions.Mnu_SortOrder,
+         Security_MenuOptions.Mnu_IsLineBreak,
+         Security_MenuOptions.Mod_Id,
+         IsNull(Security_UserRights.Mnu_Id,0) as SelectedMenu,
+         Security_UserRights.UsrSec_UserId as UserId,
+          IsNull(Security_UserRights.UsrSec_Add,0) as CanAdd,
+          IsNull(Security_UserRights.UsrSec_Edit,0) as CanEdit,
+          IsNull(Security_UserRights.UsrSec_Delete,0) as CanDelete,
+          IsNull(Security_UserRights.UsrSec_Print,0) as CanPrint,
+          IsNull(Security_UserRights.UsrSec_Import,0) as CanImport
+    From Security_MenuOptions Left Outer Join Security_UserRights On
+              ( Security_UserRights.Mnu_Id = Security_MenuOptions.Mnu_Id ) And
+              ( Security_UserRights.UsrSec_UserId = @UserId )
+Order By --Security_MenuOptions.Mnu_Level,
+         Security_MenuOptions.Mnu_SortOrder
+ End
+ 
+
+ 
+
+----------------------------------------------------------------------------------------------------------------------
