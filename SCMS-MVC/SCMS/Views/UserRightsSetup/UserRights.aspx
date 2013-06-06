@@ -9,11 +9,17 @@
         {
             background-color: rgb(230,230,230);
         }
+        #InnerTab a:hover
+        {
+            background: #F8F8F8 !important;
+            color: Black !important;
+        }
     </style>
     <% 
         List<SCMSDataLayer.DB.sp_GetUserListResult> users = new List<SCMSDataLayer.DB.sp_GetUserListResult>();
         users = new SCMSDataLayer.DALUser().GetAllData();
         List<SCMSDataLayer.DB.sp_GetUserMenuRightsResult> MenuRights = (List<SCMSDataLayer.DB.sp_GetUserMenuRightsResult>)ViewData["UserMenuRights"];
+        List<SCMSDataLayer.DB.sp_GetUserLocationsByGroupIdResult> UserLocations = (List<SCMSDataLayer.DB.sp_GetUserLocationsByGroupIdResult>)ViewData["UserLocations"];
     %>
     <div class="box round first fullpage grid" style="overflow: auto;">
         <h2>
@@ -50,9 +56,16 @@
                     </table>
                 </div>
             </div>
-            <div id='RightContainer' style="float: left; height: 390px; overflow: auto; border: 1px solid #ccc;
-                margin-left: 10px; width: 74%;">
-                <div id="MenuContainer">
+            <div id='RightContainer' style="float: left; border: 0px solid #ccc; margin-left: 10px;
+                width: 74%;">
+                <div id="InnerTab" class="tabbable">
+                    <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                        <li class="active"><a href="#MenuContainer">Menu Rights</a></li>
+                        <li><a href="#LocationContainer">Locations</a></li>
+                    </ul>
+                </div>
+                <div id="MenuContainer" style="height: 349px; overflow: auto; border: 1px solid #ccc;
+                    margin-top: 5px;">
                     <table id="MenuGrid" class="display" style="width: 100%; padding: 2px;">
                         <thead>
                             <tr class='odd gradeX' style='line-height: 15px; cursor: pointer; text-align: left;
@@ -140,6 +153,36 @@
                                         id='ChkImport<%=menuRight.Mnu_Id %>' <%=menuRight.CanImport == false ? "" : "checked='checked'" %> />
                                 </td>
                                 <%} %>
+                            </tr>
+                            <%} %>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="LocationContainer" style="height: 349px; overflow: auto; border: 1px solid #ccc;
+                    margin-top: 5px; display: none;">
+                    <table id="LocationGrid" class="display" style="width: 100%; padding: 2px;">
+                        <thead>
+                            <tr class='odd gradeX' style='line-height: 15px; cursor: pointer; text-align: left;
+                                background-color: #ccc;'>
+                                <th style="vertical-align: middle; width: 90%; padding-left: 3px;">
+                                    Location
+                                </th>
+                                <th style="vertical-align: middle; width: 10%;">
+                                    Is Allowed
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%foreach (SCMSDataLayer.DB.sp_GetUserLocationsByGroupIdResult location in UserLocations)
+                              {
+                            %>
+                            <tr class='odd gradeX' style='line-height: 15px; cursor: pointer;'>
+                                <td style='vertical-align: middle; width: 25%;'>
+                                    <%=location.Loc_Title %>
+                                </td>
+                                <td style="vertical-align: middle;">
+                                    <input type='checkbox' class='allowedloc' id='<%=location.Loc_Id %>' <%=location.SelectedLocation == "0" ? "" : "checked='checked'" %> />
+                                </td>
                             </tr>
                             <%} %>
                         </tbody>
@@ -274,6 +317,14 @@
                 }
             });
         }
-        
+
+        $("#InnerTab li").click(function () {
+            $($(this).parent().find(".active").find("a").attr("href")).hide();
+            $(this).parent().find(".active").removeClass("active");
+            $(this).addClass("active");
+            $($(this).parent().find(".active").find("a").attr("href")).show();
+        });
+
+
     </script>
 </asp:Content>

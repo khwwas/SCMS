@@ -69,3 +69,86 @@ Order By --Security_MenuOptions.Mnu_Level,
  
 
 ----------------------------------------------------------------------------------------------------------------------
+
+USE [SCMS]
+GO
+
+/****** Object:  Table [dbo].[Security_UserLocations]    Script Date: 06/06/2013 00:33:43 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Security_UserLocations](
+	[UserLoc_Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[UsrGrp_Id] [varchar](50) NULL,
+	[User_Id] [varchar](50) NULL,
+	[Loc_Id] [varchar](50) NULL,
+ CONSTRAINT [PK_Security_UserLocations] PRIMARY KEY CLUSTERED 
+(
+	[UserLoc_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[Security_UserLocations]  WITH CHECK ADD  CONSTRAINT [FK_Security_UserLocations_SECURITY_User] FOREIGN KEY([User_Id])
+REFERENCES [dbo].[SECURITY_User] ([User_Id])
+GO
+
+ALTER TABLE [dbo].[Security_UserLocations] CHECK CONSTRAINT [FK_Security_UserLocations_SECURITY_User]
+GO
+
+ALTER TABLE [dbo].[Security_UserLocations]  WITH CHECK ADD  CONSTRAINT [FK_Security_UserLocations_SECURITY_UserGroup] FOREIGN KEY([UsrGrp_Id])
+REFERENCES [dbo].[SECURITY_UserGroup] ([UsrGrp_Id])
+GO
+
+ALTER TABLE [dbo].[Security_UserLocations] CHECK CONSTRAINT [FK_Security_UserLocations_SECURITY_UserGroup]
+GO
+
+ALTER TABLE [dbo].[Security_UserLocations]  WITH CHECK ADD  CONSTRAINT [FK_Security_UserLocations_SETUP_Location] FOREIGN KEY([Loc_Id])
+REFERENCES [dbo].[SETUP_Location] ([Loc_Id])
+GO
+
+ALTER TABLE [dbo].[Security_UserLocations] CHECK CONSTRAINT [FK_Security_UserLocations_SETUP_Location]
+GO
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Create Procedure [dbo].[sp_GetUserLocationsByGroupId](@GroupId varchar(50))
+As
+Begin
+  Select SETUP_Location.*,
+  Security_UserLocations.UsrGrp_Id,
+  Security_UserLocations.User_Id,
+         IsNull(Security_UserLocations.Loc_Id,0) as SelectedLocation
+    From SETUP_Location Left Outer Join Security_UserLocations On
+              ( Security_UserLocations.Loc_Id = SETUP_Location.Loc_Id ) And
+              ( Security_UserLocations.User_Id = @GroupId )
+Order By 
+         SETUP_Location.Loc_SortOrder
+ End
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Create Procedure [dbo].[sp_GetUserLocationsByUserId](@UserId varchar(50))
+As
+Begin
+  Select SETUP_Location.*,
+  Security_UserLocations.UsrGrp_Id,
+  Security_UserLocations.User_Id,
+         IsNull(Security_UserLocations.Loc_Id,0) as SelectedLocation
+    From SETUP_Location Left Outer Join Security_UserLocations On
+              ( Security_UserLocations.Loc_Id = SETUP_Location.Loc_Id ) And
+              ( Security_UserLocations.User_Id = @UserId )
+Order By 
+         SETUP_Location.Loc_SortOrder
+ End

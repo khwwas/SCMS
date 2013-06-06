@@ -18,7 +18,9 @@ namespace SCMS.Controllers
             List<sp_GetUserGroupListResult> userGroups = new DALUserGroup().GetAllData().ToList();
             ViewData["ddl_UserGroups"] = new SelectList(userGroups, "UsrGrp_Id", "UsrGrp_Title");
             List<sp_GetUserMenuRightsResult> MenuRights = new DALUserMenuRights().GetUserMenuRights("").Where(c => c.Mod_Id == SystemParameters.ModuleId && c.Mnu_Level != "0").ToList();
+            List<sp_GetUserLocationsByGroupIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByGroupId("").ToList();
             ViewData["UserMenuRights"] = MenuRights;
+            ViewData["UserLocations"] = UserLocations;
             return View("UserRights");
         }
 

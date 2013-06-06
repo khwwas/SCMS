@@ -20,6 +20,18 @@ namespace SCMSDataLayer
             return dbSCMS.sp_GetUserMenuRightsByUserId(UserId).ToList();
         }
 
+        public List<sp_GetUserLocationsByUserIdResult> GetUserLocationsByUserId(string UserId)
+        {
+            SCMSDataContext dbSCMS = Connection.Create();
+            return dbSCMS.sp_GetUserLocationsByUserId(UserId).ToList();
+        }
+
+        public List<sp_GetUserLocationsByGroupIdResult> GetUserLocationsByGroupId(string GourpId)
+        {
+            SCMSDataContext dbSCMS = Connection.Create();
+            return dbSCMS.sp_GetUserLocationsByGroupId(GourpId).ToList();
+        }
+
         public int SaveRecord(Security_UserRight pRow_NewData)
         {
             int li_ReturnValue = 0;
