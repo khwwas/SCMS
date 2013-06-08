@@ -190,9 +190,9 @@
       <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Reports\Datasets\dsIncomeStatement.Designer.cs">
-      <DependentUpon>dsIncomeStatement.xsd</DependentUpon>
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsIncomeStatement.xsd</DependentUpon>
     </Compile>
     <Compile Include="Reports\Datasets\dsLedger1.Designer.cs">
       <DependentUpon>dsLedger.xsd</DependentUpon>
