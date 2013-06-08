@@ -42,22 +42,23 @@
                 FadeOut(lcnt_MessageBox);
                 txt_Title.focus();
                 return;
-            } 
+            }
             else {
-                var Url = document.getElementById('frm_SupplierSetup').action;
-                Url += "Supplier/SaveSupplierRecord?Code=" + lcnt_txtSelectedCode.value + "&location=" + ddl_location.value + "&SupplierType=" + ddl_SupplierType.value + "&Title=" + txt_Title.value + "&Address=" + txt_Address.value + "&Email=" + txt_Email.value + "&Phone=" + txt_Phone.value + "&Fax=" + txt_Fax.value;
+                //var Url = document.getElementById('frm_SupplierSetup').action;
+                //Url += "Supplier/SaveSupplierRecord?Code=" + lcnt_txtSelectedCode.value + "&location=" + ddl_location.value + "&SupplierType=" + ddl_SupplierType.value + "&Title=" + txt_Title.value + "&Address=" + txt_Address.value + "&Email=" + txt_Email.value + "&Phone=" + txt_Phone.value + "&Fax=" + txt_Fax.value;
                 document.getElementById("Waiting_Image").style.display = "block";
                 document.getElementById("btn_Save").style.display = "none";
                 $.ajax({
-                    type: "GET",
-                    url: Url,
+                    type: "POST",
+                    url: "Supplier/SaveSupplierRecord",
+                    data: { Code: lcnt_txtSelectedCode.value, location: ddl_location.value, SupplierType: ddl_SupplierType.value, Title: txt_Title.value, Address: txt_Address.value, Email: txt_Email.value, Phone: txt_Phone.value, Fax: txt_Fax.value },
                     success: function (response) {
                         html = response;
                         $("#GridContainer").html(response);
                         SetGrid();
                         ResetForm();
                         FadeIn(lcnt_MessageBox);
-//                        alert(document.getElementById("SaveResult").value);
+                        //                        alert(document.getElementById("SaveResult").value);
                         if (document.getElementById("SaveResult").value == "0") {
                             lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Unable to save record.</p>";
                             lcnt_MessageBox.setAttribute("class", "message error");
@@ -93,7 +94,7 @@
             document.getElementById('txt_Email').value = "";
             document.getElementById('txt_Phone').value = "";
             document.getElementById('txt_Fax').value = "";
-            
+
         }
 
         function EditRecord(Id) {
@@ -159,29 +160,29 @@
             <div class="CustomCell" style="width: 115px; height: 30px">
                 Code</div>
             <input type="text" class="CustomText" style="width: 100px;" id="txt_Code" name="txt_Code"
-                maxlength="100" value="[Auto]" readonly="readonly" /> 
-                 <div class="Clear">
+                maxlength="100" value="[Auto]" readonly="readonly" />
+            <div class="Clear">
             </div>
-                <div class="CustomCell" style="width: 115px; height: 30px;">
+            <div class="CustomCell" style="width: 115px; height: 30px;">
                 Location</div>
-                <%= Html.DropDownList("ddl_location", null, new { style = "width:900px; padding: 4px;" })%>
-                <div class="Clear">
+            <%= Html.DropDownList("ddl_location", null, new { style = "width:900px; padding: 4px;" })%>
+            <div class="Clear">
             </div>
-                <div class="CustomCell" style="width: 115px; height: 30px;">
+            <div class="CustomCell" style="width: 115px; height: 30px;">
                 Supplier Type</div>
-                <%= Html.DropDownList("ddl_SupplierType", null, new { style = "width:900px; padding: 4px;" })%>
+            <%= Html.DropDownList("ddl_SupplierType", null, new { style = "width:900px; padding: 4px;" })%>
             <div class="Clear">
             </div>
-            <div class="CustomCell" style="width: 107px; height: 30px; margin-top:8px;">
+            <div class="CustomCell" style="width: 107px; height: 30px; margin-top: 8px;">
                 Title</div>
-            <input type="text" class="CustomText" style="width: 890px; margin-left:7px;" id="txt_Title" name="txt_Title"
-                maxlength="100" />
+            <input type="text" class="CustomText" style="width: 890px; margin-left: 7px;" id="txt_Title"
+                name="txt_Title" maxlength="100" />
             <div class="Clear">
             </div>
-            <div class="CustomCell" style="width: 107px; height: 30px; margin-top:8px;">
+            <div class="CustomCell" style="width: 107px; height: 30px; margin-top: 8px;">
                 Address</div>
-            <input type="text" class="CustomText" style="width: 890px; margin-left:7px;" id="txt_Address" name="txt_Address"
-                maxlength="100" />
+            <input type="text" class="CustomText" style="width: 890px; margin-left: 7px;" id="txt_Address"
+                name="txt_Address" maxlength="100" />
             <div class="Clear">
             </div>
             <div class="CustomCell">
@@ -196,8 +197,7 @@
             <input type="text" class="CustomText" id="txt_Phone" name="txt_Phone" maxlength="100" />
             <input type="text" class="CustomText" id="txt_Fax" name="txt_Fax" maxlength="100" />
             <div class="Clear">
-            </div>     
-            
+            </div>
             <div style="float: right; margin-bottom: 10px;">
                 <div style="float: left; margin-right: 5px;">
                     <input id="btn_Save" type="button" value="Save" class="btn btn-blue" onclick="SaveRecord();"

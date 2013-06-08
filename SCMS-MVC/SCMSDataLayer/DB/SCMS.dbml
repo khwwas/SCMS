@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DA_GL" Class="SCMSDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=AWAIS-PC\MSSQL2008;Initial Catalog=DA_GL;Persist Security Info=True;User ID=sa" SettingsObjectName="SCMSDataLayer.Properties.Settings" SettingsPropertyName="DA_GLConnectionString" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="SCMS" Class="SCMSDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=WAQAS\KHAWAJAWAQAS;Initial Catalog=SCMS;Persist Security Info=True;User ID=sa" SettingsObjectName="SCMSDataLayer.Properties.Settings" SettingsPropertyName="SCMSConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.GL_VchrDetail" Member="GL_VchrDetails">
     <Type Name="GL_VchrDetail">
       <Column Name="VchDet_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -51,7 +51,7 @@
       <Column Name="Mnu_Level" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Mnu_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Mnu_TargetUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
-      <Column Name="Mnu_IsLineBreak" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Mnu_IsLineBreak" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Mnu_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Mod_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Security_MenuOption_Security_UserRight" Member="Security_UserRights" ThisKey="Mnu_Id" OtherKey="Mnu_Id" Type="Security_UserRight" />
@@ -68,6 +68,7 @@
       <Column Name="User_Password" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="User_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="User_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SECURITY_User_Security_UserLocation" Member="Security_UserLocations" ThisKey="User_Id" OtherKey="User_Id" Type="Security_UserLocation" />
       <Association Name="SECURITY_UserGroup_SECURITY_User" Member="SECURITY_UserGroup" ThisKey="UsrGrp_Id" OtherKey="UsrGrp_Id" Type="SECURITY_UserGroup" IsForeignKey="true" />
       <Association Name="SETUP_Company_SECURITY_User" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
       <Association Name="SETUP_Location_SECURITY_User" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
@@ -83,8 +84,20 @@
       <Column Name="UsrGrp_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="UsrGrp_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="SECURITY_UserGroup_SECURITY_User" Member="SECURITY_Users" ThisKey="UsrGrp_Id" OtherKey="UsrGrp_Id" Type="SECURITY_User" />
+      <Association Name="SECURITY_UserGroup_Security_UserLocation" Member="Security_UserLocations" ThisKey="UsrGrp_Id" OtherKey="UsrGrp_Id" Type="Security_UserLocation" />
       <Association Name="SETUP_Company_SECURITY_UserGroup" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
       <Association Name="SETUP_Location_SECURITY_UserGroup" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Security_UserLocations" Member="Security_UserLocations">
+    <Type Name="Security_UserLocation">
+      <Column Name="UserLoc_Id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UsrGrp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="User_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="SECURITY_User_Security_UserLocation" Member="SECURITY_User" ThisKey="User_Id" OtherKey="User_Id" Type="SECURITY_User" IsForeignKey="true" />
+      <Association Name="SECURITY_UserGroup_Security_UserLocation" Member="SECURITY_UserGroup" ThisKey="UsrGrp_Id" OtherKey="UsrGrp_Id" Type="SECURITY_UserGroup" IsForeignKey="true" />
+      <Association Name="SETUP_Location_Security_UserLocation" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Security_UserRights" Member="Security_UserRights">
@@ -95,6 +108,12 @@
       <Column Name="Mnu_Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="UsrSec_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Mod_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UsrSec_UserId" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="UsrSec_Add" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="UsrSec_Edit" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="UsrSec_Delete" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="UsrSec_Import" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="UsrSec_Print" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="Security_MenuOption_Security_UserRight" Member="Security_MenuOption" ThisKey="Mnu_Id" OtherKey="Mnu_Id" Type="Security_MenuOption" IsForeignKey="true" />
     </Type>
   </Table>
@@ -376,9 +395,40 @@
       <Column Name="Dpt_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="Dpt_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Dpt_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SETUP_Department_SETUP_EmpPlacement" Member="SETUP_EmpPlacements" ThisKey="Dpt_Id" OtherKey="Dpt_Id" Type="SETUP_EmpPlacement" />
       <Association Name="SETUP_Department_SETUP_JobPosition" Member="SETUP_JobPositions" ThisKey="Dpt_Id" OtherKey="Dpt_Id" Type="SETUP_JobPosition" />
       <Association Name="SETUP_Company_SETUP_Department" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
       <Association Name="SETUP_Location_SETUP_Department" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SETUP_Employee" Member="SETUP_Employees">
+    <Type Name="SETUP_Employee">
+      <Column Name="Emp_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Emp_Code" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Emp_DoB" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Emp_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Emp_Address" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="Gndr_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="MS_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Rlgn_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Natn_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Emp_Phone" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Emp_Mobile" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Emp_Email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Emp_CNIC" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Emp_AptmentDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Emp_JoiningDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Emp_Months_Probation" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Emp_ConfirmDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Emp_Months_NoticePerd" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Emp_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Emp_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Emp_ImagePath" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Association Name="SETUP_Employee_SETUP_EmpPlacement" Member="SETUP_EmpPlacements" ThisKey="Emp_Id" OtherKey="Emp_Id" Type="SETUP_EmpPlacement" />
+      <Association Name="SETUP_Gender_SETUP_Employee" Member="SETUP_Gender" ThisKey="Gndr_Id" OtherKey="Gndr_Id" Type="SETUP_Gender" IsForeignKey="true" />
+      <Association Name="SETUP_MaritalStatus_SETUP_Employee" Member="SETUP_MaritalStatus" ThisKey="MS_Id" OtherKey="MS_Id" Type="SETUP_MaritalStatus" IsForeignKey="true" />
+      <Association Name="SETUP_Nationality_SETUP_Employee" Member="SETUP_Nationality" ThisKey="Natn_Id" OtherKey="Natn_Id" Type="SETUP_Nationality" IsForeignKey="true" />
+      <Association Name="SETUP_Religion_SETUP_Employee" Member="SETUP_Religion" ThisKey="Rlgn_Id" OtherKey="Rlgn_Id" Type="SETUP_Religion" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.SETUP_EmployeeType" Member="SETUP_EmployeeTypes">
@@ -389,6 +439,31 @@
       <Column Name="EmpTyp_Abbreviation" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="EmpTyp_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="EmpTyp_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SETUP_EmployeeType_SETUP_EmpPlacement" Member="SETUP_EmpPlacements" ThisKey="EmpTyp_Id" OtherKey="EmpTyp_Id" Type="SETUP_EmpPlacement" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SETUP_EmpPlacement" Member="SETUP_EmpPlacements">
+    <Type Name="SETUP_EmpPlacement">
+      <Column Name="Plcmt_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Plcmt_Code" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Emp_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Dpt_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Shft_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="EmpTyp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LevTyp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LevGrp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="JT_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="SETUP_EmpPlacement_SETUP_EmpPlacement" Member="SETUP_EmpPlacement2" ThisKey="Plcmt_Id" OtherKey="Plcmt_Id" Type="SETUP_EmpPlacement" Cardinality="One" />
+      <Association Name="SETUP_Department_SETUP_EmpPlacement" Member="SETUP_Department" ThisKey="Dpt_Id" OtherKey="Dpt_Id" Type="SETUP_Department" IsForeignKey="true" />
+      <Association Name="SETUP_Employee_SETUP_EmpPlacement" Member="SETUP_Employee" ThisKey="Emp_Id" OtherKey="Emp_Id" Type="SETUP_Employee" IsForeignKey="true" />
+      <Association Name="SETUP_EmployeeType_SETUP_EmpPlacement" Member="SETUP_EmployeeType" ThisKey="EmpTyp_Id" OtherKey="EmpTyp_Id" Type="SETUP_EmployeeType" IsForeignKey="true" />
+      <Association Name="SETUP_EmpPlacement_SETUP_EmpPlacement" Member="SETUP_EmpPlacement1" ThisKey="Plcmt_Id" OtherKey="Plcmt_Id" Type="SETUP_EmpPlacement" IsForeignKey="true" />
+      <Association Name="SETUP_JobTitle_SETUP_EmpPlacement" Member="SETUP_JobTitle" ThisKey="JT_Id" OtherKey="JT_Id" Type="SETUP_JobTitle" IsForeignKey="true" />
+      <Association Name="SETUP_LeaveGroup_SETUP_EmpPlacement" Member="SETUP_LeaveGroup" ThisKey="LevGrp_Id" OtherKey="LevGrp_Id" Type="SETUP_LeaveGroup" IsForeignKey="true" />
+      <Association Name="SETUP_LeaveType_SETUP_EmpPlacement" Member="SETUP_LeaveType" ThisKey="LevTyp_Id" OtherKey="LevTyp_Id" Type="SETUP_LeaveType" IsForeignKey="true" />
+      <Association Name="SETUP_Location_SETUP_EmpPlacement" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
+      <Association Name="SETUP_Shift_SETUP_EmpPlacement" Member="SETUP_Shift" ThisKey="Shft_Id" OtherKey="Shft_Id" Type="SETUP_Shift" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.SETUP_FunctionalArea" Member="SETUP_FunctionalAreas">
@@ -413,6 +488,7 @@
       <Column Name="Gndr_Abbreviation" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Gndr_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Gndr_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SETUP_Gender_SETUP_Employee" Member="SETUP_Employees" ThisKey="Gndr_Id" OtherKey="Gndr_Id" Type="SETUP_Employee" />
     </Type>
   </Table>
   <Table Name="dbo.SETUP_JobPosition" Member="SETUP_JobPositions">
@@ -444,6 +520,7 @@
       <Column Name="JT_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="JT_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="JT_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SETUP_JobTitle_SETUP_EmpPlacement" Member="SETUP_EmpPlacements" ThisKey="JT_Id" OtherKey="JT_Id" Type="SETUP_EmpPlacement" />
       <Association Name="SETUP_JobTitle_SETUP_JobPosition" Member="SETUP_JobPositions" ThisKey="JT_Id" OtherKey="JT_Id" Type="SETUP_JobPosition" />
       <Association Name="SETUP_Company_SETUP_JobTitle" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
       <Association Name="SETUP_Location_SETUP_JobTitle" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
@@ -458,6 +535,7 @@
       <Column Name="LevGrp_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="LevGrp_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="LevGrp_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SETUP_LeaveGroup_SETUP_EmpPlacement" Member="SETUP_EmpPlacements" ThisKey="LevGrp_Id" OtherKey="LevGrp_Id" Type="SETUP_EmpPlacement" />
       <Association Name="SETUP_Company_SETUP_LeaveGroup" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
       <Association Name="SETUP_Location_SETUP_LeaveGroup" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
     </Type>
@@ -473,6 +551,7 @@
       <Column Name="LevTyp_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="LevTyp_Abbreviation" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="LevTyp_Count" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Association Name="SETUP_LeaveType_SETUP_EmpPlacement" Member="SETUP_EmpPlacements" ThisKey="LevTyp_Id" OtherKey="LevTyp_Id" Type="SETUP_EmpPlacement" />
     </Type>
   </Table>
   <Table Name="dbo.SETUP_Location" Member="SETUP_Locations">
@@ -486,6 +565,7 @@
       <Association Name="SETUP_Location_GL_VchrMaster" Member="GL_VchrMasters" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="GL_VchrMaster" />
       <Association Name="SETUP_Location_SECURITY_User" Member="SECURITY_Users" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SECURITY_User" />
       <Association Name="SETUP_Location_SECURITY_UserGroup" Member="SECURITY_UserGroups" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SECURITY_UserGroup" />
+      <Association Name="SETUP_Location_Security_UserLocation" Member="Security_UserLocations" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="Security_UserLocation" />
       <Association Name="SETUP_Location_SETUP_Bank" Member="SETUP_Banks" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Bank" />
       <Association Name="SETUP_Location_SETUP_BankAccount" Member="SETUP_BankAccounts" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_BankAccount" />
       <Association Name="SETUP_Location_SETUP_Calendar" Member="SETUP_Calendars" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Calendar" />
@@ -500,6 +580,7 @@
       <Association Name="SETUP_Location_SETUP_Customer" Member="SETUP_Customers" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Customer" />
       <Association Name="SETUP_Location_SETUP_CustomerType" Member="SETUP_CustomerTypes" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_CustomerType" />
       <Association Name="SETUP_Location_SETUP_Department" Member="SETUP_Departments" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Department" />
+      <Association Name="SETUP_Location_SETUP_EmpPlacement" Member="SETUP_EmpPlacements" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_EmpPlacement" />
       <Association Name="SETUP_Location_SETUP_FunctionalArea" Member="SETUP_FunctionalAreas" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_FunctionalArea" />
       <Association Name="SETUP_Location_SETUP_JobPosition" Member="SETUP_JobPositions" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_JobPosition" />
       <Association Name="SETUP_Location_SETUP_JobTitle" Member="SETUP_JobTitles" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_JobTitle" />
@@ -518,6 +599,7 @@
       <Column Name="MS_Abbreviation" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="MS_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="MS_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SETUP_MaritalStatus_SETUP_Employee" Member="SETUP_Employees" ThisKey="MS_Id" OtherKey="MS_Id" Type="SETUP_Employee" />
     </Type>
   </Table>
   <Table Name="dbo.SETUP_Module" Member="SETUP_Modules">
@@ -541,6 +623,7 @@
       <Column Name="Natn_Abbreviation" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Natn_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Natn_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SETUP_Nationality_SETUP_Employee" Member="SETUP_Employees" ThisKey="Natn_Id" OtherKey="Natn_Id" Type="SETUP_Employee" />
     </Type>
   </Table>
   <Table Name="dbo.SETUP_Religion" Member="SETUP_Religions">
@@ -551,6 +634,25 @@
       <Column Name="Rlgn_Abbreviation" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Rlgn_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Rlgn_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SETUP_Religion_SETUP_Employee" Member="SETUP_Employees" ThisKey="Rlgn_Id" OtherKey="Rlgn_Id" Type="SETUP_Employee" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SETUP_Shift" Member="SETUP_Shifts">
+    <Type Name="SETUP_Shift">
+      <Column Name="Shft_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Shft_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Shft_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Shft_Abbreviation" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Shft_StartTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Shft_EndTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Shft_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Shft_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Shift_BreakStartTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Shift_BreakEndTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Shift_BreakDuration" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Shift_GraceIn" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Shift_GraceEarly" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="SETUP_Shift_SETUP_EmpPlacement" Member="SETUP_EmpPlacements" ThisKey="Shft_Id" OtherKey="Shft_Id" Type="SETUP_EmpPlacement" />
     </Type>
   </Table>
   <Table Name="dbo.SETUP_Supplier" Member="SETUP_Suppliers">
@@ -650,23 +752,6 @@
       <Association Name="SYSTEM_Nature_SETUP_ChartOfAccount" Member="SETUP_ChartOfAccounts" ThisKey="Natr_Id" OtherKey="Natr_Id" Type="SETUP_ChartOfAccount" />
     </Type>
   </Table>
-  <Table Name="dbo.SETUP_Shift" Member="SETUP_Shifts">
-    <Type Name="SETUP_Shift">
-      <Column Name="Shft_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Shft_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Shft_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="Shft_Abbreviation" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Shft_StartTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Shft_EndTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Shft_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Shft_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Shift_BreakStartTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Shift_BreakEndTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Shift_BreakDuration" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Shift_GraceIn" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Shift_GraceEarly" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-    </Type>
-  </Table>
   <Function Name="dbo.sp_GetCityList" Method="sp_GetCityList">
     <ElementType Name="sp_GetCityListResult">
       <Column Name="City_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
@@ -710,6 +795,28 @@
       <Column Name="Cmp_Fax" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="Cmp_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Cmp_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GetEmployeePlacements" Method="sp_GetEmployeePlacements">
+    <Parameter Name="EmpId" Parameter="empId" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="sp_GetEmployeePlacementsResult">
+      <Column Name="Plcmt_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Plcmt_Code" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Emp_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Dpt_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Shft_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="EmpTyp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LevTyp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LevGrp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="JT_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Dpt_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="EmpTyp_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="JT_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="LevGrp_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="LevTyp_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Loc_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Shft_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
     </ElementType>
   </Function>
   <Function Name="dbo.sp_GetFunctionalAreaList" Method="sp_GetFunctionalAreaList">
@@ -841,6 +948,34 @@
       <Column Name="UsrGrp_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.sp_GetUserLocationsByGroupId" Method="sp_GetUserLocationsByGroupId">
+    <Parameter Name="GroupId" Parameter="groupId" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="sp_GetUserLocationsByGroupIdResult">
+      <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Loc_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cmp_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Loc_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Loc_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Loc_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UsrGrp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="User_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SelectedLocation" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GetUserLocationsByUserId" Method="sp_GetUserLocationsByUserId">
+    <Parameter Name="UserId" Parameter="userId" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="sp_GetUserLocationsByUserIdResult">
+      <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Loc_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cmp_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Loc_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Loc_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Loc_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UsrGrp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="User_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SelectedLocation" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
   <Function Name="dbo.sp_GetUserMenuRights" Method="sp_GetUserMenuRights">
     <Parameter Name="GroupId" Parameter="groupId" Type="System.String" DbType="VarChar(50)" />
     <ElementType Name="sp_GetUserMenuRightsResult">
@@ -848,8 +983,35 @@
       <Column Name="Mnu_Description" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="Mnu_TargetUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
       <Column Name="Mnu_Level" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Mnu_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Mnu_IsLineBreak" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Mod_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="SelectedMenu" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CanAdd" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CanEdit" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CanDelete" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CanPrint" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CanImport" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GetUserMenuRightsByUserId" Method="sp_GetUserMenuRightsByUserId">
+    <Parameter Name="UserId" Parameter="userId" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="sp_GetUserMenuRightsByUserIdResult">
+      <Column Name="Mnu_Id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Mnu_Description" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Mnu_TargetUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="Mnu_Level" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Mnu_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Mnu_IsLineBreak" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Mod_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SelectedMenu" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CanAdd" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CanEdit" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CanDelete" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CanPrint" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CanImport" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
   <Function Name="dbo.sp_GetVoucherTypeNarrationList" Method="sp_GetVoucherTypeNarrationList">

@@ -8,12 +8,12 @@
     <script type="text/javascript">
 
         function SaveRecord() {
-            
+
             var lcnt_MessageBox = document.getElementById('MessageBox');
             var lcnt_txtSelectedCode = document.getElementById("txt_SelectedCode");
             var txt_Title = document.getElementById('txt_Title');
             var ddl_location = document.getElementById('ddl_location');
-            
+
             if (ddl_location.value == 0) {
                 FadeIn(lcnt_MessageBox);
                 lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! select location</p>";
@@ -30,15 +30,16 @@
                 FadeOut(lcnt_MessageBox);
                 txt_Title.focus();
                 return;
-            } 
+            }
             else {
-                var Url = document.getElementById('frm_BankSetup').action;
-                Url += "Bank/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&Location=" + ddl_location.value + "&Title=" + txt_Title.value;
+                //var Url = document.getElementById('frm_BankSetup').action;
+                //Url += "Bank/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&Location=" + ddl_location.value + "&Title=" + txt_Title.value;
                 document.getElementById("Waiting_Image").style.display = "block";
                 document.getElementById("btn_Save").style.display = "none";
                 $.ajax({
-                    type: "GET",
-                    url: Url,
+                    type: "POST",
+                    url: "Bank/SaveRecord", //Url,
+                    data: { ps_Code: lcnt_txtSelectedCode.value, Location: ddl_location.value, Title: txt_Title.value },
                     success: function (response) {
                         html = response;
                         $("#GridContainer").html(response);
@@ -135,14 +136,13 @@
             <div class="CustomCell" style="width: 115px; height: 30px">
                 Code</div>
             <input type="text" class="CustomText" style="width: 100px;" id="txt_Code" name="txt_Code"
-                maxlength="100" value="[Auto]" readonly="readonly" /> 
-                 <div class="Clear">
+                maxlength="100" value="[Auto]" readonly="readonly" />
+            <div class="Clear">
             </div>
-            
             <div class="CustomCell" style="width: 115px; height: 30px;">
                 Location</div>
-            <%= Html.DropDownList("ddl_location", null, new { style = "width:900px; padding: 4px;" })%>    
-                <div class="Clear">
+            <%= Html.DropDownList("ddl_location", null, new { style = "width:900px; padding: 4px;" })%>
+            <div class="Clear">
             </div>
             <div class="CustomCell" style="width: 115px; height: 30px;">
                 Title</div>

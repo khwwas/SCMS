@@ -26,13 +26,14 @@
                 return;
             }
             else {
-                var Url = document.getElementById('frm_CitySetup').action;
-                Url += "City/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&ps_Title=" + lcnt_txtTitle.value;
+                //var Url = document.getElementById('frm_CitySetup').action;
+                //Url += "City/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&ps_Title=" + lcnt_txtTitle.value;
                 document.getElementById("Waiting_Image").style.display = "block";
                 document.getElementById("btn_Save").style.display = "none";
                 $.ajax({
-                    type: "GET",
-                    url: Url,
+                    type: "POST",
+                    url: "City/SaveRecord",
+                    data: { ps_Code: lcnt_txtSelectedCode.value, ps_Title: lcnt_txtTitle.value },
                     success: function (response) {
                         html = response;
                         $("#GridContainer").html(response);
@@ -42,10 +43,10 @@
                         if (document.getElementById("SaveResult").value == "0") {
                             lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Unable to save record.</p>";
                             lcnt_MessageBox.setAttribute("class", "message error");
-                           
+
                         } else {
                             lcnt_MessageBox.innerHTML = "<h5>Success!</h5><p>Record saved successfully.</p>";
-                            lcnt_MessageBox.setAttribute("class", "message success");                            
+                            lcnt_MessageBox.setAttribute("class", "message success");
                         }
                         document.getElementById("Waiting_Image").style.display = "none";
                         document.getElementById("btn_Save").style.display = "block";

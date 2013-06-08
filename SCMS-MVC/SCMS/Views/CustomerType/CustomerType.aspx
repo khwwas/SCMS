@@ -26,13 +26,14 @@
                 return;
             }
             else {
-                var Url = document.getElementById('frm_CustomerTypeSetup').action;
-                Url += "CustomerType/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&ps_Title=" + lcnt_txtTitle.value;
+                //var Url = document.getElementById('frm_CustomerTypeSetup').action;
+                //Url += "CustomerType/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&ps_Title=" + lcnt_txtTitle.value;
                 document.getElementById("Waiting_Image").style.display = "block";
                 document.getElementById("btn_Save").style.display = "none";
                 $.ajax({
-                    type: "GET",
-                    url: Url,
+                    type: "POST",
+                    url: "CustomerType/SaveRecord",
+                    data: { ps_Code: lcnt_txtSelectedCode.value, ps_Title: lcnt_txtTitle.value },
                     success: function (response) {
                         html = response;
                         $("#GridContainer").html(response);

@@ -1,0 +1,154 @@
+Scripts Generated On 31 May 2013
+----------------------------------------------------------------------------------------------------------------------
+
+Alter Table Security_UserRights
+Add UsrSec_UserId bit NULL,
+    UsrSec_Add bit NULL,
+    UsrSec_Edit bit NULL,
+    UsrSec_Delete bit NULL,
+    UsrSec_Import bit NULL,
+    UsrSec_Print bit NULL
+    
+ Update Security_UserRights Set UsrSec_Add = 1,UsrSec_Edit = 1,UsrSec_Delete = 1,UsrSec_Import = 1,UsrSec_Print = 1
+
+Alter Table SECURITY_UserRights
+Alter Column UsrSec_UserId varchar(50) Null
+
+----------------------------------------------------------------------------------------------------------------------
+
+Alter Procedure [dbo].[sp_GetUserMenuRights](@GroupId varchar(50))
+As
+Begin
+  Select Security_MenuOptions.Mnu_Id,
+         Security_MenuOptions.Mnu_Description,
+         Security_MenuOptions.Mnu_TargetUrl,
+         Security_MenuOptions.Mnu_Level,
+         Security_MenuOptions.Mnu_SortOrder,
+         Security_MenuOptions.Mnu_IsLineBreak,
+         Security_MenuOptions.Mod_Id,
+         IsNull(Security_UserRights.Mnu_Id,0) as SelectedMenu,
+         Security_UserRights.UsrSec_UserId as UserId,
+          IsNull(Security_UserRights.UsrSec_Add,0) as CanAdd,
+          IsNull(Security_UserRights.UsrSec_Edit,0) as CanEdit,
+          IsNull(Security_UserRights.UsrSec_Delete,0) as CanDelete,
+          IsNull(Security_UserRights.UsrSec_Print,0) as CanPrint,
+          IsNull(Security_UserRights.UsrSec_Import,0) as CanImport
+    From Security_MenuOptions Left Outer Join Security_UserRights On
+              ( Security_UserRights.Mnu_Id = Security_MenuOptions.Mnu_Id ) And
+              ( Security_UserRights.Grp_Id = @GroupId )
+Order By --Security_MenuOptions.Mnu_Level,
+         Security_MenuOptions.Mnu_SortOrder
+ End
+ 
+
+Create Procedure [dbo].[sp_GetUserMenuRightsByUserId](@UserId varchar(50))
+As
+Begin
+  Select Security_MenuOptions.Mnu_Id,
+         Security_MenuOptions.Mnu_Description,
+         Security_MenuOptions.Mnu_TargetUrl,
+         Security_MenuOptions.Mnu_Level,
+         Security_MenuOptions.Mnu_SortOrder,
+         Security_MenuOptions.Mnu_IsLineBreak,
+         Security_MenuOptions.Mod_Id,
+         IsNull(Security_UserRights.Mnu_Id,0) as SelectedMenu,
+         Security_UserRights.UsrSec_UserId as UserId,
+          IsNull(Security_UserRights.UsrSec_Add,0) as CanAdd,
+          IsNull(Security_UserRights.UsrSec_Edit,0) as CanEdit,
+          IsNull(Security_UserRights.UsrSec_Delete,0) as CanDelete,
+          IsNull(Security_UserRights.UsrSec_Print,0) as CanPrint,
+          IsNull(Security_UserRights.UsrSec_Import,0) as CanImport
+    From Security_MenuOptions Left Outer Join Security_UserRights On
+              ( Security_UserRights.Mnu_Id = Security_MenuOptions.Mnu_Id ) And
+              ( Security_UserRights.UsrSec_UserId = @UserId )
+Order By --Security_MenuOptions.Mnu_Level,
+         Security_MenuOptions.Mnu_SortOrder
+ End
+ 
+
+ 
+
+----------------------------------------------------------------------------------------------------------------------
+
+USE [SCMS]
+GO
+
+/****** Object:  Table [dbo].[Security_UserLocations]    Script Date: 06/06/2013 00:33:43 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[Security_UserLocations](
+	[UserLoc_Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[UsrGrp_Id] [varchar](50) NULL,
+	[User_Id] [varchar](50) NULL,
+	[Loc_Id] [varchar](50) NULL,
+ CONSTRAINT [PK_Security_UserLocations] PRIMARY KEY CLUSTERED 
+(
+	[UserLoc_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[Security_UserLocations]  WITH CHECK ADD  CONSTRAINT [FK_Security_UserLocations_SECURITY_User] FOREIGN KEY([User_Id])
+REFERENCES [dbo].[SECURITY_User] ([User_Id])
+GO
+
+ALTER TABLE [dbo].[Security_UserLocations] CHECK CONSTRAINT [FK_Security_UserLocations_SECURITY_User]
+GO
+
+ALTER TABLE [dbo].[Security_UserLocations]  WITH CHECK ADD  CONSTRAINT [FK_Security_UserLocations_SECURITY_UserGroup] FOREIGN KEY([UsrGrp_Id])
+REFERENCES [dbo].[SECURITY_UserGroup] ([UsrGrp_Id])
+GO
+
+ALTER TABLE [dbo].[Security_UserLocations] CHECK CONSTRAINT [FK_Security_UserLocations_SECURITY_UserGroup]
+GO
+
+ALTER TABLE [dbo].[Security_UserLocations]  WITH CHECK ADD  CONSTRAINT [FK_Security_UserLocations_SETUP_Location] FOREIGN KEY([Loc_Id])
+REFERENCES [dbo].[SETUP_Location] ([Loc_Id])
+GO
+
+ALTER TABLE [dbo].[Security_UserLocations] CHECK CONSTRAINT [FK_Security_UserLocations_SETUP_Location]
+GO
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Create Procedure [dbo].[sp_GetUserLocationsByGroupId](@GroupId varchar(50))
+As
+Begin
+  Select SETUP_Location.*,
+  Security_UserLocations.UsrGrp_Id,
+  Security_UserLocations.User_Id,
+         IsNull(Security_UserLocations.Loc_Id,0) as SelectedLocation
+    From SETUP_Location Left Outer Join Security_UserLocations On
+              ( Security_UserLocations.Loc_Id = SETUP_Location.Loc_Id ) And
+              ( Security_UserLocations.User_Id = @GroupId )
+Order By 
+         SETUP_Location.Loc_SortOrder
+ End
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Create Procedure [dbo].[sp_GetUserLocationsByUserId](@UserId varchar(50))
+As
+Begin
+  Select SETUP_Location.*,
+  Security_UserLocations.UsrGrp_Id,
+  Security_UserLocations.User_Id,
+         IsNull(Security_UserLocations.Loc_Id,0) as SelectedLocation
+    From SETUP_Location Left Outer Join Security_UserLocations On
+              ( Security_UserLocations.Loc_Id = SETUP_Location.Loc_Id ) And
+              ( Security_UserLocations.User_Id = @UserId )
+Order By 
+         SETUP_Location.Loc_SortOrder
+ End

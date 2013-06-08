@@ -27,13 +27,14 @@
                 return;
             }
             else {
-                var Url = document.getElementById('frm_LocationSetup').action;
-                Url += "Location/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&ps_Title=" + lcnt_txtTitle.value + "&ps_CmpId=" + lcnt_Cmp.value.toString();
+                //var Url = document.getElementById('frm_LocationSetup').action;
+                //Url += "Location/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&ps_Title=" + lcnt_txtTitle.value + "&ps_CmpId=" + lcnt_Cmp.value.toString();
                 document.getElementById("Waiting_Image").style.display = "block";
                 document.getElementById("btn_Save").style.display = "none";
                 $.ajax({
-                    type: "GET",
-                    url: Url,
+                    type: "POST",
+                    url: "Location/SaveRecord",
+                    data: { ps_Code: lcnt_txtSelectedCode.value, ps_Title: lcnt_txtTitle.value, ps_CmpId: lcnt_Cmp.value.toString() },
                     success: function (response) {
                         html = response;
                         $("#GridContainer").html(response);

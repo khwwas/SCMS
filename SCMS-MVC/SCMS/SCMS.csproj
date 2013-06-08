@@ -141,6 +141,7 @@
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\ChartOfAccountController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DashBoardController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
@@ -298,10 +299,12 @@
     <Content Include="bootstrap\css\bootstrap.min.css" />
     <Content Include="bootstrap\img\glyphicons-halflings-white.png" />
     <Content Include="bootstrap\img\glyphicons-halflings.png" />
+    <Content Include="bootstrap\js\bootstrap-datepicker.js" />
     <Content Include="bootstrap\js\bootstrap-timepicker.js" />
     <Content Include="bootstrap\js\bootstrap-timepicker.min.js" />
     <Content Include="bootstrap\js\bootstrap.js" />
     <Content Include="bootstrap\js\bootstrap.min.js" />
+    <Content Include="bootstrap\js\datepicker.css" />
     <Content Include="Content\960.css" />
     <Content Include="Content\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\Custom.css" />
@@ -1030,6 +1033,11 @@
     <Content Include="Views\ChartOfAccount\GridData.ascx" />
     <Content Include="Views\Bank\Bank.aspx" />
     <Content Include="Views\Bank\GridData.ascx" />
+    <Content Include="Views\Employee\PlacementGridData.ascx" />
+    <Content Include="Views\Employee\EmployeePlacement.ascx" />
+    <Content Include="Views\Employee\EditEmployee.aspx" />
+    <Content Include="Views\Employee\Employee.aspx" />
+    <Content Include="Views\Employee\GridData.ascx" />
     <Content Include="Views\LeaveType\GridData.ascx" />
     <Content Include="Views\LeaveType\LeaveType.aspx" />
     <Content Include="Views\Nationality\Nationality.aspx" />
@@ -1062,6 +1070,8 @@
     <Content Include="Views\Supplier\Supplier.aspx" />
     <Content Include="Views\UserRightsSetup\TreeView.ascx" />
     <Content Include="Views\UserRightsSetup\UserRights.aspx" />
+    <Content Include="Views\UserRightsSetup\TreeView-Back.ascx" />
+    <Content Include="Views\UserRightsSetup\UserRights-Back.aspx" />
     <Content Include="Views\User\GridData.ascx" />
     <Content Include="Views\User\User.aspx" />
     <Content Include="Views\CustomerType\GridData.ascx" />

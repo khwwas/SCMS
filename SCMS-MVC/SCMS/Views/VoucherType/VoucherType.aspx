@@ -43,13 +43,14 @@
                 return;
             }
             else {
-                var Url = document.getElementById('frm_VoucherType').action;
-                Url += "VoucherType/SaveVoucherType?Code=" + txt_SelectedCode.value + "&Prefix=" + txt_Prefix.value + "&Title=" + txt_Title.value + "&CodeInitilization=" + CodeInitilization; //+ "&LocId=" + ddl_Locations.value;
+                //var Url = document.getElementById('frm_VoucherType').action;
+                //Url += "VoucherType/SaveVoucherType?Code=" + txt_SelectedCode.value + "&Prefix=" + txt_Prefix.value + "&Title=" + txt_Title.value + "&CodeInitilization=" + CodeInitilization; //+ "&LocId=" + ddl_Locations.value;
                 document.getElementById("Waiting_Image").style.display = "block";
                 document.getElementById("btn_Save").style.display = "none";
                 $.ajax({
-                    type: "GET",
-                    url: Url,
+                    type: "POST",
+                    url: "VoucherType/SaveVoucherType",
+                    data: { Code: txt_SelectedCode.value, Prefix: txt_Prefix.value, Title: txt_Title.value, CodeInitilization: CodeInitilization },
                     success: function (response) {
                         html = response;
                         $("#GridContainer").html(response);
