@@ -48,9 +48,9 @@
                   %>
         <tr class='odd gradeX' style='line-height: 15px;'>
             <td>
-                <div onclick="javascript:return EditRecord('<%=RowEmployee.Emp_Id %>')" style="width: 22px;
-                    padding-right: 5px; float: left; cursor: pointer;">
-                    <img alt="Edit" src="../../img/edit.png" style="width: 22px; vertical-align: middle" />
+                <div onclick="javascript:window.location='../Employee/EmployeeEntry?id=<%=RowEmployee.Emp_Id %>'"
+                    style="width: 22px; padding-right: 5px; float: left; cursor: pointer;">
+                    <img alt="Edit" src="../../img/edit.png" style="width: 22px;" />
                 </div>
                 <div onclick="javascript:return DeleteRecord('<%=RowEmployee.Emp_Id %>')" style="width: 22px;
                     float: left; cursor: pointer;">

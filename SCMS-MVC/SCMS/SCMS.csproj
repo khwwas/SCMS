@@ -1033,11 +1033,10 @@
     <Content Include="Views\ChartOfAccount\GridData.ascx" />
     <Content Include="Views\Bank\Bank.aspx" />
     <Content Include="Views\Bank\GridData.ascx" />
-    <Content Include="Views\Employee\PlacementGridData.ascx" />
-    <Content Include="Views\Employee\EmployeePlacement.ascx" />
-    <Content Include="Views\Employee\EditEmployee.aspx" />
+    <Content Include="Views\Employee\Placement.ascx" />
     <Content Include="Views\Employee\Employee.aspx" />
     <Content Include="Views\Employee\GridData.ascx" />
+    <Content Include="Views\Employee\EmployeeConsole.aspx" />
     <Content Include="Views\LeaveType\GridData.ascx" />
     <Content Include="Views\LeaveType\LeaveType.aspx" />
     <Content Include="Views\Nationality\Nationality.aspx" />
@@ -1906,7 +1905,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>1196</DevelopmentServerPort>
+          <DevelopmentServerPort>47065</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
