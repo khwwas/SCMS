@@ -75,61 +75,8 @@
             document.getElementById('ddl_LeaveType').value = "";
             document.getElementById('ddl_Shift').value = "";
         }
-
-
-        function EditRecord(Id) {
-            document.getElementById('txt_PSelectedCode').value = Id;
-            document.getElementById('txt_PCode').value = Id;
-
-            document.getElementById('ddl_Location').value = document.getElementById('ddl_location' + Id).value;
-            document.getElementById('ddl_Department').value = document.getElementById('ddl_Department' + Id).value;
-            document.getElementById('ddl_EmployeeType').value = document.getElementById('ddl_EmployeeType' + Id).value;
-            document.getElementById('ddl_JobTitle').value = document.getElementById('ddl_JobTitle' + Id).value;
-            document.getElementById('ddl_LeaveGroup').value = document.getElementById('ddl_LeaveGroup' + Id).value;
-            document.getElementById('ddl_LeaveType').value = document.getElementById('ddl_LeaveType' + Id).value;
-            document.getElementById('ddl_Shift').value = document.getElementById('ddl_Shift' + Id).value;
-           
-            scroll(0, 0);
-        }
-
-        function DeleteRecord(Id) {
-            if (confirm("Do you really want to delete this record")) {
-                var EmpSelectedCode = document.getElementById("txt_SelectedCode");
-                var lcnt_MessageBox = document.getElementById('MessageBoxPlacement');
-                var Url = document.getElementById('frm_EmployeeSetup').action;
-
-                Url += "Employee/DeletePlacement?EmpId="+EmpSelectedCode.value+"&Id="+Id;
-                $.ajax({
-                    type: "GET",
-                    url: Url,
-                    success: function (response) {
-                        html = response;
-                        $("#GridPlacmentContainer").html(response);
-                        SetGrid();
-                        ResetForm();
-                        FadeIn(lcnt_MessageBox);
-                        if (document.getElementById("SavePlacementResult").value == "0") {
-                            lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Unable to delete record.</p>";
-                            lcnt_MessageBox.setAttribute("class", "message error");
-
-                        } else {
-                            lcnt_MessageBox.innerHTML = "<h5>Success!</h5><p>Record deleted successfully.</p>";
-                            lcnt_MessageBox.setAttribute("class", "message success");
-                            document.getElementById("txt_PCode").value = response;
-                        }
-                        scroll(0, 0);
-                        FadeOut(lcnt_MessageBox);
-                    },
-                    error: function (rs, e) {
-                        FadeIn(lcnt_MessageBox);
-                        lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>An error occured in deleting this record.</p>";
-                        lcnt_MessageBox.setAttribute("class", "message error");
-                        scroll(0, 0);
-                        FadeOut(lcnt_MessageBox);
-                    }
-                });
-            }
-        }
+       
+       
     </script>
 
     <% 
