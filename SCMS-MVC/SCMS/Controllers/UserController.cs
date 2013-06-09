@@ -11,7 +11,7 @@ namespace SCMS.Controllers
     {
         //
         // GET: /User/
-              
+
         public ActionResult Index()
         {
             ViewData["ddl_UserGroup"] = new SelectList(new DALUserGroup().PopulateData(), "UsrGrp_Id", "UsrGrp_Title", "ddl_UserGroup");
@@ -65,7 +65,7 @@ namespace SCMS.Controllers
             {
                 li_ReturnValue = objDal.DeleteRecordById(_pId);
                 ViewData["SaveResult"] = li_ReturnValue;
-                
+
                 return PartialView("GridData");
             }
             catch

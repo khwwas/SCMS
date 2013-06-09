@@ -48,6 +48,9 @@ namespace SCMSDataLayer.DB
     partial void InsertSECURITY_UserGroup(SECURITY_UserGroup instance);
     partial void UpdateSECURITY_UserGroup(SECURITY_UserGroup instance);
     partial void DeleteSECURITY_UserGroup(SECURITY_UserGroup instance);
+    partial void InsertSecurity_UserLocation(Security_UserLocation instance);
+    partial void UpdateSecurity_UserLocation(Security_UserLocation instance);
+    partial void DeleteSecurity_UserLocation(Security_UserLocation instance);
     partial void InsertSecurity_UserRight(Security_UserRight instance);
     partial void UpdateSecurity_UserRight(Security_UserRight instance);
     partial void DeleteSecurity_UserRight(Security_UserRight instance);
@@ -105,9 +108,15 @@ namespace SCMSDataLayer.DB
     partial void InsertSETUP_Department(SETUP_Department instance);
     partial void UpdateSETUP_Department(SETUP_Department instance);
     partial void DeleteSETUP_Department(SETUP_Department instance);
+    partial void InsertSETUP_Employee(SETUP_Employee instance);
+    partial void UpdateSETUP_Employee(SETUP_Employee instance);
+    partial void DeleteSETUP_Employee(SETUP_Employee instance);
     partial void InsertSETUP_EmployeeType(SETUP_EmployeeType instance);
     partial void UpdateSETUP_EmployeeType(SETUP_EmployeeType instance);
     partial void DeleteSETUP_EmployeeType(SETUP_EmployeeType instance);
+    partial void InsertSETUP_EmpPlacement(SETUP_EmpPlacement instance);
+    partial void UpdateSETUP_EmpPlacement(SETUP_EmpPlacement instance);
+    partial void DeleteSETUP_EmpPlacement(SETUP_EmpPlacement instance);
     partial void InsertSETUP_FunctionalArea(SETUP_FunctionalArea instance);
     partial void UpdateSETUP_FunctionalArea(SETUP_FunctionalArea instance);
     partial void DeleteSETUP_FunctionalArea(SETUP_FunctionalArea instance);
@@ -141,6 +150,9 @@ namespace SCMSDataLayer.DB
     partial void InsertSETUP_Religion(SETUP_Religion instance);
     partial void UpdateSETUP_Religion(SETUP_Religion instance);
     partial void DeleteSETUP_Religion(SETUP_Religion instance);
+    partial void InsertSETUP_Shift(SETUP_Shift instance);
+    partial void UpdateSETUP_Shift(SETUP_Shift instance);
+    partial void DeleteSETUP_Shift(SETUP_Shift instance);
     partial void InsertSETUP_Supplier(SETUP_Supplier instance);
     partial void UpdateSETUP_Supplier(SETUP_Supplier instance);
     partial void DeleteSETUP_Supplier(SETUP_Supplier instance);
@@ -162,19 +174,10 @@ namespace SCMSDataLayer.DB
     partial void InsertSYSTEM_Nature(SYSTEM_Nature instance);
     partial void UpdateSYSTEM_Nature(SYSTEM_Nature instance);
     partial void DeleteSYSTEM_Nature(SYSTEM_Nature instance);
-    partial void InsertSETUP_Shift(SETUP_Shift instance);
-    partial void UpdateSETUP_Shift(SETUP_Shift instance);
-    partial void DeleteSETUP_Shift(SETUP_Shift instance);
-    partial void InsertSETUP_EmpPlacement(SETUP_EmpPlacement instance);
-    partial void UpdateSETUP_EmpPlacement(SETUP_EmpPlacement instance);
-    partial void DeleteSETUP_EmpPlacement(SETUP_EmpPlacement instance);
-    partial void InsertSETUP_Employee(SETUP_Employee instance);
-    partial void UpdateSETUP_Employee(SETUP_Employee instance);
-    partial void DeleteSETUP_Employee(SETUP_Employee instance);
     #endregion
 		
 		public SCMSDataContext() : 
-				base(global::SCMSDataLayer.Properties.Settings.Default.SCMSConnectionString5, mappingSource)
+				base(global::SCMSDataLayer.Properties.Settings.Default.SCMSConnectionString2, mappingSource)
 		{
 			OnCreated();
 		}
@@ -248,6 +251,14 @@ namespace SCMSDataLayer.DB
 			get
 			{
 				return this.GetTable<SECURITY_UserGroup>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Security_UserLocation> Security_UserLocations
+		{
+			get
+			{
+				return this.GetTable<Security_UserLocation>();
 			}
 		}
 		
@@ -403,11 +414,27 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		public System.Data.Linq.Table<SETUP_Employee> SETUP_Employees
+		{
+			get
+			{
+				return this.GetTable<SETUP_Employee>();
+			}
+		}
+		
 		public System.Data.Linq.Table<SETUP_EmployeeType> SETUP_EmployeeTypes
 		{
 			get
 			{
 				return this.GetTable<SETUP_EmployeeType>();
+			}
+		}
+		
+		public System.Data.Linq.Table<SETUP_EmpPlacement> SETUP_EmpPlacements
+		{
+			get
+			{
+				return this.GetTable<SETUP_EmpPlacement>();
 			}
 		}
 		
@@ -499,6 +526,14 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		public System.Data.Linq.Table<SETUP_Shift> SETUP_Shifts
+		{
+			get
+			{
+				return this.GetTable<SETUP_Shift>();
+			}
+		}
+		
 		public System.Data.Linq.Table<SETUP_Supplier> SETUP_Suppliers
 		{
 			get
@@ -555,30 +590,6 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
-		public System.Data.Linq.Table<SETUP_Shift> SETUP_Shifts
-		{
-			get
-			{
-				return this.GetTable<SETUP_Shift>();
-			}
-		}
-		
-		public System.Data.Linq.Table<SETUP_EmpPlacement> SETUP_EmpPlacements
-		{
-			get
-			{
-				return this.GetTable<SETUP_EmpPlacement>();
-			}
-		}
-		
-		public System.Data.Linq.Table<SETUP_Employee> SETUP_Employees
-		{
-			get
-			{
-				return this.GetTable<SETUP_Employee>();
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetCityList")]
 		public ISingleResult<sp_GetCityListResult> sp_GetCityList()
 		{
@@ -598,6 +609,13 @@ namespace SCMSDataLayer.DB
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
 			return ((ISingleResult<sp_GetCompanyListResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetEmployeePlacements")]
+		public ISingleResult<sp_GetEmployeePlacementsResult> sp_GetEmployeePlacements([global::System.Data.Linq.Mapping.ParameterAttribute(Name="EmpId", DbType="VarChar(50)")] string empId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empId);
+			return ((ISingleResult<sp_GetEmployeePlacementsResult>)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetFunctionalAreaList")]
@@ -642,11 +660,32 @@ namespace SCMSDataLayer.DB
 			return ((ISingleResult<sp_GetUserListResult>)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetUserLocationsByGroupId")]
+		public ISingleResult<sp_GetUserLocationsByGroupIdResult> sp_GetUserLocationsByGroupId([global::System.Data.Linq.Mapping.ParameterAttribute(Name="GroupId", DbType="VarChar(50)")] string groupId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), groupId);
+			return ((ISingleResult<sp_GetUserLocationsByGroupIdResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetUserLocationsByUserId")]
+		public ISingleResult<sp_GetUserLocationsByUserIdResult> sp_GetUserLocationsByUserId([global::System.Data.Linq.Mapping.ParameterAttribute(Name="UserId", DbType="VarChar(50)")] string userId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), userId);
+			return ((ISingleResult<sp_GetUserLocationsByUserIdResult>)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetUserMenuRights")]
 		public ISingleResult<sp_GetUserMenuRightsResult> sp_GetUserMenuRights([global::System.Data.Linq.Mapping.ParameterAttribute(Name="GroupId", DbType="VarChar(50)")] string groupId)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), groupId);
 			return ((ISingleResult<sp_GetUserMenuRightsResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetUserMenuRightsByUserId")]
+		public ISingleResult<sp_GetUserMenuRightsByUserIdResult> sp_GetUserMenuRightsByUserId([global::System.Data.Linq.Mapping.ParameterAttribute(Name="UserId", DbType="VarChar(50)")] string userId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), userId);
+			return ((ISingleResult<sp_GetUserMenuRightsByUserIdResult>)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetVoucherTypeNarrationList")]
@@ -724,13 +763,6 @@ namespace SCMSDataLayer.DB
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), allLocation, locationId, allVoucherType, voucherTypeId, allDate, dateFrom, dateTo);
 			return ((ISingleResult<sp_ReportTrialBalanceResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetEmployeePlacements")]
-		public ISingleResult<sp_GetEmployeePlacementsResult> sp_GetEmployeePlacements([global::System.Data.Linq.Mapping.ParameterAttribute(Name="EmpId", DbType="VarChar(50)")] string empId)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empId);
-			return ((ISingleResult<sp_GetEmployeePlacementsResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -1716,7 +1748,7 @@ namespace SCMSDataLayer.DB
 		
 		private string _Mnu_TargetUrl;
 		
-		private System.Nullable<bool> _Mnu_IsLineBreak;
+		private string _Mnu_IsLineBreak;
 		
 		private System.Nullable<int> _Mnu_Active;
 		
@@ -1740,7 +1772,7 @@ namespace SCMSDataLayer.DB
     partial void OnMnu_SortOrderChanged();
     partial void OnMnu_TargetUrlChanging(string value);
     partial void OnMnu_TargetUrlChanged();
-    partial void OnMnu_IsLineBreakChanging(System.Nullable<bool> value);
+    partial void OnMnu_IsLineBreakChanging(string value);
     partial void OnMnu_IsLineBreakChanged();
     partial void OnMnu_ActiveChanging(System.Nullable<int> value);
     partial void OnMnu_ActiveChanged();
@@ -1874,8 +1906,8 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mnu_IsLineBreak", DbType="Bit")]
-		public System.Nullable<bool> Mnu_IsLineBreak
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mnu_IsLineBreak", DbType="VarChar(50)")]
+		public string Mnu_IsLineBreak
 		{
 			get
 			{
@@ -2004,6 +2036,8 @@ namespace SCMSDataLayer.DB
 		
 		private System.Nullable<int> _User_SortOrder;
 		
+		private EntitySet<Security_UserLocation> _Security_UserLocations;
+		
 		private EntityRef<SECURITY_UserGroup> _SECURITY_UserGroup;
 		
 		private EntityRef<SETUP_Company> _SETUP_Company;
@@ -2036,6 +2070,7 @@ namespace SCMSDataLayer.DB
 		
 		public SECURITY_User()
 		{
+			this._Security_UserLocations = new EntitySet<Security_UserLocation>(new Action<Security_UserLocation>(this.attach_Security_UserLocations), new Action<Security_UserLocation>(this.detach_Security_UserLocations));
 			this._SECURITY_UserGroup = default(EntityRef<SECURITY_UserGroup>);
 			this._SETUP_Company = default(EntityRef<SETUP_Company>);
 			this._SETUP_Location = default(EntityRef<SETUP_Location>);
@@ -2234,6 +2269,19 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SECURITY_User_Security_UserLocation", Storage="_Security_UserLocations", ThisKey="User_Id", OtherKey="User_Id")]
+		public EntitySet<Security_UserLocation> Security_UserLocations
+		{
+			get
+			{
+				return this._Security_UserLocations;
+			}
+			set
+			{
+				this._Security_UserLocations.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SECURITY_UserGroup_SECURITY_User", Storage="_SECURITY_UserGroup", ThisKey="UsrGrp_Id", OtherKey="UsrGrp_Id", IsForeignKey=true)]
 		public SECURITY_UserGroup SECURITY_UserGroup
 		{
@@ -2355,6 +2403,18 @@ namespace SCMSDataLayer.DB
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_Security_UserLocations(Security_UserLocation entity)
+		{
+			this.SendPropertyChanging();
+			entity.SECURITY_User = this;
+		}
+		
+		private void detach_Security_UserLocations(Security_UserLocation entity)
+		{
+			this.SendPropertyChanging();
+			entity.SECURITY_User = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SECURITY_UserGroup")]
@@ -2378,6 +2438,8 @@ namespace SCMSDataLayer.DB
 		private System.Nullable<int> _UsrGrp_SortOrder;
 		
 		private EntitySet<SECURITY_User> _SECURITY_Users;
+		
+		private EntitySet<Security_UserLocation> _Security_UserLocations;
 		
 		private EntityRef<SETUP_Company> _SETUP_Company;
 		
@@ -2406,6 +2468,7 @@ namespace SCMSDataLayer.DB
 		public SECURITY_UserGroup()
 		{
 			this._SECURITY_Users = new EntitySet<SECURITY_User>(new Action<SECURITY_User>(this.attach_SECURITY_Users), new Action<SECURITY_User>(this.detach_SECURITY_Users));
+			this._Security_UserLocations = new EntitySet<Security_UserLocation>(new Action<Security_UserLocation>(this.attach_Security_UserLocations), new Action<Security_UserLocation>(this.detach_Security_UserLocations));
 			this._SETUP_Company = default(EntityRef<SETUP_Company>);
 			this._SETUP_Location = default(EntityRef<SETUP_Location>);
 			OnCreated();
@@ -2572,6 +2635,19 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SECURITY_UserGroup_Security_UserLocation", Storage="_Security_UserLocations", ThisKey="UsrGrp_Id", OtherKey="UsrGrp_Id")]
+		public EntitySet<Security_UserLocation> Security_UserLocations
+		{
+			get
+			{
+				return this._Security_UserLocations;
+			}
+			set
+			{
+				this._Security_UserLocations.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SECURITY_UserGroup", Storage="_SETUP_Company", ThisKey="Cmp_Id", OtherKey="Cmp_Id", IsForeignKey=true)]
 		public SETUP_Company SETUP_Company
 		{
@@ -2671,6 +2747,275 @@ namespace SCMSDataLayer.DB
 			this.SendPropertyChanging();
 			entity.SECURITY_UserGroup = null;
 		}
+		
+		private void attach_Security_UserLocations(Security_UserLocation entity)
+		{
+			this.SendPropertyChanging();
+			entity.SECURITY_UserGroup = this;
+		}
+		
+		private void detach_Security_UserLocations(Security_UserLocation entity)
+		{
+			this.SendPropertyChanging();
+			entity.SECURITY_UserGroup = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Security_UserLocations")]
+	public partial class Security_UserLocation : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _UserLoc_Id;
+		
+		private string _UsrGrp_Id;
+		
+		private string _User_Id;
+		
+		private string _Loc_Id;
+		
+		private EntityRef<SECURITY_User> _SECURITY_User;
+		
+		private EntityRef<SECURITY_UserGroup> _SECURITY_UserGroup;
+		
+		private EntityRef<SETUP_Location> _SETUP_Location;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnUserLoc_IdChanging(long value);
+    partial void OnUserLoc_IdChanged();
+    partial void OnUsrGrp_IdChanging(string value);
+    partial void OnUsrGrp_IdChanged();
+    partial void OnUser_IdChanging(string value);
+    partial void OnUser_IdChanged();
+    partial void OnLoc_IdChanging(string value);
+    partial void OnLoc_IdChanged();
+    #endregion
+		
+		public Security_UserLocation()
+		{
+			this._SECURITY_User = default(EntityRef<SECURITY_User>);
+			this._SECURITY_UserGroup = default(EntityRef<SECURITY_UserGroup>);
+			this._SETUP_Location = default(EntityRef<SETUP_Location>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserLoc_Id", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public long UserLoc_Id
+		{
+			get
+			{
+				return this._UserLoc_Id;
+			}
+			set
+			{
+				if ((this._UserLoc_Id != value))
+				{
+					this.OnUserLoc_IdChanging(value);
+					this.SendPropertyChanging();
+					this._UserLoc_Id = value;
+					this.SendPropertyChanged("UserLoc_Id");
+					this.OnUserLoc_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsrGrp_Id", DbType="VarChar(50)")]
+		public string UsrGrp_Id
+		{
+			get
+			{
+				return this._UsrGrp_Id;
+			}
+			set
+			{
+				if ((this._UsrGrp_Id != value))
+				{
+					if (this._SECURITY_UserGroup.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUsrGrp_IdChanging(value);
+					this.SendPropertyChanging();
+					this._UsrGrp_Id = value;
+					this.SendPropertyChanged("UsrGrp_Id");
+					this.OnUsrGrp_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_User_Id", DbType="VarChar(50)")]
+		public string User_Id
+		{
+			get
+			{
+				return this._User_Id;
+			}
+			set
+			{
+				if ((this._User_Id != value))
+				{
+					if (this._SECURITY_User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUser_IdChanging(value);
+					this.SendPropertyChanging();
+					this._User_Id = value;
+					this.SendPropertyChanged("User_Id");
+					this.OnUser_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id", DbType="VarChar(50)")]
+		public string Loc_Id
+		{
+			get
+			{
+				return this._Loc_Id;
+			}
+			set
+			{
+				if ((this._Loc_Id != value))
+				{
+					if (this._SETUP_Location.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnLoc_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Loc_Id = value;
+					this.SendPropertyChanged("Loc_Id");
+					this.OnLoc_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SECURITY_User_Security_UserLocation", Storage="_SECURITY_User", ThisKey="User_Id", OtherKey="User_Id", IsForeignKey=true)]
+		public SECURITY_User SECURITY_User
+		{
+			get
+			{
+				return this._SECURITY_User.Entity;
+			}
+			set
+			{
+				SECURITY_User previousValue = this._SECURITY_User.Entity;
+				if (((previousValue != value) 
+							|| (this._SECURITY_User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SECURITY_User.Entity = null;
+						previousValue.Security_UserLocations.Remove(this);
+					}
+					this._SECURITY_User.Entity = value;
+					if ((value != null))
+					{
+						value.Security_UserLocations.Add(this);
+						this._User_Id = value.User_Id;
+					}
+					else
+					{
+						this._User_Id = default(string);
+					}
+					this.SendPropertyChanged("SECURITY_User");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SECURITY_UserGroup_Security_UserLocation", Storage="_SECURITY_UserGroup", ThisKey="UsrGrp_Id", OtherKey="UsrGrp_Id", IsForeignKey=true)]
+		public SECURITY_UserGroup SECURITY_UserGroup
+		{
+			get
+			{
+				return this._SECURITY_UserGroup.Entity;
+			}
+			set
+			{
+				SECURITY_UserGroup previousValue = this._SECURITY_UserGroup.Entity;
+				if (((previousValue != value) 
+							|| (this._SECURITY_UserGroup.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SECURITY_UserGroup.Entity = null;
+						previousValue.Security_UserLocations.Remove(this);
+					}
+					this._SECURITY_UserGroup.Entity = value;
+					if ((value != null))
+					{
+						value.Security_UserLocations.Add(this);
+						this._UsrGrp_Id = value.UsrGrp_Id;
+					}
+					else
+					{
+						this._UsrGrp_Id = default(string);
+					}
+					this.SendPropertyChanged("SECURITY_UserGroup");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_Security_UserLocation", Storage="_SETUP_Location", ThisKey="Loc_Id", OtherKey="Loc_Id", IsForeignKey=true)]
+		public SETUP_Location SETUP_Location
+		{
+			get
+			{
+				return this._SETUP_Location.Entity;
+			}
+			set
+			{
+				SETUP_Location previousValue = this._SETUP_Location.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Location.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Location.Entity = null;
+						previousValue.Security_UserLocations.Remove(this);
+					}
+					this._SETUP_Location.Entity = value;
+					if ((value != null))
+					{
+						value.Security_UserLocations.Add(this);
+						this._Loc_Id = value.Loc_Id;
+					}
+					else
+					{
+						this._Loc_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Location");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Security_UserRights")]
@@ -2691,6 +3036,18 @@ namespace SCMSDataLayer.DB
 		
 		private System.Nullable<int> _Mod_Id;
 		
+		private string _UsrSec_UserId;
+		
+		private System.Nullable<bool> _UsrSec_Add;
+		
+		private System.Nullable<bool> _UsrSec_Edit;
+		
+		private System.Nullable<bool> _UsrSec_Delete;
+		
+		private System.Nullable<bool> _UsrSec_Import;
+		
+		private System.Nullable<bool> _UsrSec_Print;
+		
 		private EntityRef<Security_MenuOption> _Security_MenuOption;
 		
     #region Extensibility Method Definitions
@@ -2709,6 +3066,18 @@ namespace SCMSDataLayer.DB
     partial void OnUsrSec_ActiveChanged();
     partial void OnMod_IdChanging(System.Nullable<int> value);
     partial void OnMod_IdChanged();
+    partial void OnUsrSec_UserIdChanging(string value);
+    partial void OnUsrSec_UserIdChanged();
+    partial void OnUsrSec_AddChanging(System.Nullable<bool> value);
+    partial void OnUsrSec_AddChanged();
+    partial void OnUsrSec_EditChanging(System.Nullable<bool> value);
+    partial void OnUsrSec_EditChanged();
+    partial void OnUsrSec_DeleteChanging(System.Nullable<bool> value);
+    partial void OnUsrSec_DeleteChanged();
+    partial void OnUsrSec_ImportChanging(System.Nullable<bool> value);
+    partial void OnUsrSec_ImportChanged();
+    partial void OnUsrSec_PrintChanging(System.Nullable<bool> value);
+    partial void OnUsrSec_PrintChanged();
     #endregion
 		
 		public Security_UserRight()
@@ -2837,6 +3206,126 @@ namespace SCMSDataLayer.DB
 					this._Mod_Id = value;
 					this.SendPropertyChanged("Mod_Id");
 					this.OnMod_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsrSec_UserId", DbType="VarChar(50)")]
+		public string UsrSec_UserId
+		{
+			get
+			{
+				return this._UsrSec_UserId;
+			}
+			set
+			{
+				if ((this._UsrSec_UserId != value))
+				{
+					this.OnUsrSec_UserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UsrSec_UserId = value;
+					this.SendPropertyChanged("UsrSec_UserId");
+					this.OnUsrSec_UserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsrSec_Add", DbType="Bit")]
+		public System.Nullable<bool> UsrSec_Add
+		{
+			get
+			{
+				return this._UsrSec_Add;
+			}
+			set
+			{
+				if ((this._UsrSec_Add != value))
+				{
+					this.OnUsrSec_AddChanging(value);
+					this.SendPropertyChanging();
+					this._UsrSec_Add = value;
+					this.SendPropertyChanged("UsrSec_Add");
+					this.OnUsrSec_AddChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsrSec_Edit", DbType="Bit")]
+		public System.Nullable<bool> UsrSec_Edit
+		{
+			get
+			{
+				return this._UsrSec_Edit;
+			}
+			set
+			{
+				if ((this._UsrSec_Edit != value))
+				{
+					this.OnUsrSec_EditChanging(value);
+					this.SendPropertyChanging();
+					this._UsrSec_Edit = value;
+					this.SendPropertyChanged("UsrSec_Edit");
+					this.OnUsrSec_EditChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsrSec_Delete", DbType="Bit")]
+		public System.Nullable<bool> UsrSec_Delete
+		{
+			get
+			{
+				return this._UsrSec_Delete;
+			}
+			set
+			{
+				if ((this._UsrSec_Delete != value))
+				{
+					this.OnUsrSec_DeleteChanging(value);
+					this.SendPropertyChanging();
+					this._UsrSec_Delete = value;
+					this.SendPropertyChanged("UsrSec_Delete");
+					this.OnUsrSec_DeleteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsrSec_Import", DbType="Bit")]
+		public System.Nullable<bool> UsrSec_Import
+		{
+			get
+			{
+				return this._UsrSec_Import;
+			}
+			set
+			{
+				if ((this._UsrSec_Import != value))
+				{
+					this.OnUsrSec_ImportChanging(value);
+					this.SendPropertyChanging();
+					this._UsrSec_Import = value;
+					this.SendPropertyChanged("UsrSec_Import");
+					this.OnUsrSec_ImportChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsrSec_Print", DbType="Bit")]
+		public System.Nullable<bool> UsrSec_Print
+		{
+			get
+			{
+				return this._UsrSec_Print;
+			}
+			set
+			{
+				if ((this._UsrSec_Print != value))
+				{
+					this.OnUsrSec_PrintChanging(value);
+					this.SendPropertyChanging();
+					this._UsrSec_Print = value;
+					this.SendPropertyChanged("UsrSec_Print");
+					this.OnUsrSec_PrintChanged();
 				}
 			}
 		}
@@ -9075,9 +9564,9 @@ namespace SCMSDataLayer.DB
 		
 		private System.Nullable<int> _Dpt_SortOrder;
 		
-		private EntitySet<SETUP_JobPosition> _SETUP_JobPositions;
-		
 		private EntitySet<SETUP_EmpPlacement> _SETUP_EmpPlacements;
+		
+		private EntitySet<SETUP_JobPosition> _SETUP_JobPositions;
 		
 		private EntityRef<SETUP_Company> _SETUP_Company;
 		
@@ -9105,8 +9594,8 @@ namespace SCMSDataLayer.DB
 		
 		public SETUP_Department()
 		{
-			this._SETUP_JobPositions = new EntitySet<SETUP_JobPosition>(new Action<SETUP_JobPosition>(this.attach_SETUP_JobPositions), new Action<SETUP_JobPosition>(this.detach_SETUP_JobPositions));
 			this._SETUP_EmpPlacements = new EntitySet<SETUP_EmpPlacement>(new Action<SETUP_EmpPlacement>(this.attach_SETUP_EmpPlacements), new Action<SETUP_EmpPlacement>(this.detach_SETUP_EmpPlacements));
+			this._SETUP_JobPositions = new EntitySet<SETUP_JobPosition>(new Action<SETUP_JobPosition>(this.attach_SETUP_JobPositions), new Action<SETUP_JobPosition>(this.detach_SETUP_JobPositions));
 			this._SETUP_Company = default(EntityRef<SETUP_Company>);
 			this._SETUP_Location = default(EntityRef<SETUP_Location>);
 			OnCreated();
@@ -9260,19 +9749,6 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Department_SETUP_JobPosition", Storage="_SETUP_JobPositions", ThisKey="Dpt_Id", OtherKey="Dpt_Id")]
-		public EntitySet<SETUP_JobPosition> SETUP_JobPositions
-		{
-			get
-			{
-				return this._SETUP_JobPositions;
-			}
-			set
-			{
-				this._SETUP_JobPositions.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Department_SETUP_EmpPlacement", Storage="_SETUP_EmpPlacements", ThisKey="Dpt_Id", OtherKey="Dpt_Id")]
 		public EntitySet<SETUP_EmpPlacement> SETUP_EmpPlacements
 		{
@@ -9283,6 +9759,19 @@ namespace SCMSDataLayer.DB
 			set
 			{
 				this._SETUP_EmpPlacements.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Department_SETUP_JobPosition", Storage="_SETUP_JobPositions", ThisKey="Dpt_Id", OtherKey="Dpt_Id")]
+		public EntitySet<SETUP_JobPosition> SETUP_JobPositions
+		{
+			get
+			{
+				return this._SETUP_JobPositions;
+			}
+			set
+			{
+				this._SETUP_JobPositions.Assign(value);
 			}
 		}
 		
@@ -9374,6 +9863,18 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		private void attach_SETUP_EmpPlacements(SETUP_EmpPlacement entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Department = this;
+		}
+		
+		private void detach_SETUP_EmpPlacements(SETUP_EmpPlacement entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Department = null;
+		}
+		
 		private void attach_SETUP_JobPositions(SETUP_JobPosition entity)
 		{
 			this.SendPropertyChanging();
@@ -9385,17 +9886,739 @@ namespace SCMSDataLayer.DB
 			this.SendPropertyChanging();
 			entity.SETUP_Department = null;
 		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SETUP_Employee")]
+	public partial class SETUP_Employee : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Emp_Id;
+		
+		private string _Emp_Code;
+		
+		private System.Nullable<System.DateTime> _Emp_DoB;
+		
+		private string _Emp_Title;
+		
+		private string _Emp_Address;
+		
+		private string _Gndr_Id;
+		
+		private string _MS_Id;
+		
+		private string _Rlgn_Id;
+		
+		private string _Natn_Id;
+		
+		private string _Emp_Phone;
+		
+		private string _Emp_Mobile;
+		
+		private string _Emp_Email;
+		
+		private string _Emp_CNIC;
+		
+		private System.Nullable<System.DateTime> _Emp_AptmentDate;
+		
+		private System.Nullable<System.DateTime> _Emp_JoiningDate;
+		
+		private string _Emp_Months_Probation;
+		
+		private System.Nullable<System.DateTime> _Emp_ConfirmDate;
+		
+		private string _Emp_Months_NoticePerd;
+		
+		private System.Nullable<int> _Emp_Active;
+		
+		private System.Nullable<int> _Emp_SortOrder;
+		
+		private string _Emp_ImagePath;
+		
+		private EntitySet<SETUP_EmpPlacement> _SETUP_EmpPlacements;
+		
+		private EntityRef<SETUP_Gender> _SETUP_Gender;
+		
+		private EntityRef<SETUP_MaritalStatus> _SETUP_MaritalStatus;
+		
+		private EntityRef<SETUP_Nationality> _SETUP_Nationality;
+		
+		private EntityRef<SETUP_Religion> _SETUP_Religion;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnEmp_IdChanging(string value);
+    partial void OnEmp_IdChanged();
+    partial void OnEmp_CodeChanging(string value);
+    partial void OnEmp_CodeChanged();
+    partial void OnEmp_DoBChanging(System.Nullable<System.DateTime> value);
+    partial void OnEmp_DoBChanged();
+    partial void OnEmp_TitleChanging(string value);
+    partial void OnEmp_TitleChanged();
+    partial void OnEmp_AddressChanging(string value);
+    partial void OnEmp_AddressChanged();
+    partial void OnGndr_IdChanging(string value);
+    partial void OnGndr_IdChanged();
+    partial void OnMS_IdChanging(string value);
+    partial void OnMS_IdChanged();
+    partial void OnRlgn_IdChanging(string value);
+    partial void OnRlgn_IdChanged();
+    partial void OnNatn_IdChanging(string value);
+    partial void OnNatn_IdChanged();
+    partial void OnEmp_PhoneChanging(string value);
+    partial void OnEmp_PhoneChanged();
+    partial void OnEmp_MobileChanging(string value);
+    partial void OnEmp_MobileChanged();
+    partial void OnEmp_EmailChanging(string value);
+    partial void OnEmp_EmailChanged();
+    partial void OnEmp_CNICChanging(string value);
+    partial void OnEmp_CNICChanged();
+    partial void OnEmp_AptmentDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnEmp_AptmentDateChanged();
+    partial void OnEmp_JoiningDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnEmp_JoiningDateChanged();
+    partial void OnEmp_Months_ProbationChanging(string value);
+    partial void OnEmp_Months_ProbationChanged();
+    partial void OnEmp_ConfirmDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnEmp_ConfirmDateChanged();
+    partial void OnEmp_Months_NoticePerdChanging(string value);
+    partial void OnEmp_Months_NoticePerdChanged();
+    partial void OnEmp_ActiveChanging(System.Nullable<int> value);
+    partial void OnEmp_ActiveChanged();
+    partial void OnEmp_SortOrderChanging(System.Nullable<int> value);
+    partial void OnEmp_SortOrderChanged();
+    partial void OnEmp_ImagePathChanging(string value);
+    partial void OnEmp_ImagePathChanged();
+    #endregion
+		
+		public SETUP_Employee()
+		{
+			this._SETUP_EmpPlacements = new EntitySet<SETUP_EmpPlacement>(new Action<SETUP_EmpPlacement>(this.attach_SETUP_EmpPlacements), new Action<SETUP_EmpPlacement>(this.detach_SETUP_EmpPlacements));
+			this._SETUP_Gender = default(EntityRef<SETUP_Gender>);
+			this._SETUP_MaritalStatus = default(EntityRef<SETUP_MaritalStatus>);
+			this._SETUP_Nationality = default(EntityRef<SETUP_Nationality>);
+			this._SETUP_Religion = default(EntityRef<SETUP_Religion>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Emp_Id
+		{
+			get
+			{
+				return this._Emp_Id;
+			}
+			set
+			{
+				if ((this._Emp_Id != value))
+				{
+					this.OnEmp_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Emp_Id = value;
+					this.SendPropertyChanged("Emp_Id");
+					this.OnEmp_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_Code", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Emp_Code
+		{
+			get
+			{
+				return this._Emp_Code;
+			}
+			set
+			{
+				if ((this._Emp_Code != value))
+				{
+					this.OnEmp_CodeChanging(value);
+					this.SendPropertyChanging();
+					this._Emp_Code = value;
+					this.SendPropertyChanged("Emp_Code");
+					this.OnEmp_CodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_DoB", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Emp_DoB
+		{
+			get
+			{
+				return this._Emp_DoB;
+			}
+			set
+			{
+				if ((this._Emp_DoB != value))
+				{
+					this.OnEmp_DoBChanging(value);
+					this.SendPropertyChanging();
+					this._Emp_DoB = value;
+					this.SendPropertyChanged("Emp_DoB");
+					this.OnEmp_DoBChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_Title", DbType="VarChar(100)")]
+		public string Emp_Title
+		{
+			get
+			{
+				return this._Emp_Title;
+			}
+			set
+			{
+				if ((this._Emp_Title != value))
+				{
+					this.OnEmp_TitleChanging(value);
+					this.SendPropertyChanging();
+					this._Emp_Title = value;
+					this.SendPropertyChanged("Emp_Title");
+					this.OnEmp_TitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_Address", DbType="VarChar(150)")]
+		public string Emp_Address
+		{
+			get
+			{
+				return this._Emp_Address;
+			}
+			set
+			{
+				if ((this._Emp_Address != value))
+				{
+					this.OnEmp_AddressChanging(value);
+					this.SendPropertyChanging();
+					this._Emp_Address = value;
+					this.SendPropertyChanged("Emp_Address");
+					this.OnEmp_AddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gndr_Id", DbType="VarChar(50)")]
+		public string Gndr_Id
+		{
+			get
+			{
+				return this._Gndr_Id;
+			}
+			set
+			{
+				if ((this._Gndr_Id != value))
+				{
+					if (this._SETUP_Gender.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnGndr_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Gndr_Id = value;
+					this.SendPropertyChanged("Gndr_Id");
+					this.OnGndr_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MS_Id", DbType="VarChar(50)")]
+		public string MS_Id
+		{
+			get
+			{
+				return this._MS_Id;
+			}
+			set
+			{
+				if ((this._MS_Id != value))
+				{
+					if (this._SETUP_MaritalStatus.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnMS_IdChanging(value);
+					this.SendPropertyChanging();
+					this._MS_Id = value;
+					this.SendPropertyChanged("MS_Id");
+					this.OnMS_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Rlgn_Id", DbType="VarChar(50)")]
+		public string Rlgn_Id
+		{
+			get
+			{
+				return this._Rlgn_Id;
+			}
+			set
+			{
+				if ((this._Rlgn_Id != value))
+				{
+					if (this._SETUP_Religion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRlgn_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Rlgn_Id = value;
+					this.SendPropertyChanged("Rlgn_Id");
+					this.OnRlgn_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Natn_Id", DbType="VarChar(50)")]
+		public string Natn_Id
+		{
+			get
+			{
+				return this._Natn_Id;
+			}
+			set
+			{
+				if ((this._Natn_Id != value))
+				{
+					if (this._SETUP_Nationality.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnNatn_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Natn_Id = value;
+					this.SendPropertyChanged("Natn_Id");
+					this.OnNatn_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_Phone", DbType="VarChar(100)")]
+		public string Emp_Phone
+		{
+			get
+			{
+				return this._Emp_Phone;
+			}
+			set
+			{
+				if ((this._Emp_Phone != value))
+				{
+					this.OnEmp_PhoneChanging(value);
+					this.SendPropertyChanging();
+					this._Emp_Phone = value;
+					this.SendPropertyChanged("Emp_Phone");
+					this.OnEmp_PhoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_Mobile", DbType="VarChar(100)")]
+		public string Emp_Mobile
+		{
+			get
+			{
+				return this._Emp_Mobile;
+			}
+			set
+			{
+				if ((this._Emp_Mobile != value))
+				{
+					this.OnEmp_MobileChanging(value);
+					this.SendPropertyChanging();
+					this._Emp_Mobile = value;
+					this.SendPropertyChanged("Emp_Mobile");
+					this.OnEmp_MobileChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_Email", DbType="VarChar(100)")]
+		public string Emp_Email
+		{
+			get
+			{
+				return this._Emp_Email;
+			}
+			set
+			{
+				if ((this._Emp_Email != value))
+				{
+					this.OnEmp_EmailChanging(value);
+					this.SendPropertyChanging();
+					this._Emp_Email = value;
+					this.SendPropertyChanged("Emp_Email");
+					this.OnEmp_EmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_CNIC", DbType="VarChar(100)")]
+		public string Emp_CNIC
+		{
+			get
+			{
+				return this._Emp_CNIC;
+			}
+			set
+			{
+				if ((this._Emp_CNIC != value))
+				{
+					this.OnEmp_CNICChanging(value);
+					this.SendPropertyChanging();
+					this._Emp_CNIC = value;
+					this.SendPropertyChanged("Emp_CNIC");
+					this.OnEmp_CNICChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_AptmentDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Emp_AptmentDate
+		{
+			get
+			{
+				return this._Emp_AptmentDate;
+			}
+			set
+			{
+				if ((this._Emp_AptmentDate != value))
+				{
+					this.OnEmp_AptmentDateChanging(value);
+					this.SendPropertyChanging();
+					this._Emp_AptmentDate = value;
+					this.SendPropertyChanged("Emp_AptmentDate");
+					this.OnEmp_AptmentDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_JoiningDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Emp_JoiningDate
+		{
+			get
+			{
+				return this._Emp_JoiningDate;
+			}
+			set
+			{
+				if ((this._Emp_JoiningDate != value))
+				{
+					this.OnEmp_JoiningDateChanging(value);
+					this.SendPropertyChanging();
+					this._Emp_JoiningDate = value;
+					this.SendPropertyChanged("Emp_JoiningDate");
+					this.OnEmp_JoiningDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_Months_Probation", DbType="VarChar(50)")]
+		public string Emp_Months_Probation
+		{
+			get
+			{
+				return this._Emp_Months_Probation;
+			}
+			set
+			{
+				if ((this._Emp_Months_Probation != value))
+				{
+					this.OnEmp_Months_ProbationChanging(value);
+					this.SendPropertyChanging();
+					this._Emp_Months_Probation = value;
+					this.SendPropertyChanged("Emp_Months_Probation");
+					this.OnEmp_Months_ProbationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_ConfirmDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Emp_ConfirmDate
+		{
+			get
+			{
+				return this._Emp_ConfirmDate;
+			}
+			set
+			{
+				if ((this._Emp_ConfirmDate != value))
+				{
+					this.OnEmp_ConfirmDateChanging(value);
+					this.SendPropertyChanging();
+					this._Emp_ConfirmDate = value;
+					this.SendPropertyChanged("Emp_ConfirmDate");
+					this.OnEmp_ConfirmDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_Months_NoticePerd", DbType="VarChar(50)")]
+		public string Emp_Months_NoticePerd
+		{
+			get
+			{
+				return this._Emp_Months_NoticePerd;
+			}
+			set
+			{
+				if ((this._Emp_Months_NoticePerd != value))
+				{
+					this.OnEmp_Months_NoticePerdChanging(value);
+					this.SendPropertyChanging();
+					this._Emp_Months_NoticePerd = value;
+					this.SendPropertyChanged("Emp_Months_NoticePerd");
+					this.OnEmp_Months_NoticePerdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_Active", DbType="Int")]
+		public System.Nullable<int> Emp_Active
+		{
+			get
+			{
+				return this._Emp_Active;
+			}
+			set
+			{
+				if ((this._Emp_Active != value))
+				{
+					this.OnEmp_ActiveChanging(value);
+					this.SendPropertyChanging();
+					this._Emp_Active = value;
+					this.SendPropertyChanged("Emp_Active");
+					this.OnEmp_ActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_SortOrder", DbType="Int")]
+		public System.Nullable<int> Emp_SortOrder
+		{
+			get
+			{
+				return this._Emp_SortOrder;
+			}
+			set
+			{
+				if ((this._Emp_SortOrder != value))
+				{
+					this.OnEmp_SortOrderChanging(value);
+					this.SendPropertyChanging();
+					this._Emp_SortOrder = value;
+					this.SendPropertyChanged("Emp_SortOrder");
+					this.OnEmp_SortOrderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_ImagePath", DbType="VarChar(200)")]
+		public string Emp_ImagePath
+		{
+			get
+			{
+				return this._Emp_ImagePath;
+			}
+			set
+			{
+				if ((this._Emp_ImagePath != value))
+				{
+					this.OnEmp_ImagePathChanging(value);
+					this.SendPropertyChanging();
+					this._Emp_ImagePath = value;
+					this.SendPropertyChanged("Emp_ImagePath");
+					this.OnEmp_ImagePathChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Employee_SETUP_EmpPlacement", Storage="_SETUP_EmpPlacements", ThisKey="Emp_Id", OtherKey="Emp_Id")]
+		public EntitySet<SETUP_EmpPlacement> SETUP_EmpPlacements
+		{
+			get
+			{
+				return this._SETUP_EmpPlacements;
+			}
+			set
+			{
+				this._SETUP_EmpPlacements.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Gender_SETUP_Employee", Storage="_SETUP_Gender", ThisKey="Gndr_Id", OtherKey="Gndr_Id", IsForeignKey=true)]
+		public SETUP_Gender SETUP_Gender
+		{
+			get
+			{
+				return this._SETUP_Gender.Entity;
+			}
+			set
+			{
+				SETUP_Gender previousValue = this._SETUP_Gender.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Gender.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Gender.Entity = null;
+						previousValue.SETUP_Employees.Remove(this);
+					}
+					this._SETUP_Gender.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_Employees.Add(this);
+						this._Gndr_Id = value.Gndr_Id;
+					}
+					else
+					{
+						this._Gndr_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Gender");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_MaritalStatus_SETUP_Employee", Storage="_SETUP_MaritalStatus", ThisKey="MS_Id", OtherKey="MS_Id", IsForeignKey=true)]
+		public SETUP_MaritalStatus SETUP_MaritalStatus
+		{
+			get
+			{
+				return this._SETUP_MaritalStatus.Entity;
+			}
+			set
+			{
+				SETUP_MaritalStatus previousValue = this._SETUP_MaritalStatus.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_MaritalStatus.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_MaritalStatus.Entity = null;
+						previousValue.SETUP_Employees.Remove(this);
+					}
+					this._SETUP_MaritalStatus.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_Employees.Add(this);
+						this._MS_Id = value.MS_Id;
+					}
+					else
+					{
+						this._MS_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_MaritalStatus");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Nationality_SETUP_Employee", Storage="_SETUP_Nationality", ThisKey="Natn_Id", OtherKey="Natn_Id", IsForeignKey=true)]
+		public SETUP_Nationality SETUP_Nationality
+		{
+			get
+			{
+				return this._SETUP_Nationality.Entity;
+			}
+			set
+			{
+				SETUP_Nationality previousValue = this._SETUP_Nationality.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Nationality.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Nationality.Entity = null;
+						previousValue.SETUP_Employees.Remove(this);
+					}
+					this._SETUP_Nationality.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_Employees.Add(this);
+						this._Natn_Id = value.Natn_Id;
+					}
+					else
+					{
+						this._Natn_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Nationality");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Religion_SETUP_Employee", Storage="_SETUP_Religion", ThisKey="Rlgn_Id", OtherKey="Rlgn_Id", IsForeignKey=true)]
+		public SETUP_Religion SETUP_Religion
+		{
+			get
+			{
+				return this._SETUP_Religion.Entity;
+			}
+			set
+			{
+				SETUP_Religion previousValue = this._SETUP_Religion.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Religion.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Religion.Entity = null;
+						previousValue.SETUP_Employees.Remove(this);
+					}
+					this._SETUP_Religion.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_Employees.Add(this);
+						this._Rlgn_Id = value.Rlgn_Id;
+					}
+					else
+					{
+						this._Rlgn_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Religion");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
 		
 		private void attach_SETUP_EmpPlacements(SETUP_EmpPlacement entity)
 		{
 			this.SendPropertyChanging();
-			entity.SETUP_Department = this;
+			entity.SETUP_Employee = this;
 		}
 		
 		private void detach_SETUP_EmpPlacements(SETUP_EmpPlacement entity)
 		{
 			this.SendPropertyChanging();
-			entity.SETUP_Department = null;
+			entity.SETUP_Employee = null;
 		}
 	}
 	
@@ -9606,6 +10829,685 @@ namespace SCMSDataLayer.DB
 		{
 			this.SendPropertyChanging();
 			entity.SETUP_EmployeeType = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SETUP_EmpPlacement")]
+	public partial class SETUP_EmpPlacement : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Plcmt_Id;
+		
+		private string _Plcmt_Code;
+		
+		private string _Emp_Id;
+		
+		private string _Loc_Id;
+		
+		private string _Dpt_Id;
+		
+		private string _Shft_Id;
+		
+		private string _EmpTyp_Id;
+		
+		private string _LevTyp_Id;
+		
+		private string _LevGrp_Id;
+		
+		private string _JT_Id;
+		
+		private EntityRef<SETUP_EmpPlacement> _SETUP_EmpPlacement2;
+		
+		private EntityRef<SETUP_Department> _SETUP_Department;
+		
+		private EntityRef<SETUP_Employee> _SETUP_Employee;
+		
+		private EntityRef<SETUP_EmployeeType> _SETUP_EmployeeType;
+		
+		private EntityRef<SETUP_EmpPlacement> _SETUP_EmpPlacement1;
+		
+		private EntityRef<SETUP_JobTitle> _SETUP_JobTitle;
+		
+		private EntityRef<SETUP_LeaveGroup> _SETUP_LeaveGroup;
+		
+		private EntityRef<SETUP_LeaveType> _SETUP_LeaveType;
+		
+		private EntityRef<SETUP_Location> _SETUP_Location;
+		
+		private EntityRef<SETUP_Shift> _SETUP_Shift;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnPlcmt_IdChanging(string value);
+    partial void OnPlcmt_IdChanged();
+    partial void OnPlcmt_CodeChanging(string value);
+    partial void OnPlcmt_CodeChanged();
+    partial void OnEmp_IdChanging(string value);
+    partial void OnEmp_IdChanged();
+    partial void OnLoc_IdChanging(string value);
+    partial void OnLoc_IdChanged();
+    partial void OnDpt_IdChanging(string value);
+    partial void OnDpt_IdChanged();
+    partial void OnShft_IdChanging(string value);
+    partial void OnShft_IdChanged();
+    partial void OnEmpTyp_IdChanging(string value);
+    partial void OnEmpTyp_IdChanged();
+    partial void OnLevTyp_IdChanging(string value);
+    partial void OnLevTyp_IdChanged();
+    partial void OnLevGrp_IdChanging(string value);
+    partial void OnLevGrp_IdChanged();
+    partial void OnJT_IdChanging(string value);
+    partial void OnJT_IdChanged();
+    #endregion
+		
+		public SETUP_EmpPlacement()
+		{
+			this._SETUP_EmpPlacement2 = default(EntityRef<SETUP_EmpPlacement>);
+			this._SETUP_Department = default(EntityRef<SETUP_Department>);
+			this._SETUP_Employee = default(EntityRef<SETUP_Employee>);
+			this._SETUP_EmployeeType = default(EntityRef<SETUP_EmployeeType>);
+			this._SETUP_EmpPlacement1 = default(EntityRef<SETUP_EmpPlacement>);
+			this._SETUP_JobTitle = default(EntityRef<SETUP_JobTitle>);
+			this._SETUP_LeaveGroup = default(EntityRef<SETUP_LeaveGroup>);
+			this._SETUP_LeaveType = default(EntityRef<SETUP_LeaveType>);
+			this._SETUP_Location = default(EntityRef<SETUP_Location>);
+			this._SETUP_Shift = default(EntityRef<SETUP_Shift>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Plcmt_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Plcmt_Id
+		{
+			get
+			{
+				return this._Plcmt_Id;
+			}
+			set
+			{
+				if ((this._Plcmt_Id != value))
+				{
+					if (this._SETUP_EmpPlacement1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnPlcmt_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Plcmt_Id = value;
+					this.SendPropertyChanged("Plcmt_Id");
+					this.OnPlcmt_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Plcmt_Code", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Plcmt_Code
+		{
+			get
+			{
+				return this._Plcmt_Code;
+			}
+			set
+			{
+				if ((this._Plcmt_Code != value))
+				{
+					this.OnPlcmt_CodeChanging(value);
+					this.SendPropertyChanging();
+					this._Plcmt_Code = value;
+					this.SendPropertyChanged("Plcmt_Code");
+					this.OnPlcmt_CodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Emp_Id
+		{
+			get
+			{
+				return this._Emp_Id;
+			}
+			set
+			{
+				if ((this._Emp_Id != value))
+				{
+					if (this._SETUP_Employee.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnEmp_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Emp_Id = value;
+					this.SendPropertyChanged("Emp_Id");
+					this.OnEmp_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id", DbType="VarChar(50)")]
+		public string Loc_Id
+		{
+			get
+			{
+				return this._Loc_Id;
+			}
+			set
+			{
+				if ((this._Loc_Id != value))
+				{
+					if (this._SETUP_Location.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnLoc_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Loc_Id = value;
+					this.SendPropertyChanged("Loc_Id");
+					this.OnLoc_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dpt_Id", DbType="VarChar(50)")]
+		public string Dpt_Id
+		{
+			get
+			{
+				return this._Dpt_Id;
+			}
+			set
+			{
+				if ((this._Dpt_Id != value))
+				{
+					if (this._SETUP_Department.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnDpt_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Dpt_Id = value;
+					this.SendPropertyChanged("Dpt_Id");
+					this.OnDpt_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_Id", DbType="VarChar(50)")]
+		public string Shft_Id
+		{
+			get
+			{
+				return this._Shft_Id;
+			}
+			set
+			{
+				if ((this._Shft_Id != value))
+				{
+					if (this._SETUP_Shift.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnShft_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Shft_Id = value;
+					this.SendPropertyChanged("Shft_Id");
+					this.OnShft_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmpTyp_Id", DbType="VarChar(50)")]
+		public string EmpTyp_Id
+		{
+			get
+			{
+				return this._EmpTyp_Id;
+			}
+			set
+			{
+				if ((this._EmpTyp_Id != value))
+				{
+					if (this._SETUP_EmployeeType.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnEmpTyp_IdChanging(value);
+					this.SendPropertyChanging();
+					this._EmpTyp_Id = value;
+					this.SendPropertyChanged("EmpTyp_Id");
+					this.OnEmpTyp_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevTyp_Id", DbType="VarChar(50)")]
+		public string LevTyp_Id
+		{
+			get
+			{
+				return this._LevTyp_Id;
+			}
+			set
+			{
+				if ((this._LevTyp_Id != value))
+				{
+					if (this._SETUP_LeaveType.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnLevTyp_IdChanging(value);
+					this.SendPropertyChanging();
+					this._LevTyp_Id = value;
+					this.SendPropertyChanged("LevTyp_Id");
+					this.OnLevTyp_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevGrp_Id", DbType="VarChar(50)")]
+		public string LevGrp_Id
+		{
+			get
+			{
+				return this._LevGrp_Id;
+			}
+			set
+			{
+				if ((this._LevGrp_Id != value))
+				{
+					if (this._SETUP_LeaveGroup.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnLevGrp_IdChanging(value);
+					this.SendPropertyChanging();
+					this._LevGrp_Id = value;
+					this.SendPropertyChanged("LevGrp_Id");
+					this.OnLevGrp_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_JT_Id", DbType="VarChar(50)")]
+		public string JT_Id
+		{
+			get
+			{
+				return this._JT_Id;
+			}
+			set
+			{
+				if ((this._JT_Id != value))
+				{
+					if (this._SETUP_JobTitle.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnJT_IdChanging(value);
+					this.SendPropertyChanging();
+					this._JT_Id = value;
+					this.SendPropertyChanged("JT_Id");
+					this.OnJT_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_EmpPlacement_SETUP_EmpPlacement", Storage="_SETUP_EmpPlacement2", ThisKey="Plcmt_Id", OtherKey="Plcmt_Id", IsUnique=true, IsForeignKey=false)]
+		public SETUP_EmpPlacement SETUP_EmpPlacement2
+		{
+			get
+			{
+				return this._SETUP_EmpPlacement2.Entity;
+			}
+			set
+			{
+				SETUP_EmpPlacement previousValue = this._SETUP_EmpPlacement2.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_EmpPlacement2.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_EmpPlacement2.Entity = null;
+						previousValue.SETUP_EmpPlacement1 = null;
+					}
+					this._SETUP_EmpPlacement2.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_EmpPlacement1 = this;
+					}
+					this.SendPropertyChanged("SETUP_EmpPlacement2");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Department_SETUP_EmpPlacement", Storage="_SETUP_Department", ThisKey="Dpt_Id", OtherKey="Dpt_Id", IsForeignKey=true)]
+		public SETUP_Department SETUP_Department
+		{
+			get
+			{
+				return this._SETUP_Department.Entity;
+			}
+			set
+			{
+				SETUP_Department previousValue = this._SETUP_Department.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Department.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Department.Entity = null;
+						previousValue.SETUP_EmpPlacements.Remove(this);
+					}
+					this._SETUP_Department.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_EmpPlacements.Add(this);
+						this._Dpt_Id = value.Dpt_Id;
+					}
+					else
+					{
+						this._Dpt_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Department");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Employee_SETUP_EmpPlacement", Storage="_SETUP_Employee", ThisKey="Emp_Id", OtherKey="Emp_Id", IsForeignKey=true)]
+		public SETUP_Employee SETUP_Employee
+		{
+			get
+			{
+				return this._SETUP_Employee.Entity;
+			}
+			set
+			{
+				SETUP_Employee previousValue = this._SETUP_Employee.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Employee.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Employee.Entity = null;
+						previousValue.SETUP_EmpPlacements.Remove(this);
+					}
+					this._SETUP_Employee.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_EmpPlacements.Add(this);
+						this._Emp_Id = value.Emp_Id;
+					}
+					else
+					{
+						this._Emp_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Employee");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_EmployeeType_SETUP_EmpPlacement", Storage="_SETUP_EmployeeType", ThisKey="EmpTyp_Id", OtherKey="EmpTyp_Id", IsForeignKey=true)]
+		public SETUP_EmployeeType SETUP_EmployeeType
+		{
+			get
+			{
+				return this._SETUP_EmployeeType.Entity;
+			}
+			set
+			{
+				SETUP_EmployeeType previousValue = this._SETUP_EmployeeType.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_EmployeeType.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_EmployeeType.Entity = null;
+						previousValue.SETUP_EmpPlacements.Remove(this);
+					}
+					this._SETUP_EmployeeType.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_EmpPlacements.Add(this);
+						this._EmpTyp_Id = value.EmpTyp_Id;
+					}
+					else
+					{
+						this._EmpTyp_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_EmployeeType");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_EmpPlacement_SETUP_EmpPlacement", Storage="_SETUP_EmpPlacement1", ThisKey="Plcmt_Id", OtherKey="Plcmt_Id", IsForeignKey=true)]
+		public SETUP_EmpPlacement SETUP_EmpPlacement1
+		{
+			get
+			{
+				return this._SETUP_EmpPlacement1.Entity;
+			}
+			set
+			{
+				SETUP_EmpPlacement previousValue = this._SETUP_EmpPlacement1.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_EmpPlacement1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_EmpPlacement1.Entity = null;
+						previousValue.SETUP_EmpPlacement2 = null;
+					}
+					this._SETUP_EmpPlacement1.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_EmpPlacement2 = this;
+						this._Plcmt_Id = value.Plcmt_Id;
+					}
+					else
+					{
+						this._Plcmt_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_EmpPlacement1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_JobTitle_SETUP_EmpPlacement", Storage="_SETUP_JobTitle", ThisKey="JT_Id", OtherKey="JT_Id", IsForeignKey=true)]
+		public SETUP_JobTitle SETUP_JobTitle
+		{
+			get
+			{
+				return this._SETUP_JobTitle.Entity;
+			}
+			set
+			{
+				SETUP_JobTitle previousValue = this._SETUP_JobTitle.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_JobTitle.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_JobTitle.Entity = null;
+						previousValue.SETUP_EmpPlacements.Remove(this);
+					}
+					this._SETUP_JobTitle.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_EmpPlacements.Add(this);
+						this._JT_Id = value.JT_Id;
+					}
+					else
+					{
+						this._JT_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_JobTitle");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_LeaveGroup_SETUP_EmpPlacement", Storage="_SETUP_LeaveGroup", ThisKey="LevGrp_Id", OtherKey="LevGrp_Id", IsForeignKey=true)]
+		public SETUP_LeaveGroup SETUP_LeaveGroup
+		{
+			get
+			{
+				return this._SETUP_LeaveGroup.Entity;
+			}
+			set
+			{
+				SETUP_LeaveGroup previousValue = this._SETUP_LeaveGroup.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_LeaveGroup.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_LeaveGroup.Entity = null;
+						previousValue.SETUP_EmpPlacements.Remove(this);
+					}
+					this._SETUP_LeaveGroup.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_EmpPlacements.Add(this);
+						this._LevGrp_Id = value.LevGrp_Id;
+					}
+					else
+					{
+						this._LevGrp_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_LeaveGroup");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_LeaveType_SETUP_EmpPlacement", Storage="_SETUP_LeaveType", ThisKey="LevTyp_Id", OtherKey="LevTyp_Id", IsForeignKey=true)]
+		public SETUP_LeaveType SETUP_LeaveType
+		{
+			get
+			{
+				return this._SETUP_LeaveType.Entity;
+			}
+			set
+			{
+				SETUP_LeaveType previousValue = this._SETUP_LeaveType.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_LeaveType.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_LeaveType.Entity = null;
+						previousValue.SETUP_EmpPlacements.Remove(this);
+					}
+					this._SETUP_LeaveType.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_EmpPlacements.Add(this);
+						this._LevTyp_Id = value.LevTyp_Id;
+					}
+					else
+					{
+						this._LevTyp_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_LeaveType");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_SETUP_EmpPlacement", Storage="_SETUP_Location", ThisKey="Loc_Id", OtherKey="Loc_Id", IsForeignKey=true)]
+		public SETUP_Location SETUP_Location
+		{
+			get
+			{
+				return this._SETUP_Location.Entity;
+			}
+			set
+			{
+				SETUP_Location previousValue = this._SETUP_Location.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Location.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Location.Entity = null;
+						previousValue.SETUP_EmpPlacements.Remove(this);
+					}
+					this._SETUP_Location.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_EmpPlacements.Add(this);
+						this._Loc_Id = value.Loc_Id;
+					}
+					else
+					{
+						this._Loc_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Location");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Shift_SETUP_EmpPlacement", Storage="_SETUP_Shift", ThisKey="Shft_Id", OtherKey="Shft_Id", IsForeignKey=true)]
+		public SETUP_Shift SETUP_Shift
+		{
+			get
+			{
+				return this._SETUP_Shift.Entity;
+			}
+			set
+			{
+				SETUP_Shift previousValue = this._SETUP_Shift.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Shift.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Shift.Entity = null;
+						previousValue.SETUP_EmpPlacements.Remove(this);
+					}
+					this._SETUP_Shift.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_EmpPlacements.Add(this);
+						this._Shft_Id = value.Shft_Id;
+					}
+					else
+					{
+						this._Shft_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Shift");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -10662,9 +12564,9 @@ namespace SCMSDataLayer.DB
 		
 		private System.Nullable<int> _JT_SortOrder;
 		
-		private EntitySet<SETUP_JobPosition> _SETUP_JobPositions;
-		
 		private EntitySet<SETUP_EmpPlacement> _SETUP_EmpPlacements;
+		
+		private EntitySet<SETUP_JobPosition> _SETUP_JobPositions;
 		
 		private EntityRef<SETUP_Company> _SETUP_Company;
 		
@@ -10692,8 +12594,8 @@ namespace SCMSDataLayer.DB
 		
 		public SETUP_JobTitle()
 		{
-			this._SETUP_JobPositions = new EntitySet<SETUP_JobPosition>(new Action<SETUP_JobPosition>(this.attach_SETUP_JobPositions), new Action<SETUP_JobPosition>(this.detach_SETUP_JobPositions));
 			this._SETUP_EmpPlacements = new EntitySet<SETUP_EmpPlacement>(new Action<SETUP_EmpPlacement>(this.attach_SETUP_EmpPlacements), new Action<SETUP_EmpPlacement>(this.detach_SETUP_EmpPlacements));
+			this._SETUP_JobPositions = new EntitySet<SETUP_JobPosition>(new Action<SETUP_JobPosition>(this.attach_SETUP_JobPositions), new Action<SETUP_JobPosition>(this.detach_SETUP_JobPositions));
 			this._SETUP_Company = default(EntityRef<SETUP_Company>);
 			this._SETUP_Location = default(EntityRef<SETUP_Location>);
 			OnCreated();
@@ -10847,19 +12749,6 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_JobTitle_SETUP_JobPosition", Storage="_SETUP_JobPositions", ThisKey="JT_Id", OtherKey="JT_Id")]
-		public EntitySet<SETUP_JobPosition> SETUP_JobPositions
-		{
-			get
-			{
-				return this._SETUP_JobPositions;
-			}
-			set
-			{
-				this._SETUP_JobPositions.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_JobTitle_SETUP_EmpPlacement", Storage="_SETUP_EmpPlacements", ThisKey="JT_Id", OtherKey="JT_Id")]
 		public EntitySet<SETUP_EmpPlacement> SETUP_EmpPlacements
 		{
@@ -10870,6 +12759,19 @@ namespace SCMSDataLayer.DB
 			set
 			{
 				this._SETUP_EmpPlacements.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_JobTitle_SETUP_JobPosition", Storage="_SETUP_JobPositions", ThisKey="JT_Id", OtherKey="JT_Id")]
+		public EntitySet<SETUP_JobPosition> SETUP_JobPositions
+		{
+			get
+			{
+				return this._SETUP_JobPositions;
+			}
+			set
+			{
+				this._SETUP_JobPositions.Assign(value);
 			}
 		}
 		
@@ -10961,18 +12863,6 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
-		private void attach_SETUP_JobPositions(SETUP_JobPosition entity)
-		{
-			this.SendPropertyChanging();
-			entity.SETUP_JobTitle = this;
-		}
-		
-		private void detach_SETUP_JobPositions(SETUP_JobPosition entity)
-		{
-			this.SendPropertyChanging();
-			entity.SETUP_JobTitle = null;
-		}
-		
 		private void attach_SETUP_EmpPlacements(SETUP_EmpPlacement entity)
 		{
 			this.SendPropertyChanging();
@@ -10980,6 +12870,18 @@ namespace SCMSDataLayer.DB
 		}
 		
 		private void detach_SETUP_EmpPlacements(SETUP_EmpPlacement entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_JobTitle = null;
+		}
+		
+		private void attach_SETUP_JobPositions(SETUP_JobPosition entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_JobTitle = this;
+		}
+		
+		private void detach_SETUP_JobPositions(SETUP_JobPosition entity)
 		{
 			this.SendPropertyChanging();
 			entity.SETUP_JobTitle = null;
@@ -11608,6 +13510,8 @@ namespace SCMSDataLayer.DB
 		
 		private EntitySet<SECURITY_UserGroup> _SECURITY_UserGroups;
 		
+		private EntitySet<Security_UserLocation> _Security_UserLocations;
+		
 		private EntitySet<SETUP_Bank> _SETUP_Banks;
 		
 		private EntitySet<SETUP_BankAccount> _SETUP_BankAccounts;
@@ -11636,6 +13540,8 @@ namespace SCMSDataLayer.DB
 		
 		private EntitySet<SETUP_Department> _SETUP_Departments;
 		
+		private EntitySet<SETUP_EmpPlacement> _SETUP_EmpPlacements;
+		
 		private EntitySet<SETUP_FunctionalArea> _SETUP_FunctionalAreas;
 		
 		private EntitySet<SETUP_JobPosition> _SETUP_JobPositions;
@@ -11649,8 +13555,6 @@ namespace SCMSDataLayer.DB
 		private EntitySet<SETUP_SupplierType> _SETUP_SupplierTypes;
 		
 		private EntitySet<SETUP_VoucherType> _SETUP_VoucherTypes;
-		
-		private EntitySet<SETUP_EmpPlacement> _SETUP_EmpPlacements;
 		
 		private EntityRef<SETUP_Company> _SETUP_Company;
 		
@@ -11677,6 +13581,7 @@ namespace SCMSDataLayer.DB
 			this._GL_VchrMasters = new EntitySet<GL_VchrMaster>(new Action<GL_VchrMaster>(this.attach_GL_VchrMasters), new Action<GL_VchrMaster>(this.detach_GL_VchrMasters));
 			this._SECURITY_Users = new EntitySet<SECURITY_User>(new Action<SECURITY_User>(this.attach_SECURITY_Users), new Action<SECURITY_User>(this.detach_SECURITY_Users));
 			this._SECURITY_UserGroups = new EntitySet<SECURITY_UserGroup>(new Action<SECURITY_UserGroup>(this.attach_SECURITY_UserGroups), new Action<SECURITY_UserGroup>(this.detach_SECURITY_UserGroups));
+			this._Security_UserLocations = new EntitySet<Security_UserLocation>(new Action<Security_UserLocation>(this.attach_Security_UserLocations), new Action<Security_UserLocation>(this.detach_Security_UserLocations));
 			this._SETUP_Banks = new EntitySet<SETUP_Bank>(new Action<SETUP_Bank>(this.attach_SETUP_Banks), new Action<SETUP_Bank>(this.detach_SETUP_Banks));
 			this._SETUP_BankAccounts = new EntitySet<SETUP_BankAccount>(new Action<SETUP_BankAccount>(this.attach_SETUP_BankAccounts), new Action<SETUP_BankAccount>(this.detach_SETUP_BankAccounts));
 			this._SETUP_Calendars = new EntitySet<SETUP_Calendar>(new Action<SETUP_Calendar>(this.attach_SETUP_Calendars), new Action<SETUP_Calendar>(this.detach_SETUP_Calendars));
@@ -11691,6 +13596,7 @@ namespace SCMSDataLayer.DB
 			this._SETUP_Customers = new EntitySet<SETUP_Customer>(new Action<SETUP_Customer>(this.attach_SETUP_Customers), new Action<SETUP_Customer>(this.detach_SETUP_Customers));
 			this._SETUP_CustomerTypes = new EntitySet<SETUP_CustomerType>(new Action<SETUP_CustomerType>(this.attach_SETUP_CustomerTypes), new Action<SETUP_CustomerType>(this.detach_SETUP_CustomerTypes));
 			this._SETUP_Departments = new EntitySet<SETUP_Department>(new Action<SETUP_Department>(this.attach_SETUP_Departments), new Action<SETUP_Department>(this.detach_SETUP_Departments));
+			this._SETUP_EmpPlacements = new EntitySet<SETUP_EmpPlacement>(new Action<SETUP_EmpPlacement>(this.attach_SETUP_EmpPlacements), new Action<SETUP_EmpPlacement>(this.detach_SETUP_EmpPlacements));
 			this._SETUP_FunctionalAreas = new EntitySet<SETUP_FunctionalArea>(new Action<SETUP_FunctionalArea>(this.attach_SETUP_FunctionalAreas), new Action<SETUP_FunctionalArea>(this.detach_SETUP_FunctionalAreas));
 			this._SETUP_JobPositions = new EntitySet<SETUP_JobPosition>(new Action<SETUP_JobPosition>(this.attach_SETUP_JobPositions), new Action<SETUP_JobPosition>(this.detach_SETUP_JobPositions));
 			this._SETUP_JobTitles = new EntitySet<SETUP_JobTitle>(new Action<SETUP_JobTitle>(this.attach_SETUP_JobTitles), new Action<SETUP_JobTitle>(this.detach_SETUP_JobTitles));
@@ -11698,7 +13604,6 @@ namespace SCMSDataLayer.DB
 			this._SETUP_Suppliers = new EntitySet<SETUP_Supplier>(new Action<SETUP_Supplier>(this.attach_SETUP_Suppliers), new Action<SETUP_Supplier>(this.detach_SETUP_Suppliers));
 			this._SETUP_SupplierTypes = new EntitySet<SETUP_SupplierType>(new Action<SETUP_SupplierType>(this.attach_SETUP_SupplierTypes), new Action<SETUP_SupplierType>(this.detach_SETUP_SupplierTypes));
 			this._SETUP_VoucherTypes = new EntitySet<SETUP_VoucherType>(new Action<SETUP_VoucherType>(this.attach_SETUP_VoucherTypes), new Action<SETUP_VoucherType>(this.detach_SETUP_VoucherTypes));
-			this._SETUP_EmpPlacements = new EntitySet<SETUP_EmpPlacement>(new Action<SETUP_EmpPlacement>(this.attach_SETUP_EmpPlacements), new Action<SETUP_EmpPlacement>(this.detach_SETUP_EmpPlacements));
 			this._SETUP_Company = default(EntityRef<SETUP_Company>);
 			OnCreated();
 		}
@@ -11863,6 +13768,19 @@ namespace SCMSDataLayer.DB
 			set
 			{
 				this._SECURITY_UserGroups.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_Security_UserLocation", Storage="_Security_UserLocations", ThisKey="Loc_Id", OtherKey="Loc_Id")]
+		public EntitySet<Security_UserLocation> Security_UserLocations
+		{
+			get
+			{
+				return this._Security_UserLocations;
+			}
+			set
+			{
+				this._Security_UserLocations.Assign(value);
 			}
 		}
 		
@@ -12048,6 +13966,19 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_SETUP_EmpPlacement", Storage="_SETUP_EmpPlacements", ThisKey="Loc_Id", OtherKey="Loc_Id")]
+		public EntitySet<SETUP_EmpPlacement> SETUP_EmpPlacements
+		{
+			get
+			{
+				return this._SETUP_EmpPlacements;
+			}
+			set
+			{
+				this._SETUP_EmpPlacements.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_SETUP_FunctionalArea", Storage="_SETUP_FunctionalAreas", ThisKey="Loc_Id", OtherKey="Loc_Id")]
 		public EntitySet<SETUP_FunctionalArea> SETUP_FunctionalAreas
 		{
@@ -12139,19 +14070,6 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_SETUP_EmpPlacement", Storage="_SETUP_EmpPlacements", ThisKey="Loc_Id", OtherKey="Loc_Id")]
-		public EntitySet<SETUP_EmpPlacement> SETUP_EmpPlacements
-		{
-			get
-			{
-				return this._SETUP_EmpPlacements;
-			}
-			set
-			{
-				this._SETUP_EmpPlacements.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SETUP_Location", Storage="_SETUP_Company", ThisKey="Cmp_Id", OtherKey="Cmp_Id", IsForeignKey=true)]
 		public SETUP_Company SETUP_Company
 		{
@@ -12237,6 +14155,18 @@ namespace SCMSDataLayer.DB
 		}
 		
 		private void detach_SECURITY_UserGroups(SECURITY_UserGroup entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Location = null;
+		}
+		
+		private void attach_Security_UserLocations(Security_UserLocation entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Location = this;
+		}
+		
+		private void detach_Security_UserLocations(Security_UserLocation entity)
 		{
 			this.SendPropertyChanging();
 			entity.SETUP_Location = null;
@@ -12410,6 +14340,18 @@ namespace SCMSDataLayer.DB
 			entity.SETUP_Location = null;
 		}
 		
+		private void attach_SETUP_EmpPlacements(SETUP_EmpPlacement entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Location = this;
+		}
+		
+		private void detach_SETUP_EmpPlacements(SETUP_EmpPlacement entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Location = null;
+		}
+		
 		private void attach_SETUP_FunctionalAreas(SETUP_FunctionalArea entity)
 		{
 			this.SendPropertyChanging();
@@ -12489,18 +14431,6 @@ namespace SCMSDataLayer.DB
 		}
 		
 		private void detach_SETUP_VoucherTypes(SETUP_VoucherType entity)
-		{
-			this.SendPropertyChanging();
-			entity.SETUP_Location = null;
-		}
-		
-		private void attach_SETUP_EmpPlacements(SETUP_EmpPlacement entity)
-		{
-			this.SendPropertyChanging();
-			entity.SETUP_Location = this;
-		}
-		
-		private void detach_SETUP_EmpPlacements(SETUP_EmpPlacement entity)
 		{
 			this.SendPropertyChanging();
 			entity.SETUP_Location = null;
@@ -12993,6 +14923,8 @@ namespace SCMSDataLayer.DB
 		
 		private System.Nullable<int> _Natn_SortOrder;
 		
+		private EntitySet<SETUP_Employee> _SETUP_Employees;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -13013,6 +14945,7 @@ namespace SCMSDataLayer.DB
 		
 		public SETUP_Nationality()
 		{
+			this._SETUP_Employees = new EntitySet<SETUP_Employee>(new Action<SETUP_Employee>(this.attach_SETUP_Employees), new Action<SETUP_Employee>(this.detach_SETUP_Employees));
 			OnCreated();
 		}
 		
@@ -13136,6 +15069,19 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Nationality_SETUP_Employee", Storage="_SETUP_Employees", ThisKey="Natn_Id", OtherKey="Natn_Id")]
+		public EntitySet<SETUP_Employee> SETUP_Employees
+		{
+			get
+			{
+				return this._SETUP_Employees;
+			}
+			set
+			{
+				this._SETUP_Employees.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -13154,6 +15100,18 @@ namespace SCMSDataLayer.DB
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_SETUP_Employees(SETUP_Employee entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Nationality = this;
+		}
+		
+		private void detach_SETUP_Employees(SETUP_Employee entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Nationality = null;
 		}
 	}
 	
@@ -13364,6 +15322,384 @@ namespace SCMSDataLayer.DB
 		{
 			this.SendPropertyChanging();
 			entity.SETUP_Religion = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SETUP_Shift")]
+	public partial class SETUP_Shift : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Shft_Id;
+		
+		private string _Shft_Code;
+		
+		private string _Shft_Title;
+		
+		private string _Shft_Abbreviation;
+		
+		private System.Nullable<System.DateTime> _Shft_StartTime;
+		
+		private System.Nullable<System.DateTime> _Shft_EndTime;
+		
+		private System.Nullable<int> _Shft_Active;
+		
+		private System.Nullable<int> _Shft_SortOrder;
+		
+		private System.Nullable<System.DateTime> _Shift_BreakStartTime;
+		
+		private System.Nullable<System.DateTime> _Shift_BreakEndTime;
+		
+		private System.Nullable<System.DateTime> _Shift_BreakDuration;
+		
+		private string _Shift_GraceIn;
+		
+		private string _Shift_GraceEarly;
+		
+		private EntitySet<SETUP_EmpPlacement> _SETUP_EmpPlacements;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnShft_IdChanging(string value);
+    partial void OnShft_IdChanged();
+    partial void OnShft_CodeChanging(string value);
+    partial void OnShft_CodeChanged();
+    partial void OnShft_TitleChanging(string value);
+    partial void OnShft_TitleChanged();
+    partial void OnShft_AbbreviationChanging(string value);
+    partial void OnShft_AbbreviationChanged();
+    partial void OnShft_StartTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnShft_StartTimeChanged();
+    partial void OnShft_EndTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnShft_EndTimeChanged();
+    partial void OnShft_ActiveChanging(System.Nullable<int> value);
+    partial void OnShft_ActiveChanged();
+    partial void OnShft_SortOrderChanging(System.Nullable<int> value);
+    partial void OnShft_SortOrderChanged();
+    partial void OnShift_BreakStartTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnShift_BreakStartTimeChanged();
+    partial void OnShift_BreakEndTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnShift_BreakEndTimeChanged();
+    partial void OnShift_BreakDurationChanging(System.Nullable<System.DateTime> value);
+    partial void OnShift_BreakDurationChanged();
+    partial void OnShift_GraceInChanging(string value);
+    partial void OnShift_GraceInChanged();
+    partial void OnShift_GraceEarlyChanging(string value);
+    partial void OnShift_GraceEarlyChanged();
+    #endregion
+		
+		public SETUP_Shift()
+		{
+			this._SETUP_EmpPlacements = new EntitySet<SETUP_EmpPlacement>(new Action<SETUP_EmpPlacement>(this.attach_SETUP_EmpPlacements), new Action<SETUP_EmpPlacement>(this.detach_SETUP_EmpPlacements));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Shft_Id
+		{
+			get
+			{
+				return this._Shft_Id;
+			}
+			set
+			{
+				if ((this._Shft_Id != value))
+				{
+					this.OnShft_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Shft_Id = value;
+					this.SendPropertyChanged("Shft_Id");
+					this.OnShft_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_Code", DbType="VarChar(50)")]
+		public string Shft_Code
+		{
+			get
+			{
+				return this._Shft_Code;
+			}
+			set
+			{
+				if ((this._Shft_Code != value))
+				{
+					this.OnShft_CodeChanging(value);
+					this.SendPropertyChanging();
+					this._Shft_Code = value;
+					this.SendPropertyChanged("Shft_Code");
+					this.OnShft_CodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_Title", DbType="VarChar(100)")]
+		public string Shft_Title
+		{
+			get
+			{
+				return this._Shft_Title;
+			}
+			set
+			{
+				if ((this._Shft_Title != value))
+				{
+					this.OnShft_TitleChanging(value);
+					this.SendPropertyChanging();
+					this._Shft_Title = value;
+					this.SendPropertyChanged("Shft_Title");
+					this.OnShft_TitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_Abbreviation", DbType="VarChar(50)")]
+		public string Shft_Abbreviation
+		{
+			get
+			{
+				return this._Shft_Abbreviation;
+			}
+			set
+			{
+				if ((this._Shft_Abbreviation != value))
+				{
+					this.OnShft_AbbreviationChanging(value);
+					this.SendPropertyChanging();
+					this._Shft_Abbreviation = value;
+					this.SendPropertyChanged("Shft_Abbreviation");
+					this.OnShft_AbbreviationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_StartTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Shft_StartTime
+		{
+			get
+			{
+				return this._Shft_StartTime;
+			}
+			set
+			{
+				if ((this._Shft_StartTime != value))
+				{
+					this.OnShft_StartTimeChanging(value);
+					this.SendPropertyChanging();
+					this._Shft_StartTime = value;
+					this.SendPropertyChanged("Shft_StartTime");
+					this.OnShft_StartTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_EndTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Shft_EndTime
+		{
+			get
+			{
+				return this._Shft_EndTime;
+			}
+			set
+			{
+				if ((this._Shft_EndTime != value))
+				{
+					this.OnShft_EndTimeChanging(value);
+					this.SendPropertyChanging();
+					this._Shft_EndTime = value;
+					this.SendPropertyChanged("Shft_EndTime");
+					this.OnShft_EndTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_Active", DbType="Int")]
+		public System.Nullable<int> Shft_Active
+		{
+			get
+			{
+				return this._Shft_Active;
+			}
+			set
+			{
+				if ((this._Shft_Active != value))
+				{
+					this.OnShft_ActiveChanging(value);
+					this.SendPropertyChanging();
+					this._Shft_Active = value;
+					this.SendPropertyChanged("Shft_Active");
+					this.OnShft_ActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_SortOrder", DbType="Int")]
+		public System.Nullable<int> Shft_SortOrder
+		{
+			get
+			{
+				return this._Shft_SortOrder;
+			}
+			set
+			{
+				if ((this._Shft_SortOrder != value))
+				{
+					this.OnShft_SortOrderChanging(value);
+					this.SendPropertyChanging();
+					this._Shft_SortOrder = value;
+					this.SendPropertyChanged("Shft_SortOrder");
+					this.OnShft_SortOrderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shift_BreakStartTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Shift_BreakStartTime
+		{
+			get
+			{
+				return this._Shift_BreakStartTime;
+			}
+			set
+			{
+				if ((this._Shift_BreakStartTime != value))
+				{
+					this.OnShift_BreakStartTimeChanging(value);
+					this.SendPropertyChanging();
+					this._Shift_BreakStartTime = value;
+					this.SendPropertyChanged("Shift_BreakStartTime");
+					this.OnShift_BreakStartTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shift_BreakEndTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Shift_BreakEndTime
+		{
+			get
+			{
+				return this._Shift_BreakEndTime;
+			}
+			set
+			{
+				if ((this._Shift_BreakEndTime != value))
+				{
+					this.OnShift_BreakEndTimeChanging(value);
+					this.SendPropertyChanging();
+					this._Shift_BreakEndTime = value;
+					this.SendPropertyChanged("Shift_BreakEndTime");
+					this.OnShift_BreakEndTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shift_BreakDuration", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Shift_BreakDuration
+		{
+			get
+			{
+				return this._Shift_BreakDuration;
+			}
+			set
+			{
+				if ((this._Shift_BreakDuration != value))
+				{
+					this.OnShift_BreakDurationChanging(value);
+					this.SendPropertyChanging();
+					this._Shift_BreakDuration = value;
+					this.SendPropertyChanged("Shift_BreakDuration");
+					this.OnShift_BreakDurationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shift_GraceIn", DbType="VarChar(50)")]
+		public string Shift_GraceIn
+		{
+			get
+			{
+				return this._Shift_GraceIn;
+			}
+			set
+			{
+				if ((this._Shift_GraceIn != value))
+				{
+					this.OnShift_GraceInChanging(value);
+					this.SendPropertyChanging();
+					this._Shift_GraceIn = value;
+					this.SendPropertyChanged("Shift_GraceIn");
+					this.OnShift_GraceInChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shift_GraceEarly", DbType="VarChar(50)")]
+		public string Shift_GraceEarly
+		{
+			get
+			{
+				return this._Shift_GraceEarly;
+			}
+			set
+			{
+				if ((this._Shift_GraceEarly != value))
+				{
+					this.OnShift_GraceEarlyChanging(value);
+					this.SendPropertyChanging();
+					this._Shift_GraceEarly = value;
+					this.SendPropertyChanged("Shift_GraceEarly");
+					this.OnShift_GraceEarlyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Shift_SETUP_EmpPlacement", Storage="_SETUP_EmpPlacements", ThisKey="Shft_Id", OtherKey="Shft_Id")]
+		public EntitySet<SETUP_EmpPlacement> SETUP_EmpPlacements
+		{
+			get
+			{
+				return this._SETUP_EmpPlacements;
+			}
+			set
+			{
+				this._SETUP_EmpPlacements.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_SETUP_EmpPlacements(SETUP_EmpPlacement entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Shift = this;
+		}
+		
+		private void detach_SETUP_EmpPlacements(SETUP_EmpPlacement entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Shift = null;
 		}
 	}
 	
@@ -15462,1756 +17798,6 @@ namespace SCMSDataLayer.DB
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SETUP_Shift")]
-	public partial class SETUP_Shift : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _Shft_Id;
-		
-		private string _Shft_Code;
-		
-		private string _Shft_Title;
-		
-		private string _Shft_Abbreviation;
-		
-		private System.Nullable<System.DateTime> _Shft_StartTime;
-		
-		private System.Nullable<System.DateTime> _Shft_EndTime;
-		
-		private System.Nullable<int> _Shft_Active;
-		
-		private System.Nullable<int> _Shft_SortOrder;
-		
-		private System.Nullable<System.DateTime> _Shift_BreakStartTime;
-		
-		private System.Nullable<System.DateTime> _Shift_BreakEndTime;
-		
-		private System.Nullable<System.DateTime> _Shift_BreakDuration;
-		
-		private string _Shift_GraceIn;
-		
-		private string _Shift_GraceEarly;
-		
-		private EntitySet<SETUP_EmpPlacement> _SETUP_EmpPlacements;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnShft_IdChanging(string value);
-    partial void OnShft_IdChanged();
-    partial void OnShft_CodeChanging(string value);
-    partial void OnShft_CodeChanged();
-    partial void OnShft_TitleChanging(string value);
-    partial void OnShft_TitleChanged();
-    partial void OnShft_AbbreviationChanging(string value);
-    partial void OnShft_AbbreviationChanged();
-    partial void OnShft_StartTimeChanging(System.Nullable<System.DateTime> value);
-    partial void OnShft_StartTimeChanged();
-    partial void OnShft_EndTimeChanging(System.Nullable<System.DateTime> value);
-    partial void OnShft_EndTimeChanged();
-    partial void OnShft_ActiveChanging(System.Nullable<int> value);
-    partial void OnShft_ActiveChanged();
-    partial void OnShft_SortOrderChanging(System.Nullable<int> value);
-    partial void OnShft_SortOrderChanged();
-    partial void OnShift_BreakStartTimeChanging(System.Nullable<System.DateTime> value);
-    partial void OnShift_BreakStartTimeChanged();
-    partial void OnShift_BreakEndTimeChanging(System.Nullable<System.DateTime> value);
-    partial void OnShift_BreakEndTimeChanged();
-    partial void OnShift_BreakDurationChanging(System.Nullable<System.DateTime> value);
-    partial void OnShift_BreakDurationChanged();
-    partial void OnShift_GraceInChanging(string value);
-    partial void OnShift_GraceInChanged();
-    partial void OnShift_GraceEarlyChanging(string value);
-    partial void OnShift_GraceEarlyChanged();
-    #endregion
-		
-		public SETUP_Shift()
-		{
-			this._SETUP_EmpPlacements = new EntitySet<SETUP_EmpPlacement>(new Action<SETUP_EmpPlacement>(this.attach_SETUP_EmpPlacements), new Action<SETUP_EmpPlacement>(this.detach_SETUP_EmpPlacements));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string Shft_Id
-		{
-			get
-			{
-				return this._Shft_Id;
-			}
-			set
-			{
-				if ((this._Shft_Id != value))
-				{
-					this.OnShft_IdChanging(value);
-					this.SendPropertyChanging();
-					this._Shft_Id = value;
-					this.SendPropertyChanged("Shft_Id");
-					this.OnShft_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_Code", DbType="VarChar(50)")]
-		public string Shft_Code
-		{
-			get
-			{
-				return this._Shft_Code;
-			}
-			set
-			{
-				if ((this._Shft_Code != value))
-				{
-					this.OnShft_CodeChanging(value);
-					this.SendPropertyChanging();
-					this._Shft_Code = value;
-					this.SendPropertyChanged("Shft_Code");
-					this.OnShft_CodeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_Title", DbType="VarChar(100)")]
-		public string Shft_Title
-		{
-			get
-			{
-				return this._Shft_Title;
-			}
-			set
-			{
-				if ((this._Shft_Title != value))
-				{
-					this.OnShft_TitleChanging(value);
-					this.SendPropertyChanging();
-					this._Shft_Title = value;
-					this.SendPropertyChanged("Shft_Title");
-					this.OnShft_TitleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_Abbreviation", DbType="VarChar(50)")]
-		public string Shft_Abbreviation
-		{
-			get
-			{
-				return this._Shft_Abbreviation;
-			}
-			set
-			{
-				if ((this._Shft_Abbreviation != value))
-				{
-					this.OnShft_AbbreviationChanging(value);
-					this.SendPropertyChanging();
-					this._Shft_Abbreviation = value;
-					this.SendPropertyChanged("Shft_Abbreviation");
-					this.OnShft_AbbreviationChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_StartTime", DbType="DateTime")]
-		public System.Nullable<System.DateTime> Shft_StartTime
-		{
-			get
-			{
-				return this._Shft_StartTime;
-			}
-			set
-			{
-				if ((this._Shft_StartTime != value))
-				{
-					this.OnShft_StartTimeChanging(value);
-					this.SendPropertyChanging();
-					this._Shft_StartTime = value;
-					this.SendPropertyChanged("Shft_StartTime");
-					this.OnShft_StartTimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_EndTime", DbType="DateTime")]
-		public System.Nullable<System.DateTime> Shft_EndTime
-		{
-			get
-			{
-				return this._Shft_EndTime;
-			}
-			set
-			{
-				if ((this._Shft_EndTime != value))
-				{
-					this.OnShft_EndTimeChanging(value);
-					this.SendPropertyChanging();
-					this._Shft_EndTime = value;
-					this.SendPropertyChanged("Shft_EndTime");
-					this.OnShft_EndTimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_Active", DbType="Int")]
-		public System.Nullable<int> Shft_Active
-		{
-			get
-			{
-				return this._Shft_Active;
-			}
-			set
-			{
-				if ((this._Shft_Active != value))
-				{
-					this.OnShft_ActiveChanging(value);
-					this.SendPropertyChanging();
-					this._Shft_Active = value;
-					this.SendPropertyChanged("Shft_Active");
-					this.OnShft_ActiveChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_SortOrder", DbType="Int")]
-		public System.Nullable<int> Shft_SortOrder
-		{
-			get
-			{
-				return this._Shft_SortOrder;
-			}
-			set
-			{
-				if ((this._Shft_SortOrder != value))
-				{
-					this.OnShft_SortOrderChanging(value);
-					this.SendPropertyChanging();
-					this._Shft_SortOrder = value;
-					this.SendPropertyChanged("Shft_SortOrder");
-					this.OnShft_SortOrderChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shift_BreakStartTime", DbType="DateTime")]
-		public System.Nullable<System.DateTime> Shift_BreakStartTime
-		{
-			get
-			{
-				return this._Shift_BreakStartTime;
-			}
-			set
-			{
-				if ((this._Shift_BreakStartTime != value))
-				{
-					this.OnShift_BreakStartTimeChanging(value);
-					this.SendPropertyChanging();
-					this._Shift_BreakStartTime = value;
-					this.SendPropertyChanged("Shift_BreakStartTime");
-					this.OnShift_BreakStartTimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shift_BreakEndTime", DbType="DateTime")]
-		public System.Nullable<System.DateTime> Shift_BreakEndTime
-		{
-			get
-			{
-				return this._Shift_BreakEndTime;
-			}
-			set
-			{
-				if ((this._Shift_BreakEndTime != value))
-				{
-					this.OnShift_BreakEndTimeChanging(value);
-					this.SendPropertyChanging();
-					this._Shift_BreakEndTime = value;
-					this.SendPropertyChanged("Shift_BreakEndTime");
-					this.OnShift_BreakEndTimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shift_BreakDuration", DbType="DateTime")]
-		public System.Nullable<System.DateTime> Shift_BreakDuration
-		{
-			get
-			{
-				return this._Shift_BreakDuration;
-			}
-			set
-			{
-				if ((this._Shift_BreakDuration != value))
-				{
-					this.OnShift_BreakDurationChanging(value);
-					this.SendPropertyChanging();
-					this._Shift_BreakDuration = value;
-					this.SendPropertyChanged("Shift_BreakDuration");
-					this.OnShift_BreakDurationChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shift_GraceIn", DbType="VarChar(50)")]
-		public string Shift_GraceIn
-		{
-			get
-			{
-				return this._Shift_GraceIn;
-			}
-			set
-			{
-				if ((this._Shift_GraceIn != value))
-				{
-					this.OnShift_GraceInChanging(value);
-					this.SendPropertyChanging();
-					this._Shift_GraceIn = value;
-					this.SendPropertyChanged("Shift_GraceIn");
-					this.OnShift_GraceInChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shift_GraceEarly", DbType="VarChar(50)")]
-		public string Shift_GraceEarly
-		{
-			get
-			{
-				return this._Shift_GraceEarly;
-			}
-			set
-			{
-				if ((this._Shift_GraceEarly != value))
-				{
-					this.OnShift_GraceEarlyChanging(value);
-					this.SendPropertyChanging();
-					this._Shift_GraceEarly = value;
-					this.SendPropertyChanged("Shift_GraceEarly");
-					this.OnShift_GraceEarlyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Shift_SETUP_EmpPlacement", Storage="_SETUP_EmpPlacements", ThisKey="Shft_Id", OtherKey="Shft_Id")]
-		public EntitySet<SETUP_EmpPlacement> SETUP_EmpPlacements
-		{
-			get
-			{
-				return this._SETUP_EmpPlacements;
-			}
-			set
-			{
-				this._SETUP_EmpPlacements.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_SETUP_EmpPlacements(SETUP_EmpPlacement entity)
-		{
-			this.SendPropertyChanging();
-			entity.SETUP_Shift = this;
-		}
-		
-		private void detach_SETUP_EmpPlacements(SETUP_EmpPlacement entity)
-		{
-			this.SendPropertyChanging();
-			entity.SETUP_Shift = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SETUP_EmpPlacement")]
-	public partial class SETUP_EmpPlacement : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _Plcmt_Id;
-		
-		private string _Plcmt_Code;
-		
-		private string _Emp_Id;
-		
-		private string _Loc_Id;
-		
-		private string _Dpt_Id;
-		
-		private string _Shft_Id;
-		
-		private string _EmpTyp_Id;
-		
-		private string _LevTyp_Id;
-		
-		private string _LevGrp_Id;
-		
-		private string _JT_Id;
-		
-		private EntityRef<SETUP_EmpPlacement> _SETUP_EmpPlacement2;
-		
-		private EntityRef<SETUP_Department> _SETUP_Department;
-		
-		private EntityRef<SETUP_EmployeeType> _SETUP_EmployeeType;
-		
-		private EntityRef<SETUP_EmpPlacement> _SETUP_EmpPlacement1;
-		
-		private EntityRef<SETUP_JobTitle> _SETUP_JobTitle;
-		
-		private EntityRef<SETUP_LeaveGroup> _SETUP_LeaveGroup;
-		
-		private EntityRef<SETUP_LeaveType> _SETUP_LeaveType;
-		
-		private EntityRef<SETUP_Location> _SETUP_Location;
-		
-		private EntityRef<SETUP_Shift> _SETUP_Shift;
-		
-		private EntityRef<SETUP_Employee> _SETUP_Employee;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnPlcmt_IdChanging(string value);
-    partial void OnPlcmt_IdChanged();
-    partial void OnPlcmt_CodeChanging(string value);
-    partial void OnPlcmt_CodeChanged();
-    partial void OnEmp_IdChanging(string value);
-    partial void OnEmp_IdChanged();
-    partial void OnLoc_IdChanging(string value);
-    partial void OnLoc_IdChanged();
-    partial void OnDpt_IdChanging(string value);
-    partial void OnDpt_IdChanged();
-    partial void OnShft_IdChanging(string value);
-    partial void OnShft_IdChanged();
-    partial void OnEmpTyp_IdChanging(string value);
-    partial void OnEmpTyp_IdChanged();
-    partial void OnLevTyp_IdChanging(string value);
-    partial void OnLevTyp_IdChanged();
-    partial void OnLevGrp_IdChanging(string value);
-    partial void OnLevGrp_IdChanged();
-    partial void OnJT_IdChanging(string value);
-    partial void OnJT_IdChanged();
-    #endregion
-		
-		public SETUP_EmpPlacement()
-		{
-			this._SETUP_EmpPlacement2 = default(EntityRef<SETUP_EmpPlacement>);
-			this._SETUP_Department = default(EntityRef<SETUP_Department>);
-			this._SETUP_EmployeeType = default(EntityRef<SETUP_EmployeeType>);
-			this._SETUP_EmpPlacement1 = default(EntityRef<SETUP_EmpPlacement>);
-			this._SETUP_JobTitle = default(EntityRef<SETUP_JobTitle>);
-			this._SETUP_LeaveGroup = default(EntityRef<SETUP_LeaveGroup>);
-			this._SETUP_LeaveType = default(EntityRef<SETUP_LeaveType>);
-			this._SETUP_Location = default(EntityRef<SETUP_Location>);
-			this._SETUP_Shift = default(EntityRef<SETUP_Shift>);
-			this._SETUP_Employee = default(EntityRef<SETUP_Employee>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Plcmt_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string Plcmt_Id
-		{
-			get
-			{
-				return this._Plcmt_Id;
-			}
-			set
-			{
-				if ((this._Plcmt_Id != value))
-				{
-					if (this._SETUP_EmpPlacement1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnPlcmt_IdChanging(value);
-					this.SendPropertyChanging();
-					this._Plcmt_Id = value;
-					this.SendPropertyChanged("Plcmt_Id");
-					this.OnPlcmt_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Plcmt_Code", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Plcmt_Code
-		{
-			get
-			{
-				return this._Plcmt_Code;
-			}
-			set
-			{
-				if ((this._Plcmt_Code != value))
-				{
-					this.OnPlcmt_CodeChanging(value);
-					this.SendPropertyChanging();
-					this._Plcmt_Code = value;
-					this.SendPropertyChanged("Plcmt_Code");
-					this.OnPlcmt_CodeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Emp_Id
-		{
-			get
-			{
-				return this._Emp_Id;
-			}
-			set
-			{
-				if ((this._Emp_Id != value))
-				{
-					if (this._SETUP_Employee.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnEmp_IdChanging(value);
-					this.SendPropertyChanging();
-					this._Emp_Id = value;
-					this.SendPropertyChanged("Emp_Id");
-					this.OnEmp_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id", DbType="VarChar(50)")]
-		public string Loc_Id
-		{
-			get
-			{
-				return this._Loc_Id;
-			}
-			set
-			{
-				if ((this._Loc_Id != value))
-				{
-					if (this._SETUP_Location.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnLoc_IdChanging(value);
-					this.SendPropertyChanging();
-					this._Loc_Id = value;
-					this.SendPropertyChanged("Loc_Id");
-					this.OnLoc_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dpt_Id", DbType="VarChar(50)")]
-		public string Dpt_Id
-		{
-			get
-			{
-				return this._Dpt_Id;
-			}
-			set
-			{
-				if ((this._Dpt_Id != value))
-				{
-					if (this._SETUP_Department.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnDpt_IdChanging(value);
-					this.SendPropertyChanging();
-					this._Dpt_Id = value;
-					this.SendPropertyChanged("Dpt_Id");
-					this.OnDpt_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_Id", DbType="VarChar(50)")]
-		public string Shft_Id
-		{
-			get
-			{
-				return this._Shft_Id;
-			}
-			set
-			{
-				if ((this._Shft_Id != value))
-				{
-					if (this._SETUP_Shift.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnShft_IdChanging(value);
-					this.SendPropertyChanging();
-					this._Shft_Id = value;
-					this.SendPropertyChanged("Shft_Id");
-					this.OnShft_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmpTyp_Id", DbType="VarChar(50)")]
-		public string EmpTyp_Id
-		{
-			get
-			{
-				return this._EmpTyp_Id;
-			}
-			set
-			{
-				if ((this._EmpTyp_Id != value))
-				{
-					if (this._SETUP_EmployeeType.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnEmpTyp_IdChanging(value);
-					this.SendPropertyChanging();
-					this._EmpTyp_Id = value;
-					this.SendPropertyChanged("EmpTyp_Id");
-					this.OnEmpTyp_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevTyp_Id", DbType="VarChar(50)")]
-		public string LevTyp_Id
-		{
-			get
-			{
-				return this._LevTyp_Id;
-			}
-			set
-			{
-				if ((this._LevTyp_Id != value))
-				{
-					if (this._SETUP_LeaveType.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnLevTyp_IdChanging(value);
-					this.SendPropertyChanging();
-					this._LevTyp_Id = value;
-					this.SendPropertyChanged("LevTyp_Id");
-					this.OnLevTyp_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevGrp_Id", DbType="VarChar(50)")]
-		public string LevGrp_Id
-		{
-			get
-			{
-				return this._LevGrp_Id;
-			}
-			set
-			{
-				if ((this._LevGrp_Id != value))
-				{
-					if (this._SETUP_LeaveGroup.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnLevGrp_IdChanging(value);
-					this.SendPropertyChanging();
-					this._LevGrp_Id = value;
-					this.SendPropertyChanged("LevGrp_Id");
-					this.OnLevGrp_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_JT_Id", DbType="VarChar(50)")]
-		public string JT_Id
-		{
-			get
-			{
-				return this._JT_Id;
-			}
-			set
-			{
-				if ((this._JT_Id != value))
-				{
-					if (this._SETUP_JobTitle.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnJT_IdChanging(value);
-					this.SendPropertyChanging();
-					this._JT_Id = value;
-					this.SendPropertyChanged("JT_Id");
-					this.OnJT_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_EmpPlacement_SETUP_EmpPlacement", Storage="_SETUP_EmpPlacement2", ThisKey="Plcmt_Id", OtherKey="Plcmt_Id", IsUnique=true, IsForeignKey=false)]
-		public SETUP_EmpPlacement SETUP_EmpPlacement2
-		{
-			get
-			{
-				return this._SETUP_EmpPlacement2.Entity;
-			}
-			set
-			{
-				SETUP_EmpPlacement previousValue = this._SETUP_EmpPlacement2.Entity;
-				if (((previousValue != value) 
-							|| (this._SETUP_EmpPlacement2.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SETUP_EmpPlacement2.Entity = null;
-						previousValue.SETUP_EmpPlacement1 = null;
-					}
-					this._SETUP_EmpPlacement2.Entity = value;
-					if ((value != null))
-					{
-						value.SETUP_EmpPlacement1 = this;
-					}
-					this.SendPropertyChanged("SETUP_EmpPlacement2");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Department_SETUP_EmpPlacement", Storage="_SETUP_Department", ThisKey="Dpt_Id", OtherKey="Dpt_Id", IsForeignKey=true)]
-		public SETUP_Department SETUP_Department
-		{
-			get
-			{
-				return this._SETUP_Department.Entity;
-			}
-			set
-			{
-				SETUP_Department previousValue = this._SETUP_Department.Entity;
-				if (((previousValue != value) 
-							|| (this._SETUP_Department.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SETUP_Department.Entity = null;
-						previousValue.SETUP_EmpPlacements.Remove(this);
-					}
-					this._SETUP_Department.Entity = value;
-					if ((value != null))
-					{
-						value.SETUP_EmpPlacements.Add(this);
-						this._Dpt_Id = value.Dpt_Id;
-					}
-					else
-					{
-						this._Dpt_Id = default(string);
-					}
-					this.SendPropertyChanged("SETUP_Department");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_EmployeeType_SETUP_EmpPlacement", Storage="_SETUP_EmployeeType", ThisKey="EmpTyp_Id", OtherKey="EmpTyp_Id", IsForeignKey=true)]
-		public SETUP_EmployeeType SETUP_EmployeeType
-		{
-			get
-			{
-				return this._SETUP_EmployeeType.Entity;
-			}
-			set
-			{
-				SETUP_EmployeeType previousValue = this._SETUP_EmployeeType.Entity;
-				if (((previousValue != value) 
-							|| (this._SETUP_EmployeeType.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SETUP_EmployeeType.Entity = null;
-						previousValue.SETUP_EmpPlacements.Remove(this);
-					}
-					this._SETUP_EmployeeType.Entity = value;
-					if ((value != null))
-					{
-						value.SETUP_EmpPlacements.Add(this);
-						this._EmpTyp_Id = value.EmpTyp_Id;
-					}
-					else
-					{
-						this._EmpTyp_Id = default(string);
-					}
-					this.SendPropertyChanged("SETUP_EmployeeType");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_EmpPlacement_SETUP_EmpPlacement", Storage="_SETUP_EmpPlacement1", ThisKey="Plcmt_Id", OtherKey="Plcmt_Id", IsForeignKey=true)]
-		public SETUP_EmpPlacement SETUP_EmpPlacement1
-		{
-			get
-			{
-				return this._SETUP_EmpPlacement1.Entity;
-			}
-			set
-			{
-				SETUP_EmpPlacement previousValue = this._SETUP_EmpPlacement1.Entity;
-				if (((previousValue != value) 
-							|| (this._SETUP_EmpPlacement1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SETUP_EmpPlacement1.Entity = null;
-						previousValue.SETUP_EmpPlacement2 = null;
-					}
-					this._SETUP_EmpPlacement1.Entity = value;
-					if ((value != null))
-					{
-						value.SETUP_EmpPlacement2 = this;
-						this._Plcmt_Id = value.Plcmt_Id;
-					}
-					else
-					{
-						this._Plcmt_Id = default(string);
-					}
-					this.SendPropertyChanged("SETUP_EmpPlacement1");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_JobTitle_SETUP_EmpPlacement", Storage="_SETUP_JobTitle", ThisKey="JT_Id", OtherKey="JT_Id", IsForeignKey=true)]
-		public SETUP_JobTitle SETUP_JobTitle
-		{
-			get
-			{
-				return this._SETUP_JobTitle.Entity;
-			}
-			set
-			{
-				SETUP_JobTitle previousValue = this._SETUP_JobTitle.Entity;
-				if (((previousValue != value) 
-							|| (this._SETUP_JobTitle.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SETUP_JobTitle.Entity = null;
-						previousValue.SETUP_EmpPlacements.Remove(this);
-					}
-					this._SETUP_JobTitle.Entity = value;
-					if ((value != null))
-					{
-						value.SETUP_EmpPlacements.Add(this);
-						this._JT_Id = value.JT_Id;
-					}
-					else
-					{
-						this._JT_Id = default(string);
-					}
-					this.SendPropertyChanged("SETUP_JobTitle");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_LeaveGroup_SETUP_EmpPlacement", Storage="_SETUP_LeaveGroup", ThisKey="LevGrp_Id", OtherKey="LevGrp_Id", IsForeignKey=true)]
-		public SETUP_LeaveGroup SETUP_LeaveGroup
-		{
-			get
-			{
-				return this._SETUP_LeaveGroup.Entity;
-			}
-			set
-			{
-				SETUP_LeaveGroup previousValue = this._SETUP_LeaveGroup.Entity;
-				if (((previousValue != value) 
-							|| (this._SETUP_LeaveGroup.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SETUP_LeaveGroup.Entity = null;
-						previousValue.SETUP_EmpPlacements.Remove(this);
-					}
-					this._SETUP_LeaveGroup.Entity = value;
-					if ((value != null))
-					{
-						value.SETUP_EmpPlacements.Add(this);
-						this._LevGrp_Id = value.LevGrp_Id;
-					}
-					else
-					{
-						this._LevGrp_Id = default(string);
-					}
-					this.SendPropertyChanged("SETUP_LeaveGroup");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_LeaveType_SETUP_EmpPlacement", Storage="_SETUP_LeaveType", ThisKey="LevTyp_Id", OtherKey="LevTyp_Id", IsForeignKey=true)]
-		public SETUP_LeaveType SETUP_LeaveType
-		{
-			get
-			{
-				return this._SETUP_LeaveType.Entity;
-			}
-			set
-			{
-				SETUP_LeaveType previousValue = this._SETUP_LeaveType.Entity;
-				if (((previousValue != value) 
-							|| (this._SETUP_LeaveType.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SETUP_LeaveType.Entity = null;
-						previousValue.SETUP_EmpPlacements.Remove(this);
-					}
-					this._SETUP_LeaveType.Entity = value;
-					if ((value != null))
-					{
-						value.SETUP_EmpPlacements.Add(this);
-						this._LevTyp_Id = value.LevTyp_Id;
-					}
-					else
-					{
-						this._LevTyp_Id = default(string);
-					}
-					this.SendPropertyChanged("SETUP_LeaveType");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_SETUP_EmpPlacement", Storage="_SETUP_Location", ThisKey="Loc_Id", OtherKey="Loc_Id", IsForeignKey=true)]
-		public SETUP_Location SETUP_Location
-		{
-			get
-			{
-				return this._SETUP_Location.Entity;
-			}
-			set
-			{
-				SETUP_Location previousValue = this._SETUP_Location.Entity;
-				if (((previousValue != value) 
-							|| (this._SETUP_Location.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SETUP_Location.Entity = null;
-						previousValue.SETUP_EmpPlacements.Remove(this);
-					}
-					this._SETUP_Location.Entity = value;
-					if ((value != null))
-					{
-						value.SETUP_EmpPlacements.Add(this);
-						this._Loc_Id = value.Loc_Id;
-					}
-					else
-					{
-						this._Loc_Id = default(string);
-					}
-					this.SendPropertyChanged("SETUP_Location");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Shift_SETUP_EmpPlacement", Storage="_SETUP_Shift", ThisKey="Shft_Id", OtherKey="Shft_Id", IsForeignKey=true)]
-		public SETUP_Shift SETUP_Shift
-		{
-			get
-			{
-				return this._SETUP_Shift.Entity;
-			}
-			set
-			{
-				SETUP_Shift previousValue = this._SETUP_Shift.Entity;
-				if (((previousValue != value) 
-							|| (this._SETUP_Shift.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SETUP_Shift.Entity = null;
-						previousValue.SETUP_EmpPlacements.Remove(this);
-					}
-					this._SETUP_Shift.Entity = value;
-					if ((value != null))
-					{
-						value.SETUP_EmpPlacements.Add(this);
-						this._Shft_Id = value.Shft_Id;
-					}
-					else
-					{
-						this._Shft_Id = default(string);
-					}
-					this.SendPropertyChanged("SETUP_Shift");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Employee_SETUP_EmpPlacement", Storage="_SETUP_Employee", ThisKey="Emp_Id", OtherKey="Emp_Id", IsForeignKey=true)]
-		public SETUP_Employee SETUP_Employee
-		{
-			get
-			{
-				return this._SETUP_Employee.Entity;
-			}
-			set
-			{
-				SETUP_Employee previousValue = this._SETUP_Employee.Entity;
-				if (((previousValue != value) 
-							|| (this._SETUP_Employee.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SETUP_Employee.Entity = null;
-						previousValue.SETUP_EmpPlacements.Remove(this);
-					}
-					this._SETUP_Employee.Entity = value;
-					if ((value != null))
-					{
-						value.SETUP_EmpPlacements.Add(this);
-						this._Emp_Id = value.Emp_Id;
-					}
-					else
-					{
-						this._Emp_Id = default(string);
-					}
-					this.SendPropertyChanged("SETUP_Employee");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SETUP_Employee")]
-	public partial class SETUP_Employee : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _Emp_Id;
-		
-		private string _Emp_Code;
-		
-		private System.Nullable<System.DateTime> _Emp_DoB;
-		
-		private string _Emp_Title;
-		
-		private string _Emp_Address;
-		
-		private string _Gndr_Id;
-		
-		private string _MS_Id;
-		
-		private string _Rlgn_Id;
-		
-		private string _Natn_Id;
-		
-		private string _Emp_Phone;
-		
-		private string _Emp_Mobile;
-		
-		private string _Emp_Email;
-		
-		private string _Emp_CNIC;
-		
-		private System.Nullable<System.DateTime> _Emp_AptmentDate;
-		
-		private System.Nullable<System.DateTime> _Emp_JoiningDate;
-		
-		private string _Emp_Months_Probation;
-		
-		private System.Nullable<System.DateTime> _Emp_ConfirmDate;
-		
-		private string _Emp_Months_NoticePerd;
-		
-		private System.Nullable<int> _Emp_Active;
-		
-		private System.Nullable<int> _Emp_SortOrder;
-		
-		private string _Emp_ImagePath;
-		
-		private EntitySet<SETUP_EmpPlacement> _SETUP_EmpPlacements;
-		
-		private EntityRef<SETUP_Gender> _SETUP_Gender;
-		
-		private EntityRef<SETUP_MaritalStatus> _SETUP_MaritalStatus;
-		
-		private EntityRef<SETUP_Religion> _SETUP_Religion;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnEmp_IdChanging(string value);
-    partial void OnEmp_IdChanged();
-    partial void OnEmp_CodeChanging(string value);
-    partial void OnEmp_CodeChanged();
-    partial void OnEmp_DoBChanging(System.Nullable<System.DateTime> value);
-    partial void OnEmp_DoBChanged();
-    partial void OnEmp_TitleChanging(string value);
-    partial void OnEmp_TitleChanged();
-    partial void OnEmp_AddressChanging(string value);
-    partial void OnEmp_AddressChanged();
-    partial void OnGndr_IdChanging(string value);
-    partial void OnGndr_IdChanged();
-    partial void OnMS_IdChanging(string value);
-    partial void OnMS_IdChanged();
-    partial void OnRlgn_IdChanging(string value);
-    partial void OnRlgn_IdChanged();
-    partial void OnNatn_IdChanging(string value);
-    partial void OnNatn_IdChanged();
-    partial void OnEmp_PhoneChanging(string value);
-    partial void OnEmp_PhoneChanged();
-    partial void OnEmp_MobileChanging(string value);
-    partial void OnEmp_MobileChanged();
-    partial void OnEmp_EmailChanging(string value);
-    partial void OnEmp_EmailChanged();
-    partial void OnEmp_CNICChanging(string value);
-    partial void OnEmp_CNICChanged();
-    partial void OnEmp_AptmentDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnEmp_AptmentDateChanged();
-    partial void OnEmp_JoiningDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnEmp_JoiningDateChanged();
-    partial void OnEmp_Months_ProbationChanging(string value);
-    partial void OnEmp_Months_ProbationChanged();
-    partial void OnEmp_ConfirmDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnEmp_ConfirmDateChanged();
-    partial void OnEmp_Months_NoticePerdChanging(string value);
-    partial void OnEmp_Months_NoticePerdChanged();
-    partial void OnEmp_ActiveChanging(System.Nullable<int> value);
-    partial void OnEmp_ActiveChanged();
-    partial void OnEmp_SortOrderChanging(System.Nullable<int> value);
-    partial void OnEmp_SortOrderChanged();
-    partial void OnEmp_ImagePathChanging(string value);
-    partial void OnEmp_ImagePathChanged();
-    #endregion
-		
-		public SETUP_Employee()
-		{
-			this._SETUP_EmpPlacements = new EntitySet<SETUP_EmpPlacement>(new Action<SETUP_EmpPlacement>(this.attach_SETUP_EmpPlacements), new Action<SETUP_EmpPlacement>(this.detach_SETUP_EmpPlacements));
-			this._SETUP_Gender = default(EntityRef<SETUP_Gender>);
-			this._SETUP_MaritalStatus = default(EntityRef<SETUP_MaritalStatus>);
-			this._SETUP_Religion = default(EntityRef<SETUP_Religion>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string Emp_Id
-		{
-			get
-			{
-				return this._Emp_Id;
-			}
-			set
-			{
-				if ((this._Emp_Id != value))
-				{
-					this.OnEmp_IdChanging(value);
-					this.SendPropertyChanging();
-					this._Emp_Id = value;
-					this.SendPropertyChanged("Emp_Id");
-					this.OnEmp_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_Code", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Emp_Code
-		{
-			get
-			{
-				return this._Emp_Code;
-			}
-			set
-			{
-				if ((this._Emp_Code != value))
-				{
-					this.OnEmp_CodeChanging(value);
-					this.SendPropertyChanging();
-					this._Emp_Code = value;
-					this.SendPropertyChanged("Emp_Code");
-					this.OnEmp_CodeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_DoB", DbType="DateTime")]
-		public System.Nullable<System.DateTime> Emp_DoB
-		{
-			get
-			{
-				return this._Emp_DoB;
-			}
-			set
-			{
-				if ((this._Emp_DoB != value))
-				{
-					this.OnEmp_DoBChanging(value);
-					this.SendPropertyChanging();
-					this._Emp_DoB = value;
-					this.SendPropertyChanged("Emp_DoB");
-					this.OnEmp_DoBChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_Title", DbType="VarChar(100)")]
-		public string Emp_Title
-		{
-			get
-			{
-				return this._Emp_Title;
-			}
-			set
-			{
-				if ((this._Emp_Title != value))
-				{
-					this.OnEmp_TitleChanging(value);
-					this.SendPropertyChanging();
-					this._Emp_Title = value;
-					this.SendPropertyChanged("Emp_Title");
-					this.OnEmp_TitleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_Address", DbType="VarChar(150)")]
-		public string Emp_Address
-		{
-			get
-			{
-				return this._Emp_Address;
-			}
-			set
-			{
-				if ((this._Emp_Address != value))
-				{
-					this.OnEmp_AddressChanging(value);
-					this.SendPropertyChanging();
-					this._Emp_Address = value;
-					this.SendPropertyChanged("Emp_Address");
-					this.OnEmp_AddressChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gndr_Id", DbType="VarChar(50)")]
-		public string Gndr_Id
-		{
-			get
-			{
-				return this._Gndr_Id;
-			}
-			set
-			{
-				if ((this._Gndr_Id != value))
-				{
-					if (this._SETUP_Gender.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnGndr_IdChanging(value);
-					this.SendPropertyChanging();
-					this._Gndr_Id = value;
-					this.SendPropertyChanged("Gndr_Id");
-					this.OnGndr_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MS_Id", DbType="VarChar(50)")]
-		public string MS_Id
-		{
-			get
-			{
-				return this._MS_Id;
-			}
-			set
-			{
-				if ((this._MS_Id != value))
-				{
-					if (this._SETUP_MaritalStatus.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnMS_IdChanging(value);
-					this.SendPropertyChanging();
-					this._MS_Id = value;
-					this.SendPropertyChanged("MS_Id");
-					this.OnMS_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Rlgn_Id", DbType="VarChar(50)")]
-		public string Rlgn_Id
-		{
-			get
-			{
-				return this._Rlgn_Id;
-			}
-			set
-			{
-				if ((this._Rlgn_Id != value))
-				{
-					if (this._SETUP_Religion.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnRlgn_IdChanging(value);
-					this.SendPropertyChanging();
-					this._Rlgn_Id = value;
-					this.SendPropertyChanged("Rlgn_Id");
-					this.OnRlgn_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Natn_Id", DbType="VarChar(50)")]
-		public string Natn_Id
-		{
-			get
-			{
-				return this._Natn_Id;
-			}
-			set
-			{
-				if ((this._Natn_Id != value))
-				{
-					this.OnNatn_IdChanging(value);
-					this.SendPropertyChanging();
-					this._Natn_Id = value;
-					this.SendPropertyChanged("Natn_Id");
-					this.OnNatn_IdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_Phone", DbType="VarChar(100)")]
-		public string Emp_Phone
-		{
-			get
-			{
-				return this._Emp_Phone;
-			}
-			set
-			{
-				if ((this._Emp_Phone != value))
-				{
-					this.OnEmp_PhoneChanging(value);
-					this.SendPropertyChanging();
-					this._Emp_Phone = value;
-					this.SendPropertyChanged("Emp_Phone");
-					this.OnEmp_PhoneChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_Mobile", DbType="VarChar(100)")]
-		public string Emp_Mobile
-		{
-			get
-			{
-				return this._Emp_Mobile;
-			}
-			set
-			{
-				if ((this._Emp_Mobile != value))
-				{
-					this.OnEmp_MobileChanging(value);
-					this.SendPropertyChanging();
-					this._Emp_Mobile = value;
-					this.SendPropertyChanged("Emp_Mobile");
-					this.OnEmp_MobileChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_Email", DbType="VarChar(100)")]
-		public string Emp_Email
-		{
-			get
-			{
-				return this._Emp_Email;
-			}
-			set
-			{
-				if ((this._Emp_Email != value))
-				{
-					this.OnEmp_EmailChanging(value);
-					this.SendPropertyChanging();
-					this._Emp_Email = value;
-					this.SendPropertyChanged("Emp_Email");
-					this.OnEmp_EmailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_CNIC", DbType="VarChar(100)")]
-		public string Emp_CNIC
-		{
-			get
-			{
-				return this._Emp_CNIC;
-			}
-			set
-			{
-				if ((this._Emp_CNIC != value))
-				{
-					this.OnEmp_CNICChanging(value);
-					this.SendPropertyChanging();
-					this._Emp_CNIC = value;
-					this.SendPropertyChanged("Emp_CNIC");
-					this.OnEmp_CNICChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_AptmentDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> Emp_AptmentDate
-		{
-			get
-			{
-				return this._Emp_AptmentDate;
-			}
-			set
-			{
-				if ((this._Emp_AptmentDate != value))
-				{
-					this.OnEmp_AptmentDateChanging(value);
-					this.SendPropertyChanging();
-					this._Emp_AptmentDate = value;
-					this.SendPropertyChanged("Emp_AptmentDate");
-					this.OnEmp_AptmentDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_JoiningDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> Emp_JoiningDate
-		{
-			get
-			{
-				return this._Emp_JoiningDate;
-			}
-			set
-			{
-				if ((this._Emp_JoiningDate != value))
-				{
-					this.OnEmp_JoiningDateChanging(value);
-					this.SendPropertyChanging();
-					this._Emp_JoiningDate = value;
-					this.SendPropertyChanged("Emp_JoiningDate");
-					this.OnEmp_JoiningDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_Months_Probation", DbType="VarChar(50)")]
-		public string Emp_Months_Probation
-		{
-			get
-			{
-				return this._Emp_Months_Probation;
-			}
-			set
-			{
-				if ((this._Emp_Months_Probation != value))
-				{
-					this.OnEmp_Months_ProbationChanging(value);
-					this.SendPropertyChanging();
-					this._Emp_Months_Probation = value;
-					this.SendPropertyChanged("Emp_Months_Probation");
-					this.OnEmp_Months_ProbationChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_ConfirmDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> Emp_ConfirmDate
-		{
-			get
-			{
-				return this._Emp_ConfirmDate;
-			}
-			set
-			{
-				if ((this._Emp_ConfirmDate != value))
-				{
-					this.OnEmp_ConfirmDateChanging(value);
-					this.SendPropertyChanging();
-					this._Emp_ConfirmDate = value;
-					this.SendPropertyChanged("Emp_ConfirmDate");
-					this.OnEmp_ConfirmDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_Months_NoticePerd", DbType="VarChar(50)")]
-		public string Emp_Months_NoticePerd
-		{
-			get
-			{
-				return this._Emp_Months_NoticePerd;
-			}
-			set
-			{
-				if ((this._Emp_Months_NoticePerd != value))
-				{
-					this.OnEmp_Months_NoticePerdChanging(value);
-					this.SendPropertyChanging();
-					this._Emp_Months_NoticePerd = value;
-					this.SendPropertyChanged("Emp_Months_NoticePerd");
-					this.OnEmp_Months_NoticePerdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_Active", DbType="Int")]
-		public System.Nullable<int> Emp_Active
-		{
-			get
-			{
-				return this._Emp_Active;
-			}
-			set
-			{
-				if ((this._Emp_Active != value))
-				{
-					this.OnEmp_ActiveChanging(value);
-					this.SendPropertyChanging();
-					this._Emp_Active = value;
-					this.SendPropertyChanged("Emp_Active");
-					this.OnEmp_ActiveChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_SortOrder", DbType="Int")]
-		public System.Nullable<int> Emp_SortOrder
-		{
-			get
-			{
-				return this._Emp_SortOrder;
-			}
-			set
-			{
-				if ((this._Emp_SortOrder != value))
-				{
-					this.OnEmp_SortOrderChanging(value);
-					this.SendPropertyChanging();
-					this._Emp_SortOrder = value;
-					this.SendPropertyChanged("Emp_SortOrder");
-					this.OnEmp_SortOrderChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_ImagePath", DbType="VarChar(200)")]
-		public string Emp_ImagePath
-		{
-			get
-			{
-				return this._Emp_ImagePath;
-			}
-			set
-			{
-				if ((this._Emp_ImagePath != value))
-				{
-					this.OnEmp_ImagePathChanging(value);
-					this.SendPropertyChanging();
-					this._Emp_ImagePath = value;
-					this.SendPropertyChanged("Emp_ImagePath");
-					this.OnEmp_ImagePathChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Employee_SETUP_EmpPlacement", Storage="_SETUP_EmpPlacements", ThisKey="Emp_Id", OtherKey="Emp_Id")]
-		public EntitySet<SETUP_EmpPlacement> SETUP_EmpPlacements
-		{
-			get
-			{
-				return this._SETUP_EmpPlacements;
-			}
-			set
-			{
-				this._SETUP_EmpPlacements.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Gender_SETUP_Employee", Storage="_SETUP_Gender", ThisKey="Gndr_Id", OtherKey="Gndr_Id", IsForeignKey=true)]
-		public SETUP_Gender SETUP_Gender
-		{
-			get
-			{
-				return this._SETUP_Gender.Entity;
-			}
-			set
-			{
-				SETUP_Gender previousValue = this._SETUP_Gender.Entity;
-				if (((previousValue != value) 
-							|| (this._SETUP_Gender.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SETUP_Gender.Entity = null;
-						previousValue.SETUP_Employees.Remove(this);
-					}
-					this._SETUP_Gender.Entity = value;
-					if ((value != null))
-					{
-						value.SETUP_Employees.Add(this);
-						this._Gndr_Id = value.Gndr_Id;
-					}
-					else
-					{
-						this._Gndr_Id = default(string);
-					}
-					this.SendPropertyChanged("SETUP_Gender");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_MaritalStatus_SETUP_Employee", Storage="_SETUP_MaritalStatus", ThisKey="MS_Id", OtherKey="MS_Id", IsForeignKey=true)]
-		public SETUP_MaritalStatus SETUP_MaritalStatus
-		{
-			get
-			{
-				return this._SETUP_MaritalStatus.Entity;
-			}
-			set
-			{
-				SETUP_MaritalStatus previousValue = this._SETUP_MaritalStatus.Entity;
-				if (((previousValue != value) 
-							|| (this._SETUP_MaritalStatus.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SETUP_MaritalStatus.Entity = null;
-						previousValue.SETUP_Employees.Remove(this);
-					}
-					this._SETUP_MaritalStatus.Entity = value;
-					if ((value != null))
-					{
-						value.SETUP_Employees.Add(this);
-						this._MS_Id = value.MS_Id;
-					}
-					else
-					{
-						this._MS_Id = default(string);
-					}
-					this.SendPropertyChanged("SETUP_MaritalStatus");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Religion_SETUP_Employee", Storage="_SETUP_Religion", ThisKey="Rlgn_Id", OtherKey="Rlgn_Id", IsForeignKey=true)]
-		public SETUP_Religion SETUP_Religion
-		{
-			get
-			{
-				return this._SETUP_Religion.Entity;
-			}
-			set
-			{
-				SETUP_Religion previousValue = this._SETUP_Religion.Entity;
-				if (((previousValue != value) 
-							|| (this._SETUP_Religion.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SETUP_Religion.Entity = null;
-						previousValue.SETUP_Employees.Remove(this);
-					}
-					this._SETUP_Religion.Entity = value;
-					if ((value != null))
-					{
-						value.SETUP_Employees.Add(this);
-						this._Rlgn_Id = value.Rlgn_Id;
-					}
-					else
-					{
-						this._Rlgn_Id = default(string);
-					}
-					this.SendPropertyChanged("SETUP_Religion");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_SETUP_EmpPlacements(SETUP_EmpPlacement entity)
-		{
-			this.SendPropertyChanging();
-			entity.SETUP_Employee = this;
-		}
-		
-		private void detach_SETUP_EmpPlacements(SETUP_EmpPlacement entity)
-		{
-			this.SendPropertyChanging();
-			entity.SETUP_Employee = null;
-		}
-	}
-	
 	public partial class sp_GetCityListResult
 	{
 		
@@ -17699,6 +18285,320 @@ namespace SCMSDataLayer.DB
 				if ((this._Cmp_SortOrder != value))
 				{
 					this._Cmp_SortOrder = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_GetEmployeePlacementsResult
+	{
+		
+		private string _Plcmt_Id;
+		
+		private string _Plcmt_Code;
+		
+		private string _Emp_Id;
+		
+		private string _Loc_Id;
+		
+		private string _Dpt_Id;
+		
+		private string _Shft_Id;
+		
+		private string _EmpTyp_Id;
+		
+		private string _LevTyp_Id;
+		
+		private string _LevGrp_Id;
+		
+		private string _JT_Id;
+		
+		private string _Dpt_Title;
+		
+		private string _EmpTyp_Title;
+		
+		private string _JT_Title;
+		
+		private string _LevGrp_Title;
+		
+		private string _LevTyp_Title;
+		
+		private string _Loc_Title;
+		
+		private string _Shft_Title;
+		
+		public sp_GetEmployeePlacementsResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Plcmt_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Plcmt_Id
+		{
+			get
+			{
+				return this._Plcmt_Id;
+			}
+			set
+			{
+				if ((this._Plcmt_Id != value))
+				{
+					this._Plcmt_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Plcmt_Code", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Plcmt_Code
+		{
+			get
+			{
+				return this._Plcmt_Code;
+			}
+			set
+			{
+				if ((this._Plcmt_Code != value))
+				{
+					this._Plcmt_Code = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Emp_Id
+		{
+			get
+			{
+				return this._Emp_Id;
+			}
+			set
+			{
+				if ((this._Emp_Id != value))
+				{
+					this._Emp_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id", DbType="VarChar(50)")]
+		public string Loc_Id
+		{
+			get
+			{
+				return this._Loc_Id;
+			}
+			set
+			{
+				if ((this._Loc_Id != value))
+				{
+					this._Loc_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dpt_Id", DbType="VarChar(50)")]
+		public string Dpt_Id
+		{
+			get
+			{
+				return this._Dpt_Id;
+			}
+			set
+			{
+				if ((this._Dpt_Id != value))
+				{
+					this._Dpt_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_Id", DbType="VarChar(50)")]
+		public string Shft_Id
+		{
+			get
+			{
+				return this._Shft_Id;
+			}
+			set
+			{
+				if ((this._Shft_Id != value))
+				{
+					this._Shft_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmpTyp_Id", DbType="VarChar(50)")]
+		public string EmpTyp_Id
+		{
+			get
+			{
+				return this._EmpTyp_Id;
+			}
+			set
+			{
+				if ((this._EmpTyp_Id != value))
+				{
+					this._EmpTyp_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevTyp_Id", DbType="VarChar(50)")]
+		public string LevTyp_Id
+		{
+			get
+			{
+				return this._LevTyp_Id;
+			}
+			set
+			{
+				if ((this._LevTyp_Id != value))
+				{
+					this._LevTyp_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevGrp_Id", DbType="VarChar(50)")]
+		public string LevGrp_Id
+		{
+			get
+			{
+				return this._LevGrp_Id;
+			}
+			set
+			{
+				if ((this._LevGrp_Id != value))
+				{
+					this._LevGrp_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_JT_Id", DbType="VarChar(50)")]
+		public string JT_Id
+		{
+			get
+			{
+				return this._JT_Id;
+			}
+			set
+			{
+				if ((this._JT_Id != value))
+				{
+					this._JT_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dpt_Title", DbType="VarChar(100)")]
+		public string Dpt_Title
+		{
+			get
+			{
+				return this._Dpt_Title;
+			}
+			set
+			{
+				if ((this._Dpt_Title != value))
+				{
+					this._Dpt_Title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmpTyp_Title", DbType="VarChar(100)")]
+		public string EmpTyp_Title
+		{
+			get
+			{
+				return this._EmpTyp_Title;
+			}
+			set
+			{
+				if ((this._EmpTyp_Title != value))
+				{
+					this._EmpTyp_Title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_JT_Title", DbType="VarChar(100)")]
+		public string JT_Title
+		{
+			get
+			{
+				return this._JT_Title;
+			}
+			set
+			{
+				if ((this._JT_Title != value))
+				{
+					this._JT_Title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevGrp_Title", DbType="VarChar(100)")]
+		public string LevGrp_Title
+		{
+			get
+			{
+				return this._LevGrp_Title;
+			}
+			set
+			{
+				if ((this._LevGrp_Title != value))
+				{
+					this._LevGrp_Title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevTyp_Title", DbType="VarChar(100)")]
+		public string LevTyp_Title
+		{
+			get
+			{
+				return this._LevTyp_Title;
+			}
+			set
+			{
+				if ((this._LevTyp_Title != value))
+				{
+					this._LevTyp_Title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Title", DbType="VarChar(100)")]
+		public string Loc_Title
+		{
+			get
+			{
+				return this._Loc_Title;
+			}
+			set
+			{
+				if ((this._Loc_Title != value))
+				{
+					this._Loc_Title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_Title", DbType="VarChar(100)")]
+		public string Shft_Title
+		{
+			get
+			{
+				return this._Shft_Title;
+			}
+			set
+			{
+				if ((this._Shft_Title != value))
+				{
+					this._Shft_Title = value;
 				}
 			}
 		}
@@ -19642,6 +20542,346 @@ namespace SCMSDataLayer.DB
 		}
 	}
 	
+	public partial class sp_GetUserLocationsByGroupIdResult
+	{
+		
+		private string _Loc_Id;
+		
+		private string _Loc_Code;
+		
+		private string _Cmp_Id;
+		
+		private string _Loc_Title;
+		
+		private System.Nullable<int> _Loc_Active;
+		
+		private System.Nullable<int> _Loc_SortOrder;
+		
+		private string _UsrGrp_Id;
+		
+		private string _User_Id;
+		
+		private string _SelectedLocation;
+		
+		public sp_GetUserLocationsByGroupIdResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Loc_Id
+		{
+			get
+			{
+				return this._Loc_Id;
+			}
+			set
+			{
+				if ((this._Loc_Id != value))
+				{
+					this._Loc_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Code", DbType="VarChar(50)")]
+		public string Loc_Code
+		{
+			get
+			{
+				return this._Loc_Code;
+			}
+			set
+			{
+				if ((this._Loc_Code != value))
+				{
+					this._Loc_Code = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cmp_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Cmp_Id
+		{
+			get
+			{
+				return this._Cmp_Id;
+			}
+			set
+			{
+				if ((this._Cmp_Id != value))
+				{
+					this._Cmp_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Title", DbType="VarChar(100)")]
+		public string Loc_Title
+		{
+			get
+			{
+				return this._Loc_Title;
+			}
+			set
+			{
+				if ((this._Loc_Title != value))
+				{
+					this._Loc_Title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Active", DbType="Int")]
+		public System.Nullable<int> Loc_Active
+		{
+			get
+			{
+				return this._Loc_Active;
+			}
+			set
+			{
+				if ((this._Loc_Active != value))
+				{
+					this._Loc_Active = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_SortOrder", DbType="Int")]
+		public System.Nullable<int> Loc_SortOrder
+		{
+			get
+			{
+				return this._Loc_SortOrder;
+			}
+			set
+			{
+				if ((this._Loc_SortOrder != value))
+				{
+					this._Loc_SortOrder = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsrGrp_Id", DbType="VarChar(50)")]
+		public string UsrGrp_Id
+		{
+			get
+			{
+				return this._UsrGrp_Id;
+			}
+			set
+			{
+				if ((this._UsrGrp_Id != value))
+				{
+					this._UsrGrp_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_User_Id", DbType="VarChar(50)")]
+		public string User_Id
+		{
+			get
+			{
+				return this._User_Id;
+			}
+			set
+			{
+				if ((this._User_Id != value))
+				{
+					this._User_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SelectedLocation", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string SelectedLocation
+		{
+			get
+			{
+				return this._SelectedLocation;
+			}
+			set
+			{
+				if ((this._SelectedLocation != value))
+				{
+					this._SelectedLocation = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_GetUserLocationsByUserIdResult
+	{
+		
+		private string _Loc_Id;
+		
+		private string _Loc_Code;
+		
+		private string _Cmp_Id;
+		
+		private string _Loc_Title;
+		
+		private System.Nullable<int> _Loc_Active;
+		
+		private System.Nullable<int> _Loc_SortOrder;
+		
+		private string _UsrGrp_Id;
+		
+		private string _User_Id;
+		
+		private string _SelectedLocation;
+		
+		public sp_GetUserLocationsByUserIdResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Loc_Id
+		{
+			get
+			{
+				return this._Loc_Id;
+			}
+			set
+			{
+				if ((this._Loc_Id != value))
+				{
+					this._Loc_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Code", DbType="VarChar(50)")]
+		public string Loc_Code
+		{
+			get
+			{
+				return this._Loc_Code;
+			}
+			set
+			{
+				if ((this._Loc_Code != value))
+				{
+					this._Loc_Code = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cmp_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Cmp_Id
+		{
+			get
+			{
+				return this._Cmp_Id;
+			}
+			set
+			{
+				if ((this._Cmp_Id != value))
+				{
+					this._Cmp_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Title", DbType="VarChar(100)")]
+		public string Loc_Title
+		{
+			get
+			{
+				return this._Loc_Title;
+			}
+			set
+			{
+				if ((this._Loc_Title != value))
+				{
+					this._Loc_Title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Active", DbType="Int")]
+		public System.Nullable<int> Loc_Active
+		{
+			get
+			{
+				return this._Loc_Active;
+			}
+			set
+			{
+				if ((this._Loc_Active != value))
+				{
+					this._Loc_Active = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_SortOrder", DbType="Int")]
+		public System.Nullable<int> Loc_SortOrder
+		{
+			get
+			{
+				return this._Loc_SortOrder;
+			}
+			set
+			{
+				if ((this._Loc_SortOrder != value))
+				{
+					this._Loc_SortOrder = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UsrGrp_Id", DbType="VarChar(50)")]
+		public string UsrGrp_Id
+		{
+			get
+			{
+				return this._UsrGrp_Id;
+			}
+			set
+			{
+				if ((this._UsrGrp_Id != value))
+				{
+					this._UsrGrp_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_User_Id", DbType="VarChar(50)")]
+		public string User_Id
+		{
+			get
+			{
+				return this._User_Id;
+			}
+			set
+			{
+				if ((this._User_Id != value))
+				{
+					this._User_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SelectedLocation", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string SelectedLocation
+		{
+			get
+			{
+				return this._SelectedLocation;
+			}
+			set
+			{
+				if ((this._SelectedLocation != value))
+				{
+					this._SelectedLocation = value;
+				}
+			}
+		}
+	}
+	
 	public partial class sp_GetUserMenuRightsResult
 	{
 		
@@ -19653,9 +20893,25 @@ namespace SCMSDataLayer.DB
 		
 		private string _Mnu_Level;
 		
+		private System.Nullable<int> _Mnu_SortOrder;
+		
+		private string _Mnu_IsLineBreak;
+		
 		private System.Nullable<int> _Mod_Id;
 		
 		private long _SelectedMenu;
+		
+		private string _UserId;
+		
+		private bool _CanAdd;
+		
+		private bool _CanEdit;
+		
+		private bool _CanDelete;
+		
+		private bool _CanPrint;
+		
+		private bool _CanImport;
 		
 		public sp_GetUserMenuRightsResult()
 		{
@@ -19725,6 +20981,38 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mnu_SortOrder", DbType="Int")]
+		public System.Nullable<int> Mnu_SortOrder
+		{
+			get
+			{
+				return this._Mnu_SortOrder;
+			}
+			set
+			{
+				if ((this._Mnu_SortOrder != value))
+				{
+					this._Mnu_SortOrder = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mnu_IsLineBreak", DbType="VarChar(50)")]
+		public string Mnu_IsLineBreak
+		{
+			get
+			{
+				return this._Mnu_IsLineBreak;
+			}
+			set
+			{
+				if ((this._Mnu_IsLineBreak != value))
+				{
+					this._Mnu_IsLineBreak = value;
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_Id", DbType="Int")]
 		public System.Nullable<int> Mod_Id
 		{
@@ -19753,6 +21041,362 @@ namespace SCMSDataLayer.DB
 				if ((this._SelectedMenu != value))
 				{
 					this._SelectedMenu = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="VarChar(50)")]
+		public string UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					this._UserId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanAdd", DbType="Bit NOT NULL")]
+		public bool CanAdd
+		{
+			get
+			{
+				return this._CanAdd;
+			}
+			set
+			{
+				if ((this._CanAdd != value))
+				{
+					this._CanAdd = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanEdit", DbType="Bit NOT NULL")]
+		public bool CanEdit
+		{
+			get
+			{
+				return this._CanEdit;
+			}
+			set
+			{
+				if ((this._CanEdit != value))
+				{
+					this._CanEdit = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanDelete", DbType="Bit NOT NULL")]
+		public bool CanDelete
+		{
+			get
+			{
+				return this._CanDelete;
+			}
+			set
+			{
+				if ((this._CanDelete != value))
+				{
+					this._CanDelete = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanPrint", DbType="Bit NOT NULL")]
+		public bool CanPrint
+		{
+			get
+			{
+				return this._CanPrint;
+			}
+			set
+			{
+				if ((this._CanPrint != value))
+				{
+					this._CanPrint = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanImport", DbType="Bit NOT NULL")]
+		public bool CanImport
+		{
+			get
+			{
+				return this._CanImport;
+			}
+			set
+			{
+				if ((this._CanImport != value))
+				{
+					this._CanImport = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_GetUserMenuRightsByUserIdResult
+	{
+		
+		private long _Mnu_Id;
+		
+		private string _Mnu_Description;
+		
+		private string _Mnu_TargetUrl;
+		
+		private string _Mnu_Level;
+		
+		private System.Nullable<int> _Mnu_SortOrder;
+		
+		private string _Mnu_IsLineBreak;
+		
+		private System.Nullable<int> _Mod_Id;
+		
+		private long _SelectedMenu;
+		
+		private string _UserId;
+		
+		private bool _CanAdd;
+		
+		private bool _CanEdit;
+		
+		private bool _CanDelete;
+		
+		private bool _CanPrint;
+		
+		private bool _CanImport;
+		
+		public sp_GetUserMenuRightsByUserIdResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mnu_Id", DbType="BigInt NOT NULL")]
+		public long Mnu_Id
+		{
+			get
+			{
+				return this._Mnu_Id;
+			}
+			set
+			{
+				if ((this._Mnu_Id != value))
+				{
+					this._Mnu_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mnu_Description", DbType="VarChar(100)")]
+		public string Mnu_Description
+		{
+			get
+			{
+				return this._Mnu_Description;
+			}
+			set
+			{
+				if ((this._Mnu_Description != value))
+				{
+					this._Mnu_Description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mnu_TargetUrl", DbType="VarChar(500)")]
+		public string Mnu_TargetUrl
+		{
+			get
+			{
+				return this._Mnu_TargetUrl;
+			}
+			set
+			{
+				if ((this._Mnu_TargetUrl != value))
+				{
+					this._Mnu_TargetUrl = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mnu_Level", DbType="VarChar(50)")]
+		public string Mnu_Level
+		{
+			get
+			{
+				return this._Mnu_Level;
+			}
+			set
+			{
+				if ((this._Mnu_Level != value))
+				{
+					this._Mnu_Level = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mnu_SortOrder", DbType="Int")]
+		public System.Nullable<int> Mnu_SortOrder
+		{
+			get
+			{
+				return this._Mnu_SortOrder;
+			}
+			set
+			{
+				if ((this._Mnu_SortOrder != value))
+				{
+					this._Mnu_SortOrder = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mnu_IsLineBreak", DbType="VarChar(50)")]
+		public string Mnu_IsLineBreak
+		{
+			get
+			{
+				return this._Mnu_IsLineBreak;
+			}
+			set
+			{
+				if ((this._Mnu_IsLineBreak != value))
+				{
+					this._Mnu_IsLineBreak = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mod_Id", DbType="Int")]
+		public System.Nullable<int> Mod_Id
+		{
+			get
+			{
+				return this._Mod_Id;
+			}
+			set
+			{
+				if ((this._Mod_Id != value))
+				{
+					this._Mod_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SelectedMenu", DbType="BigInt NOT NULL")]
+		public long SelectedMenu
+		{
+			get
+			{
+				return this._SelectedMenu;
+			}
+			set
+			{
+				if ((this._SelectedMenu != value))
+				{
+					this._SelectedMenu = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="VarChar(50)")]
+		public string UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					this._UserId = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanAdd", DbType="Bit NOT NULL")]
+		public bool CanAdd
+		{
+			get
+			{
+				return this._CanAdd;
+			}
+			set
+			{
+				if ((this._CanAdd != value))
+				{
+					this._CanAdd = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanEdit", DbType="Bit NOT NULL")]
+		public bool CanEdit
+		{
+			get
+			{
+				return this._CanEdit;
+			}
+			set
+			{
+				if ((this._CanEdit != value))
+				{
+					this._CanEdit = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanDelete", DbType="Bit NOT NULL")]
+		public bool CanDelete
+		{
+			get
+			{
+				return this._CanDelete;
+			}
+			set
+			{
+				if ((this._CanDelete != value))
+				{
+					this._CanDelete = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanPrint", DbType="Bit NOT NULL")]
+		public bool CanPrint
+		{
+			get
+			{
+				return this._CanPrint;
+			}
+			set
+			{
+				if ((this._CanPrint != value))
+				{
+					this._CanPrint = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanImport", DbType="Bit NOT NULL")]
+		public bool CanImport
+		{
+			get
+			{
+				return this._CanImport;
+			}
+			set
+			{
+				if ((this._CanImport != value))
+				{
+					this._CanImport = value;
 				}
 			}
 		}
@@ -22307,320 +23951,6 @@ namespace SCMSDataLayer.DB
 				if ((this._VchMas_CrAmount != value))
 				{
 					this._VchMas_CrAmount = value;
-				}
-			}
-		}
-	}
-	
-	public partial class sp_GetEmployeePlacementsResult
-	{
-		
-		private string _Plcmt_Id;
-		
-		private string _Plcmt_Code;
-		
-		private string _Emp_Id;
-		
-		private string _Loc_Id;
-		
-		private string _Dpt_Id;
-		
-		private string _Shft_Id;
-		
-		private string _EmpTyp_Id;
-		
-		private string _LevTyp_Id;
-		
-		private string _LevGrp_Id;
-		
-		private string _JT_Id;
-		
-		private string _Dpt_Title;
-		
-		private string _EmpTyp_Title;
-		
-		private string _JT_Title;
-		
-		private string _LevGrp_Title;
-		
-		private string _LevTyp_Title;
-		
-		private string _Loc_Title;
-		
-		private string _Shft_Title;
-		
-		public sp_GetEmployeePlacementsResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Plcmt_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Plcmt_Id
-		{
-			get
-			{
-				return this._Plcmt_Id;
-			}
-			set
-			{
-				if ((this._Plcmt_Id != value))
-				{
-					this._Plcmt_Id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Plcmt_Code", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Plcmt_Code
-		{
-			get
-			{
-				return this._Plcmt_Code;
-			}
-			set
-			{
-				if ((this._Plcmt_Code != value))
-				{
-					this._Plcmt_Code = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Emp_Id
-		{
-			get
-			{
-				return this._Emp_Id;
-			}
-			set
-			{
-				if ((this._Emp_Id != value))
-				{
-					this._Emp_Id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id", DbType="VarChar(50)")]
-		public string Loc_Id
-		{
-			get
-			{
-				return this._Loc_Id;
-			}
-			set
-			{
-				if ((this._Loc_Id != value))
-				{
-					this._Loc_Id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dpt_Id", DbType="VarChar(50)")]
-		public string Dpt_Id
-		{
-			get
-			{
-				return this._Dpt_Id;
-			}
-			set
-			{
-				if ((this._Dpt_Id != value))
-				{
-					this._Dpt_Id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_Id", DbType="VarChar(50)")]
-		public string Shft_Id
-		{
-			get
-			{
-				return this._Shft_Id;
-			}
-			set
-			{
-				if ((this._Shft_Id != value))
-				{
-					this._Shft_Id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmpTyp_Id", DbType="VarChar(50)")]
-		public string EmpTyp_Id
-		{
-			get
-			{
-				return this._EmpTyp_Id;
-			}
-			set
-			{
-				if ((this._EmpTyp_Id != value))
-				{
-					this._EmpTyp_Id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevTyp_Id", DbType="VarChar(50)")]
-		public string LevTyp_Id
-		{
-			get
-			{
-				return this._LevTyp_Id;
-			}
-			set
-			{
-				if ((this._LevTyp_Id != value))
-				{
-					this._LevTyp_Id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevGrp_Id", DbType="VarChar(50)")]
-		public string LevGrp_Id
-		{
-			get
-			{
-				return this._LevGrp_Id;
-			}
-			set
-			{
-				if ((this._LevGrp_Id != value))
-				{
-					this._LevGrp_Id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_JT_Id", DbType="VarChar(50)")]
-		public string JT_Id
-		{
-			get
-			{
-				return this._JT_Id;
-			}
-			set
-			{
-				if ((this._JT_Id != value))
-				{
-					this._JT_Id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dpt_Title", DbType="VarChar(100)")]
-		public string Dpt_Title
-		{
-			get
-			{
-				return this._Dpt_Title;
-			}
-			set
-			{
-				if ((this._Dpt_Title != value))
-				{
-					this._Dpt_Title = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmpTyp_Title", DbType="VarChar(100)")]
-		public string EmpTyp_Title
-		{
-			get
-			{
-				return this._EmpTyp_Title;
-			}
-			set
-			{
-				if ((this._EmpTyp_Title != value))
-				{
-					this._EmpTyp_Title = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_JT_Title", DbType="VarChar(100)")]
-		public string JT_Title
-		{
-			get
-			{
-				return this._JT_Title;
-			}
-			set
-			{
-				if ((this._JT_Title != value))
-				{
-					this._JT_Title = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevGrp_Title", DbType="VarChar(100)")]
-		public string LevGrp_Title
-		{
-			get
-			{
-				return this._LevGrp_Title;
-			}
-			set
-			{
-				if ((this._LevGrp_Title != value))
-				{
-					this._LevGrp_Title = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LevTyp_Title", DbType="VarChar(100)")]
-		public string LevTyp_Title
-		{
-			get
-			{
-				return this._LevTyp_Title;
-			}
-			set
-			{
-				if ((this._LevTyp_Title != value))
-				{
-					this._LevTyp_Title = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Title", DbType="VarChar(100)")]
-		public string Loc_Title
-		{
-			get
-			{
-				return this._Loc_Title;
-			}
-			set
-			{
-				if ((this._Loc_Title != value))
-				{
-					this._Loc_Title = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Shft_Title", DbType="VarChar(100)")]
-		public string Shft_Title
-		{
-			get
-			{
-				return this._Shft_Title;
-			}
-			set
-			{
-				if ((this._Shft_Title != value))
-				{
-					this._Shft_Title = value;
 				}
 			}
 		}

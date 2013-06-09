@@ -13,6 +13,7 @@
     else
     {
         userMenus = new SCMSDataLayer.DALUserMenuRights().GetUserMenuRights(SCMS.SystemParameters.CurrentUserGrpId).Where(c => c.Mod_Id == SCMS.SystemParameters.ModuleId).ToList();
+        userMenus = userMenus.Where(c => c.UserId == Convert.ToInt32(SCMS.SystemParameters.CurrentUserId).ToString()).ToList();
     }
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -148,7 +149,7 @@
                     <ul>
                         <li><a href="../UserGroup">User Groups</a> </li>
                         <li><a href="../User">Users</a> </li>
-                        <li><a href="../UserRightsSetup">Menu Rights</a> </li>
+                        <li><a href="../UserRightsSetup">User Rights</a> </li>
                     </ul>
                 </li>
                 <li class="ic-typography"><a href="javascript:"><span>Setups</span></a>
