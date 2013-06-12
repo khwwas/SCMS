@@ -19,14 +19,10 @@
               <xs:element name="ChrtAcc_Code" msprop:Generator_ColumnVarNameInTable="columnChrtAcc_Code" msprop:Generator_ColumnPropNameInRow="ChrtAcc_Code" msprop:Generator_ColumnPropNameInTable="ChrtAcc_CodeColumn" msprop:Generator_UserColumnName="ChrtAcc_Code" type="xs:string" minOccurs="0" />
               <xs:element name="ChrtAcc_Title" msprop:Generator_ColumnVarNameInTable="columnChrtAcc_Title" msprop:Generator_ColumnPropNameInRow="ChrtAcc_Title" msprop:Generator_ColumnPropNameInTable="ChrtAcc_TitleColumn" msprop:Generator_UserColumnName="ChrtAcc_Title" type="xs:string" minOccurs="0" />
               <xs:element name="ChrtAcc_Level" msprop:Generator_ColumnVarNameInTable="columnChrtAcc_Level" msprop:Generator_ColumnPropNameInRow="ChrtAcc_Level" msprop:Generator_ColumnPropNameInTable="ChrtAcc_LevelColumn" msprop:Generator_UserColumnName="ChrtAcc_Level" type="xs:int" minOccurs="0" />
-              <xs:element name="CurrentYear_Amount" msprop:Generator_ColumnVarNameInTable="columnCurrentYear_Amount" msprop:Generator_ColumnPropNameInRow="CurrentYear_Amount" msprop:Generator_ColumnPropNameInTable="CurrentYear_AmountColumn" msprop:Generator_UserColumnName="CurrentYear_Amount" type="xs:double" minOccurs="0" />
-              <xs:element name="PreviousYear_Amount" msprop:Generator_ColumnVarNameInTable="columnPreviousYear_Amount" msprop:Generator_ColumnPropNameInRow="PreviousYear_Amount" msprop:Generator_ColumnPropNameInTable="PreviousYear_AmountColumn" msprop:Generator_UserColumnName="PreviousYear_Amount" type="xs:double" minOccurs="0" />
+              <xs:element name="CurrentYear_Amount" msprop:Generator_ColumnVarNameInTable="columnCurrentYear_Amount" msprop:Generator_ColumnPropNameInRow="CurrentYear_Amount" msprop:Generator_ColumnPropNameInTable="CurrentYear_AmountColumn" msprop:Generator_UserColumnName="CurrentYear_Amount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PreviousYear_Amount" msprop:Generator_ColumnVarNameInTable="columnPreviousYear_Amount" msprop:Generator_ColumnPropNameInRow="PreviousYear_Amount" msprop:Generator_ColumnPropNameInTable="PreviousYear_AmountColumn" msprop:Generator_UserColumnName="PreviousYear_Amount" type="xs:decimal" minOccurs="0" />
               <xs:element name="SortOrder" msprop:Generator_ColumnVarNameInTable="columnSortOrder" msprop:Generator_ColumnPropNameInRow="SortOrder" msprop:Generator_ColumnPropNameInTable="SortOrderColumn" msprop:Generator_UserColumnName="SortOrder" type="xs:int" minOccurs="0" />
             </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="Logo" msprop:Generator_TableClassName="LogoDataTable" msprop:Generator_TableVarName="tableLogo" msprop:Generator_TablePropName="Logo" msprop:Generator_RowDeletingName="LogoRowDeleting" msprop:Generator_UserTableName="Logo" msprop:Generator_RowChangingName="LogoRowChanging" msprop:Generator_RowEvHandlerName="LogoRowChangeEventHandler" msprop:Generator_RowDeletedName="LogoRowDeleted" msprop:Generator_RowEvArgName="LogoRowChangeEvent" msprop:Generator_RowChangedName="LogoRowChanged" msprop:Generator_RowClassName="LogoRow">
-          <xs:complexType>
           </xs:complexType>
         </xs:element>
       </xs:choice>
