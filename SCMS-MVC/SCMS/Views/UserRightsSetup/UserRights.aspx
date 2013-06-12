@@ -60,8 +60,8 @@
                 width: 74%;">
                 <div id="InnerTab" class="tabbable">
                     <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
-                        <li class="active"><a href="#MenuContainer">Menu Rights</a></li>
-                        <li><a href="#LocationContainer">Locations</a></li>
+                        <li id="liMenuRights" class="active"><a href="#MenuContainer">Menu Rights</a></li>
+                        <li id="liLocationRights"><a href="#LocationContainer">Locations</a></li>
                     </ul>
                 </div>
                 <div id="MenuContainer" style="height: 349px; overflow: auto; border: 1px solid #ccc;
@@ -238,12 +238,27 @@
                     success: function (response) {
                         $("#MenuContainer").html(response);
                         SelectAll();
+                        GetUserLocations(GroupId, UserId);
                     },
                     error: function (rs, e) {
 
                     }
                 });
 
+            });
+        }
+
+        function GetUserLocations(GroupId, UserId) {
+            var Url = "../UserRightsSetup/GetUserLocations?GroupId=" + GroupId + "&UserId=" + UserId;
+            $.ajax({
+                type: "GET",
+                url: Url,
+                success: function (response) {
+                    $("#LocationContainer").html(response);
+                },
+                error: function (rs, e) {
+
+                }
             });
         }
 
@@ -318,11 +333,74 @@
             });
         }
 
+        function SetLocations() {
+
+            var lcnt_MessageBox = document.getElementById('MessageBox');
+            var UserLocationsIds = "";
+            var GroupId = "";
+            var UserId = "";
+            $(".allowedloc:checked").each(function () {
+
+                var Id = this.id;
+
+                if (UserLocationsIds != "") {
+                    UserLocationsIds += "," + Id;
+                }
+                else {
+                    UserLocationsIds += Id;
+                }
+
+            });
+            if ($("#HiddenUserId").val() != "") {
+                var Arr = $("#HiddenUserId").val().split('|');
+                UserId = Arr[0];
+                GroupId = Arr[1];
+            }
+            var Url = "../UserRightsSetup/SetUserLocations?GroupId=" + GroupId + "&UserId=" + UserId + "&isGroup=false&UserLocations=" + UserLocationsIds;
+            //alert(Url);
+            //return false;
+            document.getElementById("Waiting_Image").style.display = "block";
+            document.getElementById("btn_Save").style.display = "none";
+            $.ajax({
+                type: "GET",
+                url: Url,
+                success: function (response) {
+                    html = response;
+                    FadeIn(lcnt_MessageBox);
+                    if (response == "1") {
+                        lcnt_MessageBox.innerHTML = "<h5>Success!</h5><p>Record saved successfully.</p>";
+                        lcnt_MessageBox.setAttribute("class", "message success");
+                    }
+                    else {
+                        lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Unable to save record.</p>";
+                        lcnt_MessageBox.setAttribute("class", "message error");
+                    }
+                    document.getElementById("Waiting_Image").style.display = "none";
+                    document.getElementById("btn_Save").style.display = "block";
+                    scroll(0, 0);
+                    FadeOut(lcnt_MessageBox);
+                },
+                error: function (rs, e) {
+                    document.getElementById("Waiting_Image").style.display = "none";
+                    document.getElementById("btn_Save").style.display = "block";
+                }
+            });
+        }
+
         $("#InnerTab li").click(function () {
             $($(this).parent().find(".active").find("a").attr("href")).hide();
             $(this).parent().find(".active").removeClass("active");
             $(this).addClass("active");
             $($(this).parent().find(".active").find("a").attr("href")).show();
+
+            $("#btn_Save").removeAttr("onclick");
+            if (this.id == "liMenuRights") {
+                $("#btn_Save").attr("onclick", "SaveRecord()");
+            }
+            if (this.id == "liLocationRights") {
+                $("#btn_Save").attr("onclick", "SetLocations()");
+            }
+
         });
 
 
