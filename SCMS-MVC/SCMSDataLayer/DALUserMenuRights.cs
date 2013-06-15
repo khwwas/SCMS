@@ -32,6 +32,18 @@ namespace SCMSDataLayer
             return dbSCMS.sp_GetUserLocationsByGroupId(GourpId).ToList();
         }
 
+        public List<sp_GetUserVoucherTypesByGroupIdResult> GetUserVoucherTypesByGroupId(string GourpId)
+        {
+            SCMSDataContext dbSCMS = Connection.Create();
+            return dbSCMS.sp_GetUserVoucherTypesByGroupId(GourpId).ToList();
+        }
+
+        public List<sp_GetUserVoucherTypesByUserIdResult> GetUserVoucherTypesByUserId(string UserId)
+        {
+            SCMSDataContext dbSCMS = Connection.Create();
+            return dbSCMS.sp_GetUserVoucherTypesByUserId(UserId).ToList();
+        }
+
         public int SaveRecord(Security_UserRight pRow_NewData)
         {
             int li_ReturnValue = 0;
@@ -61,6 +73,25 @@ namespace SCMSDataLayer
                 dbSCMS.Security_UserLocations.InsertOnSubmit(pRow_NewData);
                 dbSCMS.SubmitChanges();
                 li_ReturnValue = Convert.ToInt32(pRow_NewData.UserLoc_Id);
+            }
+            catch
+            {
+                return 0;
+            }
+
+            return li_ReturnValue;
+        }
+
+        public int SetUserVoucherTypes(Security_UserVoucherType pRow_NewData)
+        {
+            int li_ReturnValue = 0;
+
+            try
+            {
+                SCMSDataContext dbSCMS = Connection.Create();
+                dbSCMS.Security_UserVoucherTypes.InsertOnSubmit(pRow_NewData);
+                dbSCMS.SubmitChanges();
+                li_ReturnValue = Convert.ToInt32(pRow_NewData.UserVchrTyp_Id);
             }
             catch
             {
@@ -114,6 +145,30 @@ namespace SCMSDataLayer
                 else
                 {
                     li_ReturnValue = dbSCMS.ExecuteCommand("Delete From Security_UserLocations where UsrGrp_Id='" + Grp_Id + "'");
+                }
+            }
+            catch
+            {
+                li_ReturnValue = -1;
+            }
+
+            return li_ReturnValue;
+        }
+
+        public int DeleteVoucherTypesByGroupId(string Grp_Id, string UserId)
+        {
+            int li_ReturnValue = 0;
+
+            try
+            {
+                SCMSDataContext dbSCMS = Connection.Create();
+                if (UserId != null)
+                {
+                    li_ReturnValue = dbSCMS.ExecuteCommand("Delete From Security_UserVoucherTypes where UserGrp_Id='" + Grp_Id + "' And User_Id='" + UserId + "'");
+                }
+                else
+                {
+                    li_ReturnValue = dbSCMS.ExecuteCommand("Delete From Security_UserVoucherTypes where UserGrp_Id='" + Grp_Id + "'");
                 }
             }
             catch

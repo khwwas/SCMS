@@ -20,6 +20,7 @@
         users = new SCMSDataLayer.DALUser().GetAllData();
         List<SCMSDataLayer.DB.sp_GetUserMenuRightsResult> MenuRights = (List<SCMSDataLayer.DB.sp_GetUserMenuRightsResult>)ViewData["UserMenuRights"];
         List<SCMSDataLayer.DB.sp_GetUserLocationsByGroupIdResult> UserLocations = (List<SCMSDataLayer.DB.sp_GetUserLocationsByGroupIdResult>)ViewData["UserLocations"];
+        List<SCMSDataLayer.DB.sp_GetUserVoucherTypesByGroupIdResult> UserVoucherTypes = (List<SCMSDataLayer.DB.sp_GetUserVoucherTypesByGroupIdResult>)ViewData["UserVoucherTypes"];
     %>
     <div class="box round first fullpage grid" style="overflow: auto;">
         <h2>
@@ -62,6 +63,7 @@
                     <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
                         <li id="liMenuRights" class="active"><a href="#MenuContainer">Menu Rights</a></li>
                         <li id="liLocationRights"><a href="#LocationContainer">Locations</a></li>
+                        <li id="liVoucherTypes"><a href="#VoucherTypeContainer">Voucher Types</a></li>
                     </ul>
                 </div>
                 <div id="MenuContainer" style="height: 349px; overflow: auto; border: 1px solid #ccc;
@@ -188,6 +190,36 @@
                         </tbody>
                     </table>
                 </div>
+                <div id="VoucherTypeContainer" style="height: 349px; overflow: auto; border: 1px solid #ccc;
+                    margin-top: 5px; display: none;">
+                    <table id="VoucherTypeGrid" class="display" style="width: 100%; padding: 2px;">
+                        <thead>
+                            <tr class='odd gradeX' style='line-height: 15px; cursor: pointer; text-align: left;
+                                background-color: #ccc;'>
+                                <th style="vertical-align: middle; width: 90%; padding-left: 3px;">
+                                    Voucher Type
+                                </th>
+                                <th style="vertical-align: middle; width: 10%;">
+                                    Is Allowed
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%foreach (SCMSDataLayer.DB.sp_GetUserVoucherTypesByGroupIdResult voucherType in UserVoucherTypes)
+                              {
+                            %>
+                            <tr class='odd gradeX' style='line-height: 15px; cursor: pointer;'>
+                                <td style='vertical-align: middle; width: 25%;'>
+                                    <%=voucherType.VchrType_Title%>
+                                </td>
+                                <td style="vertical-align: middle;">
+                                    <input type='checkbox' class='allowedVtype' id='<%=voucherType.VchrType_Id%>' <%=voucherType.SelectedVoucherType == "0" ? "" : "checked='checked'" %> />
+                                </td>
+                            </tr>
+                            <%} %>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div style="clear: both; border-bottom: 1px solid #ccc; margin-bottom: 5px; padding-top: 15px;">
             </div>
@@ -239,6 +271,7 @@
                         $("#MenuContainer").html(response);
                         SelectAll();
                         GetUserLocations(GroupId, UserId);
+                        GetUserVoucherTypes(GroupId, UserId);
                     },
                     error: function (rs, e) {
 
@@ -255,6 +288,20 @@
                 url: Url,
                 success: function (response) {
                     $("#LocationContainer").html(response);
+                },
+                error: function (rs, e) {
+
+                }
+            });
+        }
+
+        function GetUserVoucherTypes(GroupId, UserId) {
+            var Url = "../UserRightsSetup/GetUserVoucherTypes?GroupId=" + GroupId + "&UserId=" + UserId;
+            $.ajax({
+                type: "GET",
+                url: Url,
+                success: function (response) {
+                    $("#VoucherTypeContainer").html(response);
                 },
                 error: function (rs, e) {
 
@@ -387,6 +434,60 @@
             });
         }
 
+        function SetVoucherTypes() {
+
+            var lcnt_MessageBox = document.getElementById('MessageBox');
+            var VoucherTypeIds = "";
+            var GroupId = "";
+            var UserId = "";
+            $(".allowedVtype:checked").each(function () {
+
+                var Id = this.id;
+
+                if (VoucherTypeIds != "") {
+                    VoucherTypeIds += "," + Id;
+                }
+                else {
+                    VoucherTypeIds += Id;
+                }
+
+            });
+            if ($("#HiddenUserId").val() != "") {
+                var Arr = $("#HiddenUserId").val().split('|');
+                UserId = Arr[0];
+                GroupId = Arr[1];
+            }
+            var Url = "../UserRightsSetup/SetUserVoucherTypes?GroupId=" + GroupId + "&UserId=" + UserId + "&isGroup=false&UserVoucherTypes=" + VoucherTypeIds;
+            //alert(Url);
+            //return false;
+            document.getElementById("Waiting_Image").style.display = "block";
+            document.getElementById("btn_Save").style.display = "none";
+            $.ajax({
+                type: "GET",
+                url: Url,
+                success: function (response) {
+                    html = response;
+                    FadeIn(lcnt_MessageBox);
+                    if (response == "1") {
+                        lcnt_MessageBox.innerHTML = "<h5>Success!</h5><p>Record saved successfully.</p>";
+                        lcnt_MessageBox.setAttribute("class", "message success");
+                    }
+                    else {
+                        lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Unable to save record.</p>";
+                        lcnt_MessageBox.setAttribute("class", "message error");
+                    }
+                    document.getElementById("Waiting_Image").style.display = "none";
+                    document.getElementById("btn_Save").style.display = "block";
+                    scroll(0, 0);
+                    FadeOut(lcnt_MessageBox);
+                },
+                error: function (rs, e) {
+                    document.getElementById("Waiting_Image").style.display = "none";
+                    document.getElementById("btn_Save").style.display = "block";
+                }
+            });
+        }
+
         $("#InnerTab li").click(function () {
             $($(this).parent().find(".active").find("a").attr("href")).hide();
             $(this).parent().find(".active").removeClass("active");
@@ -399,6 +500,9 @@
             }
             if (this.id == "liLocationRights") {
                 $("#btn_Save").attr("onclick", "SetLocations()");
+            }
+            if (this.id == "liVoucherTypes") {
+                $("#btn_Save").attr("onclick", "SetVoucherTypes()");
             }
 
         });

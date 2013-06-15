@@ -54,6 +54,9 @@ namespace SCMSDataLayer.DB
     partial void InsertSecurity_UserRight(Security_UserRight instance);
     partial void UpdateSecurity_UserRight(Security_UserRight instance);
     partial void DeleteSecurity_UserRight(Security_UserRight instance);
+    partial void InsertSecurity_UserVoucherType(Security_UserVoucherType instance);
+    partial void UpdateSecurity_UserVoucherType(Security_UserVoucherType instance);
+    partial void DeleteSecurity_UserVoucherType(Security_UserVoucherType instance);
     partial void InsertSETUP_Bank(SETUP_Bank instance);
     partial void UpdateSETUP_Bank(SETUP_Bank instance);
     partial void DeleteSETUP_Bank(SETUP_Bank instance);
@@ -267,6 +270,14 @@ namespace SCMSDataLayer.DB
 			get
 			{
 				return this.GetTable<Security_UserRight>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Security_UserVoucherType> Security_UserVoucherTypes
+		{
+			get
+			{
+				return this.GetTable<Security_UserVoucherType>();
 			}
 		}
 		
@@ -686,6 +697,20 @@ namespace SCMSDataLayer.DB
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), userId);
 			return ((ISingleResult<sp_GetUserMenuRightsByUserIdResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetUserVoucherTypesByGroupId")]
+		public ISingleResult<sp_GetUserVoucherTypesByGroupIdResult> sp_GetUserVoucherTypesByGroupId([global::System.Data.Linq.Mapping.ParameterAttribute(Name="GroupId", DbType="VarChar(50)")] string groupId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), groupId);
+			return ((ISingleResult<sp_GetUserVoucherTypesByGroupIdResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetUserVoucherTypesByUserId")]
+		public ISingleResult<sp_GetUserVoucherTypesByUserIdResult> sp_GetUserVoucherTypesByUserId([global::System.Data.Linq.Mapping.ParameterAttribute(Name="UserId", DbType="VarChar(50)")] string userId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), userId);
+			return ((ISingleResult<sp_GetUserVoucherTypesByUserIdResult>)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetVoucherTypeNarrationList")]
@@ -2038,6 +2063,8 @@ namespace SCMSDataLayer.DB
 		
 		private EntitySet<Security_UserLocation> _Security_UserLocations;
 		
+		private EntitySet<Security_UserVoucherType> _Security_UserVoucherTypes;
+		
 		private EntityRef<SECURITY_UserGroup> _SECURITY_UserGroup;
 		
 		private EntityRef<SETUP_Company> _SETUP_Company;
@@ -2071,6 +2098,7 @@ namespace SCMSDataLayer.DB
 		public SECURITY_User()
 		{
 			this._Security_UserLocations = new EntitySet<Security_UserLocation>(new Action<Security_UserLocation>(this.attach_Security_UserLocations), new Action<Security_UserLocation>(this.detach_Security_UserLocations));
+			this._Security_UserVoucherTypes = new EntitySet<Security_UserVoucherType>(new Action<Security_UserVoucherType>(this.attach_Security_UserVoucherTypes), new Action<Security_UserVoucherType>(this.detach_Security_UserVoucherTypes));
 			this._SECURITY_UserGroup = default(EntityRef<SECURITY_UserGroup>);
 			this._SETUP_Company = default(EntityRef<SETUP_Company>);
 			this._SETUP_Location = default(EntityRef<SETUP_Location>);
@@ -2282,6 +2310,19 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SECURITY_User_Security_UserVoucherType", Storage="_Security_UserVoucherTypes", ThisKey="User_Id", OtherKey="User_Id")]
+		public EntitySet<Security_UserVoucherType> Security_UserVoucherTypes
+		{
+			get
+			{
+				return this._Security_UserVoucherTypes;
+			}
+			set
+			{
+				this._Security_UserVoucherTypes.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SECURITY_UserGroup_SECURITY_User", Storage="_SECURITY_UserGroup", ThisKey="UsrGrp_Id", OtherKey="UsrGrp_Id", IsForeignKey=true)]
 		public SECURITY_UserGroup SECURITY_UserGroup
 		{
@@ -2415,6 +2456,18 @@ namespace SCMSDataLayer.DB
 			this.SendPropertyChanging();
 			entity.SECURITY_User = null;
 		}
+		
+		private void attach_Security_UserVoucherTypes(Security_UserVoucherType entity)
+		{
+			this.SendPropertyChanging();
+			entity.SECURITY_User = this;
+		}
+		
+		private void detach_Security_UserVoucherTypes(Security_UserVoucherType entity)
+		{
+			this.SendPropertyChanging();
+			entity.SECURITY_User = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SECURITY_UserGroup")]
@@ -2440,6 +2493,8 @@ namespace SCMSDataLayer.DB
 		private EntitySet<SECURITY_User> _SECURITY_Users;
 		
 		private EntitySet<Security_UserLocation> _Security_UserLocations;
+		
+		private EntitySet<Security_UserVoucherType> _Security_UserVoucherTypes;
 		
 		private EntityRef<SETUP_Company> _SETUP_Company;
 		
@@ -2469,6 +2524,7 @@ namespace SCMSDataLayer.DB
 		{
 			this._SECURITY_Users = new EntitySet<SECURITY_User>(new Action<SECURITY_User>(this.attach_SECURITY_Users), new Action<SECURITY_User>(this.detach_SECURITY_Users));
 			this._Security_UserLocations = new EntitySet<Security_UserLocation>(new Action<Security_UserLocation>(this.attach_Security_UserLocations), new Action<Security_UserLocation>(this.detach_Security_UserLocations));
+			this._Security_UserVoucherTypes = new EntitySet<Security_UserVoucherType>(new Action<Security_UserVoucherType>(this.attach_Security_UserVoucherTypes), new Action<Security_UserVoucherType>(this.detach_Security_UserVoucherTypes));
 			this._SETUP_Company = default(EntityRef<SETUP_Company>);
 			this._SETUP_Location = default(EntityRef<SETUP_Location>);
 			OnCreated();
@@ -2648,6 +2704,19 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SECURITY_UserGroup_Security_UserVoucherType", Storage="_Security_UserVoucherTypes", ThisKey="UsrGrp_Id", OtherKey="UserGrp_Id")]
+		public EntitySet<Security_UserVoucherType> Security_UserVoucherTypes
+		{
+			get
+			{
+				return this._Security_UserVoucherTypes;
+			}
+			set
+			{
+				this._Security_UserVoucherTypes.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SECURITY_UserGroup", Storage="_SETUP_Company", ThisKey="Cmp_Id", OtherKey="Cmp_Id", IsForeignKey=true)]
 		public SETUP_Company SETUP_Company
 		{
@@ -2755,6 +2824,18 @@ namespace SCMSDataLayer.DB
 		}
 		
 		private void detach_Security_UserLocations(Security_UserLocation entity)
+		{
+			this.SendPropertyChanging();
+			entity.SECURITY_UserGroup = null;
+		}
+		
+		private void attach_Security_UserVoucherTypes(Security_UserVoucherType entity)
+		{
+			this.SendPropertyChanging();
+			entity.SECURITY_UserGroup = this;
+		}
+		
+		private void detach_Security_UserVoucherTypes(Security_UserVoucherType entity)
 		{
 			this.SendPropertyChanging();
 			entity.SECURITY_UserGroup = null;
@@ -3360,6 +3441,263 @@ namespace SCMSDataLayer.DB
 						this._Mnu_Id = default(long);
 					}
 					this.SendPropertyChanged("Security_MenuOption");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Security_UserVoucherTypes")]
+	public partial class Security_UserVoucherType : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _UserVchrTyp_Id;
+		
+		private string _UserGrp_Id;
+		
+		private string _User_Id;
+		
+		private string _VchrType_Id;
+		
+		private EntityRef<SECURITY_User> _SECURITY_User;
+		
+		private EntityRef<SECURITY_UserGroup> _SECURITY_UserGroup;
+		
+		private EntityRef<SETUP_VoucherType> _SETUP_VoucherType;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnUserVchrTyp_IdChanging(int value);
+    partial void OnUserVchrTyp_IdChanged();
+    partial void OnUserGrp_IdChanging(string value);
+    partial void OnUserGrp_IdChanged();
+    partial void OnUser_IdChanging(string value);
+    partial void OnUser_IdChanged();
+    partial void OnVchrType_IdChanging(string value);
+    partial void OnVchrType_IdChanged();
+    #endregion
+		
+		public Security_UserVoucherType()
+		{
+			this._SECURITY_User = default(EntityRef<SECURITY_User>);
+			this._SECURITY_UserGroup = default(EntityRef<SECURITY_UserGroup>);
+			this._SETUP_VoucherType = default(EntityRef<SETUP_VoucherType>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserVchrTyp_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int UserVchrTyp_Id
+		{
+			get
+			{
+				return this._UserVchrTyp_Id;
+			}
+			set
+			{
+				if ((this._UserVchrTyp_Id != value))
+				{
+					this.OnUserVchrTyp_IdChanging(value);
+					this.SendPropertyChanging();
+					this._UserVchrTyp_Id = value;
+					this.SendPropertyChanged("UserVchrTyp_Id");
+					this.OnUserVchrTyp_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserGrp_Id", DbType="VarChar(50)")]
+		public string UserGrp_Id
+		{
+			get
+			{
+				return this._UserGrp_Id;
+			}
+			set
+			{
+				if ((this._UserGrp_Id != value))
+				{
+					if (this._SECURITY_UserGroup.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserGrp_IdChanging(value);
+					this.SendPropertyChanging();
+					this._UserGrp_Id = value;
+					this.SendPropertyChanged("UserGrp_Id");
+					this.OnUserGrp_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_User_Id", DbType="VarChar(50)")]
+		public string User_Id
+		{
+			get
+			{
+				return this._User_Id;
+			}
+			set
+			{
+				if ((this._User_Id != value))
+				{
+					if (this._SECURITY_User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUser_IdChanging(value);
+					this.SendPropertyChanging();
+					this._User_Id = value;
+					this.SendPropertyChanged("User_Id");
+					this.OnUser_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchrType_Id", DbType="VarChar(50)")]
+		public string VchrType_Id
+		{
+			get
+			{
+				return this._VchrType_Id;
+			}
+			set
+			{
+				if ((this._VchrType_Id != value))
+				{
+					if (this._SETUP_VoucherType.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnVchrType_IdChanging(value);
+					this.SendPropertyChanging();
+					this._VchrType_Id = value;
+					this.SendPropertyChanged("VchrType_Id");
+					this.OnVchrType_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SECURITY_User_Security_UserVoucherType", Storage="_SECURITY_User", ThisKey="User_Id", OtherKey="User_Id", IsForeignKey=true)]
+		public SECURITY_User SECURITY_User
+		{
+			get
+			{
+				return this._SECURITY_User.Entity;
+			}
+			set
+			{
+				SECURITY_User previousValue = this._SECURITY_User.Entity;
+				if (((previousValue != value) 
+							|| (this._SECURITY_User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SECURITY_User.Entity = null;
+						previousValue.Security_UserVoucherTypes.Remove(this);
+					}
+					this._SECURITY_User.Entity = value;
+					if ((value != null))
+					{
+						value.Security_UserVoucherTypes.Add(this);
+						this._User_Id = value.User_Id;
+					}
+					else
+					{
+						this._User_Id = default(string);
+					}
+					this.SendPropertyChanged("SECURITY_User");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SECURITY_UserGroup_Security_UserVoucherType", Storage="_SECURITY_UserGroup", ThisKey="UserGrp_Id", OtherKey="UsrGrp_Id", IsForeignKey=true)]
+		public SECURITY_UserGroup SECURITY_UserGroup
+		{
+			get
+			{
+				return this._SECURITY_UserGroup.Entity;
+			}
+			set
+			{
+				SECURITY_UserGroup previousValue = this._SECURITY_UserGroup.Entity;
+				if (((previousValue != value) 
+							|| (this._SECURITY_UserGroup.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SECURITY_UserGroup.Entity = null;
+						previousValue.Security_UserVoucherTypes.Remove(this);
+					}
+					this._SECURITY_UserGroup.Entity = value;
+					if ((value != null))
+					{
+						value.Security_UserVoucherTypes.Add(this);
+						this._UserGrp_Id = value.UsrGrp_Id;
+					}
+					else
+					{
+						this._UserGrp_Id = default(string);
+					}
+					this.SendPropertyChanged("SECURITY_UserGroup");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_VoucherType_Security_UserVoucherType", Storage="_SETUP_VoucherType", ThisKey="VchrType_Id", OtherKey="VchrType_Id", IsForeignKey=true)]
+		public SETUP_VoucherType SETUP_VoucherType
+		{
+			get
+			{
+				return this._SETUP_VoucherType.Entity;
+			}
+			set
+			{
+				SETUP_VoucherType previousValue = this._SETUP_VoucherType.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_VoucherType.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_VoucherType.Entity = null;
+						previousValue.Security_UserVoucherTypes.Remove(this);
+					}
+					this._SETUP_VoucherType.Entity = value;
+					if ((value != null))
+					{
+						value.Security_UserVoucherTypes.Add(this);
+						this._VchrType_Id = value.VchrType_Id;
+					}
+					else
+					{
+						this._VchrType_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_VoucherType");
 				}
 			}
 		}
@@ -16583,6 +16921,8 @@ namespace SCMSDataLayer.DB
 		
 		private EntitySet<GL_VchrMaster> _GL_VchrMasters;
 		
+		private EntitySet<Security_UserVoucherType> _Security_UserVoucherTypes;
+		
 		private EntitySet<SETUP_VoucherTypeNarration> _SETUP_VoucherTypeNarrations;
 		
 		private EntityRef<SETUP_Company> _SETUP_Company;
@@ -16616,6 +16956,7 @@ namespace SCMSDataLayer.DB
 		public SETUP_VoucherType()
 		{
 			this._GL_VchrMasters = new EntitySet<GL_VchrMaster>(new Action<GL_VchrMaster>(this.attach_GL_VchrMasters), new Action<GL_VchrMaster>(this.detach_GL_VchrMasters));
+			this._Security_UserVoucherTypes = new EntitySet<Security_UserVoucherType>(new Action<Security_UserVoucherType>(this.attach_Security_UserVoucherTypes), new Action<Security_UserVoucherType>(this.detach_Security_UserVoucherTypes));
 			this._SETUP_VoucherTypeNarrations = new EntitySet<SETUP_VoucherTypeNarration>(new Action<SETUP_VoucherTypeNarration>(this.attach_SETUP_VoucherTypeNarrations), new Action<SETUP_VoucherTypeNarration>(this.detach_SETUP_VoucherTypeNarrations));
 			this._SETUP_Company = default(EntityRef<SETUP_Company>);
 			this._SETUP_Location = default(EntityRef<SETUP_Location>);
@@ -16823,6 +17164,19 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_VoucherType_Security_UserVoucherType", Storage="_Security_UserVoucherTypes", ThisKey="VchrType_Id", OtherKey="VchrType_Id")]
+		public EntitySet<Security_UserVoucherType> Security_UserVoucherTypes
+		{
+			get
+			{
+				return this._Security_UserVoucherTypes;
+			}
+			set
+			{
+				this._Security_UserVoucherTypes.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_VoucherType_SETUP_VoucherTypeNarration", Storage="_SETUP_VoucherTypeNarrations", ThisKey="VchrType_Id", OtherKey="VchrType_Id")]
 		public EntitySet<SETUP_VoucherTypeNarration> SETUP_VoucherTypeNarrations
 		{
@@ -16931,6 +17285,18 @@ namespace SCMSDataLayer.DB
 		}
 		
 		private void detach_GL_VchrMasters(GL_VchrMaster entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_VoucherType = null;
+		}
+		
+		private void attach_Security_UserVoucherTypes(Security_UserVoucherType entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_VoucherType = this;
+		}
+		
+		private void detach_Security_UserVoucherTypes(Security_UserVoucherType entity)
 		{
 			this.SendPropertyChanging();
 			entity.SETUP_VoucherType = null;
@@ -21397,6 +21763,454 @@ namespace SCMSDataLayer.DB
 				if ((this._CanImport != value))
 				{
 					this._CanImport = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_GetUserVoucherTypesByGroupIdResult
+	{
+		
+		private string _VchrType_Id;
+		
+		private string _VchrType_Code;
+		
+		private string _Cmp_Id;
+		
+		private string _Loc_Id;
+		
+		private string _VchrType_Title;
+		
+		private string _VchrType_Prefix;
+		
+		private System.Nullable<int> _VchrType_Active;
+		
+		private System.Nullable<int> _VchrType_SortOrder;
+		
+		private System.Nullable<int> _VchrType_CodeInitialization;
+		
+		private string _UserGrp_Id;
+		
+		private string _User_Id;
+		
+		private string _SelectedVoucherType;
+		
+		public sp_GetUserVoucherTypesByGroupIdResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchrType_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string VchrType_Id
+		{
+			get
+			{
+				return this._VchrType_Id;
+			}
+			set
+			{
+				if ((this._VchrType_Id != value))
+				{
+					this._VchrType_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchrType_Code", DbType="VarChar(50)")]
+		public string VchrType_Code
+		{
+			get
+			{
+				return this._VchrType_Code;
+			}
+			set
+			{
+				if ((this._VchrType_Code != value))
+				{
+					this._VchrType_Code = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cmp_Id", DbType="VarChar(50)")]
+		public string Cmp_Id
+		{
+			get
+			{
+				return this._Cmp_Id;
+			}
+			set
+			{
+				if ((this._Cmp_Id != value))
+				{
+					this._Cmp_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id", DbType="VarChar(50)")]
+		public string Loc_Id
+		{
+			get
+			{
+				return this._Loc_Id;
+			}
+			set
+			{
+				if ((this._Loc_Id != value))
+				{
+					this._Loc_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchrType_Title", DbType="VarChar(100)")]
+		public string VchrType_Title
+		{
+			get
+			{
+				return this._VchrType_Title;
+			}
+			set
+			{
+				if ((this._VchrType_Title != value))
+				{
+					this._VchrType_Title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchrType_Prefix", DbType="VarChar(50)")]
+		public string VchrType_Prefix
+		{
+			get
+			{
+				return this._VchrType_Prefix;
+			}
+			set
+			{
+				if ((this._VchrType_Prefix != value))
+				{
+					this._VchrType_Prefix = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchrType_Active", DbType="Int")]
+		public System.Nullable<int> VchrType_Active
+		{
+			get
+			{
+				return this._VchrType_Active;
+			}
+			set
+			{
+				if ((this._VchrType_Active != value))
+				{
+					this._VchrType_Active = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchrType_SortOrder", DbType="Int")]
+		public System.Nullable<int> VchrType_SortOrder
+		{
+			get
+			{
+				return this._VchrType_SortOrder;
+			}
+			set
+			{
+				if ((this._VchrType_SortOrder != value))
+				{
+					this._VchrType_SortOrder = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchrType_CodeInitialization", DbType="Int")]
+		public System.Nullable<int> VchrType_CodeInitialization
+		{
+			get
+			{
+				return this._VchrType_CodeInitialization;
+			}
+			set
+			{
+				if ((this._VchrType_CodeInitialization != value))
+				{
+					this._VchrType_CodeInitialization = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserGrp_Id", DbType="VarChar(50)")]
+		public string UserGrp_Id
+		{
+			get
+			{
+				return this._UserGrp_Id;
+			}
+			set
+			{
+				if ((this._UserGrp_Id != value))
+				{
+					this._UserGrp_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_User_Id", DbType="VarChar(50)")]
+		public string User_Id
+		{
+			get
+			{
+				return this._User_Id;
+			}
+			set
+			{
+				if ((this._User_Id != value))
+				{
+					this._User_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SelectedVoucherType", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string SelectedVoucherType
+		{
+			get
+			{
+				return this._SelectedVoucherType;
+			}
+			set
+			{
+				if ((this._SelectedVoucherType != value))
+				{
+					this._SelectedVoucherType = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_GetUserVoucherTypesByUserIdResult
+	{
+		
+		private string _VchrType_Id;
+		
+		private string _VchrType_Code;
+		
+		private string _Cmp_Id;
+		
+		private string _Loc_Id;
+		
+		private string _VchrType_Title;
+		
+		private string _VchrType_Prefix;
+		
+		private System.Nullable<int> _VchrType_Active;
+		
+		private System.Nullable<int> _VchrType_SortOrder;
+		
+		private System.Nullable<int> _VchrType_CodeInitialization;
+		
+		private string _UserGrp_Id;
+		
+		private string _User_Id;
+		
+		private string _SelectedVoucherType;
+		
+		public sp_GetUserVoucherTypesByUserIdResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchrType_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string VchrType_Id
+		{
+			get
+			{
+				return this._VchrType_Id;
+			}
+			set
+			{
+				if ((this._VchrType_Id != value))
+				{
+					this._VchrType_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchrType_Code", DbType="VarChar(50)")]
+		public string VchrType_Code
+		{
+			get
+			{
+				return this._VchrType_Code;
+			}
+			set
+			{
+				if ((this._VchrType_Code != value))
+				{
+					this._VchrType_Code = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cmp_Id", DbType="VarChar(50)")]
+		public string Cmp_Id
+		{
+			get
+			{
+				return this._Cmp_Id;
+			}
+			set
+			{
+				if ((this._Cmp_Id != value))
+				{
+					this._Cmp_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id", DbType="VarChar(50)")]
+		public string Loc_Id
+		{
+			get
+			{
+				return this._Loc_Id;
+			}
+			set
+			{
+				if ((this._Loc_Id != value))
+				{
+					this._Loc_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchrType_Title", DbType="VarChar(100)")]
+		public string VchrType_Title
+		{
+			get
+			{
+				return this._VchrType_Title;
+			}
+			set
+			{
+				if ((this._VchrType_Title != value))
+				{
+					this._VchrType_Title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchrType_Prefix", DbType="VarChar(50)")]
+		public string VchrType_Prefix
+		{
+			get
+			{
+				return this._VchrType_Prefix;
+			}
+			set
+			{
+				if ((this._VchrType_Prefix != value))
+				{
+					this._VchrType_Prefix = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchrType_Active", DbType="Int")]
+		public System.Nullable<int> VchrType_Active
+		{
+			get
+			{
+				return this._VchrType_Active;
+			}
+			set
+			{
+				if ((this._VchrType_Active != value))
+				{
+					this._VchrType_Active = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchrType_SortOrder", DbType="Int")]
+		public System.Nullable<int> VchrType_SortOrder
+		{
+			get
+			{
+				return this._VchrType_SortOrder;
+			}
+			set
+			{
+				if ((this._VchrType_SortOrder != value))
+				{
+					this._VchrType_SortOrder = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchrType_CodeInitialization", DbType="Int")]
+		public System.Nullable<int> VchrType_CodeInitialization
+		{
+			get
+			{
+				return this._VchrType_CodeInitialization;
+			}
+			set
+			{
+				if ((this._VchrType_CodeInitialization != value))
+				{
+					this._VchrType_CodeInitialization = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserGrp_Id", DbType="VarChar(50)")]
+		public string UserGrp_Id
+		{
+			get
+			{
+				return this._UserGrp_Id;
+			}
+			set
+			{
+				if ((this._UserGrp_Id != value))
+				{
+					this._UserGrp_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_User_Id", DbType="VarChar(50)")]
+		public string User_Id
+		{
+			get
+			{
+				return this._User_Id;
+			}
+			set
+			{
+				if ((this._User_Id != value))
+				{
+					this._User_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SelectedVoucherType", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string SelectedVoucherType
+		{
+			get
+			{
+				return this._SelectedVoucherType;
+			}
+			set
+			{
+				if ((this._SelectedVoucherType != value))
+				{
+					this._SelectedVoucherType = value;
 				}
 			}
 		}

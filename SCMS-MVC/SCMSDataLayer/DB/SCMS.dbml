@@ -69,6 +69,7 @@
       <Column Name="User_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="User_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="SECURITY_User_Security_UserLocation" Member="Security_UserLocations" ThisKey="User_Id" OtherKey="User_Id" Type="Security_UserLocation" />
+      <Association Name="SECURITY_User_Security_UserVoucherType" Member="Security_UserVoucherTypes" ThisKey="User_Id" OtherKey="User_Id" Type="Security_UserVoucherType" />
       <Association Name="SECURITY_UserGroup_SECURITY_User" Member="SECURITY_UserGroup" ThisKey="UsrGrp_Id" OtherKey="UsrGrp_Id" Type="SECURITY_UserGroup" IsForeignKey="true" />
       <Association Name="SETUP_Company_SECURITY_User" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
       <Association Name="SETUP_Location_SECURITY_User" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
@@ -85,6 +86,7 @@
       <Column Name="UsrGrp_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="SECURITY_UserGroup_SECURITY_User" Member="SECURITY_Users" ThisKey="UsrGrp_Id" OtherKey="UsrGrp_Id" Type="SECURITY_User" />
       <Association Name="SECURITY_UserGroup_Security_UserLocation" Member="Security_UserLocations" ThisKey="UsrGrp_Id" OtherKey="UsrGrp_Id" Type="Security_UserLocation" />
+      <Association Name="SECURITY_UserGroup_Security_UserVoucherType" Member="Security_UserVoucherTypes" ThisKey="UsrGrp_Id" OtherKey="UserGrp_Id" Type="Security_UserVoucherType" />
       <Association Name="SETUP_Company_SECURITY_UserGroup" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
       <Association Name="SETUP_Location_SECURITY_UserGroup" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
     </Type>
@@ -115,6 +117,17 @@
       <Column Name="UsrSec_Import" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="UsrSec_Print" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="Security_MenuOption_Security_UserRight" Member="Security_MenuOption" ThisKey="Mnu_Id" OtherKey="Mnu_Id" Type="Security_MenuOption" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Security_UserVoucherTypes" Member="Security_UserVoucherTypes">
+    <Type Name="Security_UserVoucherType">
+      <Column Name="UserVchrTyp_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserGrp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="User_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="VchrType_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="SECURITY_User_Security_UserVoucherType" Member="SECURITY_User" ThisKey="User_Id" OtherKey="User_Id" Type="SECURITY_User" IsForeignKey="true" />
+      <Association Name="SECURITY_UserGroup_Security_UserVoucherType" Member="SECURITY_UserGroup" ThisKey="UserGrp_Id" OtherKey="UsrGrp_Id" Type="SECURITY_UserGroup" IsForeignKey="true" />
+      <Association Name="SETUP_VoucherType_Security_UserVoucherType" Member="SETUP_VoucherType" ThisKey="VchrType_Id" OtherKey="VchrType_Id" Type="SETUP_VoucherType" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.SETUP_Bank" Member="SETUP_Banks">
@@ -703,6 +716,7 @@
       <Column Name="VchrType_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="VchrType_CodeInitialization" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="SETUP_VoucherType_GL_VchrMaster" Member="GL_VchrMasters" ThisKey="VchrType_Id" OtherKey="VchrType_Id" Type="GL_VchrMaster" />
+      <Association Name="SETUP_VoucherType_Security_UserVoucherType" Member="Security_UserVoucherTypes" ThisKey="VchrType_Id" OtherKey="VchrType_Id" Type="Security_UserVoucherType" />
       <Association Name="SETUP_VoucherType_SETUP_VoucherTypeNarration" Member="SETUP_VoucherTypeNarrations" ThisKey="VchrType_Id" OtherKey="VchrType_Id" Type="SETUP_VoucherTypeNarration" />
       <Association Name="SETUP_Company_SETUP_VoucherType" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
       <Association Name="SETUP_Location_SETUP_VoucherType" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
@@ -1012,6 +1026,40 @@
       <Column Name="CanDelete" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="CanPrint" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="CanImport" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GetUserVoucherTypesByGroupId" Method="sp_GetUserVoucherTypesByGroupId">
+    <Parameter Name="GroupId" Parameter="groupId" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="sp_GetUserVoucherTypesByGroupIdResult">
+      <Column Name="VchrType_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="VchrType_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cmp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="VchrType_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="VchrType_Prefix" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="VchrType_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VchrType_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VchrType_CodeInitialization" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UserGrp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="User_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SelectedVoucherType" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_GetUserVoucherTypesByUserId" Method="sp_GetUserVoucherTypesByUserId">
+    <Parameter Name="UserId" Parameter="userId" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="sp_GetUserVoucherTypesByUserIdResult">
+      <Column Name="VchrType_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="VchrType_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cmp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="VchrType_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="VchrType_Prefix" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="VchrType_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VchrType_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VchrType_CodeInitialization" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UserGrp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="User_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SelectedVoucherType" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
   <Function Name="dbo.sp_GetVoucherTypeNarrationList" Method="sp_GetVoucherTypeNarrationList">

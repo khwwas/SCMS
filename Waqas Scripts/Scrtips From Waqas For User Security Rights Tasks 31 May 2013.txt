@@ -120,8 +120,7 @@ GO
 ALTER TABLE [dbo].[Security_UserLocations] CHECK CONSTRAINT [FK_Security_UserLocations_SETUP_Location]
 GO
 
---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Create Procedure [dbo].[sp_GetUserLocationsByGroupId](@GroupId varchar(50))
 As
@@ -152,3 +151,96 @@ Begin
 Order By 
          SETUP_Location.Loc_SortOrder
  End
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Scripts Generated On 15 June 2013
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CREATE TABLE [dbo].[Security_UserVoucherTypes](
+	[UserVchrTyp_Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserGrp_Id] [varchar](50) NULL,
+	[User_Id] [varchar](50) NULL,
+	[VchrType_Id] [varchar](50) NULL,
+ CONSTRAINT [PK_Security_UserVoucherTypes] PRIMARY KEY CLUSTERED 
+(
+	[UserVchrTyp_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[Security_UserVoucherTypes]  WITH CHECK ADD  CONSTRAINT [FK_Security_UserVoucherTypes_SECURITY_User] FOREIGN KEY([User_Id])
+REFERENCES [dbo].[SECURITY_User] ([User_Id])
+GO
+
+ALTER TABLE [dbo].[Security_UserVoucherTypes] CHECK CONSTRAINT [FK_Security_UserVoucherTypes_SECURITY_User]
+GO
+
+ALTER TABLE [dbo].[Security_UserVoucherTypes]  WITH CHECK ADD  CONSTRAINT [FK_Security_UserVoucherTypes_SECURITY_UserGroup] FOREIGN KEY([UserGrp_Id])
+REFERENCES [dbo].[SECURITY_UserGroup] ([UsrGrp_Id])
+GO
+
+ALTER TABLE [dbo].[Security_UserVoucherTypes] CHECK CONSTRAINT [FK_Security_UserVoucherTypes_SECURITY_UserGroup]
+GO
+
+ALTER TABLE [dbo].[Security_UserVoucherTypes]  WITH CHECK ADD  CONSTRAINT [FK_Security_UserVoucherTypes_SETUP_VoucherType] FOREIGN KEY([VchrType_Id])
+REFERENCES [dbo].[SETUP_VoucherType] ([VchrType_Id])
+GO
+
+ALTER TABLE [dbo].[Security_UserVoucherTypes] CHECK CONSTRAINT [FK_Security_UserVoucherTypes_SETUP_VoucherType]
+GO
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Create Procedure [dbo].[sp_GetUserVoucherTypesByGroupId](@GroupId varchar(50))
+As
+Begin
+  Select SETUP_VoucherType.*,
+  Security_UserVoucherTypes.UserGrp_Id,
+  Security_UserVoucherTypes.User_Id,
+         IsNull(Security_UserVoucherTypes.VchrType_Id,0) as SelectedVoucherType
+    From SETUP_VoucherType Left Outer Join Security_UserVoucherTypes On
+              ( Security_UserVoucherTypes.VchrType_Id = SETUP_VoucherType.VchrType_Id ) And
+              ( Security_UserVoucherTypes.UserGrp_Id = @GroupId )
+Order By 
+         SETUP_VoucherType.VchrType_SortOrder
+ End
+ 
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+Create Procedure [dbo].[sp_GetUserVoucherTypesByUserId](@UserId varchar(50))
+As
+Begin
+  Select SETUP_VoucherType.*,
+  Security_UserVoucherTypes.UserGrp_Id,
+  Security_UserVoucherTypes.User_Id,
+         IsNull(Security_UserVoucherTypes.VchrType_Id,0) as SelectedVoucherType
+    From SETUP_VoucherType Left Outer Join Security_UserVoucherTypes On
+              ( Security_UserVoucherTypes.VchrType_Id = SETUP_VoucherType.VchrType_Id ) And
+              ( Security_UserVoucherTypes.User_Id = @UserId )
+Order By 
+         SETUP_VoucherType.VchrType_SortOrder
+ End
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ALTER Procedure [dbo].[sp_GetUserLocationsByGroupId](@GroupId varchar(50))
+As
+Begin
+  Select SETUP_Location.*,
+  Security_UserLocations.UsrGrp_Id,
+  Security_UserLocations.User_Id,
+         IsNull(Security_UserLocations.Loc_Id,0) as SelectedLocation
+    From SETUP_Location Left Outer Join Security_UserLocations On
+              ( Security_UserLocations.Loc_Id = SETUP_Location.Loc_Id ) And
+              ( Security_UserLocations.UsrGrp_Id = @GroupId )
+Order By 
+         SETUP_Location.Loc_SortOrder
+ End
+
+
