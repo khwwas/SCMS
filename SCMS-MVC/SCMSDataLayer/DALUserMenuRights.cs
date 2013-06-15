@@ -51,6 +51,25 @@ namespace SCMSDataLayer
             return li_ReturnValue;
         }
 
+        public int SetUserLocations(Security_UserLocation pRow_NewData)
+        {
+            int li_ReturnValue = 0;
+
+            try
+            {
+                SCMSDataContext dbSCMS = Connection.Create();
+                dbSCMS.Security_UserLocations.InsertOnSubmit(pRow_NewData);
+                dbSCMS.SubmitChanges();
+                li_ReturnValue = Convert.ToInt32(pRow_NewData.UserLoc_Id);
+            }
+            catch
+            {
+                return 0;
+            }
+
+            return li_ReturnValue;
+        }
+
         public List<Security_MenuOption> MenuOptions()
         {
             SCMSDataContext dbSCMS = Connection.Create();
@@ -71,6 +90,30 @@ namespace SCMSDataLayer
                 else
                 {
                     li_ReturnValue = dbSCMS.ExecuteCommand("Delete From Security_UserRights where Grp_Id=" + Grp_Id + " And Mod_Id=" + ModuleId);
+                }
+            }
+            catch
+            {
+                li_ReturnValue = -1;
+            }
+
+            return li_ReturnValue;
+        }
+
+        public int DeleteLocationsByGroupId(string Grp_Id, string UserId)
+        {
+            int li_ReturnValue = 0;
+
+            try
+            {
+                SCMSDataContext dbSCMS = Connection.Create();
+                if (UserId != null)
+                {
+                    li_ReturnValue = dbSCMS.ExecuteCommand("Delete From Security_UserLocations where UsrGrp_Id='" + Grp_Id + "' And User_Id='" + UserId + "'");
+                }
+                else
+                {
+                    li_ReturnValue = dbSCMS.ExecuteCommand("Delete From Security_UserLocations where UsrGrp_Id='" + Grp_Id + "'");
                 }
             }
             catch

@@ -39,27 +39,12 @@ namespace SCMSDataLayer
            }
        }
 
-       public int DeleteById(string Id)
+       public sp_GetEmployeePlacementsResult GetLastPlacement(string EmpId)
        {
            try
            {
                SCMSDataContext dbSCMS = Connection.Create();
-               int result = dbSCMS.ExecuteCommand("Delete From SETUP_EmpPlacement where Plcmt_Id='" + Id + "'");
-               return 1;
-           }
-           catch
-           {
-               return 0;
-           }
-       }
-
-
-       public List<sp_GetEmployeePlacementsResult> GetAllData(string EmpId)
-       {
-           try
-           {
-               SCMSDataContext dbSCMS = Connection.Create();
-               return dbSCMS.sp_GetEmployeePlacements(EmpId).ToList();
+               return dbSCMS.sp_GetEmployeePlacements(EmpId).LastOrDefault();
            }
            catch (Exception ex)
            {

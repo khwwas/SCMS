@@ -119,6 +119,40 @@ namespace SCMS.Controllers
             return response;
         }
 
+        public string GetUserLocations(string GroupId, string UserId)
+        {
+            List<sp_GetUserLocationsByUserIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByUserId(UserId).ToList();
+            string response = "";
+            response += "<table id='LocationGrid' class='display' style='width: 100%; padding: 2px;'>";
+            response += "<thead>";
+            response += "<tr class='odd gradeX' style='line-height: 15px; cursor: pointer; text-align: left;";
+            response += "background-color: #ccc;'>";
+            response += "<th style='vertical-align: middle; width: 90%; padding-left: 3px;'>";
+            response += "Location";
+            response += "</th>";
+            response += "<th style='vertical-align: middle; width: 10%;'>";
+            response += "Is Allowed";
+            response += "</th>";
+            response += "</tr>";
+            response += "</thead>";
+            response += "<tbody>";
+            foreach (SCMSDataLayer.DB.sp_GetUserLocationsByUserIdResult location in UserLocations)
+            {
+                response += " <tr class='odd gradeX' style='line-height: 15px; cursor: pointer;'>";
+                response += "<td style='vertical-align: middle; width: 25%;'>";
+                response += location.Loc_Title;
+                response += "</td>";
+                response += "<td style='vertical-align: middle;'>";
+                response += "<input type='checkbox' class='allowedloc' id='" + location.Loc_Id + "' ";
+                response += location.SelectedLocation == "0" ? "" : "checked='checked'" + "/>";
+                response += "</td>";
+                response += "</tr>";
+            }
+            response += "</tbody>";
+            response += "</table>";
+            return response;
+        }
+
         public string SaveUserRights(int GroupId, int? UserId, bool isGroup, string UserMenus)
         {
             try
@@ -151,6 +185,35 @@ namespace SCMS.Controllers
                         userRightRow.UsrSec_Import = Convert.ToBoolean(cols[5]);
                         userRightRow.Mod_Id = SystemParameters.ModuleId;
                         objUserMenuRights.SaveRecord(userRightRow);
+                    }
+                }
+                return "1";
+            }
+            catch
+            {
+                return "0";
+            }
+        }
+
+        public string SetUserLocations(string GroupId, string UserId, bool isGroup, string UserLocations)
+        {
+            try
+            {
+                string[] UserLocationIds = UserLocations.Split(',');
+                DALUserMenuRights objUserMenuRights = new DALUserMenuRights();
+                int Success = objUserMenuRights.DeleteLocationsByGroupId(GroupId, UserId);
+                if (Success >= 0)
+                {
+                    foreach (string userLocationId in UserLocationIds)
+                    {
+                        Security_UserLocation userLocationRow = new Security_UserLocation();
+                        userLocationRow.UsrGrp_Id = GroupId.ToString();
+                        if (UserId != null)
+                        {
+                            userLocationRow.User_Id = UserId.ToString();
+                        }
+                        userLocationRow.Loc_Id = userLocationId;
+                        objUserMenuRights.SetUserLocations(userLocationRow);
                     }
                 }
                 return "1";
