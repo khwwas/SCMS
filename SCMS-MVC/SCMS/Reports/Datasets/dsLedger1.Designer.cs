@@ -303,6 +303,8 @@ namespace SCMS.Reports.Datasets {
             
             private global::System.Data.DataColumn columnVchDet_Id;
             
+            private global::System.Data.DataColumn columnOpeningBalance;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public LedgerDetailDataTable() {
@@ -434,6 +436,14 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn OpeningBalanceColumn {
+                get {
+                    return this.columnOpeningBalance;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -469,7 +479,7 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public LedgerDetailRow AddLedgerDetailRow(string Loc_Id, string Loc_Title, string ChrtAcc_Id, string ChrtAcc_Code, string ChrtAcc_Title, string VchMas_Id, string VchMas_Code, System.DateTime VchMas_Date, double VchMas_DrAmount, double VchMas_CrAmount, string VchDet_Remarks, string VchDet_Id) {
+            public LedgerDetailRow AddLedgerDetailRow(string Loc_Id, string Loc_Title, string ChrtAcc_Id, string ChrtAcc_Code, string ChrtAcc_Title, string VchMas_Id, string VchMas_Code, System.DateTime VchMas_Date, double VchMas_DrAmount, double VchMas_CrAmount, string VchDet_Remarks, string VchDet_Id, double OpeningBalance) {
                 LedgerDetailRow rowLedgerDetailRow = ((LedgerDetailRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Loc_Id,
@@ -483,7 +493,8 @@ namespace SCMS.Reports.Datasets {
                         VchMas_DrAmount,
                         VchMas_CrAmount,
                         VchDet_Remarks,
-                        VchDet_Id};
+                        VchDet_Id,
+                        OpeningBalance};
                 rowLedgerDetailRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowLedgerDetailRow);
                 return rowLedgerDetailRow;
@@ -518,6 +529,7 @@ namespace SCMS.Reports.Datasets {
                 this.columnVchMas_CrAmount = base.Columns["VchMas_CrAmount"];
                 this.columnVchDet_Remarks = base.Columns["VchDet_Remarks"];
                 this.columnVchDet_Id = base.Columns["VchDet_Id"];
+                this.columnOpeningBalance = base.Columns["OpeningBalance"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -547,6 +559,8 @@ namespace SCMS.Reports.Datasets {
                 base.Columns.Add(this.columnVchDet_Remarks);
                 this.columnVchDet_Id = new global::System.Data.DataColumn("VchDet_Id", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnVchDet_Id);
+                this.columnOpeningBalance = new global::System.Data.DataColumn("OpeningBalance", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOpeningBalance);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -881,6 +895,22 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double OpeningBalance {
+                get {
+                    try {
+                        return ((double)(this[this.tableLedgerDetail.OpeningBalanceColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OpeningBalance\' in table \'LedgerDetail\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableLedgerDetail.OpeningBalanceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsLoc_IdNull() {
                 return this.IsNull(this.tableLedgerDetail.Loc_IdColumn);
             }
@@ -1021,6 +1051,18 @@ namespace SCMS.Reports.Datasets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetVchDet_IdNull() {
                 this[this.tableLedgerDetail.VchDet_IdColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsOpeningBalanceNull() {
+                return this.IsNull(this.tableLedgerDetail.OpeningBalanceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetOpeningBalanceNull() {
+                this[this.tableLedgerDetail.OpeningBalanceColumn] = global::System.Convert.DBNull;
             }
         }
         

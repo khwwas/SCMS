@@ -63,8 +63,19 @@
                 document.getElementById('txt_DateFrom').disabled = true;
                 document.getElementById('txt_DateTo').disabled = true;
             }
-            else if (ps_ReportName.toLowerCase() == "LedgerDtLocWise".toLowerCase() ||
-                     ps_ReportName.toLowerCase() == "LedgerDtAccWise".toLowerCase()) {
+            else if (ps_ReportName.toLowerCase() == "LedgerDtLocWise".toLowerCase()) {
+                document.getElementById('div_Location').style.display = "block";
+                document.getElementById('div_AccCodeFrom').style.display = "block";
+                document.getElementById('div_AccCodeTo').style.display = "block";
+                document.getElementById('div_DateRange').style.display = "block";
+
+                document.getElementById('ddl_AccCodeFrom').disabled = true;
+                document.getElementById('ddl_AccCodeTo').disabled = true;
+
+                document.getElementById('txt_DateFrom').disabled = true;
+                document.getElementById('txt_DateTo').disabled = true;
+            }
+            else if (ps_ReportName.toLowerCase() == "LedgerDtAccWise".toLowerCase()) {
                 document.getElementById('div_Location').style.display = "block";
                 document.getElementById('div_AccCodeFrom').style.display = "block";
                 document.getElementById('div_AccCodeTo').style.display = "block";

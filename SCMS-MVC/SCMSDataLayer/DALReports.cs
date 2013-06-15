@@ -234,7 +234,7 @@ namespace SCMSDataLayer
 
         #region Ledger Detail - Location Wise
         public DataSet LedgerDetail_LocWise(string ps_Location, int pi_AllAccCode, string ps_AccCodeFrom, string ps_AccCodeTo,
-                                    int pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo)
+                                            int pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo)
         {
             SqlConnection con = new SqlConnection();
             //SqlCommand _cmd = new SqlCommand();
@@ -261,79 +261,55 @@ namespace SCMSDataLayer
                 //_cmd.Parameters.Add(new SqlParameter("@DateFrom", SqlDbType.DateTime)).Value = pdt_DateFrom;
                 //_cmd.Parameters.Add(new SqlParameter("@DateTo", SqlDbType.DateTime)).Value = pdt_DateTo;
 
-                if (pi_AllDate != 1)
-                {
-                    _Sql += "    Select SETUP_Location.Loc_Id, ";
-                    _Sql += "           SETUP_Location.Loc_Title, ";
-                    _Sql += "           SETUP_ChartOfAccount.ChrtAcc_Id, ";
-                    _Sql += "           SETUP_ChartOfAccount.ChrtAcc_Code, ";
-                    _Sql += "           SETUP_ChartOfAccount.ChrtAcc_Title, ";
-                    _Sql += "           GL_VchrMaster.VchMas_Id, ";
-                    _Sql += "           '' As VchMas_Code, ";
-                    _Sql += "           NULL As VchMas_Date, ";
-                    _Sql += "           ( IsNULL( Sum( IsNULL( GL_VchrDetail.VchMas_DrAmount, 0 ) - IsNULL( GL_VchrDetail.VchMas_CrAmount, 0 ) ), 0 ) ) As VchMas_DrAmount, ";
-                    _Sql += "           0.0 As VchMas_CrAmount, ";
-                    _Sql += "           'Opening Balance ' As VchDet_Remarks, ";
-                    _Sql += "           GL_VchrDetail.VchDet_Id, ";
-                    _Sql += "           0 As SortOrder ";
-                    _Sql += "      From GL_VchrMaster, ";
-                    _Sql += "           GL_VchrDetail, ";
-                    _Sql += "           SETUP_Location, ";
-                    _Sql += "           SETUP_VoucherType, ";
-                    _Sql += "           SETUP_ChartOfAccount ";
-                    _Sql += "     Where ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) And ";
-                    _Sql += "           ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And ";
-                    _Sql += "           ( GL_VchrMaster.VchrType_Id = SETUP_VoucherType.VchrType_Id ) And ";
-                    _Sql += "           ( GL_VchrDetail.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And ";
-                    _Sql += "           ( SETUP_Location.Loc_Id = '" + ps_Location + "' ) And ";
-                    _Sql += "           ( " + pi_AllAccCode + " = 1 Or SETUP_ChartOfAccount.ChrtAcc_Id Between '" + ps_AccCodeFrom + "' And '" + ps_AccCodeTo + "' ) And ";
-                    _Sql += "           ( Convert( datetime, Convert( Char, GL_VchrMaster.VchMas_Date, 103 ), 103 ) < ";
-                    _Sql += "             Convert( datetime, '" + pdt_DateFrom.ToString("dd/MM/yyyy") + "', 103 ) ) ";
-                    _Sql += "  Group By SETUP_Location.Loc_Id, ";
-                    _Sql += "           SETUP_Location.Loc_Title, ";
-                    _Sql += "           SETUP_ChartOfAccount.ChrtAcc_Id, ";
-                    _Sql += "           SETUP_ChartOfAccount.ChrtAcc_Code, ";
-                    _Sql += "           SETUP_ChartOfAccount.ChrtAcc_Title, ";
-                    _Sql += "           GL_VchrMaster.VchMas_Id, ";
-                    _Sql += "           GL_VchrMaster.VchMas_Code, ";
-                    _Sql += "           GL_VchrMaster.VchMas_Date, ";
-                    _Sql += "           GL_VchrDetail.VchDet_Remarks, ";
-                    _Sql += "           GL_VchrDetail.VchDet_Id ";
-                    _Sql += "UNION ";
-                }
-
                 _Sql += "   Select SETUP_Location.Loc_Id, ";
                 _Sql += "          SETUP_Location.Loc_Title, ";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Id, ";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Code, ";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Title, ";
                 _Sql += "          GL_VchrMaster.VchMas_Id, ";
-                _Sql += "          GL_VchrMaster.VchMas_Code, ";
-                _Sql += "          GL_VchrMaster.VchMas_Date, ";
-                _Sql += "          GL_VchrDetail.VchMas_DrAmount, ";
-                _Sql += "          GL_VchrDetail.VchMas_CrAmount, ";
+                _Sql += "          GL_VchrMaster.VchMas_Code,  ";
+                _Sql += "          GL_VchrMaster.VchMas_Date,  ";
+                _Sql += "          IsNULL( GL_VchrDetail.VchMas_DrAmount, 0 ) As VchMas_DrAmount, ";
+                _Sql += "          IsNULL( GL_VchrDetail.VchMas_CrAmount, 0 ) As VchMas_CrAmount, ";
                 _Sql += "          GL_VchrDetail.VchDet_Remarks, ";
                 _Sql += "          GL_VchrDetail.VchDet_Id, ";
-                _Sql += "          1 As SortOrder ";
-                _Sql += "     From GL_VchrMaster, ";
-                _Sql += "          GL_VchrDetail, ";
-                _Sql += "          SETUP_Location, ";
-                _Sql += "          SETUP_VoucherType, ";
-                _Sql += "          SETUP_ChartOfAccount  ";
+                if (pi_AllDate == 1)
+                {
+                    _Sql += "      0.0 As OpeningBalance  ";
+                }
+                else
+                {
+                    _Sql += "      OpeningBalance = ";
+                    _Sql += "           CASE ROW_NUMBER() OVER (PARTITION BY SETUP_ChartOfAccount.ChrtAcc_Id ORDER BY SETUP_ChartOfAccount.ChrtAcc_Id Asc) ";
+                    _Sql += "                WHEN 1 THEN ";
+                    _Sql += "                       ( Select IsNULL( Sum( ISNULL( b.VchMas_DrAmount, 0 ) - ISNULL( b.VchMas_CrAmount, 0 ) ), 0 )  ";
+                    _Sql += "                           From GL_VchrMaster a, ";
+                    _Sql += "                                GL_VchrDetail b ";
+                    _Sql += "                          Where ( b.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And ";
+                    _Sql += "                                ( b.VchMas_Id = a.VchMas_Id ) and ";
+                    _Sql += "                                ( a.Loc_Id = '" + ps_Location + "' ) And ";
+                    _Sql += "                                ( " + pi_AllAccCode + " = 1 Or SETUP_ChartOfAccount.ChrtAcc_Id Between '' And '' ) And ";
+                    _Sql += "                                ( " + pi_AllDate + " = 1 Or Convert( datetime, Convert( Char, a.VchMas_Date, 103 ), 103 ) < ";
+                    _Sql += "                                                            Convert( datetime, '" + pdt_DateFrom.ToString("dd/MM/yyyy") + "', 103 ) ) ";
+                    _Sql += "                       )";
+                    _Sql += "                ELSE 0.0";
+                    _Sql += "           END";
+                }
+                _Sql += "     From SETUP_Location, ";
+                _Sql += "          SETUP_ChartOfAccount, ";
+                _Sql += "          GL_VchrMaster, ";
+                _Sql += "          GL_VchrDetail ";
                 _Sql += "    Where ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) And ";
                 _Sql += "          ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And ";
-                _Sql += "          ( GL_VchrMaster.VchrType_Id = SETUP_VoucherType.VchrType_Id ) And ";
                 _Sql += "          ( GL_VchrDetail.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And ";
-                //_Sql += "          ( 1 = 1 Or Lower( GL_VchrMaster.VchMas_Status ) = LOWER( 'Approved' ) ) and  ";
                 _Sql += "          ( SETUP_Location.Loc_Id = '" + ps_Location + "' ) And ";
                 _Sql += "          ( " + pi_AllAccCode + " = 1 Or SETUP_ChartOfAccount.ChrtAcc_Id Between '" + ps_AccCodeFrom + "' And '" + ps_AccCodeTo + "' ) And ";
                 _Sql += "          ( " + pi_AllDate + " = 1 Or Convert( datetime, Convert( Char, GL_VchrMaster.VchMas_Date, 103 ), 103 ) Between ";
-                _Sql += "                            Convert( datetime, '" + pdt_DateFrom.ToString("dd/MM/yyyy") + "', 103 ) And ";
-                _Sql += "                            Convert( datetime, '" + pdt_DateTo.ToString("dd/MM/yyyy") + "', 103 ) ) ";
-                _Sql += " Order By SETUP_Location.Loc_Title, ";
+                _Sql += "                                      Convert( datetime, '" + pdt_DateFrom.ToString("dd/MM/yyyy") + "', 103 ) And ";
+                _Sql += "                                      Convert( datetime, '" + pdt_DateTo.ToString("dd/MM/yyyy") + "', 103 ) ) ";
+                _Sql += " Order By SETUP_Location.Loc_Title,  ";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Code, ";
-                _Sql += "          VchMas_Date, ";
-                _Sql += "          SortOrder ";
+                _Sql += "          VchMas_Date ";
 
                 SqlDataAdapter da = new SqlDataAdapter(_Sql, con);
                 da.Fill(_ds, "LedgerDetail");
@@ -377,47 +353,80 @@ namespace SCMSDataLayer
                 //_cmd.Parameters.Add(new SqlParameter("@AllDate", SqlDbType.Int)).Value = pi_AllDate;
                 //_cmd.Parameters.Add(new SqlParameter("@DateFrom", SqlDbType.DateTime)).Value = pdt_DateFrom;
                 //_cmd.Parameters.Add(new SqlParameter("@DateTo", SqlDbType.DateTime)).Value = pdt_DateTo;
-                if (pi_AllDate != 1)
-                {
-                    _Sql += "    Select SETUP_Location.Loc_Id, ";
-                    _Sql += "           SETUP_Location.Loc_Title, ";
-                    _Sql += "           SETUP_ChartOfAccount.ChrtAcc_Id, ";
-                    _Sql += "           SETUP_ChartOfAccount.ChrtAcc_Code, ";
-                    _Sql += "           SETUP_ChartOfAccount.ChrtAcc_Title, ";
-                    _Sql += "           GL_VchrMaster.VchMas_Id, ";
-                    _Sql += "           '' As VchMas_Code, ";
-                    _Sql += "           NULL As VchMas_Date, ";
-                    _Sql += "           ( IsNULL( Sum( IsNULL( GL_VchrDetail.VchMas_DrAmount, 0 ) - IsNULL( GL_VchrDetail.VchMas_CrAmount, 0 ) ), 0 ) ) As VchMas_DrAmount, ";
-                    _Sql += "           0.0 As VchMas_CrAmount, ";
-                    _Sql += "           'Opening Balance ' As VchDet_Remarks, ";
-                    _Sql += "           GL_VchrDetail.VchDet_Id, ";
-                    _Sql += "           0 As SortOrder ";
-                    _Sql += "      From GL_VchrMaster, ";
-                    _Sql += "           GL_VchrDetail, ";
-                    _Sql += "           SETUP_Location, ";
-                    _Sql += "           SETUP_VoucherType, ";
-                    _Sql += "           SETUP_ChartOfAccount ";
-                    _Sql += "     Where ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) And ";
-                    _Sql += "           ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And ";
-                    _Sql += "           ( GL_VchrMaster.VchrType_Id = SETUP_VoucherType.VchrType_Id ) And ";
-                    _Sql += "           ( GL_VchrDetail.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And ";
-                    _Sql += "           ( SETUP_Location.Loc_Id = '" + ps_Location + "' ) And ";
-                    _Sql += "           ( " + pi_AllAccCode + " = 1 Or SETUP_ChartOfAccount.ChrtAcc_Id Between '" + ps_AccCodeFrom + "' And '" + ps_AccCodeTo + "' ) And ";
-                    _Sql += "           ( Convert( datetime, Convert( Char, GL_VchrMaster.VchMas_Date, 103 ), 103 ) < ";
-                    _Sql += "             Convert( datetime, '" + pdt_DateFrom.ToString("dd/MM/yyyy") + "', 103 ) ) ";
-                    _Sql += "  Group By SETUP_Location.Loc_Id, ";
-                    _Sql += "           SETUP_Location.Loc_Title, ";
-                    _Sql += "           SETUP_ChartOfAccount.ChrtAcc_Id, ";
-                    _Sql += "           SETUP_ChartOfAccount.ChrtAcc_Code, ";
-                    _Sql += "           SETUP_ChartOfAccount.ChrtAcc_Title, ";
-                    _Sql += "           GL_VchrMaster.VchMas_Id, ";
-                    _Sql += "           GL_VchrMaster.VchMas_Code, ";
-                    _Sql += "           GL_VchrMaster.VchMas_Date, ";
-                    _Sql += "           GL_VchrDetail.VchDet_Remarks, ";
-                    _Sql += "           GL_VchrDetail.VchDet_Id ";
-                    _Sql += "UNION ";
-                }
+                //if (pi_AllDate != 1)
+                //{
+                //    _Sql += "    Select SETUP_Location.Loc_Id, ";
+                //    _Sql += "           SETUP_Location.Loc_Title, ";
+                //    _Sql += "           SETUP_ChartOfAccount.ChrtAcc_Id, ";
+                //    _Sql += "           SETUP_ChartOfAccount.ChrtAcc_Code, ";
+                //    _Sql += "           SETUP_ChartOfAccount.ChrtAcc_Title, ";
+                //    _Sql += "           GL_VchrMaster.VchMas_Id, ";
+                //    _Sql += "           '' As VchMas_Code, ";
+                //    _Sql += "           NULL As VchMas_Date, ";
+                //    _Sql += "           ( IsNULL( Sum( IsNULL( GL_VchrDetail.VchMas_DrAmount, 0 ) - IsNULL( GL_VchrDetail.VchMas_CrAmount, 0 ) ), 0 ) ) As VchMas_DrAmount, ";
+                //    _Sql += "           0.0 As VchMas_CrAmount, ";
+                //    _Sql += "           'Opening Balance ' As VchDet_Remarks, ";
+                //    _Sql += "           GL_VchrDetail.VchDet_Id, ";
+                //    _Sql += "           0 As SortOrder ";
+                //    _Sql += "      From GL_VchrMaster, ";
+                //    _Sql += "           GL_VchrDetail, ";
+                //    _Sql += "           SETUP_Location, ";
+                //    _Sql += "           SETUP_VoucherType, ";
+                //    _Sql += "           SETUP_ChartOfAccount ";
+                //    _Sql += "     Where ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) And ";
+                //    _Sql += "           ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And ";
+                //    _Sql += "           ( GL_VchrMaster.VchrType_Id = SETUP_VoucherType.VchrType_Id ) And ";
+                //    _Sql += "           ( GL_VchrDetail.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And ";
+                //    _Sql += "           ( SETUP_Location.Loc_Id = '" + ps_Location + "' ) And ";
+                //    _Sql += "           ( " + pi_AllAccCode + " = 1 Or SETUP_ChartOfAccount.ChrtAcc_Id Between '" + ps_AccCodeFrom + "' And '" + ps_AccCodeTo + "' ) And ";
+                //    _Sql += "           ( Convert( datetime, Convert( Char, GL_VchrMaster.VchMas_Date, 103 ), 103 ) < ";
+                //    _Sql += "             Convert( datetime, '" + pdt_DateFrom.ToString("dd/MM/yyyy") + "', 103 ) ) ";
+                //    _Sql += "  Group By SETUP_Location.Loc_Id, ";
+                //    _Sql += "           SETUP_Location.Loc_Title, ";
+                //    _Sql += "           SETUP_ChartOfAccount.ChrtAcc_Id, ";
+                //    _Sql += "           SETUP_ChartOfAccount.ChrtAcc_Code, ";
+                //    _Sql += "           SETUP_ChartOfAccount.ChrtAcc_Title, ";
+                //    _Sql += "           GL_VchrMaster.VchMas_Id, ";
+                //    _Sql += "           GL_VchrMaster.VchMas_Code, ";
+                //    _Sql += "           GL_VchrMaster.VchMas_Date, ";
+                //    _Sql += "           GL_VchrDetail.VchDet_Remarks, ";
+                //    _Sql += "           GL_VchrDetail.VchDet_Id ";
+                //    _Sql += "UNION ";
+                //}
 
+
+                //_Sql += "   Select SETUP_Location.Loc_Id, ";
+                //_Sql += "          SETUP_Location.Loc_Title, ";
+                //_Sql += "          SETUP_ChartOfAccount.ChrtAcc_Id, ";
+                //_Sql += "          SETUP_ChartOfAccount.ChrtAcc_Code, ";
+                //_Sql += "          SETUP_ChartOfAccount.ChrtAcc_Title, ";
+                //_Sql += "          GL_VchrMaster.VchMas_Id, ";
+                //_Sql += "          GL_VchrMaster.VchMas_Code, ";
+                //_Sql += "          GL_VchrMaster.VchMas_Date, ";
+                //_Sql += "          GL_VchrDetail.VchMas_DrAmount, ";
+                //_Sql += "          GL_VchrDetail.VchMas_CrAmount, ";
+                //_Sql += "          GL_VchrDetail.VchDet_Remarks, ";
+                //_Sql += "          GL_VchrDetail.VchDet_Id, ";
+                //_Sql += "          1 As SortOrder ";
+                //_Sql += "     From GL_VchrMaster, ";
+                //_Sql += "          GL_VchrDetail, ";
+                //_Sql += "          SETUP_Location, ";
+                //_Sql += "          SETUP_VoucherType, ";
+                //_Sql += "          SETUP_ChartOfAccount  ";
+                //_Sql += "    Where ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) And ";
+                //_Sql += "          ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And ";
+                //_Sql += "          ( GL_VchrMaster.VchrType_Id = SETUP_VoucherType.VchrType_Id ) And ";
+                //_Sql += "          ( GL_VchrDetail.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And ";
+                //_Sql += "          ( 1 = 1 Or Lower( GL_VchrMaster.VchMas_Status ) = LOWER( 'Approved' ) ) and  ";
+                //_Sql += "          ( SETUP_Location.Loc_Id = '" + ps_Location + "' ) And ";
+                //_Sql += "          ( " + pi_AllAccCode + " = 1 Or SETUP_ChartOfAccount.ChrtAcc_Id Between '" + ps_AccCodeFrom + "' And '" + ps_AccCodeTo + "' ) And ";
+                //_Sql += "          ( " + pi_AllDate + " = 1 Or Convert( datetime, Convert( Char, GL_VchrMaster.VchMas_Date, 103 ), 103 ) Between ";
+                //_Sql += "                            Convert( datetime, Convert( Char, '" + pdt_DateFrom.ToString() + "', 103 ), 103 ) And ";
+                //_Sql += "                            Convert( datetime, Convert( Char, '" + pdt_DateTo.ToString() + "', 103 ), 103 ) ) ";
+                //_Sql += " Order By SETUP_ChartOfAccount.ChrtAcc_Code, ";
+                //_Sql += "          SETUP_Location.Loc_Title, ";
+                //_Sql += "          VchMas_Date, ";
+                //_Sql += "          SortOrder ";
 
                 _Sql += "   Select SETUP_Location.Loc_Id, ";
                 _Sql += "          SETUP_Location.Loc_Title, ";
@@ -425,32 +434,49 @@ namespace SCMSDataLayer
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Code, ";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Title, ";
                 _Sql += "          GL_VchrMaster.VchMas_Id, ";
-                _Sql += "          GL_VchrMaster.VchMas_Code, ";
-                _Sql += "          GL_VchrMaster.VchMas_Date, ";
-                _Sql += "          GL_VchrDetail.VchMas_DrAmount, ";
-                _Sql += "          GL_VchrDetail.VchMas_CrAmount, ";
+                _Sql += "          GL_VchrMaster.VchMas_Code,  ";
+                _Sql += "          GL_VchrMaster.VchMas_Date,  ";
+                _Sql += "          IsNULL( GL_VchrDetail.VchMas_DrAmount, 0 ) As VchMas_DrAmount, ";
+                _Sql += "          IsNULL( GL_VchrDetail.VchMas_CrAmount, 0 ) As VchMas_CrAmount, ";
                 _Sql += "          GL_VchrDetail.VchDet_Remarks, ";
                 _Sql += "          GL_VchrDetail.VchDet_Id, ";
-                _Sql += "          1 As SortOrder ";
-                _Sql += "     From GL_VchrMaster, ";
-                _Sql += "          GL_VchrDetail, ";
-                _Sql += "          SETUP_Location, ";
-                _Sql += "          SETUP_VoucherType, ";
-                _Sql += "          SETUP_ChartOfAccount  ";
+                if (pi_AllDate == 1)
+                {
+                    _Sql += "      0.0 As OpeningBalance  ";
+                }
+                else
+                {
+                    _Sql += "      OpeningBalance = ";
+                    _Sql += "           CASE ROW_NUMBER() OVER (PARTITION BY SETUP_ChartOfAccount.ChrtAcc_Id ORDER BY SETUP_ChartOfAccount.ChrtAcc_Id Asc) ";
+                    _Sql += "                WHEN 1 THEN ";
+                    _Sql += "                       ( Select IsNULL( Sum( ISNULL( b.VchMas_DrAmount, 0 ) - ISNULL( b.VchMas_CrAmount, 0 ) ), 0 )  ";
+                    _Sql += "                           From GL_VchrMaster a, ";
+                    _Sql += "                                GL_VchrDetail b ";
+                    _Sql += "                          Where ( b.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And ";
+                    _Sql += "                                ( b.VchMas_Id = a.VchMas_Id ) and ";
+                    _Sql += "                                ( a.Loc_Id = '" + ps_Location + "' ) And ";
+                    _Sql += "                                ( " + pi_AllAccCode + " = 1 Or SETUP_ChartOfAccount.ChrtAcc_Id Between '' And '' ) And ";
+                    _Sql += "                                ( " + pi_AllDate + " = 1 Or Convert( datetime, Convert( Char, a.VchMas_Date, 103 ), 103 ) < ";
+                    _Sql += "                                                            Convert( datetime, '" + pdt_DateFrom.ToString("dd/MM/yyyy") + "', 103 ) ) ";
+                    _Sql += "                       )";
+                    _Sql += "                ELSE 0.0";
+                    _Sql += "           END";
+                }
+                _Sql += "     From SETUP_Location, ";
+                _Sql += "          SETUP_ChartOfAccount, ";
+                _Sql += "          GL_VchrMaster, ";
+                _Sql += "          GL_VchrDetail ";
                 _Sql += "    Where ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) And ";
                 _Sql += "          ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And ";
-                _Sql += "          ( GL_VchrMaster.VchrType_Id = SETUP_VoucherType.VchrType_Id ) And ";
                 _Sql += "          ( GL_VchrDetail.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And ";
-                _Sql += "          ( 1 = 1 Or Lower( GL_VchrMaster.VchMas_Status ) = LOWER( 'Approved' ) ) and  ";
                 _Sql += "          ( SETUP_Location.Loc_Id = '" + ps_Location + "' ) And ";
                 _Sql += "          ( " + pi_AllAccCode + " = 1 Or SETUP_ChartOfAccount.ChrtAcc_Id Between '" + ps_AccCodeFrom + "' And '" + ps_AccCodeTo + "' ) And ";
                 _Sql += "          ( " + pi_AllDate + " = 1 Or Convert( datetime, Convert( Char, GL_VchrMaster.VchMas_Date, 103 ), 103 ) Between ";
-                _Sql += "                            Convert( datetime, Convert( Char, '" + pdt_DateFrom.ToString() + "', 103 ), 103 ) And ";
-                _Sql += "                            Convert( datetime, Convert( Char, '" + pdt_DateTo.ToString() + "', 103 ), 103 ) ) ";
-                _Sql += " Order By SETUP_ChartOfAccount.ChrtAcc_Code, ";
-                _Sql += "          SETUP_Location.Loc_Title, ";
+                _Sql += "                                      Convert( datetime, '" + pdt_DateFrom.ToString("dd/MM/yyyy") + "', 103 ) And ";
+                _Sql += "                                      Convert( datetime, '" + pdt_DateTo.ToString("dd/MM/yyyy") + "', 103 ) ) ";
+                _Sql += " Order By SETUP_Location.Loc_Title,  ";
+                _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Code, ";
                 _Sql += "          VchMas_Date ";
-                _Sql += "          SortOrder ";
 
                 //_cmd.ExecuteNonQuery();
                 //SqlDataAdapter da = new SqlDataAdapter(_cmd);
@@ -539,7 +565,8 @@ namespace SCMSDataLayer
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Level, ";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Type, ";
                 _Sql += "          IsNULL( Sum( IsNULL( VoucherDetail.VchMas_DrAmount, 0 ) ), 0 ) As VchMas_DrAmount, ";
-                _Sql += "          IsNULL( Sum( IsNULL( VoucherDetail.VchMas_CrAmount, 0 ) ), 0 ) As VchMas_CrAmount";
+                _Sql += "          IsNULL( Sum( IsNULL( VoucherDetail.VchMas_CrAmount, 0 ) ), 0 ) As VchMas_CrAmount, ";
+                _Sql += "          SYSTEM_Nature.Natr_SystemTitle ";
                 _Sql += "     From SETUP_ChartOfAccount LEFT OUTER JOIN ";
                 _Sql += "          ( Select SETUP_ChartOfAccount.ChrtAcc_Code, ";
                 _Sql += "                   GL_VchrDetail.VchMas_DrAmount, ";
@@ -556,8 +583,10 @@ namespace SCMSDataLayer
                 _Sql += "                                               Convert( datetime, '" + pdt_DateFrom.ToString("dd/MM/yyyy") + "', 103 ) And ";
                 _Sql += "                                               Convert( datetime, '" + pdt_DateTo.ToString("dd/MM/yyyy") + "', 103 ) ) ";
                 _Sql += "          ) VoucherDetail On ";
-                _Sql += "               ( SETUP_ChartOfAccount.ChrtAcc_Code = Substring( VoucherDetail.ChrtAcc_Code, 1, Len( SETUP_ChartOfAccount.ChrtAcc_Code ) ) ) ";
-                _Sql += "    Where ( " + pi_AllAccCode + " = 1 Or SETUP_ChartOfAccount.ChrtAcc_Id Between '" + ps_AccCodeFrom + "' And '" + ps_AccCodeTo + "' ) ";
+                _Sql += "               ( SETUP_ChartOfAccount.ChrtAcc_Code = Substring( VoucherDetail.ChrtAcc_Code, 1, Len( SETUP_ChartOfAccount.ChrtAcc_Code ) ) ), ";
+                _Sql += "          SYSTEM_Nature ";
+                _Sql += "    Where ( " + pi_AllAccCode + " = 1 Or SETUP_ChartOfAccount.ChrtAcc_Id Between '" + ps_AccCodeFrom + "' And '" + ps_AccCodeTo + "' ) And ";
+                _Sql += "          ( SETUP_ChartOfAccount.Natr_Id = SYSTEM_Nature.Natr_Id ) ";
 
                 ////
                 //_Sql += "          GL_VchrDetail.VchMas_DrAmount, ";
@@ -578,7 +607,8 @@ namespace SCMSDataLayer
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Code, ";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Title, ";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Level, ";
-                _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Type ";
+                _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Type, ";
+                _Sql += "          SYSTEM_Nature.Natr_SystemTitle ";
                 _Sql += " Order By SETUP_ChartOfAccount.ChrtAcc_Code, ";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Level ";
 
@@ -639,7 +669,10 @@ namespace SCMSDataLayer
 
                 _Sql += "   Select SYSTEM_Nature.Natr_Title, ";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Code, ";
-                _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Title, ";
+                _Sql += "          ChrtAcc_Title = CASE ChrtAcc_Level ";
+                _Sql += "                               WHEN 1 THEN '[' + SETUP_ChartOfAccount.ChrtAcc_Code + '] ' + SETUP_ChartOfAccount.ChrtAcc_Title ";
+                _Sql += "                               ELSE Space( SETUP_ChartOfAccount.ChrtAcc_Level * 3 ) + '[' + SETUP_ChartOfAccount.ChrtAcc_Code + '] ' + SETUP_ChartOfAccount.ChrtAcc_Title ";
+                _Sql += "                          END,";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Level, ";
                 _Sql += "          IsNULL( Sum( IsNULL( CurrentYear.VchMas_CrAmount, 0 ) ), 0 ) As CurrentYear_Amount, ";
                 _Sql += "          IsNULL( Sum( IsNULL( PreviousYear.VchMas_CrAmount, 0 ) ), 0 ) As PreviousYear_Amount, ";
@@ -676,16 +709,19 @@ namespace SCMSDataLayer
                 _Sql += "               ( SETUP_ChartOfAccount.ChrtAcc_Code = Substring( PreviousYear.ChrtAcc_Code, 1, Len( SETUP_ChartOfAccount.ChrtAcc_Code ) ) ), ";
                 _Sql += "          SYSTEM_Nature ";
                 _Sql += "    Where ( SYSTEM_Nature.Natr_Id = SETUP_ChartOfAccount.Natr_Id ) and ";
-                _Sql += "          ( Lower( SYSTEM_Nature.Natr_SystemTitle ) = LOWER( 'Revenue' ) ) and ";
-                _Sql += "          ( SETUP_ChartOfAccount.ChrtAcc_Level = " + pi_Level.ToString() + " ) ";
+                _Sql += "          ( Lower( SYSTEM_Nature.Natr_SystemTitle ) IN ( LOWER( 'Revenue' ) ) ) and ";
+                _Sql += "          ( SETUP_ChartOfAccount.ChrtAcc_Level <= " + pi_Level.ToString() + " ) ";
                 _Sql += " Group By SYSTEM_Nature.Natr_Title, ";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Code,  ";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Title, ";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Level ";
-                _Sql += " UNION ";
+                _Sql += " UNION ALL";
                 _Sql += "   Select SYSTEM_Nature.Natr_Title, ";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Code, ";
-                _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Title,";
+                _Sql += "          ChrtAcc_Title = CASE ChrtAcc_Level ";
+                _Sql += "                               WHEN 1 THEN '[' + SETUP_ChartOfAccount.ChrtAcc_Code + '] ' + SETUP_ChartOfAccount.ChrtAcc_Title ";
+                _Sql += "                               ELSE Space( SETUP_ChartOfAccount.ChrtAcc_Level * 3 ) + '[' + SETUP_ChartOfAccount.ChrtAcc_Code + '] ' + SETUP_ChartOfAccount.ChrtAcc_Title ";
+                _Sql += "                          END,";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Level,";
                 _Sql += "          -( IsNULL( Sum( IsNULL( CurrentYear.VchMas_DrAmount, 0 ) ), 0 ) ) As CurrentYear_Amount,";
                 _Sql += "          -( IsNULL( Sum( IsNULL( PreviousYear.VchMas_DrAmount, 0 ) ), 0 ) ) As PreviousYear_Amount,";
@@ -723,15 +759,14 @@ namespace SCMSDataLayer
                 _Sql += "          SYSTEM_Nature";
                 _Sql += "    Where ( SYSTEM_Nature.Natr_Id = SETUP_ChartOfAccount.Natr_Id ) and";
                 _Sql += "          ( Lower( SYSTEM_Nature.Natr_SystemTitle ) = LOWER( 'Expense' ) ) and";
-                _Sql += "          ( SETUP_ChartOfAccount.ChrtAcc_Level = " + pi_Level.ToString() + " )";
+                _Sql += "          ( SETUP_ChartOfAccount.ChrtAcc_Level <= " + pi_Level.ToString() + " )";
                 _Sql += " Group By SYSTEM_Nature.Natr_Title,";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Code, ";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Title,";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Level ";
-                _Sql += " Order By SortOrder,";
-                _Sql += "          SYSTEM_Nature.Natr_Title, ";
-                _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Code,";
-                _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Level";
+                _Sql += " Order By SortOrder, SYSTEM_Nature.Natr_Title, ";
+                _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Code, ";
+                _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Level ";
 
                 SqlDataAdapter da = new SqlDataAdapter(_Sql, con);
                 da.Fill(_ds, "IncomeStatement");

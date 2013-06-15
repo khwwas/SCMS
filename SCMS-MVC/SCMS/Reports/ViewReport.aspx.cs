@@ -460,12 +460,12 @@ namespace SCMS.Reports
                     Datasets.dsIncomeStatement _dsIncomeStatement = new Datasets.dsIncomeStatement();
                     string ls_Location = "";
                     int li_Level = 0, li_Year = 0;
-                    DateTime ldt_DateFrom, ldt_Dateto;
+                    //DateTime ldt_DateFrom, ldt_Dateto;
 
                     ls_Location = SCMS.Reports.ReportParameters.Location;
                     li_Level = SCMS.Reports.ReportParameters.Level;
                     li_Year = SCMS.Reports.ReportParameters.Year;
-                   
+
                     if (_dsIncomeStatement.Tables.Contains("Logo"))
                     {
                         _dsIncomeStatement.Tables.Remove("Logo");
@@ -488,6 +488,8 @@ namespace SCMS.Reports
 
                     _ReportDocument.SetDataSource(_dsIncomeStatement);
                     _ReportDocument.SummaryInfo.ReportTitle = "Income Statement";
+                    _ReportDocument.SetParameterValue("pm_CurrentYear", li_Year);
+                    _ReportDocument.SetParameterValue("pm_PreviousYear", li_Year - 1);
                 }
                 #endregion
 
