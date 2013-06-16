@@ -283,6 +283,8 @@ namespace SCMS.Reports.Datasets {
             
             private global::System.Data.DataColumn columnChrtAcc_Code;
             
+            private global::System.Data.DataColumn columnChrtAcc_CodeDisplay;
+            
             private global::System.Data.DataColumn columnChrtAcc_Title;
             
             private global::System.Data.DataColumn columnChrtAcc_Level;
@@ -294,6 +296,10 @@ namespace SCMS.Reports.Datasets {
             private global::System.Data.DataColumn columnVchMas_CrAmount;
             
             private global::System.Data.DataColumn columnNatr_SystemTitle;
+            
+            private global::System.Data.DataColumn columnOpeningBalance;
+            
+            private global::System.Data.DataColumn columnActivity;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -341,6 +347,14 @@ namespace SCMS.Reports.Datasets {
             public global::System.Data.DataColumn ChrtAcc_CodeColumn {
                 get {
                     return this.columnChrtAcc_Code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ChrtAcc_CodeDisplayColumn {
+                get {
+                    return this.columnChrtAcc_CodeDisplay;
                 }
             }
             
@@ -394,6 +408,22 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn OpeningBalanceColumn {
+                get {
+                    return this.columnOpeningBalance;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ActivityColumn {
+                get {
+                    return this.columnActivity;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -429,17 +459,20 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public TrialBalanceRow AddTrialBalanceRow(string ChrtAcc_Id, string ChrtAcc_Code, string ChrtAcc_Title, int ChrtAcc_Level, int ChrtAcc_Type, double VchMas_DrAmount, double VchMas_CrAmount, string Natr_SystemTitle) {
+            public TrialBalanceRow AddTrialBalanceRow(string ChrtAcc_Id, string ChrtAcc_Code, string ChrtAcc_CodeDisplay, string ChrtAcc_Title, int ChrtAcc_Level, int ChrtAcc_Type, double VchMas_DrAmount, double VchMas_CrAmount, string Natr_SystemTitle, double OpeningBalance, double Activity) {
                 TrialBalanceRow rowTrialBalanceRow = ((TrialBalanceRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ChrtAcc_Id,
                         ChrtAcc_Code,
+                        ChrtAcc_CodeDisplay,
                         ChrtAcc_Title,
                         ChrtAcc_Level,
                         ChrtAcc_Type,
                         VchMas_DrAmount,
                         VchMas_CrAmount,
-                        Natr_SystemTitle};
+                        Natr_SystemTitle,
+                        OpeningBalance,
+                        Activity};
                 rowTrialBalanceRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowTrialBalanceRow);
                 return rowTrialBalanceRow;
@@ -464,12 +497,15 @@ namespace SCMS.Reports.Datasets {
             internal void InitVars() {
                 this.columnChrtAcc_Id = base.Columns["ChrtAcc_Id"];
                 this.columnChrtAcc_Code = base.Columns["ChrtAcc_Code"];
+                this.columnChrtAcc_CodeDisplay = base.Columns["ChrtAcc_CodeDisplay"];
                 this.columnChrtAcc_Title = base.Columns["ChrtAcc_Title"];
                 this.columnChrtAcc_Level = base.Columns["ChrtAcc_Level"];
                 this.columnChrtAcc_Type = base.Columns["ChrtAcc_Type"];
                 this.columnVchMas_DrAmount = base.Columns["VchMas_DrAmount"];
                 this.columnVchMas_CrAmount = base.Columns["VchMas_CrAmount"];
                 this.columnNatr_SystemTitle = base.Columns["Natr_SystemTitle"];
+                this.columnOpeningBalance = base.Columns["OpeningBalance"];
+                this.columnActivity = base.Columns["Activity"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -479,6 +515,8 @@ namespace SCMS.Reports.Datasets {
                 base.Columns.Add(this.columnChrtAcc_Id);
                 this.columnChrtAcc_Code = new global::System.Data.DataColumn("ChrtAcc_Code", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnChrtAcc_Code);
+                this.columnChrtAcc_CodeDisplay = new global::System.Data.DataColumn("ChrtAcc_CodeDisplay", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnChrtAcc_CodeDisplay);
                 this.columnChrtAcc_Title = new global::System.Data.DataColumn("ChrtAcc_Title", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnChrtAcc_Title);
                 this.columnChrtAcc_Level = new global::System.Data.DataColumn("ChrtAcc_Level", typeof(int), null, global::System.Data.MappingType.Element);
@@ -491,6 +529,10 @@ namespace SCMS.Reports.Datasets {
                 base.Columns.Add(this.columnVchMas_CrAmount);
                 this.columnNatr_SystemTitle = new global::System.Data.DataColumn("Natr_SystemTitle", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNatr_SystemTitle);
+                this.columnOpeningBalance = new global::System.Data.DataColumn("OpeningBalance", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOpeningBalance);
+                this.columnActivity = new global::System.Data.DataColumn("Activity", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnActivity);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -665,6 +707,22 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ChrtAcc_CodeDisplay {
+                get {
+                    try {
+                        return ((string)(this[this.tableTrialBalance.ChrtAcc_CodeDisplayColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ChrtAcc_CodeDisplay\' in table \'TrialBalance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTrialBalance.ChrtAcc_CodeDisplayColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string ChrtAcc_Title {
                 get {
                     try {
@@ -761,6 +819,38 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double OpeningBalance {
+                get {
+                    try {
+                        return ((double)(this[this.tableTrialBalance.OpeningBalanceColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OpeningBalance\' in table \'TrialBalance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTrialBalance.OpeningBalanceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double Activity {
+                get {
+                    try {
+                        return ((double)(this[this.tableTrialBalance.ActivityColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Activity\' in table \'TrialBalance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTrialBalance.ActivityColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsChrtAcc_IdNull() {
                 return this.IsNull(this.tableTrialBalance.ChrtAcc_IdColumn);
             }
@@ -781,6 +871,18 @@ namespace SCMS.Reports.Datasets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetChrtAcc_CodeNull() {
                 this[this.tableTrialBalance.ChrtAcc_CodeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsChrtAcc_CodeDisplayNull() {
+                return this.IsNull(this.tableTrialBalance.ChrtAcc_CodeDisplayColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetChrtAcc_CodeDisplayNull() {
+                this[this.tableTrialBalance.ChrtAcc_CodeDisplayColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -853,6 +955,30 @@ namespace SCMS.Reports.Datasets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetNatr_SystemTitleNull() {
                 this[this.tableTrialBalance.Natr_SystemTitleColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsOpeningBalanceNull() {
+                return this.IsNull(this.tableTrialBalance.OpeningBalanceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetOpeningBalanceNull() {
+                this[this.tableTrialBalance.OpeningBalanceColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsActivityNull() {
+                return this.IsNull(this.tableTrialBalance.ActivityColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetActivityNull() {
+                this[this.tableTrialBalance.ActivityColumn] = global::System.Convert.DBNull;
             }
         }
         

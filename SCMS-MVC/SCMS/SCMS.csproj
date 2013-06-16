@@ -220,6 +220,12 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="Reports\Reps\rptTrialBalance-ActivityAll.cs">
+      <DependentUpon>rptTrialBalance-ActivityAll.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reports\Reps\rptChartOfAccount.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1849,6 +1855,10 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reports\Reps\rptTrialBalance-ActivityAll.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptTrialBalance-ActivityAll.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Reps\rptChartOfAccount.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptChartOfAccount.cs</LastGenOutput>

@@ -131,11 +131,12 @@ namespace SCMS.Controllers
 
         #region Trial Balance
         public string SetParam_TrialBalance(String ps_ReportName, String ps_Location, string pi_AllAccCode, string ps_AccCodeFrom, string ps_AccCodeTo,
-                                              string pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo)
+                                              string pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo, string ps_TrialActivity)
         {
             ResetParameters();
             Reports.ReportParameters.ReportName = ps_ReportName;
             Reports.ReportParameters.Location = ps_Location;
+            Reports.ReportParameters.TrialActivity = ps_TrialActivity;
 
             if (pi_AllAccCode == "1")
             {

@@ -65,6 +65,15 @@ namespace SCMS.Controllers
                 {
                     lrow_ChartOfAccount.ChrtAcc_Id = ps_Id;
                     lrow_ChartOfAccount.ChrtAcc_Code = ps_Code.Replace("-", "").Replace("_", "");
+
+                    string[] AccCodeArr = ps_Code.Replace("_", "").Split('-');
+                    string AccountCodeForDisplay = "";
+                    foreach (string code in AccCodeArr)
+                    {
+                        AccountCodeForDisplay += (!string.IsNullOrEmpty(AccountCodeForDisplay) ? (!string.IsNullOrEmpty(code) ? "-" + code : code) : code);
+                    }
+                    lrow_ChartOfAccount.ChrtAcc_CodeDisplay = AccountCodeForDisplay.Trim();
+
                     lrow_ChartOfAccount.ChrtAcc_Title = ps_Title;
                     lrow_ChartOfAccount.ChrtAcc_Level = pi_Level;
                     lrow_ChartOfAccount.ChrtAcc_BudgetLevel = pi_BudgetLevel;
