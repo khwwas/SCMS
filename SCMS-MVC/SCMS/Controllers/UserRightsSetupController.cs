@@ -19,8 +19,10 @@ namespace SCMS.Controllers
             ViewData["ddl_UserGroups"] = new SelectList(userGroups, "UsrGrp_Id", "UsrGrp_Title");
             List<sp_GetUserMenuRightsResult> MenuRights = new DALUserMenuRights().GetUserMenuRights("").Where(c => c.Mod_Id == SystemParameters.ModuleId && c.Mnu_Level != "0").ToList();
             List<sp_GetUserLocationsByGroupIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByGroupId("").ToList();
+            List<sp_GetUserVoucherTypesByGroupIdResult> UserVouchers = new DALUserMenuRights().GetUserVoucherTypesByGroupId("").ToList();
             ViewData["UserMenuRights"] = MenuRights;
             ViewData["UserLocations"] = UserLocations;
+            ViewData["UserVoucherTypes"] = UserVouchers;
             return View("UserRights");
         }
 
@@ -153,6 +155,40 @@ namespace SCMS.Controllers
             return response;
         }
 
+        public string GetUserVoucherTypes(string GroupId, string UserId)
+        {
+            List<sp_GetUserVoucherTypesByUserIdResult> UserVoucherTypes = new DALUserMenuRights().GetUserVoucherTypesByUserId(UserId).ToList();
+            string response = "";
+            response += "<table id='VoucherTypeGrid' class='display' style='width: 100%; padding: 2px;'>";
+            response += "<thead>";
+            response += "<tr class='odd gradeX' style='line-height: 15px; cursor: pointer; text-align: left;";
+            response += "background-color: #ccc;'>";
+            response += "<th style='vertical-align: middle; width: 90%; padding-left: 3px;'>";
+            response += "Voucher Type";
+            response += "</th>";
+            response += "<th style='vertical-align: middle; width: 10%;'>";
+            response += "Is Allowed";
+            response += "</th>";
+            response += "</tr>";
+            response += "</thead>";
+            response += "<tbody>";
+            foreach (SCMSDataLayer.DB.sp_GetUserVoucherTypesByUserIdResult voucherType in UserVoucherTypes)
+            {
+                response += " <tr class='odd gradeX' style='line-height: 15px; cursor: pointer;'>";
+                response += "<td style='vertical-align: middle; width: 25%;'>";
+                response += voucherType.VchrType_Title;
+                response += "</td>";
+                response += "<td style='vertical-align: middle;'>";
+                response += "<input type='checkbox' class='allowedVtype' id='" + voucherType.VchrType_Id + "' ";
+                response += voucherType.SelectedVoucherType == "0" ? "" : "checked='checked'" + "/>";
+                response += "</td>";
+                response += "</tr>";
+            }
+            response += "</tbody>";
+            response += "</table>";
+            return response;
+        }
+
         public string SaveUserRights(int GroupId, int? UserId, bool isGroup, string UserMenus)
         {
             try
@@ -214,6 +250,35 @@ namespace SCMS.Controllers
                         }
                         userLocationRow.Loc_Id = userLocationId;
                         objUserMenuRights.SetUserLocations(userLocationRow);
+                    }
+                }
+                return "1";
+            }
+            catch
+            {
+                return "0";
+            }
+        }
+
+        public string SetUserVoucherTypes(string GroupId, string UserId, bool isGroup, string UserVoucherTypes)
+        {
+            try
+            {
+                string[] UserVoucherTypeIds = UserVoucherTypes.Split(',');
+                DALUserMenuRights objUserMenuRights = new DALUserMenuRights();
+                int Success = objUserMenuRights.DeleteVoucherTypesByGroupId(GroupId, UserId);
+                if (Success >= 0)
+                {
+                    foreach (string userVoucherTypeId in UserVoucherTypeIds)
+                    {
+                        Security_UserVoucherType userVoucherTypeRow = new Security_UserVoucherType();
+                        userVoucherTypeRow.UserGrp_Id = GroupId.ToString();
+                        if (UserId != null)
+                        {
+                            userVoucherTypeRow.User_Id = UserId.ToString();
+                        }
+                        userVoucherTypeRow.VchrType_Id = userVoucherTypeId;
+                        objUserMenuRights.SetUserVoucherTypes(userVoucherTypeRow);
                     }
                 }
                 return "1";
