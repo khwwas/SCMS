@@ -81,5 +81,11 @@ namespace SCMS.Reports
             set;
         }
 
+        public static string TrialActivity  
+        {
+            get;
+            set;
+        }
+
     }
 }

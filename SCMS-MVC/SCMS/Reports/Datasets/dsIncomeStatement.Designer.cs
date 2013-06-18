@@ -283,6 +283,8 @@ namespace SCMS.Reports.Datasets {
             
             private global::System.Data.DataColumn columnChrtAcc_Code;
             
+            private global::System.Data.DataColumn columnChrtAcc_CodeDisplay;
+            
             private global::System.Data.DataColumn columnChrtAcc_Title;
             
             private global::System.Data.DataColumn columnChrtAcc_Level;
@@ -339,6 +341,14 @@ namespace SCMS.Reports.Datasets {
             public global::System.Data.DataColumn ChrtAcc_CodeColumn {
                 get {
                     return this.columnChrtAcc_Code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ChrtAcc_CodeDisplayColumn {
+                get {
+                    return this.columnChrtAcc_CodeDisplay;
                 }
             }
             
@@ -419,11 +429,12 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public IncomeStatementRow AddIncomeStatementRow(string Natr_Title, string ChrtAcc_Code, string ChrtAcc_Title, int ChrtAcc_Level, decimal CurrentYear_Amount, decimal PreviousYear_Amount, int SortOrder) {
+            public IncomeStatementRow AddIncomeStatementRow(string Natr_Title, string ChrtAcc_Code, string ChrtAcc_CodeDisplay, string ChrtAcc_Title, int ChrtAcc_Level, decimal CurrentYear_Amount, decimal PreviousYear_Amount, int SortOrder) {
                 IncomeStatementRow rowIncomeStatementRow = ((IncomeStatementRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Natr_Title,
                         ChrtAcc_Code,
+                        ChrtAcc_CodeDisplay,
                         ChrtAcc_Title,
                         ChrtAcc_Level,
                         CurrentYear_Amount,
@@ -453,6 +464,7 @@ namespace SCMS.Reports.Datasets {
             internal void InitVars() {
                 this.columnNatr_Title = base.Columns["Natr_Title"];
                 this.columnChrtAcc_Code = base.Columns["ChrtAcc_Code"];
+                this.columnChrtAcc_CodeDisplay = base.Columns["ChrtAcc_CodeDisplay"];
                 this.columnChrtAcc_Title = base.Columns["ChrtAcc_Title"];
                 this.columnChrtAcc_Level = base.Columns["ChrtAcc_Level"];
                 this.columnCurrentYear_Amount = base.Columns["CurrentYear_Amount"];
@@ -467,6 +479,8 @@ namespace SCMS.Reports.Datasets {
                 base.Columns.Add(this.columnNatr_Title);
                 this.columnChrtAcc_Code = new global::System.Data.DataColumn("ChrtAcc_Code", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnChrtAcc_Code);
+                this.columnChrtAcc_CodeDisplay = new global::System.Data.DataColumn("ChrtAcc_CodeDisplay", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnChrtAcc_CodeDisplay);
                 this.columnChrtAcc_Title = new global::System.Data.DataColumn("ChrtAcc_Title", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnChrtAcc_Title);
                 this.columnChrtAcc_Level = new global::System.Data.DataColumn("ChrtAcc_Level", typeof(int), null, global::System.Data.MappingType.Element);
@@ -651,6 +665,22 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ChrtAcc_CodeDisplay {
+                get {
+                    try {
+                        return ((string)(this[this.tableIncomeStatement.ChrtAcc_CodeDisplayColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ChrtAcc_CodeDisplay\' in table \'IncomeStatement\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableIncomeStatement.ChrtAcc_CodeDisplayColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string ChrtAcc_Title {
                 get {
                     try {
@@ -751,6 +781,18 @@ namespace SCMS.Reports.Datasets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetChrtAcc_CodeNull() {
                 this[this.tableIncomeStatement.ChrtAcc_CodeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsChrtAcc_CodeDisplayNull() {
+                return this.IsNull(this.tableIncomeStatement.ChrtAcc_CodeDisplayColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetChrtAcc_CodeDisplayNull() {
+                this[this.tableIncomeStatement.ChrtAcc_CodeDisplayColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

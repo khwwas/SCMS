@@ -16,7 +16,8 @@ namespace SCMS.Controllers
 
         public ActionResult Index()
         {
-          return View("");
+            //return View("Employee");
+            return View();
         }
 
         public ActionResult EmployeeEntry(string id)
@@ -37,8 +38,6 @@ namespace SCMS.Controllers
             ViewData["ddl_Religion"] = new SelectList(new DALReligion().GetAllData(), "Rlgn_Id", "Rlgn_Title", SETUP_Emp != null ? SETUP_Emp.Rlgn_Id : "ddl_Religion");
             ViewData["ddl_MaritalStatus"] = new SelectList(new DALMaritalStatus().GetAllData(), "MS_Id", "MS_Title", SETUP_Emp != null ? SETUP_Emp.MS_Id : "ddl_MaritalStatus");
             ViewData["ddl_Nationality"] = new SelectList(new DALNationality().GetAllData(), "Natn_Id", "Natn_Title", SETUP_Emp != null ? SETUP_Emp.Natn_Id : "ddl_Nationality");
-
-
             ViewData["ddl_Department"] = new SelectList(new DALDepartment().GetAllRecords(), "Dpt_Id", "Dpt_Title", SETUP_EmpPlc!=null?SETUP_EmpPlc.Dpt_Id:"ddl_Department");
             ViewData["ddl_EmployeeType"] = new SelectList(new DALEmployeeType().GetAllData(), "EmpTyp_Id", "EmpTyp_Title", SETUP_EmpPlc != null ? SETUP_EmpPlc.EmpTyp_Id:"ddl_EmployeeType");
             ViewData["ddl_JobTitle"] = new SelectList(new DALJobTitle().GetAllRecords(), "JT_Id", "JT_Title", SETUP_EmpPlc != null ? SETUP_EmpPlc.JT_Id:"ddl_JobTitle");

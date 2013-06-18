@@ -565,6 +565,8 @@ namespace SCMS.Reports.Datasets {
             
             private global::System.Data.DataColumn columnChrtAcc_Code;
             
+            private global::System.Data.DataColumn columnChrtAcc_CodeDisplay;
+            
             private global::System.Data.DataColumn columnNatr_Id;
             
             private global::System.Data.DataColumn columnAccNatr_Id;
@@ -627,6 +629,14 @@ namespace SCMS.Reports.Datasets {
             public global::System.Data.DataColumn ChrtAcc_CodeColumn {
                 get {
                     return this.columnChrtAcc_Code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ChrtAcc_CodeDisplayColumn {
+                get {
+                    return this.columnChrtAcc_CodeDisplay;
                 }
             }
             
@@ -731,11 +741,12 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public ChartOfAccountRow AddChartOfAccountRow(string ChrtAcc_Id, string ChrtAcc_Code, string Natr_Id, string AccNatr_Id, string ChrtAcc_Title, int ChrtAcc_Type, int ChrtAcc_Level, int ChrtAcc_BudgetLevel, string Natr_Title, string AccNatr_Title) {
+            public ChartOfAccountRow AddChartOfAccountRow(string ChrtAcc_Id, string ChrtAcc_Code, string ChrtAcc_CodeDisplay, string Natr_Id, string AccNatr_Id, string ChrtAcc_Title, int ChrtAcc_Type, int ChrtAcc_Level, int ChrtAcc_BudgetLevel, string Natr_Title, string AccNatr_Title) {
                 ChartOfAccountRow rowChartOfAccountRow = ((ChartOfAccountRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ChrtAcc_Id,
                         ChrtAcc_Code,
+                        ChrtAcc_CodeDisplay,
                         Natr_Id,
                         AccNatr_Id,
                         ChrtAcc_Title,
@@ -768,6 +779,7 @@ namespace SCMS.Reports.Datasets {
             internal void InitVars() {
                 this.columnChrtAcc_Id = base.Columns["ChrtAcc_Id"];
                 this.columnChrtAcc_Code = base.Columns["ChrtAcc_Code"];
+                this.columnChrtAcc_CodeDisplay = base.Columns["ChrtAcc_CodeDisplay"];
                 this.columnNatr_Id = base.Columns["Natr_Id"];
                 this.columnAccNatr_Id = base.Columns["AccNatr_Id"];
                 this.columnChrtAcc_Title = base.Columns["ChrtAcc_Title"];
@@ -785,6 +797,8 @@ namespace SCMS.Reports.Datasets {
                 base.Columns.Add(this.columnChrtAcc_Id);
                 this.columnChrtAcc_Code = new global::System.Data.DataColumn("ChrtAcc_Code", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnChrtAcc_Code);
+                this.columnChrtAcc_CodeDisplay = new global::System.Data.DataColumn("ChrtAcc_CodeDisplay", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnChrtAcc_CodeDisplay);
                 this.columnNatr_Id = new global::System.Data.DataColumn("Natr_Id", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNatr_Id);
                 this.columnAccNatr_Id = new global::System.Data.DataColumn("AccNatr_Id", typeof(string), null, global::System.Data.MappingType.Element);
@@ -1018,6 +1032,22 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ChrtAcc_CodeDisplay {
+                get {
+                    try {
+                        return ((string)(this[this.tableChartOfAccount.ChrtAcc_CodeDisplayColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ChrtAcc_CodeDisplay\' in table \'ChartOfAccount\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableChartOfAccount.ChrtAcc_CodeDisplayColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string Natr_Id {
                 get {
                     try {
@@ -1166,6 +1196,18 @@ namespace SCMS.Reports.Datasets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetChrtAcc_CodeNull() {
                 this[this.tableChartOfAccount.ChrtAcc_CodeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsChrtAcc_CodeDisplayNull() {
+                return this.IsNull(this.tableChartOfAccount.ChrtAcc_CodeDisplayColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetChrtAcc_CodeDisplayNull() {
+                this[this.tableChartOfAccount.ChrtAcc_CodeDisplayColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

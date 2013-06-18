@@ -411,11 +411,10 @@ namespace SCMS.Reports
                 #region Trial Balance
                 else if (ls_ReportName.ToLower() == "TrialBalance".ToLower())
                 {
-                    _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptTrialBalance.rpt");
-                    Datasets.dsTrialBalance _dsTrialBalance = new Datasets.dsTrialBalance();
                     string ls_Location = "", ls_AccCodeFrom = "", ls_AccCodeTo = "";
                     int li_AllAccCode = 0, li_AllDate = 0;
                     DateTime ldt_DateFrom, ldt_Dateto;
+                    Datasets.dsTrialBalance _dsTrialBalance = new Datasets.dsTrialBalance();
 
                     ls_Location = SCMS.Reports.ReportParameters.Location;
                     li_AllAccCode = SCMS.Reports.ReportParameters.AllAccCode;
@@ -425,6 +424,15 @@ namespace SCMS.Reports
                     ldt_DateFrom = SCMS.Reports.ReportParameters.DateFrom;
                     ldt_Dateto = SCMS.Reports.ReportParameters.DateTo;
 
+                    if (SCMS.Reports.ReportParameters.TrialActivity == "Activity")
+                    {
+                        _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptTrialBalance.rpt");
+                    }
+                    else if (SCMS.Reports.ReportParameters.TrialActivity == "ActivityAll")
+                    {
+                        _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptTrialBalance-ActivityAll.rpt");
+                    }
+                    
                     if (_dsTrialBalance.Tables.Contains("Logo"))
                     {
                         _dsTrialBalance.Tables.Remove("Logo");
@@ -435,9 +443,10 @@ namespace SCMS.Reports
                         _dsTrialBalance.Tables.Remove("TrialBalance");
                     }
 
-                    _ds = _dalReports.TrialBalance(ls_Location, li_AllAccCode, ls_AccCodeFrom, ls_AccCodeTo, li_AllDate, ldt_DateFrom, ldt_Dateto);
+                    _ds = _dalReports.TrialBalance(ls_Location, li_AllAccCode, ls_AccCodeFrom, ls_AccCodeTo, li_AllDate, ldt_DateFrom,
+                                                   ldt_Dateto, SCMS.Reports.ReportParameters.TrialActivity);
                     _dsTrialBalance.Tables.Add(_ds.Tables[0].Copy());
-                    _dsTrialBalance.Tables[0].TableName = "TrialBalance";
+                    _dsTrialBalance.Tables[0].TableName = "TrialBalance";       
 
                     if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
                     {
