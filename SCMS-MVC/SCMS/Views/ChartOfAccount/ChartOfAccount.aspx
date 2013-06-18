@@ -62,10 +62,9 @@
                     success: function (response) {
                         //alert(response);
                         $("#GridContainer").html(response.toString());
-                        SetGrid();
-                        if (parseInt(document.getElementById("SaveResult").value) > 0) {
-                            ResetForm();
-                        }
+                        //if (parseInt(document.getElementById("SaveResult").value) > 0) {
+                        ResetForm();
+                        // }
                         FadeIn(lcnt_MessageBox);
                         if (document.getElementById("SaveResult").value == "0") {
                             lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Unable to save record.</p>";
@@ -84,10 +83,12 @@
                         document.getElementById("btn_Save").style.display = "block";
                         scroll(0, 0);
                         FadeOut(lcnt_MessageBox);
+                        SetGrid();
                     },
                     error: function (rs, e) {
                         document.getElementById("Waiting_Image").style.display = "none";
                         document.getElementById("btn_Save").style.display = "block";
+                        SetUserRights();
                     }
                 });
             }
@@ -155,6 +156,7 @@
             //            }
             //document.getElementById('txt_Title').value = document.getElementById('txt_Title' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             scroll(0, 0);
+            ShowHideSaveButton();
         }
         function DeleteRecord(Id) {
             if (confirm("Do you really want to delete this record")) {
@@ -168,7 +170,6 @@
                     success: function (response) {
                         html = response;
                         $("#GridContainer").html(response);
-                        SetGrid();
                         ResetForm();
                         FadeIn(lcnt_MessageBox);
                         if (document.getElementById("SaveResult").value == "0") {
@@ -181,11 +182,13 @@
                         }
                         //scroll(0, 0);
                         FadeOut(lcnt_MessageBox);
+                        SetGrid();
                     },
                     error: function (rs, e) {
                         FadeIn(lcnt_MessageBox);
                         lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>An error occured in deleting this record.</p>";
                         lcnt_MessageBox.setAttribute("class", "message error");
+                        SetUserRights();
                         scroll(0, 0);
                         FadeOut(lcnt_MessageBox);
                     }
@@ -346,7 +349,7 @@
             </div>
             <div class="CustomCell" style="width: 286px;">
                 <div style="width: auto; float: right; margin-left: 3px;">
-                    <input id="btn_Cancel" type="button" value="Cancel" class="btn btn-red btn-small"
+                    <input id="btn_Cancel" type="button" value="Cancel" class="btn btn-red btn-small popcancel"
                         onclick="javascript:txt_File.value='';" style="width: 80px; height: 30px; padding-top: 5px;
                         color: White; font-weight: bold; font-size: 11pt;" />
                 </div>

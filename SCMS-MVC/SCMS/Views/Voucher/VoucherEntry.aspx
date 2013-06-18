@@ -17,6 +17,7 @@
     </style>
     <script type="text/javascript">
         $(document).ready(function () {
+            
             GetLastVoucherByTypeId();
             $('#txt_Date').Zebra_DatePicker({
                 format: 'm/d/Y'
@@ -205,7 +206,7 @@
                 $("#txt_TotalCredit").val(formatCurrency($("#txt_TotalCredit").val()));
                 $("#txt_Difference").val(formatCurrency($("#txt_Difference").val()));
             });
-
+            SetUserRights();
         });
 
         function formatCurrency(num) {
@@ -360,8 +361,9 @@
                         document.getElementById("Waiting_Image").style.display = "none";
                         document.getElementById("btn_Save").style.display = "block";
                         scroll(0, 0);
-                        GetLastVoucherByTypeId()
+                        GetLastVoucherByTypeId();
                         FadeOut(MessageBox);
+                        SetUserRights();
                     }
                 });
             }

@@ -43,7 +43,6 @@
                         //alert(response);
                         html = response;
                         $("#GridContainer").html(response);
-                        SetGrid();
                         ResetForm();
                         FadeIn(MessageBox);
                         if (document.getElementById("SaveResult").value == "0") {
@@ -56,12 +55,14 @@
                         }
                         document.getElementById("Waiting_Image").style.display = "none";
                         document.getElementById("btn_Save").style.display = "block";
+                        SetGrid();
                         scroll(0, 0);
                         FadeOut(MessageBox);
                     },
                     error: function (rs, e) {
                         document.getElementById("Waiting_Image").style.display = "none";
                         document.getElementById("btn_Save").style.display = "block";
+                        SetUserRights();
                     }
                 });
             }
@@ -72,6 +73,7 @@
             MessageBox.removeAttribute("class");
             MessageBox.innerHTML = "";
             document.getElementById('txt_SelectedCode').value = "";
+            document.getElementById('txt_Code').value = "[Auto]";
             var txt_CompanyName = document.getElementById('txt_Name').value = "";
             var txt_Address1 = document.getElementById('txt_Address1').value = "";
             var txt_Address2 = document.getElementById('txt_Address2').value = "";
@@ -89,12 +91,13 @@
             document.getElementById('txt_Email').value = document.getElementById('txt_Email' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             document.getElementById('txt_Phone').value = document.getElementById('txt_Phone' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             document.getElementById('txt_Fax').value = document.getElementById('txt_Fax' + Id).innerHTML.trim().toString().replace("&nbsp", "");
+            ShowHideSaveButton();
             scroll(0, 0);
         }
 
         function DeleteRecord(Id) {
             if (confirm("Do you really want to delete this record")) {
-                var MessageBox = document.getElementById('MessageBox');
+                var lcnt_MessageBox = document.getElementById('MessageBox');
                 var Url = document.getElementById('frm_CompanySetup').action;
                 Url += "Company/DeleteCompany?companyId=" + Id;
                 $.ajax({
@@ -103,9 +106,8 @@
                     success: function (response) {
                         html = response;
                         $("#GridContainer").html(response);
-                        SetGrid();
                         ResetForm();
-                        FadeIn(MessageBox);
+                        FadeIn(lcnt_MessageBox);
                         if (document.getElementById("SaveResult").value == "0") {
                             lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Unable to delete record.</p>";
                             lcnt_MessageBox.setAttribute("class", "message error");
@@ -114,13 +116,15 @@
                             lcnt_MessageBox.innerHTML = "<h5>Success!</h5><p>Record deleted successfully.</p>";
                             lcnt_MessageBox.setAttribute("class", "message success");
                         }
+                        SetGrid();
                         scroll(0, 0);
-                        FadeOut(MessageBox);
+                        FadeOut(lcnt_MessageBox);
                     },
                     error: function (rs, e) {
                         FadeIn(MessageBox);
                         MessageBox.innerHTML = "<h5>Error!</h5><p>An error occured in deleting this record.</p>";
                         MessageBox.setAttribute("class", "message error");
+                        SetUserRights();
                         scroll(0, 0);
                         FadeOut(MessageBox);
                     }

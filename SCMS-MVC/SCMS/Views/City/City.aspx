@@ -37,7 +37,6 @@
                     success: function (response) {
                         html = response;
                         $("#GridContainer").html(response);
-                        SetGrid();
                         ResetForm();
                         FadeIn(lcnt_MessageBox);
                         if (document.getElementById("SaveResult").value == "0") {
@@ -50,12 +49,14 @@
                         }
                         document.getElementById("Waiting_Image").style.display = "none";
                         document.getElementById("btn_Save").style.display = "block";
+                        SetGrid();
                         scroll(0, 0);
                         FadeOut(lcnt_MessageBox);
                     },
                     error: function (rs, e) {
                         document.getElementById("Waiting_Image").style.display = "none";
                         document.getElementById("btn_Save").style.display = "block";
+                        SetUserRights();
                     }
                 });
             }
@@ -76,6 +77,7 @@
             document.getElementById('txt_SelectedCode').value = Id;
             document.getElementById('txt_Code').value = Id;
             document.getElementById('txt_Title').value = document.getElementById('txt_Title' + Id).innerHTML.trim().toString().replace("&nbsp", "");
+            ShowHideSaveButton();
             scroll(0, 0);
         }
 
@@ -92,7 +94,6 @@
                     success: function (response) {
                         html = response;
                         $("#GridContainer").html(response);
-                        SetGrid();
                         ResetForm();
                         FadeIn(lcnt_MessageBox);
                         if (document.getElementById("SaveResult").value == "0") {
@@ -103,6 +104,7 @@
                             lcnt_MessageBox.innerHTML = "<h5>Success!</h5><p>Record deleted successfully.</p>";
                             lcnt_MessageBox.setAttribute("class", "message success");
                         }
+                        SetGrid();
                         scroll(0, 0);
                         FadeOut(lcnt_MessageBox);
                     },
@@ -110,6 +112,7 @@
                         FadeIn(lcnt_MessageBox);
                         lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>An error occured in deleting this record.</p>";
                         lcnt_MessageBox.setAttribute("class", "message error");
+                        SetUserRights();
                         scroll(0, 0);
                         FadeOut(lcnt_MessageBox);
                     }

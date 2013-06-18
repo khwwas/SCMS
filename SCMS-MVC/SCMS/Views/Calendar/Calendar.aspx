@@ -7,6 +7,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <script type="text/javascript">
 
+        $(document).ready(function () {
+
+        });
+
         function SaveRecord() {
 
             var lcnt_MessageBox = document.getElementById('MessageBox');
@@ -51,7 +55,7 @@
                 FadeOut(lcnt_MessageBox);
                 txt_Prefix.focus();
                 return;
-            } 
+            }
             else if (txt_Title.value == "") {
                 FadeIn(lcnt_MessageBox);
                 lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! enter title</p>";
@@ -72,7 +76,6 @@
                     success: function (response) {
                         html = response;
                         $("#GridContainer").html(response);
-                        SetGrid();
                         ResetForm();
                         FadeIn(lcnt_MessageBox);
 
@@ -86,12 +89,14 @@
                         }
                         document.getElementById("Waiting_Image").style.display = "none";
                         document.getElementById("btn_Save").style.display = "block";
+                        SetGrid();
                         scroll(0, 0);
                         FadeOut(lcnt_MessageBox);
                     },
                     error: function (rs, e) {
                         document.getElementById("Waiting_Image").style.display = "none";
                         document.getElementById("btn_Save").style.display = "block";
+                        SetUserRights();
                     }
                 });
             }
@@ -123,6 +128,7 @@
             document.getElementById('txt_SratrtDate').value = document.getElementById('txt_SratrtDate' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             document.getElementById('txt_EndDate').value = document.getElementById('txt_EndDate' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             //document.getElementById('ddl_level').value = document.getElementById('txt_level' + Id).value;
+            ShowHideSaveButton();
             scroll(0, 0);
         }
 
@@ -139,7 +145,6 @@
                     success: function (response) {
                         html = response;
                         $("#GridContainer").html(response);
-                        SetGrid();
                         ResetForm();
                         FadeIn(lcnt_MessageBox);
                         if (document.getElementById("SaveResult").value == "0") {
@@ -150,6 +155,7 @@
                             lcnt_MessageBox.innerHTML = "<h5>Success!</h5><p>Record deleted successfully.</p>";
                             lcnt_MessageBox.setAttribute("class", "message success");
                         }
+                        SetGrid();
                         scroll(0, 0);
                         FadeOut(lcnt_MessageBox);
                     },
@@ -157,6 +163,7 @@
                         FadeIn(lcnt_MessageBox);
                         lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>An error occured in deleting this record.</p>";
                         lcnt_MessageBox.setAttribute("class", "message error");
+                        SetUserRights();
                         scroll(0, 0);
                         FadeOut(lcnt_MessageBox);
                     }
@@ -176,46 +183,46 @@
             <div class="CustomCell" style="width: 105px; height: 30px">
                 Company</div>
             <div style="width: 270px; height: 30px;" class="CustomCell">
-            <%= Html.DropDownList("ddl_Company", null, new { style = "width:950px; padding: 4px;" })%>    
+                <%= Html.DropDownList("ddl_Company", null, new { style = "width:950px; padding: 4px;" })%>
             </div>
             <div class="Clear">
             </div>
             <div class="CustomCell" style="width: 105px; height: 30px;">
                 Location</div>
             <div style="width: 270px; height: 30px;" class="CustomCell">
-            <%= Html.DropDownList("ddl_location", null, new { style = "width:950px; padding: 4px;" })%>
+                <%= Html.DropDownList("ddl_location", null, new { style = "width:950px; padding: 4px;" })%>
             </div>
             <div class="Clear">
             </div>
             <div class="CustomCell" style="width: 105px; height: 30px;">
                 Calender Type</div>
             <div style="width: 270px; height: 30px;" class="CustomCell">
-            <%= Html.DropDownList("ddl_CalenderType", null, new { style = "width:950px; padding: 4px;" })%>    
+                <%= Html.DropDownList("ddl_CalenderType", null, new { style = "width:950px; padding: 4px;" })%>
             </div>
             <div class="Clear">
             </div>
             <div class="CustomCell" style="width: 102px; height: 30px; padding-top: 8px;">
                 Prefix</div>
             <div class="CustomCell" style="width: 219px; height: 30px; padding-top: 8px;">
-            <input type="text" class="CustomText" style="width: 219px;" id="txt_Prefix" name="txt_Prefix"
-                maxlength="2" />
+                <input type="text" class="CustomText" style="width: 219px;" id="txt_Prefix" name="txt_Prefix"
+                    maxlength="2" />
             </div>
             <div class="CustomCell" style="width: 80px; height: 30px; padding-top: 8px; padding-left: 62px;">
                 Title</div>
             <div class="CustomCell" style="width: 60px; height: 30px; padding-top: 8px;">
-            <input type="text" class="CustomText" style="width: 572px;" id="txt_Title" name="txt_Title"
-                maxlength="100" />
+                <input type="text" class="CustomText" style="width: 572px;" id="txt_Title" name="txt_Title"
+                    maxlength="100" />
             </div>
             <div class="Clear">
             </div>
             <div class="CustomCell" style="width: 102px; height: 30px; padding-top: 8px;">
-               Start Date</div>
+                Start Date</div>
             <div class="CustomCell" style="width: 282px; height: 30px;">
                 <input type="text" class="CustomText" style="width: 220px;" id="txt_SratrtDate" name="txt_SratrtDate"
                     value="<%=ViewData["CurrentDate"]%>" maxlength="50" />
             </div>
             <div class="CustomCell" style="width: 80px; height: 30px; padding-top: 8px;">
-               End Date</div>
+                End Date</div>
             <div class="CustomCell" style="width: 282px; height: 30px;">
                 <input type="text" class="CustomText" style="width: 220px;" id="txt_EndDate" name="txt_EndDate"
                     value="<%=ViewData["CurrentDate"]%>" maxlength="50" />
@@ -228,7 +235,6 @@
                     format: 'm/d/Y'
                 });
             </script>
-
             <div style="float: right; margin-bottom: 10px;">
                 <div style="float: left; margin-right: 5px;">
                     <input id="btn_Save" type="button" value="Save" class="btn btn-blue" onclick="SaveRecord();"

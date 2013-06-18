@@ -6,6 +6,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <script type="text/javascript">
+        $(document).ready(function () {
+            
+        });
         function SaveRecord() {
             var lcnt_MessageBox = document.getElementById('MessageBox');
             var lcnt_txtSelectedCode = document.getElementById("txt_SelectedCode");
@@ -23,7 +26,6 @@
                 success: function (response) {
                     html = response;
                     $("#GridContainer").html(response);
-                    SetGrid();
                     ResetForm();
                     FadeIn(lcnt_MessageBox);
                     if (document.getElementById("SaveResult").value == "0") {
@@ -41,12 +43,14 @@
                     }
                     document.getElementById("Waiting_Image").style.display = "none";
                     document.getElementById("btn_Save").style.display = "block";
+                    SetGrid();
                     scroll(0, 0);
                     FadeOut(lcnt_MessageBox);
                 },
                 error: function (rs, e) {
                     document.getElementById("Waiting_Image").style.display = "none";
                     document.getElementById("btn_Save").style.display = "block";
+                    SetUserRights();
                 }
             });
         }
@@ -66,9 +70,8 @@
             scroll(0, 0);
         }
     </script>
-
     <form id="frm_ChartOfAccountModSetup" action='<%=Url.Content("~/") %>'>
-       <div class="box round first fullpage grid">
+    <div class="box round first fullpage grid">
         <h2>
             Chart of Account Modification Setup</h2>
         <div class="block">
