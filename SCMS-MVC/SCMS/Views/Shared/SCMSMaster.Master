@@ -35,9 +35,6 @@
     <!--[if IE 7]><link rel="stylesheet" type="text/css" href="css/ie.css" media="screen" /><![endif]-->
     <link href="../../Content/table/demo_page.css" rel="stylesheet" type="text/css" />
     <link href="../../Content/zebra_datepicker.css" rel="stylesheet" type="text/css" />
-
-
-
     <style type="text/css">
         html, body
         {
@@ -95,13 +92,8 @@
     <script src="../../Scripts/jquery.inputmask.extensions.js" type="text/javascript"></script>
     <script src="../../Scripts/jquery.lightbox_me.js" type="text/javascript"></script>
     <script src="../../Scripts/zebra_datepicker.js" type="text/javascript"></script>
-<<<<<<< HEAD
-    <%if (Request.Url.OriginalString.Contains("Employee"))
-=======
     <%if (Request.Url.OriginalString.Contains("Employee") ||
           Request.Url.OriginalString.Contains("ReportSelectionCriteria"))
-          
->>>>>>> f6ddc15a1f651913be61e6fa580b583d5f41bcc8
       { %>
     <script src="../../bootstrap/js/bootstrap.js" type="text/javascript"></script>
     <script src="../../bootstrap/js/bootstrap-datepicker.js" type="text/javascript"></script>

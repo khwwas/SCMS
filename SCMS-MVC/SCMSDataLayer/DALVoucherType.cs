@@ -57,8 +57,15 @@ namespace SCMSDataLayer
         {
             try
             {
+                string UserLoginId = DALCommon.UserLoginId;
+                List<sp_GetUserVoucherTypesByUserIdResult> UserVoucherTypes = new DALUserMenuRights().GetUserVoucherTypesByUserId(UserLoginId).ToList();
+                if (UserVoucherTypes != null && UserVoucherTypes.Count > 0)
+                {
+                    UserVoucherTypes = UserVoucherTypes.Where(c => c.SelectedVoucherType != "0").ToList();
+                }
+                string[] VoucherTypeIds = UserVoucherTypes.Select(c => c.VchrType_Id).ToArray();
                 SCMSDataContext dbSCMS = Connection.Create();
-                return dbSCMS.sp_GetVoucherTypesList().ToList();
+                return dbSCMS.sp_GetVoucherTypesList().ToList().Where(c => VoucherTypeIds.Contains(c.VchrType_Id)).ToList();
             }
             catch
             {

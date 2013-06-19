@@ -77,8 +77,15 @@ namespace SCMSDataLayer
         {
             try
             {
+                string UserLoginId = DALCommon.UserLoginId;
+                List<sp_GetUserLocationsByUserIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByUserId(UserLoginId).ToList();
+                if (UserLocations != null && UserLocations.Count > 0)
+                {
+                    UserLocations = UserLocations.Where(c => c.SelectedLocation != "0").ToList();
+                }
+                string[] LocationsIds = UserLocations.Select(c => c.Loc_Id).ToArray();
                 SCMSDataContext dbSCMS = Connection.Create();
-                return dbSCMS.sp_GetLocationList().ToList();
+                return dbSCMS.sp_GetLocationList().ToList().Where(c => LocationsIds.Contains(c.Loc_Id)).ToList();
             }
             catch
             {
@@ -90,8 +97,15 @@ namespace SCMSDataLayer
         {
             try
             {
+                string UserLoginId = DALCommon.UserLoginId;
+                List<sp_GetUserLocationsByUserIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByUserId(UserLoginId).ToList();
+                if (UserLocations != null && UserLocations.Count > 0)
+                {
+                    UserLocations = UserLocations.Where(c => c.SelectedLocation != "0").ToList();
+                }
+                string[] LocationsIds = UserLocations.Select(c => c.Loc_Id).ToArray();
                 SCMSDataContext dbSCMS = Connection.Create();
-                return dbSCMS.sp_PopulateLocationList().ToList();
+                return dbSCMS.sp_PopulateLocationList().ToList().Where(c => LocationsIds.Contains(c.Loc_Id)).ToList();
             }
             catch
             {
@@ -103,8 +117,15 @@ namespace SCMSDataLayer
         {
             try
             {
+                string UserLoginId = DALCommon.UserLoginId;
+                List<sp_GetUserLocationsByUserIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByUserId(UserLoginId).ToList();
+                if (UserLocations != null && UserLocations.Count > 0)
+                {
+                    UserLocations = UserLocations.Where(c => c.SelectedLocation != "0").ToList();
+                }
+                string[] LocationsIds = UserLocations.Select(c => c.Loc_Id).ToArray();
                 SCMSDataContext dbSCMS = Connection.Create();
-                return dbSCMS.SETUP_Locations.Where(c => c.Loc_Active == 1).ToList();
+                return dbSCMS.SETUP_Locations.Where(c => LocationsIds.Contains(c.Loc_Id) && c.Loc_Active == 1).ToList();
             }
             catch
             {

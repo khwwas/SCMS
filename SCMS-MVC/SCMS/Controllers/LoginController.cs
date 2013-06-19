@@ -41,6 +41,7 @@ namespace SCMS.Controllers
                 if (user != null)
                 {
                     Session["user"] = user;
+                    DALCommon.UserLoginId = user.User_Id;
                     return 1;
                 }
                 else
