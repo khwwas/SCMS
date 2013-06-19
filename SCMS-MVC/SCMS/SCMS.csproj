@@ -764,6 +764,7 @@
     <Content Include="Scripts\pretty-photo\jquery.prettyPhoto.js" />
     <Content Include="Scripts\quick-sand\jquery.quicksand.js" />
     <Content Include="Scripts\SCMS.js" />
+    <Content Include="Scripts\SecurityRights.js" />
     <Content Include="Scripts\setup.js" />
     <Content Include="Scripts\table\jquery.dataTables.min.js" />
     <Content Include="Scripts\tiny-mce\jquery.tinymce.js" />

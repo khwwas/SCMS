@@ -6,6 +6,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <script type="text/javascript">
+        $(document).ready(function () {
+
+        });
         function Search() {
             var MessageBox = document.getElementById('MessageBox');
             var pcnt_Location = document.getElementById("ddl_Location");
@@ -62,13 +65,14 @@
                     success: function (response) {
                         html = response;
                         $("#GridContainer").html(response);
-                        SetGrid();
-                        ResetForm();
+
+                        //ResetForm();
                         FadeIn(MessageBox);
                         MessageBox.innerHTML = "<h5>Success!</h5><p>Record deleted successfully.</p>";
                         MessageBox.setAttribute("class", "message success");
                         scroll(0, 0);
                         FadeOut(MessageBox);
+                        SetGrid();
                     },
                     error: function (rs, e) {
                         FadeIn(MessageBox);
@@ -76,6 +80,7 @@
                         MessageBox.setAttribute("class", "message error");
                         scroll(0, 0);
                         FadeOut(MessageBox);
+                        SetUserRights();
                     }
                 });
             }

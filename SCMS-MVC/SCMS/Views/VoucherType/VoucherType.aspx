@@ -54,7 +54,6 @@
                     success: function (response) {
                         html = response;
                         $("#GridContainer").html(response);
-                        SetGrid();
                         ResetForm();
                         FadeIn(MessageBox);
                         if (document.getElementById("SaveResult").value == "0") {
@@ -67,12 +66,14 @@
                         }
                         document.getElementById("Waiting_Image").style.display = "none";
                         document.getElementById("btn_Save").style.display = "block";
+                        SetGrid();
                         scroll(0, 0);
                         FadeOut(MessageBox);
                     },
                     error: function (rs, e) {
                         document.getElementById("Waiting_Image").style.display = "none";
                         document.getElementById("btn_Save").style.display = "block";
+                        SetUserRights();
                     }
                 });
             }
@@ -105,6 +106,7 @@
             else {
                 document.getElementsByName("rdo_CodeInitialization")[0].checked = "checked";
             }
+            ShowHideSaveButton();
             scroll(0, 0);
         }
 
@@ -119,7 +121,6 @@
                     success: function (response) {
                         html = response;
                         $("#GridContainer").html(response);
-                        SetGrid();
                         ResetForm();
                         FadeIn(MessageBox);
                         if (document.getElementById("SaveResult").value == "0") {
@@ -130,6 +131,7 @@
                             lcnt_MessageBox.innerHTML = "<h5>Success!</h5><p>Record deleted successfully.</p>";
                             lcnt_MessageBox.setAttribute("class", "message success");
                         }
+                        SetGrid();
                         scroll(0, 0);
                         FadeOut(MessageBox);
                     },
@@ -137,6 +139,7 @@
                         FadeIn(MessageBox);
                         MessageBox.innerHTML = "<h5>Error!</h5><p>An error occured in deleting this record.</p>";
                         MessageBox.setAttribute("class", "message error");
+                        SetUserRights();
                         scroll(0, 0);
                         FadeOut(MessageBox);
                     }

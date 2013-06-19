@@ -58,5 +58,10 @@ namespace SCMS
             get;
             set;
         }
+        public static string CurrentUrl
+        {
+            get;
+            set;
+        }
     }
 }

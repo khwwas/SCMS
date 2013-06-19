@@ -193,6 +193,12 @@ namespace SCMSDataLayer
             return _ReturnValue;
         }
 
+        public static string UserLoginId
+        {
+            get;
+            set;
+        }
+
         //public static int ModuleId
         //{
         //    get;
