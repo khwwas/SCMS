@@ -412,7 +412,7 @@ namespace SCMS.Reports
                 else if (ls_ReportName.ToLower() == "TrialBalance".ToLower())
                 {
                     string ls_Location = "", ls_AccCodeFrom = "", ls_AccCodeTo = "";
-                    int li_AllAccCode = 0, li_AllDate = 0;
+                    int li_AllAccCode = 0, li_AllDate = 0, li_ChrtOfAccLevel = 5;
                     DateTime ldt_DateFrom, ldt_Dateto;
                     Datasets.dsTrialBalance _dsTrialBalance = new Datasets.dsTrialBalance();
 
@@ -423,16 +423,29 @@ namespace SCMS.Reports
                     li_AllDate = SCMS.Reports.ReportParameters.AllDate;
                     ldt_DateFrom = SCMS.Reports.ReportParameters.DateFrom;
                     ldt_Dateto = SCMS.Reports.ReportParameters.DateTo;
+                    li_ChrtOfAccLevel = SCMS.Reports.ReportParameters.Level;
 
                     if (SCMS.Reports.ReportParameters.TrialActivity == "Activity")
                     {
                         _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptTrialBalance.rpt");
+                        _ReportDocument.SummaryInfo.ReportTitle = "Trial Balance - Activity";
+                    }
+                    else if (SCMS.Reports.ReportParameters.TrialActivity == "Opening")
+                    {
+                        _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptTrialBalance-Opening.rpt");
+                        _ReportDocument.SummaryInfo.ReportTitle = "Trial Balance - As at " + ldt_DateFrom.ToString("dd/MMM/yyyy");
+                    }
+                    else if (SCMS.Reports.ReportParameters.TrialActivity == "Closing")
+                    {
+                        _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptTrialBalance-Closing.rpt");
+                        _ReportDocument.SummaryInfo.ReportTitle = "Trial Balance - As at " + ldt_Dateto.ToString("dd/MMM/yyyy");
                     }
                     else if (SCMS.Reports.ReportParameters.TrialActivity == "ActivityAll")
                     {
                         _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptTrialBalance-ActivityAll.rpt");
+                        _ReportDocument.SummaryInfo.ReportTitle = "Trial Balance - As at " + ldt_Dateto.ToString("dd/MMM/yyyy");
                     }
-                    
+
                     if (_dsTrialBalance.Tables.Contains("Logo"))
                     {
                         _dsTrialBalance.Tables.Remove("Logo");
@@ -444,9 +457,9 @@ namespace SCMS.Reports
                     }
 
                     _ds = _dalReports.TrialBalance(ls_Location, li_AllAccCode, ls_AccCodeFrom, ls_AccCodeTo, li_AllDate, ldt_DateFrom,
-                                                   ldt_Dateto, SCMS.Reports.ReportParameters.TrialActivity);
+                                                   ldt_Dateto, li_ChrtOfAccLevel, SCMS.Reports.ReportParameters.TrialActivity);
                     _dsTrialBalance.Tables.Add(_ds.Tables[0].Copy());
-                    _dsTrialBalance.Tables[0].TableName = "TrialBalance";       
+                    _dsTrialBalance.Tables[0].TableName = "TrialBalance";
 
                     if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
                     {
@@ -455,7 +468,6 @@ namespace SCMS.Reports
                     }
 
                     _ReportDocument.SetDataSource(_dsTrialBalance);
-                    _ReportDocument.SummaryInfo.ReportTitle = "Trial Balance";
                     _ReportDocument.SetParameterValue("pm_AllDate", li_AllDate);
                     _ReportDocument.SetParameterValue("pm_DateFrom", ldt_DateFrom);
                     _ReportDocument.SetParameterValue("pm_DateTo", ldt_Dateto);

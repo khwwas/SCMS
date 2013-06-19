@@ -19,17 +19,10 @@
         <table border="0" style="width: 100%" cellpadding="0" cellspacing="0">
             <tr>
                 <td>
-                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                        <ContentTemplate>
-                            <CR:CrystalReportViewer ID="crvReports" runat="server" AutoDataBind="true" EnableDatabaseLogonPrompt="False"
-                                EnableParameterPrompt="False" ToolPanelView="None" HasCrystalLogo="False" HasDrilldownTabs="False"
-                                HasDrillUpButton="False" HasSearchButton="False" HasToggleGroupTreeButton="False"
-                                HasToggleParameterPanelButton="False" PrintMode="ActiveX" />
-                        </ContentTemplate>
-                        <Triggers>
-                            <asp:PostBackTrigger ControlID="crvReports" />
-                        </Triggers>
-                    </asp:UpdatePanel>
+                    <CR:CrystalReportViewer ID="crvReports" runat="server" AutoDataBind="true" EnableDatabaseLogonPrompt="False"
+                        EnableParameterPrompt="False" ToolPanelView="None" HasCrystalLogo="False" HasDrilldownTabs="False"
+                        HasDrillUpButton="False" HasSearchButton="False" HasToggleGroupTreeButton="False"
+                        HasToggleParameterPanelButton="False" PrintMode="ActiveX" />
                 </td>
             </tr>
         </table>
