@@ -92,6 +92,7 @@
                 document.getElementById('div_AccCodeFrom').style.display = "block";
                 document.getElementById('div_AccCodeTo').style.display = "block";
                 document.getElementById('div_DateRange').style.display = "block";
+                document.getElementById('div_Level').style.display = "block";
                 document.getElementById('div_TrialActivity').style.display = "block";
 
                 document.getElementById('ddl_AccCodeFrom').disabled = true;
@@ -189,7 +190,11 @@
                 var pcnt_DateFrom = document.getElementById('txt_DateFrom');
                 var pcnt_DateTo = document.getElementById('txt_DateTo');
 
+                var pcnt_ChrtOfAccLevel = document.getElementById('txt_Level');
+
                 var pcnt_Acticity = document.getElementById('rdo_Activity').checked;
+                var pcnt_OpeningBal = document.getElementById('rdo_OpeningBal').checked;
+                var pcnt_ClosingBal = document.getElementById('rdo_ClosingBal').checked;
                 var pcnt_ActivityAll = document.getElementById('rdo_ActivityAll').checked;
 
                 var li_AllCode, li_AllDate, ls_TrialActivity;
@@ -211,6 +216,12 @@
                 if (pcnt_Acticity.toString() == "true") {
                     ls_TrialActivity = "Activity";
                 }
+                else if (pcnt_OpeningBal.toString() == "true") {
+                    ls_TrialActivity = "Opening";
+                }
+                else if (pcnt_ClosingBal.toString() == "true") {
+                    ls_TrialActivity = "Closing";
+                }
                 else if (pcnt_ActivityAll.toString() == "true") {
                     ls_TrialActivity = "ActivityAll";
                 }
@@ -218,7 +229,7 @@
                 ps_Url = "../ReportSelectionCriteria/SetParam_TrialBalance?ps_ReportName=" + ps_ReportName + "&ps_Location=" + pcnt_Location.value +
                          "&pi_AllAccCode=" + li_AllCode.toString() + "&ps_AccCodeFrom=" + pcnt_AccCodeFrom.value + "&ps_AccCodeTo=" + pcnt_AccCodeTo.value +
                          "&pi_AllDate=" + li_AllDate.toString() + "&pdt_DateFrom=" + pcnt_DateFrom.value + "&pdt_DateTo=" + pcnt_DateTo.value +
-                         "&ps_TrialActivity=" + ls_TrialActivity + "";
+                         "&ps_Level=" + pcnt_ChrtOfAccLevel.value + "&ps_TrialActivity=" + ls_TrialActivity + "";
             }
             else if (ps_ReportName.toLowerCase() == "IncomeStatement".toLowerCase()) {
                 var pcnt_Location = document.getElementById('ddl_location');
@@ -353,7 +364,7 @@
             </div>
             <div id="div_Level" style="display: none;">
                 <div class="CustomCell" style="width: 150px;">
-                    Level</div>
+                    Upto Level</div>
                 <div class="CustomCell" style="width: 42px;">
                     <input type="text" class="CustomText" id="txt_Level" name="txt_Level" maxlength="1"
                         style="width: 35px; border-right: 0px;" value="1" disabled="disabled" />
@@ -374,14 +385,17 @@
             </div>
             <div id="div_TrialActivity" style="display: none;">
                 <div class="CustomCell" style="width: 150px; height: 30px;">
-                    Trial Activity
+                    Trial Balance
                 </div>
                 <div class="CustomCell" style="width: 650px;">
                     Activity&nbsp;<input type="radio" class="radio" id="rdo_Activity" name="TrialActivity"
-                        value="Activity" />
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Activity/Opening/Closing&nbsp;<input
-                        type="radio" class="radio" id="rdo_ActivityAll" name="TrialActivity" checked="checked"
-                        value="All" />
+                        value="Activity" checked="checked" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Opening Balance&nbsp;<input type="radio"
+                        class="radio" id="rdo_OpeningBal" name="TrialActivity" value="Opening" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Closing Balance&nbsp;<input type="radio"
+                        class="radio" id="rdo_ClosingBal" name="TrialActivity" value="Closing" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; All Three&nbsp;<input type="radio"
+                        class="radio" id="rdo_ActivityAll" name="TrialActivity" value="All" />
                 </div>
             </div>
         </div>

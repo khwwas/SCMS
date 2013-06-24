@@ -131,11 +131,12 @@ namespace SCMS.Controllers
 
         #region Trial Balance
         public string SetParam_TrialBalance(String ps_ReportName, String ps_Location, string pi_AllAccCode, string ps_AccCodeFrom, string ps_AccCodeTo,
-                                              string pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo, string ps_TrialActivity)
+                                              string pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo, string ps_Level, string ps_TrialActivity)
         {
             ResetParameters();
             Reports.ReportParameters.ReportName = ps_ReportName;
             Reports.ReportParameters.Location = ps_Location;
+            Reports.ReportParameters.Level = Convert.ToInt32(ps_Level);
             Reports.ReportParameters.TrialActivity = ps_TrialActivity;
 
             if (pi_AllAccCode == "1")
@@ -155,8 +156,8 @@ namespace SCMS.Controllers
             if (pi_AllDate == "1")
             {
                 Reports.ReportParameters.AllDate = 1;
-                Reports.ReportParameters.DateFrom = Convert.ToDateTime("01/01/1900");
-                Reports.ReportParameters.DateTo = Convert.ToDateTime("01/01/1900");
+                Reports.ReportParameters.DateFrom = pdt_DateFrom;
+                Reports.ReportParameters.DateTo = pdt_DateTo;
             }
             else
             {
