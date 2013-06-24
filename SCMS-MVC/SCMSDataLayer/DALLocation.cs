@@ -73,19 +73,23 @@ namespace SCMSDataLayer
         //    }
         //}
 
+        /// <summary>
+        /// Use This method to get all locations without Security
+        /// </summary>
+        /// <returns></returns>
         public List<sp_GetLocationListResult> GetAllData()
         {
             try
             {
-                string UserLoginId = DALCommon.UserLoginId;
-                List<sp_GetUserLocationsByUserIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByUserId(UserLoginId).ToList();
-                if (UserLocations != null && UserLocations.Count > 0)
-                {
-                    UserLocations = UserLocations.Where(c => c.SelectedLocation != "0").ToList();
-                }
-                string[] LocationsIds = UserLocations.Select(c => c.Loc_Id).ToArray();
+                //string UserLoginId = DALCommon.UserLoginId;
+                //List<sp_GetUserLocationsByUserIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByUserId(UserLoginId).ToList();
+                //if (UserLocations != null && UserLocations.Count > 0)
+                //{
+                //    UserLocations = UserLocations.Where(c => c.SelectedLocation != "0").ToList();
+                //}
+                //string[] LocationsIds = UserLocations.Select(c => c.Loc_Id).ToArray();
                 SCMSDataContext dbSCMS = Connection.Create();
-                return dbSCMS.sp_GetLocationList().ToList().Where(c => LocationsIds.Contains(c.Loc_Id)).ToList();
+                return dbSCMS.sp_GetLocationList().ToList();//.Where(c => LocationsIds.Contains(c.Loc_Id)).ToList();
             }
             catch
             {
@@ -93,6 +97,7 @@ namespace SCMSDataLayer
             }
         }
 
+        // Use for the drop downs to implement Security
         public List<sp_PopulateLocationListResult> PopulateData()
         {
             try
@@ -117,15 +122,15 @@ namespace SCMSDataLayer
         {
             try
             {
-                string UserLoginId = DALCommon.UserLoginId;
-                List<sp_GetUserLocationsByUserIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByUserId(UserLoginId).ToList();
-                if (UserLocations != null && UserLocations.Count > 0)
-                {
-                    UserLocations = UserLocations.Where(c => c.SelectedLocation != "0").ToList();
-                }
-                string[] LocationsIds = UserLocations.Select(c => c.Loc_Id).ToArray();
+                //string UserLoginId = DALCommon.UserLoginId;
+                //List<sp_GetUserLocationsByUserIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByUserId(UserLoginId).ToList();
+                //if (UserLocations != null && UserLocations.Count > 0)
+                //{
+                //    UserLocations = UserLocations.Where(c => c.SelectedLocation != "0").ToList();
+                //}
+                //string[] LocationsIds = UserLocations.Select(c => c.Loc_Id).ToArray();
                 SCMSDataContext dbSCMS = Connection.Create();
-                return dbSCMS.SETUP_Locations.Where(c => LocationsIds.Contains(c.Loc_Id) && c.Loc_Active == 1).ToList();
+                return dbSCMS.SETUP_Locations.ToList();//.Where(c => LocationsIds.Contains(c.Loc_Id) && c.Loc_Active == 1).ToList();
             }
             catch
             {

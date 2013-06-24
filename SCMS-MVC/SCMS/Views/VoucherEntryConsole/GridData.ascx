@@ -49,7 +49,7 @@
         </tr>
     </thead>
     <tbody>
-        <%var DataList = new SCMSDataLayer.DALVoucherEntry().GetVoucherEntryConsoleData(1, "", 1, "", 1, "", "");
+        <%var DataList = new SCMSDataLayer.DALVoucherEntry().GetVoucherEntryConsoleData(1, "", 1, "", 1, "", "", true);
           if (DataList != null && DataList.Count > 0)
           {
               foreach (SCMSDataLayer.DB.sp_VoucherEntryConsoleResult DataRow in DataList)

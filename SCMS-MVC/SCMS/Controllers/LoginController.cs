@@ -17,7 +17,7 @@ namespace SCMS.Controllers
         {
             List<SETUP_Company> CompaniesList = new SCMSDataLayer.DALCompany().GetCmpByCode("00001");
 
-            if( CompaniesList != null && 
+            if (CompaniesList != null &&
                 CompaniesList.Count > 0 &&
                 CompaniesList[0].Cmp_Title != null &&
                 CompaniesList[0].Cmp_Title.ToString() != "")
@@ -25,7 +25,7 @@ namespace SCMS.Controllers
                 SCMS.SystemParameters.CurrentCmpName = CompaniesList[0].Cmp_Title;
                 ViewData["CmpDesc"] = CompaniesList[0].Cmp_Title;
             }
-            
+
             return View("Login");
         }
 
@@ -42,6 +42,7 @@ namespace SCMS.Controllers
                 {
                     Session["user"] = user;
                     DALCommon.UserLoginId = user.User_Id;
+                    DALCommon.UserGroupId = user.UsrGrp_Id;
                     return 1;
                 }
                 else
