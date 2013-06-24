@@ -104,6 +104,11 @@ namespace SCMSDataLayer
                         _CodeLength = Convert.ToInt32(_ds.Tables[0].Rows[0]["CodeGen_Length"].ToString());
                     }
 
+                    //if (ps_TableName == "SETUP_VoucherType")
+                    //{
+                    //    VoucherTypeCodeLength = _CodeLength;
+                    //}
+
                     _Sql = "";
                     _Sql += " Select IsNULL( Max( IsNULL( " + _ColumnName + ", 0 ) ), 0 ) + 1 ";
                     _Sql += "   From " + ps_TableName;
@@ -198,6 +203,18 @@ namespace SCMSDataLayer
             get;
             set;
         }
+
+        public static string UserGroupId
+        {
+            get;
+            set;
+        }
+
+        //public static int VoucherTypeCodeLength
+        //{
+        //    get;
+        //    set;
+        //}
 
         //public static int ModuleId
         //{

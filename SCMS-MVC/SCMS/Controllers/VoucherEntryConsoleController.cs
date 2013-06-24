@@ -54,7 +54,7 @@ namespace SCMS.Controllers
                     li_AllDate = 0;
                 }
 
-                objDal.GetVoucherEntryConsoleData(li_AllLocation, ps_Location, li_AllVoucherType, ps_VoucherType, li_AllDate, ps_DateFrom, ps_DateTo);
+                objDal.GetVoucherEntryConsoleData(li_AllLocation, ps_Location, li_AllVoucherType, ps_VoucherType, li_AllDate, ps_DateFrom, ps_DateTo, false);
 
                 return PartialView("GridData");
             }
@@ -88,7 +88,7 @@ namespace SCMS.Controllers
 
             try
             {
-               //if (!String.IsNullOrEmpty(Code))
+                //if (!String.IsNullOrEmpty(Code))
                 //{
                 //    DataRow.Cmp_Id = Code;
                 //    DataRow.Cmp_Code = Code;

@@ -24,7 +24,7 @@ namespace SCMS.Controllers
             DALVoucherEntry objDalVoucherEntry = new DALVoucherEntry();
 
             var VoucherTypes = new DALVoucherType().GetAllData();
-            var Locations = new DALLocation().GetAllLocation();
+            var Locations = new DALLocation().PopulateData();
             var Voucher = new DALVoucherEntry().GetAllMasterRecords();
 
             ViewData["ddl_VoucherType"] = new SelectList(VoucherTypes, "VchrType_Id", "VchrType_Title", Session["VoucherTypeForVoucherEntry"]);

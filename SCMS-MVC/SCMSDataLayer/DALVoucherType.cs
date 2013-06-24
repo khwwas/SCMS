@@ -52,7 +52,10 @@ namespace SCMSDataLayer
             }
         }
 
-
+        /// <summary>
+        /// Use GetAllData Method To Get Voucher Types With Security
+        /// </summary>
+        /// <returns></returns>
         public List<sp_GetVoucherTypesListResult> GetAllData()
         {
             try
@@ -73,6 +76,10 @@ namespace SCMSDataLayer
             }
         }
 
+        /// <summary>
+        /// Use PopulateData method to get all voucher types without security to use on the voucher type setup grid
+        /// </summary>
+        /// <returns></returns>
         public List<sp_PopulateVoucherTypeListResult> PopulateData()
         {
             try

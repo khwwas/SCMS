@@ -37,10 +37,10 @@
         </tr>
     </thead>
     <tbody>
-        <%var VoucherTypeList = new SCMSDataLayer.DALVoucherType().GetAllData();
+        <%var VoucherTypeList = new SCMSDataLayer.DALVoucherType().PopulateData();
           if (VoucherTypeList != null && VoucherTypeList.Count > 0)
           {
-              foreach (SCMSDataLayer.DB.sp_GetVoucherTypesListResult VoucherTypeRow in VoucherTypeList)
+              foreach (SCMSDataLayer.DB.sp_PopulateVoucherTypeListResult VoucherTypeRow in VoucherTypeList)
               {%>
         <tr class='odd gradeX' style='line-height: 15px;'>
             <td style="float: left">

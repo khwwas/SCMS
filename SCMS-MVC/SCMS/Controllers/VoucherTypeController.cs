@@ -26,10 +26,12 @@ namespace SCMS.Controllers
 
             try
             {
+                bool isEdit = true;
                 SETUP_VoucherType setupVoucherTypeRow = new SETUP_VoucherType();
 
                 if (String.IsNullOrEmpty(Code))
                 {
+                    isEdit = false;
                     if (DALCommon.AutoCodeGeneration("SETUP_VoucherType") == 1)
                     {
                         Code = DALCommon.GetMaximumCode("SETUP_VoucherType");
@@ -48,7 +50,22 @@ namespace SCMS.Controllers
                     setupVoucherTypeRow.VchrType_Active = 1;
 
                     VoucherTypeId = objDALVoucherType.SaveVoucherType(setupVoucherTypeRow);
+
+                    //if (isEdit == false && VoucherTypeId > 0)
+                    //{
+                    //    Security_UserVoucherType userVoucherTypeRow = new Security_UserVoucherType();
+                    //    userVoucherTypeRow.UserGrp_Id = DALCommon.UserGroupId;
+                    //    if (DALCommon.UserLoginId != null)
+                    //    {
+                    //        userVoucherTypeRow.User_Id = DALCommon.UserLoginId;
+                    //    }
+                    //    userVoucherTypeRow.VchrType_Id = Code;
+                    //    DALUserMenuRights objUserMenuRights = new DALUserMenuRights();
+                    //    objUserMenuRights.SetUserVoucherTypes(userVoucherTypeRow);
+                    //}
+
                     ViewData["SaveResult"] = VoucherTypeId;
+
                 }
                 return PartialView("GridData");
             }

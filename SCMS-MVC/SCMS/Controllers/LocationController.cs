@@ -22,6 +22,8 @@ namespace SCMS.Controllers
 
         public ActionResult SaveRecord(String ps_Code, String ps_Title, String ps_CmpId)
         {
+            bool isEdit = true;
+
             Int32 li_ReturnValue = 0;
 
             try
@@ -30,6 +32,7 @@ namespace SCMS.Controllers
 
                 if (String.IsNullOrEmpty(ps_Code))
                 {
+                    isEdit = false;
                     if (DALCommon.AutoCodeGeneration("SETUP_Location") == 1)
                     {
                         ps_Code = DALCommon.GetMaximumCode("SETUP_Location");

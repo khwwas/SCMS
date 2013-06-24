@@ -244,3 +244,55 @@ Order By
  End
 
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Scripts Generated On 25 June 2013
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ALTER PROCEDURE [dbo].[sp_VoucherEntryConsole]
+@AllLocation int, @LocationId varchar, 
+@AllVoucherType int, @VoucherTypeId varchar, 
+@AllDate int, @DateFrom varchar, @DateTo varchar 
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	  SELECT SETUP_Location.Loc_Id,
+	         SETUP_Location.Loc_Title,   
+	         SETUP_VoucherType.VchrType_Id,
+			 SETUP_VoucherType.VchrType_Title,
+			 GL_VchrMaster.VchMas_Id,   
+			 GL_VchrMaster.VchMas_Code,   
+			 GL_VchrMaster.VchMas_Date,   
+			 GL_VchrMaster.VchMas_Remarks,   
+			 GL_VchrMaster.VchMas_Status,
+			 ( Select ISNULL( Round( Sum( ISNULL( GL_VchrDetail.VchMas_DrAmount, 0 ) ), 0 ), 0 )
+			     From GL_VchrDetail
+			    Where ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) 
+			 ) As TotalDrAmount,
+			 ( Select ISNULL( Sum( ISNULL( GL_VchrDetail.VchMas_CrAmount, 0 ) ), 0 )
+			     From GL_VchrDetail
+			    Where ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) 
+			 ) As TotalCrAmount,
+			 ( Select ISNULL( Sum( ISNULL( GL_VchrDetail.VchMas_DrAmount, 0 ) ), 0 ) - 
+			          ISNULL( Sum( ISNULL( GL_VchrDetail.VchMas_CrAmount, 0 ) ), 0 )
+			     From GL_VchrDetail
+			    Where ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) 
+			 ) As DifferenceAmount
+		FROM GL_VchrMaster,   
+			 SETUP_Location,   
+			 SETUP_VoucherType  
+	   WHERE ( SETUP_Location.Loc_Id = GL_VchrMaster.Loc_Id ) and  
+			 ( SETUP_VoucherType.VchrType_Id = GL_VchrMaster.VchrType_Id ) and
+			 ( @AllLocation = 1 Or SETUP_Location.Loc_Id =  @LocationId ) and
+			 ( @AllVoucherType = 1 or SETUP_VoucherType.VchrType_Id = @VoucherTypeId ) and
+			 ( @AllDate = 1 Or CONVERT( DateTime, GL_VchrMaster.VchMas_Date, 103 )
+			   BETWEEN CONVERT(DateTime, @DateFrom, 103 ) and CONVERT(DateTime, @DateTo, 103 ) )
+	Order By SETUP_Location.Loc_Title,   
+			 SETUP_VoucherType.VchrType_Title,
+			 GL_VchrMaster.VchMas_Date;
+
+END
+

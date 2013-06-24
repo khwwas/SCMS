@@ -126,12 +126,33 @@ namespace SCMSDataLayer
         }
 
         public List<sp_VoucherEntryConsoleResult> GetVoucherEntryConsoleData(int ps_AllLocation, string ps_Location, int ps_AllVoucherType, string ps_VoucherType,
-                                                                             int ps_AllDate, string ps_DateFrom, string ps_DateTo)
+                                                                             int ps_AllDate, string ps_DateFrom, string ps_DateTo, bool ps_IncludeSecurity)
         {
             try
             {
+                List<sp_GetUserVoucherTypesByUserIdResult> UserVoucherTypes = new DALUserMenuRights().GetUserVoucherTypesByUserId(DALCommon.UserLoginId).ToList();
+                if (UserVoucherTypes != null && UserVoucherTypes.Count > 0)
+                {
+                    UserVoucherTypes = UserVoucherTypes.Where(c => c.SelectedVoucherType != "0").ToList();
+                }
+                string[] VoucherTypeIds = UserVoucherTypes.Select(c => c.VchrType_Id).ToArray();
+
+                List<sp_GetUserLocationsByUserIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByUserId(DALCommon.UserLoginId).ToList();
+                if (UserLocations != null && UserLocations.Count > 0)
+                {
+                    UserLocations = UserLocations.Where(c => c.SelectedLocation != "0").ToList();
+                }
+                string[] LocationsIds = UserLocations.Select(c => c.Loc_Id).ToArray();
+
                 SCMSDataContext dbSCMS = Connection.Create();
-                return dbSCMS.sp_VoucherEntryConsole(ps_AllLocation, ps_Location, ps_AllVoucherType, ps_VoucherType, ps_AllDate, ps_DateFrom, ps_DateTo).ToList();
+                if (ps_IncludeSecurity == true)
+                {
+                    return dbSCMS.sp_VoucherEntryConsole(ps_AllLocation, ps_Location, ps_AllVoucherType, ps_VoucherType, ps_AllDate, ps_DateFrom, ps_DateTo).ToList().Where(c => VoucherTypeIds.Contains(c.VchrType_Id) && LocationsIds.Contains(c.Loc_Id)).ToList();
+                }
+                else
+                {
+                    return dbSCMS.sp_VoucherEntryConsole(ps_AllLocation, ps_Location, ps_AllVoucherType, ps_VoucherType, ps_AllDate, ps_DateFrom, ps_DateTo).ToList();
+                }
             }
             catch
             {
@@ -139,7 +160,7 @@ namespace SCMSDataLayer
             }
         }
 
-        public List<GL_VchrMaster> GetLastRecordByVchrType(string ps_VoucherType) 
+        public List<GL_VchrMaster> GetLastRecordByVchrType(string ps_VoucherType)
         {
             try
             {
