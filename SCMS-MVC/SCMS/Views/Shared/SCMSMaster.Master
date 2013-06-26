@@ -127,9 +127,10 @@
                     <div class="floatleft marginleft10">
                         <ul class="inline-ul floatleft">
                             <li>Hello
-                                <%if (SCMS.SystemParameters.CurrentUserName != null &&
-                                      SCMS.SystemParameters.CurrentUserName.ToString().Trim() != "")
-                                      Response.Write(SCMS.SystemParameters.CurrentUserName);
+                                <% var user = (SCMSDataLayer.DB.SECURITY_User)Session["user"];
+                                   if (user.User_Title != null &&
+                                      user.User_Title != "")
+                                       Response.Write(user.User_Title);
                                 %>
                             </li>
                             <li><a href="../Login/Logout">Logout</a></li>

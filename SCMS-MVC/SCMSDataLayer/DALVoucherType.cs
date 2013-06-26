@@ -60,7 +60,10 @@ namespace SCMSDataLayer
         {
             try
             {
-                string UserLoginId = DALCommon.UserLoginId;
+                SECURITY_User user = (SECURITY_User)System.Web.HttpContext.Current.Session["user"];
+                string UserLoginId = user.User_Id;
+                string UserGroupId = user.UsrGrp_Id;
+
                 List<sp_GetUserVoucherTypesByUserIdResult> UserVoucherTypes = new DALUserMenuRights().GetUserVoucherTypesByUserId(UserLoginId).ToList();
                 if (UserVoucherTypes != null && UserVoucherTypes.Count > 0)
                 {

@@ -198,18 +198,6 @@ namespace SCMSDataLayer
             return _ReturnValue;
         }
 
-        public static string UserLoginId
-        {
-            get;
-            set;
-        }
-
-        public static string UserGroupId
-        {
-            get;
-            set;
-        }
-
         //public static int VoucherTypeCodeLength
         //{
         //    get;
@@ -374,4 +362,5 @@ namespace SCMSDataLayer
 
         //}
     }
+
 }

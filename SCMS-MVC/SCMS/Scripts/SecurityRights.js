@@ -4,12 +4,14 @@ function SetUserRights() {
     var currentUrl = document.URL.replace(document.URL.split('/')[0] + "/" + document.URL.split('/')[1] + "/" + document.URL.split('/')[2], "..");
     currentUrl = currentUrl.split('?')[0];
 
-    var rightsArr = $("a[href='" + currentUrl + "']").attr("data-rights").split(',');
-    var canAdd = rightsArr[0].replace("True", "").replace("False", "none");
-    var canEdit = rightsArr[1].replace("True", "").replace("False", "none");
-    var canDelete = rightsArr[2].replace("True", "").replace("False", "none");
-    var canPrint = rightsArr[3].replace("True", "").replace("False", "none");
-    var canImport = rightsArr[4].replace("True", "").replace("False", "none");
+    if ($("a[href='" + currentUrl + "']").attr("data-rights") != undefined) {
+        var rightsArr = $("a[href='" + currentUrl + "']").attr("data-rights").split(',');
+        var canAdd = rightsArr[0].replace("True", "").replace("False", "none");
+        var canEdit = rightsArr[1].replace("True", "").replace("False", "none");
+        var canDelete = rightsArr[2].replace("True", "").replace("False", "none");
+        var canPrint = rightsArr[3].replace("True", "").replace("False", "none");
+        var canImport = rightsArr[4].replace("True", "").replace("False", "none");
+    }
 
     if ($("input[value='Save']").val() != undefined) {
         $("input[value='Save']").css("display", canAdd);

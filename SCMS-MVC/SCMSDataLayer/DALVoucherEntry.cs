@@ -130,14 +130,18 @@ namespace SCMSDataLayer
         {
             try
             {
-                List<sp_GetUserVoucherTypesByUserIdResult> UserVoucherTypes = new DALUserMenuRights().GetUserVoucherTypesByUserId(DALCommon.UserLoginId).ToList();
+                SECURITY_User user = (SECURITY_User)System.Web.HttpContext.Current.Session["user"];
+                string UserLoginId = user.User_Id;
+                string UserGroupId = user.UsrGrp_Id;
+
+                List<sp_GetUserVoucherTypesByUserIdResult> UserVoucherTypes = new DALUserMenuRights().GetUserVoucherTypesByUserId(UserLoginId).ToList();
                 if (UserVoucherTypes != null && UserVoucherTypes.Count > 0)
                 {
                     UserVoucherTypes = UserVoucherTypes.Where(c => c.SelectedVoucherType != "0").ToList();
                 }
                 string[] VoucherTypeIds = UserVoucherTypes.Select(c => c.VchrType_Id).ToArray();
 
-                List<sp_GetUserLocationsByUserIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByUserId(DALCommon.UserLoginId).ToList();
+                List<sp_GetUserLocationsByUserIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByUserId(UserLoginId).ToList();
                 if (UserLocations != null && UserLocations.Count > 0)
                 {
                     UserLocations = UserLocations.Where(c => c.SelectedLocation != "0").ToList();

@@ -102,7 +102,10 @@ namespace SCMSDataLayer
         {
             try
             {
-                string UserLoginId = DALCommon.UserLoginId;
+                SECURITY_User user = (SECURITY_User)System.Web.HttpContext.Current.Session["user"];
+                string UserLoginId = user.User_Id;
+                string UserGroupId = user.UsrGrp_Id;
+
                 List<sp_GetUserLocationsByUserIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByUserId(UserLoginId).ToList();
                 if (UserLocations != null && UserLocations.Count > 0)
                 {
