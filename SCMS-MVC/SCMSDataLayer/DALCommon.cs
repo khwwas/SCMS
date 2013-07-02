@@ -198,6 +198,40 @@ namespace SCMSDataLayer
             return _ReturnValue;
         }
 
+        public static String GetMaxVoucherId(string ps_YearPrefix)
+        {
+            string _Sql = "", _ReturnValue = "";
+            Int32 _CodeLength = 10, _MaxId = 0;
+
+            try
+            {
+                var dbSCMS = Connection.Create();
+                SqlConnection con = (SqlConnection)dbSCMS.Connection;
+                con.Open();
+
+                _Sql += " Select IsNULL( Max( SubString( IsNULL( GL_VchrMaster.VchMas_Id, 0 ), (Len( '" + ps_YearPrefix + "' ) + 1 ), 10) ), 0 ) + 1 ";
+                _Sql += "   From GL_VchrMaster ";
+                _Sql += "  Where ( Left( GL_VchrMaster.VchrType_Id, Len( '" + ps_YearPrefix + "' ) ) = '" + ps_YearPrefix + "' )";
+
+                SqlCommand cmd = new SqlCommand(_Sql, con);
+                cmd = new SqlCommand(_Sql, con);
+                _MaxId = (Int32)cmd.ExecuteScalar();
+
+                if (_MaxId != null && _MaxId != 0)
+                {
+                    _ReturnValue = ps_YearPrefix + _MaxId.ToString().PadLeft((_CodeLength - ps_YearPrefix.Length), '0');
+                }
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message.ToString());
+            }
+
+            return _ReturnValue;
+        }
+
         //public static int VoucherTypeCodeLength
         //{
         //    get;
