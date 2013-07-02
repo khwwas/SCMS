@@ -113,7 +113,7 @@
                 <div class="floatleft">
                     <%
                         if (SCMS.SystemParameters.ModuleDesc.ToString() != null &&
-                           SCMS.SystemParameters.ModuleDesc.ToString().Trim() != "")
+                            SCMS.SystemParameters.ModuleDesc.ToString().Trim() != "")
                         { %>
                     <h1 style="color: White;">
                         <%
@@ -147,6 +147,11 @@
             <ul class="nav main">
                 <li class="ic-typography"><a href="../Home"><span>Home</span></a></li>
                 <li class="ic-typography"><a href="../Dashboard"><span>Application Dashboard</span></a></li>
+                <% 
+                    if (user.UsrGrp_Id != null &&
+                        user.UsrGrp_Id != "" &&
+                        user.UsrGrp_Id == "00001")
+                    {%>
                 <li class="ic-typography"><a href="javascript:" style="float: left"><span>Security</span></a>
                     <ul>
                         <li><a href="../UserGroup">User Groups</a> </li>
@@ -154,6 +159,7 @@
                         <li><a href="../UserRightsSetup">User Rights</a> </li>
                     </ul>
                 </li>
+                <%}%>
                 <li class="ic-typography"><a href="javascript:"><span>Setups</span></a>
                     <ul>
                         <%foreach (SCMSDataLayer.DB.sp_GetUserMenuRightsResult userMenuRow in userMenus)
