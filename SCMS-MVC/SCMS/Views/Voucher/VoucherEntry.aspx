@@ -17,7 +17,7 @@
     </style>
     <script type="text/javascript">
         $(document).ready(function () {
-            
+
             GetLastVoucherByTypeId();
             $('#txt_Date').Zebra_DatePicker({
                 format: 'm/d/Y'
@@ -242,6 +242,7 @@
                 }
             });
         }
+
         function SaveVoucher() {
             var MessageBox = document.getElementById('MessageBox');
             var txt_SelectedMasterId = document.getElementById("txt_SelectedMasterId");
@@ -252,6 +253,7 @@
             var ddl_VoucherType = document.getElementById('ddl_VoucherType');
             var txt_Difference = document.getElementById('txt_Difference');
             var ddl_Location = document.getElementById('ddl_Location');
+            var txt_VoucherMasterCode = document.getElementById('txt_Code');
 
             if (txt_Date.value == "") {
                 FadeIn(MessageBox);
@@ -329,7 +331,7 @@
                     index++;
                 });
 
-                VoucherDetailRows[$(".detailRow").length] = txt_SelectedMasterId.value + "║" + txt_Date.value + "║" + ddl_Status.value + "║" + ddl_VoucherType.value + "║" + ddl_Location.value + "║" + txt_Remarks.value;
+                VoucherDetailRows[$(".detailRow").length] = txt_SelectedMasterId.value + "║" + txt_Date.value + "║" + ddl_Status.value + "║" + ddl_VoucherType.value + "║" + ddl_Location.value + "║" + txt_Remarks.value + "║" + txt_VoucherMasterCode.value;
                 document.getElementById("Waiting_Image").style.display = "block";
                 document.getElementById("btn_Save").style.display = "none";
                 $.ajax({

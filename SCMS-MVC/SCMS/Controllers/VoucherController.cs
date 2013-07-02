@@ -174,7 +174,7 @@ namespace SCMS.Controllers
         {
             String[] MasterRow = VoucherDetailRows.Last().Split('║');
             String VoucherMasterId = MasterRow[0];
-            String VoucherMasterCode = MasterRow[0];
+            String VoucherMasterCode = MasterRow[6].Replace("[Auto]", null);
             DateTime VoucherDate = MasterRow[1] != null ? Convert.ToDateTime(MasterRow[1]) : DateTime.Now;
             string Status = MasterRow[2];
             String VoucherType = MasterRow[3];
@@ -195,12 +195,12 @@ namespace SCMS.Controllers
                 String Prefix = new DALVoucherType().GetAllData().Where(c => c.VchrType_Id.Equals(VoucherType)).SingleOrDefault().VchrType_Prefix;
                 ls_VchrTypId = Convert.ToString(Convert.ToInt32(VoucherType));
 
-                if (String.IsNullOrEmpty(VoucherMasterCode))
+                if (String.IsNullOrEmpty(VoucherMasterId))
                 {
                     if (DALCommon.AutoCodeGeneration("GL_VchrMaster") == 1)
                     {
                         //VoucherMasterCode = DALCommon.GetMaximumCode("GL_VchrMaster");
-                        VoucherMasterId = DALCommon.GetMaxVoucherId("GL_VchrMaster", VoucherDate.Year.ToString().Substring(2, 2));
+                        VoucherMasterId = DALCommon.GetMaxVoucherId(VoucherDate.Year.ToString().Substring(2, 2));
                         VoucherMasterCode = DALCommon.GetMaxVoucherCode("GL_VchrMaster", VoucherType, "");
                     }
                 }
@@ -213,8 +213,8 @@ namespace SCMS.Controllers
                 {
                     GL_Master.VchMas_Id = VoucherMasterId;
                     ViewData["VoucherId"] = VoucherMasterId;
-                    GL_Master.VchMas_Code = Prefix + Convert.ToInt32(LocationId).ToString() + VoucherMasterCode;
-                    ViewData["VoucherCode"] = Prefix + Convert.ToInt32(LocationId).ToString() + VoucherMasterCode;
+                    GL_Master.VchMas_Code = VoucherMasterCode;
+                    ViewData["VoucherCode"] = VoucherMasterCode;
                     GL_Master.VchMas_Date = VoucherDate;
                     GL_Master.Loc_Id = LocationId;
                     GL_Master.VchrType_Id = VoucherType;
