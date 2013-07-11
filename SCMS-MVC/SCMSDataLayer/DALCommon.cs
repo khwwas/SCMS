@@ -128,10 +128,10 @@ namespace SCMSDataLayer
             return _ReturnValue;
         }
 
-        public static String GetMaxVoucherCode(string ps_TableName, string ps_VoucherType, string ps_Year)
+        public static String GetMaxVoucherCode(string ps_TableName, string ps_VoucherTypeId, string ps_VoucherTypePrefix, string ps_LocationId)
         {
-            string _Sql = "", _ReturnValue = ""; // _ColumnName = "",
-            Int32 _CodeLength = 0, _MaxCode = 0; //_AutoCodeTag = 0, , 
+            string _Sql = "", _ReturnValue = "";
+            Int32 _CodeLength = 0, _MaxCode = 0;
             DataSet _ds = new DataSet();
 
             try
@@ -150,18 +150,6 @@ namespace SCMSDataLayer
 
                 if (_ds != null && _ds.Tables != null && _ds.Tables.Count > 0)
                 {
-                    //    if (_ds.Tables[0].Rows[0]["CodeGen_ColumnName"] != null &&
-                    //        _ds.Tables[0].Rows[0]["CodeGen_ColumnName"].ToString() != "")
-                    //    {
-                    //        _ColumnName = _ds.Tables[0].Rows[0]["CodeGen_ColumnName"].ToString();
-                    //    }
-
-                    //    if (_ds.Tables[0].Rows[0]["CodeGen_AutoTag"] != null &&
-                    //        _ds.Tables[0].Rows[0]["CodeGen_AutoTag"].ToString() != "")
-                    //    {
-                    //        _AutoCodeTag = Convert.ToInt32(_ds.Tables[0].Rows[0]["CodeGen_AutoTag"].ToString());
-                    //    }
-
                     if (_ds.Tables[0].Rows[0]["CodeGen_Length"] != null &&
                         _ds.Tables[0].Rows[0]["CodeGen_Length"].ToString() != "")
                     {
@@ -169,22 +157,16 @@ namespace SCMSDataLayer
                     }
 
                     _Sql = "";
-                    _Sql += " Select IsNULL( Max( IsNULL( GL_VchrMaster.VchMas_Id, 0 ) ), 0 ) + 1 ";
+                    _Sql += " Select IsNULL( Max( SubString( IsNULL( GL_VchrMaster.VchMas_Code, 0 ), ( Len( '" + ps_VoucherTypePrefix + "' ) + Len( " + Convert.ToInt32(ps_VoucherTypeId) + " ) + Len( " + Convert.ToInt32(ps_LocationId) + ") + 1 ), 20 ) ), 0 ) + 1 ";
                     _Sql += "   From GL_VchrMaster ";
-                    _Sql += "  Where ( GL_VchrMaster.VchrType_Id = '" + ps_VoucherType + "' )";
+                    _Sql += "  Where ( GL_VchrMaster.VchrType_Id = '" + ps_VoucherTypeId + "' ) And ";
+                    _Sql += "        ( GL_VchrMaster.Loc_Id = '" + ps_LocationId + "' ) ";
 
                     cmd = new SqlCommand(_Sql, con);
                     _MaxCode = (Int32)cmd.ExecuteScalar();
-                    if (_MaxCode == 1)
+                    if (_MaxCode != null && _MaxCode != 0)
                     {
-                        _ReturnValue = Convert.ToString(Convert.ToInt32(ps_VoucherType)) + _MaxCode.ToString().PadLeft(_CodeLength, '0');
-                    }
-                    else
-                    {
-                        //_MaxCode = _MaxCode.Substring(2, _CodeLength);
-                        //_ReturnValue = _MaxCode.PadLeft(_CodeLength, '0');
-                        //_ReturnValue += Convert.ToString(Convert.ToInt32(ps_VoucherType)) + _ReturnValue;
-                        _ReturnValue = _MaxCode.ToString();
+                        _ReturnValue = ps_VoucherTypePrefix + Convert.ToInt32(ps_LocationId) + Convert.ToInt32(ps_VoucherTypeId) + _MaxCode.ToString().PadLeft(_CodeLength, '0');
                     }
                 }
 
@@ -192,7 +174,7 @@ namespace SCMSDataLayer
             }
             catch (Exception ex)
             {
-                return _ReturnValue;
+                throw new Exception(ex.Message.ToString());
             }
 
             return _ReturnValue;
@@ -209,7 +191,7 @@ namespace SCMSDataLayer
                 SqlConnection con = (SqlConnection)dbSCMS.Connection;
                 con.Open();
 
-                _Sql += " Select IsNULL( Max( SubString( IsNULL( GL_VchrMaster.VchMas_Id, 0 ), (Len( '" + ps_YearPrefix + "' ) + 1 ), 10) ), 0 ) + 1 ";
+                _Sql += " Select IsNULL( Max( SubString( IsNULL( GL_VchrMaster.VchMas_Id, 0 ), ( Len( '" + ps_YearPrefix + "' ) + 1 ), 10) ), 0 ) + 1 ";
                 _Sql += "   From GL_VchrMaster ";
                 _Sql += "  Where ( Left( GL_VchrMaster.VchrType_Id, Len( '" + ps_YearPrefix + "' ) ) = '" + ps_YearPrefix + "' )";
 
