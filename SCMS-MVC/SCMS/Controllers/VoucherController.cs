@@ -173,7 +173,8 @@ namespace SCMS.Controllers
         public string SaveVoucher(IEnumerable<string> VoucherDetailRows)
         {
             String[] MasterRow = VoucherDetailRows.Last().Split('║');
-            String VoucherMasterCode = MasterRow[0];
+            String VoucherMasterId = MasterRow[0];
+            String VoucherMasterCode = MasterRow[6].Replace("[Auto]", null);
             DateTime VoucherDate = MasterRow[1] != null ? Convert.ToDateTime(MasterRow[1]) : DateTime.Now;
             string Status = MasterRow[2];
             String VoucherType = MasterRow[3];
@@ -194,11 +195,12 @@ namespace SCMS.Controllers
                 String Prefix = new DALVoucherType().GetAllData().Where(c => c.VchrType_Id.Equals(VoucherType)).SingleOrDefault().VchrType_Prefix;
                 ls_VchrTypId = Convert.ToString(Convert.ToInt32(VoucherType));
 
-                if (String.IsNullOrEmpty(VoucherMasterCode))
+                if (String.IsNullOrEmpty(VoucherMasterId))
                 {
                     if (DALCommon.AutoCodeGeneration("GL_VchrMaster") == 1)
                     {
                         //VoucherMasterCode = DALCommon.GetMaximumCode("GL_VchrMaster");
+                        VoucherMasterId = DALCommon.GetMaxVoucherId(VoucherDate.Year.ToString().Substring(2, 2));
                         VoucherMasterCode = DALCommon.GetMaxVoucherCode("GL_VchrMaster", VoucherType, "");
                     }
                 }
@@ -207,12 +209,12 @@ namespace SCMS.Controllers
                     flag = 1;
                 }
 
-                if (!String.IsNullOrEmpty(VoucherMasterCode))
+                if (!String.IsNullOrEmpty(VoucherMasterId) && !String.IsNullOrEmpty(VoucherMasterCode))
                 {
-                    GL_Master.VchMas_Id = VoucherMasterCode;
-                    ViewData["VoucherId"] = VoucherMasterCode;
-                    GL_Master.VchMas_Code = Prefix + Convert.ToInt32(LocationId).ToString() + VoucherMasterCode;
-                    ViewData["VoucherCode"] = Prefix + Convert.ToInt32(LocationId).ToString() + VoucherMasterCode;
+                    GL_Master.VchMas_Id = VoucherMasterId;
+                    ViewData["VoucherId"] = VoucherMasterId;
+                    GL_Master.VchMas_Code = VoucherMasterCode;
+                    ViewData["VoucherCode"] = VoucherMasterCode;
                     GL_Master.VchMas_Date = VoucherDate;
                     GL_Master.Loc_Id = LocationId;
                     GL_Master.VchrType_Id = VoucherType;
@@ -224,7 +226,7 @@ namespace SCMS.Controllers
                     {
                         if (flag == 1)
                         {
-                            objDalVoucherEntry.DeleteDetailRecordByMasterId(VoucherMasterCode);
+                            objDalVoucherEntry.DeleteDetailRecordByMasterId(VoucherMasterId);
                         }
 
                         for (int index = 0; index < VoucherDetailRows.ToList().Count - 1; index++)
@@ -246,7 +248,7 @@ namespace SCMS.Controllers
                             {
                                 GL_Detail = new GL_VchrDetail();
                                 GL_Detail.VchDet_Id = VoucherDetailCode;
-                                GL_Detail.VchMas_Id = VoucherMasterCode;
+                                GL_Detail.VchMas_Id = VoucherMasterId;
                                 GL_Detail.ChrtAcc_Id = Columns[0].ToString(); //Columns[0] has AccountId from Account Title drop down;
                                 GL_Detail.VchMas_DrAmount = (Columns[1] != null && Columns[1] != "") ? Convert.ToDecimal(Columns[1].Replace(",", "")) : 0; // Columns[1] has Debit Amount
                                 GL_Detail.VchMas_CrAmount = (Columns[2] != null && Columns[2] != "") ? Convert.ToDecimal(Columns[2].Replace(",", "")) : 0; // Columns[2] has Debit Amount

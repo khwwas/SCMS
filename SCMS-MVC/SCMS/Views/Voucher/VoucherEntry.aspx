@@ -17,7 +17,7 @@
     </style>
     <script type="text/javascript">
         $(document).ready(function () {
-            
+
             GetLastVoucherByTypeId();
             $('#txt_Date').Zebra_DatePicker({
                 format: 'm/d/Y'
@@ -242,9 +242,10 @@
                 }
             });
         }
+
         function SaveVoucher() {
             var MessageBox = document.getElementById('MessageBox');
-            var txt_SelectedMasterCode = document.getElementById("txt_SelectedMasterCode");
+            var txt_SelectedMasterId = document.getElementById("txt_SelectedMasterId");
             var txt_SelectedDetailCode = document.getElementById("txt_SelectedDetailCode");
             var txt_Date = document.getElementById('txt_Date');
             var ddl_Status = document.getElementById('ddl_Status');
@@ -252,6 +253,7 @@
             var ddl_VoucherType = document.getElementById('ddl_VoucherType');
             var txt_Difference = document.getElementById('txt_Difference');
             var ddl_Location = document.getElementById('ddl_Location');
+            var txt_VoucherMasterCode = document.getElementById('txt_Code');
 
             if (txt_Date.value == "") {
                 FadeIn(MessageBox);
@@ -329,7 +331,7 @@
                     index++;
                 });
 
-                VoucherDetailRows[$(".detailRow").length] = txt_SelectedMasterCode.value + "║" + txt_Date.value + "║" + ddl_Status.value + "║" + ddl_VoucherType.value + "║" + ddl_Location.value + "║" + txt_Remarks.value;
+                VoucherDetailRows[$(".detailRow").length] = txt_SelectedMasterId.value + "║" + txt_Date.value + "║" + ddl_Status.value + "║" + ddl_VoucherType.value + "║" + ddl_Location.value + "║" + txt_Remarks.value + "║" + txt_VoucherMasterCode.value;
                 document.getElementById("Waiting_Image").style.display = "block";
                 document.getElementById("btn_Save").style.display = "none";
                 $.ajax({
@@ -342,7 +344,7 @@
                         FadeIn(MessageBox);
                         var Arr = response.toString().split(",");
                         if (Arr[0] != null) {
-                            document.getElementById("txt_SelectedMasterCode").value = Arr[0];
+                            document.getElementById("txt_SelectedMasterId").value = Arr[0];
                         }
                         if (Arr[1] != null) {
                             document.getElementById("txt_Code").value = Arr[1];
@@ -375,7 +377,7 @@
 
     </script>
     <form id="frm_VoucherEntry" action='<%=Url.Content("~/") %>'>
-    <input type="hidden" id="txt_SelectedMasterCode" name="txt_SelectedMasterCode" value='<%=ViewData["VoucherId"] %>' />
+    <input type="hidden" id="txt_SelectedMasterId" name="txt_SelectedMasterId" value='<%=ViewData["VoucherId"] %>' />
     <input type="hidden" id="txt_SelectedDetailCode" name="txt_SelectedDetailCode" value="" />
     <input type="hidden" id="NarrationTitles" name="NarrationTitles" value='<%=ViewData["Narrations"] %>' />
     <%string AccountCodes = ViewData["ChartOfAccountCodesWithTitles"].ToString().Replace("'", "&#39"); %>
