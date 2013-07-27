@@ -138,7 +138,7 @@
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\ChartOfAccountController.cs" />
-    <Compile Include="Controllers\ApprovalLevelsController.cs" />
+    <Compile Include="Controllers\ApprovalLevelController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DashBoardController.cs" />

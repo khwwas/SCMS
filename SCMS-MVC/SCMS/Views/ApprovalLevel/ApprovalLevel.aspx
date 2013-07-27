@@ -133,19 +133,14 @@
             </div>
             <div class="CustomCell" style="width: 100px; height: 30px">
                 Code</div>
-            <input type="text" class="CustomText" style="width: 100px;" id="txt_Code" name="txt_Code"
-                maxlength="100" value="[Auto]" readonly="readonly" />
+            <input type="text" class="CustomText" style="width: 100px; font-weight: bold;" id="txt_Code"
+                name="txt_Code" maxlength="100" value="[Auto]" readonly="readonly" />
             <div class="Clear">
             </div>
             <div class="CustomCell" style="width: 100px; height: 30px">
                 Title</div>
             <input type="text" class="CustomText" style="width: 940px;" id="txt_Title" name="txt_Title"
                 maxlength="100" />
-            <div class="Clear">
-            </div>
-            <div class="CustomCell" style="width: 100px; height: 30px">
-                Company</div>
-            <%= Html.DropDownList("ddl_Company", null, new { style = "width:955px; padding: 4px;" })%>
             <div class="Clear">
             </div>
             <div style="float: right; margin-bottom: 10px;">

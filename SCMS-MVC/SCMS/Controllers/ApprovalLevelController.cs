@@ -8,7 +8,7 @@ using SCMSDataLayer.DB;
 
 namespace SCMS.Controllers
 {
-    public class ApprovalLevelsController : Controller
+    public class ApprovalLevelController : Controller 
     {
         //
         // GET: /ApprovalLevels/
