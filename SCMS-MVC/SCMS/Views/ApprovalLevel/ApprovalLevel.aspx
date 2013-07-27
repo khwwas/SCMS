@@ -2,7 +2,7 @@
     Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    Location Setup
+    Approval Level Setup
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <script type="text/javascript">
@@ -15,7 +15,6 @@
             var lcnt_MessageBox = document.getElementById('MessageBox');
             var lcnt_txtSelectedCode = document.getElementById("txt_SelectedCode");
             var lcnt_txtTitle = document.getElementById('txt_Title');
-            var lcnt_Cmp = document.getElementById('ddl_Company');
 
             if (lcnt_txtTitle.value == "") {
                 FadeIn(lcnt_MessageBox);
@@ -33,8 +32,8 @@
                 document.getElementById("btn_Save").style.display = "none";
                 $.ajax({
                     type: "POST",
-                    url: "Location/SaveRecord",
-                    data: { ps_Code: lcnt_txtSelectedCode.value, ps_Title: lcnt_txtTitle.value, ps_CmpId: lcnt_Cmp.value.toString() },
+                    url: "ApprovalLevel/SaveRecord",
+                    data: { ps_Code: lcnt_txtSelectedCode.value, ps_Title: lcnt_txtTitle.value },
                     success: function (response) {
                         html = response;
                         $("#GridContainer").html(response);
@@ -78,8 +77,7 @@
             document.getElementById('txt_SelectedCode').value = Id;
             document.getElementById('txt_Code').value = Id;
             document.getElementById('txt_Title').value = document.getElementById('txt_Title' + Id).innerHTML.trim().toString().replace("&nbsp", "");
-            document.getElementById('ddl_Company').value = document.getElementById('ddl_Company' + Id).innerHTML.trim().toString().replace("&nbsp", "");
-            ShowHideSaveButton();
+             ShowHideSaveButton();
             scroll(0, 0);
         }
 
@@ -89,7 +87,7 @@
                 var lcnt_MessageBox = document.getElementById('MessageBox');
                 var Url = document.getElementById('frm_LocationSetup').action;
 
-                Url += "Location/DeleteRecord?_pId=" + Id;
+                Url += "ApprovalLevel/DeleteRecord?_pId=" + Id;
                 $.ajax({
                     type: "GET",
                     url: Url,
@@ -127,25 +125,20 @@
     <input type="hidden" id="txt_SelectedCode" name="txt_SelectedCode" value="" />
     <div class="box round first fullpage grid">
         <h2>
-            Location Setup</h2>
+            Approval Level Setup</h2>
         <div class="block">
             <div id="MessageBox">
             </div>
             <div class="CustomCell" style="width: 100px; height: 30px">
                 Code</div>
-            <input type="text" class="CustomText" style="width: 100px;" id="txt_Code" name="txt_Code"
-                maxlength="100" value="[Auto]" readonly="readonly" />
+            <input type="text" class="CustomText" style="width: 100px; font-weight: bold;" id="txt_Code"
+                name="txt_Code" maxlength="100" value="[Auto]" readonly="readonly" />
             <div class="Clear">
             </div>
             <div class="CustomCell" style="width: 100px; height: 30px">
                 Title</div>
             <input type="text" class="CustomText" style="width: 940px;" id="txt_Title" name="txt_Title"
                 maxlength="100" />
-            <div class="Clear">
-            </div>
-            <div class="CustomCell" style="width: 100px; height: 30px">
-                Company</div>
-            <%= Html.DropDownList("ddl_Company", null, new { style = "width:955px; padding: 4px;" })%>
             <div class="Clear">
             </div>
             <div style="float: right; margin-bottom: 10px;">

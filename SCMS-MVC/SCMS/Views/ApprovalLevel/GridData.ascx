@@ -30,12 +30,12 @@
         </tr>
     </thead>
     <tbody>
-        <%var lList_Data = new SCMSDataLayer.DALApprovalLevel().GetAllData();
-          if (lList_Data != null && lList_Data.Count > 0)
+        <%var lList_Data = new SCMSDataLayer.DALApprovalLevel().GetAllData();  
+          if (lList_Data != null && lList_Data.Count > 0) 
           {
-              foreach (SCMSDataLayer.DB.sp_GetApprovalLevelListResult lRow_Data in lList_Data)
-              {%>
-        <tr class='odd gradeX' style='line-height: 15px;'>
+              foreach (SCMSDataLayer.DB.sp_GetApprovalLevelListResult lRow_Data in lList_Data)  
+              {%> 
+        <tr class='odd gradeX' style='line-height: 15px;'> 
             <td>
                 <div onclick="javascript:return EditRecord('<%=lRow_Data.AprvLvl_Id %>')" style="width: 22px;
                     padding-right: 5px; float: left; cursor: pointer;">

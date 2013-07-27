@@ -77,7 +77,7 @@ namespace SCMSDataLayer
         /// Use This method to get all locations without Security
         /// </summary>
         /// <returns></returns>
-        public List<sp_GetLocationListResult> GetAllData()
+        public List<sp_GetApprovalLevelListResult> GetAllData()
         {
             try
             {
@@ -89,7 +89,7 @@ namespace SCMSDataLayer
                 //}
                 //string[] LocationsIds = UserLocations.Select(c => c.AprvLvl_Id).ToArray();
                 SCMSDataContext dbSCMS = Connection.Create();
-                return dbSCMS.sp_GetLocationList().ToList();//.Where(c => LocationsIds.Contains(c.AprvLvl_Id)).ToList();
+                return dbSCMS.sp_GetApprovalLevelList().ToList();//.Where(c => LocationsIds.Contains(c.AprvLvl_Id)).ToList();
             }
             catch
             {
@@ -97,43 +97,36 @@ namespace SCMSDataLayer
             }
         }
 
-        // Use for the drop downs to implement Security
-        public List<sp_PopulateLocationListResult> PopulateData()
+        //// Use for the drop downs to implement Security
+        //public List<sp_PopulateLocationListResult> PopulateData()
+        //{
+        //    try
+        //    {
+        //        SECURITY_User user = (SECURITY_User)System.Web.HttpContext.Current.Session["user"];
+        //        string UserLoginId = user.User_Id;
+        //        string UserGroupId = user.UsrGrp_Id;
+
+        //        List<sp_GetUserLocationsByUserIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByUserId(UserLoginId).ToList();
+        //        if (UserLocations != null && UserLocations.Count > 0)
+        //        {
+        //            UserLocations = UserLocations.Where(c => c.SelectedLocation != "0").ToList();
+        //        }
+        //        string[] LocationsIds = UserLocations.Select(c => c.AprvLvl_Id).ToArray();
+        //        SCMSDataContext dbSCMS = Connection.Create();
+        //        return dbSCMS.sp_PopulateLocationList().ToList().Where(c => LocationsIds.Contains(c.AprvLvl_Id)).ToList();
+        //    }
+        //    catch
+        //    {
+        //        return null;
+        //    }
+        //}
+
+        public List<SYSTEM_ApprovalLevel> GetAllApprovalLevel() 
         {
             try
             {
-                SECURITY_User user = (SECURITY_User)System.Web.HttpContext.Current.Session["user"];
-                string UserLoginId = user.User_Id;
-                string UserGroupId = user.UsrGrp_Id;
-
-                List<sp_GetUserLocationsByUserIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByUserId(UserLoginId).ToList();
-                if (UserLocations != null && UserLocations.Count > 0)
-                {
-                    UserLocations = UserLocations.Where(c => c.SelectedLocation != "0").ToList();
-                }
-                string[] LocationsIds = UserLocations.Select(c => c.AprvLvl_Id).ToArray();
                 SCMSDataContext dbSCMS = Connection.Create();
-                return dbSCMS.sp_PopulateLocationList().ToList().Where(c => LocationsIds.Contains(c.AprvLvl_Id)).ToList();
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        public List<SYSTEM_ApprovalLevel> GetAllLocation()
-        {
-            try
-            {
-                //string UserLoginId = DALCommon.UserLoginId;
-                //List<sp_GetUserLocationsByUserIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByUserId(UserLoginId).ToList();
-                //if (UserLocations != null && UserLocations.Count > 0)
-                //{
-                //    UserLocations = UserLocations.Where(c => c.SelectedLocation != "0").ToList();
-                //}
-                //string[] LocationsIds = UserLocations.Select(c => c.AprvLvl_Id).ToArray();
-                SCMSDataContext dbSCMS = Connection.Create();
-                return dbSCMS.SYSTEM_ApprovalLevels.ToList();//.Where(c => LocationsIds.Contains(c.AprvLvl_Id) && c.AprvLvl_Active == 1).ToList();
+                return dbSCMS.SYSTEM_ApprovalLevels.ToList(); 
             }
             catch
             {

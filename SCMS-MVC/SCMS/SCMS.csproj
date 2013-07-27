@@ -138,7 +138,7 @@
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\ChartOfAccountController.cs" />
-    <Compile Include="Controllers\ApprovalLevelsController.cs" />
+    <Compile Include="Controllers\ApprovalLevelController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DashBoardController.cs" />
@@ -552,6 +552,8 @@
     <Content Include="img\header-repeat.jpg" />
     <Content Include="img\header_inner.png" />
     <Content Include="img\header_inner_corners.png" />
+    <Content Include="img\Home\Home1.jpg" />
+    <Content Include="img\Home\Home2.jpg" />
     <Content Include="img\horizontal.jpg" />
     <Content Include="img\house.png" />
     <Content Include="img\icon-charts-graphs.png" />
