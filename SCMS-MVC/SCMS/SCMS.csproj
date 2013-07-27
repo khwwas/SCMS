@@ -138,6 +138,7 @@
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\ChartOfAccountController.cs" />
+    <Compile Include="Controllers\ApprovalLevelsController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DashBoardController.cs" />
@@ -1066,6 +1067,8 @@
     <Content Include="Views\ChartOfAccount\GridData.ascx" />
     <Content Include="Views\Bank\Bank.aspx" />
     <Content Include="Views\Bank\GridData.ascx" />
+    <Content Include="Views\ApprovalLevel\GridData.ascx" />
+    <Content Include="Views\ApprovalLevel\ApprovalLevel.aspx" />
     <Content Include="Views\Employee\Placement.ascx" />
     <Content Include="Views\Employee\Employee.aspx" />
     <Content Include="Views\Employee\GridData.ascx" />
