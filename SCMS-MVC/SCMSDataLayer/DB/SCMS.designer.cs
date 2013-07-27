@@ -18206,7 +18206,7 @@ namespace SCMSDataLayer.DB
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SYSTEM_ApprovalLevels")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SYSTEM_ApprovalLevel")]
 	public partial class SYSTEM_ApprovalLevel : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		

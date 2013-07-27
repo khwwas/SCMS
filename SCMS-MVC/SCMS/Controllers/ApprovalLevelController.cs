@@ -19,10 +19,8 @@ namespace SCMS.Controllers
             return View("ApprovalLevel");
         }
 
-        public ActionResult SaveRecord(String ps_Code, String ps_Title, String ps_CmpId)
+        public ActionResult SaveRecord(String ps_Code, String ps_Title)
         {
-            bool isEdit = true;
-
             Int32 li_ReturnValue = 0;
 
             try
@@ -31,7 +29,6 @@ namespace SCMS.Controllers
 
                 if (String.IsNullOrEmpty(ps_Code))
                 {
-                    isEdit = false;
                     if (DALCommon.AutoCodeGeneration("SYSTEM_ApprovalLevel") == 1)
                     {
                         ps_Code = DALCommon.GetMaximumCode("SYSTEM_ApprovalLevel");

@@ -767,7 +767,7 @@
       <Association Name="SYSTEM_Nature_SETUP_ChartOfAccount" Member="SETUP_ChartOfAccounts" ThisKey="Natr_Id" OtherKey="Natr_Id" Type="SETUP_ChartOfAccount" />
     </Type>
   </Table>
-  <Table Name="dbo.SYSTEM_ApprovalLevels" Member="SYSTEM_ApprovalLevels">
+  <Table Name="dbo.SYSTEM_ApprovalLevel" Member="SYSTEM_ApprovalLevels">
     <Type Name="SYSTEM_ApprovalLevel">
       <Column Name="AprvLvl_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="AprvLvl_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
