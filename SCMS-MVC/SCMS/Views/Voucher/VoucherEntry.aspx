@@ -229,7 +229,7 @@
         function GetLastVoucherByTypeId() {
             $.ajax({
                 type: "GET",
-                url: "../Voucher/GetLastRecordByVoucherTypeId?VoucherTypeId=" + $("#ddl_VoucherType").val(),
+                url: "../Voucher/GetLastRecordByVoucherTypeId?LocationId=" + $("#ddl_Location").val() + "&VoucherTypeId=" + $("#ddl_VoucherType").val(),
                 success: function (response) {
                     $("#LastVoucherContainer").html(response);
                     $("#txt_Date").next().remove("style");
@@ -423,7 +423,7 @@
         <div class="CustomCell" style="width: 97px; height: 30px;">
             Location</div>
         <div class="CustomCell" style="width: 270px; height: 30px;">
-            <%= Html.DropDownList("ddl_Location", null, new { style = "width:955px;"})%>
+            <%= Html.DropDownList("ddl_Location", null, new { style = "width:955px;", onchange = "GetLastVoucherByTypeId()" })%>
         </div>
         <div class="Clear">
         </div>

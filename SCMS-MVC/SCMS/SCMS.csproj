@@ -172,6 +172,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\Datasets\dsBalanceSheet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsBalanceSheet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Datasets\dsChartOfAccount.Designer.cs">
       <DependentUpon>dsChartOfAccount.xsd</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -216,6 +221,18 @@
       <DependentUpon>dsVoucherTypes.xsd</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Reports\Reps\rptVoucherDocumentSummary.cs">
+      <DependentUpon>rptVoucherDocumentSummary.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reports\Reps\rptBalanceSheet.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBalanceSheet.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\Reps\rptTrialBalance-Opening.cs">
       <DependentUpon>rptTrialBalance-Opening.rpt</DependentUpon>
@@ -1676,6 +1693,17 @@
     <Content Include="Widgets\tests\jqxvalidator\jqxvalidation-Tests.htm" />
     <Content Include="Widgets\tests\jqxwindow\jqwindow-Tests.htm" />
     <Content Include="Views\Shared\DashBoardMaster.Master" />
+    <None Include="Reports\Datasets\dsBalanceSheet.xsc">
+      <DependentUpon>dsBalanceSheet.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\Datasets\dsBalanceSheet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsBalanceSheet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\Datasets\dsBalanceSheet.xss">
+      <DependentUpon>dsBalanceSheet.xsd</DependentUpon>
+    </None>
     <None Include="Reports\Datasets\dsChartOfAccount.xsc">
       <DependentUpon>dsChartOfAccount.xsd</DependentUpon>
     </None>
@@ -1865,6 +1893,14 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reports\Reps\rptVoucherDocumentSummary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptVoucherDocumentSummary.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Reps\rptBalanceSheet.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBalanceSheet.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Reps\rptTrialBalance-Opening.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptTrialBalance-Opening.cs</LastGenOutput>

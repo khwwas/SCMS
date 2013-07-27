@@ -80,6 +80,11 @@ namespace SCMS.Reports
             get;
             set;
         }
+        public static string VoucherPrint
+        {
+            get;
+            set;
+        }
 
         public static string TrialActivity  
         {

@@ -52,12 +52,13 @@ namespace SCMS.Controllers
 
         #region VoucherDocument
         public string SetParam_VoucherDocument(string ps_ReportName, string ps_Location, string ps_VoucherTypes, string pi_AllDoc, string ps_DocFrom, string ps_DocTo,
-                                               string pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo)
+                                               string pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo, string ps_VoucherPrint)
         {
             ResetParameters();
             Reports.ReportParameters.ReportName = ps_ReportName;
             Reports.ReportParameters.Location = ps_Location;
             Reports.ReportParameters.VoucherTypes = ps_VoucherTypes;
+            Reports.ReportParameters.VoucherPrint = ps_VoucherPrint;
 
             if (pi_AllDoc == "1")
             {
@@ -172,6 +173,19 @@ namespace SCMS.Controllers
 
         #region Income Statement
         public string SetParam_IncomeStatement(string ps_ReportName, string ps_Location, Int32 pi_Level, Int32 pi_Year)
+        {
+            ResetParameters();
+            Reports.ReportParameters.ReportName = ps_ReportName;
+            Reports.ReportParameters.Location = ps_Location;
+            Reports.ReportParameters.Level = pi_Level;
+            Reports.ReportParameters.Year = pi_Year;
+
+            return "OK";
+        }
+        #endregion
+
+        #region BalanceSheet
+        public string SetParam_BalanceSheet(string ps_ReportName, string ps_Location, Int32 pi_Level, Int32 pi_Year)
         {
             ResetParameters();
             Reports.ReportParameters.ReportName = ps_ReportName;

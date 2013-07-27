@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsBalanceSheet" targetNamespace="http://tempuri.org/dsBalanceSheet.xsd" xmlns:mstns="http://tempuri.org/dsBalanceSheet.xsd" xmlns="http://tempuri.org/dsBalanceSheet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsBalanceSheet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsBalanceSheet" msprop:Generator_UserDSName="dsBalanceSheet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="BalanceSheet" msprop:Generator_TableClassName="BalanceSheetDataTable" msprop:Generator_TableVarName="tableBalanceSheet" msprop:Generator_TablePropName="BalanceSheet" msprop:Generator_RowDeletingName="BalanceSheetRowDeleting" msprop:Generator_UserTableName="BalanceSheet" msprop:Generator_RowChangingName="BalanceSheetRowChanging" msprop:Generator_RowEvHandlerName="BalanceSheetRowChangeEventHandler" msprop:Generator_RowDeletedName="BalanceSheetRowDeleted" msprop:Generator_RowEvArgName="BalanceSheetRowChangeEvent" msprop:Generator_RowChangedName="BalanceSheetRowChanged" msprop:Generator_RowClassName="BalanceSheetRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="RowTitle" msprop:Generator_ColumnVarNameInTable="columnRowTitle" msprop:Generator_ColumnPropNameInRow="RowTitle" msprop:Generator_ColumnPropNameInTable="RowTitleColumn" msprop:Generator_UserColumnName="RowTitle" type="xs:string" minOccurs="0" />
+              <xs:element name="Natr_Title" msprop:Generator_ColumnVarNameInTable="columnNatr_Title" msprop:Generator_ColumnPropNameInRow="Natr_Title" msprop:Generator_ColumnPropNameInTable="Natr_TitleColumn" msprop:Generator_UserColumnName="Natr_Title" type="xs:string" minOccurs="0" />
+              <xs:element name="ChrtAcc_Code" msprop:Generator_ColumnVarNameInTable="columnChrtAcc_Code" msprop:Generator_ColumnPropNameInRow="ChrtAcc_Code" msprop:Generator_ColumnPropNameInTable="ChrtAcc_CodeColumn" msprop:Generator_UserColumnName="ChrtAcc_Code" type="xs:string" minOccurs="0" />
+              <xs:element name="ChrtAcc_CodeDisplay" msprop:Generator_ColumnVarNameInTable="columnChrtAcc_CodeDisplay" msprop:Generator_ColumnPropNameInRow="ChrtAcc_CodeDisplay" msprop:Generator_ColumnPropNameInTable="ChrtAcc_CodeDisplayColumn" msprop:Generator_UserColumnName="ChrtAcc_CodeDisplay" type="xs:string" minOccurs="0" />
+              <xs:element name="ChrtAcc_Title" msprop:Generator_ColumnVarNameInTable="columnChrtAcc_Title" msprop:Generator_ColumnPropNameInRow="ChrtAcc_Title" msprop:Generator_ColumnPropNameInTable="ChrtAcc_TitleColumn" msprop:Generator_UserColumnName="ChrtAcc_Title" type="xs:string" minOccurs="0" />
+              <xs:element name="ChrtAcc_Level" msprop:Generator_ColumnVarNameInTable="columnChrtAcc_Level" msprop:Generator_ColumnPropNameInRow="ChrtAcc_Level" msprop:Generator_ColumnPropNameInTable="ChrtAcc_LevelColumn" msprop:Generator_UserColumnName="ChrtAcc_Level" type="xs:int" minOccurs="0" />
+              <xs:element name="CurrentYear_Amount" msprop:Generator_ColumnVarNameInTable="columnCurrentYear_Amount" msprop:Generator_ColumnPropNameInRow="CurrentYear_Amount" msprop:Generator_ColumnPropNameInTable="CurrentYear_AmountColumn" msprop:Generator_UserColumnName="CurrentYear_Amount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="PreviousYear_Amount" msprop:Generator_ColumnVarNameInTable="columnPreviousYear_Amount" msprop:Generator_ColumnPropNameInRow="PreviousYear_Amount" msprop:Generator_ColumnPropNameInTable="PreviousYear_AmountColumn" msprop:Generator_UserColumnName="PreviousYear_Amount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="SortOrder" msprop:Generator_ColumnVarNameInTable="columnSortOrder" msprop:Generator_ColumnPropNameInRow="SortOrder" msprop:Generator_ColumnPropNameInTable="SortOrderColumn" msprop:Generator_UserColumnName="SortOrder" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

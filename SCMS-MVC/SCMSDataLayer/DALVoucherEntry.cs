@@ -164,12 +164,12 @@ namespace SCMSDataLayer
             }
         }
 
-        public List<GL_VchrMaster> GetLastRecordByVchrType(string ps_VoucherType)
+        public List<GL_VchrMaster> GetLastRecordByVchrType(string ps_LocationId, string ps_VoucherType)
         {
             try
             {
                 SCMSDataContext dbSCMS = Connection.Create();
-                return dbSCMS.GL_VchrMasters.Where(c => c.VchrType_Id == ps_VoucherType).ToList();
+                return dbSCMS.GL_VchrMasters.Where(c => c.Loc_Id == ps_LocationId && c.VchrType_Id == ps_VoucherType).ToList();
             }
             catch
             {

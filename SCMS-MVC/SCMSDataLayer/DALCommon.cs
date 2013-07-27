@@ -193,7 +193,7 @@ namespace SCMSDataLayer
 
                 _Sql += " Select IsNULL( Max( SubString( IsNULL( GL_VchrMaster.VchMas_Id, 0 ), ( Len( '" + ps_YearPrefix + "' ) + 1 ), 10) ), 0 ) + 1 ";
                 _Sql += "   From GL_VchrMaster ";
-                _Sql += "  Where ( Left( GL_VchrMaster.VchrType_Id, Len( '" + ps_YearPrefix + "' ) ) = '" + ps_YearPrefix + "' )";
+                _Sql += "  Where ( Left( GL_VchrMaster.VchMas_Id, Len( '" + ps_YearPrefix + "' ) ) = '" + ps_YearPrefix + "' )";
 
                 SqlCommand cmd = new SqlCommand(_Sql, con);
                 cmd = new SqlCommand(_Sql, con);

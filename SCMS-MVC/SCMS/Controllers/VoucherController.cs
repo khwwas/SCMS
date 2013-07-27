@@ -147,9 +147,9 @@ namespace SCMS.Controllers
             return Response;
         }
 
-        public String GetLastRecordByVoucherTypeId(string VoucherTypeId)
+        public String GetLastRecordByVoucherTypeId(string LocationId, string VoucherTypeId)
         {
-            var Voucher = new DALVoucherEntry().GetLastRecordByVchrType(VoucherTypeId);
+            var Voucher = new DALVoucherEntry().GetLastRecordByVchrType(LocationId, VoucherTypeId);
             String LastVoucher = "";
             if (Voucher != null && Voucher.Count > 0)
             {
@@ -201,7 +201,7 @@ namespace SCMS.Controllers
                     {
                         //VoucherMasterCode = DALCommon.GetMaximumCode("GL_VchrMaster");
                         VoucherMasterId = DALCommon.GetMaxVoucherId(VoucherDate.Year.ToString().Substring(2, 2));
-                        VoucherMasterCode = DALCommon.GetMaxVoucherCode("GL_VchrMaster", VoucherType, "");
+                        VoucherMasterCode = DALCommon.GetMaxVoucherCode("GL_VchrMaster", VoucherType, Prefix, LocationId);
                     }
                 }
                 else

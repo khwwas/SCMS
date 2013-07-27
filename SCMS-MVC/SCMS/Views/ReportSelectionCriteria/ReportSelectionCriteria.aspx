@@ -62,6 +62,8 @@
                 document.getElementById('div_DateRange').style.display = "block";
                 document.getElementById('txt_DateFrom').disabled = true;
                 document.getElementById('txt_DateTo').disabled = true;
+
+                document.getElementById('div_VoucherPrint').style.display = "block";
             }
             else if (ps_ReportName.toLowerCase() == "LedgerDtLocWise".toLowerCase()) {
                 document.getElementById('div_Location').style.display = "block";
@@ -101,7 +103,8 @@
                 document.getElementById('txt_DateFrom').disabled = true;
                 document.getElementById('txt_DateTo').disabled = true;
             }
-            else if (ps_ReportName.toLowerCase() == "IncomeStatement".toLowerCase()) {
+            else if (ps_ReportName.toLowerCase() == "IncomeStatement".toLowerCase() ||
+                     ps_ReportName.toLowerCase() == "BalanceSheet".toLowerCase()) {
                 document.getElementById('div_Location').style.display = "block";
                 document.getElementById('div_Level').style.display = "block";
                 document.getElementById('div_Year').style.display = "block";
@@ -126,8 +129,9 @@
                 var pcnt_AllDoc = document.getElementById('chk_AllVchrDoc');
                 var pcnt_DocFrom = document.getElementById('ddl_VchrDocFrom');
                 var pcnt_DocTo = document.getElementById('ddl_VchrDocTo');
-
-                var li_AllDoc, li_AllDate;
+                var pcnt_VchrDocSummary = document.getElementById('rdo_VchrDocSummary').checked;
+                var pcnt_VchrDocDetail = document.getElementById('rdo_VchrDocDetail').checked;
+                var li_AllDoc, li_AllDate, ls_VoucherPrint;
 
                 if (pcnt_AllDoc.checked == true) {
                     li_AllDoc = 1;
@@ -143,9 +147,16 @@
                     li_AllDate = 0;
                 }
 
+                if (pcnt_VchrDocSummary.toString() == "true") {
+                    ls_VoucherPrint = "Summary";
+                }
+                else if (pcnt_VchrDocDetail.toString() == "true") {
+                    ls_VoucherPrint = "Detail";
+                }
+
                 ps_Url = "../ReportSelectionCriteria/SetParam_VoucherDocument?ps_ReportName=" + ps_ReportName + "&ps_Location=" + pcnt_Location.value +
                          "&ps_VoucherTypes=" + pcnt_VoucherTypes.value + "&pi_AllDoc=" + li_AllDoc.toString() + "&ps_DocFrom=" + pcnt_DocFrom.value + "&ps_DocTo=" + pcnt_DocTo.value +
-                         "&pi_AllDate=" + li_AllDate.toString() + "&pdt_DateFrom=" + pcnt_DateFrom.value + "&pdt_DateTo=" + pcnt_DateTo.value + "";
+                         "&pi_AllDate=" + li_AllDate.toString() + "&pdt_DateFrom=" + pcnt_DateFrom.value + "&pdt_DateTo=" + pcnt_DateTo.value + "&ps_VoucherPrint=" + ls_VoucherPrint + "";
             }
             else if (ps_ReportName.toLowerCase() == "LedgerDtLocWise".toLowerCase() ||
                      ps_ReportName.toLowerCase() == "LedgerDtAccWise".toLowerCase()) {
@@ -237,6 +248,14 @@
                 var pcnt_Year = document.getElementById('ddl_Year');
 
                 ps_Url = "../ReportSelectionCriteria/SetParam_IncomeStatement?ps_ReportName=" + ps_ReportName + "&ps_Location=" + pcnt_Location.value +
+                         "&pi_Level=" + pcnt_Level.value + "&pi_Year=" + pcnt_Year.value;
+            }
+            else if (ps_ReportName.toLowerCase() == "BalanceSheet".toLowerCase()) {
+                var pcnt_Location = document.getElementById('ddl_location');
+                var pcnt_Level = document.getElementById('txt_Level');
+                var pcnt_Year = document.getElementById('ddl_Year');
+
+                ps_Url = "../ReportSelectionCriteria/SetParam_BalanceSheet?ps_ReportName=" + ps_ReportName + "&ps_Location=" + pcnt_Location.value +
                          "&pi_Level=" + pcnt_Level.value + "&pi_Year=" + pcnt_Year.value;
             };
 
@@ -344,6 +363,19 @@
                 </script>
                 <input type="checkbox" class="checkbox" id="chk_AllDate" name="chk_AllDate" onclick="CheckAllDate()"
                     checked="checked" />
+            </div>
+            <div class="Clear">
+            </div>
+            <div id="div_VoucherPrint" style="display: none;">
+                <div class="CustomCell" style="width: 150px; height: 30px;">
+                    Voucher Print
+                </div>
+                <div class="CustomCell" style="width: 650px;">
+                    Summary&nbsp;<input type="radio" class="radio" id="rdo_VchrDocSummary" name="VoucherPrint"
+                        value="VchrDocSummary" checked="checked" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Detail&nbsp;<input type="radio"
+                        class="radio" id="rdo_VchrDocDetail" name="VoucherPrint" value="VchrDocDetail" />
+                </div>
             </div>
             <div class="Clear">
             </div>

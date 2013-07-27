@@ -20,17 +20,17 @@ namespace SCMS.Reports.Datasets {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("dsVoucherDocument")]
+    [global::System.Xml.Serialization.XmlRootAttribute("dsBalanceSheet")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class dsVoucherDocument : global::System.Data.DataSet {
+    public partial class dsBalanceSheet : global::System.Data.DataSet {
         
-        private VoucherDocumentDataTable tableVoucherDocument;
+        private BalanceSheetDataTable tableBalanceSheet;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public dsVoucherDocument() {
+        public dsBalanceSheet() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -41,7 +41,7 @@ namespace SCMS.Reports.Datasets {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected dsVoucherDocument(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected dsBalanceSheet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -54,8 +54,8 @@ namespace SCMS.Reports.Datasets {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["VoucherDocument"] != null)) {
-                    base.Tables.Add(new VoucherDocumentDataTable(ds.Tables["VoucherDocument"]));
+                if ((ds.Tables["BalanceSheet"] != null)) {
+                    base.Tables.Add(new BalanceSheetDataTable(ds.Tables["BalanceSheet"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -79,9 +79,9 @@ namespace SCMS.Reports.Datasets {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public VoucherDocumentDataTable VoucherDocument {
+        public BalanceSheetDataTable BalanceSheet {
             get {
-                return this.tableVoucherDocument;
+                return this.tableBalanceSheet;
             }
         }
         
@@ -127,7 +127,7 @@ namespace SCMS.Reports.Datasets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            dsVoucherDocument cln = ((dsVoucherDocument)(base.Clone()));
+            dsBalanceSheet cln = ((dsBalanceSheet)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -152,8 +152,8 @@ namespace SCMS.Reports.Datasets {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["VoucherDocument"] != null)) {
-                    base.Tables.Add(new VoucherDocumentDataTable(ds.Tables["VoucherDocument"]));
+                if ((ds.Tables["BalanceSheet"] != null)) {
+                    base.Tables.Add(new BalanceSheetDataTable(ds.Tables["BalanceSheet"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -188,10 +188,10 @@ namespace SCMS.Reports.Datasets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tableVoucherDocument = ((VoucherDocumentDataTable)(base.Tables["VoucherDocument"]));
+            this.tableBalanceSheet = ((BalanceSheetDataTable)(base.Tables["BalanceSheet"]));
             if ((initTable == true)) {
-                if ((this.tableVoucherDocument != null)) {
-                    this.tableVoucherDocument.InitVars();
+                if ((this.tableBalanceSheet != null)) {
+                    this.tableBalanceSheet.InitVars();
                 }
             }
         }
@@ -199,18 +199,18 @@ namespace SCMS.Reports.Datasets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "dsVoucherDocument";
+            this.DataSetName = "dsBalanceSheet";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/dsVoucherDocument.xsd";
+            this.Namespace = "http://tempuri.org/dsBalanceSheet.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableVoucherDocument = new VoucherDocumentDataTable();
-            base.Tables.Add(this.tableVoucherDocument);
+            this.tableBalanceSheet = new BalanceSheetDataTable();
+            base.Tables.Add(this.tableBalanceSheet);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeVoucherDocument() {
+        private bool ShouldSerializeBalanceSheet() {
             return false;
         }
         
@@ -225,7 +225,7 @@ namespace SCMS.Reports.Datasets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            dsVoucherDocument ds = new dsVoucherDocument();
+            dsBalanceSheet ds = new dsBalanceSheet();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -270,41 +270,37 @@ namespace SCMS.Reports.Datasets {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void VoucherDocumentRowChangeEventHandler(object sender, VoucherDocumentRowChangeEvent e);
+        public delegate void BalanceSheetRowChangeEventHandler(object sender, BalanceSheetRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class VoucherDocumentDataTable : global::System.Data.TypedTableBase<VoucherDocumentRow> {
+        public partial class BalanceSheetDataTable : global::System.Data.TypedTableBase<BalanceSheetRow> {
             
-            private global::System.Data.DataColumn columnVchMas_Id;
+            private global::System.Data.DataColumn columnRowTitle;
             
-            private global::System.Data.DataColumn columnVchMas_Code;
-            
-            private global::System.Data.DataColumn columnVchMas_Date;
-            
-            private global::System.Data.DataColumn columnVchrType_Title;
-            
-            private global::System.Data.DataColumn columnVchMas_Status;
+            private global::System.Data.DataColumn columnNatr_Title;
             
             private global::System.Data.DataColumn columnChrtAcc_Code;
             
+            private global::System.Data.DataColumn columnChrtAcc_CodeDisplay;
+            
             private global::System.Data.DataColumn columnChrtAcc_Title;
             
-            private global::System.Data.DataColumn columnVchDet_Remarks;
+            private global::System.Data.DataColumn columnChrtAcc_Level;
             
-            private global::System.Data.DataColumn columnVchMas_DrAmount;
+            private global::System.Data.DataColumn columnCurrentYear_Amount;
             
-            private global::System.Data.DataColumn columnVchMas_CrAmount;
+            private global::System.Data.DataColumn columnPreviousYear_Amount;
             
-            private global::System.Data.DataColumn columnLoc_Title;
+            private global::System.Data.DataColumn columnSortOrder;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public VoucherDocumentDataTable() {
-                this.TableName = "VoucherDocument";
+            public BalanceSheetDataTable() {
+                this.TableName = "BalanceSheet";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -312,7 +308,7 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal VoucherDocumentDataTable(global::System.Data.DataTable table) {
+            internal BalanceSheetDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -329,48 +325,24 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected VoucherDocumentDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected BalanceSheetDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn VchMas_IdColumn {
+            public global::System.Data.DataColumn RowTitleColumn {
                 get {
-                    return this.columnVchMas_Id;
+                    return this.columnRowTitle;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn VchMas_CodeColumn {
+            public global::System.Data.DataColumn Natr_TitleColumn {
                 get {
-                    return this.columnVchMas_Code;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn VchMas_DateColumn {
-                get {
-                    return this.columnVchMas_Date;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn VchrType_TitleColumn {
-                get {
-                    return this.columnVchrType_Title;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn VchMas_StatusColumn {
-                get {
-                    return this.columnVchMas_Status;
+                    return this.columnNatr_Title;
                 }
             }
             
@@ -384,6 +356,14 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ChrtAcc_CodeDisplayColumn {
+                get {
+                    return this.columnChrtAcc_CodeDisplay;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn ChrtAcc_TitleColumn {
                 get {
                     return this.columnChrtAcc_Title;
@@ -392,33 +372,33 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn VchDet_RemarksColumn {
+            public global::System.Data.DataColumn ChrtAcc_LevelColumn {
                 get {
-                    return this.columnVchDet_Remarks;
+                    return this.columnChrtAcc_Level;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn VchMas_DrAmountColumn {
+            public global::System.Data.DataColumn CurrentYear_AmountColumn {
                 get {
-                    return this.columnVchMas_DrAmount;
+                    return this.columnCurrentYear_Amount;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn VchMas_CrAmountColumn {
+            public global::System.Data.DataColumn PreviousYear_AmountColumn {
                 get {
-                    return this.columnVchMas_CrAmount;
+                    return this.columnPreviousYear_Amount;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn Loc_TitleColumn {
+            public global::System.Data.DataColumn SortOrderColumn {
                 get {
-                    return this.columnLoc_Title;
+                    return this.columnSortOrder;
                 }
             }
             
@@ -433,55 +413,53 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public VoucherDocumentRow this[int index] {
+            public BalanceSheetRow this[int index] {
                 get {
-                    return ((VoucherDocumentRow)(this.Rows[index]));
+                    return ((BalanceSheetRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event VoucherDocumentRowChangeEventHandler VoucherDocumentRowChanging;
+            public event BalanceSheetRowChangeEventHandler BalanceSheetRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event VoucherDocumentRowChangeEventHandler VoucherDocumentRowChanged;
+            public event BalanceSheetRowChangeEventHandler BalanceSheetRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event VoucherDocumentRowChangeEventHandler VoucherDocumentRowDeleting;
+            public event BalanceSheetRowChangeEventHandler BalanceSheetRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event VoucherDocumentRowChangeEventHandler VoucherDocumentRowDeleted;
+            public event BalanceSheetRowChangeEventHandler BalanceSheetRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddVoucherDocumentRow(VoucherDocumentRow row) {
+            public void AddBalanceSheetRow(BalanceSheetRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public VoucherDocumentRow AddVoucherDocumentRow(string VchMas_Id, string VchMas_Code, System.DateTime VchMas_Date, string VchrType_Title, string VchMas_Status, string ChrtAcc_Code, string ChrtAcc_Title, string VchDet_Remarks, double VchMas_DrAmount, double VchMas_CrAmount, string Loc_Title) {
-                VoucherDocumentRow rowVoucherDocumentRow = ((VoucherDocumentRow)(this.NewRow()));
+            public BalanceSheetRow AddBalanceSheetRow(string RowTitle, string Natr_Title, string ChrtAcc_Code, string ChrtAcc_CodeDisplay, string ChrtAcc_Title, int ChrtAcc_Level, decimal CurrentYear_Amount, decimal PreviousYear_Amount, int SortOrder) {
+                BalanceSheetRow rowBalanceSheetRow = ((BalanceSheetRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        VchMas_Id,
-                        VchMas_Code,
-                        VchMas_Date,
-                        VchrType_Title,
-                        VchMas_Status,
+                        RowTitle,
+                        Natr_Title,
                         ChrtAcc_Code,
+                        ChrtAcc_CodeDisplay,
                         ChrtAcc_Title,
-                        VchDet_Remarks,
-                        VchMas_DrAmount,
-                        VchMas_CrAmount,
-                        Loc_Title};
-                rowVoucherDocumentRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowVoucherDocumentRow);
-                return rowVoucherDocumentRow;
+                        ChrtAcc_Level,
+                        CurrentYear_Amount,
+                        PreviousYear_Amount,
+                        SortOrder};
+                rowBalanceSheetRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowBalanceSheetRow);
+                return rowBalanceSheetRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                VoucherDocumentDataTable cln = ((VoucherDocumentDataTable)(base.Clone()));
+                BalanceSheetDataTable cln = ((BalanceSheetDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -489,76 +467,70 @@ namespace SCMS.Reports.Datasets {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new VoucherDocumentDataTable();
+                return new BalanceSheetDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
-                this.columnVchMas_Id = base.Columns["VchMas_Id"];
-                this.columnVchMas_Code = base.Columns["VchMas_Code"];
-                this.columnVchMas_Date = base.Columns["VchMas_Date"];
-                this.columnVchrType_Title = base.Columns["VchrType_Title"];
-                this.columnVchMas_Status = base.Columns["VchMas_Status"];
+                this.columnRowTitle = base.Columns["RowTitle"];
+                this.columnNatr_Title = base.Columns["Natr_Title"];
                 this.columnChrtAcc_Code = base.Columns["ChrtAcc_Code"];
+                this.columnChrtAcc_CodeDisplay = base.Columns["ChrtAcc_CodeDisplay"];
                 this.columnChrtAcc_Title = base.Columns["ChrtAcc_Title"];
-                this.columnVchDet_Remarks = base.Columns["VchDet_Remarks"];
-                this.columnVchMas_DrAmount = base.Columns["VchMas_DrAmount"];
-                this.columnVchMas_CrAmount = base.Columns["VchMas_CrAmount"];
-                this.columnLoc_Title = base.Columns["Loc_Title"];
+                this.columnChrtAcc_Level = base.Columns["ChrtAcc_Level"];
+                this.columnCurrentYear_Amount = base.Columns["CurrentYear_Amount"];
+                this.columnPreviousYear_Amount = base.Columns["PreviousYear_Amount"];
+                this.columnSortOrder = base.Columns["SortOrder"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitClass() {
-                this.columnVchMas_Id = new global::System.Data.DataColumn("VchMas_Id", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnVchMas_Id);
-                this.columnVchMas_Code = new global::System.Data.DataColumn("VchMas_Code", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnVchMas_Code);
-                this.columnVchMas_Date = new global::System.Data.DataColumn("VchMas_Date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnVchMas_Date);
-                this.columnVchrType_Title = new global::System.Data.DataColumn("VchrType_Title", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnVchrType_Title);
-                this.columnVchMas_Status = new global::System.Data.DataColumn("VchMas_Status", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnVchMas_Status);
+                this.columnRowTitle = new global::System.Data.DataColumn("RowTitle", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRowTitle);
+                this.columnNatr_Title = new global::System.Data.DataColumn("Natr_Title", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNatr_Title);
                 this.columnChrtAcc_Code = new global::System.Data.DataColumn("ChrtAcc_Code", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnChrtAcc_Code);
+                this.columnChrtAcc_CodeDisplay = new global::System.Data.DataColumn("ChrtAcc_CodeDisplay", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnChrtAcc_CodeDisplay);
                 this.columnChrtAcc_Title = new global::System.Data.DataColumn("ChrtAcc_Title", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnChrtAcc_Title);
-                this.columnVchDet_Remarks = new global::System.Data.DataColumn("VchDet_Remarks", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnVchDet_Remarks);
-                this.columnVchMas_DrAmount = new global::System.Data.DataColumn("VchMas_DrAmount", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnVchMas_DrAmount);
-                this.columnVchMas_CrAmount = new global::System.Data.DataColumn("VchMas_CrAmount", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnVchMas_CrAmount);
-                this.columnLoc_Title = new global::System.Data.DataColumn("Loc_Title", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnLoc_Title);
+                this.columnChrtAcc_Level = new global::System.Data.DataColumn("ChrtAcc_Level", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnChrtAcc_Level);
+                this.columnCurrentYear_Amount = new global::System.Data.DataColumn("CurrentYear_Amount", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCurrentYear_Amount);
+                this.columnPreviousYear_Amount = new global::System.Data.DataColumn("PreviousYear_Amount", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPreviousYear_Amount);
+                this.columnSortOrder = new global::System.Data.DataColumn("SortOrder", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSortOrder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public VoucherDocumentRow NewVoucherDocumentRow() {
-                return ((VoucherDocumentRow)(this.NewRow()));
+            public BalanceSheetRow NewBalanceSheetRow() {
+                return ((BalanceSheetRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new VoucherDocumentRow(builder);
+                return new BalanceSheetRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(VoucherDocumentRow);
+                return typeof(BalanceSheetRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.VoucherDocumentRowChanged != null)) {
-                    this.VoucherDocumentRowChanged(this, new VoucherDocumentRowChangeEvent(((VoucherDocumentRow)(e.Row)), e.Action));
+                if ((this.BalanceSheetRowChanged != null)) {
+                    this.BalanceSheetRowChanged(this, new BalanceSheetRowChangeEvent(((BalanceSheetRow)(e.Row)), e.Action));
                 }
             }
             
@@ -566,8 +538,8 @@ namespace SCMS.Reports.Datasets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.VoucherDocumentRowChanging != null)) {
-                    this.VoucherDocumentRowChanging(this, new VoucherDocumentRowChangeEvent(((VoucherDocumentRow)(e.Row)), e.Action));
+                if ((this.BalanceSheetRowChanging != null)) {
+                    this.BalanceSheetRowChanging(this, new BalanceSheetRowChangeEvent(((BalanceSheetRow)(e.Row)), e.Action));
                 }
             }
             
@@ -575,8 +547,8 @@ namespace SCMS.Reports.Datasets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.VoucherDocumentRowDeleted != null)) {
-                    this.VoucherDocumentRowDeleted(this, new VoucherDocumentRowChangeEvent(((VoucherDocumentRow)(e.Row)), e.Action));
+                if ((this.BalanceSheetRowDeleted != null)) {
+                    this.BalanceSheetRowDeleted(this, new BalanceSheetRowChangeEvent(((BalanceSheetRow)(e.Row)), e.Action));
                 }
             }
             
@@ -584,14 +556,14 @@ namespace SCMS.Reports.Datasets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.VoucherDocumentRowDeleting != null)) {
-                    this.VoucherDocumentRowDeleting(this, new VoucherDocumentRowChangeEvent(((VoucherDocumentRow)(e.Row)), e.Action));
+                if ((this.BalanceSheetRowDeleting != null)) {
+                    this.BalanceSheetRowDeleting(this, new BalanceSheetRowChangeEvent(((BalanceSheetRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveVoucherDocumentRow(VoucherDocumentRow row) {
+            public void RemoveBalanceSheetRow(BalanceSheetRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -600,7 +572,7 @@ namespace SCMS.Reports.Datasets {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                dsVoucherDocument ds = new dsVoucherDocument();
+                dsBalanceSheet ds = new dsBalanceSheet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -618,7 +590,7 @@ namespace SCMS.Reports.Datasets {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "VoucherDocumentDataTable";
+                attribute2.FixedValue = "BalanceSheetDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -662,94 +634,46 @@ namespace SCMS.Reports.Datasets {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class VoucherDocumentRow : global::System.Data.DataRow {
+        public partial class BalanceSheetRow : global::System.Data.DataRow {
             
-            private VoucherDocumentDataTable tableVoucherDocument;
+            private BalanceSheetDataTable tableBalanceSheet;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal VoucherDocumentRow(global::System.Data.DataRowBuilder rb) : 
+            internal BalanceSheetRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableVoucherDocument = ((VoucherDocumentDataTable)(this.Table));
+                this.tableBalanceSheet = ((BalanceSheetDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string VchMas_Id {
+            public string RowTitle {
                 get {
                     try {
-                        return ((string)(this[this.tableVoucherDocument.VchMas_IdColumn]));
+                        return ((string)(this[this.tableBalanceSheet.RowTitleColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'VchMas_Id\' in table \'VoucherDocument\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'RowTitle\' in table \'BalanceSheet\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableVoucherDocument.VchMas_IdColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string VchMas_Code {
-                get {
-                    try {
-                        return ((string)(this[this.tableVoucherDocument.VchMas_CodeColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'VchMas_Code\' in table \'VoucherDocument\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableVoucherDocument.VchMas_CodeColumn] = value;
+                    this[this.tableBalanceSheet.RowTitleColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime VchMas_Date {
+            public string Natr_Title {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableVoucherDocument.VchMas_DateColumn]));
+                        return ((string)(this[this.tableBalanceSheet.Natr_TitleColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'VchMas_Date\' in table \'VoucherDocument\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Natr_Title\' in table \'BalanceSheet\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableVoucherDocument.VchMas_DateColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string VchrType_Title {
-                get {
-                    try {
-                        return ((string)(this[this.tableVoucherDocument.VchrType_TitleColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'VchrType_Title\' in table \'VoucherDocument\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableVoucherDocument.VchrType_TitleColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string VchMas_Status {
-                get {
-                    try {
-                        return ((string)(this[this.tableVoucherDocument.VchMas_StatusColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'VchMas_Status\' in table \'VoucherDocument\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableVoucherDocument.VchMas_StatusColumn] = value;
+                    this[this.tableBalanceSheet.Natr_TitleColumn] = value;
                 }
             }
             
@@ -758,14 +682,30 @@ namespace SCMS.Reports.Datasets {
             public string ChrtAcc_Code {
                 get {
                     try {
-                        return ((string)(this[this.tableVoucherDocument.ChrtAcc_CodeColumn]));
+                        return ((string)(this[this.tableBalanceSheet.ChrtAcc_CodeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ChrtAcc_Code\' in table \'VoucherDocument\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ChrtAcc_Code\' in table \'BalanceSheet\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableVoucherDocument.ChrtAcc_CodeColumn] = value;
+                    this[this.tableBalanceSheet.ChrtAcc_CodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ChrtAcc_CodeDisplay {
+                get {
+                    try {
+                        return ((string)(this[this.tableBalanceSheet.ChrtAcc_CodeDisplayColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ChrtAcc_CodeDisplay\' in table \'BalanceSheet\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBalanceSheet.ChrtAcc_CodeDisplayColumn] = value;
                 }
             }
             
@@ -774,211 +714,187 @@ namespace SCMS.Reports.Datasets {
             public string ChrtAcc_Title {
                 get {
                     try {
-                        return ((string)(this[this.tableVoucherDocument.ChrtAcc_TitleColumn]));
+                        return ((string)(this[this.tableBalanceSheet.ChrtAcc_TitleColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ChrtAcc_Title\' in table \'VoucherDocument\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ChrtAcc_Title\' in table \'BalanceSheet\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableVoucherDocument.ChrtAcc_TitleColumn] = value;
+                    this[this.tableBalanceSheet.ChrtAcc_TitleColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string VchDet_Remarks {
+            public int ChrtAcc_Level {
                 get {
                     try {
-                        return ((string)(this[this.tableVoucherDocument.VchDet_RemarksColumn]));
+                        return ((int)(this[this.tableBalanceSheet.ChrtAcc_LevelColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'VchDet_Remarks\' in table \'VoucherDocument\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ChrtAcc_Level\' in table \'BalanceSheet\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableVoucherDocument.VchDet_RemarksColumn] = value;
+                    this[this.tableBalanceSheet.ChrtAcc_LevelColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double VchMas_DrAmount {
+            public decimal CurrentYear_Amount {
                 get {
                     try {
-                        return ((double)(this[this.tableVoucherDocument.VchMas_DrAmountColumn]));
+                        return ((decimal)(this[this.tableBalanceSheet.CurrentYear_AmountColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'VchMas_DrAmount\' in table \'VoucherDocument\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'CurrentYear_Amount\' in table \'BalanceSheet\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableVoucherDocument.VchMas_DrAmountColumn] = value;
+                    this[this.tableBalanceSheet.CurrentYear_AmountColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double VchMas_CrAmount {
+            public decimal PreviousYear_Amount {
                 get {
                     try {
-                        return ((double)(this[this.tableVoucherDocument.VchMas_CrAmountColumn]));
+                        return ((decimal)(this[this.tableBalanceSheet.PreviousYear_AmountColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'VchMas_CrAmount\' in table \'VoucherDocument\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'PreviousYear_Amount\' in table \'BalanceSheet\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableVoucherDocument.VchMas_CrAmountColumn] = value;
+                    this[this.tableBalanceSheet.PreviousYear_AmountColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Loc_Title {
+            public int SortOrder {
                 get {
                     try {
-                        return ((string)(this[this.tableVoucherDocument.Loc_TitleColumn]));
+                        return ((int)(this[this.tableBalanceSheet.SortOrderColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Loc_Title\' in table \'VoucherDocument\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'SortOrder\' in table \'BalanceSheet\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableVoucherDocument.Loc_TitleColumn] = value;
+                    this[this.tableBalanceSheet.SortOrderColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsVchMas_IdNull() {
-                return this.IsNull(this.tableVoucherDocument.VchMas_IdColumn);
+            public bool IsRowTitleNull() {
+                return this.IsNull(this.tableBalanceSheet.RowTitleColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetVchMas_IdNull() {
-                this[this.tableVoucherDocument.VchMas_IdColumn] = global::System.Convert.DBNull;
+            public void SetRowTitleNull() {
+                this[this.tableBalanceSheet.RowTitleColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsVchMas_CodeNull() {
-                return this.IsNull(this.tableVoucherDocument.VchMas_CodeColumn);
+            public bool IsNatr_TitleNull() {
+                return this.IsNull(this.tableBalanceSheet.Natr_TitleColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetVchMas_CodeNull() {
-                this[this.tableVoucherDocument.VchMas_CodeColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsVchMas_DateNull() {
-                return this.IsNull(this.tableVoucherDocument.VchMas_DateColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetVchMas_DateNull() {
-                this[this.tableVoucherDocument.VchMas_DateColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsVchrType_TitleNull() {
-                return this.IsNull(this.tableVoucherDocument.VchrType_TitleColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetVchrType_TitleNull() {
-                this[this.tableVoucherDocument.VchrType_TitleColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsVchMas_StatusNull() {
-                return this.IsNull(this.tableVoucherDocument.VchMas_StatusColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetVchMas_StatusNull() {
-                this[this.tableVoucherDocument.VchMas_StatusColumn] = global::System.Convert.DBNull;
+            public void SetNatr_TitleNull() {
+                this[this.tableBalanceSheet.Natr_TitleColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsChrtAcc_CodeNull() {
-                return this.IsNull(this.tableVoucherDocument.ChrtAcc_CodeColumn);
+                return this.IsNull(this.tableBalanceSheet.ChrtAcc_CodeColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetChrtAcc_CodeNull() {
-                this[this.tableVoucherDocument.ChrtAcc_CodeColumn] = global::System.Convert.DBNull;
+                this[this.tableBalanceSheet.ChrtAcc_CodeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsChrtAcc_CodeDisplayNull() {
+                return this.IsNull(this.tableBalanceSheet.ChrtAcc_CodeDisplayColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetChrtAcc_CodeDisplayNull() {
+                this[this.tableBalanceSheet.ChrtAcc_CodeDisplayColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsChrtAcc_TitleNull() {
-                return this.IsNull(this.tableVoucherDocument.ChrtAcc_TitleColumn);
+                return this.IsNull(this.tableBalanceSheet.ChrtAcc_TitleColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetChrtAcc_TitleNull() {
-                this[this.tableVoucherDocument.ChrtAcc_TitleColumn] = global::System.Convert.DBNull;
+                this[this.tableBalanceSheet.ChrtAcc_TitleColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsVchDet_RemarksNull() {
-                return this.IsNull(this.tableVoucherDocument.VchDet_RemarksColumn);
+            public bool IsChrtAcc_LevelNull() {
+                return this.IsNull(this.tableBalanceSheet.ChrtAcc_LevelColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetVchDet_RemarksNull() {
-                this[this.tableVoucherDocument.VchDet_RemarksColumn] = global::System.Convert.DBNull;
+            public void SetChrtAcc_LevelNull() {
+                this[this.tableBalanceSheet.ChrtAcc_LevelColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsVchMas_DrAmountNull() {
-                return this.IsNull(this.tableVoucherDocument.VchMas_DrAmountColumn);
+            public bool IsCurrentYear_AmountNull() {
+                return this.IsNull(this.tableBalanceSheet.CurrentYear_AmountColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetVchMas_DrAmountNull() {
-                this[this.tableVoucherDocument.VchMas_DrAmountColumn] = global::System.Convert.DBNull;
+            public void SetCurrentYear_AmountNull() {
+                this[this.tableBalanceSheet.CurrentYear_AmountColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsVchMas_CrAmountNull() {
-                return this.IsNull(this.tableVoucherDocument.VchMas_CrAmountColumn);
+            public bool IsPreviousYear_AmountNull() {
+                return this.IsNull(this.tableBalanceSheet.PreviousYear_AmountColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetVchMas_CrAmountNull() {
-                this[this.tableVoucherDocument.VchMas_CrAmountColumn] = global::System.Convert.DBNull;
+            public void SetPreviousYear_AmountNull() {
+                this[this.tableBalanceSheet.PreviousYear_AmountColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsLoc_TitleNull() {
-                return this.IsNull(this.tableVoucherDocument.Loc_TitleColumn);
+            public bool IsSortOrderNull() {
+                return this.IsNull(this.tableBalanceSheet.SortOrderColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetLoc_TitleNull() {
-                this[this.tableVoucherDocument.Loc_TitleColumn] = global::System.Convert.DBNull;
+            public void SetSortOrderNull() {
+                this[this.tableBalanceSheet.SortOrderColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -986,22 +902,22 @@ namespace SCMS.Reports.Datasets {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class VoucherDocumentRowChangeEvent : global::System.EventArgs {
+        public class BalanceSheetRowChangeEvent : global::System.EventArgs {
             
-            private VoucherDocumentRow eventRow;
+            private BalanceSheetRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public VoucherDocumentRowChangeEvent(VoucherDocumentRow row, global::System.Data.DataRowAction action) {
+            public BalanceSheetRowChangeEvent(BalanceSheetRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public VoucherDocumentRow Row {
+            public BalanceSheetRow Row {
                 get {
                     return this.eventRow;
                 }

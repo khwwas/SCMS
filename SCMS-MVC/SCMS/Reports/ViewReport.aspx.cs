@@ -276,8 +276,14 @@ namespace SCMS.Reports
                 #region Voucher Document
                 else if (ls_ReportName.ToLower() == "VoucherDocument".ToLower())
                 {
-
-                    _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptVoucherDocument.rpt");
+                    if (SCMS.Reports.ReportParameters.VoucherPrint.ToLower() == "Detail".ToLower())
+                    {
+                        _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptVoucherDocument.rpt");
+                    }
+                    else if (SCMS.Reports.ReportParameters.VoucherPrint.ToLower() == "Summary".ToLower())
+                    {
+                        _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptVoucherDocumentSummary.rpt");
+                    }
                     Datasets.dsVoucherDocument _dsVoucherDocument = new Datasets.dsVoucherDocument();
                     string ls_Location = "", ls_VoucherTypes = "", ls_DocFrom = "", ls_DocTo = "";
                     int li_AllDoc = 0, li_AllDate = 0;
@@ -313,7 +319,14 @@ namespace SCMS.Reports
                     }
 
                     _ReportDocument.SetDataSource(_dsVoucherDocument);
-                    _ReportDocument.SummaryInfo.ReportTitle = "Voucher Document";
+                    if (SCMS.Reports.ReportParameters.VoucherPrint.ToLower() == "Detail".ToLower())
+                    {
+                        _ReportDocument.SummaryInfo.ReportTitle = "Voucher Detail";
+                    }
+                    else if (SCMS.Reports.ReportParameters.VoucherPrint.ToLower() == "Summary".ToLower())
+                    {
+                        _ReportDocument.SummaryInfo.ReportTitle = "Voucher Summary";
+                    }
                 }
                 #endregion
 
@@ -509,6 +522,45 @@ namespace SCMS.Reports
 
                     _ReportDocument.SetDataSource(_dsIncomeStatement);
                     _ReportDocument.SummaryInfo.ReportTitle = "Income Statement";
+                    _ReportDocument.SetParameterValue("pm_CurrentYear", li_Year);
+                    _ReportDocument.SetParameterValue("pm_PreviousYear", li_Year - 1);
+                }
+                #endregion
+
+                #region BalanceSheet
+                else if (ls_ReportName.ToLower() == "BalanceSheet".ToLower())
+                {
+                    _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptBalanceSheet.rpt");
+                    Datasets.dsBalanceSheet _dsBalanceSheet = new Datasets.dsBalanceSheet();
+                    string ls_Location = "";
+                    int li_Level = 0, li_Year = 0;
+
+                    ls_Location = SCMS.Reports.ReportParameters.Location;
+                    li_Level = SCMS.Reports.ReportParameters.Level;
+                    li_Year = SCMS.Reports.ReportParameters.Year;
+
+                    if (_dsBalanceSheet.Tables.Contains("Logo"))
+                    {
+                        _dsBalanceSheet.Tables.Remove("Logo");
+                    }
+
+                    if (_dsBalanceSheet.Tables.Contains("BalanceSheet"))
+                    {
+                        _dsBalanceSheet.Tables.Remove("BalanceSheet");
+                    }
+
+                    _ds = _dalReports.BalanceSheet(ls_Location, li_Level, li_Year);
+                    _dsBalanceSheet.Tables.Add(_ds.Tables[0].Copy());
+                    _dsBalanceSheet.Tables[0].TableName = "BalanceSheet";
+
+                    if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
+                    {
+                        MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
+                        return;
+                    }
+
+                    _ReportDocument.SetDataSource(_dsBalanceSheet);
+                    _ReportDocument.SummaryInfo.ReportTitle = "Balance Sheet";
                     _ReportDocument.SetParameterValue("pm_CurrentYear", li_Year);
                     _ReportDocument.SetParameterValue("pm_PreviousYear", li_Year - 1);
                 }
