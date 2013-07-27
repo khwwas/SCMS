@@ -7,7 +7,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <script type="text/javascript">
         $(document).ready(function () {
-           
+
         });
         function SaveRecord() {
 
@@ -18,31 +18,32 @@
             var ddl_location = document.getElementById('ddl_location');
             var ddl_level = document.getElementById('ddl_level');
 
-            if (ddl_Company.value == 0) {
-                FadeIn(lcnt_MessageBox);
-                lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! select company</p>";
-                lcnt_MessageBox.setAttribute("class", "message error");
-                scroll(0, 0);
-                FadeOut(lcnt_MessageBox);
-                ddl_Company.focus();
-                return;
-            } else if (ddl_location.value == 0) {
-                FadeIn(lcnt_MessageBox);
-                lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! select location</p>";
-                lcnt_MessageBox.setAttribute("class", "message error");
-                scroll(0, 0);
-                FadeOut(lcnt_MessageBox);
-                ddl_location.focus();
-                return;
-            } else if (ddl_level.value == 0) {
-                FadeIn(lcnt_MessageBox);
-                lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! select level</p>";
-                lcnt_MessageBox.setAttribute("class", "message error");
-                scroll(0, 0);
-                FadeOut(lcnt_MessageBox);
-                ddl_level.focus();
-                return;
-            } else if (txt_Title.value == "") {
+            //            if (ddl_Company.value == 0) {
+            //                FadeIn(lcnt_MessageBox);
+            //                lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! select company</p>";
+            //                lcnt_MessageBox.setAttribute("class", "message error");
+            //                scroll(0, 0);
+            //                FadeOut(lcnt_MessageBox);
+            //                ddl_Company.focus();
+            //                return;
+            //            } else if (ddl_location.value == 0) {
+            //                FadeIn(lcnt_MessageBox);
+            //                lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! select location</p>";
+            //                lcnt_MessageBox.setAttribute("class", "message error");
+            //                scroll(0, 0);
+            //                FadeOut(lcnt_MessageBox);
+            //                ddl_location.focus();
+            //                return;
+            //            } else if (ddl_level.value == 0) {
+            //                FadeIn(lcnt_MessageBox);
+            //                lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! select level</p>";
+            //                lcnt_MessageBox.setAttribute("class", "message error");
+            //                scroll(0, 0);
+            //                FadeOut(lcnt_MessageBox);
+            //                ddl_level.focus();
+            //                return;
+            //            } else 
+            if (txt_Title.value == "") {
                 FadeIn(lcnt_MessageBox);
                 lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! enter title</p>";
                 lcnt_MessageBox.setAttribute("class", "message error");
@@ -52,19 +53,21 @@
                 return;
             }
             else {
-                var Url = document.getElementById('frm_CalendarTypeSetup').action;
-                Url += "CalendarType/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&Comapany=" + ddl_Company.value + "&Location=" + ddl_location.value + "&Title=" + txt_Title.value + "&Level=" + ddl_level.value;
+                //var Url = document.getElementById('frm_CalendarTypeSetup').action;
+                //Url += "CalendarType/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&Comapany=" + ddl_Company.value + "&Location=" + ddl_location.value + "&Title=" + txt_Title.value + "&Level=" + ddl_level.value;
+                //Url += "CalendarType/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&Title=" + txt_Title.value ;
                 document.getElementById("Waiting_Image").style.display = "block";
                 document.getElementById("btn_Save").style.display = "none";
+                alert("Before AJEX ps_Code: "+ lcnt_txtSelectedCode.value + ", Title: "+ txt_Title.value);
                 $.ajax({
-                    type: "GET",
-                    url: Url,
+                    type: "POST",
+                    url: "CalendarType/SaveRecord",
+                    data: { ps_Code: lcnt_txtSelectedCode.value, Title: txt_Title.value },
                     success: function (response) {
                         html = response;
                         $("#GridContainer").html(response);
                         ResetForm();
                         FadeIn(lcnt_MessageBox);
-
                         if (document.getElementById("SaveResult").value == "0") {
                             lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Unable to save record.</p>";
                             lcnt_MessageBox.setAttribute("class", "message error");
@@ -95,18 +98,20 @@
             lcnt_MessageBox.innerHTML = "";
 
             document.getElementById('txt_SelectedCode').value = "";
+            document.getElementById('txt_Code').value = "[Auto]";
             document.getElementById('txt_Title').value = "";
-            document.getElementById('ddl_Company').value = "";
-            document.getElementById('ddl_location').value = "";
-            document.getElementById('ddl_level').value = "";
+            //document.getElementById('ddl_Company').value = "";
+            //document.getElementById('ddl_location').value = "";
+            //document.getElementById('ddl_level').value = "";
         }
 
         function EditRecord(Id) {
             document.getElementById('txt_SelectedCode').value = Id;
+            document.getElementById('txt_Code').value = Id;
             document.getElementById('txt_Title').value = document.getElementById('txt_Title' + Id).innerHTML.trim().toString().replace("&nbsp", "");
-            document.getElementById('ddl_Company').value = document.getElementById('ddl_Company' + Id).innerHTML.trim().toString().replace("&nbsp", "");
-            document.getElementById('ddl_location').value = document.getElementById('ddl_location' + Id).innerHTML.trim().toString().replace("&nbsp", "");
-            document.getElementById('ddl_level').value = document.getElementById('txt_level' + Id).value;
+            //document.getElementById('ddl_Company').value = document.getElementById('ddl_Company' + Id).innerHTML.trim().toString().replace("&nbsp", "");
+            //document.getElementById('ddl_location').value = document.getElementById('ddl_location' + Id).innerHTML.trim().toString().replace("&nbsp", "");
+            //document.getElementById('ddl_level').value = document.getElementById('txt_level' + Id).value;
             ShowHideSaveButton();
             scroll(0, 0);
         }
@@ -159,14 +164,14 @@
         <div class="block">
             <div id="MessageBox">
             </div>
-            <div class="CustomCell" style="width: 115px; height: 30px">
+            <!--<div class="CustomCell" style="width: 115px; height: 30px">
                 Company</div>
-            <%= Html.DropDownList("ddl_Company", null, new { style = "width:900px; padding: 4px;" })%>
+            < %= Html.DropDownList("ddl_Company", null, new { style = "width:900px; padding: 4px;" })%>
             <div class="Clear">
             </div>
             <div class="CustomCell" style="width: 115px; height: 30px;">
                 Location</div>
-            <%= Html.DropDownList("ddl_location", null, new { style = "width:900px; padding: 4px;" })%>
+            < %= Html.DropDownList("ddl_location", null, new { style = "width:900px; padding: 4px;" })%>
             <div class="Clear">
             </div>
             <div class="CustomCell" style="width: 115px; height: 30px;">
@@ -179,6 +184,12 @@
                 <option value="4">Weekly</option>
                 <option value="5">Daily</option>
             </select>
+            <div class="Clear">
+            </div>-->
+            <div class="CustomCell" style="width: 115px; height: 30px">
+                Code</div>
+            <input type="text" class="CustomText" style="width: 100px; font-weight: bold;" id="txt_Code"
+                name="txt_Code" maxlength="100" value="[Auto]" readonly="readonly" />
             <div class="Clear">
             </div>
             <div class="CustomCell" style="width: 115px; height: 30px;">

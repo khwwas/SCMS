@@ -21,7 +21,7 @@ namespace SCMS.Controllers
         }
 
         // Insertion
-        public ActionResult SaveRecord(String ps_Code, String Comapany, String Location, String Title, int Level)
+        public ActionResult SaveRecord(String ps_Code, String Title)
         {
             Int32 li_ReturnValue = 0;
 
@@ -43,9 +43,9 @@ namespace SCMS.Controllers
                     lrow_CalendarType.CldrType_Id = ps_Code;
                     lrow_CalendarType.CldrType_Code = ps_Code;
                     lrow_CalendarType.CldrType_Title = Title;
-                    lrow_CalendarType.Cmp_Id = Comapany;
-                    lrow_CalendarType.Loc_Id = Location;
-                    lrow_CalendarType.CldrType_Level = Level;
+                    //lrow_CalendarType.Cmp_Id = Comapany;
+                    //lrow_CalendarType.Loc_Id = Location;
+                    //lrow_CalendarType.CldrType_Level = Level;
                     lrow_CalendarType.CldrType_Active = 1;
 
                     li_ReturnValue = objDalCalendarType.SaveRecord(lrow_CalendarType);
@@ -59,6 +59,45 @@ namespace SCMS.Controllers
                 return PartialView("GridData");
             }
         }
+
+        //public ActionResult SaveRecord(String ps_Code, String Comapany, String Location, String Title, int Level)
+        //{
+        //    Int32 li_ReturnValue = 0;
+
+        //    try
+        //    {
+        //        SETUP_CalendarType lrow_CalendarType = new SETUP_CalendarType();
+
+        //        if (String.IsNullOrEmpty(ps_Code))
+        //        {
+        //            if (DALCommon.AutoCodeGeneration("SETUP_CalendarType") == 1)
+        //            {
+        //                ps_Code = DALCommon.GetMaximumCode("SETUP_CalendarType");
+        //            }
+        //        }
+
+
+        //        if (!String.IsNullOrEmpty(ps_Code))
+        //        {
+        //            lrow_CalendarType.CldrType_Id = ps_Code;
+        //            lrow_CalendarType.CldrType_Code = ps_Code;
+        //            lrow_CalendarType.CldrType_Title = Title;
+        //            lrow_CalendarType.Cmp_Id = Comapany;
+        //            lrow_CalendarType.Loc_Id = Location;
+        //            lrow_CalendarType.CldrType_Level = Level;
+        //            lrow_CalendarType.CldrType_Active = 1;
+
+        //            li_ReturnValue = objDalCalendarType.SaveRecord(lrow_CalendarType);
+        //            ViewData["SaveResult"] = li_ReturnValue;
+        //        }
+
+        //        return PartialView("GridData");
+        //    }
+        //    catch
+        //    {
+        //        return PartialView("GridData");
+        //    }
+        //}
 
         public ActionResult DeleteRecord(String _pId)
         {

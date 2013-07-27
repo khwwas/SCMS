@@ -7,7 +7,7 @@
         padding: 0;
         margin: 0;
         border-radius: 0px;
-         -webkit-border-radius: 0px;
+        -webkit-border-radius: 0px;
         -moz-border-radius: 0px;
     }
     input[type="text"]
@@ -18,12 +18,16 @@
 <table id="CityGrid" class="data display datatable">
     <thead>
         <tr>
-            <th style="width: 10%;">
+            <th style="width: 5%;">
                 Action
             </th>
             <th style="width: 10%;">
+                Code
+            </th>
+            <th style="width: 15%;">
                 Title
             </th>
+            <!--
             <th style="width: 10%;">
                 Level
             </th>
@@ -32,7 +36,7 @@
             </th>
             <th style="width: 10%;">
                 Location
-            </th>
+            </th>-->
         </tr>
     </thead>
     <tbody>
@@ -68,12 +72,16 @@
                     <img alt="Delete" src="../../img/delete.png" style="width: 22px; vertical-align: middle" />
                 </div>
             </td>
+            <td id="Td1" style="vertical-align: middle;">
+                <%=lRow_Data.CldrType_Code%>
+            </td>
             <td id="txt_Title<%=lRow_Data.CldrType_Id%>" style="vertical-align: middle;">
                 <%=lRow_Data.CldrType_Title%>
             </td>
-            <td id="ddl_level<%=lRow_Data.CldrType_Id%>" style="vertical-align: middle;">
-                <input type="hidden" id="txt_level<%=lRow_Data.CldrType_Id%>" value="<%=lRow_Data.CldrType_Level%>" />
-                <% if (lRow_Data.CldrType_Level == Convert.ToInt32(SCMSDataLayer.CalenderLevel.Yearly))
+            <!--
+            <td id="ddl_level< %=lRow_Data.CldrType_Id%>" style="vertical-align: middle;">
+                <input type="hidden" id="txt_level< %=lRow_Data.CldrType_Id%>" value="< %=lRow_Data.CldrType_Level%>" />
+                < % if (lRow_Data.CldrType_Level == Convert.ToInt32(SCMSDataLayer.CalenderLevel.Yearly))
                        Response.Write("Yearly");
                    else if (lRow_Data.CldrType_Level == Convert.ToInt32(SCMSDataLayer.CalenderLevel.Monthly))
                        Response.Write("Monthly");
@@ -85,18 +93,18 @@
                        Response.Write("Daily");
                 %>
             </td>
-            <td id="ddl_Company<%=lRow_Data.CldrType_Id%>" style="vertical-align: middle;">
-                <%if (CompanyRow != null)
+            <td id="ddl_Company< %=lRow_Data.CldrType_Id%>" style="vertical-align: middle;">
+                < %if (CompanyRow != null)
                   { %>
-                <%=CompanyRow.Cmp_Title%>
-                <%} %>
+                < %=CompanyRow.Cmp_Title%>
+                < %} %>
             </td>
-            <td id="ddl_location<%=lRow_Data.CldrType_Id%>" style="vertical-align: middle;">
-                <%if (LocationRow != null)
+            <td id="ddl_location< %=lRow_Data.CldrType_Id%>" style="vertical-align: middle;">
+                < %if (LocationRow != null)
                   { %>
-                <%=LocationRow.Loc_Title%>
-                <%} %>
-            </td>
+                < %=LocationRow.Loc_Title%>
+                < %} %>
+            </td>-->
         </tr>
         <%}
             }
