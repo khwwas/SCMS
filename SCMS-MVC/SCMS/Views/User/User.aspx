@@ -11,9 +11,10 @@
             var lcnt_MessageBox = document.getElementById('MessageBox');
             var lcnt_txtSelectedCode = document.getElementById("txt_SelectedCode");
             var lcnt_txtTitle = document.getElementById('txt_Title');
+            var lcnt_txtLogin = document.getElementById('txt_Login');
             var lcnt_txtPassword = document.getElementById('txt_Password');
             var lcnt_UserGroup = document.getElementById('ddl_UserGroup');
-
+            
             if (lcnt_txtTitle.value == "") {
                 FadeIn(lcnt_MessageBox);
                 lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! enter title</p>";
@@ -23,14 +24,24 @@
                 lcnt_txtTitle.focus();
                 return;
             }
+            else if (lcnt_txtLogin.value == "") {
+                FadeIn(lcnt_MessageBox);
+                lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! enter login</p>";
+                lcnt_MessageBox.setAttribute("class", "message error");
+                scroll(0, 0);
+                FadeOut(lcnt_MessageBox);
+                lcnt_txtTitle.focus();
+                return;
+            }
             else {
-                var Url = document.getElementById('frm_UserSetup').action;
-                Url += "User/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&ps_Title=" + lcnt_txtTitle.value + "&ps_GroupId=" + lcnt_UserGroup.value + "&ps_Password=" + lcnt_txtPassword.value;
+                //var Url = document.getElementById('frm_UserSetup').action;
+                //Url += "User/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&ps_Title=" + lcnt_txtTitle.value + "&ps_GroupId=" + lcnt_UserGroup.value + "&ps_Password=" + lcnt_txtPassword.value;
                 document.getElementById("Waiting_Image").style.display = "block";
                 document.getElementById("btn_Save").style.display = "none";
                 $.ajax({
-                    type: "GET",
-                    url: Url,
+                    type: "POST",
+                    url: "User/SaveRecord",
+                    data: { ps_Code: lcnt_txtSelectedCode.value, ps_Title: txt_Title.value, ps_GroupId: lcnt_UserGroup.value, ps_Login: lcnt_txtLogin.value, ps_Password: lcnt_txtPassword.value },
                     success: function (response) {
                         html = response;
                         $("#GridContainer").html(response);
@@ -67,6 +78,7 @@
             document.getElementById('txt_SelectedCode').value = "";
             document.getElementById('txt_Code').value = "[Auto]";
             document.getElementById('txt_Title').value = "";
+            document.getElementById('txt_Login').value = "";
             document.getElementById('txt_Password').value = "";
         }
 
@@ -74,6 +86,7 @@
             document.getElementById('txt_SelectedCode').value = Id;
             document.getElementById('txt_Code').value = Id;
             document.getElementById('txt_Title').value = document.getElementById('txt_Title' + Id).innerHTML.trim().toString().replace("&nbsp", "");
+            document.getElementById('txt_Login').value = document.getElementById('txt_Login' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             document.getElementById('txt_Password').value = document.getElementById('txt_Password' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             document.getElementById('ddl_UserGroup').value = document.getElementById('ddl_UserGroup' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             scroll(0, 0);
@@ -136,6 +149,12 @@
                 Title</div>
             <input type="text" class="CustomText" style="width: 940px;" id="txt_Title" name="txt_Title"
                 maxlength="100" />
+            <div class="Clear">
+            </div>
+            <div class="CustomCell" style="width: 100px; height: 30px">
+                Login Id</div>
+            <input type="text" class="CustomText" style="width: 940px;" id="txt_Login" name="txt_Login"
+                maxlength="50" />
             <div class="Clear">
             </div>
             <div class="CustomCell" style="width: 100px; height: 30px">

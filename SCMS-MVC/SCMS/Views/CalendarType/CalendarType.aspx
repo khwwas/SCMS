@@ -58,7 +58,7 @@
                 //Url += "CalendarType/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&Title=" + txt_Title.value ;
                 document.getElementById("Waiting_Image").style.display = "block";
                 document.getElementById("btn_Save").style.display = "none";
-                alert("Before AJEX ps_Code: "+ lcnt_txtSelectedCode.value + ", Title: "+ txt_Title.value);
+                //alert("Before AJEX ps_Code: "+ lcnt_txtSelectedCode.value + ", Title: "+ txt_Title.value);
                 $.ajax({
                     type: "POST",
                     url: "CalendarType/SaveRecord",
