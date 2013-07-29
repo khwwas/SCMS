@@ -18218,6 +18218,8 @@ namespace SCMSDataLayer.DB
 		
 		private string _AprvLvl_Title;
 		
+		private System.Nullable<int> _AprvLvl_Level;
+		
 		private System.Nullable<int> _AprvLvl_Active;
 		
 		private System.Nullable<int> _AprvLvl_SortOrder;
@@ -18232,6 +18234,8 @@ namespace SCMSDataLayer.DB
     partial void OnAprvLvl_CodeChanged();
     partial void OnAprvLvl_TitleChanging(string value);
     partial void OnAprvLvl_TitleChanged();
+    partial void OnAprvLvl_LevelChanging(System.Nullable<int> value);
+    partial void OnAprvLvl_LevelChanged();
     partial void OnAprvLvl_ActiveChanging(System.Nullable<int> value);
     partial void OnAprvLvl_ActiveChanged();
     partial void OnAprvLvl_SortOrderChanging(System.Nullable<int> value);
@@ -18299,6 +18303,26 @@ namespace SCMSDataLayer.DB
 					this._AprvLvl_Title = value;
 					this.SendPropertyChanged("AprvLvl_Title");
 					this.OnAprvLvl_TitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AprvLvl_Level", DbType="Int")]
+		public System.Nullable<int> AprvLvl_Level
+		{
+			get
+			{
+				return this._AprvLvl_Level;
+			}
+			set
+			{
+				if ((this._AprvLvl_Level != value))
+				{
+					this.OnAprvLvl_LevelChanging(value);
+					this.SendPropertyChanging();
+					this._AprvLvl_Level = value;
+					this.SendPropertyChanged("AprvLvl_Level");
+					this.OnAprvLvl_LevelChanged();
 				}
 			}
 		}
@@ -25015,6 +25039,8 @@ namespace SCMSDataLayer.DB
 		
 		private string _AprvLvl_Title;
 		
+		private System.Nullable<int> _AprvLvl_Level;
+		
 		private System.Nullable<int> _AprvLvl_Active;
 		
 		private System.Nullable<int> _AprvLvl_SortOrder;
@@ -25067,6 +25093,22 @@ namespace SCMSDataLayer.DB
 				if ((this._AprvLvl_Title != value))
 				{
 					this._AprvLvl_Title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AprvLvl_Level", DbType="Int")]
+		public System.Nullable<int> AprvLvl_Level
+		{
+			get
+			{
+				return this._AprvLvl_Level;
+			}
+			set
+			{
+				if ((this._AprvLvl_Level != value))
+				{
+					this._AprvLvl_Level = value;
 				}
 			}
 		}

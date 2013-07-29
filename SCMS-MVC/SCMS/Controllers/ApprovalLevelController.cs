@@ -19,7 +19,7 @@ namespace SCMS.Controllers
             return View("ApprovalLevel");
         }
 
-        public ActionResult SaveRecord(String ps_Code, String ps_Title)
+        public ActionResult SaveRecord(String ps_Code, Int32 pi_Level, String ps_Title)
         {
             Int32 li_ReturnValue = 0;
 
@@ -39,6 +39,7 @@ namespace SCMS.Controllers
                 {
                     lrow_ApprovalLevels.AprvLvl_Id = ps_Code;
                     lrow_ApprovalLevels.AprvLvl_Code = ps_Code;
+                    lrow_ApprovalLevels.AprvLvl_Level = pi_Level;
                     lrow_ApprovalLevels.AprvLvl_Title = ps_Title;
                     lrow_ApprovalLevels.AprvLvl_Active = 1;
 

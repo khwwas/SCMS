@@ -772,6 +772,7 @@
       <Column Name="AprvLvl_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="AprvLvl_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="AprvLvl_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="AprvLvl_Level" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="AprvLvl_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="AprvLvl_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
@@ -1275,6 +1276,7 @@
       <Column Name="AprvLvl_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="AprvLvl_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="AprvLvl_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="AprvLvl_Level" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="AprvLvl_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="AprvLvl_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>

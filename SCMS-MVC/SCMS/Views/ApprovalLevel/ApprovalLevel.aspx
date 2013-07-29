@@ -14,6 +14,7 @@
         function SaveRecord() {
             var lcnt_MessageBox = document.getElementById('MessageBox');
             var lcnt_txtSelectedCode = document.getElementById("txt_SelectedCode");
+            var lcnt_Level = document.getElementById('txt_Level');
             var lcnt_txtTitle = document.getElementById('txt_Title');
 
             if (lcnt_txtTitle.value == "") {
@@ -33,7 +34,7 @@
                 $.ajax({
                     type: "POST",
                     url: "ApprovalLevel/SaveRecord",
-                    data: { ps_Code: lcnt_txtSelectedCode.value, ps_Title: lcnt_txtTitle.value },
+                    data: { ps_Code: lcnt_txtSelectedCode.value, pi_Level: lcnt_Level.value, ps_Title: lcnt_txtTitle.value },
                     success: function (response) {
                         html = response;
                         $("#GridContainer").html(response);
@@ -70,14 +71,21 @@
 
             document.getElementById('txt_SelectedCode').value = "";
             document.getElementById('txt_Code').value = "[Auto]";
+            document.getElementById('txt_Level').value = "1";
             document.getElementById('txt_Title').value = "";
         }
 
         function EditRecord(Id) {
             document.getElementById('txt_SelectedCode').value = Id;
             document.getElementById('txt_Code').value = Id;
+            if (document.getElementById('AprvLvl_Level' + Id).value == "") {
+                document.getElementById('txt_Level').value = "1";
+            }
+            else {
+                document.getElementById('txt_Level').value = document.getElementById('AprvLvl_Level' + Id).value;
+            }
             document.getElementById('txt_Title').value = document.getElementById('txt_Title' + Id).innerHTML.trim().toString().replace("&nbsp", "");
-             ShowHideSaveButton();
+            ShowHideSaveButton();
             scroll(0, 0);
         }
 
@@ -133,6 +141,25 @@
                 Code</div>
             <input type="text" class="CustomText" style="width: 100px; font-weight: bold;" id="txt_Code"
                 name="txt_Code" maxlength="100" value="[Auto]" readonly="readonly" />
+            <div class="Clear">
+            </div>
+            <div class="CustomCell" style="width: 100px; height: 30px">
+                Level</div>
+            <div class="CustomCell" style="width: 109px;">
+                <input type="text" class="CustomText" id="txt_Level" name="txt_Level" maxlength="1"
+                    style="width: 100px; border-right: 0px;" value="1" disabled="disabled" />
+            </div>
+            <div class="CustomCell" style="border: 1px solid #ccc; width: 20px; height: 28px;
+                margin-right: 12px;">
+                <div style="background-image: url('../../img/ArrowUp.png'); background-position: center;
+                    height: 14px; background-repeat: no-repeat; cursor: pointer;" onclick="ValuePlus('txt_Level');">
+                    &nbsp;
+                </div>
+                <div style="background-image: url('../../img/ArrowDown.png'); background-position: center;
+                    height: 14px; background-repeat: no-repeat; cursor: pointer;" onclick="ValueMinus('txt_Level');">
+                    &nbsp;
+                </div>
+            </div>
             <div class="Clear">
             </div>
             <div class="CustomCell" style="width: 100px; height: 30px">
