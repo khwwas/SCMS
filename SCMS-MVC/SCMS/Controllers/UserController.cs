@@ -18,7 +18,7 @@ namespace SCMS.Controllers
             return View("User");
         }
 
-        public ActionResult SaveRecord(string ps_Code, string ps_Title, string ps_GroupId, string ps_Password)
+        public ActionResult SaveRecord(string ps_Code, string ps_Title, string ps_GroupId, string ps_Login, string ps_Password)
         {
             DALUser objDal = new DALUser();
             Int32 li_ReturnValue = 0;
@@ -41,6 +41,7 @@ namespace SCMS.Controllers
                     lrow_Data.User_Code = ps_Code;
                     lrow_Data.UsrGrp_Id = ps_GroupId;
                     lrow_Data.User_Title = ps_Title;
+                    lrow_Data.User_Login = ps_Login;
                     lrow_Data.User_Password = ps_Password;
                     lrow_Data.User_Active = 1;
 

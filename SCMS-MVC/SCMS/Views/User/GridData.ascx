@@ -24,10 +24,13 @@
             <th style="width: 6%;">
                 Code
             </th>
-            <th style="width: 48%;">
+            <th style="width: 38%;">
                 Title
             </th>
-            <th style="width: 20%;">
+            <th style="width: 15%;">
+                Login Id
+            </th>
+            <th style="width: 15%;">
                 Password
             </th>
             <th style="width: 20%;">
@@ -58,8 +61,11 @@
             <td id="txt_Title<%=lRow_Data.User_Id%>" style="vertical-align: middle;">
                 <%=lRow_Data.User_Title%>
             </td>
+            <td id="txt_Login<%=lRow_Data.User_Id%>" style="vertical-align: middle;">
+                <%=lRow_Data.User_Login%>
+            </td>
             <td id="txt_Password<%=lRow_Data.User_Id%>" style="vertical-align: middle;">
-                <%=lRow_Data.User_Password%>
+                ******************** <!--< %=lRow_Data.User_Password%>-->
             </td>
             <td id="txt_UserGroup<%=lRow_Data.User_Id%>" style="vertical-align: middle;">
                 <%=lRow_Data.UsrGrp_Title%>

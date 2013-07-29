@@ -22,6 +22,7 @@ namespace SCMSDataLayer
                     lRow_ExistingData.User_Title = pRow_NewData.User_Title;
                     lRow_ExistingData.UsrGrp_Id = pRow_NewData.UsrGrp_Id;
                     lRow_ExistingData.User_Password = pRow_NewData.User_Password;
+                    lRow_ExistingData.User_Login = pRow_NewData.User_Login;
                 }
                 else
                 {
