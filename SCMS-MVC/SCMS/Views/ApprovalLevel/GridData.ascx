@@ -24,6 +24,9 @@
             <th style="width: 6%;">
                 Code
             </th>
+            <th style="width: 6%;">
+                Level
+            </th>
             <th style="width: 48%;">
                 Title
             </th>
@@ -48,6 +51,9 @@
             </td>
             <td id="txt_Code<%=lRow_Data.AprvLvl_Id%>" style="vertical-align: middle;">
                 <%=lRow_Data.AprvLvl_Code%>
+            </td>
+             <td id="txt_Level" style="vertical-align: middle;">
+                <%=lRow_Data.AprvLvl_Level%>
             </td>
             <td id="txt_Title<%=lRow_Data.AprvLvl_Id%>" style="vertical-align: middle;">
                 <%=lRow_Data.AprvLvl_Title%>

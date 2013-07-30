@@ -19,6 +19,7 @@ namespace SCMSDataLayer
 
                 if (lRow_ExistingData != null)
                 {
+                    lRow_ExistingData.AprvLvl_Level = pRow_NewData.AprvLvl_Level;
                     lRow_ExistingData.AprvLvl_Title = pRow_NewData.AprvLvl_Title;
                 }
                 else
