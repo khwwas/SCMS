@@ -1,0 +1,107 @@
+/****** Object:  Table [dbo].[SYSTEM_Screens]    Script Date: 07/28/2013 21:27:52 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[SYSTEM_Screens](
+	[Scr_Id] [int] IDENTITY(1,1) NOT NULL,
+	[Scr_Title] [varchar](200) NOT NULL,
+	[Scr_Type] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_SYSTEM_Screens] PRIMARY KEY CLUSTERED 
+(
+	[Scr_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Insert Into SYSTEM_Screens Values('Company','Setup')
+Insert Into SYSTEM_Screens Values('Location','Setup')
+Insert Into SYSTEM_Screens Values('City','Setup')
+Insert Into SYSTEM_Screens Values('Supplier Types','Setup')
+Insert Into SYSTEM_Screens Values('Suppliers','Setup')
+Insert Into SYSTEM_Screens Values('Customer Types','Setup')
+Insert Into SYSTEM_Screens Values('Customer','Setup')
+Insert Into SYSTEM_Screens Values('Voucher Type','Setup')
+Insert Into SYSTEM_Screens Values('Voucher Type Narration ','Setup')
+Insert Into SYSTEM_Screens Values('Chart Of Account','Setup')
+Insert Into SYSTEM_Screens Values('Bank','Setup')
+Insert Into SYSTEM_Screens Values('Bank Account','Setup')
+Insert Into SYSTEM_Screens Values('Calendar Type','Setup')
+Insert Into SYSTEM_Screens Values('Calendar','Setup')
+Insert Into SYSTEM_Screens Values('Bulk COA Modifications ','Setup')
+Insert Into SYSTEM_Screens Values('Voucher Entry Console','Transaction')
+Insert Into SYSTEM_Screens Values('Voucher Entry','Transaction')
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/****** Object:  Table [dbo].[SYSTEM_AuditTrail]    Script Date: 07/29/2013 02:07:29 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[SYSTEM_AuditTrail](
+	[AdtTrl_Id] [bigint] IDENTITY(1,1) NOT NULL,
+	[Scr_Id] [int] NULL,
+	[User_Id] [varchar](50) NULL,
+	[Loc_Id] [varchar](50) NULL,
+	[AdtTrl_Action] [varchar](50) NULL,
+	[AdtTrl_EntryId] [varchar](50) NULL,
+	[VchrType_Id] [varchar](50) NULL,
+	[AdtTrl_DataDump] [nvarchar](max) NULL,
+ CONSTRAINT [PK_SYSTEM_AuditTrail] PRIMARY KEY CLUSTERED 
+(
+	[AdtTrl_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[SYSTEM_AuditTrail]  WITH CHECK ADD  CONSTRAINT [FK_SYSTEM_AuditTrail_SECURITY_User] FOREIGN KEY([User_Id])
+REFERENCES [dbo].[SECURITY_User] ([User_Id])
+GO
+
+ALTER TABLE [dbo].[SYSTEM_AuditTrail] CHECK CONSTRAINT [FK_SYSTEM_AuditTrail_SECURITY_User]
+GO
+
+ALTER TABLE [dbo].[SYSTEM_AuditTrail]  WITH CHECK ADD  CONSTRAINT [FK_SYSTEM_AuditTrail_SETUP_Location] FOREIGN KEY([Loc_Id])
+REFERENCES [dbo].[SETUP_Location] ([Loc_Id])
+GO
+
+ALTER TABLE [dbo].[SYSTEM_AuditTrail] CHECK CONSTRAINT [FK_SYSTEM_AuditTrail_SETUP_Location]
+GO
+
+ALTER TABLE [dbo].[SYSTEM_AuditTrail]  WITH CHECK ADD  CONSTRAINT [FK_SYSTEM_AuditTrail_SETUP_VoucherType] FOREIGN KEY([VchrType_Id])
+REFERENCES [dbo].[SETUP_VoucherType] ([VchrType_Id])
+GO
+
+ALTER TABLE [dbo].[SYSTEM_AuditTrail] CHECK CONSTRAINT [FK_SYSTEM_AuditTrail_SETUP_VoucherType]
+GO
+
+ALTER TABLE [dbo].[SYSTEM_AuditTrail]  WITH CHECK ADD  CONSTRAINT [FK_SYSTEM_AuditTrail_SYSTEM_Screens] FOREIGN KEY([Scr_Id])
+REFERENCES [dbo].[SYSTEM_Screens] ([Scr_Id])
+GO
+
+ALTER TABLE [dbo].[SYSTEM_AuditTrail] CHECK CONSTRAINT [FK_SYSTEM_AuditTrail_SYSTEM_Screens]
+GO
+
+

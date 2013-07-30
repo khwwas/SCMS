@@ -24,6 +24,11 @@ namespace SCMS.Controllers
             try
             {
                 SETUP_Company setupCompanyRow = new SETUP_Company();
+                String Action = "Add";
+                if (!string.IsNullOrEmpty(Code))
+                {
+                    Action = "Edit";
+                }
 
                 if (String.IsNullOrEmpty(Code))
                 {
@@ -46,6 +51,32 @@ namespace SCMS.Controllers
                     setupCompanyRow.Cmp_Active = 1;
                     li_ReturnValue = objDalCompany.SaveCompany(setupCompanyRow);
                     ViewData["SaveResult"] = li_ReturnValue;
+
+                    // Audit Trail Entry Section
+                    if (li_ReturnValue > 0)
+                    {
+                        string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
+                        if (IsAuditTrail == "1")
+                        {
+                            SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
+                            DALAuditTrail objAuditTrail = new DALAuditTrail();
+                            systemAuditTrail.Scr_Id = 1;
+                            systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
+                            systemAuditTrail.AdtTrl_Action = Action;
+                            systemAuditTrail.AdtTrl_EntryId = li_ReturnValue.ToString();
+                            systemAuditTrail.AdtTrl_DataDump = "Cmp_Id = " + Code + ";";
+                            systemAuditTrail.AdtTrl_DataDump += "Cmp_Code = " + Code + ";";
+                            systemAuditTrail.AdtTrl_DataDump += "Cmp_Title = " + Name + ";";
+                            systemAuditTrail.AdtTrl_DataDump += "Cmp_Address1 = " + Address1 + ";";
+                            systemAuditTrail.AdtTrl_DataDump += "Cmp_Address2 = " + Address2 + ";";
+                            systemAuditTrail.AdtTrl_DataDump += "Cmp_Email = " + Email + ";";
+                            systemAuditTrail.AdtTrl_DataDump += "Cmp_Phone = " + Phone + ";";
+                            systemAuditTrail.AdtTrl_DataDump += "Cmp_Fax = " + Fax + ";";
+                            systemAuditTrail.AdtTrl_DataDump += "Cmp_Active = " + 1 + ";";
+                            objAuditTrail.SaveRecord(systemAuditTrail);
+                        }
+                    }
+                    // Audit Trail Section End
                 }
                 return PartialView("GridData");
             }
@@ -60,8 +91,34 @@ namespace SCMS.Controllers
             Int32 li_ReturnValue = 0;
             try
             {
+                SETUP_Company CompanyRow = objDalCompany.GetCmpByCode(companyId).SingleOrDefault();
                 li_ReturnValue = objDalCompany.DeleteCompanyByCompanyId(companyId);
                 ViewData["SaveResult"] = li_ReturnValue;
+                // Audit Trail Entry Section
+                if (li_ReturnValue > 0)
+                {
+                    string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
+                    if (IsAuditTrail == "1")
+                    {
+                        SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
+                        DALAuditTrail objAuditTrail = new DALAuditTrail();
+                        systemAuditTrail.Scr_Id = 1;
+                        systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
+                        systemAuditTrail.AdtTrl_Action = "Delete";
+                        systemAuditTrail.AdtTrl_EntryId = li_ReturnValue.ToString();
+                        systemAuditTrail.AdtTrl_DataDump = "Cmp_Id = " + CompanyRow.Cmp_Id + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Code = " + CompanyRow.Cmp_Code + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Title = " + CompanyRow.Cmp_Title + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Address1 = " + CompanyRow.Cmp_Address1 + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Address2 = " + CompanyRow.Cmp_Address2 + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Email = " + CompanyRow.Cmp_Email + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Phone = " + CompanyRow.Cmp_Phone + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Fax = " + CompanyRow.Cmp_Fax + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Active = " + CompanyRow.Cmp_Active + ";";
+                        objAuditTrail.SaveRecord(systemAuditTrail);
+                    }
+                }
+                // Audit Trail Section End
                 return PartialView("GridData");
             }
             catch
