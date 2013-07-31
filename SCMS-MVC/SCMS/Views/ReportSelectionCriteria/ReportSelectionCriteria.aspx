@@ -13,6 +13,24 @@
             SetCriteria();
         });
 
+        function CheckAllLocations() {
+            if (document.getElementById('chk_AllLocations').checked == true) {
+                document.getElementById('ddl_location').disabled = true;
+            }
+            else {
+                document.getElementById('ddl_location').disabled = false;
+            }
+        };
+
+        function CheckAllVchrTypes() {
+            if (document.getElementById('chk_AllVoucherTypes').checked == true) {
+                document.getElementById('ddl_VoucherTypes').disabled = true;
+            }
+            else {
+                document.getElementById('ddl_VoucherTypes').disabled = false;
+            }
+        };
+
         function CheckAllCode() {
             if (document.getElementById('chk_AllAccCode').checked == true) {
                 document.getElementById('ddl_AccCodeFrom').disabled = true;
@@ -52,7 +70,10 @@
             }
             else if (ps_ReportName.toLowerCase() == "VoucherDocument".toLowerCase()) {
                 document.getElementById('div_Location').style.display = "block";
+                document.getElementById('ddl_location').disabled = true;
+
                 document.getElementById('div_VoucherTypes').style.display = "block";
+                document.getElementById('ddl_VoucherTypes').disabled = true;
 
                 document.getElementById('div_VchrDocFrom').style.display = "block";
                 document.getElementById('div_VchrDocTo').style.display = "block";
@@ -67,6 +88,8 @@
             }
             else if (ps_ReportName.toLowerCase() == "LedgerDtLocWise".toLowerCase()) {
                 document.getElementById('div_Location').style.display = "block";
+                document.getElementById('ddl_location').disabled = true;
+
                 document.getElementById('div_AccCodeFrom').style.display = "block";
                 document.getElementById('div_AccCodeTo').style.display = "block";
                 document.getElementById('div_DateRange').style.display = "block";
@@ -79,6 +102,8 @@
             }
             else if (ps_ReportName.toLowerCase() == "LedgerDtAccWise".toLowerCase()) {
                 document.getElementById('div_Location').style.display = "block";
+                document.getElementById('ddl_location').disabled = true;
+
                 document.getElementById('div_AccCodeFrom').style.display = "block";
                 document.getElementById('div_AccCodeTo').style.display = "block";
                 document.getElementById('div_DateRange').style.display = "block";
@@ -91,6 +116,8 @@
             }
             else if (ps_ReportName.toLowerCase() == "TrialBalance".toLowerCase()) {
                 document.getElementById('div_Location').style.display = "block";
+                document.getElementById('ddl_location').disabled = true;
+
                 document.getElementById('div_AccCodeFrom').style.display = "block";
                 document.getElementById('div_AccCodeTo').style.display = "block";
                 document.getElementById('div_DateRange').style.display = "block";
@@ -106,6 +133,8 @@
             else if (ps_ReportName.toLowerCase() == "IncomeStatement".toLowerCase() ||
                      ps_ReportName.toLowerCase() == "BalanceSheet".toLowerCase()) {
                 document.getElementById('div_Location').style.display = "block";
+                document.getElementById('ddl_location').disabled = true;
+
                 document.getElementById('div_Level').style.display = "block";
                 document.getElementById('div_Year').style.display = "block";
             }
@@ -121,7 +150,9 @@
                 ps_Url = "../ReportSelectionCriteria/SetParam_ChartOfAccount?ps_ReportName=" + ps_ReportName + "&pi_Level=" + pcnt_ChartOfAccount.value;
             }
             else if (ps_ReportName.toLowerCase() == "VoucherDocument".toLowerCase()) {
+                var pcnt_AllLoc = document.getElementById('chk_AllLocations');
                 var pcnt_Location = document.getElementById('ddl_location');
+                var pcnt_AllVchrTypes = document.getElementById('chk_AllVoucherTypes');
                 var pcnt_VoucherTypes = document.getElementById('ddl_VoucherTypes');
                 var pcnt_AllDate = document.getElementById('chk_AllDate');
                 var pcnt_DateFrom = document.getElementById('txt_DateFrom');
@@ -131,7 +162,21 @@
                 var pcnt_DocTo = document.getElementById('ddl_VchrDocTo');
                 var pcnt_VchrDocSummary = document.getElementById('rdo_VchrDocSummary').checked;
                 var pcnt_VchrDocDetail = document.getElementById('rdo_VchrDocDetail').checked;
-                var li_AllDoc, li_AllDate, ls_VoucherPrint;
+                var li_AllLoc, li_AllVchrType, li_AllDoc, li_AllDate, ls_VoucherPrint;
+
+               if (pcnt_AllLoc.checked == true) {
+                    li_AllLoc = 1;
+                }
+                else {
+                    li_AllLoc = 0;
+                }
+
+                if (pcnt_AllVchrTypes.checked == true) {
+                    li_AllVchrType = 1;
+                }
+                else {
+                    li_AllVchrType = 0;
+                }
 
                 if (pcnt_AllDoc.checked == true) {
                     li_AllDoc = 1;
@@ -154,12 +199,13 @@
                     ls_VoucherPrint = "Detail";
                 }
 
-                ps_Url = "../ReportSelectionCriteria/SetParam_VoucherDocument?ps_ReportName=" + ps_ReportName + "&ps_Location=" + pcnt_Location.value +
-                         "&ps_VoucherTypes=" + pcnt_VoucherTypes.value + "&pi_AllDoc=" + li_AllDoc.toString() + "&ps_DocFrom=" + pcnt_DocFrom.value + "&ps_DocTo=" + pcnt_DocTo.value +
+                ps_Url = "../ReportSelectionCriteria/SetParam_VoucherDocument?ps_ReportName=" + ps_ReportName + "&pi_AllLoc=" + li_AllLoc + "&ps_Location=" + pcnt_Location.value +
+                         "&pi_AllVchrType=" + li_AllVchrType +  "&ps_VoucherTypes=" + pcnt_VoucherTypes.value + "&pi_AllDoc=" + li_AllDoc.toString() + "&ps_DocFrom=" + pcnt_DocFrom.value + "&ps_DocTo=" + pcnt_DocTo.value +
                          "&pi_AllDate=" + li_AllDate.toString() + "&pdt_DateFrom=" + pcnt_DateFrom.value + "&pdt_DateTo=" + pcnt_DateTo.value + "&ps_VoucherPrint=" + ls_VoucherPrint + "";
             }
             else if (ps_ReportName.toLowerCase() == "LedgerDtLocWise".toLowerCase() ||
                      ps_ReportName.toLowerCase() == "LedgerDtAccWise".toLowerCase()) {
+                var pcnt_AllLoc = document.getElementById('chk_AllLocations');
                 var pcnt_Location = document.getElementById('ddl_location');
 
                 var pcnt_AllAccCode = document.getElementById('chk_AllAccCode').checked;
@@ -170,7 +216,14 @@
                 var pcnt_DateFrom = document.getElementById('txt_DateFrom');
                 var pcnt_DateTo = document.getElementById('txt_DateTo');
 
-                var li_AllCode, li_AllDate;
+                var li_AllLoc, li_AllCode, li_AllDate;
+
+                if (pcnt_AllLoc.checked == true) {
+                    li_AllLoc = 1;
+                }
+                else {
+                    li_AllLoc = 0;
+                }
 
                 if (pcnt_AllAccCode.toString() == "true") {
                     li_AllCode = 1;
@@ -186,11 +239,12 @@
                     li_AllDate = 0;
                 }
 
-                ps_Url = "../ReportSelectionCriteria/SetParam_LedgerDetail?ps_ReportName=" + ps_ReportName + "&ps_Location=" + pcnt_Location.value +
+                ps_Url = "../ReportSelectionCriteria/SetParam_LedgerDetail?ps_ReportName=" + ps_ReportName + "&pi_AllLoc=" + li_AllLoc + "&ps_Location=" + pcnt_Location.value +
                          "&pi_AllAccCode=" + li_AllCode.toString() + "&ps_AccCodeFrom=" + pcnt_AccCodeFrom.value + "&ps_AccCodeTo=" + pcnt_AccCodeTo.value +
                          "&pi_AllDate=" + li_AllDate.toString() + "&pdt_DateFrom=" + pcnt_DateFrom.value + "&pdt_DateTo=" + pcnt_DateTo.value + "";
             }
             else if (ps_ReportName.toLowerCase() == "TrialBalance".toLowerCase()) {
+                var pcnt_AllLoc = document.getElementById('chk_AllLocations');
                 var pcnt_Location = document.getElementById('ddl_location');
 
                 var pcnt_AllAccCode = document.getElementById('chk_AllAccCode').checked;
@@ -208,7 +262,14 @@
                 var pcnt_ClosingBal = document.getElementById('rdo_ClosingBal').checked;
                 var pcnt_ActivityAll = document.getElementById('rdo_ActivityAll').checked;
 
-                var li_AllCode, li_AllDate, ls_TrialActivity;
+                var li_AllCode, li_AllDate, ls_TrialActivity, li_AllLoc;
+
+                if (pcnt_AllLoc.checked == true) {
+                    li_AllLoc = 1;
+                }
+                else {
+                    li_AllLoc = 0;
+                }
 
                 if (pcnt_AllAccCode.toString() == "true") {
                     li_AllCode = 1;
@@ -237,25 +298,45 @@
                     ls_TrialActivity = "ActivityAll";
                 }
 
-                ps_Url = "../ReportSelectionCriteria/SetParam_TrialBalance?ps_ReportName=" + ps_ReportName + "&ps_Location=" + pcnt_Location.value +
+                ps_Url = "../ReportSelectionCriteria/SetParam_TrialBalance?ps_ReportName=" + ps_ReportName + "&pi_AllLoc=" + li_AllLoc + "&ps_Location=" + pcnt_Location.value +
                          "&pi_AllAccCode=" + li_AllCode.toString() + "&ps_AccCodeFrom=" + pcnt_AccCodeFrom.value + "&ps_AccCodeTo=" + pcnt_AccCodeTo.value +
                          "&pi_AllDate=" + li_AllDate.toString() + "&pdt_DateFrom=" + pcnt_DateFrom.value + "&pdt_DateTo=" + pcnt_DateTo.value +
                          "&ps_Level=" + pcnt_ChrtOfAccLevel.value + "&ps_TrialActivity=" + ls_TrialActivity + "";
             }
             else if (ps_ReportName.toLowerCase() == "IncomeStatement".toLowerCase()) {
+                var pcnt_AllLoc = document.getElementById('chk_AllLocations');
                 var pcnt_Location = document.getElementById('ddl_location');
                 var pcnt_Level = document.getElementById('txt_Level');
                 var pcnt_Year = document.getElementById('ddl_Year');
 
-                ps_Url = "../ReportSelectionCriteria/SetParam_IncomeStatement?ps_ReportName=" + ps_ReportName + "&ps_Location=" + pcnt_Location.value +
+                var li_AllLoc;
+
+                if (pcnt_AllLoc.checked == true) {
+                    li_AllLoc = 1;
+                }
+                else {
+                    li_AllLoc = 0;
+                }
+
+                ps_Url = "../ReportSelectionCriteria/SetParam_IncomeStatement?ps_ReportName=" + ps_ReportName + "&pi_AllLoc=" + li_AllLoc + "&ps_Location=" + pcnt_Location.value +
                          "&pi_Level=" + pcnt_Level.value + "&pi_Year=" + pcnt_Year.value;
             }
             else if (ps_ReportName.toLowerCase() == "BalanceSheet".toLowerCase()) {
+                var pcnt_AllLoc = document.getElementById('chk_AllLocations');
                 var pcnt_Location = document.getElementById('ddl_location');
                 var pcnt_Level = document.getElementById('txt_Level');
                 var pcnt_Year = document.getElementById('ddl_Year');
 
-                ps_Url = "../ReportSelectionCriteria/SetParam_BalanceSheet?ps_ReportName=" + ps_ReportName + "&ps_Location=" + pcnt_Location.value +
+                var li_AllLoc;
+
+                if (pcnt_AllLoc.checked == true) {
+                    li_AllLoc = 1;
+                }
+                else {
+                    li_AllLoc = 0;
+                }
+
+                ps_Url = "../ReportSelectionCriteria/SetParam_BalanceSheet?ps_ReportName=" + ps_ReportName + "&pi_AllLoc=" + li_AllLoc + "&ps_Location=" + pcnt_Location.value +
                          "&pi_Level=" + pcnt_Level.value + "&pi_Year=" + pcnt_Year.value;
             };
 
@@ -295,6 +376,8 @@
                 <div class="CustomCell" style="width: 150px; height: 30px;">
                     Location</div>
                 <%= Html.DropDownList("ddl_location", null, new { style = "width:955px;" })%>
+                <input type="checkbox" class="checkbox" id="chk_AllLocations" name="chk_AllLocations"
+                    onclick="CheckAllLocations()" checked="checked" />
             </div>
             <div class="Clear">
             </div>
@@ -302,6 +385,8 @@
                 <div class="CustomCell" style="width: 150px; height: 30px;">
                     Voucher Type</div>
                 <%= Html.DropDownList("ddl_VoucherTypes", null, new { style = "width:955px;" })%>
+                <input type="checkbox" class="checkbox" id="chk_AllVoucherTypes" name="chk_AllVoucherTypes"
+                    onclick="CheckAllVchrTypes()" checked="checked" />
             </div>
             <div class="Clear">
             </div>

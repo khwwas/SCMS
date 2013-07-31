@@ -355,6 +355,7 @@
     <Content Include="Content\nav.css" />
     <Content Include="Content\prettyPhoto.css" />
     <Content Include="Content\reset.css" />
+    <Content Include="Content\Slider\slicebox.css" />
     <Content Include="Content\table\demo_page.css" />
     <Content Include="Content\table\demo_table.css" />
     <Content Include="Content\table\demo_table_jui.css" />
@@ -670,6 +671,9 @@
     <Content Include="img\shine-effect.png" />
     <Content Include="img\sidemenu-repeat-hover.jpg" />
     <Content Include="img\sidemenu-repeat.jpg" />
+    <Content Include="img\Slider\nav.png" />
+    <Content Include="img\Slider\options.png" />
+    <Content Include="img\Slider\shadow.png" />
     <Content Include="img\star_list.png" />
     <Content Include="img\switch_minus.gif" />
     <Content Include="img\switch_plus.gif" />
@@ -786,6 +790,8 @@
     <Content Include="Scripts\SCMS.js" />
     <Content Include="Scripts\SecurityRights.js" />
     <Content Include="Scripts\setup.js" />
+    <Content Include="Scripts\Slider\jquery.slicebox.js" />
+    <Content Include="Scripts\Slider\modernizr.custom.46884.js" />
     <Content Include="Scripts\table\jquery.dataTables.min.js" />
     <Content Include="Scripts\tiny-mce\jquery.tinymce.js" />
     <Content Include="Scripts\tiny-mce\langs\en.js" />

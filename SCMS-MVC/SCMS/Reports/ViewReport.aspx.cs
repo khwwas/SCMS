@@ -15,7 +15,8 @@ using CrystalDecisions.Shared;
 using CrystalDecisions.Web;
 using System.ComponentModel;
 //using System.Collection.Generic.List;
-using System.Reflection;
+//using System.Reflection;
+using SCMSDataLayer.DB;
 
 using System.Globalization;
 
@@ -54,14 +55,15 @@ namespace SCMS.Reports
                         ls_Company = SCMS.SystemParameters.CurrentCmpName;
                     }
 
-                    if (SCMS.SystemParameters.CurrentUserName == null ||
-                        SCMS.SystemParameters.CurrentUserName.Trim() == "")
+                    SECURITY_User lobj_User = (SECURITY_User)System.Web.HttpContext.Current.Session["user"];
+                    if (lobj_User.User_Title == null ||
+                        lobj_User.User_Title.Trim() == "")
                     {
                         ls_User = "Administrator";
                     }
                     else
                     {
-                        ls_User = SCMS.SystemParameters.CurrentUserName;
+                        ls_User = lobj_User.User_Title.Trim();
                     }
 
                     BindReports();
@@ -532,7 +534,7 @@ namespace SCMS.Reports
                 {
                     _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptBalanceSheet.rpt");
                     Datasets.dsBalanceSheet _dsBalanceSheet = new Datasets.dsBalanceSheet();
-                    string ls_Location = "";
+                    string ls_Location="";
                     int li_Level = 0, li_Year = 0;
 
                     ls_Location = SCMS.Reports.ReportParameters.Location;

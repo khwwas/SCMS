@@ -34,6 +34,8 @@ namespace SCMS.Controllers
             return null;
         }
 
+        string UserLoginId = "";
+
         #region Setups
         public string SetParam_Setups(String ps_ReportName)
         {
@@ -51,18 +53,66 @@ namespace SCMS.Controllers
         #endregion
 
         #region VoucherDocument
-        public string SetParam_VoucherDocument(string ps_ReportName, string ps_Location, string ps_VoucherTypes, string pi_AllDoc, string ps_DocFrom, string ps_DocTo,
+        public string SetParam_VoucherDocument(string ps_ReportName, string pi_AllLoc, string ps_Location, string pi_AllVchrType, string ps_VoucherTypes,
+                                               string pi_AllDoc, string ps_DocFrom, string ps_DocTo,
                                                string pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo, string ps_VoucherPrint)
         {
+            string ls_Location = "", ls_VoucherTypes="";
+            
             ResetParameters();
             Reports.ReportParameters.ReportName = ps_ReportName;
-            Reports.ReportParameters.Location = ps_Location;
-            Reports.ReportParameters.VoucherTypes = ps_VoucherTypes;
             Reports.ReportParameters.VoucherPrint = ps_VoucherPrint;
+
+            if (pi_AllLoc == "1")
+            {
+                SECURITY_User user = (SECURITY_User)System.Web.HttpContext.Current.Session["user"];
+                UserLoginId = user.User_Id;
+
+                List<sp_GetUserLocationsByUserIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByUserId(UserLoginId).ToList();
+                if (UserLocations != null && UserLocations.Count > 0)
+                {
+                    UserLocations = UserLocations.Where(c => c.SelectedLocation != "0").ToList();
+                }
+
+                ls_Location = ConvertStringArrayToString(UserLocations.Select(c => c.Loc_Id).ToArray());
+                if (ls_Location == null || ls_Location.Trim() == "")
+                {
+                    ls_Location = "''";
+                }
+
+                Reports.ReportParameters.Location = ls_Location;
+            }
+            else
+            {
+                Reports.ReportParameters.Location = ps_Location;
+            }
+
+            if (pi_AllVchrType == "1")
+            {
+                SECURITY_User user = (SECURITY_User)System.Web.HttpContext.Current.Session["user"];
+                UserLoginId = user.User_Id;
+
+                List<sp_GetUserVoucherTypesByUserIdResult> UserVoucherTypes = new DALUserMenuRights().GetUserVoucherTypesByUserId(UserLoginId).ToList();
+                if (UserVoucherTypes != null && UserVoucherTypes.Count > 0)
+                {
+                    UserVoucherTypes = UserVoucherTypes.Where(c => c.SelectedVoucherType != "0").ToList();
+                }
+
+                ls_VoucherTypes =ConvertStringArrayToString(UserVoucherTypes.Select(c => c.VchrType_Id).ToArray());
+                if (ls_VoucherTypes == null || ls_VoucherTypes.Trim() == "")
+                {
+                    ls_VoucherTypes = "''";
+                }
+
+                Reports.ReportParameters.VoucherTypes = ls_VoucherTypes;
+            }
+            else
+            {
+                Reports.ReportParameters.VoucherTypes = ps_VoucherTypes;
+            }
 
             if (pi_AllDoc == "1")
             {
-
                 Reports.ReportParameters.AllDoc = 1;
                 Reports.ReportParameters.DocFrom = "";
                 Reports.ReportParameters.DocTo = "";
@@ -92,12 +142,37 @@ namespace SCMS.Controllers
         #endregion
 
         #region Ledger Datail
-        public string SetParam_LedgerDetail(String ps_ReportName, String ps_Location, string pi_AllAccCode, string ps_AccCodeFrom, string ps_AccCodeTo,
+        public string SetParam_LedgerDetail(String ps_ReportName, string pi_AllLoc, String ps_Location, string pi_AllAccCode, string ps_AccCodeFrom, string ps_AccCodeTo,
                                               string pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo)
         {
+            string ls_Location = "";
+
             ResetParameters();
             Reports.ReportParameters.ReportName = ps_ReportName;
-            Reports.ReportParameters.Location = ps_Location;
+
+            if (pi_AllLoc == "1")
+            {
+                SECURITY_User user = (SECURITY_User)System.Web.HttpContext.Current.Session["user"];
+                UserLoginId = user.User_Id;
+
+                List<sp_GetUserLocationsByUserIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByUserId(UserLoginId).ToList();
+                if (UserLocations != null && UserLocations.Count > 0)
+                {
+                    UserLocations = UserLocations.Where(c => c.SelectedLocation != "0").ToList();
+                }
+
+                ls_Location = ConvertStringArrayToString(UserLocations.Select(c => c.Loc_Id).ToArray());
+                if (ls_Location == null || ls_Location.Trim() == "")
+                {
+                    ls_Location = "''";
+                }
+
+                Reports.ReportParameters.Location = ls_Location;
+            }
+            else
+            {
+                Reports.ReportParameters.Location = ps_Location;
+            }
 
             if (pi_AllAccCode == "1")
             {
@@ -131,14 +206,39 @@ namespace SCMS.Controllers
         #endregion
 
         #region Trial Balance
-        public string SetParam_TrialBalance(String ps_ReportName, String ps_Location, string pi_AllAccCode, string ps_AccCodeFrom, string ps_AccCodeTo,
+        public string SetParam_TrialBalance(String ps_ReportName, string pi_AllLoc, String ps_Location, string pi_AllAccCode, string ps_AccCodeFrom, string ps_AccCodeTo,
                                               string pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo, string ps_Level, string ps_TrialActivity)
         {
+            string ls_Location = "";
+
             ResetParameters();
             Reports.ReportParameters.ReportName = ps_ReportName;
-            Reports.ReportParameters.Location = ps_Location;
             Reports.ReportParameters.Level = Convert.ToInt32(ps_Level);
             Reports.ReportParameters.TrialActivity = ps_TrialActivity;
+
+            if (pi_AllLoc == "1")
+            {
+                SECURITY_User user = (SECURITY_User)System.Web.HttpContext.Current.Session["user"];
+                UserLoginId = user.User_Id;
+
+                List<sp_GetUserLocationsByUserIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByUserId(UserLoginId).ToList();
+                if (UserLocations != null && UserLocations.Count > 0)
+                {
+                    UserLocations = UserLocations.Where(c => c.SelectedLocation != "0").ToList();
+                }
+
+                ls_Location = ConvertStringArrayToString(UserLocations.Select(c => c.Loc_Id).ToArray());
+                if (ls_Location == null || ls_Location.Trim() == "")
+                {
+                    ls_Location = "''";
+                }
+
+                Reports.ReportParameters.Location = ls_Location;
+            }
+            else
+            {
+                Reports.ReportParameters.Location = ps_Location;
+            }
 
             if (pi_AllAccCode == "1")
             {
@@ -172,26 +272,76 @@ namespace SCMS.Controllers
         #endregion
 
         #region Income Statement
-        public string SetParam_IncomeStatement(string ps_ReportName, string ps_Location, Int32 pi_Level, Int32 pi_Year)
+        public string SetParam_IncomeStatement(string ps_ReportName, string pi_AllLoc, string ps_Location, Int32 pi_Level, Int32 pi_Year)
         {
+            string ls_Location = "";
+
             ResetParameters();
             Reports.ReportParameters.ReportName = ps_ReportName;
-            Reports.ReportParameters.Location = ps_Location;
             Reports.ReportParameters.Level = pi_Level;
             Reports.ReportParameters.Year = pi_Year;
+
+            if (pi_AllLoc == "1")
+            {
+                SECURITY_User user = (SECURITY_User)System.Web.HttpContext.Current.Session["user"];
+                UserLoginId = user.User_Id;
+
+                List<sp_GetUserLocationsByUserIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByUserId(UserLoginId).ToList();
+                if (UserLocations != null && UserLocations.Count > 0)
+                {
+                    UserLocations = UserLocations.Where(c => c.SelectedLocation != "0").ToList();
+                }
+
+                ls_Location = ConvertStringArrayToString(UserLocations.Select(c => c.Loc_Id).ToArray());
+                if (ls_Location == null || ls_Location.Trim() == "")
+                {
+                    ls_Location = "''";
+                }
+
+                Reports.ReportParameters.Location = ls_Location;
+            }
+            else
+            {
+                Reports.ReportParameters.Location = ps_Location;
+            }
 
             return "OK";
         }
         #endregion
 
         #region BalanceSheet
-        public string SetParam_BalanceSheet(string ps_ReportName, string ps_Location, Int32 pi_Level, Int32 pi_Year)
+        public string SetParam_BalanceSheet(string ps_ReportName, string pi_AllLoc, string ps_Location, Int32 pi_Level, Int32 pi_Year)
         {
+            string ls_Location = "";
+
             ResetParameters();
             Reports.ReportParameters.ReportName = ps_ReportName;
-            Reports.ReportParameters.Location = ps_Location;
             Reports.ReportParameters.Level = pi_Level;
             Reports.ReportParameters.Year = pi_Year;
+
+            if (pi_AllLoc == "1")
+            {
+                SECURITY_User user = (SECURITY_User)System.Web.HttpContext.Current.Session["user"];
+                UserLoginId = user.User_Id;
+
+                List<sp_GetUserLocationsByUserIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByUserId(UserLoginId).ToList();
+                if (UserLocations != null && UserLocations.Count > 0)
+                {
+                    UserLocations = UserLocations.Where(c => c.SelectedLocation != "0").ToList();
+                }
+
+                ls_Location = ConvertStringArrayToString(UserLocations.Select(c => c.Loc_Id).ToArray());
+                if (ls_Location == null || ls_Location.Trim() == "")
+                {
+                    ls_Location = "''";
+                }
+
+                Reports.ReportParameters.Location = ls_Location;
+            }
+            else
+            {
+                Reports.ReportParameters.Location = ps_Location;
+            }
 
             return "OK";
         }
@@ -200,8 +350,8 @@ namespace SCMS.Controllers
         #region Functions
         void ResetParameters()
         {
-            Reports.ReportParameters.Location = "";
-            Reports.ReportParameters.VoucherTypes = "";
+            Reports.ReportParameters.Location = null;
+            Reports.ReportParameters.VoucherTypes = null;
             Reports.ReportParameters.Level = 0;
             Reports.ReportParameters.AllAccCode = 1;
             Reports.ReportParameters.AccCodeFrom = "";
@@ -212,6 +362,33 @@ namespace SCMS.Controllers
 
 
         }
+        static string ConvertStringArrayToString(string[] ps_Array)
+        {
+            string ls_Array = "";
+            int li_Index = 0;
+
+            try
+            {
+                for (li_Index = 0; li_Index <= ps_Array.Length - 1; li_Index++)
+                {
+                    if (ls_Array == null || ls_Array.Trim() == "")
+                    {
+                        ls_Array += "'" + ps_Array[li_Index] + "'";
+                    }
+                    else
+                    {
+                        ls_Array += ", '" + ps_Array[li_Index] + "'";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message.ToString());
+            }
+
+            return ls_Array;
+        }
+
         #endregion
 
     }

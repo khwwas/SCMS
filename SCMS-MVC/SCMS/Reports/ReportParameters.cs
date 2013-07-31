@@ -27,7 +27,7 @@ namespace SCMS.Reports
             get;
             set;
         }
-        public static int Year 
+        public static int Year
         {
             get;
             set;
@@ -86,7 +86,7 @@ namespace SCMS.Reports
             set;
         }
 
-        public static string TrialActivity  
+        public static string TrialActivity
         {
             get;
             set;

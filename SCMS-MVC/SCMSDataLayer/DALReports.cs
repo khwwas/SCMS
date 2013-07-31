@@ -210,13 +210,14 @@ namespace SCMSDataLayer
                 _Sql += "          ( GL_VchrMaster.VchrType_Id = SETUP_VoucherType.VchrType_Id ) And ";
                 _Sql += "          ( GL_VchrDetail.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And ";
                 _Sql += "          ( SETUP_Location.Loc_Id = GL_VchrMaster.Loc_Id ) And ";
-                _Sql += "          ( GL_VchrMaster.Loc_Id = '" + ps_Location + "' ) And ";
-                _Sql += "          ( SETUP_VoucherType.VchrType_Id = '" + ps_VoucherTypes + "' ) And ";
+                _Sql += "          ( GL_VchrMaster.Loc_Id In (" + ps_Location + ") ) And ";
+                _Sql += "          ( SETUP_VoucherType.VchrType_Id In (" + ps_VoucherTypes + ") ) And ";
                 _Sql += "          ( " + pi_AllDate + " = 1 Or Convert( datetime, Convert( Char, GL_VchrMaster.VchMas_Date, 103 ), 103 ) Between ";
-                _Sql += "                                      Convert( datetime, Convert( Char, '" + pdt_DateFrom.ToString() + "', 103 ), 103 ) And ";
-                _Sql += "                                      Convert( datetime, Convert( Char, '" + pdt_DateTo.ToString() + "', 103 ), 103 ) ) And ";
+                _Sql += "                                      Convert( datetime, Convert( Char, '" + pdt_DateFrom.ToString("dd/MM/yyyy") + "', 103 ), 103 ) And ";
+                _Sql += "                                      Convert( datetime, '" + pdt_DateTo.ToString("dd/MM/yyyy") + "', 103 ) ) And ";
                 _Sql += "          ( " + pi_AllDoc + " = 1 Or GL_VchrMaster.VchMas_Id Between '" + ps_DocFrom + "' And '" + ps_DocTo + "' ) ";
-                _Sql += " Order By GL_VchrMaster.VchMas_Date, ";
+                _Sql += " Order By SETUP_Location.Loc_Title, ";
+                _Sql += "          GL_VchrMaster.VchMas_Date, ";
                 _Sql += "          GL_VchrDetail.VchDet_Id ";
 
                 SqlDataAdapter da = new SqlDataAdapter(_Sql, con);
@@ -288,7 +289,7 @@ namespace SCMSDataLayer
                     _Sql += "                                GL_VchrDetail b ";
                     _Sql += "                          Where ( b.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And ";
                     _Sql += "                                ( b.VchMas_Id = a.VchMas_Id ) and ";
-                    _Sql += "                                ( a.Loc_Id = '" + ps_Location + "' ) And ";
+                    _Sql += "                                ( a.Loc_Id In (" + ps_Location + ") ) And ";
                     _Sql += "                                ( " + pi_AllAccCode + " = 1 Or SETUP_ChartOfAccount.ChrtAcc_Id Between '' And '' ) And ";
                     _Sql += "                                ( " + pi_AllDate + " = 1 Or Convert( datetime, Convert( Char, a.VchMas_Date, 103 ), 103 ) < ";
                     _Sql += "                                                            Convert( datetime, '" + pdt_DateFrom.ToString("dd/MM/yyyy") + "', 103 ) ) ";
@@ -303,7 +304,7 @@ namespace SCMSDataLayer
                 _Sql += "    Where ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) And ";
                 _Sql += "          ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And ";
                 _Sql += "          ( GL_VchrDetail.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And ";
-                _Sql += "          ( SETUP_Location.Loc_Id = '" + ps_Location + "' ) And ";
+                _Sql += "          ( SETUP_Location.Loc_Id In (" + ps_Location + ") ) And ";
                 _Sql += "          ( " + pi_AllAccCode + " = 1 Or SETUP_ChartOfAccount.ChrtAcc_Id Between '" + ps_AccCodeFrom + "' And '" + ps_AccCodeTo + "' ) And ";
                 _Sql += "          ( " + pi_AllDate + " = 1 Or Convert( datetime, Convert( Char, GL_VchrMaster.VchMas_Date, 103 ), 103 ) Between ";
                 _Sql += "                                      Convert( datetime, '" + pdt_DateFrom.ToString("dd/MM/yyyy") + "', 103 ) And ";
@@ -381,7 +382,7 @@ namespace SCMSDataLayer
                     _Sql += "                                GL_VchrDetail b ";
                     _Sql += "                          Where ( b.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And ";
                     _Sql += "                                ( b.VchMas_Id = a.VchMas_Id ) and ";
-                    _Sql += "                                ( a.Loc_Id = '" + ps_Location + "' ) And ";
+                    _Sql += "                                ( a.Loc_Id In (" + ps_Location + ") ) And ";
                     _Sql += "                                ( " + pi_AllAccCode + " = 1 Or SETUP_ChartOfAccount.ChrtAcc_Id Between '' And '' ) And ";
                     _Sql += "                                ( " + pi_AllDate + " = 1 Or Convert( datetime, Convert( Char, a.VchMas_Date, 103 ), 103 ) < ";
                     _Sql += "                                                            Convert( datetime, '" + pdt_DateFrom.ToString("dd/MM/yyyy") + "', 103 ) ) ";
@@ -396,7 +397,7 @@ namespace SCMSDataLayer
                 _Sql += "    Where ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) And ";
                 _Sql += "          ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And ";
                 _Sql += "          ( GL_VchrDetail.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And ";
-                _Sql += "          ( SETUP_Location.Loc_Id = '" + ps_Location + "' ) And ";
+                _Sql += "          ( SETUP_Location.Loc_Id In (" + ps_Location + ") ) And ";
                 _Sql += "          ( " + pi_AllAccCode + " = 1 Or SETUP_ChartOfAccount.ChrtAcc_Id Between '" + ps_AccCodeFrom + "' And '" + ps_AccCodeTo + "' ) And ";
                 _Sql += "          ( " + pi_AllDate + " = 1 Or Convert( datetime, Convert( Char, GL_VchrMaster.VchMas_Date, 103 ), 103 ) Between ";
                 _Sql += "                                      Convert( datetime, '" + pdt_DateFrom.ToString("dd/MM/yyyy") + "', 103 ) And ";
@@ -488,7 +489,7 @@ namespace SCMSDataLayer
                         _Sql += "               ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) and ";
                         _Sql += "               ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And ";
                         _Sql += "               ( SETUP_ChartOfAccount.ChrtAcc_Code = Substring( a.ChrtAcc_Code, 1, Len( SETUP_ChartOfAccount.ChrtAcc_Code ) ) ) And ";
-                        _Sql += "               ( SETUP_Location.Loc_Id = '" + ps_Location + "' ) And ";
+                        _Sql += "               ( SETUP_Location.Loc_Id In (" + ps_Location + ") ) And ";
                         _Sql += "               ( " + pi_AllDate + " = 1 Or Convert( datetime, Convert( Char, GL_VchrMaster.VchMas_Date, 103 ), 103 ) < ";
                         _Sql += "                                              Convert( datetime, '" + pdt_DateFrom.ToString("dd/MM/yyyy") + "', 103 )  ) ";
                         _Sql += "      ) OpeningBalance, ";
@@ -505,7 +506,7 @@ namespace SCMSDataLayer
                     _Sql += "             Where ( SETUP_ChartOfAccount.ChrtAcc_Id = GL_VchrDetail.ChrtAcc_Id ) And ";
                     _Sql += "                   ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) and ";
                     _Sql += "                   ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And ";
-                    _Sql += "                   ( SETUP_Location.Loc_Id = '" + ps_Location + "' ) And ";
+                    _Sql += "                   ( SETUP_Location.Loc_Id In (" + ps_Location + ") ) And ";
                     _Sql += "                   ( " + pi_AllDate + " = 1 Or Convert( datetime, Convert( Char, GL_VchrMaster.VchMas_Date, 103 ), 103 ) Between ";
                     _Sql += "                                               Convert( datetime, '" + pdt_DateFrom.ToString("dd/MM/yyyy") + "', 103 ) And ";
                     _Sql += "                                               Convert( datetime, '" + pdt_DateTo.ToString("dd/MM/yyyy") + "', 103 ) ) ";
@@ -545,7 +546,7 @@ namespace SCMSDataLayer
                     _Sql += "                   ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) and ";
                     _Sql += "                   ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And ";
                     _Sql += "                   ( SETUP_ChartOfAccount.ChrtAcc_Code = Substring( a.ChrtAcc_Code, 1, Len( SETUP_ChartOfAccount.ChrtAcc_Code ) ) ) And ";
-                    _Sql += "                   ( SETUP_Location.Loc_Id = '" + ps_Location + "' ) And ";
+                    _Sql += "                   ( SETUP_Location.Loc_Id In (" + ps_Location + ") ) And ";
                     _Sql += "                   ( " + pi_AllDate + " = 1 Or Convert( datetime, Convert( Char, GL_VchrMaster.VchMas_Date, 103 ), 103 ) < ";
                     _Sql += "                                               Convert( datetime, '" + pdt_DateFrom.ToString("dd/MM/yyyy") + "', 103 )  ) ";
                     _Sql += "          ) OpeningBalance, ";
@@ -585,7 +586,7 @@ namespace SCMSDataLayer
                     _Sql += "                   ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) and ";
                     _Sql += "                   ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And ";
                     _Sql += "                   ( SETUP_ChartOfAccount.ChrtAcc_Code = Substring( a.ChrtAcc_Code, 1, Len( SETUP_ChartOfAccount.ChrtAcc_Code ) ) ) And ";
-                    _Sql += "                   ( SETUP_Location.Loc_Id = '" + ps_Location + "' ) And ";
+                    _Sql += "                   ( SETUP_Location.Loc_Id In (" + ps_Location + ") ) And ";
                     _Sql += "                   ( " + pi_AllDate + " = 1 Or Convert( datetime, Convert( Char, GL_VchrMaster.VchMas_Date, 103 ), 103 ) <= ";
                     _Sql += "                                               Convert( datetime, '" + pdt_DateTo.ToString("dd/MM/yyyy") + "', 103 )  ) ";
                     _Sql += "          ) OpeningBalance, ";
@@ -687,7 +688,7 @@ namespace SCMSDataLayer
                 _Sql += "             Where ( SETUP_ChartOfAccount.ChrtAcc_Id = GL_VchrDetail.ChrtAcc_Id ) And ";
                 _Sql += "                   ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) and ";
                 _Sql += "                   ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And ";
-                _Sql += "                   ( SETUP_Location.Loc_Id = '" + ps_Location + "' ) And  ";
+                _Sql += "                   ( SETUP_Location.Loc_Id In (" + ps_Location + ") ) And ";
                 _Sql += "                   ( Year( GL_VchrMaster.VchMas_Date ) = " + pi_Year.ToString() + " ) ";
                 _Sql += "          ) CurrentYear On ";
                 _Sql += "               ( SETUP_ChartOfAccount.ChrtAcc_Code = Substring( CurrentYear.ChrtAcc_Code, 1, Len( SETUP_ChartOfAccount.ChrtAcc_Code ) ) ) ";
@@ -701,7 +702,7 @@ namespace SCMSDataLayer
                 _Sql += "             Where ( SETUP_ChartOfAccount.ChrtAcc_Id = GL_VchrDetail.ChrtAcc_Id ) And  ";
                 _Sql += "                   ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) and ";
                 _Sql += "                   ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And ";
-                _Sql += "                   ( SETUP_Location.Loc_Id = '" + ps_Location + "' ) And ";
+                _Sql += "                   ( SETUP_Location.Loc_Id In (" + ps_Location + ") ) And ";
                 _Sql += "                   ( Year( GL_VchrMaster.VchMas_Date ) = " + pi_Year.ToString() + " - 1 ) ";
                 _Sql += "          ) PreviousYear On ";
                 _Sql += "               ( SETUP_ChartOfAccount.ChrtAcc_Code = Substring( PreviousYear.ChrtAcc_Code, 1, Len( SETUP_ChartOfAccount.ChrtAcc_Code ) ) ), ";
@@ -742,7 +743,7 @@ namespace SCMSDataLayer
                 _Sql += "             Where ( SETUP_ChartOfAccount.ChrtAcc_Id = GL_VchrDetail.ChrtAcc_Id ) And ";
                 _Sql += "                   ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) and";
                 _Sql += "                   ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And";
-                _Sql += "                   ( SETUP_Location.Loc_Id = '" + ps_Location + "' ) And ";
+                _Sql += "                   ( SETUP_Location.Loc_Id In (" + ps_Location + ") ) And ";
                 _Sql += "                   ( Year( GL_VchrMaster.VchMas_Date ) = " + pi_Year.ToString() + " ) ";
                 _Sql += "          ) CurrentYear On";
                 _Sql += "               ( SETUP_ChartOfAccount.ChrtAcc_Code = Substring( CurrentYear.ChrtAcc_Code, 1, Len( SETUP_ChartOfAccount.ChrtAcc_Code ) ) )";
@@ -757,7 +758,7 @@ namespace SCMSDataLayer
                 _Sql += "             Where ( SETUP_ChartOfAccount.ChrtAcc_Id = GL_VchrDetail.ChrtAcc_Id ) And";
                 _Sql += "                   ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) and";
                 _Sql += "                   ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And ";
-                _Sql += "                   ( SETUP_Location.Loc_Id = '" + ps_Location + "' ) And";
+                _Sql += "                   ( SETUP_Location.Loc_Id In (" + ps_Location + ") ) And ";
                 _Sql += "                   ( Year( GL_VchrMaster.VchMas_Date ) = " + pi_Year.ToString() + " - 1 )";
                 _Sql += "          ) PreviousYear On ";
                 _Sql += "               ( SETUP_ChartOfAccount.ChrtAcc_Code = Substring( PreviousYear.ChrtAcc_Code, 1, Len( SETUP_ChartOfAccount.ChrtAcc_Code ) ) ),";
@@ -856,7 +857,7 @@ namespace SCMSDataLayer
                 _Sql += "             Where ( SETUP_ChartOfAccount.ChrtAcc_Id = GL_VchrDetail.ChrtAcc_Id ) And ";
                 _Sql += "                   ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) and ";
                 _Sql += "                   ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And ";
-                _Sql += "                   ( SETUP_Location.Loc_Id = '" + ps_Location + "' ) And  ";
+                _Sql += "                   ( SETUP_Location.Loc_Id In (" + ps_Location + ") ) And  ";
                 _Sql += "                   ( Year( GL_VchrMaster.VchMas_Date ) = " + pi_Year.ToString() + " ) ";
                 _Sql += "          ) CurrentYear On ";
                 _Sql += "               ( SETUP_ChartOfAccount.ChrtAcc_Code = Substring( CurrentYear.ChrtAcc_Code, 1, Len( SETUP_ChartOfAccount.ChrtAcc_Code ) ) ) ";
@@ -870,7 +871,7 @@ namespace SCMSDataLayer
                 _Sql += "             Where ( SETUP_ChartOfAccount.ChrtAcc_Id = GL_VchrDetail.ChrtAcc_Id ) And  ";
                 _Sql += "                   ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) and ";
                 _Sql += "                   ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And ";
-                _Sql += "                   ( SETUP_Location.Loc_Id = '" + ps_Location + "' ) And ";
+                _Sql += "                   ( SETUP_Location.Loc_Id In (" + ps_Location + ") ) And ";
                 _Sql += "                   ( Year( GL_VchrMaster.VchMas_Date ) = " + pi_Year.ToString() + " - 1 ) ";
                 _Sql += "          ) PreviousYear On ";
                 _Sql += "               ( SETUP_ChartOfAccount.ChrtAcc_Code = Substring( PreviousYear.ChrtAcc_Code, 1, Len( SETUP_ChartOfAccount.ChrtAcc_Code ) ) ), ";
@@ -911,7 +912,7 @@ namespace SCMSDataLayer
                 _Sql += "             Where ( SETUP_ChartOfAccount.ChrtAcc_Id = GL_VchrDetail.ChrtAcc_Id ) And ";
                 _Sql += "                   ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) and ";
                 _Sql += "                   ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And ";
-                _Sql += "                   ( SETUP_Location.Loc_Id = '" + ps_Location + "' ) And  ";
+                _Sql += "                   ( SETUP_Location.Loc_Id In (" + ps_Location + ") ) And ";
                 _Sql += "                   ( Year( GL_VchrMaster.VchMas_Date ) = " + pi_Year.ToString() + " ) ";
                 _Sql += "          ) CurrentYear On ";
                 _Sql += "               ( SETUP_ChartOfAccount.ChrtAcc_Code = Substring( CurrentYear.ChrtAcc_Code, 1, Len( SETUP_ChartOfAccount.ChrtAcc_Code ) ) ) ";
@@ -925,7 +926,7 @@ namespace SCMSDataLayer
                 _Sql += "             Where ( SETUP_ChartOfAccount.ChrtAcc_Id = GL_VchrDetail.ChrtAcc_Id ) And  ";
                 _Sql += "                   ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) and ";
                 _Sql += "                   ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And ";
-                _Sql += "                   ( SETUP_Location.Loc_Id = '" + ps_Location + "' ) And ";
+                _Sql += "                   ( SETUP_Location.Loc_Id In (" + ps_Location + ") ) And ";
                 _Sql += "                   ( Year( GL_VchrMaster.VchMas_Date ) = " + pi_Year.ToString() + " - 1 ) ";
                 _Sql += "          ) PreviousYear On ";
                 _Sql += "               ( SETUP_ChartOfAccount.ChrtAcc_Code = Substring( PreviousYear.ChrtAcc_Code, 1, Len( SETUP_ChartOfAccount.ChrtAcc_Code ) ) ), ";
@@ -967,7 +968,7 @@ namespace SCMSDataLayer
                 _Sql += "             Where ( SETUP_ChartOfAccount.ChrtAcc_Id = GL_VchrDetail.ChrtAcc_Id ) And ";
                 _Sql += "                   ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) and";
                 _Sql += "                   ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And";
-                _Sql += "                   ( SETUP_Location.Loc_Id = '" + ps_Location + "' ) And ";
+                _Sql += "                   ( SETUP_Location.Loc_Id In (" + ps_Location + ") ) And ";
                 _Sql += "                   ( Year( GL_VchrMaster.VchMas_Date ) = " + pi_Year.ToString() + " ) ";
                 _Sql += "          ) CurrentYear On";
                 _Sql += "               ( SETUP_ChartOfAccount.ChrtAcc_Code = Substring( CurrentYear.ChrtAcc_Code, 1, Len( SETUP_ChartOfAccount.ChrtAcc_Code ) ) )";
@@ -982,7 +983,7 @@ namespace SCMSDataLayer
                 _Sql += "             Where ( SETUP_ChartOfAccount.ChrtAcc_Id = GL_VchrDetail.ChrtAcc_Id ) And";
                 _Sql += "                   ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) and";
                 _Sql += "                   ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And ";
-                _Sql += "                   ( SETUP_Location.Loc_Id = '" + ps_Location + "' ) And";
+                _Sql += "                   ( SETUP_Location.Loc_Id In (" + ps_Location + ") ) And ";
                 _Sql += "                   ( Year( GL_VchrMaster.VchMas_Date ) = " + pi_Year.ToString() + " - 1 )";
                 _Sql += "          ) PreviousYear On ";
                 _Sql += "               ( SETUP_ChartOfAccount.ChrtAcc_Code = Substring( PreviousYear.ChrtAcc_Code, 1, Len( SETUP_ChartOfAccount.ChrtAcc_Code ) ) ),";
