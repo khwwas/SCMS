@@ -49,6 +49,31 @@ namespace SCMS.Controllers
 
                     li_ReturnValue = objDalLocation.SaveRecord(lrow_Location);
                     ViewData["SaveResult"] = li_ReturnValue;
+
+                    // Audit Trail Entry Section
+                    if (li_ReturnValue > 0)
+                    {
+                        string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
+                        if (IsAuditTrail == "1")
+                        {
+                            SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
+                            DALAuditTrail objAuditTrail = new DALAuditTrail();
+                            systemAuditTrail.Scr_Id = 2;
+                            systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
+                            systemAuditTrail.AdtTrl_Action = isEdit == true ? "Edit" : "Add";
+                            systemAuditTrail.AdtTrl_EntryId = ps_Code;
+                            systemAuditTrail.AdtTrl_DataDump = "Loc_Id = " + lrow_Location.Loc_Id + ";";
+                            systemAuditTrail.AdtTrl_DataDump += "Loc_Code = " + lrow_Location.Loc_Code + ";";
+                            systemAuditTrail.AdtTrl_DataDump += "Cmp_Id = " + lrow_Location.Cmp_Id + ";";
+                            systemAuditTrail.AdtTrl_DataDump += "Loc_Title = " + lrow_Location.Loc_Title + ";";
+                            systemAuditTrail.AdtTrl_DataDump += "Loc_Active = " + lrow_Location.Loc_Active + ";";
+                            systemAuditTrail.AdtTrl_DataDump += "Loc_SortOrder = " + lrow_Location.Loc_SortOrder + ";";
+                            systemAuditTrail.AdtTrl_Date = DateTime.Now;
+                            objAuditTrail.SaveRecord(systemAuditTrail);
+                        }
+                    }
+                    // Audit Trail Section End
+
                 }
 
                 return PartialView("GridData");
@@ -65,8 +90,35 @@ namespace SCMS.Controllers
 
             try
             {
+                SETUP_Location LocationRow = objDalLocation.GetAllLocation().Where(c => c.Loc_Id.Equals(_pId)).SingleOrDefault();
+
                 li_ReturnValue = objDalLocation.DeleteRecordById(_pId);
                 ViewData["SaveResult"] = li_ReturnValue;
+
+
+                // Audit Trail Entry Section
+                if (li_ReturnValue > 0)
+                {
+                    string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
+                    if (IsAuditTrail == "1")
+                    {
+                        SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
+                        DALAuditTrail objAuditTrail = new DALAuditTrail();
+                        systemAuditTrail.Scr_Id = 2;
+                        systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
+                        systemAuditTrail.AdtTrl_Action = "Delete";
+                        systemAuditTrail.AdtTrl_EntryId = _pId;
+                        systemAuditTrail.AdtTrl_DataDump = "Loc_Id = " + LocationRow.Loc_Id + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "Loc_Code = " + LocationRow.Loc_Code + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Id = " + LocationRow.Cmp_Id + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "Loc_Title = " + LocationRow.Loc_Title + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "Loc_Active = " + LocationRow.Loc_Active + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "Loc_SortOrder = " + LocationRow.Loc_SortOrder + ";";
+                        systemAuditTrail.AdtTrl_Date = DateTime.Now;
+                        objAuditTrail.SaveRecord(systemAuditTrail);
+                    }
+                }
+                // Audit Trail Section End
 
                 return PartialView("GridData");
             }
