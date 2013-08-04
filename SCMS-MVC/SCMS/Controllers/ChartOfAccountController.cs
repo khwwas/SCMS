@@ -94,6 +94,36 @@ namespace SCMS.Controllers
                     {
                         li_ReturnValue = objDalChartOfAccount.SaveRecord(lrow_ChartOfAccount);
                         ViewData["SaveResult"] = li_ReturnValue;
+
+                        // Audit Trail Entry Section
+                        if (li_ReturnValue > 0)
+                        {
+                            string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
+                            if (IsAuditTrail == "1")
+                            {
+                                SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
+                                DALAuditTrail objAuditTrail = new DALAuditTrail();
+                                systemAuditTrail.Scr_Id = 10;
+                                systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
+                                systemAuditTrail.Loc_Id = lrow_ChartOfAccount.Loc_Id;
+                                systemAuditTrail.AdtTrl_Action = isEdit == true ? "Edit" : "Add";
+                                systemAuditTrail.AdtTrl_EntryId = lrow_ChartOfAccount.ChrtAcc_Id;
+                                systemAuditTrail.AdtTrl_DataDump = "ChrtAcc_Id = " + lrow_ChartOfAccount.ChrtAcc_Id + ";";
+                                systemAuditTrail.AdtTrl_DataDump += "ChrtAcc_Code = " + lrow_ChartOfAccount.ChrtAcc_CodeDisplay + ";";
+                                systemAuditTrail.AdtTrl_DataDump += "Cmp_Id = " + lrow_ChartOfAccount.Cmp_Id + ";";
+                                systemAuditTrail.AdtTrl_DataDump += "Loc_Id = " + lrow_ChartOfAccount.Loc_Id + ";";
+                                systemAuditTrail.AdtTrl_DataDump += "Natr_Id = " + lrow_ChartOfAccount.Natr_Id + ";";
+                                systemAuditTrail.AdtTrl_DataDump += "AccNatr_Id = " + lrow_ChartOfAccount.AccNatr_Id + ";";
+                                systemAuditTrail.AdtTrl_DataDump += "ChrtAcc_Title = " + lrow_ChartOfAccount.ChrtAcc_Title + ";";
+                                systemAuditTrail.AdtTrl_DataDump += "ChrtAcc_Type = " + lrow_ChartOfAccount.ChrtAcc_Type + ";";
+                                systemAuditTrail.AdtTrl_DataDump += "ChrtAcc_Level = " + lrow_ChartOfAccount.ChrtAcc_Level + ";";
+                                systemAuditTrail.AdtTrl_DataDump += "ChrtAcc_BudgetLevel = " + lrow_ChartOfAccount.ChrtAcc_BudgetLevel + ";";
+                                systemAuditTrail.AdtTrl_Date = DateTime.Now;
+                                objAuditTrail.SaveRecord(systemAuditTrail);
+                            }
+                        }
+                        // Audit Trail Section End
+
                     }
                 }
                 string[] rList = new string[1];
@@ -392,8 +422,39 @@ namespace SCMS.Controllers
 
             try
             {
+                SETUP_ChartOfAccount ChartOfAccountRow = objDalChartOfAccount.GetAllRecords().Where(c => c.ChrtAcc_Id.Equals(_pId)).SingleOrDefault();
+
                 li_ReturnValue = objDalChartOfAccount.DeleteRecordById(_pId);
                 ViewData["SaveResult"] = li_ReturnValue;
+
+                // Audit Trail Entry Section
+                if (li_ReturnValue > 0)
+                {
+                    string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
+                    if (IsAuditTrail == "1")
+                    {
+                        SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
+                        DALAuditTrail objAuditTrail = new DALAuditTrail();
+                        systemAuditTrail.Scr_Id = 10;
+                        systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
+                        systemAuditTrail.Loc_Id = ChartOfAccountRow.Loc_Id;
+                        systemAuditTrail.AdtTrl_Action = "Delete";
+                        systemAuditTrail.AdtTrl_EntryId = ChartOfAccountRow.ChrtAcc_Id;
+                        systemAuditTrail.AdtTrl_DataDump = "ChrtAcc_Id = " + ChartOfAccountRow.ChrtAcc_Id + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "ChrtAcc_Code = " + ChartOfAccountRow.ChrtAcc_CodeDisplay + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Id = " + ChartOfAccountRow.Cmp_Id + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "Loc_Id = " + ChartOfAccountRow.Loc_Id + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "Natr_Id = " + ChartOfAccountRow.Natr_Id + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "AccNatr_Id = " + ChartOfAccountRow.AccNatr_Id + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "ChrtAcc_Title = " + ChartOfAccountRow.ChrtAcc_Title + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "ChrtAcc_Type = " + ChartOfAccountRow.ChrtAcc_Type + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "ChrtAcc_Level = " + ChartOfAccountRow.ChrtAcc_Level + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "ChrtAcc_BudgetLevel = " + ChartOfAccountRow.ChrtAcc_BudgetLevel + ";";
+                        systemAuditTrail.AdtTrl_Date = DateTime.Now;
+                        objAuditTrail.SaveRecord(systemAuditTrail);
+                    }
+                }
+                // Audit Trail Section End
 
                 return PartialView("GridData");
             }
