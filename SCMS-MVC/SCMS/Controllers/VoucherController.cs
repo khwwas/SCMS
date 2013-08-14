@@ -209,6 +209,8 @@ namespace SCMS.Controllers
                     flag = 1;
                 }
 
+                List<GL_VchrDetail> VoucherDetailList = new List<GL_VchrDetail>();
+
                 if (!String.IsNullOrEmpty(VoucherMasterId) && !String.IsNullOrEmpty(VoucherMasterCode))
                 {
                     GL_Master.VchMas_Id = VoucherMasterId;
@@ -228,7 +230,6 @@ namespace SCMS.Controllers
                         {
                             objDalVoucherEntry.DeleteDetailRecordByMasterId(VoucherMasterId);
                         }
-
                         for (int index = 0; index < VoucherDetailRows.ToList().Count - 1; index++)
                         {
                             string Row = VoucherDetailRows.ToList()[index];
@@ -254,11 +255,57 @@ namespace SCMS.Controllers
                                 GL_Detail.VchMas_CrAmount = (Columns[2] != null && Columns[2] != "") ? Convert.ToDecimal(Columns[2].Replace(",", "")) : 0; // Columns[2] has Debit Amount
                                 GL_Detail.VchDet_Remarks = (Columns[3] != null && Columns[3] != "") ? Columns[3].ToString() : ""; // Columns[3] has Remarks
                                 objDalVoucherEntry.SaveVoucherDetail(GL_Detail);
+                                VoucherDetailList.Add(GL_Detail);
                             }
                         }
                     }
                 }
                 ViewData["SaveResult"] = li_ReturnValue;
+
+                // Audit Trail Entry Section
+                if (li_ReturnValue > 0)
+                {
+                    string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
+                    if (IsAuditTrail == "1")
+                    {
+                        SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
+                        DALAuditTrail objAuditTrail = new DALAuditTrail();
+                        systemAuditTrail.Scr_Id = flag == 0 ? 17 : 16;
+                        systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
+                        systemAuditTrail.Loc_Id = GL_Master.Loc_Id;
+                        systemAuditTrail.VchrType_Id = GL_Master.VchrType_Id;
+                        systemAuditTrail.AdtTrl_Action = flag == 0 ? "Add" : "Edit";
+                        systemAuditTrail.AdtTrl_EntryId = VoucherMasterId;
+                        systemAuditTrail.AdtTrl_DataDump = "VchMas_Id = " + GL_Master.VchMas_Id + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchMas_Code = " + GL_Master.VchMas_Code + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchMas_Date = " + GL_Master.VchMas_Date + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Id = " + GL_Master.Cmp_Id + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "Loc_Id = " + GL_Master.Loc_Id + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchrType_Id = " + GL_Master.VchrType_Id + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchMas_Remarks = " + GL_Master.VchMas_Remarks + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchMas_Status = " + GL_Master.VchMas_Status + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchMas_EnteredBy = " + GL_Master.VchMas_EnteredBy + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchMas_EnteredDate = " + GL_Master.VchMas_EnteredDate + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchMas_ApprovedBy = " + GL_Master.VchMas_ApprovedBy + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchMas_ApprovedDate = " + GL_Master.VchMas_ApprovedDate + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "SyncStatus = " + GL_Master.SyncStatus + ";";
+
+                        foreach (GL_VchrDetail voucherDetail in VoucherDetailList)
+                        {
+                            systemAuditTrail.AdtTrl_DataDump += "║ VchDet_Id = " + voucherDetail.VchDet_Id + ";";
+                            systemAuditTrail.AdtTrl_DataDump += "VchMas_Id = " + voucherDetail.VchMas_Id + ";";
+                            systemAuditTrail.AdtTrl_DataDump += "ChrtAcc_Id = " + voucherDetail.ChrtAcc_Id + ";";
+                            systemAuditTrail.AdtTrl_DataDump += "VchMas_DrAmount = " + voucherDetail.VchMas_DrAmount + ";";
+                            systemAuditTrail.AdtTrl_DataDump += "VchMas_CrAmount = " + voucherDetail.VchMas_CrAmount + ";";
+                            systemAuditTrail.AdtTrl_DataDump += "VchDet_Remarks = " + voucherDetail.VchDet_Remarks + ";";
+                        }
+
+                        systemAuditTrail.AdtTrl_Date = DateTime.Now;
+                        objAuditTrail.SaveRecord(systemAuditTrail);
+                    }
+                }
+                // Audit Trail Section End
+
                 //return PartialView("GridData");
                 //string result = ViewData["VoucherId"].ToString(); //+ "|" + ViewData["VoucherCode"].ToString() + "|" + ViewData["SaveResult"].ToString();
                 string[] rList = new string[3];

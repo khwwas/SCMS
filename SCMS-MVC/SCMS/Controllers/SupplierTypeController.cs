@@ -30,6 +30,12 @@ namespace SCMS.Controllers
             {
                 SETUP_SupplierType lrow_SupplierType = new SETUP_SupplierType();
 
+                String Action = "Add";
+                if (!string.IsNullOrEmpty(ps_Code))
+                {
+                    Action = "Edit";
+                }
+
                 if (String.IsNullOrEmpty(ps_Code))
                 {
                     if (DALCommon.AutoCodeGeneration("SETUP_SupplierType") == 1)
@@ -49,6 +55,32 @@ namespace SCMS.Controllers
                     li_ReturnValue = objDalSupplierType.SaveRecord(lrow_SupplierType);
                     ViewData["SaveResult"] = li_ReturnValue;
                 }
+
+                // Audit Trail Entry Section
+                if (li_ReturnValue > 0)
+                {
+                    string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
+                    if (IsAuditTrail == "1")
+                    {
+                        SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
+                        DALAuditTrail objAuditTrail = new DALAuditTrail();
+                        systemAuditTrail.Scr_Id = 4;
+                        systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
+                        systemAuditTrail.Loc_Id = lrow_SupplierType.Loc_Id;
+                        systemAuditTrail.AdtTrl_Action = Action;
+                        systemAuditTrail.AdtTrl_EntryId = ps_Code;
+                        systemAuditTrail.AdtTrl_DataDump = "SuppType_Id = " + lrow_SupplierType.SuppType_Id + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "SuppType_Code = " + lrow_SupplierType.SuppType_Code + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Id = " + lrow_SupplierType.Cmp_Id + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "Loc_Id = " + lrow_SupplierType.Loc_Id + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "SuppType_Title = " + lrow_SupplierType.SuppType_Title + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "SuppType_Active = " + lrow_SupplierType.SuppType_Active + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "SuppType_SortOrder = " + lrow_SupplierType.SuppType_SortOrder + ";";
+                        systemAuditTrail.AdtTrl_Date = DateTime.Now;
+                        objAuditTrail.SaveRecord(systemAuditTrail);
+                    }
+                }
+                // Audit Trail Section End
 
                 return PartialView("GridData");
             }
@@ -109,8 +141,36 @@ namespace SCMS.Controllers
 
             try
             {
+                SETUP_SupplierType SupplierTypeRow = objDalSupplierType.GetAllSupplierType().Where(c => c.SuppType_Id.Equals(_pId)).SingleOrDefault();
+
                 li_ReturnValue = objDalSupplierType.DeleteRecordById(_pId);
                 ViewData["SaveResult"] = li_ReturnValue;
+
+                // Audit Trail Entry Section
+                if (li_ReturnValue > 0)
+                {
+                    string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
+                    if (IsAuditTrail == "1")
+                    {
+                        SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
+                        DALAuditTrail objAuditTrail = new DALAuditTrail();
+                        systemAuditTrail.Scr_Id = 4;
+                        systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
+                        systemAuditTrail.Loc_Id = SupplierTypeRow.Loc_Id;
+                        systemAuditTrail.AdtTrl_Action = "Delete";
+                        systemAuditTrail.AdtTrl_EntryId = _pId;
+                        systemAuditTrail.AdtTrl_DataDump = "SuppType_Id = " + SupplierTypeRow.SuppType_Id + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "SuppType_Code = " + SupplierTypeRow.SuppType_Code + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Id = " + SupplierTypeRow.Cmp_Id + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "Loc_Id = " + SupplierTypeRow.Loc_Id + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "SuppType_Title = " + SupplierTypeRow.SuppType_Title + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "SuppType_Active = " + SupplierTypeRow.SuppType_Active + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "SuppType_SortOrder = " + SupplierTypeRow.SuppType_SortOrder + ";";
+                        systemAuditTrail.AdtTrl_Date = DateTime.Now;
+                        objAuditTrail.SaveRecord(systemAuditTrail);
+                    }
+                }
+                // Audit Trail Section End
 
                 return PartialView("GridData");
             }

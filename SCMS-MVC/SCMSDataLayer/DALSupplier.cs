@@ -27,7 +27,6 @@ namespace SCMSDataLayer.DB
                     Row_ExistingData.Supp_Email = row_Supplier.Supp_Email;
                     Row_ExistingData.Supp_Phone = row_Supplier.Supp_Phone;
                     Row_ExistingData.Supp_Fax = row_Supplier.Supp_Fax;
-
                 }
                 else
                 {

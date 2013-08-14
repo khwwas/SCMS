@@ -64,15 +64,62 @@ namespace SCMS.Controllers
             }
         }
 
-
         public ActionResult DeleteRecordById(String ps_Id)
         {
             DALVoucherEntry objDal = new DALVoucherEntry();
 
             try
             {
+                GL_VchrMaster VoucherMasterRow = objDal.GetAllMasterRecords().Where(c => c.VchMas_Id.Equals(ps_Id)).SingleOrDefault();
+                List<GL_VchrDetail> VoucherDetailList = objDal.GetAllDetailRecords().Where(c => c.VchMas_Id.Equals(ps_Id)).ToList();
+
                 int result = objDal.DeleteRecordById(ps_Id);
                 ViewData["result"] = result;
+
+                // Audit Trail Entry Section
+                if (result > 0)
+                {
+                    string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
+                    if (IsAuditTrail == "1")
+                    {
+                        SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
+                        DALAuditTrail objAuditTrail = new DALAuditTrail();
+                        systemAuditTrail.Scr_Id = 16;
+                        systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
+                        systemAuditTrail.Loc_Id = VoucherMasterRow.Loc_Id;
+                        systemAuditTrail.VchrType_Id = VoucherMasterRow.VchrType_Id;
+                        systemAuditTrail.AdtTrl_Action = "Delete";
+                        systemAuditTrail.AdtTrl_EntryId = ps_Id;
+                        systemAuditTrail.AdtTrl_DataDump = "VchMas_Id = " + VoucherMasterRow.VchMas_Id + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchMas_Code = " + VoucherMasterRow.VchMas_Code + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchMas_Date = " + VoucherMasterRow.VchMas_Date + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Id = " + VoucherMasterRow.Cmp_Id + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "Loc_Id = " + VoucherMasterRow.Loc_Id + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchrType_Id = " + VoucherMasterRow.VchrType_Id + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchMas_Remarks = " + VoucherMasterRow.VchMas_Remarks + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchMas_Status = " + VoucherMasterRow.VchMas_Status + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchMas_EnteredBy = " + VoucherMasterRow.VchMas_EnteredBy + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchMas_EnteredDate = " + VoucherMasterRow.VchMas_EnteredDate + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchMas_ApprovedBy = " + VoucherMasterRow.VchMas_ApprovedBy + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchMas_ApprovedDate = " + VoucherMasterRow.VchMas_ApprovedDate + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "SyncStatus = " + VoucherMasterRow.SyncStatus + ";";
+
+                        foreach (GL_VchrDetail voucherDetail in VoucherDetailList)
+                        {
+                            systemAuditTrail.AdtTrl_DataDump += "║ VchDet_Id = " + voucherDetail.VchDet_Id + ";";
+                            systemAuditTrail.AdtTrl_DataDump += "VchMas_Id = " + voucherDetail.VchMas_Id + ";";
+                            systemAuditTrail.AdtTrl_DataDump += "ChrtAcc_Id = " + voucherDetail.ChrtAcc_Id + ";";
+                            systemAuditTrail.AdtTrl_DataDump += "VchMas_DrAmount = " + voucherDetail.VchMas_DrAmount + ";";
+                            systemAuditTrail.AdtTrl_DataDump += "VchMas_CrAmount = " + voucherDetail.VchMas_CrAmount + ";";
+                            systemAuditTrail.AdtTrl_DataDump += "VchDet_Remarks = " + voucherDetail.VchDet_Remarks + ";";
+                        }
+
+                        systemAuditTrail.AdtTrl_Date = DateTime.Now;
+                        objAuditTrail.SaveRecord(systemAuditTrail);
+                    }
+                }
+                // Audit Trail Section End
+
                 return PartialView("GridData");
             }
             catch

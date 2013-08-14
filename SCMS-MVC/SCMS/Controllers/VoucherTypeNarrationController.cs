@@ -28,6 +28,12 @@ namespace SCMS.Controllers
             {
                 SETUP_VoucherTypeNarration lrow_Data = new SETUP_VoucherTypeNarration();
 
+                String Action = "Add";
+                if (!string.IsNullOrEmpty(ps_Code))
+                {
+                    Action = "Edit";
+                }
+
                 if (String.IsNullOrEmpty(ps_Code))
                 {
                     if (DALCommon.AutoCodeGeneration("SETUP_VoucherTypeNarration") == 1)
@@ -47,6 +53,32 @@ namespace SCMS.Controllers
                     li_ReturnValue = objDal.SaveRecord(lrow_Data);
                     ViewData["SaveResult"] = li_ReturnValue;
                 }
+
+                // Audit Trail Entry Section
+                if (li_ReturnValue > 0)
+                {
+                    string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
+                    if (IsAuditTrail == "1")
+                    {
+                        SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
+                        DALAuditTrail objAuditTrail = new DALAuditTrail();
+                        systemAuditTrail.Scr_Id = 9;
+                        systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
+                        //systemAuditTrail.Loc_Id = lrow_Data.Loc_Id;
+                        systemAuditTrail.AdtTrl_Action = Action;
+                        systemAuditTrail.AdtTrl_EntryId = ps_Code;
+                        systemAuditTrail.AdtTrl_DataDump = "VchrTypeNarr_Id = " + lrow_Data.VchrTypeNarr_Id + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchrTypeNarr_Code = " + lrow_Data.VchrTypeNarr_Code + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchrType_Id = " + lrow_Data.VchrType_Id + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchrTypeNarr_Title = " + lrow_Data.VchrTypeNarr_Title + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchrTypeNarr_Active = " + lrow_Data.VchrTypeNarr_Active + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchrTypeNarr_SortOrder = " + lrow_Data.VchrTypeNarr_SortOrder + ";";
+                        systemAuditTrail.AdtTrl_Date = DateTime.Now;
+                        objAuditTrail.SaveRecord(systemAuditTrail);
+                    }
+                }
+                // Audit Trail Section End
+
                 return PartialView("GridData");
             }
             catch
@@ -62,8 +94,35 @@ namespace SCMS.Controllers
 
             try
             {
+                sp_GetVoucherTypeNarrationListResult VoucherTypeNarrationRow = objDal.GetAllData().Where(c => c.VchrTypeNarr_Id.Equals(_pId)).SingleOrDefault();
+
                 li_ReturnValue = objDal.DeleteRecordById(_pId);
                 ViewData["SaveResult"] = li_ReturnValue;
+
+                // Audit Trail Entry Section
+                if (li_ReturnValue > 0)
+                {
+                    string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
+                    if (IsAuditTrail == "1")
+                    {
+                        SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
+                        DALAuditTrail objAuditTrail = new DALAuditTrail();
+                        systemAuditTrail.Scr_Id = 9;
+                        systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
+                        systemAuditTrail.Loc_Id = VoucherTypeNarrationRow.Loc_Id;
+                        systemAuditTrail.AdtTrl_Action = "Delete";
+                        systemAuditTrail.AdtTrl_EntryId = _pId;
+                        systemAuditTrail.AdtTrl_DataDump = "VchrTypeNarr_Id = " + VoucherTypeNarrationRow.VchrTypeNarr_Id + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchrTypeNarr_Code = " + VoucherTypeNarrationRow.VchrTypeNarr_Code + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchrType_Id = " + VoucherTypeNarrationRow.VchrType_Id + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchrTypeNarr_Title = " + VoucherTypeNarrationRow.VchrTypeNarr_Title + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchrTypeNarr_Active = " + VoucherTypeNarrationRow.VchrTypeNarr_Active + ";";
+                        systemAuditTrail.AdtTrl_DataDump += "VchrTypeNarr_SortOrder = " + VoucherTypeNarrationRow.VchrTypeNarr_SortOrder + ";";
+                        systemAuditTrail.AdtTrl_Date = DateTime.Now;
+                        objAuditTrail.SaveRecord(systemAuditTrail);
+                    }
+                }
+                // Audit Trail Section End
 
                 return PartialView("GridData");
             }

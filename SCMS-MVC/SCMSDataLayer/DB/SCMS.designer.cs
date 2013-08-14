@@ -17901,6 +17901,8 @@ namespace SCMSDataLayer.DB
 		
 		private string _AdtTrl_DataDump;
 		
+		private System.Nullable<System.DateTime> _AdtTrl_Date;
+		
 		private EntityRef<SECURITY_User> _SECURITY_User;
 		
 		private EntityRef<SETUP_Location> _SETUP_Location;
@@ -17929,6 +17931,8 @@ namespace SCMSDataLayer.DB
     partial void OnVchrType_IdChanged();
     partial void OnAdtTrl_DataDumpChanging(string value);
     partial void OnAdtTrl_DataDumpChanged();
+    partial void OnAdtTrl_DateChanging(System.Nullable<System.DateTime> value);
+    partial void OnAdtTrl_DateChanged();
     #endregion
 		
 		public SYSTEM_AuditTrail()
@@ -18112,6 +18116,26 @@ namespace SCMSDataLayer.DB
 					this._AdtTrl_DataDump = value;
 					this.SendPropertyChanged("AdtTrl_DataDump");
 					this.OnAdtTrl_DataDumpChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdtTrl_Date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> AdtTrl_Date
+		{
+			get
+			{
+				return this._AdtTrl_Date;
+			}
+			set
+			{
+				if ((this._AdtTrl_Date != value))
+				{
+					this.OnAdtTrl_DateChanging(value);
+					this.SendPropertyChanging();
+					this._AdtTrl_Date = value;
+					this.SendPropertyChanged("AdtTrl_Date");
+					this.OnAdtTrl_DateChanged();
 				}
 			}
 		}
