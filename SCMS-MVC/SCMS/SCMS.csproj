@@ -173,6 +173,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\Datasets\dsAuditTrail.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsAuditTrail.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Datasets\dsBalanceSheet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -222,6 +227,12 @@
       <DependentUpon>dsVoucherTypes.xsd</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Reports\Reps\rptAuditTrail.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptAuditTrail.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\Reps\rptVoucherDocumentSummary.cs">
       <DependentUpon>rptVoucherDocumentSummary.rpt</DependentUpon>
@@ -355,7 +366,6 @@
     <Content Include="Content\nav.css" />
     <Content Include="Content\prettyPhoto.css" />
     <Content Include="Content\reset.css" />
-    <Content Include="Content\Slider\slicebox.css" />
     <Content Include="Content\table\demo_page.css" />
     <Content Include="Content\table\demo_table.css" />
     <Content Include="Content\table\demo_table_jui.css" />
@@ -422,7 +432,6 @@
     <Content Include="img\0.png" />
     <Content Include="img\accordian_bg.png" />
     <Content Include="img\add.png" />
-    <Content Include="img\ajax-loader.gif" />
     <Content Include="img\Ajax_Loading.gif" />
     <Content Include="img\application_double.png" />
     <Content Include="img\arrow-asc.png" />
@@ -553,8 +562,9 @@
     <Content Include="img\header-repeat.jpg" />
     <Content Include="img\header_inner.png" />
     <Content Include="img\header_inner_corners.png" />
-    <Content Include="img\Home\Home1.jpg" />
-    <Content Include="img\Home\Home2.png" />
+    <Content Include="img\img-profile.png" />
+    <Content Include="img\Slider\1.jpg" />
+    <Content Include="img\Slider\2.png" />
     <Content Include="img\horizontal.jpg" />
     <Content Include="img\house.png" />
     <Content Include="img\icon-charts-graphs.png" />
@@ -564,7 +574,6 @@
     <Content Include="img\icon-gallery.png" />
     <Content Include="img\icon-grid-tables.png" />
     <Content Include="img\icon-notifications.png" />
-    <Content Include="img\img-profile.jpg" />
     <Content Include="img\img_box_background_pattern.png" />
     <Content Include="img\input-left.png" />
     <Content Include="img\input-right.png" />
@@ -671,9 +680,7 @@
     <Content Include="img\shine-effect.png" />
     <Content Include="img\sidemenu-repeat-hover.jpg" />
     <Content Include="img\sidemenu-repeat.jpg" />
-    <Content Include="img\Slider\nav.png" />
-    <Content Include="img\Slider\options.png" />
-    <Content Include="img\Slider\shadow.png" />
+    <Content Include="img\Slider\3.jpg" />
     <Content Include="img\star_list.png" />
     <Content Include="img\switch_minus.gif" />
     <Content Include="img\switch_plus.gif" />
@@ -790,8 +797,6 @@
     <Content Include="Scripts\SCMS.js" />
     <Content Include="Scripts\SecurityRights.js" />
     <Content Include="Scripts\setup.js" />
-    <Content Include="Scripts\Slider\jquery.slicebox.js" />
-    <Content Include="Scripts\Slider\modernizr.custom.46884.js" />
     <Content Include="Scripts\table\jquery.dataTables.min.js" />
     <Content Include="Scripts\tiny-mce\jquery.tinymce.js" />
     <Content Include="Scripts\tiny-mce\langs\en.js" />
@@ -1704,6 +1709,17 @@
     <Content Include="Widgets\tests\jqxvalidator\jqxvalidation-Tests.htm" />
     <Content Include="Widgets\tests\jqxwindow\jqwindow-Tests.htm" />
     <Content Include="Views\Shared\DashBoardMaster.Master" />
+    <None Include="Reports\Datasets\dsAuditTrail.xsc">
+      <DependentUpon>dsAuditTrail.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\Datasets\dsAuditTrail.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsAuditTrail.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\Datasets\dsAuditTrail.xss">
+      <DependentUpon>dsAuditTrail.xsd</DependentUpon>
+    </None>
     <None Include="Reports\Datasets\dsBalanceSheet.xsc">
       <DependentUpon>dsBalanceSheet.xsd</DependentUpon>
     </None>
@@ -1904,6 +1920,10 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reports\Reps\rptAuditTrail.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptAuditTrail.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Reps\rptVoucherDocumentSummary.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptVoucherDocumentSummary.cs</LastGenOutput>
@@ -1982,7 +2002,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>47065</DevelopmentServerPort>
+          <DevelopmentServerPort>63283</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

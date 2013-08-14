@@ -347,6 +347,44 @@ namespace SCMS.Controllers
         }
         #endregion
 
+        #region Audit Trial
+        public string SetParam_AuditTrail(string ps_ReportName)
+        {
+            //string ls_Location = "";
+
+            //ResetParameters();
+            Reports.ReportParameters.ReportName = ps_ReportName;
+            //Reports.ReportParameters.Level = pi_Level;
+            //Reports.ReportParameters.Year = pi_Year;
+
+            //if (pi_AllLoc == "1")
+            //{
+            //    SECURITY_User user = (SECURITY_User)System.Web.HttpContext.Current.Session["user"];
+            //    UserLoginId = user.User_Id;
+
+            //    List<sp_GetUserLocationsByUserIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByUserId(UserLoginId).ToList();
+            //    if (UserLocations != null && UserLocations.Count > 0)
+            //    {
+            //        UserLocations = UserLocations.Where(c => c.SelectedLocation != "0").ToList();
+            //    }
+
+            //    ls_Location = ConvertStringArrayToString(UserLocations.Select(c => c.Loc_Id).ToArray());
+            //    if (ls_Location == null || ls_Location.Trim() == "")
+            //    {
+            //        ls_Location = "''";
+            //    }
+
+            //    Reports.ReportParameters.Location = ls_Location;
+            //}
+            //else
+            //{
+            //    Reports.ReportParameters.Location = ps_Location;
+            //}
+
+            return "OK";
+        }
+        #endregion
+
         #region Functions
         void ResetParameters()
         {

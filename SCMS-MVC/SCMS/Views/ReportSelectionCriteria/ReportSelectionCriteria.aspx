@@ -3,8 +3,13 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Report Selection Criteria
+   
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+ <script src="<%=ResolveUrl("~/") %>Scripts/DatePicker/glDatePicker.js" type="text/javascript"></script>
+    <script src="<%=ResolveUrl("~/") %>Scripts/DatePicker/glDatePicker.min.js" type="text/javascript"></script>
+    <link href="<%=ResolveUrl("~/") %>Content/DatePicker/glDatePicker.darkneon.css" rel="stylesheet"
+        type="text/css" media="screen" />
     <script type="text/javascript">
         var ps_ReportName, ps_Url;
         ps_ReportName = '<%= ViewData["ReportName"] %>';
@@ -164,7 +169,7 @@
                 var pcnt_VchrDocDetail = document.getElementById('rdo_VchrDocDetail').checked;
                 var li_AllLoc, li_AllVchrType, li_AllDoc, li_AllDate, ls_VoucherPrint;
 
-               if (pcnt_AllLoc.checked == true) {
+                if (pcnt_AllLoc.checked == true) {
                     li_AllLoc = 1;
                 }
                 else {
@@ -200,7 +205,7 @@
                 }
 
                 ps_Url = "../ReportSelectionCriteria/SetParam_VoucherDocument?ps_ReportName=" + ps_ReportName + "&pi_AllLoc=" + li_AllLoc + "&ps_Location=" + pcnt_Location.value +
-                         "&pi_AllVchrType=" + li_AllVchrType +  "&ps_VoucherTypes=" + pcnt_VoucherTypes.value + "&pi_AllDoc=" + li_AllDoc.toString() + "&ps_DocFrom=" + pcnt_DocFrom.value + "&ps_DocTo=" + pcnt_DocTo.value +
+                         "&pi_AllVchrType=" + li_AllVchrType + "&ps_VoucherTypes=" + pcnt_VoucherTypes.value + "&pi_AllDoc=" + li_AllDoc.toString() + "&ps_DocFrom=" + pcnt_DocFrom.value + "&ps_DocTo=" + pcnt_DocTo.value +
                          "&pi_AllDate=" + li_AllDate.toString() + "&pdt_DateFrom=" + pcnt_DateFrom.value + "&pdt_DateTo=" + pcnt_DateTo.value + "&ps_VoucherPrint=" + ls_VoucherPrint + "";
             }
             else if (ps_ReportName.toLowerCase() == "LedgerDtLocWise".toLowerCase() ||
@@ -338,6 +343,9 @@
 
                 ps_Url = "../ReportSelectionCriteria/SetParam_BalanceSheet?ps_ReportName=" + ps_ReportName + "&pi_AllLoc=" + li_AllLoc + "&ps_Location=" + pcnt_Location.value +
                          "&pi_Level=" + pcnt_Level.value + "&pi_Year=" + pcnt_Year.value;
+            }
+            else if (ps_ReportName.toLowerCase() == "AuditTrail".toLowerCase()) {
+                ps_Url = "../ReportSelectionCriteria/SetParam_AuditTrail?ps_ReportName=" + ps_ReportName;
             };
 
             $.ajax({
@@ -429,9 +437,13 @@
                     <input type="text" class="CustomText" style="width: 220px;" id="txt_DateFrom" name="txt_DateFrom"
                         value="<%=ViewData["CurrentDate"]%>" maxlength="50" />
                 </div>
+                <input type="text" id="mydate" gldp-id="mydate" />
+                <div gldp-el="mydate" style="width: 400px; height: 300px; position: absolute; top: 70px;
+                    left: 100px;">
+                </div>
                 <script type="text/javascript">
-                    $('#txt_DateFrom').datepicker().on('changeDate', function (ev) {
-                        $('#txt_DateFrom').datepicker("hide");
+                    $(window).load(function () {
+                        $('mydate').glDatePicker();
                     });
                 </script>
                 &nbsp;

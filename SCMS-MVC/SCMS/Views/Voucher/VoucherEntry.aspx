@@ -563,13 +563,27 @@
                 </div>
                 <div class="CustomCell" style="width: 565px; height: 30px;">
                     <input id="test" type="text" class="CustomText" style="width: 545px;" name="txt_Details"
-                        maxlength="200" />
+                        maxlength="200" tabindex="2" />
                 </div>
                 <div class="CustomCell" style="width: 118px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Debit" maxlength="50" />
+                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Debit" maxlength="50" tabindex="3"/>
                 </div>
                 <div class="CustomCell" style="width: 118px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Credit" maxlength="50" />
+                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Credit" maxlength="50" tabindex="4" />
+                </div>
+            </div>
+            <div class="detailRow" style="float: left; width: auto;">
+                <div class="CustomCell" style="width: 250px; height: 30px;" >
+                    <%= Html.DropDownList("ddl_Account", null, new { style = "width:250px;" }) %>
+                </div>
+                <div class="CustomCell" style="width: 565px; height: 30px;">
+                    <input type="text" class="CustomText" style="width: 545px;" name="txt_Details" maxlength="200" tabindex="6" />
+                </div>
+                <div class="CustomCell" style="width: 118px; height: 30px;">
+                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Debit" maxlength="50" tabindex="7" />
+                </div>
+                <div class="CustomCell" style="width: 118px; height: 30px;">
+                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Credit" maxlength="50" tabindex="8" />
                 </div>
             </div>
             <div class="detailRow" style="float: left; width: auto;">
@@ -577,13 +591,13 @@
                     <%= Html.DropDownList("ddl_Account", null, new { style = "width:250px;" })%>
                 </div>
                 <div class="CustomCell" style="width: 565px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 545px;" name="txt_Details" maxlength="200" />
+                    <input type="text" class="CustomText" style="width: 545px;" name="txt_Details" maxlength="200" tabindex="10" />
                 </div>
                 <div class="CustomCell" style="width: 118px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Debit" maxlength="50" />
+                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Debit" maxlength="50" tabindex="11" />
                 </div>
                 <div class="CustomCell" style="width: 118px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Credit" maxlength="50" />
+                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Credit" maxlength="50" tabindex="12" />
                 </div>
             </div>
             <div class="detailRow" style="float: left; width: auto;">
@@ -591,27 +605,13 @@
                     <%= Html.DropDownList("ddl_Account", null, new { style = "width:250px;" })%>
                 </div>
                 <div class="CustomCell" style="width: 565px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 545px;" name="txt_Details" maxlength="200" />
+                    <input type="text" class="CustomText" style="width: 545px;" name="txt_Details" maxlength="200" tabindex="14"/>
                 </div>
                 <div class="CustomCell" style="width: 118px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Debit" maxlength="50" />
+                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Debit" maxlength="50" tabindex="15"/>
                 </div>
                 <div class="CustomCell" style="width: 118px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Credit" maxlength="50" />
-                </div>
-            </div>
-            <div class="detailRow" style="float: left; width: auto;">
-                <div class="CustomCell" style="width: 250px; height: 30px;">
-                    <%= Html.DropDownList("ddl_Account", null, new { style = "width:250px;" })%>
-                </div>
-                <div class="CustomCell" style="width: 565px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 545px;" name="txt_Details" maxlength="200" />
-                </div>
-                <div class="CustomCell" style="width: 118px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Debit" maxlength="50" />
-                </div>
-                <div class="CustomCell" style="width: 118px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Credit" maxlength="50" />
+                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Credit" maxlength="50" tabindex="16"/>
                 </div>
             </div>
             <%} %>

@@ -529,7 +529,7 @@ namespace SCMS.Reports
                 }
                 #endregion
 
-                #region BalanceSheet
+                #region Balance Sheet
                 else if (ls_ReportName.ToLower() == "BalanceSheet".ToLower())
                 {
                     _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptBalanceSheet.rpt");
@@ -565,6 +565,45 @@ namespace SCMS.Reports
                     _ReportDocument.SummaryInfo.ReportTitle = "Balance Sheet";
                     _ReportDocument.SetParameterValue("pm_CurrentYear", li_Year);
                     _ReportDocument.SetParameterValue("pm_PreviousYear", li_Year - 1);
+                }
+                #endregion
+
+                #region Audit Trial
+                else if (ls_ReportName.ToLower() == "AuditTrail".ToLower())
+                {
+                    _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptAuditTrail.rpt");
+                    Datasets.dsAuditTrail _dsAuditTrail = new Datasets.dsAuditTrail();
+                    //string ls_Location = "";
+                    //int li_Level = 0, li_Year = 0;
+
+                    //ls_Location = SCMS.Reports.ReportParameters.Location;
+                    //li_Level = SCMS.Reports.ReportParameters.Level;
+                    //li_Year = SCMS.Reports.ReportParameters.Year;
+
+                    if (_dsAuditTrail.Tables.Contains("Logo"))
+                    {
+                        _dsAuditTrail.Tables.Remove("Logo");
+                    }
+
+                    if (_dsAuditTrail.Tables.Contains("AuditTrail"))
+                    {
+                        _dsAuditTrail.Tables.Remove("AuditTrail");
+                    }
+
+                    _ds = _dalReports.AuditTrail();
+                    _dsAuditTrail.Tables.Add(_ds.Tables[0].Copy());
+                    _dsAuditTrail.Tables[0].TableName = "AuditTrail";
+
+                    if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
+                    {
+                        MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
+                        return;
+                    }
+
+                    _ReportDocument.SetDataSource(_dsAuditTrail);
+                    _ReportDocument.SummaryInfo.ReportTitle = "Audit Trail";
+                    //_ReportDocument.SetParameterValue("pm_CurrentYear", li_Year);
+                    //_ReportDocument.SetParameterValue("pm_PreviousYear", li_Year - 1);
                 }
                 #endregion
 

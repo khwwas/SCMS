@@ -1013,5 +1013,77 @@ namespace SCMSDataLayer
             return _ds;
         }
         #endregion
+
+        #region Audit Trial
+        public DataSet AuditTrail()
+        {
+            SqlConnection con = new SqlConnection();
+            SqlCommand _cmd = new SqlCommand();
+            DataSet _ds = new DataSet();
+            string _Sql = "";
+
+            try
+            {
+                con = Connection.ReportConnection("Open");
+                if (con.State != System.Data.ConnectionState.Open)
+                {
+                    return null;
+                }
+
+                //_cmd.Connection = con;
+                //_cmd.CommandType = CommandType.StoredProcedure;
+                //_cmd.CommandText = "sp_ReportTrialBalance";
+
+                //_ReportDocument.SetParameterValue("@AllLocation", 1);
+                //_ReportDocument.SetParameterValue("@LocationId", "''");
+                //_ReportDocument.SetParameterValue("@AllVoucherType", 1);
+                //_ReportDocument.SetParameterValue("@VoucherTypeId", "''");
+                //_ReportDocument.SetParameterValue("@AllDate", 1);
+                //_ReportDocument.SetParameterValue("@DateFrom", "''");
+                //_ReportDocument.SetParameterValue("@DateTo", "''");
+
+                //_cmd.Parameters.Add(new SqlParameter("@AllLocation", SqlDbType.Int)).Value = 1;
+                //_cmd.Parameters.Add(new SqlParameter("@LocationId", SqlDbType.VarChar)).Value = " ";
+
+                //_cmd.Parameters.Add(new SqlParameter("@AllVoucherType", SqlDbType.Int)).Value = 1;
+                //_cmd.Parameters.Add(new SqlParameter("@VoucherTypeId", SqlDbType.VarChar)).Value = " ";
+
+                //_cmd.Parameters.Add(new SqlParameter("@AllDate", SqlDbType.Int)).Value = 1;
+                //_cmd.Parameters.Add(new SqlParameter("@DateFrom", SqlDbType.VarChar)).Value = " ";
+                //_cmd.Parameters.Add(new SqlParameter("@DateTo", SqlDbType.VarChar)).Value = " ";
+
+                //_cmd.ExecuteNonQuery();
+
+                _Sql += "   Select * ";
+                _Sql += "     From SYSTEM_AuditTrail, ";
+                _Sql += "          SYSTEM_Screens, ";
+                _Sql += "          SECURITY_User ";
+                _Sql += "    Where ( SYSTEM_AuditTrail.Scr_Id = SYSTEM_Screens.Scr_Id ) And ";
+                _Sql += "          ( SYSTEM_AuditTrail.User_Id = SECURITY_User.User_Id )  ";
+                //_Sql += "          ( SETUP_ChartOfAccount.ChrtAcc_Level <= " + pi_Level.ToString() + " ) ";
+                //_Sql += " Group By SYSTEM_Nature.Natr_Title, ";
+                //_Sql += "          SETUP_ChartOfAccount.ChrtAcc_Code,  ";
+                //_Sql += "          SETUP_ChartOfAccount.ChrtAcc_CodeDisplay, ";
+                //_Sql += "          SETUP_ChartOfAccount.ChrtAcc_Title, ";
+                //_Sql += "          SETUP_ChartOfAccount.ChrtAcc_Level ";
+                _Sql += " Order By SYSTEM_Screens.Scr_Type, ";
+                _Sql += "          SYSTEM_Screens.Scr_Id, ";
+                _Sql += "          SYSTEM_AuditTrail.AdtTrl_Action, ";
+                _Sql += "          SYSTEM_AuditTrail.AdtTrl_EntryId, ";
+                _Sql += "          SECURITY_User.User_Title ";
+
+                SqlDataAdapter da = new SqlDataAdapter(_Sql, con);
+                da.Fill(_ds, "AuditTrail");
+
+                Connection.ReportConnection("Close");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message.ToString());
+            }
+
+            return _ds;
+        }
+        #endregion
     }
 }

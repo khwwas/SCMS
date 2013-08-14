@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsAuditTrail" targetNamespace="http://tempuri.org/dsAuditTrail.xsd" xmlns:mstns="http://tempuri.org/dsAuditTrail.xsd" xmlns="http://tempuri.org/dsAuditTrail.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsAuditTrail" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsAuditTrail" msprop:Generator_UserDSName="dsAuditTrail">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="AuditTrail" msprop:Generator_TableClassName="AuditTrailDataTable" msprop:Generator_TableVarName="tableAuditTrail" msprop:Generator_TablePropName="AuditTrail" msprop:Generator_RowDeletingName="AuditTrailRowDeleting" msprop:Generator_UserTableName="AuditTrail" msprop:Generator_RowChangingName="AuditTrailRowChanging" msprop:Generator_RowEvHandlerName="AuditTrailRowChangeEventHandler" msprop:Generator_RowDeletedName="AuditTrailRowDeleted" msprop:Generator_RowEvArgName="AuditTrailRowChangeEvent" msprop:Generator_RowChangedName="AuditTrailRowChanged" msprop:Generator_RowClassName="AuditTrailRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="AdtTrl_Id" msprop:Generator_ColumnVarNameInTable="columnAdtTrl_Id" msprop:Generator_ColumnPropNameInRow="AdtTrl_Id" msprop:Generator_ColumnPropNameInTable="AdtTrl_IdColumn" msprop:Generator_UserColumnName="AdtTrl_Id" type="xs:int" minOccurs="0" />
+              <xs:element name="Scr_Id" msprop:Generator_ColumnVarNameInTable="columnScr_Id" msprop:Generator_ColumnPropNameInRow="Scr_Id" msprop:Generator_ColumnPropNameInTable="Scr_IdColumn" msprop:Generator_UserColumnName="Scr_Id" type="xs:int" minOccurs="0" />
+              <xs:element name="Scr_Title" msprop:Generator_ColumnVarNameInTable="columnScr_Title" msprop:Generator_ColumnPropNameInRow="Scr_Title" msprop:Generator_ColumnPropNameInTable="Scr_TitleColumn" msprop:Generator_UserColumnName="Scr_Title" type="xs:string" minOccurs="0" />
+              <xs:element name="User_Id" msprop:Generator_ColumnVarNameInTable="columnUser_Id" msprop:Generator_ColumnPropNameInRow="User_Id" msprop:Generator_ColumnPropNameInTable="User_IdColumn" msprop:Generator_UserColumnName="User_Id" type="xs:string" minOccurs="0" />
+              <xs:element name="User_Title" msprop:Generator_ColumnVarNameInTable="columnUser_Title" msprop:Generator_ColumnPropNameInRow="User_Title" msprop:Generator_ColumnPropNameInTable="User_TitleColumn" msprop:Generator_UserColumnName="User_Title" type="xs:string" minOccurs="0" />
+              <xs:element name="Loc_Id" msprop:Generator_ColumnVarNameInTable="columnLoc_Id" msprop:Generator_ColumnPropNameInRow="Loc_Id" msprop:Generator_ColumnPropNameInTable="Loc_IdColumn" msprop:Generator_UserColumnName="Loc_Id" type="xs:string" minOccurs="0" />
+              <xs:element name="AdtTrl_Action" msprop:Generator_ColumnVarNameInTable="columnAdtTrl_Action" msprop:Generator_ColumnPropNameInRow="AdtTrl_Action" msprop:Generator_ColumnPropNameInTable="AdtTrl_ActionColumn" msprop:Generator_UserColumnName="AdtTrl_Action" type="xs:string" minOccurs="0" />
+              <xs:element name="AdtTrl_EntryId" msprop:Generator_ColumnVarNameInTable="columnAdtTrl_EntryId" msprop:Generator_ColumnPropNameInRow="AdtTrl_EntryId" msprop:Generator_ColumnPropNameInTable="AdtTrl_EntryIdColumn" msprop:Generator_UserColumnName="AdtTrl_EntryId" type="xs:string" minOccurs="0" />
+              <xs:element name="VchrType_Id" msprop:Generator_ColumnVarNameInTable="columnVchrType_Id" msprop:Generator_ColumnPropNameInRow="VchrType_Id" msprop:Generator_ColumnPropNameInTable="VchrType_IdColumn" msprop:Generator_UserColumnName="VchrType_Id" type="xs:string" minOccurs="0" />
+              <xs:element name="AdtTrl_DataDump" msprop:Generator_ColumnVarNameInTable="columnAdtTrl_DataDump" msprop:Generator_ColumnPropNameInRow="AdtTrl_DataDump" msprop:Generator_ColumnPropNameInTable="AdtTrl_DataDumpColumn" msprop:Generator_UserColumnName="AdtTrl_DataDump" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
