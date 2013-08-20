@@ -60,19 +60,20 @@ namespace SCMS.Controllers
                         {
                             SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
                             DALAuditTrail objAuditTrail = new DALAuditTrail();
+
                             systemAuditTrail.Scr_Id = 1;
                             systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
                             systemAuditTrail.AdtTrl_Action = Action;
                             systemAuditTrail.AdtTrl_EntryId = Code;
-                            systemAuditTrail.AdtTrl_DataDump = "Cmp_Id = " + Code + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "Cmp_Code = " + Code + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "Cmp_Title = " + Name + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "Cmp_Address1 = " + Address1 + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "Cmp_Address2 = " + Address2 + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "Cmp_Email = " + Email + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "Cmp_Phone = " + Phone + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "Cmp_Fax = " + Fax + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "Cmp_Active = " + 1 + ";";
+                            //systemAuditTrail.AdtTrl_DataDump =  ":" + Code + ";";
+                            systemAuditTrail.AdtTrl_DataDump += "<html><b>Code   :</b> " + Code + " <br/>";
+                            systemAuditTrail.AdtTrl_DataDump += "<b>Title  :</b> " + Name + " <br/>";
+                            systemAuditTrail.AdtTrl_DataDump += "<b>Address:</b> " + Address1 + " <br/>";
+                            systemAuditTrail.AdtTrl_DataDump += "<b>Address:</b> " + Address2 + " <br/>";
+                            systemAuditTrail.AdtTrl_DataDump += "<b>Email  :</b> " + Email + " <br/>";
+                            systemAuditTrail.AdtTrl_DataDump += "<b>Phone  :</b> " + Phone + " <br/>";
+                            systemAuditTrail.AdtTrl_DataDump += "<b>Fax    :</b> " + Fax + " </html>";
+                            //systemAuditTrail.AdtTrl_DataDump += "Cmp_Active = " + 1 + ";";
                             systemAuditTrail.AdtTrl_Date = DateTime.Now;
                             objAuditTrail.SaveRecord(systemAuditTrail);
                         }
@@ -96,7 +97,7 @@ namespace SCMS.Controllers
 
                 li_ReturnValue = objDalCompany.DeleteCompanyByCompanyId(companyId);
                 ViewData["SaveResult"] = li_ReturnValue;
-                
+
                 // Audit Trail Entry Section
                 if (li_ReturnValue > 0)
                 {

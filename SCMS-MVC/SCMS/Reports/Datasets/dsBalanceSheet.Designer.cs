@@ -24,7 +24,9 @@ namespace SCMS.Reports.Datasets {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
     public partial class dsBalanceSheet : global::System.Data.DataSet {
         
-        private BalanceSheetDataTable tableBalanceSheet;
+        private AssetsDataTable tableAssets;
+        
+        private EquityDataTable tableEquity;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -54,8 +56,11 @@ namespace SCMS.Reports.Datasets {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["BalanceSheet"] != null)) {
-                    base.Tables.Add(new BalanceSheetDataTable(ds.Tables["BalanceSheet"]));
+                if ((ds.Tables["Assets"] != null)) {
+                    base.Tables.Add(new AssetsDataTable(ds.Tables["Assets"]));
+                }
+                if ((ds.Tables["Equity"] != null)) {
+                    base.Tables.Add(new EquityDataTable(ds.Tables["Equity"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -79,9 +84,19 @@ namespace SCMS.Reports.Datasets {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public BalanceSheetDataTable BalanceSheet {
+        public AssetsDataTable Assets {
             get {
-                return this.tableBalanceSheet;
+                return this.tableAssets;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public EquityDataTable Equity {
+            get {
+                return this.tableEquity;
             }
         }
         
@@ -152,8 +167,11 @@ namespace SCMS.Reports.Datasets {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["BalanceSheet"] != null)) {
-                    base.Tables.Add(new BalanceSheetDataTable(ds.Tables["BalanceSheet"]));
+                if ((ds.Tables["Assets"] != null)) {
+                    base.Tables.Add(new AssetsDataTable(ds.Tables["Assets"]));
+                }
+                if ((ds.Tables["Equity"] != null)) {
+                    base.Tables.Add(new EquityDataTable(ds.Tables["Equity"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -188,10 +206,16 @@ namespace SCMS.Reports.Datasets {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tableBalanceSheet = ((BalanceSheetDataTable)(base.Tables["BalanceSheet"]));
+            this.tableAssets = ((AssetsDataTable)(base.Tables["Assets"]));
             if ((initTable == true)) {
-                if ((this.tableBalanceSheet != null)) {
-                    this.tableBalanceSheet.InitVars();
+                if ((this.tableAssets != null)) {
+                    this.tableAssets.InitVars();
+                }
+            }
+            this.tableEquity = ((EquityDataTable)(base.Tables["Equity"]));
+            if ((initTable == true)) {
+                if ((this.tableEquity != null)) {
+                    this.tableEquity.InitVars();
                 }
             }
         }
@@ -204,13 +228,21 @@ namespace SCMS.Reports.Datasets {
             this.Namespace = "http://tempuri.org/dsBalanceSheet.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableBalanceSheet = new BalanceSheetDataTable();
-            base.Tables.Add(this.tableBalanceSheet);
+            this.tableAssets = new AssetsDataTable();
+            base.Tables.Add(this.tableAssets);
+            this.tableEquity = new EquityDataTable();
+            base.Tables.Add(this.tableEquity);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeBalanceSheet() {
+        private bool ShouldSerializeAssets() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeEquity() {
             return false;
         }
         
@@ -270,14 +302,17 @@ namespace SCMS.Reports.Datasets {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void BalanceSheetRowChangeEventHandler(object sender, BalanceSheetRowChangeEvent e);
+        public delegate void AssetsRowChangeEventHandler(object sender, AssetsRowChangeEvent e);
+        
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public delegate void EquityRowChangeEventHandler(object sender, EquityRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class BalanceSheetDataTable : global::System.Data.TypedTableBase<BalanceSheetRow> {
+        public partial class AssetsDataTable : global::System.Data.TypedTableBase<AssetsRow> {
             
             private global::System.Data.DataColumn columnRowTitle;
             
@@ -299,8 +334,8 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public BalanceSheetDataTable() {
-                this.TableName = "BalanceSheet";
+            public AssetsDataTable() {
+                this.TableName = "Assets";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -308,7 +343,7 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal BalanceSheetDataTable(global::System.Data.DataTable table) {
+            internal AssetsDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -325,7 +360,7 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected BalanceSheetDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected AssetsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
@@ -413,34 +448,34 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public BalanceSheetRow this[int index] {
+            public AssetsRow this[int index] {
                 get {
-                    return ((BalanceSheetRow)(this.Rows[index]));
+                    return ((AssetsRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event BalanceSheetRowChangeEventHandler BalanceSheetRowChanging;
+            public event AssetsRowChangeEventHandler AssetsRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event BalanceSheetRowChangeEventHandler BalanceSheetRowChanged;
+            public event AssetsRowChangeEventHandler AssetsRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event BalanceSheetRowChangeEventHandler BalanceSheetRowDeleting;
+            public event AssetsRowChangeEventHandler AssetsRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event BalanceSheetRowChangeEventHandler BalanceSheetRowDeleted;
+            public event AssetsRowChangeEventHandler AssetsRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddBalanceSheetRow(BalanceSheetRow row) {
+            public void AddAssetsRow(AssetsRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public BalanceSheetRow AddBalanceSheetRow(string RowTitle, string Natr_Title, string ChrtAcc_Code, string ChrtAcc_CodeDisplay, string ChrtAcc_Title, int ChrtAcc_Level, decimal CurrentYear_Amount, decimal PreviousYear_Amount, int SortOrder) {
-                BalanceSheetRow rowBalanceSheetRow = ((BalanceSheetRow)(this.NewRow()));
+            public AssetsRow AddAssetsRow(string RowTitle, string Natr_Title, string ChrtAcc_Code, string ChrtAcc_CodeDisplay, string ChrtAcc_Title, int ChrtAcc_Level, decimal CurrentYear_Amount, decimal PreviousYear_Amount, int SortOrder) {
+                AssetsRow rowAssetsRow = ((AssetsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         RowTitle,
                         Natr_Title,
@@ -451,15 +486,15 @@ namespace SCMS.Reports.Datasets {
                         CurrentYear_Amount,
                         PreviousYear_Amount,
                         SortOrder};
-                rowBalanceSheetRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowBalanceSheetRow);
-                return rowBalanceSheetRow;
+                rowAssetsRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowAssetsRow);
+                return rowAssetsRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                BalanceSheetDataTable cln = ((BalanceSheetDataTable)(base.Clone()));
+                AssetsDataTable cln = ((AssetsDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -467,7 +502,7 @@ namespace SCMS.Reports.Datasets {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new BalanceSheetDataTable();
+                return new AssetsDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -509,28 +544,28 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public BalanceSheetRow NewBalanceSheetRow() {
-                return ((BalanceSheetRow)(this.NewRow()));
+            public AssetsRow NewAssetsRow() {
+                return ((AssetsRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new BalanceSheetRow(builder);
+                return new AssetsRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(BalanceSheetRow);
+                return typeof(AssetsRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.BalanceSheetRowChanged != null)) {
-                    this.BalanceSheetRowChanged(this, new BalanceSheetRowChangeEvent(((BalanceSheetRow)(e.Row)), e.Action));
+                if ((this.AssetsRowChanged != null)) {
+                    this.AssetsRowChanged(this, new AssetsRowChangeEvent(((AssetsRow)(e.Row)), e.Action));
                 }
             }
             
@@ -538,8 +573,8 @@ namespace SCMS.Reports.Datasets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.BalanceSheetRowChanging != null)) {
-                    this.BalanceSheetRowChanging(this, new BalanceSheetRowChangeEvent(((BalanceSheetRow)(e.Row)), e.Action));
+                if ((this.AssetsRowChanging != null)) {
+                    this.AssetsRowChanging(this, new AssetsRowChangeEvent(((AssetsRow)(e.Row)), e.Action));
                 }
             }
             
@@ -547,8 +582,8 @@ namespace SCMS.Reports.Datasets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.BalanceSheetRowDeleted != null)) {
-                    this.BalanceSheetRowDeleted(this, new BalanceSheetRowChangeEvent(((BalanceSheetRow)(e.Row)), e.Action));
+                if ((this.AssetsRowDeleted != null)) {
+                    this.AssetsRowDeleted(this, new AssetsRowChangeEvent(((AssetsRow)(e.Row)), e.Action));
                 }
             }
             
@@ -556,14 +591,14 @@ namespace SCMS.Reports.Datasets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.BalanceSheetRowDeleting != null)) {
-                    this.BalanceSheetRowDeleting(this, new BalanceSheetRowChangeEvent(((BalanceSheetRow)(e.Row)), e.Action));
+                if ((this.AssetsRowDeleting != null)) {
+                    this.AssetsRowDeleting(this, new AssetsRowChangeEvent(((AssetsRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveBalanceSheetRow(BalanceSheetRow row) {
+            public void RemoveAssetsRow(AssetsRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -590,7 +625,366 @@ namespace SCMS.Reports.Datasets {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "BalanceSheetDataTable";
+                attribute2.FixedValue = "AssetsDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class EquityDataTable : global::System.Data.TypedTableBase<EquityRow> {
+            
+            private global::System.Data.DataColumn columnRowTitle;
+            
+            private global::System.Data.DataColumn columnNatr_Title;
+            
+            private global::System.Data.DataColumn columnChrtAcc_Code;
+            
+            private global::System.Data.DataColumn columnChrtAcc_CodeDisplay;
+            
+            private global::System.Data.DataColumn columnChrtAcc_Title;
+            
+            private global::System.Data.DataColumn columnChrtAcc_Level;
+            
+            private global::System.Data.DataColumn columnCurrentYear_Amount;
+            
+            private global::System.Data.DataColumn columnPreviousYear_Amount;
+            
+            private global::System.Data.DataColumn columnSortOrder;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public EquityDataTable() {
+                this.TableName = "Equity";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal EquityDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected EquityDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RowTitleColumn {
+                get {
+                    return this.columnRowTitle;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Natr_TitleColumn {
+                get {
+                    return this.columnNatr_Title;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ChrtAcc_CodeColumn {
+                get {
+                    return this.columnChrtAcc_Code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ChrtAcc_CodeDisplayColumn {
+                get {
+                    return this.columnChrtAcc_CodeDisplay;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ChrtAcc_TitleColumn {
+                get {
+                    return this.columnChrtAcc_Title;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ChrtAcc_LevelColumn {
+                get {
+                    return this.columnChrtAcc_Level;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CurrentYear_AmountColumn {
+                get {
+                    return this.columnCurrentYear_Amount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn PreviousYear_AmountColumn {
+                get {
+                    return this.columnPreviousYear_Amount;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn SortOrderColumn {
+                get {
+                    return this.columnSortOrder;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public EquityRow this[int index] {
+                get {
+                    return ((EquityRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event EquityRowChangeEventHandler EquityRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event EquityRowChangeEventHandler EquityRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event EquityRowChangeEventHandler EquityRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event EquityRowChangeEventHandler EquityRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddEquityRow(EquityRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public EquityRow AddEquityRow(string RowTitle, string Natr_Title, string ChrtAcc_Code, string ChrtAcc_CodeDisplay, string ChrtAcc_Title, int ChrtAcc_Level, decimal CurrentYear_Amount, decimal PreviousYear_Amount, int SortOrder) {
+                EquityRow rowEquityRow = ((EquityRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        RowTitle,
+                        Natr_Title,
+                        ChrtAcc_Code,
+                        ChrtAcc_CodeDisplay,
+                        ChrtAcc_Title,
+                        ChrtAcc_Level,
+                        CurrentYear_Amount,
+                        PreviousYear_Amount,
+                        SortOrder};
+                rowEquityRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowEquityRow);
+                return rowEquityRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                EquityDataTable cln = ((EquityDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new EquityDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnRowTitle = base.Columns["RowTitle"];
+                this.columnNatr_Title = base.Columns["Natr_Title"];
+                this.columnChrtAcc_Code = base.Columns["ChrtAcc_Code"];
+                this.columnChrtAcc_CodeDisplay = base.Columns["ChrtAcc_CodeDisplay"];
+                this.columnChrtAcc_Title = base.Columns["ChrtAcc_Title"];
+                this.columnChrtAcc_Level = base.Columns["ChrtAcc_Level"];
+                this.columnCurrentYear_Amount = base.Columns["CurrentYear_Amount"];
+                this.columnPreviousYear_Amount = base.Columns["PreviousYear_Amount"];
+                this.columnSortOrder = base.Columns["SortOrder"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnRowTitle = new global::System.Data.DataColumn("RowTitle", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRowTitle);
+                this.columnNatr_Title = new global::System.Data.DataColumn("Natr_Title", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNatr_Title);
+                this.columnChrtAcc_Code = new global::System.Data.DataColumn("ChrtAcc_Code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnChrtAcc_Code);
+                this.columnChrtAcc_CodeDisplay = new global::System.Data.DataColumn("ChrtAcc_CodeDisplay", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnChrtAcc_CodeDisplay);
+                this.columnChrtAcc_Title = new global::System.Data.DataColumn("ChrtAcc_Title", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnChrtAcc_Title);
+                this.columnChrtAcc_Level = new global::System.Data.DataColumn("ChrtAcc_Level", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnChrtAcc_Level);
+                this.columnCurrentYear_Amount = new global::System.Data.DataColumn("CurrentYear_Amount", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCurrentYear_Amount);
+                this.columnPreviousYear_Amount = new global::System.Data.DataColumn("PreviousYear_Amount", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPreviousYear_Amount);
+                this.columnSortOrder = new global::System.Data.DataColumn("SortOrder", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSortOrder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public EquityRow NewEquityRow() {
+                return ((EquityRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new EquityRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(EquityRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.EquityRowChanged != null)) {
+                    this.EquityRowChanged(this, new EquityRowChangeEvent(((EquityRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.EquityRowChanging != null)) {
+                    this.EquityRowChanging(this, new EquityRowChangeEvent(((EquityRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.EquityRowDeleted != null)) {
+                    this.EquityRowDeleted(this, new EquityRowChangeEvent(((EquityRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.EquityRowDeleting != null)) {
+                    this.EquityRowDeleting(this, new EquityRowChangeEvent(((EquityRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveEquityRow(EquityRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                dsBalanceSheet ds = new dsBalanceSheet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "EquityDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -634,15 +1028,15 @@ namespace SCMS.Reports.Datasets {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class BalanceSheetRow : global::System.Data.DataRow {
+        public partial class AssetsRow : global::System.Data.DataRow {
             
-            private BalanceSheetDataTable tableBalanceSheet;
+            private AssetsDataTable tableAssets;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal BalanceSheetRow(global::System.Data.DataRowBuilder rb) : 
+            internal AssetsRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableBalanceSheet = ((BalanceSheetDataTable)(this.Table));
+                this.tableAssets = ((AssetsDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -650,14 +1044,14 @@ namespace SCMS.Reports.Datasets {
             public string RowTitle {
                 get {
                     try {
-                        return ((string)(this[this.tableBalanceSheet.RowTitleColumn]));
+                        return ((string)(this[this.tableAssets.RowTitleColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'RowTitle\' in table \'BalanceSheet\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'RowTitle\' in table \'Assets\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableBalanceSheet.RowTitleColumn] = value;
+                    this[this.tableAssets.RowTitleColumn] = value;
                 }
             }
             
@@ -666,14 +1060,14 @@ namespace SCMS.Reports.Datasets {
             public string Natr_Title {
                 get {
                     try {
-                        return ((string)(this[this.tableBalanceSheet.Natr_TitleColumn]));
+                        return ((string)(this[this.tableAssets.Natr_TitleColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Natr_Title\' in table \'BalanceSheet\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Natr_Title\' in table \'Assets\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableBalanceSheet.Natr_TitleColumn] = value;
+                    this[this.tableAssets.Natr_TitleColumn] = value;
                 }
             }
             
@@ -682,14 +1076,14 @@ namespace SCMS.Reports.Datasets {
             public string ChrtAcc_Code {
                 get {
                     try {
-                        return ((string)(this[this.tableBalanceSheet.ChrtAcc_CodeColumn]));
+                        return ((string)(this[this.tableAssets.ChrtAcc_CodeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ChrtAcc_Code\' in table \'BalanceSheet\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ChrtAcc_Code\' in table \'Assets\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableBalanceSheet.ChrtAcc_CodeColumn] = value;
+                    this[this.tableAssets.ChrtAcc_CodeColumn] = value;
                 }
             }
             
@@ -698,14 +1092,14 @@ namespace SCMS.Reports.Datasets {
             public string ChrtAcc_CodeDisplay {
                 get {
                     try {
-                        return ((string)(this[this.tableBalanceSheet.ChrtAcc_CodeDisplayColumn]));
+                        return ((string)(this[this.tableAssets.ChrtAcc_CodeDisplayColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ChrtAcc_CodeDisplay\' in table \'BalanceSheet\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ChrtAcc_CodeDisplay\' in table \'Assets\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableBalanceSheet.ChrtAcc_CodeDisplayColumn] = value;
+                    this[this.tableAssets.ChrtAcc_CodeDisplayColumn] = value;
                 }
             }
             
@@ -714,14 +1108,14 @@ namespace SCMS.Reports.Datasets {
             public string ChrtAcc_Title {
                 get {
                     try {
-                        return ((string)(this[this.tableBalanceSheet.ChrtAcc_TitleColumn]));
+                        return ((string)(this[this.tableAssets.ChrtAcc_TitleColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ChrtAcc_Title\' in table \'BalanceSheet\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ChrtAcc_Title\' in table \'Assets\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableBalanceSheet.ChrtAcc_TitleColumn] = value;
+                    this[this.tableAssets.ChrtAcc_TitleColumn] = value;
                 }
             }
             
@@ -730,14 +1124,14 @@ namespace SCMS.Reports.Datasets {
             public int ChrtAcc_Level {
                 get {
                     try {
-                        return ((int)(this[this.tableBalanceSheet.ChrtAcc_LevelColumn]));
+                        return ((int)(this[this.tableAssets.ChrtAcc_LevelColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ChrtAcc_Level\' in table \'BalanceSheet\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ChrtAcc_Level\' in table \'Assets\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableBalanceSheet.ChrtAcc_LevelColumn] = value;
+                    this[this.tableAssets.ChrtAcc_LevelColumn] = value;
                 }
             }
             
@@ -746,14 +1140,14 @@ namespace SCMS.Reports.Datasets {
             public decimal CurrentYear_Amount {
                 get {
                     try {
-                        return ((decimal)(this[this.tableBalanceSheet.CurrentYear_AmountColumn]));
+                        return ((decimal)(this[this.tableAssets.CurrentYear_AmountColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CurrentYear_Amount\' in table \'BalanceSheet\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'CurrentYear_Amount\' in table \'Assets\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableBalanceSheet.CurrentYear_AmountColumn] = value;
+                    this[this.tableAssets.CurrentYear_AmountColumn] = value;
                 }
             }
             
@@ -762,14 +1156,14 @@ namespace SCMS.Reports.Datasets {
             public decimal PreviousYear_Amount {
                 get {
                     try {
-                        return ((decimal)(this[this.tableBalanceSheet.PreviousYear_AmountColumn]));
+                        return ((decimal)(this[this.tableAssets.PreviousYear_AmountColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PreviousYear_Amount\' in table \'BalanceSheet\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'PreviousYear_Amount\' in table \'Assets\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableBalanceSheet.PreviousYear_AmountColumn] = value;
+                    this[this.tableAssets.PreviousYear_AmountColumn] = value;
                 }
             }
             
@@ -778,123 +1172,390 @@ namespace SCMS.Reports.Datasets {
             public int SortOrder {
                 get {
                     try {
-                        return ((int)(this[this.tableBalanceSheet.SortOrderColumn]));
+                        return ((int)(this[this.tableAssets.SortOrderColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SortOrder\' in table \'BalanceSheet\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'SortOrder\' in table \'Assets\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableBalanceSheet.SortOrderColumn] = value;
+                    this[this.tableAssets.SortOrderColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsRowTitleNull() {
-                return this.IsNull(this.tableBalanceSheet.RowTitleColumn);
+                return this.IsNull(this.tableAssets.RowTitleColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetRowTitleNull() {
-                this[this.tableBalanceSheet.RowTitleColumn] = global::System.Convert.DBNull;
+                this[this.tableAssets.RowTitleColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsNatr_TitleNull() {
-                return this.IsNull(this.tableBalanceSheet.Natr_TitleColumn);
+                return this.IsNull(this.tableAssets.Natr_TitleColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetNatr_TitleNull() {
-                this[this.tableBalanceSheet.Natr_TitleColumn] = global::System.Convert.DBNull;
+                this[this.tableAssets.Natr_TitleColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsChrtAcc_CodeNull() {
-                return this.IsNull(this.tableBalanceSheet.ChrtAcc_CodeColumn);
+                return this.IsNull(this.tableAssets.ChrtAcc_CodeColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetChrtAcc_CodeNull() {
-                this[this.tableBalanceSheet.ChrtAcc_CodeColumn] = global::System.Convert.DBNull;
+                this[this.tableAssets.ChrtAcc_CodeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsChrtAcc_CodeDisplayNull() {
-                return this.IsNull(this.tableBalanceSheet.ChrtAcc_CodeDisplayColumn);
+                return this.IsNull(this.tableAssets.ChrtAcc_CodeDisplayColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetChrtAcc_CodeDisplayNull() {
-                this[this.tableBalanceSheet.ChrtAcc_CodeDisplayColumn] = global::System.Convert.DBNull;
+                this[this.tableAssets.ChrtAcc_CodeDisplayColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsChrtAcc_TitleNull() {
-                return this.IsNull(this.tableBalanceSheet.ChrtAcc_TitleColumn);
+                return this.IsNull(this.tableAssets.ChrtAcc_TitleColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetChrtAcc_TitleNull() {
-                this[this.tableBalanceSheet.ChrtAcc_TitleColumn] = global::System.Convert.DBNull;
+                this[this.tableAssets.ChrtAcc_TitleColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsChrtAcc_LevelNull() {
-                return this.IsNull(this.tableBalanceSheet.ChrtAcc_LevelColumn);
+                return this.IsNull(this.tableAssets.ChrtAcc_LevelColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetChrtAcc_LevelNull() {
-                this[this.tableBalanceSheet.ChrtAcc_LevelColumn] = global::System.Convert.DBNull;
+                this[this.tableAssets.ChrtAcc_LevelColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsCurrentYear_AmountNull() {
-                return this.IsNull(this.tableBalanceSheet.CurrentYear_AmountColumn);
+                return this.IsNull(this.tableAssets.CurrentYear_AmountColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetCurrentYear_AmountNull() {
-                this[this.tableBalanceSheet.CurrentYear_AmountColumn] = global::System.Convert.DBNull;
+                this[this.tableAssets.CurrentYear_AmountColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsPreviousYear_AmountNull() {
-                return this.IsNull(this.tableBalanceSheet.PreviousYear_AmountColumn);
+                return this.IsNull(this.tableAssets.PreviousYear_AmountColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetPreviousYear_AmountNull() {
-                this[this.tableBalanceSheet.PreviousYear_AmountColumn] = global::System.Convert.DBNull;
+                this[this.tableAssets.PreviousYear_AmountColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsSortOrderNull() {
-                return this.IsNull(this.tableBalanceSheet.SortOrderColumn);
+                return this.IsNull(this.tableAssets.SortOrderColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetSortOrderNull() {
-                this[this.tableBalanceSheet.SortOrderColumn] = global::System.Convert.DBNull;
+                this[this.tableAssets.SortOrderColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class EquityRow : global::System.Data.DataRow {
+            
+            private EquityDataTable tableEquity;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal EquityRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableEquity = ((EquityDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string RowTitle {
+                get {
+                    try {
+                        return ((string)(this[this.tableEquity.RowTitleColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RowTitle\' in table \'Equity\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEquity.RowTitleColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Natr_Title {
+                get {
+                    try {
+                        return ((string)(this[this.tableEquity.Natr_TitleColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Natr_Title\' in table \'Equity\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEquity.Natr_TitleColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ChrtAcc_Code {
+                get {
+                    try {
+                        return ((string)(this[this.tableEquity.ChrtAcc_CodeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ChrtAcc_Code\' in table \'Equity\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEquity.ChrtAcc_CodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ChrtAcc_CodeDisplay {
+                get {
+                    try {
+                        return ((string)(this[this.tableEquity.ChrtAcc_CodeDisplayColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ChrtAcc_CodeDisplay\' in table \'Equity\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEquity.ChrtAcc_CodeDisplayColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ChrtAcc_Title {
+                get {
+                    try {
+                        return ((string)(this[this.tableEquity.ChrtAcc_TitleColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ChrtAcc_Title\' in table \'Equity\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEquity.ChrtAcc_TitleColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int ChrtAcc_Level {
+                get {
+                    try {
+                        return ((int)(this[this.tableEquity.ChrtAcc_LevelColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ChrtAcc_Level\' in table \'Equity\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEquity.ChrtAcc_LevelColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal CurrentYear_Amount {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableEquity.CurrentYear_AmountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CurrentYear_Amount\' in table \'Equity\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEquity.CurrentYear_AmountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public decimal PreviousYear_Amount {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableEquity.PreviousYear_AmountColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PreviousYear_Amount\' in table \'Equity\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEquity.PreviousYear_AmountColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int SortOrder {
+                get {
+                    try {
+                        return ((int)(this[this.tableEquity.SortOrderColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'SortOrder\' in table \'Equity\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableEquity.SortOrderColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRowTitleNull() {
+                return this.IsNull(this.tableEquity.RowTitleColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRowTitleNull() {
+                this[this.tableEquity.RowTitleColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsNatr_TitleNull() {
+                return this.IsNull(this.tableEquity.Natr_TitleColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetNatr_TitleNull() {
+                this[this.tableEquity.Natr_TitleColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsChrtAcc_CodeNull() {
+                return this.IsNull(this.tableEquity.ChrtAcc_CodeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetChrtAcc_CodeNull() {
+                this[this.tableEquity.ChrtAcc_CodeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsChrtAcc_CodeDisplayNull() {
+                return this.IsNull(this.tableEquity.ChrtAcc_CodeDisplayColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetChrtAcc_CodeDisplayNull() {
+                this[this.tableEquity.ChrtAcc_CodeDisplayColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsChrtAcc_TitleNull() {
+                return this.IsNull(this.tableEquity.ChrtAcc_TitleColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetChrtAcc_TitleNull() {
+                this[this.tableEquity.ChrtAcc_TitleColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsChrtAcc_LevelNull() {
+                return this.IsNull(this.tableEquity.ChrtAcc_LevelColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetChrtAcc_LevelNull() {
+                this[this.tableEquity.ChrtAcc_LevelColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCurrentYear_AmountNull() {
+                return this.IsNull(this.tableEquity.CurrentYear_AmountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCurrentYear_AmountNull() {
+                this[this.tableEquity.CurrentYear_AmountColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPreviousYear_AmountNull() {
+                return this.IsNull(this.tableEquity.PreviousYear_AmountColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPreviousYear_AmountNull() {
+                this[this.tableEquity.PreviousYear_AmountColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsSortOrderNull() {
+                return this.IsNull(this.tableEquity.SortOrderColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetSortOrderNull() {
+                this[this.tableEquity.SortOrderColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -902,22 +1563,56 @@ namespace SCMS.Reports.Datasets {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class BalanceSheetRowChangeEvent : global::System.EventArgs {
+        public class AssetsRowChangeEvent : global::System.EventArgs {
             
-            private BalanceSheetRow eventRow;
+            private AssetsRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public BalanceSheetRowChangeEvent(BalanceSheetRow row, global::System.Data.DataRowAction action) {
+            public AssetsRowChangeEvent(AssetsRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public BalanceSheetRow Row {
+            public AssetsRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class EquityRowChangeEvent : global::System.EventArgs {
+            
+            private EquityRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public EquityRowChangeEvent(EquityRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public EquityRow Row {
                 get {
                     return this.eventRow;
                 }

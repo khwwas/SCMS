@@ -93,7 +93,10 @@
                 <div class="login-header">
                     <div class="logo clear">
                         <img src="<%=ResolveUrl("~/img/logo.png") %>" alt="" class="picture" />
-                        <span class="title"><%= ViewData["CmpDesc"]%> </span>
+                        <span class="title" style="color: White; font-family: Calibri; font-style: oblique;
+                            font-size: x-large; font-weight: bold;">
+                            <%= ViewData["CmpDesc"]%>
+                        </span>
                     </div>
                 </div>
                 <form action="" method="post">

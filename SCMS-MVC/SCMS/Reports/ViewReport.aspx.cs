@@ -546,14 +546,20 @@ namespace SCMS.Reports
                         _dsBalanceSheet.Tables.Remove("Logo");
                     }
 
-                    if (_dsBalanceSheet.Tables.Contains("BalanceSheet"))
+                    if (_dsBalanceSheet.Tables.Contains("Assets"))
                     {
-                        _dsBalanceSheet.Tables.Remove("BalanceSheet");
+                        _dsBalanceSheet.Tables.Remove("Assets");
+                    }
+
+                    if (_dsBalanceSheet.Tables.Contains("Equity"))
+                    {
+                        _dsBalanceSheet.Tables.Remove("Equity");
                     }
 
                     _ds = _dalReports.BalanceSheet(ls_Location, li_Level, li_Year);
-                    _dsBalanceSheet.Tables.Add(_ds.Tables[0].Copy());
-                    _dsBalanceSheet.Tables[0].TableName = "BalanceSheet";
+                    _dsBalanceSheet.Tables.Add(_ds.Tables["Assets"].Copy());
+                    _dsBalanceSheet.Tables.Add(_ds.Tables["Equity"].Copy());
+                    //_dsBalanceSheet.Tables[0].TableName = "BalanceSheet";
 
                     if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
                     {
@@ -600,8 +606,23 @@ namespace SCMS.Reports
                         return;
                     }
 
+                    //for (int _Index = 0; _Index <= _dsAuditTrail.Tables[0].Rows.Count - 1; _Index++)
+                    //{
+                    //    string _Data = "";
+                    //    int _IndexOf = 0;
+
+                    //    if (_dsAuditTrail.Tables[0].Rows[_Index]["AdtTrl_DataDump"] != null &&
+                    //        _dsAuditTrail.Tables[0].Rows[_Index]["AdtTrl_DataDump"].ToString() != "")
+                    //    {
+                    //        _Data = _dsAuditTrail.Tables[0].Rows[_Index]["AdtTrl_DataDump"].ToString();
+
+                    //        for (int _Index2 = 0; 
+                    //        _Data = _Data + Environment.NewLine ;
+                    //    }
+                    //}
+
                     _ReportDocument.SetDataSource(_dsAuditTrail);
-                    _ReportDocument.SummaryInfo.ReportTitle = "Audit Trail";
+                    _ReportDocument.SummaryInfo.ReportTitle = "Audit Log";
                     //_ReportDocument.SetParameterValue("pm_CurrentYear", li_Year);
                     //_ReportDocument.SetParameterValue("pm_PreviousYear", li_Year - 1);
                 }

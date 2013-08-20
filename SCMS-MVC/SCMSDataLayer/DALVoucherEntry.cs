@@ -125,6 +125,18 @@ namespace SCMSDataLayer
             }
         }
 
+        /// <summary>
+        /// This function is used to retreive data in voucher entry console
+        /// </summary>
+        /// <param name="ps_AllLocation"></param>
+        /// <param name="ps_Location"></param>
+        /// <param name="ps_AllVoucherType"></param>
+        /// <param name="ps_VoucherType"></param>
+        /// <param name="ps_AllDate"></param>
+        /// <param name="ps_DateFrom"></param>
+        /// <param name="ps_DateTo"></param>
+        /// <param name="ps_IncludeSecurity"></param>
+        /// <returns></returns>
         public List<sp_VoucherEntryConsoleResult> GetVoucherEntryConsoleData(int ps_AllLocation, string ps_Location, int ps_AllVoucherType, string ps_VoucherType,
                                                                              int ps_AllDate, string ps_DateFrom, string ps_DateTo, bool ps_IncludeSecurity)
         {

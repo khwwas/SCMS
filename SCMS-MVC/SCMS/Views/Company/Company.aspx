@@ -143,8 +143,8 @@
             </div>
             <div class="CustomCell" style="width: 100px; height: 30px">
                 Code</div>
-            <input type="text" class="CustomText" style="width: 100px; font-weight: bold;" id="txt_Code" name="txt_Code"
-                maxlength="100" value="[Auto]" readonly="readonly" />
+            <input type="text" class="CustomText" style="width: 100px; font-weight: bold;" id="txt_Code"
+                name="txt_Code" maxlength="100" value="[Auto]" readonly="readonly" />
             <div class="Clear">
             </div>
             <div class="CustomCell" style="width: 100px; height: 30px">

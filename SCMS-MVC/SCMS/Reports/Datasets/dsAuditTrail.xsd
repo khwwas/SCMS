@@ -25,6 +25,7 @@
               <xs:element name="AdtTrl_EntryId" msprop:Generator_ColumnVarNameInTable="columnAdtTrl_EntryId" msprop:Generator_ColumnPropNameInRow="AdtTrl_EntryId" msprop:Generator_ColumnPropNameInTable="AdtTrl_EntryIdColumn" msprop:Generator_UserColumnName="AdtTrl_EntryId" type="xs:string" minOccurs="0" />
               <xs:element name="VchrType_Id" msprop:Generator_ColumnVarNameInTable="columnVchrType_Id" msprop:Generator_ColumnPropNameInRow="VchrType_Id" msprop:Generator_ColumnPropNameInTable="VchrType_IdColumn" msprop:Generator_UserColumnName="VchrType_Id" type="xs:string" minOccurs="0" />
               <xs:element name="AdtTrl_DataDump" msprop:Generator_ColumnVarNameInTable="columnAdtTrl_DataDump" msprop:Generator_ColumnPropNameInRow="AdtTrl_DataDump" msprop:Generator_ColumnPropNameInTable="AdtTrl_DataDumpColumn" msprop:Generator_UserColumnName="AdtTrl_DataDump" type="xs:string" minOccurs="0" />
+              <xs:element name="AdtTrl_Date" msprop:Generator_ColumnVarNameInTable="columnAdtTrl_Date" msprop:Generator_ColumnPropNameInRow="AdtTrl_Date" msprop:Generator_ColumnPropNameInTable="AdtTrl_DateColumn" msprop:Generator_UserColumnName="AdtTrl_Date" type="xs:dateTime" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

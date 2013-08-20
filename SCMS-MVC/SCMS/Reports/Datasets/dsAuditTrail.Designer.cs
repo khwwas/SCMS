@@ -299,6 +299,8 @@ namespace SCMS.Reports.Datasets {
             
             private global::System.Data.DataColumn columnAdtTrl_DataDump;
             
+            private global::System.Data.DataColumn columnAdtTrl_Date;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public AuditTrailDataTable() {
@@ -414,6 +416,14 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn AdtTrl_DateColumn {
+                get {
+                    return this.columnAdtTrl_Date;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -449,7 +459,7 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public AuditTrailRow AddAuditTrailRow(int AdtTrl_Id, int Scr_Id, string Scr_Title, string User_Id, string User_Title, string Loc_Id, string AdtTrl_Action, string AdtTrl_EntryId, string VchrType_Id, string AdtTrl_DataDump) {
+            public AuditTrailRow AddAuditTrailRow(int AdtTrl_Id, int Scr_Id, string Scr_Title, string User_Id, string User_Title, string Loc_Id, string AdtTrl_Action, string AdtTrl_EntryId, string VchrType_Id, string AdtTrl_DataDump, System.DateTime AdtTrl_Date) {
                 AuditTrailRow rowAuditTrailRow = ((AuditTrailRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         AdtTrl_Id,
@@ -461,7 +471,8 @@ namespace SCMS.Reports.Datasets {
                         AdtTrl_Action,
                         AdtTrl_EntryId,
                         VchrType_Id,
-                        AdtTrl_DataDump};
+                        AdtTrl_DataDump,
+                        AdtTrl_Date};
                 rowAuditTrailRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowAuditTrailRow);
                 return rowAuditTrailRow;
@@ -494,6 +505,7 @@ namespace SCMS.Reports.Datasets {
                 this.columnAdtTrl_EntryId = base.Columns["AdtTrl_EntryId"];
                 this.columnVchrType_Id = base.Columns["VchrType_Id"];
                 this.columnAdtTrl_DataDump = base.Columns["AdtTrl_DataDump"];
+                this.columnAdtTrl_Date = base.Columns["AdtTrl_Date"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -519,6 +531,8 @@ namespace SCMS.Reports.Datasets {
                 base.Columns.Add(this.columnVchrType_Id);
                 this.columnAdtTrl_DataDump = new global::System.Data.DataColumn("AdtTrl_DataDump", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAdtTrl_DataDump);
+                this.columnAdtTrl_Date = new global::System.Data.DataColumn("AdtTrl_Date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAdtTrl_Date);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -821,6 +835,22 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public System.DateTime AdtTrl_Date {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableAuditTrail.AdtTrl_DateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'AdtTrl_Date\' in table \'AuditTrail\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAuditTrail.AdtTrl_DateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsAdtTrl_IdNull() {
                 return this.IsNull(this.tableAuditTrail.AdtTrl_IdColumn);
             }
@@ -937,6 +967,18 @@ namespace SCMS.Reports.Datasets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetAdtTrl_DataDumpNull() {
                 this[this.tableAuditTrail.AdtTrl_DataDumpColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsAdtTrl_DateNull() {
+                return this.IsNull(this.tableAuditTrail.AdtTrl_DateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetAdtTrl_DateNull() {
+                this[this.tableAuditTrail.AdtTrl_DateColumn] = global::System.Convert.DBNull;
             }
         }
         

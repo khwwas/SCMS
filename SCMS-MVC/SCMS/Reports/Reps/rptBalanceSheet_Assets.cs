@@ -16,14 +16,14 @@ namespace SCMS.Reports.Reps {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class rptBalanceSheet : ReportClass {
+    public class rptBalanceSheet_Assets : ReportClass {
         
-        public rptBalanceSheet() {
+        public rptBalanceSheet_Assets() {
         }
         
         public override string ResourceName {
             get {
-                return "rptBalanceSheet.rpt";
+                return "rptBalanceSheet_Assets.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace SCMS.Reports.Reps {
         
         public override string FullResourceName {
             get {
-                return "SCMS.Reports.Reps.rptBalanceSheet.rpt";
+                return "SCMS.Reports.Reps.rptBalanceSheet_Assets.rpt";
             }
             set {
                 // Do nothing
@@ -103,60 +103,12 @@ namespace SCMS.Reports.Reps {
                 return this.ReportDefinition.Sections[6];
             }
         }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_pm_CompanyName {
-            get {
-                return this.DataDefinition.ParameterFields[0];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_pm_CurrentYear {
-            get {
-                return this.DataDefinition.ParameterFields[1];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_pm_PreviousYear {
-            get {
-                return this.DataDefinition.ParameterFields[2];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_rptBalanceSheet_Assetsrpt_pm_CompanyName {
-            get {
-                return this.DataDefinition.ParameterFields[3];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_rptBalanceSheet_Assetsrpt_pm_CurrentYear {
-            get {
-                return this.DataDefinition.ParameterFields[4];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_rptBalanceSheet_Assetsrpt_pm_PreviousYear {
-            get {
-                return this.DataDefinition.ParameterFields[5];
-            }
-        }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedrptBalanceSheet : Component, ICachedReport {
+    public class CachedrptBalanceSheet_Assets : Component, ICachedReport {
         
-        public CachedrptBalanceSheet() {
+        public CachedrptBalanceSheet_Assets() {
         }
         
         [Browsable(false)]
@@ -193,7 +145,7 @@ namespace SCMS.Reports.Reps {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            rptBalanceSheet rpt = new rptBalanceSheet();
+            rptBalanceSheet_Assets rpt = new rptBalanceSheet_Assets();
             rpt.Site = this.Site;
             return rpt;
         }

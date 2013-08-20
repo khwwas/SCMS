@@ -17,7 +17,6 @@ namespace SCMSDataLayer
                 SCMSDataContext dbSCMS = Connection.Create();
                 dbSCMS.SYSTEM_AuditTrails.InsertOnSubmit(lrow_AuditTrail);
                 dbSCMS.SubmitChanges();
-
                 li_ReturnValue = Convert.ToInt32(lrow_AuditTrail.AdtTrl_Id);
             }
             catch

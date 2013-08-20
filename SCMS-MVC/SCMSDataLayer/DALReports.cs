@@ -829,7 +829,7 @@ namespace SCMSDataLayer
 
                 //_cmd.ExecuteNonQuery();
 
-
+                #region  ASSETS
                 _Sql += "   Select 'ASSETS ' As RowTitle, ";
                 _Sql += "          SYSTEM_Nature.Natr_Title, ";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Code, ";
@@ -884,7 +884,14 @@ namespace SCMSDataLayer
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_CodeDisplay, ";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Title, ";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Level ";
-                _Sql += " UNION ALL";
+                #endregion
+
+                SqlDataAdapter da = new SqlDataAdapter(_Sql, con);
+                da.Fill(_ds, "Assets");
+
+                //_Sql += " UNION ALL";
+                _Sql = "";
+                #region LIABILITIES
                 _Sql += "   Select 'LIABILITIES' As RowTitle, ";
                 _Sql += "          SYSTEM_Nature.Natr_Title, ";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Code, ";
@@ -939,7 +946,9 @@ namespace SCMSDataLayer
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_CodeDisplay, ";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Title, ";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Level ";
+                #endregion
                 _Sql += " UNION ALL";
+                #region EQUITY
                 _Sql += "   Select 'SHAREHOLDER''S EQUITY' As RowTitle, ";
                 _Sql += "          SYSTEM_Nature.Natr_Title, ";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Code, ";
@@ -999,9 +1008,10 @@ namespace SCMSDataLayer
                 _Sql += " Order By SortOrder, RowTitle, SYSTEM_Nature.Natr_Title, ";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Code, ";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Level ";
+                #endregion
 
-                SqlDataAdapter da = new SqlDataAdapter(_Sql, con);
-                da.Fill(_ds, "IncomeStatement");
+                da = new SqlDataAdapter(_Sql, con);
+                da.Fill(_ds, "Equity");
 
                 Connection.ReportConnection("Close");
             }
