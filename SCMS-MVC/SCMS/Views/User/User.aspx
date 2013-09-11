@@ -152,7 +152,7 @@
             <div class="Clear">
             </div>
             <div class="CustomCell" style="width: 100px; height: 30px">
-                Login Id</div>
+                Login</div>
             <input type="text" class="CustomText" style="width: 940px;" id="txt_Login" name="txt_Login"
                 maxlength="50" />
             <div class="Clear">
@@ -164,7 +164,7 @@
             <div class="Clear">
             </div>
             <div class="CustomCell" style="width: 100px; height: 30px">
-                Group</div>
+                User Group</div>
             <%= Html.DropDownList("ddl_UserGroup", null, new { style = "width:955px;" })%>
             <div class="Clear">
             </div>

@@ -15,31 +15,31 @@
 
             var lcnt_MessageBox = document.getElementById('MessageBox');
             var lcnt_txtSelectedCode = document.getElementById("txt_SelectedCode");
-            var ddl_Company = document.getElementById('ddl_Company');
-            var ddl_location = document.getElementById('ddl_location');
+            //            var ddl_Company = document.getElementById('ddl_Company');
+            //            var ddl_location = document.getElementById('ddl_location');
             var ddl_CalenderType = document.getElementById('ddl_CalenderType');
             var txt_Prefix = document.getElementById('txt_Prefix');
             var txt_Title = document.getElementById('txt_Title');
             var txt_SratrtDate = document.getElementById('txt_SratrtDate');
             var txt_EndDate = document.getElementById('txt_EndDate');
 
-            if (ddl_Company.value == 0) {
-                FadeIn(lcnt_MessageBox);
-                lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! select company</p>";
-                lcnt_MessageBox.setAttribute("class", "message error");
-                scroll(0, 0);
-                FadeOut(lcnt_MessageBox);
-                ddl_Company.focus();
-                return;
-            } else if (ddl_location.value == 0) {
-                FadeIn(lcnt_MessageBox);
-                lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! select location</p>";
-                lcnt_MessageBox.setAttribute("class", "message error");
-                scroll(0, 0);
-                FadeOut(lcnt_MessageBox);
-                ddl_location.focus();
-                return;
-            } else if (ddl_CalenderType.value == 0) {
+            //            if (ddl_Company.value == 0) {
+            //                FadeIn(lcnt_MessageBox);
+            //                lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! select company</p>";
+            //                lcnt_MessageBox.setAttribute("class", "message error");
+            //                scroll(0, 0);
+            //                FadeOut(lcnt_MessageBox);
+            //                ddl_Company.focus();
+            //                return;
+            //            } else if (ddl_location.value == 0) {
+            //                FadeIn(lcnt_MessageBox);
+            //                lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! select location</p>";
+            //                lcnt_MessageBox.setAttribute("class", "message error");
+            //                scroll(0, 0);
+            //                FadeOut(lcnt_MessageBox);
+            //                ddl_location.focus();
+            //                return;
+            if (ddl_CalenderType.value == 0) {
                 FadeIn(lcnt_MessageBox);
                 lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! select calendar type</p>";
                 lcnt_MessageBox.setAttribute("class", "message error");
@@ -67,7 +67,7 @@
             }
             else {
                 var Url = document.getElementById('frm_CalendarSetup').action;
-                Url += "Calendar/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&Comapany=" + ddl_Company.value + "&Location=" + ddl_location.value + "&CalenderType=" + ddl_CalenderType.value + "&Prefix=" + txt_Prefix.value + "&Title=" + txt_Title.value + "&SratrtDate=" + txt_SratrtDate.value + "&EndDate=" + txt_EndDate.value;
+                Url += "Calendar/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&CalenderType=" + ddl_CalenderType.value + "&Prefix=" + txt_Prefix.value + "&Title=" + txt_Title.value + "&SratrtDate=" + txt_SratrtDate.value + "&EndDate=" + txt_EndDate.value;
                 document.getElementById("Waiting_Image").style.display = "block";
                 document.getElementById("btn_Save").style.display = "none";
                 $.ajax({
@@ -110,8 +110,8 @@
 
             document.getElementById('txt_SelectedCode').value = "";
             document.getElementById('txt_Title').value = "";
-            document.getElementById('ddl_Company').value = "";
-            document.getElementById('ddl_location').value = "";
+            //            document.getElementById('ddl_Company').value = "";
+            //            document.getElementById('ddl_location').value = "";
             document.getElementById('ddl_CalenderType').value = "";
             document.getElementById('txt_Prefix').value = "";
             document.getElementById('txt_SratrtDate').value = "";
@@ -121,8 +121,8 @@
         function EditRecord(Id) {
             document.getElementById('txt_SelectedCode').value = Id;
             document.getElementById('txt_Title').value = document.getElementById('txt_Title' + Id).innerHTML.trim().toString().replace("&nbsp", "");
-            document.getElementById('ddl_Company').value = document.getElementById('ddl_Company' + Id).innerHTML.trim().toString().replace("&nbsp", "");
-            document.getElementById('ddl_location').value = document.getElementById('ddl_location' + Id).innerHTML.trim().toString().replace("&nbsp", "");
+            //            document.getElementById('ddl_Company').value = document.getElementById('ddl_Company' + Id).innerHTML.trim().toString().replace("&nbsp", "");
+            //            document.getElementById('ddl_location').value = document.getElementById('ddl_location' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             document.getElementById('ddl_CalenderType').value = document.getElementById('ddl_CalenderType' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             document.getElementById('txt_Prefix').value = document.getElementById('txt_Prefix' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             document.getElementById('txt_SratrtDate').value = document.getElementById('txt_SratrtDate' + Id).innerHTML.trim().toString().replace("&nbsp", "");
@@ -180,7 +180,7 @@
         <div class="block">
             <div id="MessageBox">
             </div>
-            <div class="CustomCell" style="width: 105px; height: 30px">
+            <%--<div class="CustomCell" style="width: 105px; height: 30px">
                 Company</div>
             <div style="width: 270px; height: 30px;" class="CustomCell">
                 <%= Html.DropDownList("ddl_Company", null, new { style = "width:950px; padding: 4px;" })%>
@@ -193,35 +193,31 @@
                 <%= Html.DropDownList("ddl_location", null, new { style = "width:950px; padding: 4px;" })%>
             </div>
             <div class="Clear">
-            </div>
-            <div class="CustomCell" style="width: 105px; height: 30px;">
-                Calender Type</div>
-            <div style="width: 270px; height: 30px;" class="CustomCell">
-                <%= Html.DropDownList("ddl_CalenderType", null, new { style = "width:950px; padding: 4px;" })%>
-            </div>
-            <div class="Clear">
-            </div>
-            <div class="CustomCell" style="width: 102px; height: 30px; padding-top: 8px;">
-                Prefix</div>
-            <div class="CustomCell" style="width: 219px; height: 30px; padding-top: 8px;">
-                <input type="text" class="CustomText" style="width: 219px;" id="txt_Prefix" name="txt_Prefix"
-                    maxlength="2" />
-            </div>
-            <div class="CustomCell" style="width: 80px; height: 30px; padding-top: 8px; padding-left: 62px;">
+            </div>--%>
+            <div class="CustomCell" style="width: 115px; height: 30px;">
                 Title</div>
-            <div class="CustomCell" style="width: 60px; height: 30px; padding-top: 8px;">
-                <input type="text" class="CustomText" style="width: 572px;" id="txt_Title" name="txt_Title"
-                    maxlength="100" />
-            </div>
+            <input type="text" class="CustomText" style="width: 940px;" id="txt_Title" name="txt_Title"
+                maxlength="100" />
             <div class="Clear">
             </div>
-            <div class="CustomCell" style="width: 102px; height: 30px; padding-top: 8px;">
+            <div class="CustomCell" style="width: 115px; height: 30px;">
+                Calender Type</div>
+            <%= Html.DropDownList("ddl_CalenderType", null, new { style = "width:950px; padding: 4px;" })%>
+            <div class="Clear">
+            </div>
+            <div class="CustomCell" style="width: 115px; height: 30px;">
+                Prefix</div>
+            <input type="text" class="CustomText" style="width: 219px;" id="txt_Prefix" name="txt_Prefix"
+                maxlength="2" />
+            <div class="Clear">
+            </div>
+            <div class="CustomCell" style="width: 115px; height: 30px;">
                 Start Date</div>
             <div class="CustomCell" style="width: 282px; height: 30px;">
                 <input type="text" class="CustomText" style="width: 220px;" id="txt_SratrtDate" name="txt_SratrtDate"
                     value="<%=ViewData["CurrentDate"]%>" maxlength="50" />
             </div>
-            <div class="CustomCell" style="width: 80px; height: 30px; padding-top: 8px;">
+            <div class="CustomCell" style="width: 115px; height: 30px;">
                 End Date</div>
             <div class="CustomCell" style="width: 282px; height: 30px;">
                 <input type="text" class="CustomText" style="width: 220px;" id="txt_EndDate" name="txt_EndDate"
@@ -235,6 +231,8 @@
                     format: 'm/d/Y'
                 });
             </script>
+            <div class="Clear">
+            </div>
             <div style="float: right; margin-bottom: 10px;">
                 <div style="float: left; margin-right: 5px;">
                     <input id="btn_Save" type="button" value="Save" class="btn btn-blue" onclick="SaveRecord();"

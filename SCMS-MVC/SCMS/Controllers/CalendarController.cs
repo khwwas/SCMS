@@ -16,15 +16,15 @@ namespace SCMS.Controllers
 
         public ActionResult Index()
         {
-            ViewData["ddl_Company"] = new SelectList(new DALCompany().PopulateData(), "Cmp_Id", "Cmp_Title", "ddl_Company");
-            ViewData["ddl_location"] = new SelectList(new DALLocation().PopulateData(), "Loc_Id", "Loc_Title", "ddl_Location");
+            //ViewData["ddl_Company"] = new SelectList(new DALCompany().PopulateData(), "Cmp_Id", "Cmp_Title", "ddl_Company");
+            //ViewData["ddl_location"] = new SelectList(new DALLocation().PopulateData(), "Loc_Id", "Loc_Title", "ddl_Location");
             ViewData["ddl_CalenderType"] = new SelectList(new DALCalendarType().GetAllRecords(), "CldrType_Id", "CldrType_Title", "ddl_CalenderType");
             ViewData["CurrentDate"] = DateTime.Now.ToString("MM/dd/yyyy");
             return View("Calendar");
         }
 
         // Insertion
-        public ActionResult SaveRecord(String ps_Code, String Comapany, String Location, String CalenderType, String Prefix, String Title, DateTime SratrtDate, DateTime EndDate)
+        public ActionResult SaveRecord(String ps_Code, String CalenderType, String Prefix, String Title, DateTime SratrtDate, DateTime EndDate)
         {
             Int32 li_ReturnValue = 0;
 
@@ -57,8 +57,8 @@ namespace SCMS.Controllers
                 {
                     lrow_Calendar.Cldr_Id = ps_Code;
                     lrow_Calendar.Cldr_Code = ps_Code;
-                    lrow_Calendar.Cmp_Id = Comapany;
-                    lrow_Calendar.Loc_Id = Location;
+                    //lrow_Calendar.Cmp_Id = Comapany;
+                    //lrow_Calendar.Loc_Id = Location;
                     lrow_Calendar.CldrType_Id = CalenderType;
                     lrow_Calendar.Cldr_Prefix = Prefix;
                     lrow_Calendar.Cldr_Title = Title;
@@ -86,8 +86,8 @@ namespace SCMS.Controllers
                             systemAuditTrail.AdtTrl_DataDump = "Cldr_Id = " + lrow_Calendar.Cldr_Id + ";";
                             systemAuditTrail.AdtTrl_DataDump += "Cldr_ParentRefId = " + lrow_Calendar.Cldr_ParentRefId + ";";
                             systemAuditTrail.AdtTrl_DataDump += "Cldr_Code = " + lrow_Calendar.Cldr_Code + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "Cmp_Id = " + lrow_Calendar.Cmp_Id + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "Loc_Id = " + lrow_Calendar.Loc_Id + ";";
+                            //systemAuditTrail.AdtTrl_DataDump += "Cmp_Id = " + lrow_Calendar.Cmp_Id + ";";
+                            //systemAuditTrail.AdtTrl_DataDump += "Loc_Id = " + lrow_Calendar.Loc_Id + ";";
                             systemAuditTrail.AdtTrl_DataDump += "CldrType_Id = " + lrow_Calendar.CldrType_Id + ";";
                             systemAuditTrail.AdtTrl_DataDump += "Cldr_Title = " + lrow_Calendar.Cldr_Title + ";";
                             systemAuditTrail.AdtTrl_DataDump += "Cldr_DateStart = " + lrow_Calendar.Cldr_DateStart + ";";

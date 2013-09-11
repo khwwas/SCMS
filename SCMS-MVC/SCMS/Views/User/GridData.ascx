@@ -28,13 +28,13 @@
                 Title
             </th>
             <th style="width: 15%;">
-                Login Id
+                Login
             </th>
             <th style="width: 15%;">
                 Password
             </th>
             <th style="width: 20%;">
-                Group
+                User Group
             </th>
         </tr>
     </thead>

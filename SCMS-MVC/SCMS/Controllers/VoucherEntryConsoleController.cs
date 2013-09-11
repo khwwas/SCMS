@@ -14,7 +14,8 @@ namespace SCMS.Controllers
         // GET: /Voucher/
         public ActionResult Index()
         {
-            //ViewData["ddl_Location"] = new SelectList(new DALLocation().PopulateData(), "Loc_Id", "Loc_Title", "ddl_Location");
+            ViewData["ddl_Location"] = new SelectList(new DALLocation().PopulateData(), "Loc_Id", "Loc_Title", "0");
+            //ddl_Location.
             //ViewData["ddl_VoucherType"] = new SelectList(new DALVoucherType().PopulateData(), "VchrType_Id", "VchrType_Title", "ddl_VoucherType");
 
             return View("VoucherEntryConsole");

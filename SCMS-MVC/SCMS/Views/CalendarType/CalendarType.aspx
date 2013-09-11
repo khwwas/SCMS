@@ -194,7 +194,7 @@
             </div>
             <div class="CustomCell" style="width: 115px; height: 30px;">
                 Title</div>
-            <input type="text" class="CustomText" style="width: 888px;" id="txt_Title" name="txt_Title"
+            <input type="text" class="CustomText" style="width: 940px;" id="txt_Title" name="txt_Title"
                 maxlength="100" />
             <div class="Clear">
             </div>

@@ -128,7 +128,7 @@ namespace SCMSDataLayer
             return _ReturnValue;
         }
 
-        public static String GetMaxVoucherCode(string ps_TableName, string ps_VoucherTypeId, string ps_VoucherTypePrefix, string ps_LocationId)
+        public static String GetMaxVoucherCode(string ps_TableName, string ps_VoucherTypeId, string ps_VoucherTypePrefix, string ps_LocationId, string ps_YearPrefix)
         {
             string _Sql = "", _ReturnValue = "";
             Int32 _CodeLength = 0, _MaxCode = 0;
@@ -160,7 +160,8 @@ namespace SCMSDataLayer
                     _Sql += " Select IsNULL( Max( SubString( IsNULL( GL_VchrMaster.VchMas_Code, 0 ), ( Len( '" + ps_VoucherTypePrefix + "' ) + Len( " + Convert.ToInt32(ps_VoucherTypeId) + " ) + Len( " + Convert.ToInt32(ps_LocationId) + ") + 1 ), 20 ) ), 0 ) + 1 ";
                     _Sql += "   From GL_VchrMaster ";
                     _Sql += "  Where ( GL_VchrMaster.VchrType_Id = '" + ps_VoucherTypeId + "' ) And ";
-                    _Sql += "        ( GL_VchrMaster.Loc_Id = '" + ps_LocationId + "' ) ";
+                    _Sql += "        ( GL_VchrMaster.Loc_Id = '" + ps_LocationId + "' ) and ";
+                    _Sql += "        ( Left( GL_VchrMaster.VchMas_Id, Len( '" + ps_YearPrefix + "' ) ) = '" + ps_YearPrefix + "' ) ";
 
                     cmd = new SqlCommand(_Sql, con);
                     _MaxCode = (Int32)cmd.ExecuteScalar();

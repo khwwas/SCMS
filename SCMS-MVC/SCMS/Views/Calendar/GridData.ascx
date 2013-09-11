@@ -24,12 +24,12 @@
             <th style="width: 10%;">
                 Title
             </th>
-            <th style="width: 10%;">
+           <%-- <th style="width: 10%;">
                 Company
             </th>
             <th style="width: 10%;">
                 Location
-            </th>
+            </th>--%>
             <th style="width: 10%;">
                 Calender Type
             </th>
@@ -49,13 +49,13 @@
             
             var lList_Data = new SCMSDataLayer.DALCalendar().GetAllRecords();
 
-            // Get location name show in list
-            List<SCMSDataLayer.DB.SETUP_Location> ListLocations = new List<SCMSDataLayer.DB.SETUP_Location>();
-            ListLocations = new SCMSDataLayer.DALLocation().GetAllLocation().ToList();
+            //// Get location name show in list
+            //List<SCMSDataLayer.DB.SETUP_Location> ListLocations = new List<SCMSDataLayer.DB.SETUP_Location>();
+            //ListLocations = new SCMSDataLayer.DALLocation().GetAllLocation().ToList();
 
-            // Get Company name show in list
-            List<SCMSDataLayer.DB.SETUP_Company> ListCompanies = new List<SCMSDataLayer.DB.SETUP_Company>();
-            ListCompanies = new SCMSDataLayer.DALCompany().GetAllCompanies().ToList();
+            //// Get Company name show in list
+            //List<SCMSDataLayer.DB.SETUP_Company> ListCompanies = new List<SCMSDataLayer.DB.SETUP_Company>();
+            //ListCompanies = new SCMSDataLayer.DALCompany().GetAllCompanies().ToList();
 
             // Get Calendar type name show in list
             List<SCMSDataLayer.DB.SETUP_CalendarType> ListCalendarTypes = new List<SCMSDataLayer.DB.SETUP_CalendarType>();
@@ -65,8 +65,8 @@
             {
                 foreach (SCMSDataLayer.DB.SETUP_Calendar lRow_Data in lList_Data)
                 {
-                    SCMSDataLayer.DB.SETUP_Company CompanyRow = ListCompanies.Where(c => c.Cmp_Id.Equals(lRow_Data.Cmp_Id)).SingleOrDefault();
-                    SCMSDataLayer.DB.SETUP_Location LocationRow = ListLocations.Where(L => L.Loc_Id.Equals(lRow_Data.Loc_Id)).SingleOrDefault();
+                    //SCMSDataLayer.DB.SETUP_Company CompanyRow = ListCompanies.Where(c => c.Cmp_Id.Equals(lRow_Data.Cmp_Id)).SingleOrDefault();
+                    //SCMSDataLayer.DB.SETUP_Location LocationRow = ListLocations.Where(L => L.Loc_Id.Equals(lRow_Data.Loc_Id)).SingleOrDefault();
                     SCMSDataLayer.DB.SETUP_CalendarType CalendarTypeRow = ListCalendarTypes.Where(C => C.CldrType_Id.Equals(lRow_Data.CldrType_Id)).SingleOrDefault();
                   
                   
@@ -86,7 +86,7 @@
                 <%=lRow_Data.Cldr_Title%>
             </td>
             
-            <td id="ddl_Company<%=lRow_Data.Cldr_Id%>" style="vertical-align: middle;">
+           <%-- <td id="ddl_Company<%=lRow_Data.Cldr_Id%>" style="vertical-align: middle;">
                 <%if (CompanyRow != null)
                   { %>
                 <%=CompanyRow.Cmp_Title%>
@@ -97,7 +97,7 @@
                   { %>
                 <%=LocationRow.Loc_Title%>
                 <%} %>
-            </td>
+            </td>--%>
             <td id="ddl_CalenderType<%=lRow_Data.Cldr_Id%>" style="vertical-align: middle;">
                 <%if (CalendarTypeRow != null)
                   { %>

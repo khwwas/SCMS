@@ -62,7 +62,7 @@
         <div class="block">
             <div id="MessageBox">
             </div>
-            <%-- <div id="div_Location" style="vertical-align: middle">
+            <%--<div id="div_Location" style="vertical-align: middle">
                 <div class="CustomCell" style="width: 200px; height: 20px; text-align: right;">
                     Location&nbsp;&nbsp;</div>
                 <%= Html.DropDownList("ddl_location", null, new { style = "width:500px; height:20px;" })%>
@@ -73,9 +73,9 @@
                     style="width: 120px; height: 35px; padding-top: 5px; color: White; font-weight: bold;
                     font-size: 11pt;" />
                 <img alt="" id="Waiting_Image" src="../../img/Ajax_Loading.gif" style="display: none;
-                    margin-left: 10" /></div>
+                    margin-left: 10" /></div>--%>
             <div class="Clear">
-            </div>--%>
+            </div>
             <div id="GridContainer">
                 <%Html.RenderPartial("GridData");%>
             </div>

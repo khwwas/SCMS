@@ -195,6 +195,7 @@ namespace SCMSDataLayer
                 _Sql += "          GL_VchrMaster.VchMas_Date, ";
                 _Sql += "          SETUP_VoucherType.VchrType_Title, ";
                 _Sql += "          GL_VchrMaster.VchMas_Status, ";
+                _Sql += "          GL_VchrMaster.VchMas_Remarks, ";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_CodeDisplay As ChrtAcc_Code, ";
                 _Sql += "          SETUP_ChartOfAccount.ChrtAcc_Title, ";
                 _Sql += "          GL_VchrDetail.VchDet_Remarks, ";

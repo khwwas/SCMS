@@ -15,6 +15,11 @@
         margin-bottom: 0;
     }
 </style>
+<div class="CustomCell" style="width: 97px; height: 30px;">
+    Location</div>
+<div class="CustomCell" style="width: 270px; height: 30px;">
+    <%= Html.DropDownList("ddl_Location", null, new { style = "width:555px;" })%>
+</div>
 <table id="VoucherEntryConsoleGrid" class="data display datatable">
     <thead>
         <tr>

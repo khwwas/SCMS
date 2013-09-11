@@ -123,6 +123,11 @@
       <DependentUpon>SCMS.dbml</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="VersionControl\01 - Create.sql" />
+    <Content Include="VersionControl\02 - SP.sql" />
+    <Content Include="VersionControl\03 - Insert.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

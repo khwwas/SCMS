@@ -437,7 +437,12 @@
                     <input type="text" class="CustomText" style="width: 220px;" id="txt_DateFrom" name="txt_DateFrom"
                         value="<%=ViewData["CurrentDate"]%>" maxlength="50" />
                 </div>
-                <input type="text" id="mydate" gldp-id="mydate" />
+                <script type="text/javascript">
+                    $('#txt_DateFrom').datepicker().on('changeDate', function (ev) {
+                        $('#txt_DateFrom').datepicker("hide");
+                    });
+                </script>
+                <%--<input type="text" id="mydate" gldp-id="mydate" />
                 <div gldp-el="mydate" style="width: 400px; height: 300px; position: absolute; top: 70px;
                     left: 100px;">
                 </div>
@@ -445,7 +450,7 @@
                     $(window).load(function () {
                         $('mydate').glDatePicker();
                     });
-                </script>
+                </script>--%>
                 &nbsp;
                 <div class="CustomCell" style="width: 140px; height: 30px;">
                     Date To</div>

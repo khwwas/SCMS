@@ -301,6 +301,8 @@ namespace SCMS.Reports.Datasets {
             
             private global::System.Data.DataColumn columnLoc_Title;
             
+            private global::System.Data.DataColumn columnVchMas_Remarks;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public VoucherDocumentDataTable() {
@@ -424,6 +426,14 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn VchMas_RemarksColumn {
+                get {
+                    return this.columnVchMas_Remarks;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -459,7 +469,7 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public VoucherDocumentRow AddVoucherDocumentRow(string VchMas_Id, string VchMas_Code, System.DateTime VchMas_Date, string VchrType_Title, string VchMas_Status, string ChrtAcc_Code, string ChrtAcc_Title, string VchDet_Remarks, double VchMas_DrAmount, double VchMas_CrAmount, string Loc_Title) {
+            public VoucherDocumentRow AddVoucherDocumentRow(string VchMas_Id, string VchMas_Code, System.DateTime VchMas_Date, string VchrType_Title, string VchMas_Status, string ChrtAcc_Code, string ChrtAcc_Title, string VchDet_Remarks, double VchMas_DrAmount, double VchMas_CrAmount, string Loc_Title, string VchMas_Remarks) {
                 VoucherDocumentRow rowVoucherDocumentRow = ((VoucherDocumentRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         VchMas_Id,
@@ -472,7 +482,8 @@ namespace SCMS.Reports.Datasets {
                         VchDet_Remarks,
                         VchMas_DrAmount,
                         VchMas_CrAmount,
-                        Loc_Title};
+                        Loc_Title,
+                        VchMas_Remarks};
                 rowVoucherDocumentRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowVoucherDocumentRow);
                 return rowVoucherDocumentRow;
@@ -506,6 +517,7 @@ namespace SCMS.Reports.Datasets {
                 this.columnVchMas_DrAmount = base.Columns["VchMas_DrAmount"];
                 this.columnVchMas_CrAmount = base.Columns["VchMas_CrAmount"];
                 this.columnLoc_Title = base.Columns["Loc_Title"];
+                this.columnVchMas_Remarks = base.Columns["VchMas_Remarks"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -533,6 +545,8 @@ namespace SCMS.Reports.Datasets {
                 base.Columns.Add(this.columnVchMas_CrAmount);
                 this.columnLoc_Title = new global::System.Data.DataColumn("Loc_Title", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnLoc_Title);
+                this.columnVchMas_Remarks = new global::System.Data.DataColumn("VchMas_Remarks", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnVchMas_Remarks);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -851,6 +865,22 @@ namespace SCMS.Reports.Datasets {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string VchMas_Remarks {
+                get {
+                    try {
+                        return ((string)(this[this.tableVoucherDocument.VchMas_RemarksColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'VchMas_Remarks\' in table \'VoucherDocument\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableVoucherDocument.VchMas_RemarksColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsVchMas_IdNull() {
                 return this.IsNull(this.tableVoucherDocument.VchMas_IdColumn);
             }
@@ -979,6 +1009,18 @@ namespace SCMS.Reports.Datasets {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetLoc_TitleNull() {
                 this[this.tableVoucherDocument.Loc_TitleColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsVchMas_RemarksNull() {
+                return this.IsNull(this.tableVoucherDocument.VchMas_RemarksColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetVchMas_RemarksNull() {
+                this[this.tableVoucherDocument.VchMas_RemarksColumn] = global::System.Convert.DBNull;
             }
         }
         

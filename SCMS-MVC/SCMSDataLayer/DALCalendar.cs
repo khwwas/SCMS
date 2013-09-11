@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SCMSDataLayer.DB;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace SCMSDataLayer
 {
-   public class DALCalendar
+    public class DALCalendar
     {
-       public int SaveRecord(SETUP_Calendar lrow_Calendar)
+        public int SaveRecord(SETUP_Calendar lrow_Calendar)
         {
             int li_ReturnValue = 0;
 
@@ -56,32 +58,6 @@ namespace SCMSDataLayer
             }
         }
 
-        public List<SETUP_Location> GetAllLocation()
-        {
-            try
-            {
-                SCMSDataContext dbSCMS = Connection.Create();
-                return dbSCMS.SETUP_Locations.Where(c => c.Loc_Active == 1).ToList();
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        public List<SETUP_Company> GetAllCompanies()
-        {
-            try
-            {
-                SCMSDataContext dbSCMS = Connection.Create();
-                return dbSCMS.SETUP_Companies.Where(c => c.Cmp_Active == 1).ToList();
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
         public int DeleteRecordById(String ps_Id)
         {
             int li_ReturnValue = 0;
@@ -99,5 +75,45 @@ namespace SCMSDataLayer
             return li_ReturnValue;
         }
 
+        public string GetCalendarPrefix_ByCurrentDate(DateTime pdt_CurrentDate)
+        {
+            SqlConnection con = new SqlConnection();
+            SqlCommand _cmd = new SqlCommand();
+            DataSet _ds = new DataSet();
+            string ls_Sql = "", ls_ReturnValue = "";
+
+            try
+            {
+                con = Connection.ReportConnection("Open");
+                if (con.State != System.Data.ConnectionState.Open)
+                {
+                    return null;
+                }
+
+                ls_Sql += " Select Cldr_Prefix ";
+                ls_Sql += "   From SETUP_Calendar ";
+                ls_Sql += "  Where Convert( DateTime, '" + pdt_CurrentDate.ToString("dd/MM/yyyy") + "', 103 ) Between ";
+                ls_Sql += "        Convert( DateTime, Convert( Char, Cldr_DateStart, 103 ), 103 ) And ";
+                ls_Sql += "        Convert( DateTime, Convert( Char, Cldr_DateEnd, 103 ), 103 ) ";
+
+                SqlDataAdapter da = new SqlDataAdapter(ls_Sql, con);
+                da.Fill(_ds, "Calendar");
+
+                if (_ds != null && _ds.Tables != null && _ds.Tables[0].Rows.Count > 0 &&
+                    _ds.Tables[0].Rows[0]["Cldr_Prefix"] != null &&
+                    _ds.Tables[0].Rows[0]["Cldr_Prefix"].ToString() != "")
+                {
+                    ls_ReturnValue = _ds.Tables[0].Rows[0]["Cldr_Prefix"].ToString();
+                }
+
+                Connection.ReportConnection("Close");
+            }
+            catch
+            {
+                ls_ReturnValue = "";
+            }
+
+            return ls_ReturnValue;
+        }
     }
 }

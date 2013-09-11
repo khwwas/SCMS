@@ -180,11 +180,12 @@ namespace SCMS.Controllers
             String VoucherType = MasterRow[3];
             String LocationId = MasterRow[4];
             String Remarks = MasterRow[5];
-            string ls_VchrTypId = "";
+            string ls_VchrTypId = "", ls_YearPrefix = "";
 
             Session["VoucherTypeForVoucherEntry"] = VoucherType;
             Session["LocationIdForVoucherEntry"] = LocationId;
             DALVoucherEntry objDalVoucherEntry = new DALVoucherEntry();
+            DALCalendar objDalCalendar = new DALCalendar();
             Int32 li_ReturnValue = 0;
             int flag = 0;
 
@@ -199,9 +200,13 @@ namespace SCMS.Controllers
                 {
                     if (DALCommon.AutoCodeGeneration("GL_VchrMaster") == 1)
                     {
-                        //VoucherMasterCode = DALCommon.GetMaximumCode("GL_VchrMaster");
-                        VoucherMasterId = DALCommon.GetMaxVoucherId(VoucherDate.Year.ToString().Substring(2, 2));
-                        VoucherMasterCode = DALCommon.GetMaxVoucherCode("GL_VchrMaster", VoucherType, Prefix, LocationId);
+                        ls_YearPrefix = objDalCalendar.GetCalendarPrefix_ByCurrentDate(VoucherDate);
+                        if (ls_YearPrefix == null && ls_YearPrefix == "")
+                        {
+                            return "";
+                        }
+                        VoucherMasterId = DALCommon.GetMaxVoucherId(ls_YearPrefix);
+                        VoucherMasterCode = DALCommon.GetMaxVoucherCode("GL_VchrMaster", VoucherType, Prefix, LocationId, ls_YearPrefix);
                     }
                 }
                 else

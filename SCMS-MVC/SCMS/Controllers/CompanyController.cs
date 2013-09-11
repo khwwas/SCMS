@@ -55,7 +55,7 @@ namespace SCMS.Controllers
                     // Audit Trail Entry Section
                     if (li_ReturnValue > 0)
                     {
-                        string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
+                        string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues("IsAuditTrail")[0];
                         if (IsAuditTrail == "1")
                         {
                             SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
@@ -65,15 +65,23 @@ namespace SCMS.Controllers
                             systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
                             systemAuditTrail.AdtTrl_Action = Action;
                             systemAuditTrail.AdtTrl_EntryId = Code;
-                            //systemAuditTrail.AdtTrl_DataDump =  ":" + Code + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "<html><b>Code   :</b> " + Code + " <br/>";
-                            systemAuditTrail.AdtTrl_DataDump += "<b>Title  :</b> " + Name + " <br/>";
-                            systemAuditTrail.AdtTrl_DataDump += "<b>Address:</b> " + Address1 + " <br/>";
-                            systemAuditTrail.AdtTrl_DataDump += "<b>Address:</b> " + Address2 + " <br/>";
-                            systemAuditTrail.AdtTrl_DataDump += "<b>Email  :</b> " + Email + " <br/>";
-                            systemAuditTrail.AdtTrl_DataDump += "<b>Phone  :</b> " + Phone + " <br/>";
-                            systemAuditTrail.AdtTrl_DataDump += "<b>Fax    :</b> " + Fax + " </html>";
-                            //systemAuditTrail.AdtTrl_DataDump += "Cmp_Active = " + 1 + ";";
+                            ////systemAuditTrail.AdtTrl_DataDump =  ":" + Code + ";";
+                            //systemAuditTrail.AdtTrl_DataDump += "<html><b>Code   :</b> " + Code + " &nbsp; <br/>";
+                            //systemAuditTrail.AdtTrl_DataDump += "<b>Title  :</b> " + Name + " &nbsp; <br/>";
+                            //systemAuditTrail.AdtTrl_DataDump += "<b>Address:</b> " + Address1 + " &nbsp; <br/>";
+                            //systemAuditTrail.AdtTrl_DataDump += "<b>Address:</b> " + Address2 + " &nbsp; <br/>";
+                            //systemAuditTrail.AdtTrl_DataDump += "<b>Email  :</b> " + Email + " &nbsp; <br/>";
+                            //systemAuditTrail.AdtTrl_DataDump += "<b>Phone  :</b> " + Phone + " &nbsp; <br/>";
+                            //systemAuditTrail.AdtTrl_DataDump += "<b>Fax    :</b> " + Fax + " </html>";
+                            ////systemAuditTrail.AdtTrl_DataDump += "Cmp_Active = " + 1 + ";";
+ 
+                            systemAuditTrail.AdtTrl_DataDump += "<html><div style=clear:both><b>Code: </b> " + Code + " &nbsp;</div> ";
+                            systemAuditTrail.AdtTrl_DataDump += "<div style=clear:both><b>Titl: </b> " + Name + " &nbsp;</div>";
+                            systemAuditTrail.AdtTrl_DataDump += "<div style=clear:both><b>Address: </b> " + Address1 + " &nbsp;</div>";
+                            systemAuditTrail.AdtTrl_DataDump += "<div style=clear:both><b>Address: </b> " + Address2 + " &nbsp;</div>";
+                            systemAuditTrail.AdtTrl_DataDump += "<div style=clear:both><b>Email: </b> " + Email + " &nbsp;</div>";
+                            systemAuditTrail.AdtTrl_DataDump += "<div style=clear:both><b>Phone: </b> " + Phone + " &nbsp;</div>";
+                            systemAuditTrail.AdtTrl_DataDump += "<div style=clear:both><b>Fax: </b> " + Fax + " </html>";
                             systemAuditTrail.AdtTrl_Date = DateTime.Now;
                             objAuditTrail.SaveRecord(systemAuditTrail);
                         }
@@ -101,7 +109,7 @@ namespace SCMS.Controllers
                 // Audit Trail Entry Section
                 if (li_ReturnValue > 0)
                 {
-                    string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
+                    string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues("IsAuditTrail")[0];
                     if (IsAuditTrail == "1")
                     {
                         SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
