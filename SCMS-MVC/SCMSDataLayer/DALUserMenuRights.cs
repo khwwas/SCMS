@@ -44,6 +44,18 @@ namespace SCMSDataLayer
             return dbSCMS.sp_GetUserVoucherTypesByUserId(UserId).ToList();
         }
 
+        public List<sp_GetUserChartOfAccountByGroupIdResult> GetUserChartOfAccountByGroupId(string GourpId)
+        {
+            SCMSDataContext dbSCMS = Connection.Create();
+            return dbSCMS.sp_GetUserChartOfAccountByGroupId(GourpId).ToList();
+        }
+
+        public List<sp_GetUserChartOfAccountByUserIdResult> GetUserChartOfAccountByUserId(string UserId)
+        {
+            SCMSDataContext dbSCMS = Connection.Create();
+            return dbSCMS.sp_GetUserChartOfAccountByUserId(UserId).ToList();
+        }
+
         public int SaveRecord(Security_UserRight pRow_NewData)
         {
             int li_ReturnValue = 0;

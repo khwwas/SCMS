@@ -21,6 +21,7 @@
         List<SCMSDataLayer.DB.sp_GetUserMenuRightsResult> MenuRights = (List<SCMSDataLayer.DB.sp_GetUserMenuRightsResult>)ViewData["UserMenuRights"];
         List<SCMSDataLayer.DB.sp_GetUserLocationsByGroupIdResult> UserLocations = (List<SCMSDataLayer.DB.sp_GetUserLocationsByGroupIdResult>)ViewData["UserLocations"];
         List<SCMSDataLayer.DB.sp_GetUserVoucherTypesByGroupIdResult> UserVoucherTypes = (List<SCMSDataLayer.DB.sp_GetUserVoucherTypesByGroupIdResult>)ViewData["UserVoucherTypes"];
+        List<SCMSDataLayer.DB.sp_GetUserChartOfAccountByGroupIdResult> UserChartOfAccountTypes = (List<SCMSDataLayer.DB.sp_GetUserChartOfAccountByGroupIdResult>)ViewData["UserChartOfAccount"];
     %>
     <div class="box round first fullpage grid" style="overflow: auto;">
         <h2>
@@ -64,6 +65,7 @@
                         <li id="liMenuRights" class="active"><a href="#MenuContainer">Menu Rights</a></li>
                         <li id="liLocationRights"><a href="#LocationContainer">Locations</a></li>
                         <li id="liVoucherTypes"><a href="#VoucherTypeContainer">Voucher Types</a></li>
+                        <li id="liChartOfAccount"><a href="#ChartOfAccountContainer">Chart Of Account</a></li>
                     </ul>
                 </div>
                 <div id="MenuContainer" style="height: 349px; overflow: auto; border: 1px solid #ccc;
@@ -214,6 +216,66 @@
                                 </td>
                                 <td style="vertical-align: middle;">
                                     <input type='checkbox' class='allowedVtype' id='<%=voucherType.VchrType_Id%>' <%=voucherType.SelectedVoucherType == "0" ? "" : "checked='checked'" %> />
+                                </td>
+                            </tr>
+                            <%} %>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="ChartOfAccountContainer" style="height: 349px; overflow: auto; border: 1px solid #ccc;
+                    margin-top: 5px; display: none;">
+                    <table id="Table1" class="display" style="width: 100%; padding: 2px;">
+                        <thead>
+                            <tr class='odd gradeX' style='line-height: 15px; cursor: pointer; text-align: left;
+                                background-color: #ccc;'>
+                                <th style="vertical-align: middle; width: 90%; padding-left: 3px;">
+                                    Chart Of Account
+                                </th>
+                                <th style="vertical-align: middle; width: 10%;">
+                                    Is Allowed
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%foreach (SCMSDataLayer.DB.sp_GetUserChartOfAccountByGroupIdResult coa in UserChartOfAccountTypes)
+                              {
+                            %>
+                            <tr class='odd gradeX' style='line-height: 15px; cursor: pointer;'>
+                                <td style='vertical-align: middle; width: 25%;'>
+                                    <%if (coa.ChrtAcc_Level == 2)
+                                      {
+                                          coa.ChrtAcc_Title = "&nbsp; &nbsp; " + coa.ChrtAcc_Title;
+                                      }
+                                    %>
+                                    <%else if (coa.ChrtAcc_Level == 3)
+                                      {
+                                          coa.ChrtAcc_Title = "&nbsp; &nbsp; &nbsp; &nbsp; " + coa.ChrtAcc_Title;
+                                      }
+                                    %>
+                                    <%else if (coa.ChrtAcc_Level == 4)
+                                      {
+                                          coa.ChrtAcc_Title = "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; " + coa.ChrtAcc_Title;
+                                      }
+                                    %>
+                                    <%else if (coa.ChrtAcc_Level == 5)
+                                      {
+                                          coa.ChrtAcc_Title = "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; " + coa.ChrtAcc_Title;
+                                      }
+                                    %>
+                                    <%else if (coa.ChrtAcc_Level == 6)
+                                      {
+                                          coa.ChrtAcc_Title = "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; " + coa.ChrtAcc_Title;
+                                      }
+                                    %>
+                                    <%else
+                                      {
+                                          coa.ChrtAcc_Title = "<b>" + coa.ChrtAcc_Title + "</b>";
+                                      }
+                                    %>
+                                    <%=coa.ChrtAcc_Title%>
+                                </td>
+                                <td style="vertical-align: middle;">
+                                    <input type='checkbox' class='allowedCOA' value='Chk_Coa<%=coa.ChrtAcc_Id %>' id='<%=coa.ChrtAcc_Id%>' <%=coa.SelectedChartOfAccount == "0" ? "" : "checked='checked'" %> />
                                 </td>
                             </tr>
                             <%} %>

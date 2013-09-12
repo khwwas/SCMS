@@ -20,9 +20,11 @@ namespace SCMS.Controllers
             List<sp_GetUserMenuRightsResult> MenuRights = new DALUserMenuRights().GetUserMenuRights("").Where(c => c.Mod_Id == SystemParameters.ModuleId && c.Mnu_Level != "0").ToList();
             List<sp_GetUserLocationsByGroupIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByGroupId("").ToList();
             List<sp_GetUserVoucherTypesByGroupIdResult> UserVouchers = new DALUserMenuRights().GetUserVoucherTypesByGroupId("").ToList();
+            List<sp_GetUserChartOfAccountByGroupIdResult> UserChartOfAccounts = new DALUserMenuRights().GetUserChartOfAccountByGroupId("").ToList();
             ViewData["UserMenuRights"] = MenuRights;
             ViewData["UserLocations"] = UserLocations;
             ViewData["UserVoucherTypes"] = UserVouchers;
+            ViewData["UserChartOfAccount"] = UserChartOfAccounts;
             return View("UserRights");
         }
 
