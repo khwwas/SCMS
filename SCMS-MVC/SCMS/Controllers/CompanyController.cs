@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using SCMSDataLayer;
 using SCMSDataLayer.DB;
+
 namespace SCMS.Controllers
 {
     public class CompanyController : Controller
@@ -19,22 +20,19 @@ namespace SCMS.Controllers
 
         public ActionResult SaveCompany(String Code, String Name, String Address1, String Address2, String Email, String Phone, String Fax)
         {
+            SETUP_Company setupCompanyRow = new SETUP_Company();
+            String ls_Action = "Edit", IsAuditTrail = "", ls_UserId = "";
+            String[] ls_Lable = new String[7], ls_Data = new String[7];
             Int32 li_ReturnValue = 0;
 
             try
             {
-                SETUP_Company setupCompanyRow = new SETUP_Company();
-                String Action = "Add";
-                if (!string.IsNullOrEmpty(Code))
-                {
-                    Action = "Edit";
-                }
-
                 if (String.IsNullOrEmpty(Code))
                 {
                     if (DALCommon.AutoCodeGeneration("SETUP_Company") == 1)
                     {
                         Code = DALCommon.GetMaximumCode("SETUP_Company");
+                        ls_Action = "Add";
                     }
                 }
 
@@ -52,41 +50,32 @@ namespace SCMS.Controllers
                     li_ReturnValue = objDalCompany.SaveCompany(setupCompanyRow);
                     ViewData["SaveResult"] = li_ReturnValue;
 
-                    // Audit Trail Entry Section
-                    if (li_ReturnValue > 0)
-                    {
-                        string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues("IsAuditTrail")[0];
-                        if (IsAuditTrail == "1")
-                        {
-                            SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
-                            DALAuditTrail objAuditTrail = new DALAuditTrail();
+                    IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues("IsAuditTrail")[0];
 
-                            systemAuditTrail.Scr_Id = 1;
-                            systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
-                            systemAuditTrail.AdtTrl_Action = Action;
-                            systemAuditTrail.AdtTrl_EntryId = Code;
-                            ////systemAuditTrail.AdtTrl_DataDump =  ":" + Code + ";";
-                            //systemAuditTrail.AdtTrl_DataDump += "<html><b>Code   :</b> " + Code + " &nbsp; <br/>";
-                            //systemAuditTrail.AdtTrl_DataDump += "<b>Title  :</b> " + Name + " &nbsp; <br/>";
-                            //systemAuditTrail.AdtTrl_DataDump += "<b>Address:</b> " + Address1 + " &nbsp; <br/>";
-                            //systemAuditTrail.AdtTrl_DataDump += "<b>Address:</b> " + Address2 + " &nbsp; <br/>";
-                            //systemAuditTrail.AdtTrl_DataDump += "<b>Email  :</b> " + Email + " &nbsp; <br/>";
-                            //systemAuditTrail.AdtTrl_DataDump += "<b>Phone  :</b> " + Phone + " &nbsp; <br/>";
-                            //systemAuditTrail.AdtTrl_DataDump += "<b>Fax    :</b> " + Fax + " </html>";
-                            ////systemAuditTrail.AdtTrl_DataDump += "Cmp_Active = " + 1 + ";";
- 
-                            systemAuditTrail.AdtTrl_DataDump += "<html><div style=clear:both><b>Code: </b> " + Code + " &nbsp;</div> ";
-                            systemAuditTrail.AdtTrl_DataDump += "<div style=clear:both><b>Titl: </b> " + Name + " &nbsp;</div>";
-                            systemAuditTrail.AdtTrl_DataDump += "<div style=clear:both><b>Address: </b> " + Address1 + " &nbsp;</div>";
-                            systemAuditTrail.AdtTrl_DataDump += "<div style=clear:both><b>Address: </b> " + Address2 + " &nbsp;</div>";
-                            systemAuditTrail.AdtTrl_DataDump += "<div style=clear:both><b>Email: </b> " + Email + " &nbsp;</div>";
-                            systemAuditTrail.AdtTrl_DataDump += "<div style=clear:both><b>Phone: </b> " + Phone + " &nbsp;</div>";
-                            systemAuditTrail.AdtTrl_DataDump += "<div style=clear:both><b>Fax: </b> " + Fax + " </html>";
-                            systemAuditTrail.AdtTrl_Date = DateTime.Now;
-                            objAuditTrail.SaveRecord(systemAuditTrail);
-                        }
+                    // Save Audit Log
+                    if (li_ReturnValue > 0 && IsAuditTrail == "1")
+                    {
+                        DALAuditLog objAuditLog = new DALAuditLog();
+
+                        ls_UserId = ((SECURITY_User)Session["user"]).User_Id;
+                        ls_Lable[0] = "Code";
+                        ls_Lable[1] = "Title";
+                        ls_Lable[2] = "Address";
+                        ls_Lable[3] = "       ";
+                        ls_Lable[4] = "Email";
+                        ls_Lable[5] = "Phone";
+                        ls_Lable[6] = "Fax";
+
+                        ls_Data[0] = Code;
+                        ls_Data[1] = Name;
+                        ls_Data[2] = Address1;
+                        ls_Data[3] = Address2;
+                        ls_Data[4] = Email;
+                        ls_Data[5] = Phone;
+                        ls_Data[6] = Fax;
+
+                        objAuditLog.SaveRecord(1, ls_UserId, ls_Action, ls_Lable, ls_Data);
                     }
-                    // Audit Trail Section End
                 }
                 return PartialView("GridData");
             }
@@ -98,7 +87,10 @@ namespace SCMS.Controllers
 
         public ActionResult DeleteCompany(String companyId)
         {
+            String ls_Action = "Delete", IsAuditTrail = "", ls_UserId = "";
+            String[] ls_Lable = new String[7], ls_Data = new String[7];
             Int32 li_ReturnValue = 0;
+
             try
             {
                 SETUP_Company CompanyRow = objDalCompany.GetCmpByCode(companyId).SingleOrDefault();
@@ -106,30 +98,31 @@ namespace SCMS.Controllers
                 li_ReturnValue = objDalCompany.DeleteCompanyByCompanyId(companyId);
                 ViewData["SaveResult"] = li_ReturnValue;
 
-                // Audit Trail Entry Section
-                if (li_ReturnValue > 0)
+                IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues("IsAuditTrail")[0];
+
+                // Delete Audit Log
+                if (li_ReturnValue > 0 && IsAuditTrail == "1")
                 {
-                    string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues("IsAuditTrail")[0];
-                    if (IsAuditTrail == "1")
-                    {
-                        SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
-                        DALAuditTrail objAuditTrail = new DALAuditTrail();
-                        systemAuditTrail.Scr_Id = 1;
-                        systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
-                        systemAuditTrail.AdtTrl_Action = "Delete";
-                        systemAuditTrail.AdtTrl_EntryId = companyId;
-                        systemAuditTrail.AdtTrl_DataDump = "Cmp_Id = " + CompanyRow.Cmp_Id + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Code = " + CompanyRow.Cmp_Code + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Title = " + CompanyRow.Cmp_Title + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Address1 = " + CompanyRow.Cmp_Address1 + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Address2 = " + CompanyRow.Cmp_Address2 + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Email = " + CompanyRow.Cmp_Email + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Phone = " + CompanyRow.Cmp_Phone + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Fax = " + CompanyRow.Cmp_Fax + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Active = " + CompanyRow.Cmp_Active + ";";
-                        systemAuditTrail.AdtTrl_Date = DateTime.Now;
-                        objAuditTrail.SaveRecord(systemAuditTrail);
-                    }
+                    DALAuditLog objAuditLog = new DALAuditLog();
+
+                    ls_UserId = ((SECURITY_User)Session["user"]).User_Id;
+                    ls_Lable[0] = "Code";
+                    ls_Lable[1] = "Title";
+                    ls_Lable[2] = "Address";
+                    ls_Lable[3] = "       ";
+                    ls_Lable[4] = "Email";
+                    ls_Lable[5] = "Phone";
+                    ls_Lable[6] = "Fax";
+
+                    ls_Data[0] = CompanyRow.Cmp_Code;
+                    ls_Data[1] = CompanyRow.Cmp_Title;
+                    ls_Data[2] = CompanyRow.Cmp_Address1;
+                    ls_Data[3] = CompanyRow.Cmp_Address2;
+                    ls_Data[4] = CompanyRow.Cmp_Email;
+                    ls_Data[5] = CompanyRow.Cmp_Phone;
+                    ls_Data[6] = CompanyRow.Cmp_Fax;
+
+                    objAuditLog.SaveRecord(1, ls_UserId, ls_Action, ls_Lable, ls_Data);
                 }
                 // Audit Trail Section End
 

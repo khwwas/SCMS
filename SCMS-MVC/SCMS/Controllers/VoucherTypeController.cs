@@ -19,22 +19,21 @@ namespace SCMS.Controllers
             return View("VoucherType");
         }
 
-        // public ActionResult SaveVoucherType(String Code, String Title, String Prefix, String LocId)
         public ActionResult SaveVoucherType(String Code, String Title, String Prefix, int CodeInitilization)
         {
-            Int32 VoucherTypeId = 0;
+            SETUP_VoucherType setupVoucherTypeRow = new SETUP_VoucherType();
+            String ls_Action = "Delete", IsAuditTrail = "", ls_UserId = "";
+            String[] ls_Lable = new String[4], ls_Data = new String[4];
+            Int32 li_ReturnValue = 0;
 
             try
             {
-                bool isEdit = true;
-                SETUP_VoucherType setupVoucherTypeRow = new SETUP_VoucherType();
-
                 if (String.IsNullOrEmpty(Code))
                 {
-                    isEdit = false;
                     if (DALCommon.AutoCodeGeneration("SETUP_VoucherType") == 1)
                     {
                         Code = DALCommon.GetMaximumCode("SETUP_VoucherType");
+                        ls_Action = "Add";
                     }
                 }
 
@@ -44,57 +43,34 @@ namespace SCMS.Controllers
                     setupVoucherTypeRow.VchrType_Code = Code;
                     setupVoucherTypeRow.VchrType_Title = Title;
                     setupVoucherTypeRow.VchrType_Prefix = Prefix;
-                    //setupVoucherTypeRow.Loc_Id = LocId;
                     setupVoucherTypeRow.VchrType_CodeInitialization = CodeInitilization;
                     setupVoucherTypeRow.VchrType_SortOrder = 1;
                     setupVoucherTypeRow.VchrType_Active = 1;
+                    li_ReturnValue = objDALVoucherType.SaveVoucherType(setupVoucherTypeRow);
 
-                    VoucherTypeId = objDALVoucherType.SaveVoucherType(setupVoucherTypeRow);
+                    ViewData["SaveResult"] = li_ReturnValue;
 
-                    //if (isEdit == false && VoucherTypeId > 0)
-                    //{
-                    //    Security_UserVoucherType userVoucherTypeRow = new Security_UserVoucherType();
-                    //    userVoucherTypeRow.UserGrp_Id = DALCommon.UserGroupId;
-                    //    if (DALCommon.UserLoginId != null)
-                    //    {
-                    //        userVoucherTypeRow.User_Id = DALCommon.UserLoginId;
-                    //    }
-                    //    userVoucherTypeRow.VchrType_Id = Code;
-                    //    DALUserMenuRights objUserMenuRights = new DALUserMenuRights();
-                    //    objUserMenuRights.SetUserVoucherTypes(userVoucherTypeRow);
-                    //}
-
-                    ViewData["SaveResult"] = VoucherTypeId;
+                    IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues("IsAuditTrail")[0];
 
                     // Audit Trail Entry Section
-                    if (VoucherTypeId > 0)
+                    if (li_ReturnValue > 0 && IsAuditTrail == "1")
                     {
-                        string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
-                        if (IsAuditTrail == "1")
-                        {
-                            SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
-                            DALAuditTrail objAuditTrail = new DALAuditTrail();
-                            systemAuditTrail.Scr_Id = 8;
-                            systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
-                            systemAuditTrail.Loc_Id = setupVoucherTypeRow.Loc_Id;
-                            systemAuditTrail.AdtTrl_Action = isEdit == true ? "Edit" : "Add";
-                            systemAuditTrail.AdtTrl_EntryId = Code;
-                            systemAuditTrail.AdtTrl_DataDump = "VchrType_Id = " + setupVoucherTypeRow.VchrType_Id + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "VchrType_Code = " + setupVoucherTypeRow.VchrType_Code + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "Cmp_Id = " + setupVoucherTypeRow.Cmp_Id + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "Loc_Id = " + setupVoucherTypeRow.Loc_Id + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "VchrType_Title = " + setupVoucherTypeRow.VchrType_Title + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "VchrType_Prefix = " + setupVoucherTypeRow.VchrType_Prefix + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "VchrType_Active = " + setupVoucherTypeRow.VchrType_Active + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "VchrType_SortOrder = " + setupVoucherTypeRow.VchrType_SortOrder + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "VchrType_CodeInitialization = " + setupVoucherTypeRow.VchrType_CodeInitialization + ";";
-                            systemAuditTrail.AdtTrl_Date = DateTime.Now;
-                            objAuditTrail.SaveRecord(systemAuditTrail);
-                        }
+                        DALAuditLog objAuditLog = new DALAuditLog();
+
+                        ls_UserId = ((SECURITY_User)Session["user"]).User_Id;
+                        ls_Lable[0] = "Code";
+                        ls_Lable[1] = "Title";
+                        ls_Lable[2] = "Prefix";
+                        ls_Lable[3] = "Code Initialization";
+
+                        ls_Data[0] = Code;
+                        ls_Data[1] = Title;
+                        ls_Data[2] = Prefix;
+                        ls_Data[3] = CodeInitilization.ToString();
+
+                        objAuditLog.SaveRecord(8, ls_UserId, ls_Action, ls_Lable, ls_Data);
                     }
                     // Audit Trail Section End
-
-
                 }
                 return PartialView("GridData");
             }
@@ -104,10 +80,12 @@ namespace SCMS.Controllers
             }
         }
 
-
         public ActionResult DeleteVoucherType(String VoucherTypeId)
         {
+            String ls_Action = "Delete", IsAuditTrail = "", ls_UserId = "";
+            String[] ls_Lable = new String[4], ls_Data = new String[4];
             Int32 li_ReturnValue = 0;
+
             try
             {
                 sp_PopulateVoucherTypeListResult VoucherTypeRow = objDALVoucherType.PopulateData().Where(c => c.VchrType_Id.Equals(VoucherTypeId)).SingleOrDefault();
@@ -115,31 +93,25 @@ namespace SCMS.Controllers
                 li_ReturnValue = objDALVoucherType.DeleteVoucherTypeById(VoucherTypeId);
                 ViewData["SaveResult"] = li_ReturnValue;
 
-                // Audit Trail Entry Section
-                if (li_ReturnValue > 0)
+                IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues("IsAuditTrail")[0];
+
+                // Delete Audit Log
+                if (li_ReturnValue > 0 && IsAuditTrail == "1")
                 {
-                    string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
-                    if (IsAuditTrail == "1")
-                    {
-                        SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
-                        DALAuditTrail objAuditTrail = new DALAuditTrail();
-                        systemAuditTrail.Scr_Id = 8;
-                        systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
-                        systemAuditTrail.Loc_Id = VoucherTypeRow.Loc_Id;
-                        systemAuditTrail.AdtTrl_Action = "Delete";
-                        systemAuditTrail.AdtTrl_EntryId = VoucherTypeId;
-                        systemAuditTrail.AdtTrl_DataDump = "VchrType_Id = " + VoucherTypeRow.VchrType_Id + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "VchrType_Code = " + VoucherTypeRow.VchrType_Code + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Id = " + VoucherTypeRow.Cmp_Id + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "Loc_Id = " + VoucherTypeRow.Loc_Id + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "VchrType_Title = " + VoucherTypeRow.VchrType_Title + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "VchrType_Prefix = " + VoucherTypeRow.VchrType_Prefix + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "VchrType_Active = " + VoucherTypeRow.VchrType_Active + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "VchrType_SortOrder = " + VoucherTypeRow.VchrType_SortOrder + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "VchrType_CodeInitialization = " + VoucherTypeRow.VchrType_CodeInitialization + ";";
-                        systemAuditTrail.AdtTrl_Date = DateTime.Now;
-                        objAuditTrail.SaveRecord(systemAuditTrail);
-                    }
+                    DALAuditLog objAuditLog = new DALAuditLog();
+
+                    ls_UserId = ((SECURITY_User)Session["user"]).User_Id;
+                    ls_Lable[0] = "Code";
+                    ls_Lable[1] = "Title";
+                    ls_Lable[2] = "Prefix";
+                    ls_Lable[3] = "Code Initialization";
+
+                    ls_Data[0] = VoucherTypeRow.VchrType_Code;
+                    ls_Data[1] = VoucherTypeRow.VchrType_Title;
+                    ls_Data[2] = VoucherTypeRow.VchrType_Prefix;
+                    ls_Data[3] = VoucherTypeRow.VchrType_CodeInitialization.ToString();
+
+                    objAuditLog.SaveRecord(8, ls_UserId, ls_Action, ls_Lable, ls_Data);
                 }
                 // Audit Trail Section End
 
