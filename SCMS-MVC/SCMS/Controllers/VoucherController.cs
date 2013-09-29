@@ -186,8 +186,11 @@ namespace SCMS.Controllers
             Session["LocationIdForVoucherEntry"] = LocationId;
             DALVoucherEntry objDalVoucherEntry = new DALVoucherEntry();
             DALCalendar objDalCalendar = new DALCalendar();
-            Int32 li_ReturnValue = 0;
             int flag = 0;
+
+            String ls_Action = "Edit", IsAuditTrail = "", ls_UserId = "";
+            String[] ls_Lable = new String[7], ls_Data = new String[7];
+            Int32 li_ReturnValue = 0, Increment = 5;
 
             try
             {
@@ -207,6 +210,7 @@ namespace SCMS.Controllers
                         }
                         VoucherMasterId = DALCommon.GetMaxVoucherId(ls_YearPrefix);
                         VoucherMasterCode = DALCommon.GetMaxVoucherCode("GL_VchrMaster", VoucherType, Prefix, LocationId, ls_YearPrefix);
+                        ls_Action = "Add";
                     }
                 }
                 else
@@ -267,49 +271,92 @@ namespace SCMS.Controllers
                 }
                 ViewData["SaveResult"] = li_ReturnValue;
 
-                // Audit Trail Entry Section
-                if (li_ReturnValue > 0)
+                IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues("IsAuditTrail")[0];
+
+                // Save Audit Log
+                if (li_ReturnValue > 0 && IsAuditTrail == "1")
                 {
-                    string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
-                    if (IsAuditTrail == "1")
+                    DALAuditLog objAuditLog = new DALAuditLog();
+
+                    ls_UserId = ((SECURITY_User)Session["user"]).User_Id;
+                    ls_Lable[0] = "Code";
+                    ls_Lable[1] = "Date";
+                    ls_Lable[2] = "Location";
+                    ls_Lable[3] = "Voucher Type";
+                    ls_Lable[4] = "Remarks";
+                    ls_Lable[5] = "Status";
+
+                    ls_Data[0] = VoucherMasterCode;
+                    ls_Data[1] = VoucherDate.ToString("dd/MM/yyyy");
+                    ls_Data[2] = LocationId;
+                    ls_Data[3] = VoucherType;
+                    ls_Data[4] = Remarks;
+                    ls_Data[5] = Status;
+
+                    foreach (GL_VchrDetail voucherDetail in VoucherDetailList)
                     {
-                        SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
-                        DALAuditTrail objAuditTrail = new DALAuditTrail();
-                        systemAuditTrail.Scr_Id = flag == 0 ? 17 : 16;
-                        systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
-                        systemAuditTrail.Loc_Id = GL_Master.Loc_Id;
-                        systemAuditTrail.VchrType_Id = GL_Master.VchrType_Id;
-                        systemAuditTrail.AdtTrl_Action = flag == 0 ? "Add" : "Edit";
-                        systemAuditTrail.AdtTrl_EntryId = VoucherMasterId;
-                        systemAuditTrail.AdtTrl_DataDump = "VchMas_Id = " + GL_Master.VchMas_Id + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "VchMas_Code = " + GL_Master.VchMas_Code + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "VchMas_Date = " + GL_Master.VchMas_Date + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Id = " + GL_Master.Cmp_Id + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "Loc_Id = " + GL_Master.Loc_Id + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "VchrType_Id = " + GL_Master.VchrType_Id + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "VchMas_Remarks = " + GL_Master.VchMas_Remarks + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "VchMas_Status = " + GL_Master.VchMas_Status + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "VchMas_EnteredBy = " + GL_Master.VchMas_EnteredBy + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "VchMas_EnteredDate = " + GL_Master.VchMas_EnteredDate + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "VchMas_ApprovedBy = " + GL_Master.VchMas_ApprovedBy + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "VchMas_ApprovedDate = " + GL_Master.VchMas_ApprovedDate + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "SyncStatus = " + GL_Master.SyncStatus + ";";
+                        Increment++;
+                        ls_Lable[Increment] = "Account Code";
+                        ls_Data[Increment] = voucherDetail.ChrtAcc_Id;
 
-                        foreach (GL_VchrDetail voucherDetail in VoucherDetailList)
-                        {
-                            systemAuditTrail.AdtTrl_DataDump += "║ VchDet_Id = " + voucherDetail.VchDet_Id + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "VchMas_Id = " + voucherDetail.VchMas_Id + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "ChrtAcc_Id = " + voucherDetail.ChrtAcc_Id + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "VchMas_DrAmount = " + voucherDetail.VchMas_DrAmount + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "VchMas_CrAmount = " + voucherDetail.VchMas_CrAmount + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "VchDet_Remarks = " + voucherDetail.VchDet_Remarks + ";";
-                        }
+                        Increment++;
+                        ls_Lable[Increment] = "Debit";
+                        ls_Data[Increment] = Convert.ToString(voucherDetail.VchMas_DrAmount);
 
-                        systemAuditTrail.AdtTrl_Date = DateTime.Now;
-                        objAuditTrail.SaveRecord(systemAuditTrail);
+                        Increment++;
+                        ls_Lable[Increment] = "Credit";
+                        ls_Data[Increment] = Convert.ToString(voucherDetail.VchMas_CrAmount);
+
+                        Increment++;
+                        ls_Lable[Increment] = "Narration";
+                        ls_Data[Increment] = voucherDetail.VchDet_Remarks;
                     }
+
+                    objAuditLog.SaveRecord(7, ls_UserId, ls_Action, ls_Lable, ls_Data);
                 }
-                // Audit Trail Section End
+                //// Audit Trail Entry Section
+                //if (li_ReturnValue > 0)
+                //{
+                //    string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
+                //    if (IsAuditTrail == "1")
+                //    {
+                //        SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
+                //        DALAuditLog objAuditTrail = new DALAuditLog();
+                //        systemAuditTrail.Scr_Id = flag == 0 ? 17 : 16;
+                //        systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
+                //        systemAuditTrail.Loc_Id = GL_Master.Loc_Id;
+                //        systemAuditTrail.VchrType_Id = GL_Master.VchrType_Id;
+                //        systemAuditTrail.AdtTrl_Action = flag == 0 ? "Add" : "Edit";
+                //        systemAuditTrail.AdtTrl_EntryId = VoucherMasterId;
+                //        systemAuditTrail.AdtTrl_DataDump = "VchMas_Id = " + GL_Master.VchMas_Id + ";";
+                //        systemAuditTrail.AdtTrl_DataDump += "VchMas_Code = " + GL_Master.VchMas_Code + ";";
+                //        systemAuditTrail.AdtTrl_DataDump += "VchMas_Date = " + GL_Master.VchMas_Date + ";";
+                //        systemAuditTrail.AdtTrl_DataDump += "Cmp_Id = " + GL_Master.Cmp_Id + ";";
+                //        systemAuditTrail.AdtTrl_DataDump += "Loc_Id = " + GL_Master.Loc_Id + ";";
+                //        systemAuditTrail.AdtTrl_DataDump += "VchrType_Id = " + GL_Master.VchrType_Id + ";";
+                //        systemAuditTrail.AdtTrl_DataDump += "VchMas_Remarks = " + GL_Master.VchMas_Remarks + ";";
+                //        systemAuditTrail.AdtTrl_DataDump += "VchMas_Status = " + GL_Master.VchMas_Status + ";";
+                //        systemAuditTrail.AdtTrl_DataDump += "VchMas_EnteredBy = " + GL_Master.VchMas_EnteredBy + ";";
+                //        systemAuditTrail.AdtTrl_DataDump += "VchMas_EnteredDate = " + GL_Master.VchMas_EnteredDate + ";";
+                //        systemAuditTrail.AdtTrl_DataDump += "VchMas_ApprovedBy = " + GL_Master.VchMas_ApprovedBy + ";";
+                //        systemAuditTrail.AdtTrl_DataDump += "VchMas_ApprovedDate = " + GL_Master.VchMas_ApprovedDate + ";";
+                //        systemAuditTrail.AdtTrl_DataDump += "SyncStatus = " + GL_Master.SyncStatus + ";";
+
+                //        foreach (GL_VchrDetail voucherDetail in VoucherDetailList)
+                //        {
+                //            systemAuditTrail.AdtTrl_DataDump += "║ VchDet_Id = " + voucherDetail.VchDet_Id + ";";
+                //            systemAuditTrail.AdtTrl_DataDump += "VchMas_Id = " + voucherDetail.VchMas_Id + ";";
+                //            systemAuditTrail.AdtTrl_DataDump += "ChrtAcc_Id = " + voucherDetail.ChrtAcc_Id + ";";
+                //            systemAuditTrail.AdtTrl_DataDump += "VchMas_DrAmount = " + voucherDetail.VchMas_DrAmount + ";";
+                //            systemAuditTrail.AdtTrl_DataDump += "VchMas_CrAmount = " + voucherDetail.VchMas_CrAmount + ";";
+                //            systemAuditTrail.AdtTrl_DataDump += "VchDet_Remarks = " + voucherDetail.VchDet_Remarks + ";";
+                //        }
+
+                //        systemAuditTrail.AdtTrl_Date = DateTime.Now;
+                //        objAuditTrail.SaveRecord(systemAuditTrail);
+                //    }
+                //}
+                //// Audit Trail Section End
 
                 //return PartialView("GridData");
                 //string result = ViewData["VoucherId"].ToString(); //+ "|" + ViewData["VoucherCode"].ToString() + "|" + ViewData["SaveResult"].ToString();

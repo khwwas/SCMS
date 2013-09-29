@@ -1079,7 +1079,7 @@ namespace SCMSDataLayer
                 //_Sql += "          SETUP_ChartOfAccount.ChrtAcc_Level ";
                 _Sql += " Order By SYSTEM_Screens.Scr_Type, ";
                 _Sql += "          SYSTEM_Screens.Scr_Id, ";
-                _Sql += "          SYSTEM_AuditTrail.AdtTrl_Action, ";
+                _Sql += "          SYSTEM_AuditTrail.AdtTrl_Date, ";
                 _Sql += "          SYSTEM_AuditTrail.AdtTrl_EntryId, ";
                 _Sql += "          SECURITY_User.User_Title ";
 

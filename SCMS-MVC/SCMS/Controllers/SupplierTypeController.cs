@@ -24,26 +24,21 @@ namespace SCMS.Controllers
 
         public ActionResult SaveRecord(String ps_Code, String ps_Title)
         {
+            SETUP_SupplierType lrow_SupplierType = new SETUP_SupplierType();
+            String ls_Action = "Edit", IsAuditTrail = "", ls_UserId = "";
+            String[] ls_Lable = new String[2], ls_Data = new String[2];
             Int32 li_ReturnValue = 0;
 
             try
             {
-                SETUP_SupplierType lrow_SupplierType = new SETUP_SupplierType();
-
-                String Action = "Add";
-                if (!string.IsNullOrEmpty(ps_Code))
-                {
-                    Action = "Edit";
-                }
-
                 if (String.IsNullOrEmpty(ps_Code))
                 {
                     if (DALCommon.AutoCodeGeneration("SETUP_SupplierType") == 1)
                     {
                         ps_Code = DALCommon.GetMaximumCode("SETUP_SupplierType");
+                        ls_Action = "Add";
                     }
                 }
-
 
                 if (!String.IsNullOrEmpty(ps_Code))
                 {
@@ -54,33 +49,24 @@ namespace SCMS.Controllers
 
                     li_ReturnValue = objDalSupplierType.SaveRecord(lrow_SupplierType);
                     ViewData["SaveResult"] = li_ReturnValue;
-                }
 
-                // Audit Trail Entry Section
-                if (li_ReturnValue > 0)
-                {
-                    string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
-                    if (IsAuditTrail == "1")
+                    IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues("IsAuditTrail")[0];
+
+                    // Save Audit Log
+                    if (li_ReturnValue > 0 && IsAuditTrail == "1")
                     {
-                        SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
-                        DALAuditTrail objAuditTrail = new DALAuditTrail();
-                        systemAuditTrail.Scr_Id = 4;
-                        systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
-                        systemAuditTrail.Loc_Id = lrow_SupplierType.Loc_Id;
-                        systemAuditTrail.AdtTrl_Action = Action;
-                        systemAuditTrail.AdtTrl_EntryId = ps_Code;
-                        systemAuditTrail.AdtTrl_DataDump = "SuppType_Id = " + lrow_SupplierType.SuppType_Id + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "SuppType_Code = " + lrow_SupplierType.SuppType_Code + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Id = " + lrow_SupplierType.Cmp_Id + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "Loc_Id = " + lrow_SupplierType.Loc_Id + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "SuppType_Title = " + lrow_SupplierType.SuppType_Title + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "SuppType_Active = " + lrow_SupplierType.SuppType_Active + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "SuppType_SortOrder = " + lrow_SupplierType.SuppType_SortOrder + ";";
-                        systemAuditTrail.AdtTrl_Date = DateTime.Now;
-                        objAuditTrail.SaveRecord(systemAuditTrail);
+                        DALAuditLog objAuditLog = new DALAuditLog();
+
+                        ls_UserId = ((SECURITY_User)Session["user"]).User_Id;
+                        ls_Lable[0] = "Code";
+                        ls_Lable[1] = "Title";
+
+                        ls_Data[0] = ps_Code;
+                        ls_Data[1] = ps_Title;
+
+                        objAuditLog.SaveRecord(4, ls_UserId, ls_Action, ls_Lable, ls_Data);
                     }
                 }
-                // Audit Trail Section End
 
                 return PartialView("GridData");
             }
@@ -90,53 +76,10 @@ namespace SCMS.Controllers
             }
         }
 
-        //public ActionResult SaveRecord(HttpContext context)
-        //{
-        //    var data = context.Request;
-        //    var sr = new StreamReader(data.InputStream);
-        //    var stream = sr.ReadToEnd();
-        //    var javaScriptSerializer = new JavaScriptSerializer();
-        //    var arrayOfStrings = javaScriptSerializer.Deserialize<string[]>(stream);
-        //    Int32 li_ReturnValue = 0;
-
-        //    //string json = context.Current.Request.Forms["json"];
-        //    //JavaScriptSerializer serializer = new JavaScriptSerializer();
-        //    //var urObj = serializer.Deserialize<Type>(json);
-
-        //    try
-        //    {
-        //        //SETUP_SupplierType lrow_SupplierType = new SETUP_SupplierType();
-
-        //        //if (String.IsNullOrEmpty(ps_Code))
-        //        //{
-        //        //    if (DALCommon.AutoCodeGeneration("SETUP_SupplierType") == 1)
-        //        //    {
-        //        //        ps_Code = DALCommon.GetMaximumCode("SETUP_SupplierType");
-        //        //    }
-        //        //}
-
-
-        //        //if (!String.IsNullOrEmpty(ps_Code))
-        //        //{
-        //        //    lrow_SupplierType.SuppType_Id = ps_Code;
-        //        //    lrow_SupplierType.SuppType_Code = ps_Code;
-        //        //    lrow_SupplierType.SuppType_Title = ps_Title;
-        //        //    lrow_SupplierType.SuppType_Active = 1;
-
-        //        //    li_ReturnValue = objDalSupplierType.SaveRecord(lrow_SupplierType);
-        //        //    ViewData["SaveResult"] = li_ReturnValue;
-        //        //}
-
-        //        return PartialView("GridData");
-        //    }
-        //    catch
-        //    {
-        //        return PartialView("GridData");
-        //    }
-        //}
-
         public ActionResult DeleteRecord(String _pId)
         {
+            String ls_Action = "Delete", IsAuditTrail = "", ls_UserId = "";
+            String[] ls_Lable = new String[2], ls_Data = new String[2];
             Int32 li_ReturnValue = 0;
 
             try
@@ -146,29 +89,21 @@ namespace SCMS.Controllers
                 li_ReturnValue = objDalSupplierType.DeleteRecordById(_pId);
                 ViewData["SaveResult"] = li_ReturnValue;
 
-                // Audit Trail Entry Section
-                if (li_ReturnValue > 0)
+                IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues("IsAuditTrail")[0];
+
+                // Delete Audit Log
+                if (li_ReturnValue > 0 && IsAuditTrail == "1")
                 {
-                    string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
-                    if (IsAuditTrail == "1")
-                    {
-                        SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
-                        DALAuditTrail objAuditTrail = new DALAuditTrail();
-                        systemAuditTrail.Scr_Id = 4;
-                        systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
-                        systemAuditTrail.Loc_Id = SupplierTypeRow.Loc_Id;
-                        systemAuditTrail.AdtTrl_Action = "Delete";
-                        systemAuditTrail.AdtTrl_EntryId = _pId;
-                        systemAuditTrail.AdtTrl_DataDump = "SuppType_Id = " + SupplierTypeRow.SuppType_Id + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "SuppType_Code = " + SupplierTypeRow.SuppType_Code + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Id = " + SupplierTypeRow.Cmp_Id + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "Loc_Id = " + SupplierTypeRow.Loc_Id + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "SuppType_Title = " + SupplierTypeRow.SuppType_Title + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "SuppType_Active = " + SupplierTypeRow.SuppType_Active + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "SuppType_SortOrder = " + SupplierTypeRow.SuppType_SortOrder + ";";
-                        systemAuditTrail.AdtTrl_Date = DateTime.Now;
-                        objAuditTrail.SaveRecord(systemAuditTrail);
-                    }
+                    DALAuditLog objAuditLog = new DALAuditLog();
+
+                    ls_UserId = ((SECURITY_User)Session["user"]).User_Id;
+                    ls_Lable[0] = "Code";
+                    ls_Lable[1] = "Title";
+                    
+                    ls_Data[0] = SupplierTypeRow.SuppType_Code;
+                    ls_Data[1] = SupplierTypeRow.SuppType_Title;
+                   
+                    objAuditLog.SaveRecord(4, ls_UserId, ls_Action, ls_Lable, ls_Data);
                 }
                 // Audit Trail Section End
 

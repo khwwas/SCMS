@@ -23,23 +23,19 @@ namespace SCMS.Controllers
         // Insertion
         public ActionResult SaveRecord(String ps_Code, String Location, String Bank, String Title)
         {
+            SETUP_BankAccount lrow_BankAccount = new SETUP_BankAccount();
+            String ls_Action = "Edit", IsAuditTrail = "", ls_UserId = "";
+            String[] ls_Lable = new String[3], ls_Data = new String[3];
             Int32 li_ReturnValue = 0;
 
             try
             {
-                SETUP_BankAccount lrow_BankAccount = new SETUP_BankAccount();
-
-                String Action = "Add";
-                if (!string.IsNullOrEmpty(ps_Code))
-                {
-                    Action = "Edit";
-                }
-
                 if (String.IsNullOrEmpty(ps_Code))
                 {
                     if (DALCommon.AutoCodeGeneration("SETUP_BankAccount") == 1)
                     {
                         ps_Code = DALCommon.GetMaximumCode("SETUP_BankAccount");
+                        ls_Action = "Add";
                     }
                 }
 
@@ -56,35 +52,25 @@ namespace SCMS.Controllers
                     li_ReturnValue = objDalBankAccount.SaveRecord(lrow_BankAccount);
                     ViewData["SaveResult"] = li_ReturnValue;
 
+                    IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
+
                     // Audit Trail Entry Section
-                    if (li_ReturnValue > 0)
+                    if (li_ReturnValue > 0 && IsAuditTrail == "1")
                     {
-                        string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
-                        if (IsAuditTrail == "1")
-                        {
-                            SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
-                            DALAuditTrail objAuditTrail = new DALAuditTrail();
-                            systemAuditTrail.Scr_Id = 12;
-                            systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
-                            systemAuditTrail.Loc_Id = lrow_BankAccount.Loc_Id;
-                            systemAuditTrail.AdtTrl_Action = Action;
-                            systemAuditTrail.AdtTrl_EntryId = ps_Code;
-                            systemAuditTrail.AdtTrl_DataDump = "BankAcc_Id = " + lrow_BankAccount.BankAcc_Id + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "BankAcc_Code = " + lrow_BankAccount.BankAcc_Code + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "Cmp_Id = " + lrow_BankAccount.Cmp_Id + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "Loc_Id = " + lrow_BankAccount.Loc_Id + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "Bank_Id = " + lrow_BankAccount.Bank_Id + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "BankAcc_Title = " + lrow_BankAccount.BankAcc_Title + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "BankAcc_Active = " + lrow_BankAccount.BankAcc_Active + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "BankAcc_SortOrder = " + lrow_BankAccount.BankAcc_SortOrder + ";";
-                            systemAuditTrail.AdtTrl_Date = DateTime.Now;
-                            objAuditTrail.SaveRecord(systemAuditTrail);
-                        }
+                        DALAuditLog objAuditLog = new DALAuditLog();
+
+                        ls_UserId = ((SECURITY_User)Session["user"]).User_Id;
+                        ls_Lable[0] = "Code";
+                        ls_Lable[1] = "Title";
+                        ls_Lable[2] = "Bank";
+
+                        ls_Data[0] = ps_Code;
+                        ls_Data[1] = Title;
+                        ls_Data[2] = Bank;
+
+                        objAuditLog.SaveRecord(12, ls_UserId, ls_Action, ls_Lable, ls_Data);
                     }
-                    // Audit Trail Section End
-
                 }
-
                 return PartialView("GridData");
             }
             catch
@@ -95,6 +81,8 @@ namespace SCMS.Controllers
 
         public ActionResult DeleteRecord(String _pId)
         {
+            String ls_Action = "Delete", IsAuditTrail = "", ls_UserId = "";
+            String[] ls_Lable = new String[3], ls_Data = new String[3];
             Int32 li_ReturnValue = 0;
 
             try
@@ -103,30 +91,23 @@ namespace SCMS.Controllers
                 li_ReturnValue = objDalBankAccount.DeleteRecordById(_pId);
                 ViewData["SaveResult"] = li_ReturnValue;
 
-                // Audit Trail Entry Section
-                if (li_ReturnValue > 0)
+                IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues("IsAuditTrail")[0];
+
+                // Delete Audit Log
+                if (li_ReturnValue > 0 && IsAuditTrail == "1")
                 {
-                    string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
-                    if (IsAuditTrail == "1")
-                    {
-                        SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
-                        DALAuditTrail objAuditTrail = new DALAuditTrail();
-                        systemAuditTrail.Scr_Id = 12;
-                        systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
-                        systemAuditTrail.Loc_Id = BankRow.Loc_Id;
-                        systemAuditTrail.AdtTrl_Action = "Delete";
-                        systemAuditTrail.AdtTrl_EntryId = _pId;
-                        systemAuditTrail.AdtTrl_DataDump = "BankAcc_Id = " + BankRow.BankAcc_Id + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "BankAcc_Code = " + BankRow.BankAcc_Code + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Id = " + BankRow.Cmp_Id + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "Loc_Id = " + BankRow.Loc_Id + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "Bank_Id = " + BankRow.Bank_Id + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "BankAcc_Title = " + BankRow.BankAcc_Title + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "BankAcc_Active = " + BankRow.BankAcc_Active + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "BankAcc_SortOrder = " + BankRow.BankAcc_SortOrder + ";";
-                        systemAuditTrail.AdtTrl_Date = DateTime.Now;
-                        objAuditTrail.SaveRecord(systemAuditTrail);
-                    }
+                    DALAuditLog objAuditLog = new DALAuditLog();
+
+                    ls_UserId = ((SECURITY_User)Session["user"]).User_Id;
+                    ls_Lable[0] = "Code";
+                    ls_Lable[1] = "Title";
+                    ls_Lable[2] = "Bank";
+
+                    ls_Data[0] = BankRow.BankAcc_Code;
+                    ls_Data[1] = BankRow.BankAcc_Title;
+                    ls_Data[2] = BankRow.Bank_Id;
+
+                    objAuditLog.SaveRecord(12, ls_UserId, ls_Action, ls_Lable, ls_Data);
                 }
                 // Audit Trail Section End
 

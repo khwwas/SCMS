@@ -23,23 +23,19 @@ namespace SCMS.Controllers
         // Insertion
         public ActionResult SaveRecord(String ps_Code, String Title)
         {
+            SETUP_CalendarType lrow_CalendarType = new SETUP_CalendarType();
+            String ls_Action = "Edit", IsAuditTrail = "", ls_UserId = "";
+            String[] ls_Lable = new String[2], ls_Data = new String[2];
             Int32 li_ReturnValue = 0;
 
             try
             {
-                SETUP_CalendarType lrow_CalendarType = new SETUP_CalendarType();
-
-                String Action = "Add";
-                if (!string.IsNullOrEmpty(ps_Code))
-                {
-                    Action = "Edit";
-                }
-
                 if (String.IsNullOrEmpty(ps_Code))
                 {
                     if (DALCommon.AutoCodeGeneration("SETUP_CalendarType") == 1)
                     {
                         ps_Code = DALCommon.GetMaximumCode("SETUP_CalendarType");
+                        ls_Action = "Add";
                     }
                 }
 
@@ -49,41 +45,27 @@ namespace SCMS.Controllers
                     lrow_CalendarType.CldrType_Id = ps_Code;
                     lrow_CalendarType.CldrType_Code = ps_Code;
                     lrow_CalendarType.CldrType_Title = Title;
-                    //lrow_CalendarType.Cmp_Id = Comapany;
-                    //lrow_CalendarType.Loc_Id = Location;
-                    //lrow_CalendarType.CldrType_Level = Level;
                     lrow_CalendarType.CldrType_Active = 1;
 
                     li_ReturnValue = objDalCalendarType.SaveRecord(lrow_CalendarType);
                     ViewData["SaveResult"] = li_ReturnValue;
 
-                    // Audit Trail Entry Section
-                    if (li_ReturnValue > 0)
-                    {
-                        string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
-                        if (IsAuditTrail == "1")
-                        {
-                            SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
-                            DALAuditTrail objAuditTrail = new DALAuditTrail();
-                            systemAuditTrail.Scr_Id = 13;
-                            systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
-                            systemAuditTrail.Loc_Id = lrow_CalendarType.Loc_Id;
-                            systemAuditTrail.AdtTrl_Action = Action;
-                            systemAuditTrail.AdtTrl_EntryId = ps_Code;
-                            systemAuditTrail.AdtTrl_DataDump = "CldrType_Id = " + lrow_CalendarType.CldrType_Id + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "CldrType_Code = " + lrow_CalendarType.CldrType_Code + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "Cmp_Id = " + lrow_CalendarType.Cmp_Id + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "Loc_Id = " + lrow_CalendarType.Loc_Id + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "CldrType_Title = " + lrow_CalendarType.CldrType_Title + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "CldrType_Active = " + lrow_CalendarType.CldrType_Active + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "CldrType_SortOrder = " + lrow_CalendarType.CldrType_SortOrder + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "CldrType_Level = " + lrow_CalendarType.CldrType_Level + ";";
-                            systemAuditTrail.AdtTrl_Date = DateTime.Now;
-                            objAuditTrail.SaveRecord(systemAuditTrail);
-                        }
-                    }
-                    // Audit Trail Section End
+                    IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues("IsAuditTrail")[0];
 
+                    // Save Audit Log
+                    if (li_ReturnValue > 0 && IsAuditTrail == "1")
+                    {
+                        DALAuditLog objAuditLog = new DALAuditLog();
+
+                        ls_UserId = ((SECURITY_User)Session["user"]).User_Id;
+                        ls_Lable[0] = "Code";
+                        ls_Lable[1] = "Title";
+                       
+                        ls_Data[0] = ps_Code;
+                        ls_Data[1] = Title;
+                        
+                        objAuditLog.SaveRecord(13, ls_UserId, ls_Action, ls_Lable, ls_Data);
+                    }
                 }
 
                 return PartialView("GridData");
@@ -94,47 +76,10 @@ namespace SCMS.Controllers
             }
         }
 
-        //public ActionResult SaveRecord(String ps_Code, String Comapany, String Location, String Title, int Level)
-        //{
-        //    Int32 li_ReturnValue = 0;
-
-        //    try
-        //    {
-        //        SETUP_CalendarType lrow_CalendarType = new SETUP_CalendarType();
-
-        //        if (String.IsNullOrEmpty(ps_Code))
-        //        {
-        //            if (DALCommon.AutoCodeGeneration("SETUP_CalendarType") == 1)
-        //            {
-        //                ps_Code = DALCommon.GetMaximumCode("SETUP_CalendarType");
-        //            }
-        //        }
-
-
-        //        if (!String.IsNullOrEmpty(ps_Code))
-        //        {
-        //            lrow_CalendarType.CldrType_Id = ps_Code;
-        //            lrow_CalendarType.CldrType_Code = ps_Code;
-        //            lrow_CalendarType.CldrType_Title = Title;
-        //            lrow_CalendarType.Cmp_Id = Comapany;
-        //            lrow_CalendarType.Loc_Id = Location;
-        //            lrow_CalendarType.CldrType_Level = Level;
-        //            lrow_CalendarType.CldrType_Active = 1;
-
-        //            li_ReturnValue = objDalCalendarType.SaveRecord(lrow_CalendarType);
-        //            ViewData["SaveResult"] = li_ReturnValue;
-        //        }
-
-        //        return PartialView("GridData");
-        //    }
-        //    catch
-        //    {
-        //        return PartialView("GridData");
-        //    }
-        //}
-
-        public ActionResult DeleteRecord(String _pId)
+         public ActionResult DeleteRecord(String _pId)
         {
+            String ls_Action = "Delete", IsAuditTrail = "", ls_UserId = "";
+            String[] ls_Lable = new String[2], ls_Data = new String[2];
             Int32 li_ReturnValue = 0;
 
             try
@@ -144,30 +89,21 @@ namespace SCMS.Controllers
                 li_ReturnValue = objDalCalendarType.DeleteRecordById(_pId);
                 ViewData["SaveResult"] = li_ReturnValue;
 
-                // Audit Trail Entry Section
-                if (li_ReturnValue > 0)
+                IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues("IsAuditTrail")[0];
+
+                // Delete Audit Log
+                if (li_ReturnValue > 0 && IsAuditTrail == "1")
                 {
-                    string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
-                    if (IsAuditTrail == "1")
-                    {
-                        SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
-                        DALAuditTrail objAuditTrail = new DALAuditTrail();
-                        systemAuditTrail.Scr_Id = 13;
-                        systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
-                        systemAuditTrail.Loc_Id = CalendarTypeRow.Loc_Id;
-                        systemAuditTrail.AdtTrl_Action = "Delete";
-                        systemAuditTrail.AdtTrl_EntryId = _pId;
-                        systemAuditTrail.AdtTrl_DataDump = "CldrType_Id = " + CalendarTypeRow.CldrType_Id + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "CldrType_Code = " + CalendarTypeRow.CldrType_Code + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Id = " + CalendarTypeRow.Cmp_Id + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "Loc_Id = " + CalendarTypeRow.Loc_Id + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "CldrType_Title = " + CalendarTypeRow.CldrType_Title + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "CldrType_Active = " + CalendarTypeRow.CldrType_Active + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "CldrType_SortOrder = " + CalendarTypeRow.CldrType_SortOrder + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "CldrType_Level = " + CalendarTypeRow.CldrType_Level + ";";
-                        systemAuditTrail.AdtTrl_Date = DateTime.Now;
-                        objAuditTrail.SaveRecord(systemAuditTrail);
-                    }
+                    DALAuditLog objAuditLog = new DALAuditLog();
+
+                    ls_UserId = ((SECURITY_User)Session["user"]).User_Id;
+                    ls_Lable[0] = "Code";
+                    ls_Lable[1] = "Title";
+
+                    ls_Data[0] = CalendarTypeRow.CldrType_Code;
+                    ls_Data[1] = CalendarTypeRow.CldrType_Title;
+                   
+                    objAuditLog.SaveRecord(13, ls_UserId, ls_Action, ls_Lable, ls_Data);
                 }
                 // Audit Trail Section End
 

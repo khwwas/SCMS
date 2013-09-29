@@ -22,20 +22,19 @@ namespace SCMS.Controllers
 
         public ActionResult SaveRecord(String ps_Code, String ps_Title, String ps_CmpId)
         {
-            bool isEdit = true;
-
+            SETUP_Location lrow_Location = new SETUP_Location();
+            String ls_Action = "Edit", IsAuditTrail = "", ls_UserId = "";
+            String[] ls_Lable = new String[3], ls_Data = new String[3];
             Int32 li_ReturnValue = 0;
 
             try
             {
-                SETUP_Location lrow_Location = new SETUP_Location();
-
                 if (String.IsNullOrEmpty(ps_Code))
                 {
-                    isEdit = false;
                     if (DALCommon.AutoCodeGeneration("SETUP_Location") == 1)
                     {
                         ps_Code = DALCommon.GetMaximumCode("SETUP_Location");
+                        ls_Action = "Add";
                     }
                 }
 
@@ -50,30 +49,25 @@ namespace SCMS.Controllers
                     li_ReturnValue = objDalLocation.SaveRecord(lrow_Location);
                     ViewData["SaveResult"] = li_ReturnValue;
 
+                    IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
+
                     // Audit Trail Entry Section
-                    if (li_ReturnValue > 0)
+                    if (li_ReturnValue > 0 && IsAuditTrail == "1")
                     {
-                        string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
-                        if (IsAuditTrail == "1")
-                        {
-                            SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
-                            DALAuditTrail objAuditTrail = new DALAuditTrail();
-                            systemAuditTrail.Scr_Id = 2;
-                            systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
-                            systemAuditTrail.AdtTrl_Action = isEdit == true ? "Edit" : "Add";
-                            systemAuditTrail.AdtTrl_EntryId = ps_Code;
-                            systemAuditTrail.AdtTrl_DataDump = "Loc_Id = " + lrow_Location.Loc_Id + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "Loc_Code = " + lrow_Location.Loc_Code + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "Cmp_Id = " + lrow_Location.Cmp_Id + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "Loc_Title = " + lrow_Location.Loc_Title + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "Loc_Active = " + lrow_Location.Loc_Active + ";";
-                            systemAuditTrail.AdtTrl_DataDump += "Loc_SortOrder = " + lrow_Location.Loc_SortOrder + ";";
-                            systemAuditTrail.AdtTrl_Date = DateTime.Now;
-                            objAuditTrail.SaveRecord(systemAuditTrail);
-                        }
+                        DALAuditLog objAuditLog = new DALAuditLog();
+
+                        ls_UserId = ((SECURITY_User)Session["user"]).User_Id;
+                        ls_Lable[0] = "Code";
+                        ls_Lable[1] = "Title";
+                        ls_Lable[2] = "Company";
+
+                        ls_Data[0] = ps_Code;
+                        ls_Data[1] = ps_Title;
+                        ls_Data[2] = ps_CmpId;
+
+                        objAuditLog.SaveRecord(2, ls_UserId, ls_Action, ls_Lable, ls_Data);
                     }
                     // Audit Trail Section End
-
                 }
 
                 return PartialView("GridData");
@@ -86,6 +80,8 @@ namespace SCMS.Controllers
 
         public ActionResult DeleteRecord(String _pId)
         {
+            String ls_Action = "Delete", IsAuditTrail = "", ls_UserId = "";
+            String[] ls_Lable = new String[3], ls_Data = new String[3];
             Int32 li_ReturnValue = 0;
 
             try
@@ -95,28 +91,23 @@ namespace SCMS.Controllers
                 li_ReturnValue = objDalLocation.DeleteRecordById(_pId);
                 ViewData["SaveResult"] = li_ReturnValue;
 
+                IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues("IsAuditTrail")[0];
 
-                // Audit Trail Entry Section
-                if (li_ReturnValue > 0)
+                // Delete Audit Log
+                if (li_ReturnValue > 0 && IsAuditTrail == "1")
                 {
-                    string IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
-                    if (IsAuditTrail == "1")
-                    {
-                        SYSTEM_AuditTrail systemAuditTrail = new SYSTEM_AuditTrail();
-                        DALAuditTrail objAuditTrail = new DALAuditTrail();
-                        systemAuditTrail.Scr_Id = 2;
-                        systemAuditTrail.User_Id = ((SECURITY_User)Session["user"]).User_Id;
-                        systemAuditTrail.AdtTrl_Action = "Delete";
-                        systemAuditTrail.AdtTrl_EntryId = _pId;
-                        systemAuditTrail.AdtTrl_DataDump = "Loc_Id = " + LocationRow.Loc_Id + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "Loc_Code = " + LocationRow.Loc_Code + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "Cmp_Id = " + LocationRow.Cmp_Id + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "Loc_Title = " + LocationRow.Loc_Title + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "Loc_Active = " + LocationRow.Loc_Active + ";";
-                        systemAuditTrail.AdtTrl_DataDump += "Loc_SortOrder = " + LocationRow.Loc_SortOrder + ";";
-                        systemAuditTrail.AdtTrl_Date = DateTime.Now;
-                        objAuditTrail.SaveRecord(systemAuditTrail);
-                    }
+                    DALAuditLog objAuditLog = new DALAuditLog();
+
+                    ls_UserId = ((SECURITY_User)Session["user"]).User_Id;
+                    ls_Lable[0] = "Code";
+                    ls_Lable[1] = "Title";
+                    ls_Lable[2] = "Company";
+
+                    ls_Data[0] = LocationRow.Loc_Code;
+                    ls_Data[1] = LocationRow.Loc_Title;
+                    ls_Data[2] = LocationRow.Cmp_Id;
+
+                    objAuditLog.SaveRecord(2, ls_UserId, ls_Action, ls_Lable, ls_Data);
                 }
                 // Audit Trail Section End
 
