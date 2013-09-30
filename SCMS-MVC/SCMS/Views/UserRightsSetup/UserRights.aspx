@@ -21,6 +21,7 @@
         List<SCMSDataLayer.DB.sp_GetUserMenuRightsResult> MenuRights = (List<SCMSDataLayer.DB.sp_GetUserMenuRightsResult>)ViewData["UserMenuRights"];
         List<SCMSDataLayer.DB.sp_GetUserLocationsByGroupIdResult> UserLocations = (List<SCMSDataLayer.DB.sp_GetUserLocationsByGroupIdResult>)ViewData["UserLocations"];
         List<SCMSDataLayer.DB.sp_GetUserVoucherTypesByGroupIdResult> UserVoucherTypes = (List<SCMSDataLayer.DB.sp_GetUserVoucherTypesByGroupIdResult>)ViewData["UserVoucherTypes"];
+        List<SCMSDataLayer.DB.sp_GetUserChartOfAccountByGroupIdResult> UserChartOfAccountTypes = (List<SCMSDataLayer.DB.sp_GetUserChartOfAccountByGroupIdResult>)ViewData["UserChartOfAccount"];
     %>
     <div class="box round first fullpage grid" style="overflow: auto;">
         <h2>
@@ -30,7 +31,7 @@
             </div>
             <input type='hidden' id='HiddenUserId' value='' />
             <div id="LeftContainer" style="width: 25%; float: left;">
-                <%=Html.DropDownList("ddl_UserGroups", null,"Select User Group", new { @style = "width:330px;", @onchange = "FilterUsersByGroup(this.value)" })%>
+                <%=Html.DropDownList("ddl_UserGroups", null, new { @style = "width:330px;", @onchange = "FilterUsersByGroup(this.value,'0')" })%>
                 <div style="clear: both;">
                 </div>
                 <div id="UserContainer" style="overflow: auto; height: 350px; width: 100%; border: 1px solid #ccc;">
@@ -64,6 +65,7 @@
                         <li id="liMenuRights" class="active"><a href="#MenuContainer">Menu Rights</a></li>
                         <li id="liLocationRights"><a href="#LocationContainer">Locations</a></li>
                         <li id="liVoucherTypes"><a href="#VoucherTypeContainer">Voucher Types</a></li>
+                        <li id="liChartOfAccount"><a href="#ChartOfAccountContainer">Chart Of Account</a></li>
                     </ul>
                 </div>
                 <div id="MenuContainer" style="height: 349px; overflow: auto; border: 1px solid #ccc;
@@ -220,6 +222,67 @@
                         </tbody>
                     </table>
                 </div>
+                <div id="ChartOfAccountContainer" style="height: 349px; overflow: auto; border: 1px solid #ccc;
+                    margin-top: 5px; display: none;">
+                    <table id="ChartOfAccountGrid" class="display" style="width: 100%; padding: 2px;">
+                        <thead>
+                            <tr class='odd gradeX' style='line-height: 15px; cursor: pointer; text-align: left;
+                                background-color: #ccc;'>
+                                <th style="vertical-align: middle; width: 90%; padding-left: 3px;">
+                                    Chart Of Account
+                                </th>
+                                <th style="vertical-align: middle; width: 10%;">
+                                    Is Allowed
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%foreach (SCMSDataLayer.DB.sp_GetUserChartOfAccountByGroupIdResult coa in UserChartOfAccountTypes)
+                              {
+                            %>
+                            <tr class='odd gradeX' style='line-height: 15px; cursor: pointer;'>
+                                <td style='vertical-align: middle; width: 25%;'>
+                                    <%if (coa.ChrtAcc_Level == 2)
+                                      {
+                                          coa.ChrtAcc_Title = "&nbsp; &nbsp; " + coa.ChrtAcc_Title;
+                                      }
+                                    %>
+                                    <%else if (coa.ChrtAcc_Level == 3)
+                                      {
+                                          coa.ChrtAcc_Title = "&nbsp; &nbsp; &nbsp; &nbsp; " + coa.ChrtAcc_Title;
+                                      }
+                                    %>
+                                    <%else if (coa.ChrtAcc_Level == 4)
+                                      {
+                                          coa.ChrtAcc_Title = "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; " + coa.ChrtAcc_Title;
+                                      }
+                                    %>
+                                    <%else if (coa.ChrtAcc_Level == 5)
+                                      {
+                                          coa.ChrtAcc_Title = "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; " + coa.ChrtAcc_Title;
+                                      }
+                                    %>
+                                    <%else if (coa.ChrtAcc_Level == 6)
+                                      {
+                                          coa.ChrtAcc_Title = "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; " + coa.ChrtAcc_Title;
+                                      }
+                                    %>
+                                    <%else
+                                      {
+                                          coa.ChrtAcc_Title = "<b>" + coa.ChrtAcc_Title + "</b>";
+                                      }
+                                    %>
+                                    <%=coa.ChrtAcc_Title%>
+                                </td>
+                                <td style="vertical-align: middle;">
+                                    <input type='checkbox' class='allowedCOA' value='Chk_Coa<%=coa.ChrtAcc_Id %>' id='<%=coa.ChrtAcc_Id%>'
+                                        <%=coa.SelectedChartOfAccount == "0" ? "" : "checked='checked'" %> />
+                                </td>
+                            </tr>
+                            <%} %>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div style="clear: both; border-bottom: 1px solid #ccc; margin-bottom: 5px; padding-top: 15px;">
             </div>
@@ -235,11 +298,15 @@
     </div>
     <script type="text/javascript">
 
-        SetClass();
+        //SetClass();
+        $(document).ready(function () {
+            FilterUsersByGroup($("#ddl_UserGroups").val(), '1');
+            SetDefault();
+        });
 
-        function FilterUsersByGroup(value) {
+        function FilterUsersByGroup(value, selected) {
             $("#HiddenUserId").val("");
-            var Url = "../UserRightsSetup/GetUsersByGroupId?GroupId=" + value;
+            var Url = "../UserRightsSetup/GetUsersByGroupId?GroupId=" + value + "&selected=" + selected;
             $.ajax({
                 type: "GET",
                 url: Url,
@@ -272,6 +339,7 @@
                         SelectAll();
                         GetUserLocations(GroupId, UserId);
                         GetUserVoucherTypes(GroupId, UserId);
+                        GetChartOfAccounts(GroupId, UserId);
                     },
                     error: function (rs, e) {
 
@@ -279,6 +347,32 @@
                 });
 
             });
+        }
+
+        function SetDefault() {
+
+            $("#HiddenUserId").val($("#UserGrid tr")[0].id);
+
+            var Arr = $("#HiddenUserId").val().split('|');
+            UserId = Arr[0];
+            GroupId = Arr[1];
+
+            var Url = "../UserRightsSetup/GetUserMenus?GroupId=" + GroupId + "&UserId=" + UserId;
+            $.ajax({
+                type: "GET",
+                url: Url,
+                success: function (response) {
+                    $("#MenuContainer").html(response);
+                    SelectAll();
+                    GetUserLocations(GroupId, UserId);
+                    GetUserVoucherTypes(GroupId, UserId);
+                    GetChartOfAccounts(GroupId, UserId);
+                },
+                error: function (rs, e) {
+
+                }
+            });
+
         }
 
         function GetUserLocations(GroupId, UserId) {
@@ -302,6 +396,20 @@
                 url: Url,
                 success: function (response) {
                     $("#VoucherTypeContainer").html(response);
+                },
+                error: function (rs, e) {
+
+                }
+            });
+        }
+
+        function GetChartOfAccounts(GroupId, UserId) {
+            var Url = "../UserRightsSetup/GetUserChartOfAccounts?GroupId=" + GroupId + "&UserId=" + UserId;
+            $.ajax({
+                type: "GET",
+                url: Url,
+                success: function (response) {
+                    $("#ChartOfAccountContainer").html(response);
                 },
                 error: function (rs, e) {
 
@@ -488,6 +596,60 @@
             });
         }
 
+        function SetChartOfAccounts() {
+
+            var lcnt_MessageBox = document.getElementById('MessageBox');
+            var ChartOfAccountIds = "";
+            var GroupId = "";
+            var UserId = "";
+            $(".allowedCOA:checked").each(function () {
+
+                var Id = this.id;
+
+                if (ChartOfAccountIds != "") {
+                    ChartOfAccountIds += "," + Id;
+                }
+                else {
+                    ChartOfAccountIds += Id;
+                }
+
+            });
+            if ($("#HiddenUserId").val() != "") {
+                var Arr = $("#HiddenUserId").val().split('|');
+                UserId = Arr[0];
+                GroupId = Arr[1];
+            }
+            var Url = "../UserRightsSetup/SetUserChartOfAccount?GroupId=" + GroupId + "&UserId=" + UserId + "&isGroup=false&UserChartOfAccounts=" + ChartOfAccountIds;
+            //            alert(Url);
+            //            return false;
+            document.getElementById("Waiting_Image").style.display = "block";
+            document.getElementById("btn_Save").style.display = "none";
+            $.ajax({
+                type: "GET",
+                url: Url,
+                success: function (response) {
+                    html = response;
+                    FadeIn(lcnt_MessageBox);
+                    if (response == "1") {
+                        lcnt_MessageBox.innerHTML = "<h5>Success!</h5><p>Record saved successfully.</p>";
+                        lcnt_MessageBox.setAttribute("class", "message success");
+                    }
+                    else {
+                        lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Unable to save record.</p>";
+                        lcnt_MessageBox.setAttribute("class", "message error");
+                    }
+                    document.getElementById("Waiting_Image").style.display = "none";
+                    document.getElementById("btn_Save").style.display = "block";
+                    scroll(0, 0);
+                    FadeOut(lcnt_MessageBox);
+                },
+                error: function (rs, e) {
+                    document.getElementById("Waiting_Image").style.display = "none";
+                    document.getElementById("btn_Save").style.display = "block";
+                }
+            });
+        }
+
         $("#InnerTab li").click(function () {
             $($(this).parent().find(".active").find("a").attr("href")).hide();
             $(this).parent().find(".active").removeClass("active");
@@ -504,7 +666,9 @@
             if (this.id == "liVoucherTypes") {
                 $("#btn_Save").attr("onclick", "SetVoucherTypes()");
             }
-
+            if (this.id == "liChartOfAccount") {
+                $("#btn_Save").attr("onclick", "SetChartOfAccounts()");
+            }
         });
 
 

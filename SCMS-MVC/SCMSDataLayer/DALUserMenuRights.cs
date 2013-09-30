@@ -44,6 +44,18 @@ namespace SCMSDataLayer
             return dbSCMS.sp_GetUserVoucherTypesByUserId(UserId).ToList();
         }
 
+        public List<sp_GetUserChartOfAccountByGroupIdResult> GetUserChartOfAccountByGroupId(string GourpId)
+        {
+            SCMSDataContext dbSCMS = Connection.Create();
+            return dbSCMS.sp_GetUserChartOfAccountByGroupId(GourpId).ToList();
+        }
+
+        public List<sp_GetUserChartOfAccountByUserIdResult> GetUserChartOfAccountByUserId(string UserId)
+        {
+            SCMSDataContext dbSCMS = Connection.Create();
+            return dbSCMS.sp_GetUserChartOfAccountByUserId(UserId).ToList();
+        }
+
         public int SaveRecord(Security_UserRight pRow_NewData)
         {
             int li_ReturnValue = 0;
@@ -92,6 +104,24 @@ namespace SCMSDataLayer
                 dbSCMS.Security_UserVoucherTypes.InsertOnSubmit(pRow_NewData);
                 dbSCMS.SubmitChanges();
                 li_ReturnValue = Convert.ToInt32(pRow_NewData.UserVchrTyp_Id);
+            }
+            catch
+            {
+                return 0;
+            }
+
+            return li_ReturnValue;
+        }
+
+        public int SetUserChartOfAccount(Security_UserChartOfAccount pRow_NewData)
+        {
+            int li_ReturnValue = 0;
+            try
+            {
+                SCMSDataContext dbSCMS = Connection.Create();
+                dbSCMS.Security_UserChartOfAccounts.InsertOnSubmit(pRow_NewData);
+                dbSCMS.SubmitChanges();
+                li_ReturnValue = Convert.ToInt32(pRow_NewData.UserCOA_Id);
             }
             catch
             {
@@ -169,6 +199,30 @@ namespace SCMSDataLayer
                 else
                 {
                     li_ReturnValue = dbSCMS.ExecuteCommand("Delete From Security_UserVoucherTypes where UserGrp_Id='" + Grp_Id + "'");
+                }
+            }
+            catch
+            {
+                li_ReturnValue = -1;
+            }
+
+            return li_ReturnValue;
+        }
+
+        public int DeleteChartOfAccountsByGroupId(string Grp_Id, string UserId)
+        {
+            int li_ReturnValue = 0;
+
+            try
+            {
+                SCMSDataContext dbSCMS = Connection.Create();
+                if (UserId != null)
+                {
+                    li_ReturnValue = dbSCMS.ExecuteCommand("Delete From Security_UserChartOfAccount where UserGrp_Id='" + Grp_Id + "' And User_Id='" + UserId + "'");
+                }
+                else
+                {
+                    li_ReturnValue = dbSCMS.ExecuteCommand("Delete From Security_UserChartOfAccount where UserGrp_Id='" + Grp_Id + "'");
                 }
             }
             catch
