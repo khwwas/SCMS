@@ -348,7 +348,7 @@ namespace SCMS.Controllers
         #endregion
 
         #region Audit Trial
-        public string SetParam_AuditTrail(string ps_ReportName)
+        public string SetParam_AuditTrail(string ps_ReportName, string pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo)
         {
             //string ls_Location = "";
 
@@ -380,6 +380,19 @@ namespace SCMS.Controllers
             //{
             //    Reports.ReportParameters.Location = ps_Location;
             //}
+
+            if (pi_AllDate == "1")
+            {
+                Reports.ReportParameters.AllDate = 1;
+                Reports.ReportParameters.DateFrom = pdt_DateFrom;
+                Reports.ReportParameters.DateTo = pdt_DateTo;
+            }
+            else
+            {
+                Reports.ReportParameters.AllDate = 0;
+                Reports.ReportParameters.DateFrom = pdt_DateFrom;
+                Reports.ReportParameters.DateTo = pdt_DateTo;
+            }
 
             return "OK";
         }

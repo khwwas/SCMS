@@ -3,10 +3,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Report Selection Criteria
-   
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
- <script src="<%=ResolveUrl("~/") %>Scripts/DatePicker/glDatePicker.js" type="text/javascript"></script>
+    <script src="<%=ResolveUrl("~/") %>Scripts/DatePicker/glDatePicker.js" type="text/javascript"></script>
     <script src="<%=ResolveUrl("~/") %>Scripts/DatePicker/glDatePicker.min.js" type="text/javascript"></script>
     <link href="<%=ResolveUrl("~/") %>Content/DatePicker/glDatePicker.darkneon.css" rel="stylesheet"
         type="text/css" media="screen" />
@@ -142,6 +141,11 @@
 
                 document.getElementById('div_Level').style.display = "block";
                 document.getElementById('div_Year').style.display = "block";
+            }
+            else if (ps_ReportName.toLowerCase() == "AuditTrail".toLowerCase()) {
+                document.getElementById('div_DateRange').style.display = "block";
+                document.getElementById('txt_DateFrom').disabled = true;
+                document.getElementById('txt_DateTo').disabled = true;
             }
         };
 
@@ -345,7 +349,20 @@
                          "&pi_Level=" + pcnt_Level.value + "&pi_Year=" + pcnt_Year.value;
             }
             else if (ps_ReportName.toLowerCase() == "AuditTrail".toLowerCase()) {
-                ps_Url = "../ReportSelectionCriteria/SetParam_AuditTrail?ps_ReportName=" + ps_ReportName;
+                var pcnt_AllDate = document.getElementById('chk_AllDate').checked;
+                var pcnt_DateFrom = document.getElementById('txt_DateFrom');
+                var pcnt_DateTo = document.getElementById('txt_DateTo');
+
+                if (pcnt_AllDate.toString() == "true") {
+                    li_AllDate = 1;
+                }
+                else {
+                    li_AllDate = 0;
+                }
+
+
+                ps_Url = "../ReportSelectionCriteria/SetParam_AuditTrail?ps_ReportName=" + ps_ReportName +
+                "&pi_AllDate=" + li_AllDate.toString() + "&pdt_DateFrom=" + pcnt_DateFrom.value + "&pdt_DateTo=" + pcnt_DateTo.value + "";
             };
 
             $.ajax({

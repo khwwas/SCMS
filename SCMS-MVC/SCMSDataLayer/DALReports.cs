@@ -1026,7 +1026,7 @@ namespace SCMSDataLayer
         #endregion
 
         #region Audit Trial
-        public DataSet AuditTrail()
+        public DataSet AuditTrail(int pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo)
         {
             SqlConnection con = new SqlConnection();
             SqlCommand _cmd = new SqlCommand();
@@ -1070,7 +1070,10 @@ namespace SCMSDataLayer
                 _Sql += "          SYSTEM_Screens, ";
                 _Sql += "          SECURITY_User ";
                 _Sql += "    Where ( SYSTEM_AuditTrail.Scr_Id = SYSTEM_Screens.Scr_Id ) And ";
-                _Sql += "          ( SYSTEM_AuditTrail.User_Id = SECURITY_User.User_Id )  ";
+                _Sql += "          ( SYSTEM_AuditTrail.User_Id = SECURITY_User.User_Id ) And ";
+                _Sql += "          ( " + pi_AllDate + " = 1 Or Convert( datetime, Convert( Char, SYSTEM_AuditTrail.AdtTrl_Date, 103 ), 103 ) Between ";
+                _Sql += "                                      Convert( datetime, '" + pdt_DateFrom.ToString("dd/MM/yyyy") + "', 103 ) And ";
+                _Sql += "                                      Convert( datetime, '" + pdt_DateTo.ToString("dd/MM/yyyy") + "', 103 ) ) ";
                 //_Sql += "          ( SETUP_ChartOfAccount.ChrtAcc_Level <= " + pi_Level.ToString() + " ) ";
                 //_Sql += " Group By SYSTEM_Nature.Natr_Title, ";
                 //_Sql += "          SETUP_ChartOfAccount.ChrtAcc_Code,  ";

@@ -579,12 +579,19 @@ namespace SCMS.Reports
                 {
                     _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptAuditTrail.rpt");
                     Datasets.dsAuditTrail _dsAuditTrail = new Datasets.dsAuditTrail();
+                    int li_AllDate = 0;
+                    DateTime ldt_DateFrom, ldt_Dateto;
+
                     //string ls_Location = "";
                     //int li_Level = 0, li_Year = 0;
 
                     //ls_Location = SCMS.Reports.ReportParameters.Location;
                     //li_Level = SCMS.Reports.ReportParameters.Level;
                     //li_Year = SCMS.Reports.ReportParameters.Year;
+
+                    li_AllDate = SCMS.Reports.ReportParameters.AllDate;
+                    ldt_DateFrom = SCMS.Reports.ReportParameters.DateFrom;
+                    ldt_Dateto = SCMS.Reports.ReportParameters.DateTo;
 
                     if (_dsAuditTrail.Tables.Contains("Logo"))
                     {
@@ -596,7 +603,7 @@ namespace SCMS.Reports
                         _dsAuditTrail.Tables.Remove("AuditTrail");
                     }
 
-                    _ds = _dalReports.AuditTrail();
+                    _ds = _dalReports.AuditTrail(li_AllDate, ldt_DateFrom, ldt_Dateto);
                     _dsAuditTrail.Tables.Add(_ds.Tables[0].Copy());
                     _dsAuditTrail.Tables[0].TableName = "AuditTrail";
 
