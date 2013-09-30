@@ -88,6 +88,9 @@ namespace SCMSDataLayer
             try
             {
 
+                SECURITY_User user = (SECURITY_User)System.Web.HttpContext.Current.Session["user"];
+                string UserLoginId = user.User_Id;
+                string UserGroupId = user.UsrGrp_Id;
 
                 // ChrtAcc_Type
 
@@ -95,7 +98,8 @@ namespace SCMSDataLayer
                 _Sql += "         SETUP_ChartOfAccount.ChrtAcc_Title + ' [' + SETUP_ChartOfAccount.ChrtAcc_Code + ']'  as ChrtAcc_Title ";
                 _Sql += "    From SETUP_ChartOfAccount ";
                 _Sql += "   Where ( IsNULL( SETUP_ChartOfAccount.ChrtAcc_Type, 0 ) = 2 ) ";
-                _Sql += "Order By SETUP_ChartOfAccount.ChrtAcc_Code, ";
+                _Sql += " And SETUP_ChartOfAccount.ChrtAcc_Id in (Select ChrtAcc_Id From Security_UserChartOfAccount Where UserGrp_Id =" + UserGroupId + " And User_Id = " + UserLoginId + ")";
+                _Sql += " Order By SETUP_ChartOfAccount.ChrtAcc_Code, ";
                 _Sql += "         SETUP_ChartOfAccount.ChrtAcc_Level";
 
 
