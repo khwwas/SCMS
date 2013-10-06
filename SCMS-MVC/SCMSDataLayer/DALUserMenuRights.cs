@@ -232,5 +232,70 @@ namespace SCMSDataLayer
 
             return li_ReturnValue;
         }
+
+        public int CopyUserRights(string CurrentUserId, string NewUserId, string SelectedTab)
+        {
+            try
+            {
+                SCMSDataContext dbSCMS = Connection.Create();
+                if (SelectedTab == "Menus")
+                {
+                    int GroupId = 0;
+
+                    List<Security_UserRight> currentUserMenuRights = dbSCMS.Security_UserRights.Where(c => c.UsrSec_UserId.Equals(Convert.ToInt32(CurrentUserId))).ToList();
+
+                    List<Security_UserRight> newUserMenuRights = dbSCMS.Security_UserRights.Where(c => c.UsrSec_UserId.Equals(Convert.ToInt32(NewUserId))).ToList();
+
+                    if (newUserMenuRights != null && newUserMenuRights.Count > 0)
+                    {
+                        GroupId = Convert.ToInt32(new DALUser().GetAllData().Where(c => c.User_Id.Equals(NewUserId)).SingleOrDefault().UsrGrp_Id);
+                        dbSCMS.Security_UserRights.DeleteAllOnSubmit(newUserMenuRights);
+                        dbSCMS.SubmitChanges();
+                    }
+
+                    if (currentUserMenuRights != null && currentUserMenuRights.Count > 0)
+                    {
+                        foreach (Security_UserRight userRight in currentUserMenuRights)
+                        {
+                            Security_UserRight newUserRight = new Security_UserRight();
+
+                            newUserRight.Grp_Id = userRight.Grp_Id;
+                            newUserRight.Mnu_Id = userRight.Mnu_Id;
+                            newUserRight.Mod_Id = userRight.Mod_Id;
+                            newUserRight.UsrSec_UserId = Convert.ToInt32(NewUserId).ToString();
+                            newUserRight.UsrSec_Add = userRight.UsrSec_Add;
+                            newUserRight.UsrSec_Edit = userRight.UsrSec_Edit;
+                            newUserRight.UsrSec_Delete = userRight.UsrSec_Delete;
+                            newUserRight.UsrSec_Print = userRight.UsrSec_Print;
+                            newUserRight.UsrSec_Import = userRight.UsrSec_Import;
+
+                            SaveRecord(newUserRight);
+                        }
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+                else if (SelectedTab == "Locations")
+                {
+                    return 0;
+                }
+                else if (SelectedTab == "VoucherTypes")
+                {
+                    return 0;
+                }
+                else if (SelectedTab == "ChartOfAccounts")
+                {
+                    return 0;
+                }
+
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
     }
 }

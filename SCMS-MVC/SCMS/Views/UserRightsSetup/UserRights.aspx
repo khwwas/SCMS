@@ -22,6 +22,7 @@
         List<SCMSDataLayer.DB.sp_GetUserLocationsByGroupIdResult> UserLocations = (List<SCMSDataLayer.DB.sp_GetUserLocationsByGroupIdResult>)ViewData["UserLocations"];
         List<SCMSDataLayer.DB.sp_GetUserVoucherTypesByGroupIdResult> UserVoucherTypes = (List<SCMSDataLayer.DB.sp_GetUserVoucherTypesByGroupIdResult>)ViewData["UserVoucherTypes"];
         List<SCMSDataLayer.DB.sp_GetUserChartOfAccountByGroupIdResult> UserChartOfAccountTypes = (List<SCMSDataLayer.DB.sp_GetUserChartOfAccountByGroupIdResult>)ViewData["UserChartOfAccount"];
+        List<SCMSDataLayer.DB.sp_GetUserListResult> allUsers = (List<SCMSDataLayer.DB.sp_GetUserListResult>)ViewData["AllUsers"];
     %>
     <div class="box round first fullpage grid" style="overflow: auto;">
         <h2>
@@ -31,7 +32,7 @@
             </div>
             <input type='hidden' id='HiddenUserId' value='' />
             <div id="LeftContainer" style="width: 25%; float: left;">
-                <%=Html.DropDownList("ddl_UserGroups", null, new { @style = "width:330px;", @onchange = "FilterUsersByGroup(this.value,'0')" })%>
+                <%=Html.DropDownList("ddl_UserGroups", null, new { @style = "width:330px;", @onchange = "FilterUsersByGroup(this.value,'1')" })%>
                 <div style="clear: both;">
                 </div>
                 <div id="UserContainer" style="overflow: auto; height: 350px; width: 100%; border: 1px solid #ccc;">
@@ -70,7 +71,7 @@
                 </div>
                 <div id="MenuContainer" style="height: 349px; overflow: auto; border: 1px solid #ccc;
                     margin-top: 5px;">
-                    <table id="MenuGrid" class="display" style="width: 100%; padding: 2px;">
+                    <%--<table id="MenuGrid" class="display" style="width: 100%; padding: 2px;">
                         <thead>
                             <tr class='odd gradeX' style='line-height: 15px; cursor: pointer; text-align: left;
                                 background-color: #ccc;'>
@@ -160,11 +161,11 @@
                             </tr>
                             <%} %>
                         </tbody>
-                    </table>
+                    </table>--%>
                 </div>
                 <div id="LocationContainer" style="height: 349px; overflow: auto; border: 1px solid #ccc;
                     margin-top: 5px; display: none;">
-                    <table id="LocationGrid" class="display" style="width: 100%; padding: 2px;">
+                    <%--<table id="LocationGrid" class="display" style="width: 100%; padding: 2px;">
                         <thead>
                             <tr class='odd gradeX' style='line-height: 15px; cursor: pointer; text-align: left;
                                 background-color: #ccc;'>
@@ -190,11 +191,11 @@
                             </tr>
                             <%} %>
                         </tbody>
-                    </table>
+                    </table>--%>
                 </div>
                 <div id="VoucherTypeContainer" style="height: 349px; overflow: auto; border: 1px solid #ccc;
                     margin-top: 5px; display: none;">
-                    <table id="VoucherTypeGrid" class="display" style="width: 100%; padding: 2px;">
+                    <%-- <table id="VoucherTypeGrid" class="display" style="width: 100%; padding: 2px;">
                         <thead>
                             <tr class='odd gradeX' style='line-height: 15px; cursor: pointer; text-align: left;
                                 background-color: #ccc;'>
@@ -220,19 +221,26 @@
                             </tr>
                             <%} %>
                         </tbody>
-                    </table>
+                    </table>--%>
                 </div>
                 <div id="ChartOfAccountContainer" style="height: 349px; overflow: auto; border: 1px solid #ccc;
                     margin-top: 5px; display: none;">
-                    <table id="ChartOfAccountGrid" class="display" style="width: 100%; padding: 2px;">
+                    <%--<table id="ChartOfAccountGrid" class="display" style="width: 100%; padding: 2px;">
                         <thead>
                             <tr class='odd gradeX' style='line-height: 15px; cursor: pointer; text-align: left;
                                 background-color: #ccc;'>
-                                <th style="vertical-align: middle; width: 90%; padding-left: 3px;">
+                                <th style="vertical-align: middle; width: 25%; padding-left: 3px;">
+                                    Code
+                                </th>
+                                <th style="vertical-align: middle; width: 25%; padding-left: 3px;">
                                     Chart Of Account
                                 </th>
-                                <th style="vertical-align: middle; width: 10%;">
-                                    Is Allowed
+                                <th style="vertical-align: middle; width: 25%; padding-left: 3px;">
+                                    Type
+                                </th>
+                                <th style="vertical-align: middle; width: 25%;">
+                                    <input type='checkbox' id='chk_AllCOA' style='margin-bottom: 5px; margin-right: 1px;
+                                        margin-left: 4px;' />Is Allowed
                                 </th>
                             </tr>
                         </thead>
@@ -242,37 +250,20 @@
                             %>
                             <tr class='odd gradeX' style='line-height: 15px; cursor: pointer;'>
                                 <td style='vertical-align: middle; width: 25%;'>
-                                    <%if (coa.ChrtAcc_Level == 2)
-                                      {
-                                          coa.ChrtAcc_Title = "&nbsp; &nbsp; " + coa.ChrtAcc_Title;
-                                      }
-                                    %>
-                                    <%else if (coa.ChrtAcc_Level == 3)
-                                      {
-                                          coa.ChrtAcc_Title = "&nbsp; &nbsp; &nbsp; &nbsp; " + coa.ChrtAcc_Title;
-                                      }
-                                    %>
-                                    <%else if (coa.ChrtAcc_Level == 4)
-                                      {
-                                          coa.ChrtAcc_Title = "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; " + coa.ChrtAcc_Title;
-                                      }
-                                    %>
-                                    <%else if (coa.ChrtAcc_Level == 5)
-                                      {
-                                          coa.ChrtAcc_Title = "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; " + coa.ChrtAcc_Title;
-                                      }
-                                    %>
-                                    <%else if (coa.ChrtAcc_Level == 6)
-                                      {
-                                          coa.ChrtAcc_Title = "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; " + coa.ChrtAcc_Title;
-                                      }
-                                    %>
-                                    <%else
-                                      {
-                                          coa.ChrtAcc_Title = "<b>" + coa.ChrtAcc_Title + "</b>";
-                                      }
-                                    %>
+                                    <%=coa.ChrtAcc_CodeDisplay%>
+                                </td>
+                                <td style='vertical-align: middle; width: 25%;'>
                                     <%=coa.ChrtAcc_Title%>
+                                </td>
+                                <td style='vertical-align: middle; width: 25%;'>
+                                    <%if (coa.ChrtAcc_Type == 1)
+                                      {
+                                          Response.Write("Group");
+                                      }
+                                      else
+                                      {
+                                          Response.Write("Detail");
+                                      } %>
                                 </td>
                                 <td style="vertical-align: middle;">
                                     <input type='checkbox' class='allowedCOA' value='Chk_Coa<%=coa.ChrtAcc_Id %>' id='<%=coa.ChrtAcc_Id%>'
@@ -281,13 +272,16 @@
                             </tr>
                             <%} %>
                         </tbody>
-                    </table>
+                    </table>--%>
                 </div>
             </div>
             <div style="clear: both; border-bottom: 1px solid #ccc; margin-bottom: 5px; padding-top: 15px;">
             </div>
             <div style="float: right">
                 <div style="float: left; margin-right: 5px;">
+                    <input id="btn_Copy" type="button" value="Copy" class="btn btn-blue" onclick="CopyUserRights();"
+                        style="width: 90px; height: 35px; padding-top: 5px; color: White; font-weight: bold;
+                        font-size: 11pt;" />
                     <input id="btn_Save" type="button" value="Save" class="btn btn-blue" onclick="SaveRecord();"
                         style="width: 90px; height: 35px; padding-top: 5px; color: White; font-weight: bold;
                         font-size: 11pt;" />
@@ -296,12 +290,60 @@
             </div>
         </div>
     </div>
+    <div id="popup" style="display: none; background: #FFF; border-radius: 5px 5px 5px 5px;
+        -moz-border-radius: 5px 5px 5px 5px; width: 500px; padding: 10px;">
+        <div id="PopUpContent">
+            <div style="text-align: center; border-bottom: 1px solid #ccc;">
+                <h6>
+                    Select user to copy rights from the previous selected user</h6>
+            </div>
+            <table id="CopyUsers" class=" display" style="width: 100%; padding: 2px; margin-bottom: 5px;">
+                <tbody>
+                    <%foreach (SCMSDataLayer.DB.sp_GetUserListResult user in allUsers)
+                      { %>
+                    <tr id='<%=user.User_Id%>' class='odd gradeX' style='line-height: 15px; cursor: pointer;'
+                        onclick='SaveCopyRights(this.id);'>
+                        <td style="vertical-align: middle; width: 25%;">
+                            <%=user.User_Code %>
+                        </td>
+                        <td style="vertical-align: middle; width: 35%;">
+                            <%=user.User_Title %>
+                        </td>
+                        <td style="vertical-align: middle; width: 30%;">
+                            <%=user.UsrGrp_Title %>
+                        </td>
+                        <td style="vertical-align: middle; text-align: right; padding-right: 3px;">
+                        </td>
+                    </tr>
+                    <%} %>
+                </tbody>
+            </table>
+            <input type="hidden" id="txt_CurrentTab" value="Menus" />
+            <div style="width: auto; float: right; margin-right: 5px;">
+                <input id="btn_Close" type="button" value="Cancel" class="btn btn-red" style="width: 80px;
+                    height: 30px; padding-top: 5px; color: White; font-weight: bold; font-size: 11pt;" />
+            </div>
+        </div>
+        <div style="display: none; text-align: center;" id="wait">
+            <h4>
+                Your request is in progress, Please Wait....</h4>
+            <img src="../../img/ajaxloaderlarge.gif" width="120px" />
+        </div>
+    </div>
     <script type="text/javascript">
-
+        function CopyUserRights() {
+            $('#popup').lightbox_me({
+                centered: true,
+                closeClick: false,
+                closeEsc: false,
+                closeSelector: ".btn-red"
+            });
+            e.preventDefault();
+        }
         //SetClass();
         $(document).ready(function () {
             FilterUsersByGroup($("#ddl_UserGroups").val(), '1');
-            SetDefault();
+            //SetDefault();
         });
 
         function FilterUsersByGroup(value, selected) {
@@ -313,6 +355,7 @@
                 success: function (response) {
                     $("#UserContainer").html(response);
                     SetClass();
+                    SetDefault();
                 },
                 error: function (rs, e) {
 
@@ -337,6 +380,7 @@
                     success: function (response) {
                         $("#MenuContainer").html(response);
                         SelectAll();
+                        //SelectAllCOA();
                         GetUserLocations(GroupId, UserId);
                         GetUserVoucherTypes(GroupId, UserId);
                         GetChartOfAccounts(GroupId, UserId);
@@ -364,6 +408,7 @@
                 success: function (response) {
                     $("#MenuContainer").html(response);
                     SelectAll();
+                    //SelectAllCOA();
                     GetUserLocations(GroupId, UserId);
                     GetUserVoucherTypes(GroupId, UserId);
                     GetChartOfAccounts(GroupId, UserId);
@@ -428,6 +473,12 @@
             });
         }
         SelectAll();
+
+        function SelectAllCOA(obj) {
+            // alert(obj.checked);
+            $(".allowedCOA").prop('checked', obj.checked);
+        }
+        //SelectAllCOA();
 
         function SaveRecord() {
 
@@ -619,14 +670,15 @@
                 UserId = Arr[0];
                 GroupId = Arr[1];
             }
-            var Url = "../UserRightsSetup/SetUserChartOfAccount?GroupId=" + GroupId + "&UserId=" + UserId + "&isGroup=false&UserChartOfAccounts=" + ChartOfAccountIds;
-            //            alert(Url);
-            //            return false;
+            //var Url = "../UserRightsSetup/SetUserChartOfAccount?GroupId=" + GroupId + "&UserId=" + UserId + "&isGroup=false&UserChartOfAccounts=" + ChartOfAccountIds;
+            //alert(Url);
+            //return false;
             document.getElementById("Waiting_Image").style.display = "block";
             document.getElementById("btn_Save").style.display = "none";
             $.ajax({
-                type: "GET",
-                url: Url,
+                type: "POST",
+                url: "UserRightsSetup/SetUserChartOfAccount",
+                data: { GroupId: GroupId, UserId: UserId, isGroup: false, UserChartOfAccounts: ChartOfAccountIds },
                 success: function (response) {
                     html = response;
                     FadeIn(lcnt_MessageBox);
@@ -659,18 +711,72 @@
             $("#btn_Save").removeAttr("onclick");
             if (this.id == "liMenuRights") {
                 $("#btn_Save").attr("onclick", "SaveRecord()");
+                $("#txt_CurrentTab").val("Menus");
             }
             if (this.id == "liLocationRights") {
                 $("#btn_Save").attr("onclick", "SetLocations()");
+                $("#txt_CurrentTab").val("Locations");
             }
             if (this.id == "liVoucherTypes") {
                 $("#btn_Save").attr("onclick", "SetVoucherTypes()");
+                $("#txt_CurrentTab").val("VoucherTypes");
             }
             if (this.id == "liChartOfAccount") {
                 $("#btn_Save").attr("onclick", "SetChartOfAccounts()");
+                $("#txt_CurrentTab").val("ChartOfAccounts");
             }
+
         });
 
+        function SaveCopyRights(NewUserId) {
+            var lcnt_MessageBox = document.getElementById('MessageBox');
+            var Arr = $("#HiddenUserId").val().split('|');
+            var CurrentUserId = Arr[0];
+            var GroupId = Arr[1];
+            var SelectedTab = $("#txt_CurrentTab").val();
+
+            var Url = "../UserRightsSetup/CopyUserRights?CurrentUserId=" + CurrentUserId + "&NewUserId=" + NewUserId + "&SelectedTab=" + SelectedTab;
+            //return false;
+            $("#PopUpContent").hide();
+            $("#wait").show();
+
+            $.ajax({
+                type: "GET",
+                url: Url,
+                success: function (response) {
+                    //html = response;
+                    if (response == "1") {
+                        $("#PopUpContent").show();
+                        $("#wait").hide();
+                        $("#popup").trigger('close');
+                        FadeIn(lcnt_MessageBox);
+                        //alert("OK");
+                        lcnt_MessageBox.innerHTML = "<h5>Success!</h5><p>Your request has been processed successfully.</p>";
+                        lcnt_MessageBox.setAttribute("class", "message success");
+                    }
+                    else {
+                        $("#PopUpContent").show();
+                        $("#wait").hide();
+                        $("#popup").trigger('close');
+                        FadeIn(lcnt_MessageBox);
+                        lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Sorry, the system was unable to process your request.</p>";
+                        lcnt_MessageBox.setAttribute("class", "message error");
+                    }
+                    scroll(0, 0);
+                    FadeOut(lcnt_MessageBox);
+                },
+                error: function (rs, e) {
+                    $("#PopUpContent").show();
+                    $("#wait").hide();
+                    $("#popup").trigger('close');
+                    FadeIn(lcnt_MessageBox);
+                    lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Sorry, the system was unable to process your request.</p>";
+                    lcnt_MessageBox.setAttribute("class", "message error");
+                    scroll(0, 0);
+                    FadeOut(lcnt_MessageBox);
+                }
+            });
+        }
 
     </script>
 </asp:Content>

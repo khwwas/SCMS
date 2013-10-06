@@ -21,10 +21,12 @@ namespace SCMS.Controllers
             List<sp_GetUserLocationsByGroupIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByGroupId("").ToList();
             List<sp_GetUserVoucherTypesByGroupIdResult> UserVouchers = new DALUserMenuRights().GetUserVoucherTypesByGroupId("").ToList();
             List<sp_GetUserChartOfAccountByGroupIdResult> UserChartOfAccounts = new DALUserMenuRights().GetUserChartOfAccountByGroupId("").ToList();
+            List<sp_GetUserListResult> Users = new DALUser().GetAllData().ToList();
             ViewData["UserMenuRights"] = MenuRights;
             ViewData["UserLocations"] = UserLocations;
             ViewData["UserVoucherTypes"] = UserVouchers;
             ViewData["UserChartOfAccount"] = UserChartOfAccounts;
+            ViewData["AllUsers"] = Users;
             return View("UserRights");
         }
 
@@ -199,50 +201,36 @@ namespace SCMS.Controllers
             response += "<thead>";
             response += "<tr class='odd gradeX' style='line-height: 15px; cursor: pointer; text-align: left;";
             response += "background-color: #ccc;'>";
-            response += "<th style='vertical-align: middle; width: 90%; padding-left: 3px;'>";
+            response += "<th style='vertical-align: middle; width: 25%; padding-left: 3px;'>";
+            response += " Code";
+            response += "</th>";
+            response += "<th style='vertical-align: middle; width: 25%; padding-left: 3px;'>";
             response += " Chart Of Account";
             response += "</th>";
-            response += "<th style='vertical-align: middle; width: 10%;'>";
-            response += "Is Allowed";
+            response += "<th style='vertical-align: middle; width: 25%; padding-left: 3px;'>";
+            response += " Type";
+            response += "</th>";
+            response += "<th style='vertical-align: middle; width: 25%;'>";
+            response += "<input type='checkbox' id='chk_AllCOA' onclick='SelectAllCOA(this);' style='margin-bottom:5px;margin-right:1px;margin-left:4px;' /> Is Allowed";
             response += "</th>";
             response += "</tr>";
             response += "</thead>";
             response += "<tbody>";
             foreach (SCMSDataLayer.DB.sp_GetUserChartOfAccountByUserIdResult coa in UserChartOfAccounts)
             {
-                response += " <tr class='odd gradeX' style='line-height: 15px; cursor: pointer;'>";
+                response += " <tr class='odd gradeX' style='line-height: 15px; cursor: pointer; " + (coa.ChrtAcc_Type == 1 ? "font-weight:bold" : "") + "'>";
                 response += "<td style='vertical-align: middle; width: 25%;'>";
-                if (coa.ChrtAcc_Level == 2)
-                {
-                    coa.ChrtAcc_Title = "&nbsp; &nbsp; " + coa.ChrtAcc_Title;
-                }
-                else if (coa.ChrtAcc_Level == 3)
-                {
-                    coa.ChrtAcc_Title = "&nbsp; &nbsp; &nbsp; &nbsp; " + coa.ChrtAcc_Title;
-                }
-                else if (coa.ChrtAcc_Level == 4)
-                {
-                    coa.ChrtAcc_Title = "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; " + coa.ChrtAcc_Title;
-                }
-                else if (coa.ChrtAcc_Level == 5)
-                {
-                    coa.ChrtAcc_Title = "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; " + coa.ChrtAcc_Title;
-                }
-
-                else if (coa.ChrtAcc_Level == 6)
-                {
-                    coa.ChrtAcc_Title = "&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; " + coa.ChrtAcc_Title;
-                }
-
-                else
-                {
-                    coa.ChrtAcc_Title = "<b>" + coa.ChrtAcc_Title + "</b>";
-                }
+                response += coa.ChrtAcc_CodeDisplay;
+                response += "</td>";
+                response += "<td style='vertical-align: middle; width: 25%;'>";
                 response += coa.ChrtAcc_Title;
                 response += "</td>";
+                response += "<td style='vertical-align: middle; width: 25%;'>";
+                response += coa.ChrtAcc_Type == 1 ? "Group" : "Detail";
+                response += "</td>";
                 response += "<td style='vertical-align: middle;'>";
-                response += "<input type='checkbox' class='allowedCOA' value='Chk_Coa'" + coa.ChrtAcc_Id + " id='" + coa.ChrtAcc_Id + "' ";
-                response += coa.SelectedChartOfAccount == "0" ? "" : "checked='checked'" + "/>";
+                response += "<input type='checkbox' class='allowedCOA' id='" + coa.ChrtAcc_Id + "' value='' ";
+                response += (coa.SelectedChartOfAccount == "0" ? "" : "checked='checked'") + "/>";
                 response += "</td>";
                 response += "</tr>";
             }
@@ -351,10 +339,15 @@ namespace SCMS.Controllers
             }
         }
 
-        public string SetUserChartOfAccount(string GroupId, string UserId, bool isGroup, string UserChartOfAccounts)
+        public string SetUserChartOfAccount(String GroupId, String UserId, Boolean isGroup, String UserChartOfAccounts)
         {
             try
             {
+                //string GroupId = "";
+                //string UserId = "";
+                //bool isGroup = false;
+                //string UserChartOfAccounts = "";
+
                 string[] UserChartOfAccountIds = UserChartOfAccounts.Split(',');
                 DALUserMenuRights objUserMenuRights = new DALUserMenuRights();
                 int Success = objUserMenuRights.DeleteChartOfAccountsByGroupId(GroupId, UserId);
@@ -420,6 +413,11 @@ namespace SCMS.Controllers
             }
 
             return response;
+        }
+
+        public string CopyUserRights(string CurrentUserId, string NewUserId, string SelectedTab)
+        {
+            return new DALUserMenuRights().CopyUserRights(CurrentUserId, NewUserId, SelectedTab).ToString();
         }
 
     }
