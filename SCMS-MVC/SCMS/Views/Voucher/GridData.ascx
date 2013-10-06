@@ -7,7 +7,7 @@
         padding: 0;
         margin: 0;
         border-radius: 0px;
-         -webkit-border-radius: 0px;
+        -webkit-border-radius: 0px;
         -moz-border-radius: 0px;
     }
     input[type="text"]
@@ -55,12 +55,6 @@
                     <img alt="Delete" src="../../img/delete.png" style="width: 22px;" />
                 </div>
             </td>
-            <%--<td id="txt_Code<%=VoucherDetailRow.VchDet_Id%>" style="vertical-align: middle;">
-                <%=VoucherDetailRow.Cmp_Code%>
-            </td>
-            <td id="txt_Title<%=VoucherDetailRow.VchDet_Id%>" style="vertical-align: middle;">
-                <%=VoucherDetailRow.Cmp_Title%>
-            </td>--%>
             <td id="txt_Address1<%=VoucherDetailRow.VchDet_Id%>" style="vertical-align: middle;">
                 <%=VoucherDetailRow.VchMas_DrAmount%>
             </td>

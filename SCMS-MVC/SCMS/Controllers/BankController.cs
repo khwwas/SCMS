@@ -19,11 +19,11 @@ namespace SCMS.Controllers
             return View("Bank");
         }
 
-        public ActionResult SaveRecord(String ps_Code, String Location, String Title)
+        public ActionResult SaveRecord(String ps_Code, String Title)
         {
             SETUP_Bank lrow_Bank = new SETUP_Bank();
             String ls_Action = "Edit", IsAuditTrail = "", ls_UserId = "";
-            String[] ls_Lable = new String[3], ls_Data = new String[3];
+            String[] ls_Lable = new String[2], ls_Data = new String[2];
             Int32 li_ReturnValue = 0;
 
             try
@@ -43,7 +43,7 @@ namespace SCMS.Controllers
                     lrow_Bank.Bank_Id = ps_Code;
                     lrow_Bank.Bank_Code = ps_Code;
                     lrow_Bank.Bank_Title = Title;
-                    lrow_Bank.Loc_Id = Location;
+                    //lrow_Bank.Loc_Id = Location;
                     lrow_Bank.Bank_Active = 1;
 
                     li_ReturnValue = objDalBank.SaveRecord(lrow_Bank);
@@ -59,11 +59,11 @@ namespace SCMS.Controllers
                         ls_UserId = ((SECURITY_User)Session["user"]).User_Id;
                         ls_Lable[0] = "Code";
                         ls_Lable[1] = "Title";
-                        ls_Lable[2] = "Location";
+                        //ls_Lable[2] = "Location";
 
                         ls_Data[0] = ps_Code;
                         ls_Data[1] = Title;
-                        ls_Data[2] = Location;
+                        //ls_Data[2] = Location;
 
                         objAuditLog.SaveRecord(11, ls_UserId, ls_Action, ls_Lable, ls_Data);
                     }
@@ -80,7 +80,7 @@ namespace SCMS.Controllers
         public ActionResult DeleteRecord(String _pId)
         {
             String ls_Action = "Delete", IsAuditTrail = "", ls_UserId = "";
-            String[] ls_Lable = new String[3], ls_Data = new String[3];
+            String[] ls_Lable = new String[2], ls_Data = new String[2];
             Int32 li_ReturnValue = 0;
 
             try
@@ -100,11 +100,11 @@ namespace SCMS.Controllers
                     ls_UserId = ((SECURITY_User)Session["user"]).User_Id;
                     ls_Lable[0] = "Code";
                     ls_Lable[1] = "Title";
-                    ls_Lable[2] = "Location";
+                    //ls_Lable[2] = "Location";
 
                     ls_Data[0] = BankRow.Bank_Code;
                     ls_Data[1] = BankRow.Bank_Title;
-                    ls_Data[2] = BankRow.Loc_Id;
+                    //ls_Data[2] = BankRow.Loc_Id;
 
                     objAuditLog.SaveRecord(11, ls_UserId, ls_Action, ls_Lable, ls_Data);
                 }

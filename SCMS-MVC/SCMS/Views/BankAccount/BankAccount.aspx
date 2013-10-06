@@ -43,6 +43,15 @@
                 txt_Title.focus();
                 return;
             }
+            else if (ddl_AccountCode.value == 0) {
+                FadeIn(lcnt_MessageBox);
+                lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! select account code</p>";
+                lcnt_MessageBox.setAttribute("class", "message error");
+                scroll(0, 0);
+                FadeOut(lcnt_MessageBox);
+                ddl_AccountCode.focus();
+                return;
+            }
             else {
                 //var Url = document.getElementById('frm_BankAccountSetup').action;
                 //Url += "BankAccount/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&Location=" + ddl_location.value + "&Bank=" + ddl_bank.value + "&Title=" + txt_Title.value;
@@ -51,7 +60,7 @@
                 $.ajax({
                     type: "POST",
                     url: "BankAccount/SaveRecord",
-                    data: { ps_Code: lcnt_txtSelectedCode.value, Location: ddl_location.value, Bank: ddl_bank.value, Title: txt_Title.value },
+                    data: { ps_Code: lcnt_txtSelectedCode.value, Location: ddl_location.value, Bank: ddl_bank.value, Title: txt_Title.value, AccountCode: ddl_AccountCode.value },
                     success: function (response) {
                         html = response;
                         $("#GridContainer").html(response);
@@ -90,6 +99,7 @@
             document.getElementById('txt_SelectedCode').value = "";
             document.getElementById('txt_Title').value = "";
             document.getElementById('ddl_location').value = "";
+            document.getElementById('ddl_AccountCode').value = "0";
         }
 
         function EditRecord(Id) {
@@ -97,6 +107,7 @@
             document.getElementById('txt_Title').value = document.getElementById('txt_Title' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             document.getElementById('ddl_location').value = document.getElementById('ddl_location' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             document.getElementById('ddl_bank').value = document.getElementById('ddl_bank' + Id).innerHTML.trim().toString().replace("&nbsp", "");
+            document.getElementById('ddl_AccountCode').value = document.getElementById('ddl_AccountCode' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             ShowHideSaveButton();
             scroll(0, 0);
         }
@@ -151,8 +162,8 @@
             </div>
             <div class="CustomCell" style="width: 115px; height: 30px">
                 Code</div>
-            <input type="text" class="CustomText" style="width: 100px; font-weight: bold;" id="txt_Code" name="txt_Code"
-                maxlength="100" value="[Auto]" readonly="readonly" />
+            <input type="text" class="CustomText" style="width: 100px; font-weight: bold;" id="txt_Code"
+                name="txt_Code" maxlength="100" value="[Auto]" readonly="readonly" />
             <div class="Clear">
             </div>
             <div class="CustomCell" style="width: 115px; height: 30px;">
@@ -169,6 +180,11 @@
                 Title</div>
             <input type="text" class="CustomText" style="width: 888px;" id="txt_Title" name="txt_Title"
                 maxlength="100" />
+            <div class="Clear">
+            </div>
+            <div class="CustomCell" style="width: 115px; height: 30px;">
+                Account Code</div>
+            <%= Html.DropDownList("ddl_AccountCode", null, new { style = "width:900px; padding: 4px;" })%>
             <div class="Clear">
             </div>
             <div style="float: right; margin-bottom: 10px;">

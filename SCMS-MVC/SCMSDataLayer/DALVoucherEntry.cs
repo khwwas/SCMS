@@ -31,7 +31,7 @@ namespace SCMSDataLayer
                 dbSCMS.SubmitChanges();
                 return Convert.ToInt32(newVoucherMaster.VchMas_Id);
             }
-            catch
+            catch(Exception ex)
             {
                 return 0;
             }

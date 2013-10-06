@@ -139,6 +139,7 @@
     <Compile Include="Controllers\CityController.cs" />
     <Compile Include="Controllers\ChartOfAccountController.cs" />
     <Compile Include="Controllers\ApprovalLevelController.cs" />
+    <Compile Include="Controllers\BankReconciliationController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DashBoardController.cs" />
@@ -1067,6 +1068,8 @@
     <Content Include="Scripts\zebra_datepicker.js" />
     <Content Include="Views\BankAccount\BankAccount.aspx" />
     <Content Include="Views\BankAccount\GridData.ascx" />
+    <Content Include="Views\BankReconciliation\BankReconciliation.aspx" />
+    <Content Include="Views\BankReconciliation\GridData.ascx" />
     <Content Include="Views\CalendarType\CalendarType.aspx" />
     <Content Include="Views\CalendarType\GridData.ascx" />
     <Content Include="Views\Calendar\Calendar.aspx" />

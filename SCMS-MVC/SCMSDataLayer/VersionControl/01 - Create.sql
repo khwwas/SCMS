@@ -579,6 +579,7 @@ CREATE TABLE [dbo].[SETUP_BankAccount](
 	[Cmp_Id] [varchar](50) NULL,
 	[Loc_Id] [varchar](50) NULL,
 	[Bank_Id] [varchar](50) NOT NULL,
+	[ChrtAcc_Id] [varchar](50) NOT NULL,
 	[BankAcc_Title] [varchar](100) NULL,
 	[BankAcc_Active] [int] NULL,
 	[BankAcc_SortOrder] [int] NULL,
@@ -610,6 +611,14 @@ GO
 
 ALTER TABLE [dbo].[SETUP_BankAccount] CHECK CONSTRAINT [FK_SETUPBankAccount_SETUPBank_BankId]
 GO
+
+ALTER TABLE [dbo].[SETUP_BankAccount]  WITH CHECK ADD  CONSTRAINT [FK_SETUPBankAccount_SETUPChartOfAccount_ChrtAccId] FOREIGN KEY([ChrtAcc_Id])
+REFERENCES [dbo].[SETUP_ChartOfAccount] ([ChrtAcc_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_BankAccount] CHECK CONSTRAINT [FK_SETUPBankAccount_SETUPChartOfAccount_ChrtAccId]
+GO
+
 
 CREATE TABLE [dbo].[SETUP_CalendarType](
 	[CldrType_Id] [varchar](50) NOT NULL,
@@ -779,6 +788,8 @@ CREATE TABLE [dbo].[GL_VchrMaster](
 	[VchMas_ApprovedBy] [varchar] (100) NULL,
 	[VchMas_ApprovedDate] [datetime] NULL,
 	[SyncStatus] [bit] NOT NULL Default 0,
+	[VchMas_ReconciliationDate] [datetime] NULL,
+	[VchMas_Reconciliation] [Int] NULL,
  CONSTRAINT [PK_GLVchrMaster_VchMasId] PRIMARY KEY CLUSTERED 
 (
 	[VchMas_Id]
@@ -1035,5 +1046,43 @@ GO
 
 ALTER TABLE [dbo].[SETUP_JobPosition] CHECK CONSTRAINT [FK_SETUPJobPosition_SETUPJobTitle_JTId]
 GO
+
+
+CREATE TABLE [dbo].[Security_UserChartOfAccount](
+	[UserCOA_Id] [int] IDENTITY(1,1) NOT NULL,
+	[UserGrp_Id] [varchar](50) NULL,
+	[User_Id] [varchar](50) NULL,
+	[ChrtAcc_Id] [varchar](50) NULL,
+ CONSTRAINT [PK_Security_UserChartOfAccount] PRIMARY KEY CLUSTERED 
+(
+	[UserCOA_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[Security_UserChartOfAccount]  WITH CHECK ADD  CONSTRAINT [FK_Security_UserChartOfAccount_SECURITY_User] FOREIGN KEY([User_Id])
+REFERENCES [dbo].[SECURITY_User] ([User_Id])
+GO
+
+ALTER TABLE [dbo].[Security_UserChartOfAccount] CHECK CONSTRAINT [FK_Security_UserChartOfAccount_SECURITY_User]
+GO
+
+ALTER TABLE [dbo].[Security_UserChartOfAccount]  WITH CHECK ADD  CONSTRAINT [FK_Security_UserChartOfAccount_SECURITY_UserGroup] FOREIGN KEY([UserGrp_Id])
+REFERENCES [dbo].[SECURITY_UserGroup] ([UsrGrp_Id])
+GO
+
+ALTER TABLE [dbo].[Security_UserChartOfAccount] CHECK CONSTRAINT [FK_Security_UserChartOfAccount_SECURITY_UserGroup]
+GO
+
+ALTER TABLE [dbo].[Security_UserChartOfAccount]  WITH CHECK ADD  CONSTRAINT [FK_Security_UserChartOfAccount_SETUP_ChartOfAccount] FOREIGN KEY([ChrtAcc_Id])
+REFERENCES [dbo].[SETUP_ChartOfAccount] ([ChrtAcc_Id])
+GO
+
+ALTER TABLE [dbo].[Security_UserChartOfAccount] CHECK CONSTRAINT [FK_Security_UserChartOfAccount_SETUP_ChartOfAccount]
+GO
+
+
+
 SET ANSI_PADDING OFF
 GO

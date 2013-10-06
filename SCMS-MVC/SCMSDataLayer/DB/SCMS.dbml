@@ -1,46 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="SCMS" Class="SCMSDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=WAQAS\KHAWAJAWAQAS;Initial Catalog=SCMS;Persist Security Info=True;User ID=sa" SettingsObjectName="SCMSDataLayer.Properties.Settings" SettingsPropertyName="SCMSConnectionString2" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.GL_VchrDetail" Member="GL_VchrDetails">
-    <Type Name="GL_VchrDetail">
-      <Column Name="VchDet_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="VchMas_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="ChrtAcc_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="VchMas_DrAmount" Type="System.Decimal" DbType="Decimal(20,6)" CanBeNull="true" />
-      <Column Name="VchMas_CrAmount" Type="System.Decimal" DbType="Decimal(20,6)" CanBeNull="true" />
-      <Column Name="VchDet_Remarks" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
-      <Column Name="VchMas_Id_Temp" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Association Name="GL_VchrMaster_GL_VchrDetail" Member="GL_VchrMaster" ThisKey="VchMas_Id" OtherKey="VchMas_Id" Type="GL_VchrMaster" IsForeignKey="true" />
-      <Association Name="SETUP_ChartOfAccount_GL_VchrDetail" Member="SETUP_ChartOfAccount" ThisKey="ChrtAcc_Id" OtherKey="ChrtAcc_Id" Type="SETUP_ChartOfAccount" IsForeignKey="true" />
-    </Type>
-  </Table>
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DA_GL" Class="SCMSDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=AWAIS-PC\MSSQL2008;Initial Catalog=DA_GL;Persist Security Info=True;User ID=sa" SettingsObjectName="SCMSDataLayer.Properties.Settings" SettingsPropertyName="DA_GLConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.SYSTEM_Screens" Member="SYSTEM_Screens">
     <Type Name="SYSTEM_Screen">
       <Column Name="Scr_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Scr_Title" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
       <Column Name="Scr_Type" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="SYSTEM_Screen_SYSTEM_AuditTrail" Member="SYSTEM_AuditTrails" ThisKey="Scr_Id" OtherKey="Scr_Id" Type="SYSTEM_AuditTrail" />
-    </Type>
-  </Table>
-  <Table Name="dbo.GL_VchrMaster" Member="GL_VchrMasters">
-    <Type Name="GL_VchrMaster">
-      <Column Name="VchMas_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="VchMas_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="VchMas_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Cmp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="VchrType_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="VchMas_Remarks" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
-      <Column Name="VchMas_Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="VchMas_EnteredBy" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="VchMas_EnteredDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="VchMas_ApprovedBy" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="VchMas_ApprovedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="SyncStatus" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="VchMas_Id_Temp" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Association Name="GL_VchrMaster_GL_VchrDetail" Member="GL_VchrDetails" ThisKey="VchMas_Id" OtherKey="VchMas_Id" Type="GL_VchrDetail" />
-      <Association Name="SETUP_Company_GL_VchrMaster" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
-      <Association Name="SETUP_Location_GL_VchrMaster" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
-      <Association Name="SETUP_VoucherType_GL_VchrMaster" Member="SETUP_VoucherType" ThisKey="VchrType_Id" OtherKey="VchrType_Id" Type="SETUP_VoucherType" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Security_MenuOptions" Member="Security_MenuOptions">
@@ -159,21 +124,6 @@
       <Association Name="SETUP_Location_SETUP_Bank" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.SETUP_BankAccount" Member="SETUP_BankAccounts">
-    <Type Name="SETUP_BankAccount">
-      <Column Name="BankAcc_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="BankAcc_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Cmp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Bank_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="BankAcc_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="BankAcc_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="BankAcc_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="SETUP_Bank_SETUP_BankAccount" Member="SETUP_Bank" ThisKey="Bank_Id" OtherKey="Bank_Id" Type="SETUP_Bank" IsForeignKey="true" />
-      <Association Name="SETUP_Company_SETUP_BankAccount" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
-      <Association Name="SETUP_Location_SETUP_BankAccount" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.SETUP_Calendar" Member="SETUP_Calendars">
     <Type Name="SETUP_Calendar">
       <Column Name="Cldr_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -223,8 +173,9 @@
       <Column Name="ChrtAcc_BudgetLevel" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ChrtAcc_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ChrtAcc_CodeDisplay" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Association Name="SETUP_ChartOfAccount_GL_VchrDetail" Member="GL_VchrDetails" ThisKey="ChrtAcc_Id" OtherKey="ChrtAcc_Id" Type="GL_VchrDetail" />
       <Association Name="SETUP_ChartOfAccount_Security_UserChartOfAccount" Member="Security_UserChartOfAccounts" ThisKey="ChrtAcc_Id" OtherKey="ChrtAcc_Id" Type="Security_UserChartOfAccount" />
+      <Association Name="SETUP_ChartOfAccount_SETUP_BankAccount" Member="SETUP_BankAccounts" ThisKey="ChrtAcc_Id" OtherKey="ChrtAcc_Id" Type="SETUP_BankAccount" />
+      <Association Name="SETUP_ChartOfAccount_GL_VchrDetail" Member="GL_VchrDetails" ThisKey="ChrtAcc_Id" OtherKey="ChrtAcc_Id" Type="GL_VchrDetail" />
       <Association Name="SETUP_Company_SETUP_ChartOfAccount" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
       <Association Name="SETUP_Location_SETUP_ChartOfAccount" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
       <Association Name="SYSTEM_AccountNature_SETUP_ChartOfAccount" Member="SYSTEM_AccountNature" ThisKey="AccNatr_Id" OtherKey="AccNatr_Id" Type="SYSTEM_AccountNature" IsForeignKey="true" />
@@ -334,11 +285,9 @@
       <Column Name="Cmp_Fax" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="Cmp_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Cmp_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="SETUP_Company_GL_VchrMaster" Member="GL_VchrMasters" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="GL_VchrMaster" />
       <Association Name="SETUP_Company_SECURITY_User" Member="SECURITY_Users" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SECURITY_User" />
       <Association Name="SETUP_Company_SECURITY_UserGroup" Member="SECURITY_UserGroups" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SECURITY_UserGroup" />
       <Association Name="SETUP_Company_SETUP_Bank" Member="SETUP_Banks" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Bank" />
-      <Association Name="SETUP_Company_SETUP_BankAccount" Member="SETUP_BankAccounts" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_BankAccount" />
       <Association Name="SETUP_Company_SETUP_Calendar" Member="SETUP_Calendars" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Calendar" />
       <Association Name="SETUP_Company_SETUP_CalendarType" Member="SETUP_CalendarTypes" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_CalendarType" />
       <Association Name="SETUP_Company_SETUP_ChartOfAccount" Member="SETUP_ChartOfAccounts" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_ChartOfAccount" />
@@ -359,6 +308,8 @@
       <Association Name="SETUP_Company_SETUP_Supplier" Member="SETUP_Suppliers" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Supplier" />
       <Association Name="SETUP_Company_SETUP_SupplierType" Member="SETUP_SupplierTypes" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_SupplierType" />
       <Association Name="SETUP_Company_SETUP_VoucherType" Member="SETUP_VoucherTypes" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_VoucherType" />
+      <Association Name="SETUP_Company_SETUP_BankAccount" Member="SETUP_BankAccounts" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_BankAccount" />
+      <Association Name="SETUP_Company_GL_VchrMaster" Member="GL_VchrMasters" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="GL_VchrMaster" />
     </Type>
   </Table>
   <Table Name="dbo.SETUP_CompanyModule" Member="SETUP_CompanyModules">
@@ -591,12 +542,10 @@
       <Column Name="Loc_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="Loc_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Loc_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="SETUP_Location_GL_VchrMaster" Member="GL_VchrMasters" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="GL_VchrMaster" />
       <Association Name="SETUP_Location_SECURITY_User" Member="SECURITY_Users" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SECURITY_User" />
       <Association Name="SETUP_Location_SECURITY_UserGroup" Member="SECURITY_UserGroups" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SECURITY_UserGroup" />
       <Association Name="SETUP_Location_Security_UserLocation" Member="Security_UserLocations" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="Security_UserLocation" />
       <Association Name="SETUP_Location_SETUP_Bank" Member="SETUP_Banks" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Bank" />
-      <Association Name="SETUP_Location_SETUP_BankAccount" Member="SETUP_BankAccounts" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_BankAccount" />
       <Association Name="SETUP_Location_SETUP_Calendar" Member="SETUP_Calendars" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Calendar" />
       <Association Name="SETUP_Location_SETUP_CalendarType" Member="SETUP_CalendarTypes" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_CalendarType" />
       <Association Name="SETUP_Location_SETUP_ChartOfAccount" Member="SETUP_ChartOfAccounts" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_ChartOfAccount" />
@@ -618,6 +567,8 @@
       <Association Name="SETUP_Location_SETUP_SupplierType" Member="SETUP_SupplierTypes" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_SupplierType" />
       <Association Name="SETUP_Location_SETUP_VoucherType" Member="SETUP_VoucherTypes" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_VoucherType" />
       <Association Name="SETUP_Location_SYSTEM_AuditTrail" Member="SYSTEM_AuditTrails" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SYSTEM_AuditTrail" />
+      <Association Name="SETUP_Location_SETUP_BankAccount" Member="SETUP_BankAccounts" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_BankAccount" />
+      <Association Name="SETUP_Location_GL_VchrMaster" Member="GL_VchrMasters" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="GL_VchrMaster" />
       <Association Name="SETUP_Company_SETUP_Location" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
     </Type>
   </Table>
@@ -731,10 +682,10 @@
       <Column Name="VchrType_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="VchrType_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="VchrType_CodeInitialization" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="SETUP_VoucherType_GL_VchrMaster" Member="GL_VchrMasters" ThisKey="VchrType_Id" OtherKey="VchrType_Id" Type="GL_VchrMaster" />
       <Association Name="SETUP_VoucherType_Security_UserVoucherType" Member="Security_UserVoucherTypes" ThisKey="VchrType_Id" OtherKey="VchrType_Id" Type="Security_UserVoucherType" />
       <Association Name="SETUP_VoucherType_SETUP_VoucherTypeNarration" Member="SETUP_VoucherTypeNarrations" ThisKey="VchrType_Id" OtherKey="VchrType_Id" Type="SETUP_VoucherTypeNarration" />
       <Association Name="SETUP_VoucherType_SYSTEM_AuditTrail" Member="SYSTEM_AuditTrails" ThisKey="VchrType_Id" OtherKey="VchrType_Id" Type="SYSTEM_AuditTrail" />
+      <Association Name="SETUP_VoucherType_GL_VchrMaster" Member="GL_VchrMasters" ThisKey="VchrType_Id" OtherKey="VchrType_Id" Type="GL_VchrMaster" />
       <Association Name="SETUP_Company_SETUP_VoucherType" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
       <Association Name="SETUP_Location_SETUP_VoucherType" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
     </Type>
@@ -818,6 +769,58 @@
       <Column Name="SysPrm_RefColumn" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
       <Column Name="SysPrm_RefData" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Association Name="SETUP_Module_SYSTEM_Parm" Member="SETUP_Module" ThisKey="Mod_Id" OtherKey="Mod_Id" Type="SETUP_Module" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SETUP_BankAccount" Member="SETUP_BankAccounts">
+    <Type Name="SETUP_BankAccount">
+      <Column Name="BankAcc_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="BankAcc_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cmp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Bank_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="BankAcc_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="BankAcc_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BankAcc_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ChrtAcc_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="SETUP_Bank_SETUP_BankAccount" Member="SETUP_Bank" ThisKey="Bank_Id" OtherKey="Bank_Id" Type="SETUP_Bank" IsForeignKey="true" />
+      <Association Name="SETUP_ChartOfAccount_SETUP_BankAccount" Member="SETUP_ChartOfAccount" ThisKey="ChrtAcc_Id" OtherKey="ChrtAcc_Id" Type="SETUP_ChartOfAccount" IsForeignKey="true" />
+      <Association Name="SETUP_Company_SETUP_BankAccount" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
+      <Association Name="SETUP_Location_SETUP_BankAccount" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GL_VchrDetail" Member="GL_VchrDetails">
+    <Type Name="GL_VchrDetail">
+      <Column Name="VchDet_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="VchMas_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ChrtAcc_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="VchMas_DrAmount" Type="System.Decimal" DbType="Decimal(20,6)" CanBeNull="true" />
+      <Column Name="VchMas_CrAmount" Type="System.Decimal" DbType="Decimal(20,6)" CanBeNull="true" />
+      <Column Name="VchDet_Remarks" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Association Name="SETUP_ChartOfAccount_GL_VchrDetail" Member="SETUP_ChartOfAccount" ThisKey="ChrtAcc_Id" OtherKey="ChrtAcc_Id" Type="SETUP_ChartOfAccount" IsForeignKey="true" />
+      <Association Name="GL_VchrMaster_GL_VchrDetail" Member="GL_VchrMaster" ThisKey="VchMas_Id" OtherKey="VchMas_Id" Type="GL_VchrMaster" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GL_VchrMaster" Member="GL_VchrMasters">
+    <Type Name="GL_VchrMaster">
+      <Column Name="VchMas_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="VchMas_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="VchMas_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Cmp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="VchrType_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="VchMas_Remarks" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="VchMas_Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="VchMas_EnteredBy" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="VchMas_EnteredDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="VchMas_ApprovedBy" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="VchMas_ApprovedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="SyncStatus" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="VchMas_ReconciliationDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="VchMas_Reconciliation" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="GL_VchrMaster_GL_VchrDetail" Member="GL_VchrDetails" ThisKey="VchMas_Id" OtherKey="VchMas_Id" Type="GL_VchrDetail" />
+      <Association Name="SETUP_Company_GL_VchrMaster" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
+      <Association Name="SETUP_Location_GL_VchrMaster" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
+      <Association Name="SETUP_VoucherType_GL_VchrMaster" Member="SETUP_VoucherType" ThisKey="VchrType_Id" OtherKey="VchrType_Id" Type="SETUP_VoucherType" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.sp_GetApprovalLevelList" Method="sp_GetApprovalLevelList">
@@ -1368,6 +1371,25 @@
       <Column Name="ChrtAcc_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="VchMas_DrAmount" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
       <Column Name="VchMas_CrAmount" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_BankReconciliation" Method="sp_BankReconciliation">
+    <Parameter Name="AllLocation" Parameter="allLocation" Type="System.Int32" DbType="Int" />
+    <Parameter Name="LocationId" Parameter="locationId" Type="System.String" DbType="VarChar(1)" />
+    <Parameter Name="AllDate" Parameter="allDate" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DateFrom" Parameter="dateFrom" Type="System.String" DbType="VarChar(1)" />
+    <Parameter Name="DateTo" Parameter="dateTo" Type="System.String" DbType="VarChar(1)" />
+    <ElementType Name="sp_BankReconciliationResult">
+      <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Loc_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Bank_Title" Type="System.String" DbType="VarChar(203)" CanBeNull="true" />
+      <Column Name="VchMas_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="VchMas_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="VchMas_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="VchDet_Remarks" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="VchMas_CrAmount" Type="System.Decimal" DbType="Decimal(20,6)" CanBeNull="true" />
+      <Column Name="VchMas_Reconciliation" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VchMas_ReconciliationDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

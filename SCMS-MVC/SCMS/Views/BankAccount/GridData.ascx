@@ -7,7 +7,7 @@
         padding: 0;
         margin: 0;
         border-radius: 0px;
-         -webkit-border-radius: 0px;
+        -webkit-border-radius: 0px;
         -moz-border-radius: 0px;
     }
     input[type="text"]
@@ -15,14 +15,11 @@
         margin-bottom: 0;
     }
 </style>
-<table id="CityGrid" class="data display datatable">
+<table id="BankAccountGrid" class="data display datatable">
     <thead>
         <tr>
             <th style="width: 10%;">
                 Action
-            </th>
-            <th style="width: 10%;">
-                Title
             </th>
             <th style="width: 10%;">
                 Location
@@ -30,22 +27,29 @@
             <th style="width: 10%;">
                 Bank
             </th>
-
+            <th style="width: 30%;">
+                Title
+            </th>
+            <th style="width: 40%;">
+                Account Code
+            </th>
         </tr>
     </thead>
     <tbody>
         <% 
-            
             var lList_Data = new SCMSDataLayer.DALBankAccount().GetAllRecords();
 
             // Get location name show in list
             List<SCMSDataLayer.DB.SETUP_Location> ListLocations = new List<SCMSDataLayer.DB.SETUP_Location>();
             ListLocations = new SCMSDataLayer.DALLocation().GetAllLocation().ToList();
 
-
             // Get Bank name show in list
             List<SCMSDataLayer.DB.SETUP_Bank> ListBanks = new List<SCMSDataLayer.DB.SETUP_Bank>();
             ListBanks = new SCMSDataLayer.DALBank().PopulateData().ToList();
+
+            // Get Bank name show in list
+            List<SCMSDataLayer.DB.SETUP_ChartOfAccount> ListChartOfAccount = new List<SCMSDataLayer.DB.SETUP_ChartOfAccount>();
+            ListChartOfAccount = new SCMSDataLayer.DALChartOfAccount().GetChartOfAccountForDropDown().ToList();
 
             if (lList_Data != null && lList_Data.Count > 0)
             {
@@ -53,8 +57,7 @@
                 {
                     SCMSDataLayer.DB.SETUP_Location LocationRow = ListLocations.Where(L => L.Loc_Id.Equals(lRow_Data.Loc_Id)).SingleOrDefault();
                     SCMSDataLayer.DB.SETUP_Bank BankRow = ListBanks.Where(B => B.Bank_Id.Equals(lRow_Data.Bank_Id)).SingleOrDefault();
-                  
-                  
+                    SCMSDataLayer.DB.SETUP_ChartOfAccount ChartOfAccountRow = ListChartOfAccount.Where(C => C.ChrtAcc_Id.Equals(lRow_Data.ChrtAcc_Id)).SingleOrDefault();
         %>
         <tr class='odd gradeX' style='line-height: 15px;'>
             <td>
@@ -67,28 +70,30 @@
                     <img alt="Delete" src="../../img/delete.png" style="width: 22px; vertical-align: middle" />
                 </div>
             </td>
-            <td id="txt_Title<%=lRow_Data.BankAcc_Id%>" style="vertical-align: middle;">
-                <%=lRow_Data.BankAcc_Title%>
-            </td>
             <td id="ddl_location<%=lRow_Data.BankAcc_Id%>" style="vertical-align: middle;">
-            <%if (LocationRow != null)
+                <%if (LocationRow != null)
                   { %>
                 <%=LocationRow.Loc_Title%>
                 <%} %>
-                
             </td>
             <td id="ddl_bank<%=lRow_Data.BankAcc_Id%>" style="vertical-align: middle;">
-            <%if (BankRow != null)
+                <%if (BankRow != null)
                   { %>
                 <%=BankRow.Bank_Title%>
                 <%} %>
-                
             </td>
-
+            <td id="txt_Title<%=lRow_Data.BankAcc_Id%>" style="vertical-align: middle;">
+                <%=lRow_Data.BankAcc_Title%>
+            </td>
+             <td id="ddl_AccountCode<%=lRow_Data.BankAcc_Id%>" style="vertical-align: middle;">
+                <%if (ChartOfAccountRow != null)
+                  { %>
+                <%=ChartOfAccountRow.ChrtAcc_Title%>
+                <%} %>
+            </td>
         </tr>
         <%}
-          }
-          
+            }
         %>
     </tbody>
 </table>

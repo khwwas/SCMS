@@ -154,7 +154,7 @@ namespace SCMS.Controllers
             if (Voucher != null && Voucher.Count > 0)
             {
                 LastVoucher += "<div class='CustomCell' style='width: 800px; height: 30px; font-family: Tahoma;'>";
-                LastVoucher += "<b>Voucher # :</b>";
+                LastVoucher += "<b>Voucher # : </b>";
                 LastVoucher += Voucher.Last().VchMas_Code;
                 LastVoucher += "<b>, Date : </b>";
                 LastVoucher += Voucher.Last().VchMas_Date != null ? Convert.ToDateTime(Voucher.Last().VchMas_Date).ToShortDateString() : "";

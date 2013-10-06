@@ -359,3 +359,89 @@ BEGIN
 		        SETUP_JobPosition.JT_Id = SETUP_JobTitle.JT_Id
 	   
 END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[sp_GetUserChartOfAccountByGroupId](@GroupId varchar(50))
+As
+Begin
+  Select SETUP_ChartOfAccount.*,
+  Security_UserChartOfAccount.UserGrp_Id,
+  Security_UserChartOfAccount.User_Id,
+         IsNull(Security_UserChartOfAccount.ChrtAcc_Id,0) as SelectedChartOfAccount
+    From SETUP_ChartOfAccount Left Outer Join Security_UserChartOfAccount On
+              ( Security_UserChartOfAccount.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And
+              ( Security_UserChartOfAccount.UserGrp_Id = @GroupId )
+Order By 
+         SETUP_ChartOfAccount.ChrtAcc_Code,SETUP_ChartOfAccount.ChrtAcc_Level
+ End 
+ GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Procedure [dbo].[sp_GetUserChartOfAccountByUserId](@UserId varchar(50))
+As
+Begin
+  Select SETUP_ChartOfAccount.*,
+  Security_UserChartOfAccount.UserGrp_Id,
+  Security_UserChartOfAccount.User_Id,
+         IsNull(Security_UserChartOfAccount.ChrtAcc_Id,0) as SelectedChartOfAccount
+    From SETUP_ChartOfAccount Left Outer Join Security_UserChartOfAccount On
+              ( Security_UserChartOfAccount.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And
+              ( Security_UserChartOfAccount.User_Id = @UserId )
+Order By 
+         SETUP_ChartOfAccount.ChrtAcc_Code,SETUP_ChartOfAccount.ChrtAcc_Level
+End 
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[sp_BankReconciliation]    Script Date: 10/06/2013 16:15:02 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[sp_BankReconciliation]
+@AllLocation int, @LocationId varchar, 
+@AllDate int, @DateFrom varchar, @DateTo varchar 
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+  	Select SETUP_Location.Loc_Id,
+	       SETUP_Location.Loc_Title,
+	       SETUP_Bank.Bank_Title + ' [' + SETUP_BankAccount.BankAcc_Title + ']' As Bank_Title,
+	       GL_VchrMaster.VchMas_Id,
+	       GL_VchrMaster.VchMas_Date,
+	       GL_VchrMaster.VchMas_Code,
+	       GL_VchrDetail.VchDet_Remarks,
+	       GL_VchrDetail.VchMas_CrAmount,
+	       GL_VchrMaster.VchMas_Reconciliation,
+	       GL_VchrMaster.VchMas_ReconciliationDate
+	  From Setup_bank,
+	       SETUP_BankAccount,
+	       SETUP_ChartOfAccount,
+	       GL_VchrDetail,
+	       GL_VchrMaster,
+	       SETUP_Location 
+	 Where ( SETUP_BankAccount.Bank_Id = SETUP_Bank.Bank_Id ) And
+	       ( SETUP_BankAccount.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And
+	       ( GL_VchrDetail.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And
+	       ( GL_VchrDetail.VchMas_Id = GL_VchrMaster.VchMas_Id ) And
+	       ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And
+		   ( ISNULL( GL_VchrDetail.VchMas_DrAmount, 0 ) <= 0 ) And
+		   ( @AllLocation = 1 Or SETUP_Location.Loc_Id =  @LocationId ) and
+		   ( @AllDate = 1 Or CONVERT( DateTime, GL_VchrMaster.VchMas_Date, 103 )
+		     BETWEEN CONVERT(DateTime, @DateFrom, 103 ) and CONVERT(DateTime, @DateTo, 103 ) )
+  Order By SETUP_Location.Loc_Title,   
+           Bank_Title,
+		   GL_VchrMaster.VchMas_Date;
+
+END

@@ -7,7 +7,7 @@
         padding: 0;
         margin: 0;
         border-radius: 0px;
-         -webkit-border-radius: 0px;
+        -webkit-border-radius: 0px;
         -moz-border-radius: 0px;
     }
     input[type="text"]
@@ -22,30 +22,21 @@
                 Action
             </th>
             <th style="width: 10%;">
+                Code
+            </th>
+            <th style="width: 80%;">
                 Title
             </th>
-            <th style="width: 10%;">
-                Location
-            </th>
-
         </tr>
     </thead>
     <tbody>
         <% 
-            
             var lList_Data = new SCMSDataLayer.DALBank().GetAllRecords();
-
-            // Get location name show in list
-            List<SCMSDataLayer.DB.SETUP_Location> ListLocations = new List<SCMSDataLayer.DB.SETUP_Location>();
-            ListLocations = new SCMSDataLayer.DALLocation().GetAllLocation().ToList();
 
             if (lList_Data != null && lList_Data.Count > 0)
             {
                 foreach (SCMSDataLayer.DB.SETUP_Bank lRow_Data in lList_Data)
-                {
-                    SCMSDataLayer.DB.SETUP_Location LocationRow = ListLocations.Where(L => L.Loc_Id.Equals(lRow_Data.Loc_Id)).SingleOrDefault();
-                  
-                  
+                {                   
         %>
         <tr class='odd gradeX' style='line-height: 15px;'>
             <td>
@@ -58,21 +49,15 @@
                     <img alt="Delete" src="../../img/delete.png" style="width: 22px; vertical-align: middle" />
                 </div>
             </td>
-             <td id="txt_Title<%=lRow_Data.Bank_Id%>" style="vertical-align: middle;">
+             <td id="txt_Code<%=lRow_Data.Bank_Id%>" style="vertical-align: middle;">
+                <%=lRow_Data.Bank_Code%>
+            </td>
+            <td id="txt_Title<%=lRow_Data.Bank_Id%>" style="vertical-align: middle;">
                 <%=lRow_Data.Bank_Title%>
             </td>
-            <td id="ddl_location<%=lRow_Data.Bank_Id%>" style="vertical-align: middle;">
-            <%if (LocationRow != null)
-                  { %>
-                <%=LocationRow.Loc_Title%>
-                <%} %>
-                
-            </td>
-           
         </tr>
         <%}
-          }
-          
+            }
         %>
     </tbody>
 </table>

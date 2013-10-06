@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DALBankReconciliation.cs" />
     <Compile Include="DALApprovalLevel.cs" />
     <Compile Include="DALAuditLog.cs" />
     <Compile Include="DALEmployee.cs" />

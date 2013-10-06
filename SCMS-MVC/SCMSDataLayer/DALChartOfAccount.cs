@@ -92,16 +92,16 @@ namespace SCMSDataLayer
                 string UserLoginId = user.User_Id;
                 string UserGroupId = user.UsrGrp_Id;
 
-                // ChrtAcc_Type
-
                 _Sql += "  Select SETUP_ChartOfAccount.ChrtAcc_Id, ";
                 _Sql += "         SETUP_ChartOfAccount.ChrtAcc_Title + ' [' + SETUP_ChartOfAccount.ChrtAcc_Code + ']'  as ChrtAcc_Title ";
                 _Sql += "    From SETUP_ChartOfAccount ";
-                _Sql += "   Where ( IsNULL( SETUP_ChartOfAccount.ChrtAcc_Type, 0 ) = 2 ) ";
-                _Sql += " And SETUP_ChartOfAccount.ChrtAcc_Id in (Select ChrtAcc_Id From Security_UserChartOfAccount Where UserGrp_Id =" + UserGroupId + " And User_Id = " + UserLoginId + ")";
-                _Sql += " Order By SETUP_ChartOfAccount.ChrtAcc_Code, ";
+                _Sql += "   Where ( IsNULL( SETUP_ChartOfAccount.ChrtAcc_Type, 0 ) = 2 ) And ";
+                _Sql += "         ( SETUP_ChartOfAccount.ChrtAcc_Id in ( Select ChrtAcc_Id ";
+                _Sql += "                                                  From Security_UserChartOfAccount ";
+                _Sql += "                                                 Where UserGrp_Id = '" + UserGroupId + "' And ";
+                _Sql += "                                                       User_Id = '" + UserLoginId + "' ) ) ";
+                _Sql += "Order By SETUP_ChartOfAccount.ChrtAcc_Code, ";
                 _Sql += "         SETUP_ChartOfAccount.ChrtAcc_Level";
-
 
                 SCMSDataContext dbSCMS = Connection.Create();
                 List<SETUP_ChartOfAccount> ChartOfAccountList = new List<SETUP_ChartOfAccount>();
