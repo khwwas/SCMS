@@ -66,7 +66,7 @@
             <td id="txt_Bank<%=DataRow.VchMas_Id%>" style="vertical-align: middle;">
                 <%=DataRow.Bank_Title%>
             </td>
-            <td id="txt_Date<%=DataRow.VchMas_Id%>" style="vertical-align: middle;">
+            <td id="txt_VoucherDate<%=DataRow.VchMas_Id%>" style="vertical-align: middle;">
                 <%=Convert.ToDateTime(DataRow.VchMas_Date).ToString("MM/dd/yyyy")%>
             </td>
             <td id="txt_Code<%=DataRow.VchMas_Id%>" style="vertical-align: middle;">
@@ -79,10 +79,25 @@
                 <%=DataRow.VchMas_CrAmount%>
             </td>
             <td id="txt_Reconciliation<%=DataRow.VchMas_Id%>" style="vertical-align: middle;">
-                <%=DataRow.VchMas_Reconciliation%>
+                    <%bool Reconcilation = false;
+                      if (DataRow.VchMas_Reconciliation == null || DataRow.VchMas_Reconciliation <= 0 || DataRow.VchMas_Reconciliation.ToString() == "")
+                      {
+                          Reconcilation = false;
+                      }
+                      else
+                      {
+                          Reconcilation = true; 
+                      }
+                      Response.Write(Reconcilation);
+                    %>
             </td>
             <td id="txt_ReconciliationDate<%=DataRow.VchMas_Id%>" style="vertical-align: middle;">
-                <%                =Convert.ToDateTime(DataRow.VchMas_ReconciliationDate).ToString("MM/dd/yyyy")
+                <%string ReconcilationData = "";
+                  if (DataRow.VchMas_ReconciliationDate != null && DataRow.VchMas_ReconciliationDate != DateTime.MinValue)
+                  {
+                      ReconcilationData = Convert.ToDateTime(DataRow.VchMas_ReconciliationDate).ToString("MM/dd/yyyy");
+                  }
+                  Response.Write(ReconcilationData);
                 %>
             </td>
         </tr>

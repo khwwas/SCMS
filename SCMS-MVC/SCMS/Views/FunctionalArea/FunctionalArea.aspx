@@ -87,7 +87,7 @@
             document.getElementById('txt_Code').value = Id;
             document.getElementById('txt_Title').value = document.getElementById('txt_Title' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             document.getElementById('ddl_location').value = document.getElementById('ddl_location' + Id).value;
-            
+            ShowHideSaveButton();
             scroll(0, 0);
         }
 

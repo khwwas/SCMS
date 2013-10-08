@@ -14,22 +14,21 @@ namespace SCMSDataLayer
 
             try
             {
-                //SCMSDataContext dbSCMS = Connection.Create();
-                //SETUP_BankAccount lRow_ExistingData = dbSCMS.SETUP_BankAccounts.Where(c => c.BankAcc_Id.Equals(lrow_BankAccount.BankAcc_Id)).SingleOrDefault();
+                SCMSDataContext dbSCMS = Connection.Create();
+                GL_VchrMaster lRow_ExistingData = dbSCMS.GL_VchrMasters.Where(c => c.VchMas_Id.Equals(lrow_VchrMaster.VchMas_Id)).SingleOrDefault();
 
-                //if (lRow_ExistingData != null)
-                //{
-                //    lRow_ExistingData.BankAcc_Title = lrow_BankAccount.BankAcc_Title;
-                //    lRow_ExistingData.Loc_Id = lrow_BankAccount.Loc_Id;
-                //    lRow_ExistingData.Bank_Id = lrow_BankAccount.Bank_Id;
-                //}
-                //else
-                //{
-                //    dbSCMS.SETUP_BankAccounts.InsertOnSubmit(lrow_BankAccount);
-                //}
-                //dbSCMS.SubmitChanges();
+                if (lRow_ExistingData != null)
+                {
+                    lRow_ExistingData.VchMas_Reconciliation = lrow_VchrMaster.VchMas_Reconciliation;
+                    lRow_ExistingData.VchMas_ReconciliationDate = lrow_VchrMaster.VchMas_ReconciliationDate;
+                }
+                else
+                {
+                    //dbSCMS.SETUP_BankAccounts.InsertOnSubmit(lrow_BankAccount);
+                }
+                dbSCMS.SubmitChanges();
 
-                //li_ReturnValue = Convert.ToInt32(lrow_BankAccount.BankAcc_Id);
+                li_ReturnValue = Convert.ToInt32(lrow_VchrMaster.VchMas_Id);
             }
             catch
             {

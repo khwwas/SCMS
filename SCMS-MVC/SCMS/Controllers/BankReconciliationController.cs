@@ -17,60 +17,51 @@ namespace SCMS.Controllers
             return View("BankReconciliation");
         }
 
-        public ActionResult SaveRecord(String ps_Code, String Location, String Bank, String Title, String AccountCode)
+        public ActionResult SaveRecord(String ps_Code, String ps_Reconciled, String ps_ReconciliationDate)
         {
-            DALBankAccount objDalBankAccount = new DALBankAccount();
-            SETUP_BankAccount lrow_BankAccount = new SETUP_BankAccount();
+            DALBankReconciliation objDalBankReconciliation = new DALBankReconciliation();
+            GL_VchrMaster lrow_BankReconciliation = new GL_VchrMaster();
             String ls_Action = "Edit", IsAuditTrail = "", ls_UserId = "";
             String[] ls_Lable = new String[5], ls_Data = new String[5];
             Int32 li_ReturnValue = 0;
 
             try
             {
-                if (String.IsNullOrEmpty(ps_Code))
-                {
-                    if (DALCommon.AutoCodeGeneration("SETUP_BankAccount") == 1)
-                    {
-                        ps_Code = DALCommon.GetMaximumCode("SETUP_BankAccount");
-                        ls_Action = "Add";
-                    }
-                }
-
                 if (!String.IsNullOrEmpty(ps_Code))
                 {
-                    lrow_BankAccount.BankAcc_Id = ps_Code;
-                    lrow_BankAccount.BankAcc_Id = ps_Code;
-                    lrow_BankAccount.BankAcc_Title = Title;
-                    lrow_BankAccount.Loc_Id = Location;
-                    lrow_BankAccount.Bank_Id = Bank;
-                    lrow_BankAccount.ChrtAcc_Id = AccountCode;
-                    lrow_BankAccount.BankAcc_Active = 1;
+                    lrow_BankReconciliation.VchMas_Id = ps_Code;
+                    if (ps_Reconciled.ToLower() == "On".ToLower())
+                    {
+                        lrow_BankReconciliation.VchMas_Reconciliation = 1;
+                    }
+                    else
+                    {
+                        lrow_BankReconciliation.VchMas_Reconciliation = 0;
+                    }
+                    lrow_BankReconciliation.VchMas_ReconciliationDate = Convert.ToDateTime(ps_ReconciliationDate);
 
-                    li_ReturnValue = objDalBankAccount.SaveRecord(lrow_BankAccount);
+                    li_ReturnValue = objDalBankReconciliation.SaveRecord(lrow_BankReconciliation);
                     ViewData["SaveResult"] = li_ReturnValue;
 
                     IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues(3)[0];
 
-                    // Audit Trail Entry Section
-                    if (li_ReturnValue > 0 && IsAuditTrail == "1")
-                    {
-                        DALAuditLog objAuditLog = new DALAuditLog();
+                    //// Audit Trail Entry Section
+                    //if (li_ReturnValue > 0 && IsAuditTrail == "1")
+                    //{
+                    //    DALAuditLog objAuditLog = new DALAuditLog();
 
-                        ls_UserId = ((SECURITY_User)Session["user"]).User_Id;
-                        ls_Lable[0] = "Code";
-                        ls_Lable[1] = "Location";
-                        ls_Lable[2] = "Bank";
-                        ls_Lable[3] = "Title";
-                        ls_Lable[4] = "Account Code";
+                    //    ls_UserId = ((SECURITY_User)Session["user"]).User_Id;
+                    //    ls_Lable[0] = "Code";
+                    //    ls_Lable[1] = "Reconciliation";
+                    //    ls_Lable[2] = "Reconciliation Date";
 
-                        ls_Data[0] = ps_Code;
-                        ls_Data[1] = Location;
-                        ls_Data[2] = Bank;
-                        ls_Data[3] = Title;
-                        ls_Data[4] = AccountCode;
 
-                        objAuditLog.SaveRecord(12, ls_UserId, ls_Action, ls_Lable, ls_Data);
-                    }
+                    //    ls_Data[0] = ps_Code;
+                    //    ls_Data[1] = ps_Reconciled;
+                    //    ls_Data[2] = ps_ReconciliationDate;
+
+                    //    objAuditLog.SaveRecord(12, ls_UserId, ls_Action, ls_Lable, ls_Data);
+                    //}
                 }
                 return PartialView("GridData");
             }
@@ -80,5 +71,5 @@ namespace SCMS.Controllers
             }
         }
 
-     }
+    }
 }

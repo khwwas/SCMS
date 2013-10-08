@@ -400,12 +400,14 @@ End
 GO
 
 
-/****** Object:  StoredProcedure [dbo].[sp_BankReconciliation]    Script Date: 10/06/2013 16:15:02 ******/
+
+
+/****** Object:  StoredProcedure [dbo].[sp_BankReconciliation]    Script Date: 10/08/2013 21:22:11 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE [dbo].[sp_BankReconciliation]
+ALTER PROCEDURE [dbo].[sp_BankReconciliation]
 @AllLocation int, @LocationId varchar, 
 @AllDate int, @DateFrom varchar, @DateTo varchar 
 AS
@@ -415,14 +417,18 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-  	Select SETUP_Location.Loc_Id,
+Select Distinct SETUP_Location.Loc_Id,
 	       SETUP_Location.Loc_Title,
 	       SETUP_Bank.Bank_Title + ' [' + SETUP_BankAccount.BankAcc_Title + ']' As Bank_Title,
 	       GL_VchrMaster.VchMas_Id,
 	       GL_VchrMaster.VchMas_Date,
 	       GL_VchrMaster.VchMas_Code,
-	       GL_VchrDetail.VchDet_Remarks,
-	       GL_VchrDetail.VchMas_CrAmount,
+	       IsNULL( ( Select Sum( IsNULL( GL_VchrDetail.VchMas_CrAmount, 0 ) )
+	                   From GL_VchrDetail
+	                  Where ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) And
+	                        ( ISNULL( GL_VchrDetail.VchMas_DrAmount, 0 ) <= 0 )
+	       ), 0 ) As VchMas_CrAmount,
+	       GL_VchrMaster.VchMas_Remarks,
 	       GL_VchrMaster.VchMas_Reconciliation,
 	       GL_VchrMaster.VchMas_ReconciliationDate
 	  From Setup_bank,
@@ -435,6 +441,7 @@ BEGIN
 	       ( SETUP_BankAccount.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And
 	       ( GL_VchrDetail.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And
 	       ( GL_VchrDetail.VchMas_Id = GL_VchrMaster.VchMas_Id ) And
+	       ( Lower( Left( GL_VchrMaster.VchMas_Code, 3 ) ) = Lower( 'BPV' ) ) And
 	       ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And
 		   ( ISNULL( GL_VchrDetail.VchMas_DrAmount, 0 ) <= 0 ) And
 		   ( @AllLocation = 1 Or SETUP_Location.Loc_Id =  @LocationId ) and
