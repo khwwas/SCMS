@@ -107,7 +107,7 @@
             document.getElementById('txt_Title').value = document.getElementById('txt_Title' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             document.getElementById('ddl_location').value = document.getElementById('ddl_location' + Id).innerHTML.trim().toString().replace("&nbsp", "");
             document.getElementById('ddl_bank').value = document.getElementById('ddl_bank' + Id).innerHTML.trim().toString().replace("&nbsp", "");
-            document.getElementById('ddl_AccountCode').value = document.getElementById('ddl_AccountCode' + Id).innerHTML.trim().toString().replace("&nbsp", "");
+            document.getElementById('ddl_AccountCode').value = document.getElementById('txt_AccountCode' + Id).innerHTML.trim().toString();
             ShowHideSaveButton();
             scroll(0, 0);
         }

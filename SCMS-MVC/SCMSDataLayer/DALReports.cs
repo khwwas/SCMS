@@ -190,6 +190,10 @@ namespace SCMSDataLayer
                     return null;
                 }
 
+                SECURITY_User user = (SECURITY_User)System.Web.HttpContext.Current.Session["user"];
+                string UserLoginId = user.User_Id;
+                string UserGroupId = user.UsrGrp_Id;
+
                 _Sql += "   Select GL_VchrMaster.VchMas_Id, ";
                 _Sql += "          GL_VchrMaster.VchMas_Code, ";
                 _Sql += "          GL_VchrMaster.VchMas_Date, ";
@@ -211,6 +215,10 @@ namespace SCMSDataLayer
                 _Sql += "          ( GL_VchrMaster.VchrType_Id = SETUP_VoucherType.VchrType_Id ) And ";
                 _Sql += "          ( GL_VchrDetail.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And ";
                 _Sql += "          ( SETUP_Location.Loc_Id = GL_VchrMaster.Loc_Id ) And ";
+                _Sql += "          ( SETUP_ChartOfAccount.ChrtAcc_Id in ( Select ChrtAcc_Id ";
+                _Sql += "                                                   From Security_UserChartOfAccount ";
+                _Sql += "                                                  Where UserGrp_Id = '" + UserGroupId + "' And ";
+                _Sql += "                                                        User_Id = '" + UserLoginId + "' ) ) And ";
                 _Sql += "          ( GL_VchrMaster.Loc_Id In (" + ps_Location + ") ) And ";
                 _Sql += "          ( SETUP_VoucherType.VchrType_Id In (" + ps_VoucherTypes + ") ) And ";
                 _Sql += "          ( " + pi_AllDate + " = 1 Or Convert( datetime, Convert( Char, GL_VchrMaster.VchMas_Date, 103 ), 103 ) Between ";
@@ -252,6 +260,10 @@ namespace SCMSDataLayer
                     return null;
                 }
 
+                SECURITY_User user = (SECURITY_User)System.Web.HttpContext.Current.Session["user"];
+                string UserLoginId = user.User_Id;
+                string UserGroupId = user.UsrGrp_Id;
+
                 //_cmd.Connection = con;
                 //_cmd.CommandType = CommandType.Text;
                 //_cmd.CommandType = CommandType.StoredProcedure;
@@ -305,6 +317,10 @@ namespace SCMSDataLayer
                 _Sql += "    Where ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) And ";
                 _Sql += "          ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And ";
                 _Sql += "          ( GL_VchrDetail.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And ";
+                _Sql += "          ( SETUP_ChartOfAccount.ChrtAcc_Id in ( Select ChrtAcc_Id ";
+                _Sql += "                                                   From Security_UserChartOfAccount ";
+                _Sql += "                                                  Where UserGrp_Id = '" + UserGroupId + "' And ";
+                _Sql += "                                                        User_Id = '" + UserLoginId + "' ) ) And ";
                 _Sql += "          ( SETUP_Location.Loc_Id In (" + ps_Location + ") ) And ";
                 _Sql += "          ( " + pi_AllAccCode + " = 1 Or SETUP_ChartOfAccount.ChrtAcc_Id Between '" + ps_AccCodeFrom + "' And '" + ps_AccCodeTo + "' ) And ";
                 _Sql += "          ( " + pi_AllDate + " = 1 Or Convert( datetime, Convert( Char, GL_VchrMaster.VchMas_Date, 103 ), 103 ) Between ";
@@ -345,6 +361,10 @@ namespace SCMSDataLayer
                     return null;
                 }
 
+                SECURITY_User user = (SECURITY_User)System.Web.HttpContext.Current.Session["user"];
+                string UserLoginId = user.User_Id;
+                string UserGroupId = user.UsrGrp_Id;
+
                 //_cmd.Connection = con;
                 //_cmd.CommandType = CommandType.Text;
                 //_cmd.CommandType = CommandType.StoredProcedure;
@@ -398,6 +418,10 @@ namespace SCMSDataLayer
                 _Sql += "    Where ( GL_VchrMaster.VchMas_Id = GL_VchrDetail.VchMas_Id ) And ";
                 _Sql += "          ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And ";
                 _Sql += "          ( GL_VchrDetail.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And ";
+                _Sql += "          ( SETUP_ChartOfAccount.ChrtAcc_Id in ( Select ChrtAcc_Id ";
+                _Sql += "                                                   From Security_UserChartOfAccount ";
+                _Sql += "                                                  Where UserGrp_Id = '" + UserGroupId + "' And ";
+                _Sql += "                                                        User_Id = '" + UserLoginId + "' ) ) And ";
                 _Sql += "          ( SETUP_Location.Loc_Id In (" + ps_Location + ") ) And ";
                 _Sql += "          ( " + pi_AllAccCode + " = 1 Or SETUP_ChartOfAccount.ChrtAcc_Id Between '" + ps_AccCodeFrom + "' And '" + ps_AccCodeTo + "' ) And ";
                 _Sql += "          ( " + pi_AllDate + " = 1 Or Convert( datetime, Convert( Char, GL_VchrMaster.VchMas_Date, 103 ), 103 ) Between ";
@@ -439,6 +463,10 @@ namespace SCMSDataLayer
                 {
                     return null;
                 }
+
+                SECURITY_User user = (SECURITY_User)System.Web.HttpContext.Current.Session["user"];
+                string UserLoginId = user.User_Id;
+                string UserGroupId = user.UsrGrp_Id;
 
                 //_cmd.Connection = con;
                 //_cmd.CommandType = CommandType.StoredProcedure;
@@ -515,6 +543,10 @@ namespace SCMSDataLayer
                     _Sql += "               ( SETUP_ChartOfAccount.ChrtAcc_Code = Substring( VoucherDetail.ChrtAcc_Code, 1, Len( SETUP_ChartOfAccount.ChrtAcc_Code ) ) ), ";
                     _Sql += "          SYSTEM_Nature ";
                     _Sql += "    Where ( " + pi_AllAccCode + " = 1 Or SETUP_ChartOfAccount.ChrtAcc_Id Between '" + ps_AccCodeFrom + "' And '" + ps_AccCodeTo + "' ) And ";
+                    _Sql += "          ( SETUP_ChartOfAccount.ChrtAcc_Id in ( Select ChrtAcc_Id ";
+                    _Sql += "                                                   From Security_UserChartOfAccount ";
+                    _Sql += "                                                  Where UserGrp_Id = '" + UserGroupId + "' And ";
+                    _Sql += "                                                        User_Id = '" + UserLoginId + "' ) ) And ";
                     _Sql += "          ( SETUP_ChartOfAccount.ChrtAcc_Level <= " + pi_Level.ToString() + " ) And ";
                     _Sql += "          ( SETUP_ChartOfAccount.Natr_Id = SYSTEM_Nature.Natr_Id ) ";
                     _Sql += " Group By SETUP_ChartOfAccount.ChrtAcc_Id, ";
@@ -555,6 +587,10 @@ namespace SCMSDataLayer
                     _Sql += "     From SETUP_ChartOfAccount, ";
                     _Sql += "          SYSTEM_Nature ";
                     _Sql += "    Where ( " + pi_AllAccCode + " = 1 Or SETUP_ChartOfAccount.ChrtAcc_Id Between '" + ps_AccCodeFrom + "' And '" + ps_AccCodeTo + "' ) And ";
+                    _Sql += "          ( SETUP_ChartOfAccount.ChrtAcc_Id in ( Select ChrtAcc_Id ";
+                    _Sql += "                                                   From Security_UserChartOfAccount ";
+                    _Sql += "                                                  Where UserGrp_Id = '" + UserGroupId + "' And ";
+                    _Sql += "                                                        User_Id = '" + UserLoginId + "' ) ) And ";
                     _Sql += "          ( SETUP_ChartOfAccount.ChrtAcc_Level <= " + pi_Level.ToString() + " ) And ";
                     _Sql += "          ( SETUP_ChartOfAccount.Natr_Id = SYSTEM_Nature.Natr_Id ) ";
                     _Sql += " Group By SETUP_ChartOfAccount.ChrtAcc_Id, ";
@@ -595,6 +631,10 @@ namespace SCMSDataLayer
                     _Sql += "     From SETUP_ChartOfAccount, ";
                     _Sql += "          SYSTEM_Nature ";
                     _Sql += "    Where ( " + pi_AllAccCode + " = 1 Or SETUP_ChartOfAccount.ChrtAcc_Id Between '" + ps_AccCodeFrom + "' And '" + ps_AccCodeTo + "' ) And ";
+                    _Sql += "          ( SETUP_ChartOfAccount.ChrtAcc_Id in ( Select ChrtAcc_Id ";
+                    _Sql += "                                                   From Security_UserChartOfAccount ";
+                    _Sql += "                                                  Where UserGrp_Id = '" + UserGroupId + "' And ";
+                    _Sql += "                                                        User_Id = '" + UserLoginId + "' ) ) And ";
                     _Sql += "          ( SETUP_ChartOfAccount.ChrtAcc_Level <= " + pi_Level.ToString() + " ) And ";
                     _Sql += "          ( SETUP_ChartOfAccount.Natr_Id = SYSTEM_Nature.Natr_Id ) ";
                     _Sql += " Group By SETUP_ChartOfAccount.ChrtAcc_Id, ";
@@ -637,6 +677,10 @@ namespace SCMSDataLayer
                 {
                     return null;
                 }
+
+                SECURITY_User user = (SECURITY_User)System.Web.HttpContext.Current.Session["user"];
+                string UserLoginId = user.User_Id;
+                string UserGroupId = user.UsrGrp_Id;
 
                 //_cmd.Connection = con;
                 //_cmd.CommandType = CommandType.StoredProcedure;
@@ -709,6 +753,10 @@ namespace SCMSDataLayer
                 _Sql += "               ( SETUP_ChartOfAccount.ChrtAcc_Code = Substring( PreviousYear.ChrtAcc_Code, 1, Len( SETUP_ChartOfAccount.ChrtAcc_Code ) ) ), ";
                 _Sql += "          SYSTEM_Nature ";
                 _Sql += "    Where ( SYSTEM_Nature.Natr_Id = SETUP_ChartOfAccount.Natr_Id ) and ";
+                _Sql += "          ( SETUP_ChartOfAccount.ChrtAcc_Id in ( Select ChrtAcc_Id ";
+                _Sql += "                                                   From Security_UserChartOfAccount ";
+                _Sql += "                                                  Where UserGrp_Id = '" + UserGroupId + "' And ";
+                _Sql += "                                                        User_Id = '" + UserLoginId + "' ) ) And ";
                 _Sql += "          ( Lower( SYSTEM_Nature.Natr_SystemTitle ) IN ( LOWER( 'Revenue' ) ) ) and ";
                 _Sql += "          ( SETUP_ChartOfAccount.ChrtAcc_Level <= " + pi_Level.ToString() + " ) ";
                 _Sql += " Group By SYSTEM_Nature.Natr_Title, ";
@@ -765,6 +813,10 @@ namespace SCMSDataLayer
                 _Sql += "               ( SETUP_ChartOfAccount.ChrtAcc_Code = Substring( PreviousYear.ChrtAcc_Code, 1, Len( SETUP_ChartOfAccount.ChrtAcc_Code ) ) ),";
                 _Sql += "          SYSTEM_Nature";
                 _Sql += "    Where ( SYSTEM_Nature.Natr_Id = SETUP_ChartOfAccount.Natr_Id ) and";
+                _Sql += "          ( SETUP_ChartOfAccount.ChrtAcc_Id in ( Select ChrtAcc_Id ";
+                _Sql += "                                                   From Security_UserChartOfAccount ";
+                _Sql += "                                                  Where UserGrp_Id = '" + UserGroupId + "' And ";
+                _Sql += "                                                        User_Id = '" + UserLoginId + "' ) ) And ";
                 _Sql += "          ( Lower( SYSTEM_Nature.Natr_SystemTitle ) = LOWER( 'Expense' ) ) and";
                 _Sql += "          ( SETUP_ChartOfAccount.ChrtAcc_Level <= " + pi_Level.ToString() + " )";
                 _Sql += " Group By SYSTEM_Nature.Natr_Title,";
@@ -805,6 +857,10 @@ namespace SCMSDataLayer
                 {
                     return null;
                 }
+
+                SECURITY_User user = (SECURITY_User)System.Web.HttpContext.Current.Session["user"];
+                string UserLoginId = user.User_Id;
+                string UserGroupId = user.UsrGrp_Id;
 
                 //_cmd.Connection = con;
                 //_cmd.CommandType = CommandType.StoredProcedure;
@@ -878,6 +934,10 @@ namespace SCMSDataLayer
                 _Sql += "               ( SETUP_ChartOfAccount.ChrtAcc_Code = Substring( PreviousYear.ChrtAcc_Code, 1, Len( SETUP_ChartOfAccount.ChrtAcc_Code ) ) ), ";
                 _Sql += "          SYSTEM_Nature ";
                 _Sql += "    Where ( SYSTEM_Nature.Natr_Id = SETUP_ChartOfAccount.Natr_Id ) and ";
+                _Sql += "          ( SETUP_ChartOfAccount.ChrtAcc_Id in ( Select ChrtAcc_Id ";
+                _Sql += "                                                   From Security_UserChartOfAccount ";
+                _Sql += "                                                  Where UserGrp_Id = '" + UserGroupId + "' And ";
+                _Sql += "                                                        User_Id = '" + UserLoginId + "' ) ) And ";
                 _Sql += "          ( Lower( SYSTEM_Nature.Natr_SystemTitle ) IN ( LOWER( 'Assets' ) ) ) and ";
                 _Sql += "          ( SETUP_ChartOfAccount.ChrtAcc_Level <= " + pi_Level.ToString() + " ) ";
                 _Sql += " Group By SYSTEM_Nature.Natr_Title, ";
@@ -940,6 +1000,10 @@ namespace SCMSDataLayer
                 _Sql += "               ( SETUP_ChartOfAccount.ChrtAcc_Code = Substring( PreviousYear.ChrtAcc_Code, 1, Len( SETUP_ChartOfAccount.ChrtAcc_Code ) ) ), ";
                 _Sql += "          SYSTEM_Nature ";
                 _Sql += "    Where ( SYSTEM_Nature.Natr_Id = SETUP_ChartOfAccount.Natr_Id ) and ";
+                _Sql += "          ( SETUP_ChartOfAccount.ChrtAcc_Id in ( Select ChrtAcc_Id ";
+                _Sql += "                                                   From Security_UserChartOfAccount ";
+                _Sql += "                                                  Where UserGrp_Id = '" + UserGroupId + "' And ";
+                _Sql += "                                                        User_Id = '" + UserLoginId + "' ) ) And ";
                 _Sql += "          ( Lower( SYSTEM_Nature.Natr_SystemTitle ) IN ( LOWER( 'Liability' ) ) ) and ";
                 _Sql += "          ( SETUP_ChartOfAccount.ChrtAcc_Level <= " + pi_Level.ToString() + " ) ";
                 _Sql += " Group By SYSTEM_Nature.Natr_Title, ";
@@ -999,6 +1063,10 @@ namespace SCMSDataLayer
                 _Sql += "               ( SETUP_ChartOfAccount.ChrtAcc_Code = Substring( PreviousYear.ChrtAcc_Code, 1, Len( SETUP_ChartOfAccount.ChrtAcc_Code ) ) ),";
                 _Sql += "          SYSTEM_Nature";
                 _Sql += "    Where ( SYSTEM_Nature.Natr_Id = SETUP_ChartOfAccount.Natr_Id ) and";
+                _Sql += "          ( SETUP_ChartOfAccount.ChrtAcc_Id in ( Select ChrtAcc_Id ";
+                _Sql += "                                                   From Security_UserChartOfAccount ";
+                _Sql += "                                                  Where UserGrp_Id = '" + UserGroupId + "' And ";
+                _Sql += "                                                        User_Id = '" + UserLoginId + "' ) ) And ";
                 _Sql += "          ( Lower( SYSTEM_Nature.Natr_SystemTitle ) = LOWER( 'Equity' ) ) and";
                 _Sql += "          ( SETUP_ChartOfAccount.ChrtAcc_Level <= " + pi_Level.ToString() + " )";
                 _Sql += " Group By SYSTEM_Nature.Natr_Title,";

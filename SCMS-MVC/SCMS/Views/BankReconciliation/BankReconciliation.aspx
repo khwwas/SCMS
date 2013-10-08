@@ -9,57 +9,50 @@
 
         $(document).ready(function () {
             //            document.getElementById("txt_Title").focus();
+
+            $('#txt_Date').Zebra_DatePicker({
+                format: 'm/d/Y'
+            });
         });
 
         function SaveRecord() {
             var lcnt_MessageBox = document.getElementById('MessageBox');
             var lcnt_txtSelectedCode = document.getElementById("txt_SelectedCode");
-            var lcnt_txtTitle = document.getElementById('txt_Title');
+            var lcnt_Reconciled = document.getElementById("chk_Reconcilied");
+            var lcnt_ReconDate = document.getElementById("txt_Date");
 
-            if (lcnt_txtTitle.value == "") {
-                FadeIn(lcnt_MessageBox);
-                lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Please! enter title</p>";
-                lcnt_MessageBox.setAttribute("class", "message error");
-                scroll(0, 0);
-                FadeOut(lcnt_MessageBox);
-                lcnt_txtTitle.focus();
-                return;
-            }
-            else {
-                //var Url = document.getElementById('frm_CitySetup').action;
-                //Url += "City/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&ps_Title=" + lcnt_txtTitle.value;
-                document.getElementById("Waiting_Image").style.display = "block";
-                document.getElementById("btn_Save").style.display = "none";
-                $.ajax({
-                    type: "POST",
-                    url: "City/SaveRecord",
-                    data: { ps_Code: lcnt_txtSelectedCode.value, ps_Title: lcnt_txtTitle.value },
-                    success: function (response) {
-                        html = response;
-                        $("#GridContainer").html(response);
-                        ResetForm();
-                        FadeIn(lcnt_MessageBox);
-                        if (document.getElementById("SaveResult").value == "0") {
-                            lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Unable to save record.</p>";
-                            lcnt_MessageBox.setAttribute("class", "message error");
+            document.getElementById("Waiting_Image").style.display = "block";
+            document.getElementById("btn_Save").style.display = "none";
+            $.ajax({
+                type: "POST",
+                url: "BankReconciliation/SaveRecord",
+                data: { ps_Code: lcnt_txtSelectedCode.value, ps_Reconciled: lcnt_Reconciled.value, ps_ReconciliationDate: lcnt_ReconDate.value },
+                success: function (response) {
+                    html = response;
+                    $("#GridContainer").html(response);
+                    ResetForm();
+                    FadeIn(lcnt_MessageBox);
+                    if (document.getElementById("SaveResult").value == "0") {
+                        lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Unable to save record.</p>";
+                        lcnt_MessageBox.setAttribute("class", "message error");
 
-                        } else {
-                            lcnt_MessageBox.innerHTML = "<h5>Success!</h5><p>Record saved successfully.</p>";
-                            lcnt_MessageBox.setAttribute("class", "message success");
-                        }
-                        document.getElementById("Waiting_Image").style.display = "none";
-                        document.getElementById("btn_Save").style.display = "block";
-                        SetGrid();
-                        scroll(0, 0);
-                        FadeOut(lcnt_MessageBox);
-                    },
-                    error: function (rs, e) {
-                        document.getElementById("Waiting_Image").style.display = "none";
-                        document.getElementById("btn_Save").style.display = "block";
-                        SetUserRights();
+                    } else {
+                        lcnt_MessageBox.innerHTML = "<h5>Success!</h5><p>Record saved successfully.</p>";
+                        lcnt_MessageBox.setAttribute("class", "message success");
                     }
-                });
-            }
+                    document.getElementById("Waiting_Image").style.display = "none";
+                    document.getElementById("btn_Save").style.display = "block";
+                    SetGrid();
+                    scroll(0, 0);
+                    FadeOut(lcnt_MessageBox);
+                },
+                error: function (rs, e) {
+                    document.getElementById("Waiting_Image").style.display = "none";
+                    document.getElementById("btn_Save").style.display = "block";
+                    SetUserRights();
+                }
+            });
+
         }
 
         //        function ResetForm() {
@@ -78,9 +71,16 @@
         }
 
         function EditRecord(Id) {
-//            document.getElementById('txt_SelectedCode').value = Id;
-            document.getElementById('txt_Code').value = Id;
-            document.getElementById('txt_Date').value = document.getElementById('txt_Date' + Id).innerHTML.trim().toString();
+            document.getElementById('txt_SelectedCode').value = Id;
+            document.getElementById('txt_Code').value = document.getElementById('txt_Code' + Id).innerHTML.trim().toString();
+            document.getElementById('txt_VoucherDate').value = document.getElementById('txt_VoucherDate' + Id).innerHTML.trim().toString();
+            if (document.getElementById('txt_Reconciliation' + Id).innerHTML.trim().toString() == "1") {
+                document.getElementById('chk_Reconcilied').checked = true;
+            }
+            else {
+                document.getElementById('chk_Reconcilied').checked = false;
+            }
+            document.getElementById('txt_Date').value = document.getElementById('txt_ReconciliationDate' + Id).innerHTML.trim().toString();
             ShowHideSaveButton();
             scroll(0, 0);
         }
@@ -95,14 +95,32 @@
             <div id="MessageBox">
             </div>
             <div class="CustomCell" style="width: 150px; height: 30px">
-                Reconciled</div>
-            <input type="checkbox" class="Checkbox" id="chk_Reconcilied" name="chk_Reconcilied" />
+                Voucher #</div>
+            <div class="CustomCell" style="width: 320px; height: 30px;">
+                <input type="text" class="CustomText" style="width: 100px; font-weight: bold;" id="txt_Code"
+                    name="txt_Code" maxlength="100" value="[Auto]" readonly="readonly" />
+            </div>
+            <div class="CustomCell" style="width: 150px; height: 30px;">
+                Voucher Date</div>
+            <div class="CustomCell" style="width: 200px; height: 30px;">
+                <input type="text" class="CustomText" style="width: 120px;" id="txt_VoucherDate"
+                    name="txt_VoucherDate" value="" readonly="readonly" maxlength="180" />
+            </div>
             <div class="Clear">
             </div>
             <div class="CustomCell" style="width: 150px; height: 30px">
+                Reconciled</div>
+            <div class="CustomCell" style="width: 320px; height: 30px;">
+                <input type="checkbox" class="Checkbox" id="chk_Reconcilied" name="chk_Reconcilied" />
+            </div>
+            <%--<div class="Clear">
+            </div>--%>
+            <div class="CustomCell" style="width: 150px; height: 30px">
                 Reconciliation Date</div>
-            <input type="text" class="CustomText" style="width: 220px;" id="txt_Date" name="txt_Date"
-                value="<%=ViewData["CurrentDate"]%>" maxlength="180" />
+            <div class="CustomCell" style="width: 200px; height: 30px;">
+                <input type="text" class="CustomText" style="width: 120px;" id="txt_Date" name="txt_Date"
+                    value="<%=ViewData["CurrentDate"]%>" maxlength="180" />
+            </div>
             <div class="Clear">
             </div>
             <div style="float: right; margin-bottom: 10px;">

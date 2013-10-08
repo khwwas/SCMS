@@ -1386,8 +1386,8 @@
       <Column Name="VchMas_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="VchMas_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="VchMas_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="VchDet_Remarks" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
-      <Column Name="VchMas_CrAmount" Type="System.Decimal" DbType="Decimal(20,6)" CanBeNull="true" />
+      <Column Name="VchMas_CrAmount" Type="System.Decimal" DbType="Decimal(38,6) NOT NULL" CanBeNull="false" />
+      <Column Name="VchMas_Remarks" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Column Name="VchMas_Reconciliation" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="VchMas_ReconciliationDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </ElementType>

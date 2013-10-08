@@ -85,7 +85,11 @@
             <td id="txt_Title<%=lRow_Data.BankAcc_Id%>" style="vertical-align: middle;">
                 <%=lRow_Data.BankAcc_Title%>
             </td>
-             <td id="ddl_AccountCode<%=lRow_Data.BankAcc_Id%>" style="vertical-align: middle;">
+            <td id="txt_AccountCode<%=lRow_Data.BankAcc_Id%>" style="vertical-align: middle;
+                display: none">
+                <%=lRow_Data.ChrtAcc_Id%>
+            </td>
+            <td id="ddl_AccountCode<%=lRow_Data.BankAcc_Id%>" style="vertical-align: middle;">
                 <%if (ChartOfAccountRow != null)
                   { %>
                 <%=ChartOfAccountRow.ChrtAcc_Title%>
