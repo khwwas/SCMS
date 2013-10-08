@@ -34,7 +34,7 @@
                 Voucher #
             </th>
             <th style="width: 22%;">
-                Narration
+                Remarks
             </th>
             <th style="width: 15%;">
                 Amount
@@ -73,7 +73,7 @@
                 <%=DataRow.VchMas_Code%>
             </td>
             <td id="txt_Remarks<%=DataRow.VchMas_Id%>" style="vertical-align: middle;">
-                <%=DataRow.VchDet_Remarks%>
+                <%=DataRow.VchMas_Remarks%>
             </td>
             <td id="txt_TotalAmount<%=DataRow.VchMas_Id%>" style="vertical-align: middle;">
                 <%=DataRow.VchMas_CrAmount%>

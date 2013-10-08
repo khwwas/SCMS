@@ -26956,9 +26956,9 @@ namespace SCMSDataLayer.DB
 		
 		private string _VchMas_Code;
 		
-		private string _VchDet_Remarks;
+		private decimal _VchMas_CrAmount;
 		
-		private System.Nullable<decimal> _VchMas_CrAmount;
+		private string _VchMas_Remarks;
 		
 		private System.Nullable<int> _VchMas_Reconciliation;
 		
@@ -27064,24 +27064,8 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchDet_Remarks", DbType="VarChar(200)")]
-		public string VchDet_Remarks
-		{
-			get
-			{
-				return this._VchDet_Remarks;
-			}
-			set
-			{
-				if ((this._VchDet_Remarks != value))
-				{
-					this._VchDet_Remarks = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_CrAmount", DbType="Decimal(20,6)")]
-		public System.Nullable<decimal> VchMas_CrAmount
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_CrAmount", DbType="Decimal(38,6) NOT NULL")]
+		public decimal VchMas_CrAmount
 		{
 			get
 			{
@@ -27092,6 +27076,22 @@ namespace SCMSDataLayer.DB
 				if ((this._VchMas_CrAmount != value))
 				{
 					this._VchMas_CrAmount = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VchMas_Remarks", DbType="VarChar(200)")]
+		public string VchMas_Remarks
+		{
+			get
+			{
+				return this._VchMas_Remarks;
+			}
+			set
+			{
+				if ((this._VchMas_Remarks != value))
+				{
+					this._VchMas_Remarks = value;
 				}
 			}
 		}
