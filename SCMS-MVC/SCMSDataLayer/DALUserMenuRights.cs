@@ -237,18 +237,18 @@ namespace SCMSDataLayer
         {
             try
             {
+                string GroupId = "";
+                GroupId = new DALUser().GetAllData().Where(c => c.User_Id.Equals(NewUserId)).SingleOrDefault().UsrGrp_Id;
+
                 SCMSDataContext dbSCMS = Connection.Create();
                 if (SelectedTab == "Menus")
                 {
-                    int GroupId = 0;
-
                     List<Security_UserRight> currentUserMenuRights = dbSCMS.Security_UserRights.Where(c => c.UsrSec_UserId.Equals(Convert.ToInt32(CurrentUserId))).ToList();
 
                     List<Security_UserRight> newUserMenuRights = dbSCMS.Security_UserRights.Where(c => c.UsrSec_UserId.Equals(Convert.ToInt32(NewUserId))).ToList();
 
                     if (newUserMenuRights != null && newUserMenuRights.Count > 0)
                     {
-                        GroupId = Convert.ToInt32(new DALUser().GetAllData().Where(c => c.User_Id.Equals(NewUserId)).SingleOrDefault().UsrGrp_Id);
                         dbSCMS.Security_UserRights.DeleteAllOnSubmit(newUserMenuRights);
                         dbSCMS.SubmitChanges();
                     }
@@ -259,7 +259,7 @@ namespace SCMSDataLayer
                         {
                             Security_UserRight newUserRight = new Security_UserRight();
 
-                            newUserRight.Grp_Id = userRight.Grp_Id;
+                            newUserRight.Grp_Id = Convert.ToInt32(GroupId); //userRight.Grp_Id;
                             newUserRight.Mnu_Id = userRight.Mnu_Id;
                             newUserRight.Mod_Id = userRight.Mod_Id;
                             newUserRight.UsrSec_UserId = Convert.ToInt32(NewUserId).ToString();
@@ -279,15 +279,94 @@ namespace SCMSDataLayer
                 }
                 else if (SelectedTab == "Locations")
                 {
-                    return 0;
+
+                    List<Security_UserLocation> currentUserLocations = dbSCMS.Security_UserLocations.Where(c => c.User_Id.Equals(CurrentUserId)).ToList();
+
+                    List<Security_UserLocation> newUserLocations = dbSCMS.Security_UserLocations.Where(c => c.User_Id.Equals(NewUserId)).ToList();
+
+                    if (newUserLocations != null && newUserLocations.Count > 0)
+                    {
+                        dbSCMS.Security_UserLocations.DeleteAllOnSubmit(newUserLocations);
+                        dbSCMS.SubmitChanges();
+                    }
+
+                    if (currentUserLocations != null && currentUserLocations.Count > 0)
+                    {
+                        foreach (Security_UserLocation userLocation in currentUserLocations)
+                        {
+                            Security_UserLocation newUserLocation = new Security_UserLocation();
+
+                            newUserLocation.UsrGrp_Id = GroupId;
+                            newUserLocation.User_Id = NewUserId;
+                            newUserLocation.Loc_Id = userLocation.Loc_Id;
+
+                            SetUserLocations(newUserLocation);
+                        }
+                    }
+                    else
+                    {
+                        return 0;
+                    }
                 }
                 else if (SelectedTab == "VoucherTypes")
                 {
-                    return 0;
+                    List<Security_UserVoucherType> currentVoucherTypes = dbSCMS.Security_UserVoucherTypes.Where(c => c.User_Id.Equals(CurrentUserId)).ToList();
+
+                    List<Security_UserVoucherType> newVouchertTypes = dbSCMS.Security_UserVoucherTypes.Where(c => c.User_Id.Equals(NewUserId)).ToList();
+
+                    if (newVouchertTypes != null && newVouchertTypes.Count > 0)
+                    {
+                        dbSCMS.Security_UserVoucherTypes.DeleteAllOnSubmit(newVouchertTypes);
+                        dbSCMS.SubmitChanges();
+                    }
+
+                    if (currentVoucherTypes != null && currentVoucherTypes.Count > 0)
+                    {
+                        foreach (Security_UserVoucherType userVoucherType in currentVoucherTypes)
+                        {
+                            Security_UserVoucherType newUserVoucherType = new Security_UserVoucherType();
+
+                            newUserVoucherType.UserGrp_Id = GroupId;
+                            newUserVoucherType.User_Id = NewUserId;
+                            newUserVoucherType.VchrType_Id = userVoucherType.VchrType_Id;
+
+                            SetUserVoucherTypes(newUserVoucherType);
+                        }
+                    }
+                    else
+                    {
+                        return 0;
+                    }
                 }
                 else if (SelectedTab == "ChartOfAccounts")
                 {
-                    return 0;
+                    List<Security_UserChartOfAccount> currentChartOfAccounts = dbSCMS.Security_UserChartOfAccounts.Where(c => c.User_Id.Equals(CurrentUserId)).ToList();
+
+                    List<Security_UserChartOfAccount> newChartOfAccounts = dbSCMS.Security_UserChartOfAccounts.Where(c => c.User_Id.Equals(NewUserId)).ToList();
+
+                    if (newChartOfAccounts != null && newChartOfAccounts.Count > 0)
+                    {
+                        dbSCMS.Security_UserChartOfAccounts.DeleteAllOnSubmit(newChartOfAccounts);
+                        dbSCMS.SubmitChanges();
+                    }
+
+                    if (currentChartOfAccounts != null && currentChartOfAccounts.Count > 0)
+                    {
+                        foreach (Security_UserChartOfAccount userChartOfAccount in currentChartOfAccounts)
+                        {
+                            Security_UserChartOfAccount newUserChartOfAccount = new Security_UserChartOfAccount();
+
+                            newUserChartOfAccount.UserGrp_Id = GroupId;
+                            newUserChartOfAccount.User_Id = NewUserId;
+                            newUserChartOfAccount.ChrtAcc_Id = userChartOfAccount.ChrtAcc_Id;
+
+                            SetUserChartOfAccount(newUserChartOfAccount);
+                        }
+                    }
+                    else
+                    {
+                        return 0;
+                    }
                 }
 
                 return 1;

@@ -445,7 +445,7 @@
     <Content Include="img\0.png" />
     <Content Include="img\accordian_bg.png" />
     <Content Include="img\add.png" />
-    <Content Include="img\ajaxloaderlarge.gif" />
+    <Content Include="img\ajax-loader.gif" />
     <Content Include="img\Ajax_Loading.gif" />
     <Content Include="img\application_double.png" />
     <Content Include="img\arrow-asc.png" />

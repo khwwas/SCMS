@@ -327,7 +327,7 @@
         <div style="display: none; text-align: center;" id="wait">
             <h4>
                 Your request is in progress, Please Wait....</h4>
-            <img src="../../img/ajaxloaderlarge.gif" width="120px" />
+            <img src="../../img/ajax-loader.gif" width="120px" />
         </div>
     </div>
     <script type="text/javascript">
