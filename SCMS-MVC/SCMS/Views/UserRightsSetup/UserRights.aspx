@@ -279,7 +279,7 @@
             </div>
             <div style="float: right">
                 <div style="float: left; margin-right: 5px;">
-                    <input id="btn_Copy" type="button" value="Copy" class="btn btn-blue" onclick="CopyUserRights();"
+                    <input id="btn_Copy" type="button" value="Assign To" class="btn btn-blue" onclick="CopyUserRights();"
                         style="width: 90px; height: 35px; padding-top: 5px; color: White; font-weight: bold;
                         font-size: 11pt;" />
                     <input id="btn_Save" type="button" value="Save" class="btn btn-blue" onclick="SaveRecord();"
@@ -295,7 +295,8 @@
         <div id="PopUpContent">
             <div style="text-align: center; border-bottom: 1px solid #ccc;">
                 <h6>
-                    Select user to copy rights from the previous selected user</h6>
+                    Select user to assign rights as <span id="popupUserName">previous selected user</span>
+                </h6>
             </div>
             <table id="CopyUsers" class=" display" style="width: 100%; padding: 2px; margin-bottom: 5px;">
                 <tbody>
@@ -369,6 +370,8 @@
                 $(this).addClass("Background");
                 $("#HiddenUserId").val(this.id);
 
+                $("#popupUserName").html($($(this).find("td")[1]).html());
+
                 var Arr = $("#HiddenUserId").val().split('|');
                 UserId = Arr[0];
                 GroupId = Arr[1];
@@ -396,6 +399,8 @@
         function SetDefault() {
 
             $("#HiddenUserId").val($("#UserGrid tr")[0].id);
+
+            $("#popupUserName").html($($("#UserGrid tr td")[1]).html());
 
             var Arr = $("#HiddenUserId").val().split('|');
             UserId = Arr[0];
