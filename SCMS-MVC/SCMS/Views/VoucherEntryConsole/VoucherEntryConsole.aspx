@@ -22,6 +22,10 @@
         function EditRecord(Id) {
         }
 
+        function VoucherEntryConsole(locationId) {
+            window.location = '../VoucherEntryConsole?locationId=' + locationId;
+        }
+
         function DeleteRecord(Id) {
             if (confirm("Do you really want to delete this record")) {
                 var MessageBox = document.getElementById('MessageBox');

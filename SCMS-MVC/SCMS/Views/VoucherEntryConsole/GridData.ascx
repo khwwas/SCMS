@@ -18,7 +18,7 @@
 <div class="CustomCell" style="width: 97px; height: 30px;">
     Location</div>
 <div class="CustomCell" style="width: 270px; height: 30px;">
-    <%= Html.DropDownList("ddl_Location", null, new { style = "width:555px;" })%>
+    <%= Html.DropDownList("ddl_Location", null,"All", new { style = "width:555px;", onchange="VoucherEntryConsole(this.value)" })%>
 </div>
 <table id="VoucherEntryConsoleGrid" class="data display datatable">
     <thead>
@@ -56,7 +56,15 @@
         </tr>
     </thead>
     <tbody>
-        <%var DataList = new SCMSDataLayer.DALVoucherEntry().GetVoucherEntryConsoleData(1, "", 1, "", 1, "", "", true);
+        <%List<SCMSDataLayer.DB.sp_VoucherEntryConsoleResult> DataList = new List<SCMSDataLayer.DB.sp_VoucherEntryConsoleResult>();
+          if (ViewData["LocationId"] == null || ViewData["LocationId"] == "")
+          {
+              DataList = new SCMSDataLayer.DALVoucherEntry().GetVoucherEntryConsoleData(1, "", 1, "", 1, "", "", true);
+          }
+          else
+          {
+              DataList = new SCMSDataLayer.DALVoucherEntry().GetVoucherEntryConsoleData(0, ViewData["LocationId"].ToString(), 1, "", 1, "", "", true);
+          }
           if (DataList != null && DataList.Count > 0)
           {
               foreach (SCMSDataLayer.DB.sp_VoucherEntryConsoleResult DataRow in DataList)
