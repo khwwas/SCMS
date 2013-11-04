@@ -12,12 +12,42 @@ namespace SCMS.Controllers
     {
         //
         // GET: /Voucher/
-        public ActionResult Index(string locationId)
+        public ActionResult Index(string p_LocationId, string p_VoucherTypeId)
         {
-            ViewData["ddl_Location"] = new SelectList(new DALLocation().PopulateData(), "Loc_Id", "Loc_Title", locationId);
-            //ddl_Location.
-            //ViewData["ddl_VoucherType"] = new SelectList(new DALVoucherType().PopulateData(), "VchrType_Id", "VchrType_Title", "ddl_VoucherType");
-            ViewData["LocationId"] = locationId;
+            if (p_LocationId != null && p_LocationId.Trim() != "") 
+            {
+                ViewData["ddl_Location"] = new SelectList(new DALLocation().PopulateData(), "Loc_Id", "Loc_Title", p_LocationId);
+                
+            }
+
+            if (p_VoucherTypeId != null && p_VoucherTypeId != "")
+            {
+                ViewData["ddl_VoucherType"] = new SelectList(new DALVoucherType().PopulateData(), "VchrType_Id", "VchrType_Title", p_VoucherTypeId);
+            }
+
+            if (p_LocationId == null || p_LocationId.Trim() == "")
+            {
+                ViewData["AllLoc"] = 1;
+                ViewData["LocationId"] = "";
+            }
+            else
+            {
+                ViewData["AllLoc"] = 0;
+                ViewData["LocationId"] = p_LocationId;
+            }
+
+
+            if (p_VoucherTypeId == null || p_VoucherTypeId.Trim() == "")
+            {
+                ViewData["AllVchrType"] = 1;
+                ViewData["VoucherTypeId"] = "";
+            }
+            else
+            {
+                ViewData["AllVchrType"] = 0;
+                ViewData["VoucherTypeId"] = p_VoucherTypeId;
+            }
+
             return View("VoucherEntryConsole");
         }
 

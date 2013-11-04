@@ -504,6 +504,9 @@
                 document.getElementById("ddl_Status").value = '<%=ViewData["Status"] %>';
                 document.getElementById("ddl_VoucherType").value = '<%=ViewData["VoucherType"] %>';
                 document.getElementById("ddl_Location").value = '<%=ViewData["LocationId"] %>';
+                document.getElementById("ddl_VoucherType").disabled = true;
+                document.getElementById("ddl_Location").disabled = true;
+
                 $(document).ready(function () {
 
                     if ($("#txt_TotalDebit").val() == "") {

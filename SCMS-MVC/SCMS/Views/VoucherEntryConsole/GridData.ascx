@@ -18,7 +18,12 @@
 <div class="CustomCell" style="width: 97px; height: 30px;">
     Location</div>
 <div class="CustomCell" style="width: 270px; height: 30px;">
-    <%= Html.DropDownList("ddl_Location", null,"All", new { style = "width:555px;", onchange="VoucherEntryConsole(this.value)" })%>
+    <%--<%= Html.DropDownList("ddl_Location", null, "All", new { style = "width:555px;", onchange = "VoucherEntryConsole(ddl_Location.value.toString(),ddl_VoucherType.value.toString())" })%>--%>
+</div>
+<div class="CustomCell" style="width: 97px; height: 30px;">
+    Voucher Type</div>
+<div class="CustomCell" style="width: 270px; height: 30px;">
+    <%--<%= Html.DropDownList("ddl_VoucherType", null, "All", new { style = "width:555px;", onchange = "VoucherEntryConsole(ddl_Location.value,ddl_VoucherType.value)" })%>--%>
 </div>
 <table id="VoucherEntryConsoleGrid" class="data display datatable">
     <thead>
@@ -57,14 +62,11 @@
     </thead>
     <tbody>
         <%List<SCMSDataLayer.DB.sp_VoucherEntryConsoleResult> DataList = new List<SCMSDataLayer.DB.sp_VoucherEntryConsoleResult>();
-          if (ViewData["LocationId"] == null || ViewData["LocationId"] == "")
-          {
-              DataList = new SCMSDataLayer.DALVoucherEntry().GetVoucherEntryConsoleData(1, "", 1, "", 1, "", "", true);
-          }
-          else
-          {
-              DataList = new SCMSDataLayer.DALVoucherEntry().GetVoucherEntryConsoleData(0, ViewData["LocationId"].ToString(), 1, "", 1, "", "", true);
-          }
+
+          DataList = new SCMSDataLayer.DALVoucherEntry().GetVoucherEntryConsoleData(Convert.ToInt32(ViewData["AllLoc"]), ViewData["LocationId"].ToString(),
+                                                                                    Convert.ToInt32(ViewData["AllVchrType"]), ViewData["VoucherTypeId"].ToString(), 
+                                                                                    1, "", "", true);
+
           if (DataList != null && DataList.Count > 0)
           {
               foreach (SCMSDataLayer.DB.sp_VoucherEntryConsoleResult DataRow in DataList)

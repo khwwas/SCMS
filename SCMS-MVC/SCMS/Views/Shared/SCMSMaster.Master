@@ -155,19 +155,20 @@
             <ul class="nav main">
                 <li class="ic-typography"><a href="../Home"><span>Home</span></a></li>
                 <li class="ic-typography"><a href="../Dashboard"><span>Application Dashboard</span></a></li>
-                <% 
-                    if (user.UsrGrp_Id != null &&
-                        user.UsrGrp_Id != "" &&
-                        user.UsrGrp_Id == "00001")
-                    {%>
                 <li class="ic-typography"><a href="javascript:" style="float: left"><span>Security</span></a>
                     <ul>
-                        <li><a href="../UserGroup">User Groups</a> </li>
-                        <li><a href="../User">Users</a> </li>
-                        <li><a href="../UserRightsSetup">User Rights</a> </li>
+                        <%foreach (SCMSDataLayer.DB.sp_GetUserMenuRightsResult userMenuRow in userMenus)
+                          {
+                              string rights = userMenuRow.CanAdd.ToString() + "," + userMenuRow.CanEdit.ToString() + "," + userMenuRow.CanDelete.ToString() + "," + userMenuRow.CanPrint.ToString() + "," + userMenuRow.CanImport.ToString();
+
+                              if (userMenuRow.Mnu_Level.Contains("4.") && userMenuRow.SelectedMenu > 0)
+                              {
+                                  Response.Write("<li><a data-rights='" + rights + "' href='" + userMenuRow.Mnu_TargetUrl + "'>" + userMenuRow.Mnu_Description + "</a> </li>");
+                              }
+                          } 
+                        %>
                     </ul>
                 </li>
-                <%}%>
                 <li class="ic-typography"><a href="javascript:"><span>Setups</span></a>
                     <ul>
                         <%foreach (SCMSDataLayer.DB.sp_GetUserMenuRightsResult userMenuRow in userMenus)

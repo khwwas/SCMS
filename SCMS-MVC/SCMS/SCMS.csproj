@@ -140,6 +140,7 @@
     <Compile Include="Controllers\ChartOfAccountController.cs" />
     <Compile Include="Controllers\ApprovalLevelController.cs" />
     <Compile Include="Controllers\BankReconciliationController.cs" />
+    <Compile Include="Controllers\SystemProcessController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DashBoardController.cs" />
@@ -1099,6 +1100,7 @@
     <Content Include="Views\Bank\GridData.ascx" />
     <Content Include="Views\ApprovalLevel\GridData.ascx" />
     <Content Include="Views\ApprovalLevel\ApprovalLevel.aspx" />
+    <Content Include="Views\SystemProcess\SystemProcess.aspx" />
     <Content Include="Views\Employee\Placement.ascx" />
     <Content Include="Views\Employee\Employee.aspx" />
     <Content Include="Views\Employee\GridData.ascx" />

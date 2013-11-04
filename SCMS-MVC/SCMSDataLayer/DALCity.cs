@@ -29,7 +29,7 @@ namespace SCMSDataLayer
 
                 li_ReturnValue = Convert.ToInt32(pRow_NewData.City_Id);
             }
-            catch
+            catch (Exception ex)
             {
                 return 0;
             }

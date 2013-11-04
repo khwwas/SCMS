@@ -22,8 +22,10 @@
         function EditRecord(Id) {
         }
 
-        function VoucherEntryConsole(locationId) {
-            window.location = '../VoucherEntryConsole?locationId=' + locationId;
+        function VoucherEntryConsole(locationId, vchrtypId) {
+            //alert(locationId + " " + vchrtypId);
+            //return false;
+            window.location = "../VoucherEntryConsole?p_LocationId=" + locationId + "&p_VoucherTypeId=" + vchrtypId;
         }
 
         function DeleteRecord(Id) {
