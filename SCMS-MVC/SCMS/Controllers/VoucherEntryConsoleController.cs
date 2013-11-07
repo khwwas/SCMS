@@ -14,15 +14,22 @@ namespace SCMS.Controllers
         // GET: /Voucher/
         public ActionResult Index(string p_LocationId, string p_VoucherTypeId)
         {
-            if (p_LocationId != null && p_LocationId.Trim() != "") 
+            if (p_LocationId != null && p_LocationId.Trim() != "")
             {
                 ViewData["ddl_Location"] = new SelectList(new DALLocation().PopulateData(), "Loc_Id", "Loc_Title", p_LocationId);
-                
+            }
+            else
+            {
+                ViewData["ddl_Location"] = new SelectList(new DALLocation().PopulateData(), "Loc_Id", "Loc_Title");
             }
 
             if (p_VoucherTypeId != null && p_VoucherTypeId != "")
             {
                 ViewData["ddl_VoucherType"] = new SelectList(new DALVoucherType().PopulateData(), "VchrType_Id", "VchrType_Title", p_VoucherTypeId);
+            }
+            else
+            {
+                ViewData["ddl_VoucherType"] = new SelectList(new DALVoucherType().PopulateData(), "VchrType_Id", "VchrType_Title");
             }
 
             if (p_LocationId == null || p_LocationId.Trim() == "")
