@@ -73,6 +73,8 @@
               {%>
         <tr class='odd gradeX' style='line-height: 15px;'>
             <td style="float: left">
+                <%if (DataRow.VchMas_Status != "Cancelled")
+                  { %>
                 <div onclick="javascript:window.location='../Voucher/VoucherEntry?VoucherId=<%=DataRow.VchMas_Id %>'"
                     style="width: 22px; padding-right: 5px; float: left; cursor: pointer;">
                     <img alt="Edit" src="../../img/edit.png" style="width: 22px;" />
@@ -81,6 +83,7 @@
                     float: left; cursor: pointer;">
                     <img alt="Delete" src="../../img/delete.png" style="width: 22px;" />
                 </div>
+                <%} %>
             </td>
             <td id="txt_Location<%=DataRow.VchMas_Id%>" style="vertical-align: middle;">
                 <%=DataRow.Loc_Title%>

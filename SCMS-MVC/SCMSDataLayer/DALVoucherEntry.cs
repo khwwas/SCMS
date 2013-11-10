@@ -114,9 +114,10 @@ namespace SCMSDataLayer
             {
                 SCMSDataContext dbSCMS = Connection.Create();
 
-                li_Result = dbSCMS.ExecuteCommand("Delete From GL_VchrDetail Where VchMas_Id='" + ps_Id + "'");
+                //li_Result = dbSCMS.ExecuteCommand("Delete From GL_VchrDetail Where VchMas_Id='" + ps_Id + "'");
 
-                li_Result = dbSCMS.ExecuteCommand("Delete From GL_VchrMaster Where VchMas_Id='" + ps_Id + "'");
+                //li_Result = dbSCMS.ExecuteCommand("Delete From GL_VchrMaster Where VchMas_Id='" + ps_Id + "'");
+                li_Result = dbSCMS.ExecuteCommand("Update GL_VchrMaster Set VchMas_Status='Cancelled' Where VchMas_Id='" + ps_Id + "'");
                 return 1;
             }
             catch

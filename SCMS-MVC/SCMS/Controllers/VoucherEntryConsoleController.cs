@@ -106,7 +106,7 @@ namespace SCMS.Controllers
         public ActionResult DeleteRecordById(String ps_Id)
         {
             DALVoucherEntry objDal = new DALVoucherEntry();
-            String ls_Action = "Delete", IsAuditTrail = "", ls_UserId = "";
+            String ls_Action = "Cancel", IsAuditTrail = "", ls_UserId = "";
             String[] ls_Lable = new String[7], ls_Data = new String[7];
             Int32 li_ReturnValue = 0;
 
@@ -145,6 +145,12 @@ namespace SCMS.Controllers
                     objAuditLog.SaveRecord(16, ls_UserId, ls_Action, ls_Lable, ls_Data);
                 }
                 // Audit Trail Section End
+                ViewData["ddl_Location"] = new SelectList(new DALLocation().PopulateData(), "Loc_Id", "Loc_Title");
+                ViewData["ddl_VoucherType"] = new SelectList(new DALVoucherType().PopulateData(), "VchrType_Id", "VchrType_Title");
+                ViewData["AllLoc"] = 1;
+                ViewData["LocationId"] = "";
+                ViewData["AllVchrType"] = 1;
+                ViewData["VoucherTypeId"] = "";
 
                 return PartialView("GridData");
             }
