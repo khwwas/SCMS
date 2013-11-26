@@ -24,6 +24,7 @@
             var lcnt_Nature = document.getElementById('ddl_Nature');
             var lcnt_AccountNature = ""; //document.getElementById('ddl_AccNature');
             var lcnt_CodeBeforeEdit = document.getElementById('txt_ExistingCodeBeforeEdit').value;
+            var lcnt_TitleBeforeEdit = document.getElementById('txt_ExistingTitleBeforeEdit').value;
             var li_Type;
 
             if (lcnt_txtTitle.value == "") {
@@ -49,7 +50,7 @@
                     Active = 1;
                 }
                 var dataString = [];
-                dataString[0] = lcnt_txtSelectedCode.value + "║" + lcnt_txtCode.value + "║" + lcnt_txtTitle.value + "║" + lcnt_Level.value + "║" + lcnt_BudgetLevel.value + "║" + Active + "║" + li_Type + "║" + lcnt_Nature.value + "║" + lcnt_AccountNature.value + "║" + lcnt_CodeBeforeEdit;
+                dataString[0] = lcnt_txtSelectedCode.value + "║" + lcnt_txtCode.value + "║" + lcnt_txtTitle.value + "║" + lcnt_Level.value + "║" + lcnt_BudgetLevel.value + "║" + Active + "║" + li_Type + "║" + lcnt_Nature.value + "║" + lcnt_AccountNature.value + "║" + lcnt_CodeBeforeEdit + "║" + lcnt_TitleBeforeEdit;
 
                 document.getElementById("Waiting_Image").style.display = "block";
                 document.getElementById("btn_Save").style.display = "none";
@@ -72,6 +73,11 @@
                         }
                         else if (document.getElementById("SaveResult").value == "-1") {
                             lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Code already exists.</p>";
+                            lcnt_MessageBox.setAttribute("class", "message error");
+
+                        }
+                        else if (document.getElementById("SaveResult").value == "-2") {
+                            lcnt_MessageBox.innerHTML = "<h5>Error!</h5><p>Account title already exists, please enter a different title.</p>";
                             lcnt_MessageBox.setAttribute("class", "message error");
 
                         }
@@ -101,6 +107,7 @@
 
             document.getElementById('txt_SelectedCode').value = "";
             document.getElementById('txt_ExistingCodeBeforeEdit').value = "";
+            document.getElementById('txt_ExistingTitleBeforeEdit').value = "";
             document.getElementById('txt_Code').value = "";
             document.getElementById('txt_Title').value = "";
             document.getElementById('txt_Level').value = "1";
@@ -112,6 +119,7 @@
             document.getElementById('txt_ExistingCodeBeforeEdit').value = ps_Code;
             var txtTitle = document.getElementById('txt_Title' + Id).childNodes[0].nodeValue;
             document.getElementById('txt_Title').value = txtTitle.trim(); //.replace("&nbsp; &nbsp; &nbsp;", "");
+            document.getElementById('txt_ExistingTitleBeforeEdit').value = txtTitle.trim();
             if (document.getElementById('ChrtAcc_Level' + Id).value == "") {
                 document.getElementById('txt_Level').value = "1";
             }
@@ -287,6 +295,7 @@
             </div>
             <div class="CustomCell" style="width: 100px; height: 30px">
                 Title</div>
+            <input type="hidden" id="txt_ExistingTitleBeforeEdit" value="" />
             <input type="text" class="CustomText" style="width: 940px;" id="txt_Title" name="txt_Title"
                 maxlength="100" />
             <div class="Clear">

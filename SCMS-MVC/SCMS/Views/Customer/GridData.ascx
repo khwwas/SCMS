@@ -7,7 +7,7 @@
         padding: 0;
         margin: 0;
         border-radius: 0px;
-         -webkit-border-radius: 0px;
+        -webkit-border-radius: 0px;
         -moz-border-radius: 0px;
     }
     input[type="text"]
@@ -30,9 +30,8 @@
             <th style="width: 10%;">
                 Customer Type
             </th>
-            
             <th style="width: 10%;">
-                Address 
+                Address
             </th>
             <th style="width: 10%;">
                 Email
@@ -46,25 +45,26 @@
         </tr>
     </thead>
     <tbody>
-        <% //var lList_Data = new SCMSDataLayer.DALCustomerType().GetAllCustomer();
-          var CustomerData = new SCMSDataLayer.DB.DALCustomer().GetAllCustomer();
+        <% 
+            //var lList_Data = new SCMSDataLayer.DALCustomerType().GetAllCustomer();
+            var CustomerData = new SCMSDataLayer.DB.DALCustomer().GetAllCustomer();
 
-          // Get location name show in list
-          List<SCMSDataLayer.DB.SETUP_Location> ListLocations = new List<SCMSDataLayer.DB.SETUP_Location>();
-          ListLocations = new SCMSDataLayer.DALLocation().GetAllLocation().ToList();
-          
-          // Get all customer type
-          List<SCMSDataLayer.DB.SETUP_CustomerType> ListCutomerType = new List<SCMSDataLayer.DB.SETUP_CustomerType>();
-          ListCutomerType = new SCMSDataLayer.DALCustomerType().GetAllCustomerType().ToList();
+            // Get location name show in list
+            List<SCMSDataLayer.DB.SETUP_Location> ListLocations = new List<SCMSDataLayer.DB.SETUP_Location>();
+            ListLocations = new SCMSDataLayer.DALLocation().GetAllLocation().ToList();
 
-          if (CustomerData != null && CustomerData.Count > 0)
-          {
-              foreach (SCMSDataLayer.DB.SETUP_Customer RowCustomer in CustomerData)
-              {
-                  SCMSDataLayer.DB.SETUP_Location LocationRow = ListLocations.Where(L => L.Loc_Id.Equals(RowCustomer.Loc_Id)).SingleOrDefault();
-                  SCMSDataLayer.DB.SETUP_CustomerType CustomerTypeRow = ListCutomerType.Where(CT => CT.CustType_Id.Equals(RowCustomer.CustType_Id)).SingleOrDefault();
+            // Get all customer type
+            List<SCMSDataLayer.DB.SETUP_CustomerType> ListCutomerType = new List<SCMSDataLayer.DB.SETUP_CustomerType>();
+            ListCutomerType = new SCMSDataLayer.DALCustomerType().GetAllCustomerType().ToList();
+
+            if (CustomerData != null && CustomerData.Count > 0)
+            {
+                foreach (SCMSDataLayer.DB.SETUP_Customer RowCustomer in CustomerData)
+                {
+                    SCMSDataLayer.DB.SETUP_Location LocationRow = ListLocations.Where(L => L.Loc_Id.Equals(RowCustomer.Loc_Id)).SingleOrDefault();
+                    SCMSDataLayer.DB.SETUP_CustomerType CustomerTypeRow = ListCutomerType.Where(CT => CT.CustType_Id.Equals(RowCustomer.CustType_Id)).SingleOrDefault();
                   
-                  %>
+        %>
         <tr class='odd gradeX' style='line-height: 15px;'>
             <td>
                 <div onclick="javascript:return EditRecord('<%=RowCustomer.Cust_Id %>')" style="width: 22px;
@@ -76,7 +76,7 @@
                     <img alt="Delete" src="../../img/delete.png" style="width: 22px; vertical-align: middle" />
                 </div>
             </td>
-                        <td id="txt_Title<%=RowCustomer.Cust_Id%>" style="vertical-align: middle;">
+            <td id="txt_Title<%=RowCustomer.Cust_Id%>" style="vertical-align: middle;">
                 <%=RowCustomer.Cust_Title%>
             </td>
             <td id="ddl_location<%=RowCustomer.Cust_Id%>" style="vertical-align: middle;">
@@ -85,7 +85,6 @@
             <td id="ddl_CustomerType<%=RowCustomer.Cust_Id%>" style="vertical-align: middle;">
                 <%=CustomerTypeRow.CustType_Title%>
             </td>
-
             <td id="txt_Address<%=RowCustomer.Cust_Id%>" style="vertical-align: middle;">
                 <%=RowCustomer.Cust_Address1%>
             </td>
@@ -100,7 +99,7 @@
             </td>
         </tr>
         <%}
-          }
+            }
           
         %>
     </tbody>

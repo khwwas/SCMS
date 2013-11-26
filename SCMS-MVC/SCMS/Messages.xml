@@ -1,0 +1,11 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <Messages>
+    <Title>Error</Title>
+    <Description>Unable to save record!</Description>
+  </Messages>
+  <Messages>
+    <Title>Success</Title>
+    <Description>Record Saved Successfully!</Description>
+  </Messages>
+</NewDataSet>

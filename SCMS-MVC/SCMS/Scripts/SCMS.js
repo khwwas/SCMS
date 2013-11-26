@@ -141,3 +141,24 @@ function ValuePlus(id) {
     });
 })(jQuery);
 
+function GetMessage(MessageType) {
+    if (MessageType == "SaveError") {
+        return "Unable to save record!";
+    }
+    else if (MessageType == "DeleteError") {
+        return "Unable to delete record!";
+    }
+    else if (MessageType == "DuplicateError") {
+        return "Description should not be duplicate!";
+    }
+    else if (MessageType == "UnkownError") {
+        return "An unknown error occured!";
+    }
+    else if (MessageType == "SaveSuccess") {
+        return "Record saved successfully!";
+    }
+    else if (MessageType == "DeleteSuccess") {
+        return "Record deleted successfully!";
+    }
+    return "";
+}

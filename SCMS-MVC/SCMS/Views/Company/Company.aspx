@@ -46,11 +46,11 @@
                         ResetForm();
                         FadeIn(MessageBox);
                         if (document.getElementById("SaveResult").value == "0") {
-                            MessageBox.innerHTML = "<h5>Error!</h5><p>Unable to save record.</p>";
+                            MessageBox.innerHTML = "<h5>Error!</h5><p>" + GetMessage("SaveError") + "</p>";
                             MessageBox.setAttribute("class", "message error");
 
                         } else {
-                            MessageBox.innerHTML = "<h5>Success!</h5><p>Record saved successfully.</p>";
+                            MessageBox.innerHTML = "<h5>Success!</h5><p>" + GetMessage("SaveSuccess") + "</p>";
                             MessageBox.setAttribute("class", "message success");
                         }
                         document.getElementById("Waiting_Image").style.display = "none";
