@@ -2,12 +2,11 @@
     Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    Voucher Entry Console
+    Budget Console
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <script type="text/javascript">
         $(document).ready(function () {
-            //            document.getElementById('ddl_location').disabled = true;
         });
 
         function EditRecord(Id) {
@@ -20,7 +19,7 @@
         function DeleteRecord(Id) {
             if (confirm("Do you really want to cancel this record")) {
                 var MessageBox = document.getElementById('MessageBox');
-                var Url = document.getElementById('frm_VoucherEntryConsole').action;
+                var Url = document.getElementById('frm_BudgetConsole').action;
                 Url += "VoucherEntryConsole/DeleteRecordById?ps_Id=" + Id;
                 $.ajax({
                     type: "GET",
@@ -50,10 +49,10 @@
         }
 
     </script>
-    <form id="frm_VoucherEntryConsole" action='<%=Url.Content("~/") %>'>
+    <form id="frm_BudgetConsole" action='<%=Url.Content("~/") %>'>
     <div class="box round first fullpage grid">
         <h2>
-            Voucher Entry Console</h2>
+            Budget Console</h2>
         <div class="block">
             <div id="MessageBox">
             </div>

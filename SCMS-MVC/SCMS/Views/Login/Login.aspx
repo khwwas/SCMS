@@ -118,7 +118,7 @@
                         </div>
                         <div class="Clear">
                         </div>
-                        <div style="float: left; margin-left: 139px;">
+                        <div style="float: left; margin-left: 141px;">
                             <input id="btn_Login" type="button" value="Login" class="btn btn-blue" onclick="ValidateUser();"
                                 style="width: 90px; height: 35px; padding-top: 5px; color: White; font-weight: bold;
                                 font-size: 11pt" />

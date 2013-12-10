@@ -310,6 +310,7 @@
       <Association Name="SETUP_Company_SETUP_VoucherType" Member="SETUP_VoucherTypes" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_VoucherType" />
       <Association Name="SETUP_Company_SETUP_BankAccount" Member="SETUP_BankAccounts" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_BankAccount" />
       <Association Name="SETUP_Company_GL_VchrMaster" Member="GL_VchrMasters" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="GL_VchrMaster" />
+      <Association Name="SETUP_Company_SYSTEM_BudgetType" Member="SYSTEM_BudgetTypes" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SYSTEM_BudgetType" />
     </Type>
   </Table>
   <Table Name="dbo.SETUP_CompanyModule" Member="SETUP_CompanyModules">
@@ -569,6 +570,7 @@
       <Association Name="SETUP_Location_SYSTEM_AuditTrail" Member="SYSTEM_AuditTrails" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SYSTEM_AuditTrail" />
       <Association Name="SETUP_Location_SETUP_BankAccount" Member="SETUP_BankAccounts" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_BankAccount" />
       <Association Name="SETUP_Location_GL_VchrMaster" Member="GL_VchrMasters" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="GL_VchrMaster" />
+      <Association Name="SETUP_Location_SYSTEM_BudgetType" Member="SYSTEM_BudgetTypes" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SYSTEM_BudgetType" />
       <Association Name="SETUP_Company_SETUP_Location" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
     </Type>
   </Table>
@@ -821,6 +823,20 @@
       <Association Name="SETUP_Company_GL_VchrMaster" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
       <Association Name="SETUP_Location_GL_VchrMaster" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
       <Association Name="SETUP_VoucherType_GL_VchrMaster" Member="SETUP_VoucherType" ThisKey="VchrType_Id" OtherKey="VchrType_Id" Type="SETUP_VoucherType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SYSTEM_BudgetType" Member="SYSTEM_BudgetTypes">
+    <Type Name="SYSTEM_BudgetType">
+      <Column Name="BgdtType_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="BgdtType_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cmp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="BgdtType_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="BgdtType_Prefix" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="BgdtType_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BgdtType_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SETUP_Company_SYSTEM_BudgetType" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
+      <Association Name="SETUP_Location_SYSTEM_BudgetType" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.sp_GetApprovalLevelList" Method="sp_GetApprovalLevelList">

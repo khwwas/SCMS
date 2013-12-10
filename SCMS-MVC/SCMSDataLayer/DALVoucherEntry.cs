@@ -98,7 +98,7 @@ namespace SCMSDataLayer
             try
             {
                 SCMSDataContext dbSCMS = Connection.Create();
-                return dbSCMS.GL_VchrMasters.OrderBy(c => c.VchMas_Id).ToList();
+                return dbSCMS.GL_VchrMasters.Where(c => c.VchMas_Status == "Approved").OrderBy(c => c.VchMas_Id ).ToList();
             }
             catch
             {

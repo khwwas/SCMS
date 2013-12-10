@@ -11,7 +11,6 @@ namespace SCMS.Controllers
 {
     public class ReportSelectionCriteriaController : Controller
     {
-
         public ActionResult Index(string ps_ReportName)
         {
             ViewData["ddl_Location"] = new SelectList(new DALLocation().PopulateData(), "Loc_Id", "Loc_Title");

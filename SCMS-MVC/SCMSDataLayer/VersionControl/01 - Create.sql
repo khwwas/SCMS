@@ -293,6 +293,193 @@ GO
 ALTER TABLE [dbo].[SETUP_Location] CHECK CONSTRAINT [FK_SETUPLocation_SETUPCompany_CmpId]
 GO
 
+CREATE TABLE [dbo].[SETUP_CodeAnalysis1](
+	[CA_Id] [varchar](50) NOT NULL,
+	[CA_Code] [varchar](50) NULL,
+	[Cmp_Id] [varchar](50) NULL,
+	[Loc_Id] [varchar](50) NULL,
+	[CA_Title] [varchar](100) NULL,
+	[CA_Active] [int] NULL,
+	[CA_SortOrder] [int] NULL,
+ CONSTRAINT [PK_SETUPCodeAnalysis1_CAId] PRIMARY KEY CLUSTERED 
+(
+	[CA_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[SETUP_CodeAnalysis1]  WITH CHECK ADD  CONSTRAINT [FK_SETUPCodeAnalysis1_SETUPCompany_CmpId] FOREIGN KEY([Cmp_Id])
+REFERENCES [dbo].[SETUP_Company] ([Cmp_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_CodeAnalysis1] CHECK CONSTRAINT [FK_SETUPCodeAnalysis1_SETUPCompany_CmpId]
+GO
+
+ALTER TABLE [dbo].[SETUP_CodeAnalysis1]  WITH CHECK ADD  CONSTRAINT [FK_SETUPCodeAnalysis1_SETUPLocation_LocId] FOREIGN KEY([Loc_Id])
+REFERENCES [dbo].[SETUP_Location] ([Loc_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_CodeAnalysis1] CHECK CONSTRAINT [FK_SETUPCodeAnalysis1_SETUPLocation_LocId]
+GO
+
+
+CREATE TABLE [dbo].[SETUP_CodeAnalysis2](
+	[CA_Id] [varchar](50) NOT NULL,
+	[CA_Code] [varchar](50) NULL,
+	[Cmp_Id] [varchar](50) NULL,
+	[Loc_Id] [varchar](50) NULL,
+	[CA_Title] [varchar](100) NULL,
+	[CA_Active] [int] NULL,
+	[CA_SortOrder] [int] NULL,
+ CONSTRAINT [PK_SETUPCodeAnalysis2_CAId] PRIMARY KEY CLUSTERED 
+(
+	[CA_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+ALTER TABLE [dbo].[SETUP_CodeAnalysis2]  WITH CHECK ADD  CONSTRAINT [FK_SETUPCodeAnalysis2_SETUPCompany_CmpId] FOREIGN KEY([Cmp_Id])
+REFERENCES [dbo].[SETUP_Company] ([Cmp_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_CodeAnalysis2] CHECK CONSTRAINT [FK_SETUPCodeAnalysis2_SETUPCompany_CmpId]
+GO
+
+ALTER TABLE [dbo].[SETUP_CodeAnalysis2]  WITH CHECK ADD  CONSTRAINT [FK_SETUPCodeAnalysis2_SETUPLocation_LocId] FOREIGN KEY([Loc_Id])
+REFERENCES [dbo].[SETUP_Location] ([Loc_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_CodeAnalysis2] CHECK CONSTRAINT [FK_SETUPCodeAnalysis2_SETUPLocation_LocId]
+GO
+
+CREATE TABLE [dbo].[SETUP_CodeAnalysis3](
+	[CA_Id] [varchar](50) NOT NULL,
+	[CA_Code] [varchar](50) NULL,
+	[Cmp_Id] [varchar](50) NULL,
+	[Loc_Id] [varchar](50) NULL,
+	[CA_Title] [varchar](100) NULL,
+	[CA_Active] [int] NULL,
+	[CA_SortOrder] [int] NULL,
+ CONSTRAINT [PK_SETUPCodeAnalysis3_CAId] PRIMARY KEY CLUSTERED 
+(
+	[CA_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+ALTER TABLE [dbo].[SETUP_CodeAnalysis3]  WITH CHECK ADD  CONSTRAINT [FK_SETUPCodeAnalysis3_SETUPCompany_CmpId] FOREIGN KEY([Cmp_Id])
+REFERENCES [dbo].[SETUP_Company] ([Cmp_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_CodeAnalysis3] CHECK CONSTRAINT [FK_SETUPCodeAnalysis3_SETUPCompany_CmpId]
+GO
+
+ALTER TABLE [dbo].[SETUP_CodeAnalysis3]  WITH CHECK ADD  CONSTRAINT [FK_SETUPCodeAnalysis3_SETUPLocation_LocId] FOREIGN KEY([Loc_Id])
+REFERENCES [dbo].[SETUP_Location] ([Loc_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_CodeAnalysis3] CHECK CONSTRAINT [FK_SETUPCodeAnalysis3_SETUPLocation_LocId]
+GO
+
+
+CREATE TABLE [dbo].[SETUP_CodeAnalysis4](
+	[CA_Id] [varchar](50) NOT NULL,
+	[CA_Code] [varchar](50) NULL,
+	[Cmp_Id] [varchar](50) NULL,
+	[Loc_Id] [varchar](50) NULL,
+	[CA_Title] [varchar](100) NULL,
+	[CA_Active] [int] NULL,
+	[CA_SortOrder] [int] NULL,
+ CONSTRAINT [PK_SETUPCodeAnalysis4_CAId] PRIMARY KEY CLUSTERED 
+(
+	[CA_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[SETUP_CodeAnalysis4]  WITH CHECK ADD  CONSTRAINT [FK_SETUPCodeAnalysis4_SETUPCompany_CmpId] FOREIGN KEY([Cmp_Id])
+REFERENCES [dbo].[SETUP_Company] ([Cmp_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_CodeAnalysis4] CHECK CONSTRAINT [FK_SETUPCodeAnalysis4_SETUPCompany_CmpId]
+GO
+
+ALTER TABLE [dbo].[SETUP_CodeAnalysis4]  WITH CHECK ADD  CONSTRAINT [FK_SETUPCodeAnalysis4_SETUPLocation_LocId] FOREIGN KEY([Loc_Id])
+REFERENCES [dbo].[SETUP_Location] ([Loc_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_CodeAnalysis4] CHECK CONSTRAINT [FK_SETUPCodeAnalysis4_SETUPLocation_LocId]
+GO
+
+CREATE TABLE [dbo].[SETUP_CodeAnalysis5](
+	[CA_Id] [varchar](50) NOT NULL,
+	[CA_Code] [varchar](50) NULL,
+	[Cmp_Id] [varchar](50) NULL,
+	[Loc_Id] [varchar](50) NULL,
+	[CA_Title] [varchar](100) NULL,
+	[CA_Active] [int] NULL,
+	[CA_SortOrder] [int] NULL,
+ CONSTRAINT [PK_SETUPCodeAnalysis5_CAId] PRIMARY KEY CLUSTERED 
+(
+	[CA_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[SETUP_CodeAnalysis5]  WITH CHECK ADD  CONSTRAINT [FK_SETUPCodeAnalysis5_SETUPCompany_CmpId] FOREIGN KEY([Cmp_Id])
+REFERENCES [dbo].[SETUP_Company] ([Cmp_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_CodeAnalysis5] CHECK CONSTRAINT [FK_SETUPCodeAnalysis5_SETUPCompany_CmpId]
+GO
+
+ALTER TABLE [dbo].[SETUP_CodeAnalysis5]  WITH CHECK ADD  CONSTRAINT [FK_SETUPCodeAnalysis5_SETUPLocation_LocId] FOREIGN KEY([Loc_Id])
+REFERENCES [dbo].[SETUP_Location] ([Loc_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_CodeAnalysis5] CHECK CONSTRAINT [FK_SETUPCodeAnalysis5_SETUPLocation_LocId]
+GO
+
+CREATE TABLE [dbo].[SETUP_CodeAnalysis6](
+	[CA_Id] [varchar](50) NOT NULL,
+	[CA_Code] [varchar](50) NULL,
+	[Cmp_Id] [varchar](50) NULL,
+	[Loc_Id] [varchar](50) NULL,
+	[CA_Title] [varchar](100) NULL,
+	[CA_Active] [int] NULL,
+	[CA_SortOrder] [int] NULL,
+ CONSTRAINT [PK_SETUPCodeAnalysis6_CAId] PRIMARY KEY CLUSTERED 
+(
+	[CA_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[SETUP_CodeAnalysis6]  WITH CHECK ADD  CONSTRAINT [FK_SETUPCodeAnalysis6_SETUPCompany_CmpId] FOREIGN KEY([Cmp_Id])
+REFERENCES [dbo].[SETUP_Company] ([Cmp_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_CodeAnalysis6] CHECK CONSTRAINT [FK_SETUPCodeAnalysis6_SETUPCompany_CmpId]
+GO
+
+ALTER TABLE [dbo].[SETUP_CodeAnalysis6]  WITH CHECK ADD  CONSTRAINT [FK_SETUPCodeAnalysis6_SETUPLocation_LocId] FOREIGN KEY([Loc_Id])
+REFERENCES [dbo].[SETUP_Location] ([Loc_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_CodeAnalysis6] CHECK CONSTRAINT [FK_SETUPCodeAnalysis6_SETUPLocation_LocId]
+GO
+
 CREATE TABLE [dbo].[SETUP_Country](
 	[Cnty_Id] [varchar](50) NOT NULL,
 	[Cnty_Code] [varchar](50) NULL,
@@ -742,38 +929,6 @@ GO
 ALTER TABLE [dbo].[SETUP_ChartOfAccount] CHECK CONSTRAINT [FK_SETUPChartOfAccount_SYSTEMAccountNature_AccNatrId]
 GO
 
-
-CREATE TABLE [dbo].[SETUP_CodeAnalysis1](
-	[CA_Id] [varchar](50) NOT NULL,
-	[CA_Code] [varchar](50) NULL,
-	[Cmp_Id] [varchar](50) NULL,
-	[Loc_Id] [varchar](50) NULL,
-	[CA_Title] [varchar](100) NULL,
-	[CA_Active] [int] NULL,
-	[CA_SortOrder] [int] NULL,
- CONSTRAINT [PK_SETUPCA_CAId] PRIMARY KEY CLUSTERED 
-(
-	[CA_Id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
-
-GO
-
-ALTER TABLE [dbo].[SETUP_CodeAnalysis1]  WITH CHECK ADD  CONSTRAINT [FK_SETUPCA_SETUPCompany_CmpId] FOREIGN KEY([Cmp_Id])
-REFERENCES [dbo].[SETUP_Company] ([Cmp_Id])
-GO
-
-ALTER TABLE [dbo].[SETUP_CodeAnalysis1] CHECK CONSTRAINT [FK_SETUPCA_SETUPCompany_CmpId]
-GO
-
-ALTER TABLE [dbo].[SETUP_CodeAnalysis1]  WITH CHECK ADD  CONSTRAINT [FK_SETUPCA_SETUPLocation_LocId] FOREIGN KEY([Loc_Id])
-REFERENCES [dbo].[SETUP_Location] ([Loc_Id])
-GO
-
-ALTER TABLE [dbo].[SETUP_CodeAnalysis1] CHECK CONSTRAINT [FK_SETUPCA_SETUPLocation_LocId]
-GO
-
-
 CREATE TABLE [dbo].[GL_VchrMaster](
 	[VchMas_Id] [varchar](50) NOT NULL,
 	[VchMas_Code] [varchar](50) NULL,
@@ -870,6 +1025,121 @@ GO
 
 
 
+
+
+
+CREATE TABLE [dbo].[SETUP_Shift](
+	[Shft_Id] [varchar](50) NOT NULL,
+	[Shft_Code] [varchar](50) NULL,
+	[Shft_Title] [varchar](100) NULL,
+	[Shft_Abbreviation] [varchar](50) NULL,
+	[Shft_StartTime] [datetime] NULL,
+	[Shft_EndTime] [datetime] NULL,
+	[Shft_Active] [int] NULL,
+	[Shft_SortOrder] [int] NULL,
+	[Shift_BreakStartTime] [datetime] Null,
+    [Shift_BreakEndTime] [datetime] null,
+    [Shift_BreakDuration] [datetime] null,
+    [Shift_GraceIn] [varchar](50) null,
+    [Shift_GraceEarly] [varchar](50) null
+ CONSTRAINT [PK_SETUPNationality_NatnId] PRIMARY KEY CLUSTERED 
+(
+	[Shft_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+CREATE TABLE [dbo].[SETUP_EmployeeType](
+	[EmpTyp_Id] [varchar](50) NOT NULL,
+	[EmpTyp_Code] [varchar](50) NULL,
+	[EmpTyp_Title] [varchar](100) NULL,
+	[EmpTyp_Abbreviation] [varchar](50) NULL,
+	[EmpTyp_Active] [int] NULL,
+	[EmpTyp_SortOrder] [int] NULL,
+ CONSTRAINT [PK_SETUPEmployeeType_EmpTypId] PRIMARY KEY CLUSTERED 
+(
+	[EmpTyp_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+CREATE TABLE [dbo].[SETUP_Gender](
+	[Gndr_Id] [varchar](50) NOT NULL,
+	[Gndr_Code] [varchar](50) NULL,
+	[Gndr_Title] [varchar](100) NULL,
+	[Gndr_Abbreviation] [varchar](50) NULL,
+	[Gndr_Active] [int] NULL,
+	[Gndr_SortOrder] [int] NULL,
+ CONSTRAINT [PK_SETUPGender_GndrId] PRIMARY KEY CLUSTERED 
+(
+	[Gndr_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+CREATE TABLE [dbo].[SETUP_Religion](
+	[Rlgn_Id] [varchar](50) NOT NULL,
+	[Rlgn_Code] [varchar](50) NULL,
+	[Rlgn_Title] [varchar](100) NULL,
+	[Rlgn_Abbreviation] [varchar](50) NULL,
+	[Rlgn_Active] [int] NULL,
+	[Rlgn_SortOrder] [int] NULL,
+ CONSTRAINT [PK_SETUPReligion_RlgnId] PRIMARY KEY CLUSTERED 
+(
+	[Rlgn_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+CREATE TABLE [dbo].[SETUP_MaritalStatus](
+	[MS_Id] [varchar](50) NOT NULL,
+	[MS_Code] [varchar](50) NULL,
+	[MS_Title] [varchar](100) NULL,
+	[MS_Abbreviation] [varchar](50) NULL,
+	[MS_Active] [int] NULL,
+	[MS_SortOrder] [int] NULL,
+ CONSTRAINT [PK_SETUPMaritalStatus_MSId] PRIMARY KEY CLUSTERED 
+(
+	[MS_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+CREATE TABLE [dbo].[SETUP_Nationality](
+	[Natn_Id] [varchar](50) NOT NULL,
+	[Natn_Code] [varchar](50) NULL,
+	[Natn_Title] [varchar](100) NULL,
+	[Natn_Abbreviation] [varchar](50) NULL,
+	[Natn_Active] [int] NULL,
+	[Natn_SortOrder] [int] NULL,
+ CONSTRAINT [PK_SETUPNationality_NatnId] PRIMARY KEY CLUSTERED 
+(
+	[Natn_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ CREATE TABLE [dbo].[SETUP_LeaveType](
+	[LevTyp_Id] [varchar](50) NOT NULL,
+	[LevTyp_Code] [varchar](50) NULL,
+	[Cmp_Id] [varchar](50) NULL,
+	[Loc_Id] [varchar](50) NULL,
+	[LevTyp_Title] [varchar](100) NULL,
+	[LevTyp_Active] [int] NULL,
+	[LevTyp_SortOrder] [int] NULL,
+	[LevTyp_Abbreviation] [varchar](50) NULL,
+	[LevTyp_Count] [varchar](100) NULL,
+ CONSTRAINT [PK_SETUPLeaveType_LevTypId] PRIMARY KEY CLUSTERED 
+(
+	[LevTyp_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
 
 
 CREATE TABLE [dbo].[SETUP_LeaveGroup](
@@ -1084,5 +1354,47 @@ GO
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 SET ANSI_PADDING OFF
 GO
+
+
+
+
+
+
+
+
+

@@ -129,6 +129,7 @@
     <Content Include="VersionControl\01 - Create.sql" />
     <Content Include="VersionControl\02 - SP.sql" />
     <Content Include="VersionControl\03 - Insert.sql" />
+    <Content Include="VersionControl\04 - Create-TMS.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

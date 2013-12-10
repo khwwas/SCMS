@@ -569,13 +569,15 @@
                         maxlength="200" tabindex="2" />
                 </div>
                 <div class="CustomCell" style="width: 118px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Debit" maxlength="50" tabindex="3"/>
+                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Debit" maxlength="50"
+                        tabindex="3" />
                 </div>
                 <div class="CustomCell" style="width: 118px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Credit" maxlength="50" tabindex="4" />
+                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Credit" maxlength="50"
+                        tabindex="4" />
                 </div>
             </div>
-            <div class="detailRow" style="float: left; width: auto;">
+            <%--<div class="detailRow" style="float: left; width: auto;">
                 <div class="CustomCell" style="width: 250px; height: 30px;" >
                     <%= Html.DropDownList("ddl_Account", null, new { style = "width:250px;" }) %>
                 </div>
@@ -617,6 +619,7 @@
                     <input type="text" class="CustomText" style="width: 100px;" name="txt_Credit" maxlength="50" tabindex="16"/>
                 </div>
             </div>
+            --%>
             <%} %>
             <div class="img_Container" style="float: left;">
                 <img id="btn_AddNewRow" alt="Add New" src="../../img/add.png" style="width: 30px;

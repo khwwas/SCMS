@@ -52,31 +52,33 @@ END
 
 GO
 
+/****** Object:  StoredProcedure [dbo].[sp_GetUserMenuRights]    Script Date: 04/11/2013 20:37:47 ******/
 -- =============================================
 -- Author:		<Author,,Waqas Akhtar>
 -- Create date: 13/03/2013
 -- Description:	Create for retrieving data from usermenuoptions and selected menu options for groups
 -- =============================================
-
-Create Procedure sp_GetUserMenuRights(@GroupId varchar(50))
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE Procedure [dbo].[sp_GetUserMenuRights](@GroupId varchar(50))
 As
 Begin
-
-Select Security_MenuOptions.Mnu_Id,
-       Security_MenuOptions.Mnu_Description,
-       Security_MenuOptions.Mnu_TargetUrl,
-       Security_MenuOptions.Mnu_Level,
-       Security_MenuOptions.Mod_Id,
-       IsNull(Security_UserRights.Mnu_Id,0) as SelectedMenu 
-  From Security_MenuOptions Left Outer Join Security_UserRights On
-            Security_UserRights.Mnu_Id = Security_MenuOptions.Mnu_Id And
-            Security_UserRights.Grp_Id = @GroupId
+  Select Security_MenuOptions.Mnu_Id,
+         Security_MenuOptions.Mnu_Description,
+         Security_MenuOptions.Mnu_TargetUrl,
+         Security_MenuOptions.Mnu_Level,
+         Security_MenuOptions.Mnu_SortOrder,
+         Security_MenuOptions.Mnu_IsLineBreak,
+         Security_MenuOptions.Mod_Id,
+         IsNull(Security_UserRights.Mnu_Id,0) as SelectedMenu 
+    From Security_MenuOptions Left Outer Join Security_UserRights On
+              ( Security_UserRights.Mnu_Id = Security_MenuOptions.Mnu_Id ) And
+              ( Security_UserRights.Grp_Id = @GroupId )
+Order By Security_MenuOptions.Mnu_SortOrder
  End
-
-
-
-
-
+ GO
 
 
 
@@ -445,3 +447,61 @@ Select Distinct SETUP_Location.Loc_Id,
 		   GL_VchrMaster.VchMas_Date;
 
 END
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/****** Object:  StoredProcedure [dbo].[sp_GetLeaveTypesList]    Script Date: 04/12/2013 00:23:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[sp_GetLeaveTypesList]
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT *
+	  From SETUP_LeaveType Left Join
+	       SETUP_Location 
+	 On SETUP_LeaveType.Loc_Id = SETUP_Location.Loc_Id
+END
+Go
+
+

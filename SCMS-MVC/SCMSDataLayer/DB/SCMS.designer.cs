@@ -189,6 +189,9 @@ namespace SCMSDataLayer.DB
     partial void InsertGL_VchrMaster(GL_VchrMaster instance);
     partial void UpdateGL_VchrMaster(GL_VchrMaster instance);
     partial void DeleteGL_VchrMaster(GL_VchrMaster instance);
+    partial void InsertSYSTEM_BudgetType(SYSTEM_BudgetType instance);
+    partial void UpdateSYSTEM_BudgetType(SYSTEM_BudgetType instance);
+    partial void DeleteSYSTEM_BudgetType(SYSTEM_BudgetType instance);
     #endregion
 		
 		public SCMSDataContext() : 
@@ -642,6 +645,14 @@ namespace SCMSDataLayer.DB
 			get
 			{
 				return this.GetTable<GL_VchrMaster>();
+			}
+		}
+		
+		public System.Data.Linq.Table<SYSTEM_BudgetType> SYSTEM_BudgetTypes
+		{
+			get
+			{
+				return this.GetTable<SYSTEM_BudgetType>();
 			}
 		}
 		
@@ -7120,6 +7131,8 @@ namespace SCMSDataLayer.DB
 		
 		private EntitySet<GL_VchrMaster> _GL_VchrMasters;
 		
+		private EntitySet<SYSTEM_BudgetType> _SYSTEM_BudgetTypes;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -7173,6 +7186,7 @@ namespace SCMSDataLayer.DB
 			this._SETUP_VoucherTypes = new EntitySet<SETUP_VoucherType>(new Action<SETUP_VoucherType>(this.attach_SETUP_VoucherTypes), new Action<SETUP_VoucherType>(this.detach_SETUP_VoucherTypes));
 			this._SETUP_BankAccounts = new EntitySet<SETUP_BankAccount>(new Action<SETUP_BankAccount>(this.attach_SETUP_BankAccounts), new Action<SETUP_BankAccount>(this.detach_SETUP_BankAccounts));
 			this._GL_VchrMasters = new EntitySet<GL_VchrMaster>(new Action<GL_VchrMaster>(this.attach_GL_VchrMasters), new Action<GL_VchrMaster>(this.detach_GL_VchrMasters));
+			this._SYSTEM_BudgetTypes = new EntitySet<SYSTEM_BudgetType>(new Action<SYSTEM_BudgetType>(this.attach_SYSTEM_BudgetTypes), new Action<SYSTEM_BudgetType>(this.detach_SYSTEM_BudgetTypes));
 			OnCreated();
 		}
 		
@@ -7701,6 +7715,19 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SYSTEM_BudgetType", Storage="_SYSTEM_BudgetTypes", ThisKey="Cmp_Id", OtherKey="Cmp_Id")]
+		public EntitySet<SYSTEM_BudgetType> SYSTEM_BudgetTypes
+		{
+			get
+			{
+				return this._SYSTEM_BudgetTypes;
+			}
+			set
+			{
+				this._SYSTEM_BudgetTypes.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -8016,6 +8043,18 @@ namespace SCMSDataLayer.DB
 		}
 		
 		private void detach_GL_VchrMasters(GL_VchrMaster entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Company = null;
+		}
+		
+		private void attach_SYSTEM_BudgetTypes(SYSTEM_BudgetType entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Company = this;
+		}
+		
+		private void detach_SYSTEM_BudgetTypes(SYSTEM_BudgetType entity)
 		{
 			this.SendPropertyChanging();
 			entity.SETUP_Company = null;
@@ -13193,6 +13232,8 @@ namespace SCMSDataLayer.DB
 		
 		private EntitySet<GL_VchrMaster> _GL_VchrMasters;
 		
+		private EntitySet<SYSTEM_BudgetType> _SYSTEM_BudgetTypes;
+		
 		private EntityRef<SETUP_Company> _SETUP_Company;
 		
     #region Extensibility Method Definitions
@@ -13242,6 +13283,7 @@ namespace SCMSDataLayer.DB
 			this._SYSTEM_AuditTrails = new EntitySet<SYSTEM_AuditTrail>(new Action<SYSTEM_AuditTrail>(this.attach_SYSTEM_AuditTrails), new Action<SYSTEM_AuditTrail>(this.detach_SYSTEM_AuditTrails));
 			this._SETUP_BankAccounts = new EntitySet<SETUP_BankAccount>(new Action<SETUP_BankAccount>(this.attach_SETUP_BankAccounts), new Action<SETUP_BankAccount>(this.detach_SETUP_BankAccounts));
 			this._GL_VchrMasters = new EntitySet<GL_VchrMaster>(new Action<GL_VchrMaster>(this.attach_GL_VchrMasters), new Action<GL_VchrMaster>(this.detach_GL_VchrMasters));
+			this._SYSTEM_BudgetTypes = new EntitySet<SYSTEM_BudgetType>(new Action<SYSTEM_BudgetType>(this.attach_SYSTEM_BudgetTypes), new Action<SYSTEM_BudgetType>(this.detach_SYSTEM_BudgetTypes));
 			this._SETUP_Company = default(EntityRef<SETUP_Company>);
 			OnCreated();
 		}
@@ -13721,6 +13763,19 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_SYSTEM_BudgetType", Storage="_SYSTEM_BudgetTypes", ThisKey="Loc_Id", OtherKey="Loc_Id")]
+		public EntitySet<SYSTEM_BudgetType> SYSTEM_BudgetTypes
+		{
+			get
+			{
+				return this._SYSTEM_BudgetTypes;
+			}
+			set
+			{
+				this._SYSTEM_BudgetTypes.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SETUP_Location", Storage="_SETUP_Company", ThisKey="Cmp_Id", OtherKey="Cmp_Id", IsForeignKey=true)]
 		public SETUP_Company SETUP_Company
 		{
@@ -14094,6 +14149,18 @@ namespace SCMSDataLayer.DB
 		}
 		
 		private void detach_GL_VchrMasters(GL_VchrMaster entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Location = null;
+		}
+		
+		private void attach_SYSTEM_BudgetTypes(SYSTEM_BudgetType entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Location = this;
+		}
+		
+		private void detach_SYSTEM_BudgetTypes(SYSTEM_BudgetType entity)
 		{
 			this.SendPropertyChanging();
 			entity.SETUP_Location = null;
@@ -19516,6 +19583,318 @@ namespace SCMSDataLayer.DB
 		{
 			this.SendPropertyChanging();
 			entity.GL_VchrMaster = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SYSTEM_BudgetType")]
+	public partial class SYSTEM_BudgetType : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _BgdtType_Id;
+		
+		private string _BgdtType_Code;
+		
+		private string _Cmp_Id;
+		
+		private string _Loc_Id;
+		
+		private string _BgdtType_Title;
+		
+		private string _BgdtType_Prefix;
+		
+		private System.Nullable<int> _BgdtType_Active;
+		
+		private System.Nullable<int> _BgdtType_SortOrder;
+		
+		private EntityRef<SETUP_Company> _SETUP_Company;
+		
+		private EntityRef<SETUP_Location> _SETUP_Location;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnBgdtType_IdChanging(string value);
+    partial void OnBgdtType_IdChanged();
+    partial void OnBgdtType_CodeChanging(string value);
+    partial void OnBgdtType_CodeChanged();
+    partial void OnCmp_IdChanging(string value);
+    partial void OnCmp_IdChanged();
+    partial void OnLoc_IdChanging(string value);
+    partial void OnLoc_IdChanged();
+    partial void OnBgdtType_TitleChanging(string value);
+    partial void OnBgdtType_TitleChanged();
+    partial void OnBgdtType_PrefixChanging(string value);
+    partial void OnBgdtType_PrefixChanged();
+    partial void OnBgdtType_ActiveChanging(System.Nullable<int> value);
+    partial void OnBgdtType_ActiveChanged();
+    partial void OnBgdtType_SortOrderChanging(System.Nullable<int> value);
+    partial void OnBgdtType_SortOrderChanged();
+    #endregion
+		
+		public SYSTEM_BudgetType()
+		{
+			this._SETUP_Company = default(EntityRef<SETUP_Company>);
+			this._SETUP_Location = default(EntityRef<SETUP_Location>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtType_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string BgdtType_Id
+		{
+			get
+			{
+				return this._BgdtType_Id;
+			}
+			set
+			{
+				if ((this._BgdtType_Id != value))
+				{
+					this.OnBgdtType_IdChanging(value);
+					this.SendPropertyChanging();
+					this._BgdtType_Id = value;
+					this.SendPropertyChanged("BgdtType_Id");
+					this.OnBgdtType_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtType_Code", DbType="VarChar(50)")]
+		public string BgdtType_Code
+		{
+			get
+			{
+				return this._BgdtType_Code;
+			}
+			set
+			{
+				if ((this._BgdtType_Code != value))
+				{
+					this.OnBgdtType_CodeChanging(value);
+					this.SendPropertyChanging();
+					this._BgdtType_Code = value;
+					this.SendPropertyChanged("BgdtType_Code");
+					this.OnBgdtType_CodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cmp_Id", DbType="VarChar(50)")]
+		public string Cmp_Id
+		{
+			get
+			{
+				return this._Cmp_Id;
+			}
+			set
+			{
+				if ((this._Cmp_Id != value))
+				{
+					if (this._SETUP_Company.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCmp_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Cmp_Id = value;
+					this.SendPropertyChanged("Cmp_Id");
+					this.OnCmp_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id", DbType="VarChar(50)")]
+		public string Loc_Id
+		{
+			get
+			{
+				return this._Loc_Id;
+			}
+			set
+			{
+				if ((this._Loc_Id != value))
+				{
+					if (this._SETUP_Location.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnLoc_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Loc_Id = value;
+					this.SendPropertyChanged("Loc_Id");
+					this.OnLoc_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtType_Title", DbType="VarChar(100)")]
+		public string BgdtType_Title
+		{
+			get
+			{
+				return this._BgdtType_Title;
+			}
+			set
+			{
+				if ((this._BgdtType_Title != value))
+				{
+					this.OnBgdtType_TitleChanging(value);
+					this.SendPropertyChanging();
+					this._BgdtType_Title = value;
+					this.SendPropertyChanged("BgdtType_Title");
+					this.OnBgdtType_TitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtType_Prefix", DbType="VarChar(50)")]
+		public string BgdtType_Prefix
+		{
+			get
+			{
+				return this._BgdtType_Prefix;
+			}
+			set
+			{
+				if ((this._BgdtType_Prefix != value))
+				{
+					this.OnBgdtType_PrefixChanging(value);
+					this.SendPropertyChanging();
+					this._BgdtType_Prefix = value;
+					this.SendPropertyChanged("BgdtType_Prefix");
+					this.OnBgdtType_PrefixChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtType_Active", DbType="Int")]
+		public System.Nullable<int> BgdtType_Active
+		{
+			get
+			{
+				return this._BgdtType_Active;
+			}
+			set
+			{
+				if ((this._BgdtType_Active != value))
+				{
+					this.OnBgdtType_ActiveChanging(value);
+					this.SendPropertyChanging();
+					this._BgdtType_Active = value;
+					this.SendPropertyChanged("BgdtType_Active");
+					this.OnBgdtType_ActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtType_SortOrder", DbType="Int")]
+		public System.Nullable<int> BgdtType_SortOrder
+		{
+			get
+			{
+				return this._BgdtType_SortOrder;
+			}
+			set
+			{
+				if ((this._BgdtType_SortOrder != value))
+				{
+					this.OnBgdtType_SortOrderChanging(value);
+					this.SendPropertyChanging();
+					this._BgdtType_SortOrder = value;
+					this.SendPropertyChanged("BgdtType_SortOrder");
+					this.OnBgdtType_SortOrderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SYSTEM_BudgetType", Storage="_SETUP_Company", ThisKey="Cmp_Id", OtherKey="Cmp_Id", IsForeignKey=true)]
+		public SETUP_Company SETUP_Company
+		{
+			get
+			{
+				return this._SETUP_Company.Entity;
+			}
+			set
+			{
+				SETUP_Company previousValue = this._SETUP_Company.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Company.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Company.Entity = null;
+						previousValue.SYSTEM_BudgetTypes.Remove(this);
+					}
+					this._SETUP_Company.Entity = value;
+					if ((value != null))
+					{
+						value.SYSTEM_BudgetTypes.Add(this);
+						this._Cmp_Id = value.Cmp_Id;
+					}
+					else
+					{
+						this._Cmp_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Company");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_SYSTEM_BudgetType", Storage="_SETUP_Location", ThisKey="Loc_Id", OtherKey="Loc_Id", IsForeignKey=true)]
+		public SETUP_Location SETUP_Location
+		{
+			get
+			{
+				return this._SETUP_Location.Entity;
+			}
+			set
+			{
+				SETUP_Location previousValue = this._SETUP_Location.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Location.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Location.Entity = null;
+						previousValue.SYSTEM_BudgetTypes.Remove(this);
+					}
+					this._SETUP_Location.Entity = value;
+					if ((value != null))
+					{
+						value.SYSTEM_BudgetTypes.Add(this);
+						this._Loc_Id = value.Loc_Id;
+					}
+					else
+					{
+						this._Loc_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Location");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	

@@ -431,6 +431,7 @@ input.button
 {
     background-color: #066ECD;
     border-color: #0561B4;
+    border-radius : 5px 5px 5px 5px;
 }
 .btn-blue:hover
 {

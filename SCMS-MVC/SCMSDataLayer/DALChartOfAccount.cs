@@ -99,7 +99,7 @@ namespace SCMSDataLayer
                 _Sql += "         ( SETUP_ChartOfAccount.ChrtAcc_Id in ( Select ChrtAcc_Id ";
                 _Sql += "                                                  From Security_UserChartOfAccount ";
                 _Sql += "                                                 Where UserGrp_Id = '" + UserGroupId + "' And ";
-                _Sql += "                                                       User_Id = '" + UserLoginId + "' ) ) ";
+                _Sql += "                                                       User_Id = '" + UserLoginId + "' ) )  ";
                 _Sql += "Order By SETUP_ChartOfAccount.ChrtAcc_Code, ";
                 _Sql += "         SETUP_ChartOfAccount.ChrtAcc_Level";
 
