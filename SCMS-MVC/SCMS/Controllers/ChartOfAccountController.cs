@@ -42,6 +42,7 @@ namespace SCMS.Controllers
             string ps_Nature = Row[7];
             string ps_AccountNature = Row[8];
             string ps_CodeBeforeEdit = Row[9];
+            string ps_TitleBeforeEdit = Row[10];
 
             SETUP_ChartOfAccount lrow_ChartOfAccount = new SETUP_ChartOfAccount();
             String ls_Action = "Edit", IsAuditTrail = "", ls_UserId = "";
@@ -76,45 +77,55 @@ namespace SCMS.Controllers
                     lrow_ChartOfAccount.ChrtAcc_Type = pi_Type;
                     lrow_ChartOfAccount.Natr_Id = ps_Nature;
                     lrow_ChartOfAccount.ChrtAcc_Active = 1;
-                    //var ChartOfAccountCode = objDalChartOfAccount.GetAllRecords().Where(c => c.ChrtAcc_Code.Equals(lrow_ChartOfAccount.ChrtAcc_Code)).ToList();
 
-                    //if (isEdit == false && ChartOfAccountCode != null && ChartOfAccountCode.Count > 0)
-                    //{
-                    //    ViewData["SaveResult"] = -1;
-                    //}
-                    //else if (isEdit == true && ps_Code.Replace("-", "").Replace("_", "") != ps_CodeBeforeEdit.Replace("-", "").Replace("_", "") && ChartOfAccountCode != null && ChartOfAccountCode.Count > 0)
-                    //{
-                    //    ViewData["SaveResult"] = -1;
-                    //}
-                    //else
-                    //{
-                    li_ReturnValue = objDalChartOfAccount.SaveRecord(lrow_ChartOfAccount);
-                    ViewData["SaveResult"] = li_ReturnValue;
+                    var ChartOfAccountCode = objDalChartOfAccount.GetAllRecords().Where(c => c.ChrtAcc_Code.Equals(lrow_ChartOfAccount.ChrtAcc_Code)).ToList();
+                    var ChartOfAccountTitle = objDalChartOfAccount.GetAllRecords().Where(c => c.ChrtAcc_Title.Equals(lrow_ChartOfAccount.ChrtAcc_Title)).ToList();
 
-                    IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues("IsAuditTrail")[0];
-
-                    // Save Audit Log
-                    if (li_ReturnValue > 0 && IsAuditTrail == "1")
+                    if (ls_Action == "Add" && ChartOfAccountCode != null && ChartOfAccountCode.Count > 0)
                     {
-                        DALAuditLog objAuditLog = new DALAuditLog();
+                        ViewData["SaveResult"] = -1;
+                    }
+                    else if (ls_Action == "Edit" && ps_Code.Replace("-", "").Replace("_", "") != ps_CodeBeforeEdit.Replace("-", "").Replace("_", "") && ChartOfAccountCode != null && ChartOfAccountCode.Count > 0)
+                    {
+                        ViewData["SaveResult"] = -1;
+                    }
+                    else if (ls_Action == "Add" && ChartOfAccountTitle != null && ChartOfAccountTitle.Count > 0)
+                    {
+                        ViewData["SaveResult"] = -2;
+                    }
+                    else if (ls_Action == "Edit" && ps_Title != ps_TitleBeforeEdit && ChartOfAccountTitle != null && ChartOfAccountTitle.Count > 0)
+                    {
+                        ViewData["SaveResult"] = -2;
+                    }
+                    else
+                    {
+                        li_ReturnValue = objDalChartOfAccount.SaveRecord(lrow_ChartOfAccount);
+                        ViewData["SaveResult"] = li_ReturnValue;
 
-                        ls_UserId = ((SECURITY_User)Session["user"]).User_Id;
-                        ls_Lable[0] = "Code";
-                        ls_Lable[1] = "Title";
-                        ls_Lable[2] = "Level";
-                        ls_Lable[3] = "Budget Level";
-                        ls_Lable[4] = "Type";
-                        ls_Lable[5] = "Nature";
-                      
-                        ls_Data[0] = AccountCodeForDisplay;
-                        ls_Data[1] = ps_Title;
-                        ls_Data[2] = pi_Level.ToString();
-                        ls_Data[3] = pi_BudgetLevel.ToString();
-                        ls_Data[4] = pi_Type.ToString();
-                        ls_Data[5] = ps_Nature;
-                      
-                        objAuditLog.SaveRecord(10, ls_UserId, ls_Action, ls_Lable, ls_Data);
-                        //}
+                        IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues("IsAuditTrail")[0];
+
+                        // Save Audit Log
+                        if (li_ReturnValue > 0 && IsAuditTrail == "1")
+                        {
+                            DALAuditLog objAuditLog = new DALAuditLog();
+
+                            ls_UserId = ((SECURITY_User)Session["user"]).User_Id;
+                            ls_Lable[0] = "Code";
+                            ls_Lable[1] = "Title";
+                            ls_Lable[2] = "Level";
+                            ls_Lable[3] = "Budget Level";
+                            ls_Lable[4] = "Type";
+                            ls_Lable[5] = "Nature";
+
+                            ls_Data[0] = AccountCodeForDisplay;
+                            ls_Data[1] = ps_Title;
+                            ls_Data[2] = pi_Level.ToString();
+                            ls_Data[3] = pi_BudgetLevel.ToString();
+                            ls_Data[4] = pi_Type.ToString();
+                            ls_Data[5] = ps_Nature;
+
+                            objAuditLog.SaveRecord(10, ls_UserId, ls_Action, ls_Lable, ls_Data);
+                        }
 
                         //// Audit Trail Entry Section
                         //if (li_ReturnValue > 0)

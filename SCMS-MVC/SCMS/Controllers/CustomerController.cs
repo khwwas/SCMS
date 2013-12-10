@@ -13,6 +13,7 @@ namespace SCMS.Controllers
         //
         // GET: /Customer/
         DALCustomer objDALCustomer = new DALCustomer();
+
         public ActionResult Index()
         {
             ViewData["ddl_location"] = new SelectList(new DALLocation().PopulateData(), "Loc_Id", "Loc_Title", "ddl_Location");
