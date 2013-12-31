@@ -61,7 +61,7 @@ namespace SCMSDataLayer
                 SCMSDataContext dbSCMS = Connection.Create();
                 return dbSCMS.SETUP_SupplierTypes.Where(c => c.SuppType_Active == 1).OrderBy(c => c.SuppType_Code).ToList();
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }
@@ -74,7 +74,7 @@ namespace SCMSDataLayer
                 SCMSDataContext dbSCMS = Connection.Create();
                 return dbSCMS.SETUP_SupplierTypes.Where(c => c.SuppType_Active == 1).OrderBy(c => c.SuppType_Id).ToList();
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }

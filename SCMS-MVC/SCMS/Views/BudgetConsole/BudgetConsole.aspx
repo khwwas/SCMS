@@ -9,18 +9,18 @@
         $(document).ready(function () {
         });
 
-        function EditRecord(Id) {
-        }
+//        function EditRecord(Id) {
+//        }
 
-        function VoucherEntryConsole(locationId, vchrtypId) {
-            window.location = "../VoucherEntryConsole?p_LocationId=" + locationId + "&p_VoucherTypeId=" + vchrtypId;
+        function BudgetConsole(locationId) {
+            window.location = "../BudgetConsole?p_LocationId=" + locationId;
         }
 
         function DeleteRecord(Id) {
             if (confirm("Do you really want to cancel this record")) {
                 var MessageBox = document.getElementById('MessageBox');
                 var Url = document.getElementById('frm_BudgetConsole').action;
-                Url += "VoucherEntryConsole/DeleteRecordById?ps_Id=" + Id;
+                Url += "BudgetConsole/DeleteRecordById?ps_Id=" + Id;
                 $.ajax({
                     type: "GET",
                     url: Url,

@@ -89,7 +89,7 @@
             if (confirm("Do you really want to delete this record")) {
                 var MessageBox = document.getElementById('MessageBox');
                 var Url = document.getElementById('frm_BudgetType').action;
-                Url += "BudgetType/Delete?BudgetTypeId=" + Id;
+                Url += "BudgetType/Delete?Id=" + Id;
                 $.ajax({
                     type: "GET",
                     url: Url,

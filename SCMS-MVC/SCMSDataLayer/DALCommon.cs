@@ -128,6 +128,39 @@ namespace SCMSDataLayer
             return _ReturnValue;
         }
 
+        public static String GetMaxVoucherId(string ps_YearPrefix)
+        {
+            string _Sql = "", _ReturnValue = "";
+            Int32 _CodeLength = 10, _MaxId = 0;
+
+            try
+            {
+                var dbSCMS = Connection.Create();
+                SqlConnection con = (SqlConnection)dbSCMS.Connection;
+                con.Open();
+
+                _Sql += " Select IsNULL( Max( SubString( IsNULL( GL_VchrMaster.VchMas_Id, 0 ), ( Len( '" + ps_YearPrefix + "' ) + 1 ), 10) ), 0 ) + 1 ";
+                _Sql += "   From GL_VchrMaster ";
+                _Sql += "  Where ( Left( GL_VchrMaster.VchMas_Id, Len( '" + ps_YearPrefix + "' ) ) = '" + ps_YearPrefix + "' )";
+
+                SqlCommand cmd = new SqlCommand(_Sql, con);
+                cmd = new SqlCommand(_Sql, con);
+                _MaxId = (Int32)cmd.ExecuteScalar();
+
+                if (_MaxId != 0)
+                {
+                    _ReturnValue = ps_YearPrefix + _MaxId.ToString().PadLeft((_CodeLength - ps_YearPrefix.Length), '0');
+                }
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message.ToString());
+            }
+
+            return _ReturnValue;
+        }
         public static String GetMaxVoucherCode(string ps_TableName, string ps_VoucherTypeId, string ps_VoucherTypePrefix, string ps_LocationId, string ps_YearPrefix)
         {
             string _Sql = "", _ReturnValue = "";
@@ -181,7 +214,7 @@ namespace SCMSDataLayer
             return _ReturnValue;
         }
 
-        public static String GetMaxVoucherId(string ps_YearPrefix)
+        public static String GetMaxBudgetId(string ps_YearPrefix)
         {
             string _Sql = "", _ReturnValue = "";
             Int32 _CodeLength = 10, _MaxId = 0;
@@ -192,17 +225,69 @@ namespace SCMSDataLayer
                 SqlConnection con = (SqlConnection)dbSCMS.Connection;
                 con.Open();
 
-                _Sql += " Select IsNULL( Max( SubString( IsNULL( GL_VchrMaster.VchMas_Id, 0 ), ( Len( '" + ps_YearPrefix + "' ) + 1 ), 10) ), 0 ) + 1 ";
-                _Sql += "   From GL_VchrMaster ";
-                _Sql += "  Where ( Left( GL_VchrMaster.VchMas_Id, Len( '" + ps_YearPrefix + "' ) ) = '" + ps_YearPrefix + "' )";
+                _Sql += " Select IsNULL( Max( SubString( IsNULL( GL_BgdtMaster.BgdtMas_Id, 0 ), ( Len( '" + ps_YearPrefix + "' ) + 1 ), 10) ), 0 ) + 1 ";
+                _Sql += "   From GL_BgdtMaster ";
+                _Sql += "  Where ( Left( GL_BgdtMaster.BgdtMas_Id, Len( '" + ps_YearPrefix + "' ) ) = '" + ps_YearPrefix + "' )";
 
                 SqlCommand cmd = new SqlCommand(_Sql, con);
                 cmd = new SqlCommand(_Sql, con);
                 _MaxId = (Int32)cmd.ExecuteScalar();
 
-                if (_MaxId != null && _MaxId != 0)
+                if (_MaxId != 0)
                 {
                     _ReturnValue = ps_YearPrefix + _MaxId.ToString().PadLeft((_CodeLength - ps_YearPrefix.Length), '0');
+                }
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message.ToString());
+            }
+
+            return _ReturnValue;
+        }
+        public static String GetMaxBudgetCode(string ps_TableName, string ps_VoucherTypeId, string ps_VoucherTypePrefix, string ps_LocationId, string ps_YearPrefix)
+        {
+            string _Sql = "", _ReturnValue = "";
+            Int32 _CodeLength = 0, _MaxCode = 0;
+            DataSet _ds = new DataSet();
+
+            try
+            {
+                var dbSCMS = Connection.Create();
+                SqlConnection con = (SqlConnection)dbSCMS.Connection;
+                con.Open();
+
+                _Sql += " Select * ";
+                _Sql += "   From SYSTEM_CodeGeneration ";
+                _Sql += "  Where ( Lower( SYSTEM_CodeGeneration.CodeGen_TableName ) = Lower( '" + ps_TableName + "' ) ) ";
+
+                SqlCommand cmd = new SqlCommand(_Sql, con);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(_ds);
+
+                if (_ds != null && _ds.Tables != null && _ds.Tables.Count > 0)
+                {
+                    if (_ds.Tables[0].Rows[0]["CodeGen_Length"] != null &&
+                        _ds.Tables[0].Rows[0]["CodeGen_Length"].ToString() != "")
+                    {
+                        _CodeLength = Convert.ToInt32(_ds.Tables[0].Rows[0]["CodeGen_Length"].ToString());
+                    }
+
+                    _Sql = "";
+                    _Sql += " Select IsNULL( Max( SubString( IsNULL( GL_VchrMaster.VchMas_Code, 0 ), ( Len( '" + ps_VoucherTypePrefix + "' ) + Len( " + Convert.ToInt32(ps_VoucherTypeId) + " ) + Len( " + Convert.ToInt32(ps_LocationId) + ") + 1 ), 20 ) ), 0 ) + 1 ";
+                    _Sql += "   From GL_VchrMaster ";
+                    _Sql += "  Where ( GL_VchrMaster.VchrType_Id = '" + ps_VoucherTypeId + "' ) And ";
+                    _Sql += "        ( GL_VchrMaster.Loc_Id = '" + ps_LocationId + "' ) and ";
+                    _Sql += "        ( Left( GL_VchrMaster.VchMas_Id, Len( '" + ps_YearPrefix + "' ) ) = '" + ps_YearPrefix + "' ) ";
+
+                    cmd = new SqlCommand(_Sql, con);
+                    _MaxCode = (Int32)cmd.ExecuteScalar();
+                    if (_MaxCode != null && _MaxCode != 0)
+                    {
+                        _ReturnValue = ps_VoucherTypePrefix + Convert.ToInt32(ps_LocationId) + Convert.ToInt32(ps_VoucherTypeId) + _MaxCode.ToString().PadLeft(_CodeLength, '0');
+                    }
                 }
 
                 con.Close();

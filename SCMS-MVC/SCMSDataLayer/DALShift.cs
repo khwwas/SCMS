@@ -64,7 +64,7 @@ namespace SCMSDataLayer
                 SCMSDataContext dbSCMS = Connection.Create();
                 return dbSCMS.SETUP_Shifts.Where(c => c.Shft_Active == 1).OrderBy(c => c.Shft_Id).ToList();
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }

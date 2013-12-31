@@ -29,9 +29,9 @@ namespace SCMSDataLayer
 
                 li_ReturnValue = Convert.ToInt32(pRow_NewData.VchrTypeNarr_Id);
             }
-            catch
+            catch( Exception ex)
             {
-                return 0;
+                throw new Exception(ex.Message.ToString());
             }
 
             return li_ReturnValue;

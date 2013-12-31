@@ -31,7 +31,7 @@ namespace SCMSDataLayer
                 dbSCMS.SubmitChanges();
                 return Convert.ToInt32(newVoucherMaster.VchMas_Id);
             }
-            catch(Exception ex)
+            catch
             {
                 return 0;
             }
@@ -98,7 +98,8 @@ namespace SCMSDataLayer
             try
             {
                 SCMSDataContext dbSCMS = Connection.Create();
-                return dbSCMS.GL_VchrMasters.Where(c => c.VchMas_Status == "Approved").OrderBy(c => c.VchMas_Id ).ToList();
+                //return dbSCMS.GL_VchrMasters.Where(c => c.VchMas_Status == "Approved").OrderBy(c => c.VchMas_Id ).ToList();
+                return dbSCMS.GL_VchrMasters.OrderBy(c => c.VchMas_Id).ToList();
             }
             catch
             {
@@ -146,6 +147,7 @@ namespace SCMSDataLayer
                 SECURITY_User user = (SECURITY_User)System.Web.HttpContext.Current.Session["user"];
                 string UserLoginId = user.User_Id;
                 string UserGroupId = user.UsrGrp_Id;
+                string _Status = "Pending";
 
                 List<sp_GetUserVoucherTypesByUserIdResult> UserVoucherTypes = new DALUserMenuRights().GetUserVoucherTypesByUserId(UserLoginId).ToList();
                 if (UserVoucherTypes != null && UserVoucherTypes.Count > 0)
@@ -164,7 +166,8 @@ namespace SCMSDataLayer
                 SCMSDataContext dbSCMS = Connection.Create();
                 if (ps_IncludeSecurity == true)
                 {
-                    return dbSCMS.sp_VoucherEntryConsole(ps_AllLocation, ps_Location, ps_AllVoucherType, ps_VoucherType, ps_AllDate, ps_DateFrom, ps_DateTo).ToList().Where(c => VoucherTypeIds.Contains(c.VchrType_Id) && LocationsIds.Contains(c.Loc_Id)).ToList();
+                    //return dbSCMS.sp_VoucherEntryConsole(ps_AllLocation, ps_Location, ps_AllVoucherType, ps_VoucherType, ps_AllDate, ps_DateFrom, ps_DateTo).ToList().Where(c => VoucherTypeIds.Contains(c.VchrType_Id) && LocationsIds.Contains(c.Loc_Id) && _Status.Contains (c.VchMas_Status) ).ToList();
+                    return dbSCMS.sp_VoucherEntryConsole(ps_AllLocation, ps_Location, ps_AllVoucherType, ps_VoucherType, ps_AllDate, ps_DateFrom, ps_DateTo).ToList().Where(c => VoucherTypeIds.Contains(c.VchrType_Id) && LocationsIds.Contains(c.Loc_Id) ).ToList();
                 }
                 else
                 {

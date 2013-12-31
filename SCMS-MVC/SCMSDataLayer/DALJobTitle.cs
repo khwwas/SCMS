@@ -45,7 +45,7 @@ namespace SCMSDataLayer
                 SCMSDataContext dbSCMS = Connection.Create();
                 return dbSCMS.SETUP_JobTitles.Where(c => c.JT_Active == 1).OrderBy(c => c.JT_Code).ToList();
             }
-            catch (Exception ex)
+            catch 
             {
                 return null;
             }

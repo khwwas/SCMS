@@ -45,7 +45,7 @@ namespace SCMSDataLayer
                SCMSDataContext dbSCMS = Connection.Create();
                return dbSCMS.SETUP_Banks.Where(c => c.Bank_Active == 1).OrderBy(c => c.Bank_Code).ToList();
            }
-           catch (Exception ex)
+           catch
            {
                return null;
            }

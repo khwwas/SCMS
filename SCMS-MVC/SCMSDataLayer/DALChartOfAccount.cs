@@ -58,7 +58,7 @@ namespace SCMSDataLayer
                     li_ReturnValue = dbSCMS.ExecuteCommand("Delete From Setup_ChartOfAccount where ChrtAcc_Id='" + ps_Id + "'");
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 li_ReturnValue = 0;
             }
@@ -93,7 +93,7 @@ namespace SCMSDataLayer
                 string UserGroupId = user.UsrGrp_Id;
 
                 _Sql += "  Select SETUP_ChartOfAccount.ChrtAcc_Id, ";
-                _Sql += "         SETUP_ChartOfAccount.ChrtAcc_Title + ' [' + SETUP_ChartOfAccount.ChrtAcc_Code + ']'  as ChrtAcc_Title ";
+                _Sql += "         SETUP_ChartOfAccount.ChrtAcc_Title + ' [' + SETUP_ChartOfAccount.ChrtAcc_CodeDisplay + ']'  as ChrtAcc_Title ";
                 _Sql += "    From SETUP_ChartOfAccount ";
                 _Sql += "   Where ( IsNULL( SETUP_ChartOfAccount.ChrtAcc_Type, 0 ) = 2 ) And ";
                 _Sql += "         ( SETUP_ChartOfAccount.ChrtAcc_Id in ( Select ChrtAcc_Id ";
@@ -145,7 +145,7 @@ namespace SCMSDataLayer
 
                 li_ReturnValue = dbSCMS.ExecuteCommand(_Sql);
             }
-            catch (Exception ex)
+            catch
             {
                 li_ReturnValue = 0;
             }
@@ -153,5 +153,37 @@ namespace SCMSDataLayer
             return li_ReturnValue;
         }
         #endregion
+
+        public int Validations(string ps_Case, string ps_Data)
+        {
+            SCMSDataContext dbSCMS = Connection.Create();
+            List<SETUP_ChartOfAccount> ChartOfAccountList;
+            int li_ReturnValue = 0;
+            string ls_Sql = "";
+
+            try
+            {
+                if (ps_Case.ToLower() == "Code".ToLower())
+                {
+                    ls_Sql = "Select * from SETUP_ChartOfAccount Where ( SETUP_ChartOfAccount.ChrtAcc_Code = '" + ps_Data + "' )";
+                }
+                else if (ps_Case.ToLower() == "Title".ToLower())
+                {
+                    ls_Sql = "Select * from SETUP_ChartOfAccount Where ( Ltrim( Rtrim( Lower( SETUP_ChartOfAccount.ChrtAcc_Title ) ) ) = '" + ps_Data.Trim().ToLower() + "' )";
+                }
+                ChartOfAccountList = (List<SETUP_ChartOfAccount>)dbSCMS.ExecuteQuery<SETUP_ChartOfAccount>(ls_Sql, "").ToList();
+                if (ChartOfAccountList != null && ChartOfAccountList.Count >= 1)
+                {
+                    li_ReturnValue = 1;
+                }
+            }
+            catch
+            {
+                li_ReturnValue = 0;
+            }
+
+            return li_ReturnValue;
+        }
+
     }
 }

@@ -45,7 +45,7 @@ namespace SCMSDataLayer
                 SCMSDataContext dbSCMS = Connection.Create();
                 return dbSCMS.SETUP_LeaveGroups.Where(c => c.LevGrp_Active == 1).OrderBy(c => c.LevGrp_Code).ToList();
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }

@@ -712,7 +712,7 @@ CREATE TABLE [dbo].[SETUP_VoucherTypeNarration](
 	[VchrTypeNarr_Id] [varchar](50) NOT NULL,
 	[VchrTypeNarr_Code] [varchar](50) NULL,
 	[VchrType_Id] [varchar](50) NOT NULL,
-	[VchrTypeNarr_Title] [varchar](100) NULL,
+	[VchrTypeNarr_Title] [varchar](1500) NULL,
 	[VchrTypeNarr_Active] [int] NULL,
 	[VchrTypeNarr_SortOrder] [int] NULL,
  CONSTRAINT [PK_SETUPVoucherTypeNarration_VchrTypeNarrId] PRIMARY KEY CLUSTERED 
@@ -1005,8 +1005,88 @@ ALTER TABLE [dbo].[GL_VchrDetail] CHECK CONSTRAINT [FK_GLVchrDetail_SETUPChartOf
 GO
 
 
+CREATE TABLE [dbo].[SYSTEM_BudgetType](
+	[BgdtType_Id] [varchar](50) NOT NULL,
+	[BgdtType_Code] [varchar](50) NULL,
+	[Cmp_Id] [varchar](50) NULL,
+	[Loc_Id] [varchar](50) NULL,
+	[BgdtType_Title] [varchar](100) NULL,
+	[BgdtType_Prefix] [varchar](50) NULL,
+	[BgdtType_Active] [int] NULL,
+	[BgdtType_SortOrder] [int] NULL,
+ CONSTRAINT [PK_SYSTEMBudgetType_BgdtTypeId] PRIMARY KEY CLUSTERED 
+(
+	[BgdtType_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
 
 
+ALTER TABLE [dbo].[SYSTEM_BudgetType]  WITH CHECK ADD  CONSTRAINT [FK_SYSTEMBudgetType_SETUPCompany_CmpId] FOREIGN KEY([Cmp_Id])
+REFERENCES [dbo].[SETUP_Company] ([Cmp_Id])
+GO
+
+ALTER TABLE [dbo].[SYSTEM_BudgetType] CHECK CONSTRAINT [FK_SYSTEMBudgetType_SETUPCompany_CmpId]
+GO
+
+ALTER TABLE [dbo].[SYSTEM_BudgetType]  WITH CHECK ADD  CONSTRAINT [FK_SYSTEMBudgetType_SETUPLocation_LocId] FOREIGN KEY([Loc_Id])
+REFERENCES [dbo].[SETUP_Location] ([Loc_Id])
+GO
+
+ALTER TABLE [dbo].[SYSTEM_BudgetType] CHECK CONSTRAINT [FK_SYSTEMBudgetType_SETUPLocation_LocId]
+GO
+
+CREATE TABLE [dbo].[GL_BgdtMaster](
+	[BgdtMas_Id] [varchar](50) NOT NULL,
+	[BgdtMas_Code] [varchar](50) NULL,
+	[BgdtMas_Date] [datetime] NULL,
+	[Cmp_Id] [varchar](50) NULL,
+	[Loc_Id] [varchar](50) NULL,
+	[Cldr_Id] [varchar](50) NULL,
+	[BgdtType_Id] [varchar](50) NOT NULL,
+	[BgdtMas_Remarks] [varchar](200) NULL,
+	[BgdtMas_Status] [varchar](50) NULL,
+	[BgdtMas_EnteredBy] [varchar](100) NULL,
+	[BgdtMas_EnteredDate] [datetime] NULL,
+	[BgdtMas_ApprovedBy] [varchar](100) NULL,
+	[BgdtMas_ApprovedDate] [datetime] NULL,
+	[BgdtType_Revision] [int] NULL,
+ CONSTRAINT [PK_GLBgdtMaster_BgdtMasId] PRIMARY KEY CLUSTERED 
+(
+	[BgdtMas_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[GL_BgdtMaster]  WITH CHECK ADD  CONSTRAINT [FK_GLBgdtMaster_SETUPCalendar_CldrId] FOREIGN KEY([Cldr_Id])
+REFERENCES [dbo].[SETUP_Calendar] ([Cldr_Id])
+GO
+
+ALTER TABLE [dbo].[GL_BgdtMaster] CHECK CONSTRAINT [FK_GLBgdtMaster_SETUPCalendar_CldrId]
+GO
+
+ALTER TABLE [dbo].[GL_BgdtMaster]  WITH CHECK ADD  CONSTRAINT [FK_GLBgdtMaster_SETUPCompany_CmpId] FOREIGN KEY([Cmp_Id])
+REFERENCES [dbo].[SETUP_Company] ([Cmp_Id])
+GO
+
+ALTER TABLE [dbo].[GL_BgdtMaster] CHECK CONSTRAINT [FK_GLBgdtMaster_SETUPCompany_CmpId]
+GO
+
+ALTER TABLE [dbo].[GL_BgdtMaster]  WITH CHECK ADD  CONSTRAINT [FK_GLBgdtMaster_SETUPLocation_LocId] FOREIGN KEY([Loc_Id])
+REFERENCES [dbo].[SETUP_Location] ([Loc_Id])
+GO
+
+ALTER TABLE [dbo].[GL_BgdtMaster] CHECK CONSTRAINT [FK_GLBgdtMaster_SETUPLocation_LocId]
+GO
+
+ALTER TABLE [dbo].[GL_BgdtMaster]  WITH CHECK ADD  CONSTRAINT [FK_GLBgdtMaster_SYSTEMBgdtType_BgdtTypeId] FOREIGN KEY([BgdtType_Id])
+REFERENCES [dbo].[SYSTEM_BudgetType] ([BgdtType_Id])
+GO
+
+ALTER TABLE [dbo].[GL_BgdtMaster] CHECK CONSTRAINT [FK_GLBgdtMaster_SYSTEMBgdtType_BgdtTypeId]
+GO
 
 
 

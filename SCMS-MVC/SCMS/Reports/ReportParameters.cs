@@ -85,6 +85,16 @@ namespace SCMS.Reports
             get;
             set;
         }
+        public static int AllVchrStatus  
+        {
+            get;
+            set;
+        }
+        public static string VoucherStatus
+        { 
+            get;
+            set;
+        }
 
         public static string TrialActivity
         {

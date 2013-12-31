@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DALBudgetEntry.cs" />
+    <Compile Include="DALBudgetType.cs" />
     <Compile Include="DALSystemProcess.cs" />
     <Compile Include="DALBankReconciliation.cs" />
     <Compile Include="DALApprovalLevel.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="DALCompany.cs" />
     <Compile Include="DalUserMenu.cs" />
     <Compile Include="DALUserMenuRights.cs" />
+    <Compile Include="DALValidations.cs" />
     <Compile Include="DALVoucherEntry.cs" />
     <Compile Include="DALVoucherType.cs" />
     <Compile Include="DALVoucherTypeNarration.cs" />

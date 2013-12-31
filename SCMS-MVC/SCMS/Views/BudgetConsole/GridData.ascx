@@ -18,14 +18,14 @@
 <div class="CustomCell" style="width: 97px; height: 30px;">
     Location</div>
 <div class="CustomCell" style="width: 270px; height: 30px;">
-    <%= Html.DropDownList("ddl_Location", null, "All", new { style = "width:250px;", onchange = "VoucherEntryConsole(ddl_Location.value.toString(),ddl_VoucherType.value.toString())" })%>
+    <%= Html.DropDownList("ddl_Location", null, "All", new { style = "width:250px;", onchange = "BudgetConsole(ddl_Location.value.toString())" })%>
 </div>
-<div class="CustomCell" style="width: 97px; height: 30px;">
+<%--<div class="CustomCell" style="width: 97px; height: 30px;">
     Voucher Type</div>
 <div class="CustomCell" style="width: 270px; height: 30px;">
-    <%= Html.DropDownList("ddl_VoucherType", null, "All", new { style = "width:250px;", onchange = "VoucherEntryConsole(ddl_Location.value,ddl_VoucherType.value)" })%>
-</div>
-<table id="VoucherEntryConsoleGrid" class="data display datatable">
+    <%= Html.DropDownList("ddl_VoucherType", null, "All", new { style = "width:250px;", onchange = "BudgetConsole(ddl_Location.value())" })%>
+</div>--%>
+<table id="BudgetConsoleGrid" class="data display datatable">
     <thead>
         <tr>
             <th style="width: 6%;">
@@ -35,22 +35,22 @@
                 Location
             </th>
             <th style="width: 10%;">
-                Voucher Type
+                Budget Year
             </th>
             <th style="width: 8%;">
-                Voucher #
+                Budget #
             </th>
             <th style="width: 8%;">
                 Date
             </th>
             <th style="width: 10%;">
-                Dr.
+                Approved Budget
             </th>
             <th style="width: 10%;">
-                Cr.
+                Actual Expense (As on today)
             </th>
             <th style="width: 15%;">
-                Diff
+                Remaining Amount
             </th>
             <th style="width: 13%;">
                 Remarks
@@ -61,56 +61,54 @@
         </tr>
     </thead>
     <tbody>
-        <%List<SCMSDataLayer.DB.sp_VoucherEntryConsoleResult> DataList = new List<SCMSDataLayer.DB.sp_VoucherEntryConsoleResult>();
+        <%List<SCMSDataLayer.DB.sp_BudgetConsoleResult> DataList = new List<SCMSDataLayer.DB.sp_BudgetConsoleResult>();
 
-          DataList = new SCMSDataLayer.DALVoucherEntry().GetVoucherEntryConsoleData(Convert.ToInt32(ViewData["AllLoc"]), ViewData["LocationId"].ToString(),
-                                                                                    Convert.ToInt32(ViewData["AllVchrType"]), ViewData["VoucherTypeId"].ToString(),
-                                                                                    1, "", "", true);
+          DataList = new SCMSDataLayer.DALBudgetEntry().GetBudgetEntryConsoleData(Convert.ToInt32(ViewData["AllLoc"]), ViewData["LocationId"].ToString(), true);
 
           if (DataList != null && DataList.Count > 0)
           {
-              foreach (SCMSDataLayer.DB.sp_VoucherEntryConsoleResult DataRow in DataList)
+              foreach (SCMSDataLayer.DB.sp_BudgetConsoleResult DataRow in DataList)
               {%>
         <tr class='odd gradeX' style='line-height: 15px;'>
             <td style="float: left">
-                <%if (DataRow.VchMas_Status != "Cancelled")
+                <%if (DataRow.BgdtMas_Status != "Cancelled")
                   { %>
-                <div onclick="javascript:window.location='../Voucher/VoucherEntry?VoucherId=<%=DataRow.VchMas_Id %>'"
+                <div onclick="javascript:window.location='../Budget?p_BudgetId=<%=DataRow.BgdtMas_Id %>'"
                     style="width: 22px; padding-right: 5px; float: left; cursor: pointer;">
                     <img alt="Edit" src="../../img/edit.png" style="width: 22px;" />
                 </div>
-                <div onclick="javascript:return DeleteRecord('<%=DataRow.VchMas_Id %>')" style="width: 22px;
+                <div onclick="javascript:return DeleteRecord('<%=DataRow.BgdtMas_Id %>')" style="width: 22px;
                     float: left; cursor: pointer;">
                     <img alt="Delete" src="../../img/delete.png" style="width: 22px;" />
                 </div>
                 <%} %>
             </td>
-            <td id="txt_Location<%=DataRow.VchMas_Id%>" style="vertical-align: middle;">
+            <td id="txt_Location<%=DataRow.BgdtMas_Id%>" style="vertical-align: middle;">
                 <%=DataRow.Loc_Title%>
             </td>
-            <td id="txt_VoucherType<%=DataRow.VchMas_Id%>" style="vertical-align: middle;">
-                <%=DataRow.VchrType_Title%>
+            <td id="txt_VoucherType<%=DataRow.BgdtMas_Id%>" style="vertical-align: middle;">
+                <%=DataRow.Cldr_Title%>
             </td>
-            <td id="txt_Code<%=DataRow.VchMas_Id%>" style="vertical-align: middle;">
-                <%=DataRow.VchMas_Code%>
+            <td id="txt_Code<%=DataRow.BgdtMas_Id%>" style="vertical-align: middle;">
+                <%=DataRow.BgdtMas_Code%>
             </td>
-            <td id="txt_Date<%=DataRow.VchMas_Id%>" style="vertical-align: middle;">
-                <%=Convert.ToDateTime(DataRow.VchMas_Date).ToString("MM/dd/yyyy")%>
+            <td id="txt_Date<%=DataRow.BgdtMas_Id%>" style="vertical-align: middle;">
+                <%=Convert.ToDateTime(DataRow.BgdtMas_Date).ToString("MM/dd/yyyy")%>
             </td>
-            <td id="txt_TotalDrAmount" style="vertical-align: middle;">
-                <%=string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N0}", Convert.ToInt32(DataRow.TotalDrAmount))%>
+            <td id="txt_ApprovedBudet" style="vertical-align: middle;">
+                <%=string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N0}", Convert.ToInt32(DataRow.ApprovedBudget))%>
             </td>
-            <td id="txt_TotalCrAmount" style="vertical-align: middle;">
-                <%=string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N0}", Convert.ToInt32(DataRow.TotalCrAmount))%>
+            <td id="txt_ActualExpense" style="vertical-align: middle;">
+                <%=string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N0}", Convert.ToInt32(DataRow.ActualExpense))%>
             </td>
-            <td id="txt_DiffAmount" style="vertical-align: middle;">
-                <%=string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N0}", Convert.ToInt32(DataRow.DifferenceAmount))%>
+            <td id="txt_RemainingAmount" style="vertical-align: middle;">
+                <%=string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N0}", Convert.ToInt32(DataRow.RemainingAmount))%>
             </td>
-            <td id="txt_Remarks<%=DataRow.VchMas_Id%>" style="vertical-align: middle;">
-                <%=DataRow.VchMas_Remarks%>
+            <td id="txt_Remarks<%=DataRow.BgdtMas_Id%>" style="vertical-align: middle;">
+                <%=DataRow.BgdtMas_Remarks%>
             </td>
-            <td id="txt_Status<%=DataRow.VchMas_Id%>" style="vertical-align: middle;">
-                <%=DataRow.VchMas_Status%>
+            <td id="txt_Status<%=DataRow.BgdtMas_Id%>" style="vertical-align: middle;">
+                <%=DataRow.BgdtMas_Status%>
             </td>
         </tr>
         <%}

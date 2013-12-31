@@ -61,7 +61,7 @@ namespace SCMSDataLayer
                 SCMSDataContext dbSCMS = Connection.Create();
                 return dbSCMS.SETUP_CustomerTypes.Where(c => c.CustType_Active == 1).OrderBy(c => c.CustType_Code).ToList();
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }

@@ -72,7 +72,7 @@ namespace SCMSDataLayer
                SCMSDataContext dbSCMS = Connection.Create();
                return dbSCMS.SETUP_Employees.Where(c => c.Emp_Active == 1 && c.Emp_Id.Equals(Id)).Take(1).SingleOrDefault();
            }
-           catch (Exception ex)
+           catch 
            {
                return null;
            }
@@ -103,7 +103,7 @@ namespace SCMSDataLayer
                SCMSDataContext dbSCMS = Connection.Create();
                return dbSCMS.SETUP_Employees.Where(c => c.Emp_Active == 1).OrderBy(c => c.Emp_Id).ToList();
            }
-           catch (Exception ex)
+           catch 
            {
                return null;
            }

@@ -29,7 +29,7 @@ namespace SCMSDataLayer
 
                 li_ReturnValue = Convert.ToInt32(pRow_NewData.City_Id);
             }
-            catch (Exception ex)
+            catch
             {
                 return 0;
             }
@@ -61,7 +61,7 @@ namespace SCMSDataLayer
                 SCMSDataContext dbSCMS = Connection.Create();
                 return dbSCMS.SETUP_Cities.Where(c => c.City_Active == 1).OrderBy(c => c.City_Code).ToList();
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }

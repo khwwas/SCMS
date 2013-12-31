@@ -47,7 +47,7 @@ namespace SCMSDataLayer
                 SCMSDataContext dbSCMS = Connection.Create();
                 return dbSCMS.SETUP_CalendarTypes.Where(c => c.CldrType_Active == 1).OrderBy(c => c.CldrType_Code).ToList();
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }

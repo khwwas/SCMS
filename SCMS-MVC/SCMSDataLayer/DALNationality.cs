@@ -56,7 +56,7 @@ namespace SCMSDataLayer
                SCMSDataContext dbSCMS = Connection.Create();
                return dbSCMS.SETUP_Nationalities.Where(c => c.Natn_Active == 1).OrderBy(c => c.Natn_Id).ToList();
            }
-           catch (Exception ex)
+           catch
            {
                return null;
            }

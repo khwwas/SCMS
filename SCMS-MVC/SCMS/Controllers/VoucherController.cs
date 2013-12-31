@@ -231,9 +231,10 @@ namespace SCMS.Controllers
                     GL_Master.VchrType_Id = VoucherType;
                     GL_Master.VchMas_Remarks = Remarks;
                     GL_Master.VchMas_Status = Status;
+                    GL_Master.VchMas_EnteredBy = ((SECURITY_User)Session["user"]).User_Title;
                     GL_Master.VchMas_EnteredDate = DateTime.Now;
                     li_ReturnValue = objDalVoucherEntry.SaveVoucherMaster(GL_Master);
-                    if (li_ReturnValue != null && li_ReturnValue > 0)
+                    if (li_ReturnValue > 0)
                     {
                         if (flag == 1)
                         {

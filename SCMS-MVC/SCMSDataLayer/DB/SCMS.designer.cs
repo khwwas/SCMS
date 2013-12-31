@@ -192,6 +192,9 @@ namespace SCMSDataLayer.DB
     partial void InsertSYSTEM_BudgetType(SYSTEM_BudgetType instance);
     partial void UpdateSYSTEM_BudgetType(SYSTEM_BudgetType instance);
     partial void DeleteSYSTEM_BudgetType(SYSTEM_BudgetType instance);
+    partial void InsertGL_BgdtMaster(GL_BgdtMaster instance);
+    partial void UpdateGL_BgdtMaster(GL_BgdtMaster instance);
+    partial void DeleteGL_BgdtMaster(GL_BgdtMaster instance);
     #endregion
 		
 		public SCMSDataContext() : 
@@ -656,6 +659,14 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		public System.Data.Linq.Table<GL_BgdtMaster> GL_BgdtMasters
+		{
+			get
+			{
+				return this.GetTable<GL_BgdtMaster>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetApprovalLevelList")]
 		public ISingleResult<sp_GetApprovalLevelListResult> sp_GetApprovalLevelList()
 		{
@@ -871,6 +882,27 @@ namespace SCMSDataLayer.DB
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), allLocation, locationId, allDate, dateFrom, dateTo);
 			return ((ISingleResult<sp_BankReconciliationResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_PopulateBudgetTypeList")]
+		public ISingleResult<sp_PopulateBudgetTypeListResult> sp_PopulateBudgetTypeList()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<sp_PopulateBudgetTypeListResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_GetBudgetTypesList")]
+		public ISingleResult<sp_GetBudgetTypesListResult> sp_GetBudgetTypesList()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<sp_GetBudgetTypesListResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_BudgetConsole")]
+		public ISingleResult<sp_BudgetConsoleResult> sp_BudgetConsole([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AllLocation", DbType="Int")] System.Nullable<int> allLocation, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="LocationId", DbType="VarChar(10)")] string locationId)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), allLocation, locationId);
+			return ((ISingleResult<sp_BudgetConsoleResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -3693,6 +3725,8 @@ namespace SCMSDataLayer.DB
 		
 		private string _Cldr_Prefix;
 		
+		private EntitySet<GL_BgdtMaster> _GL_BgdtMasters;
+		
 		private EntityRef<SETUP_CalendarType> _SETUP_CalendarType;
 		
 		private EntityRef<SETUP_Company> _SETUP_Company;
@@ -3733,6 +3767,7 @@ namespace SCMSDataLayer.DB
 		
 		public SETUP_Calendar()
 		{
+			this._GL_BgdtMasters = new EntitySet<GL_BgdtMaster>(new Action<GL_BgdtMaster>(this.attach_GL_BgdtMasters), new Action<GL_BgdtMaster>(this.detach_GL_BgdtMasters));
 			this._SETUP_CalendarType = default(EntityRef<SETUP_CalendarType>);
 			this._SETUP_Company = default(EntityRef<SETUP_Company>);
 			this._SETUP_Location = default(EntityRef<SETUP_Location>);
@@ -4011,6 +4046,19 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Calendar_GL_BgdtMaster", Storage="_GL_BgdtMasters", ThisKey="Cldr_Id", OtherKey="Cldr_Id")]
+		public EntitySet<GL_BgdtMaster> GL_BgdtMasters
+		{
+			get
+			{
+				return this._GL_BgdtMasters;
+			}
+			set
+			{
+				this._GL_BgdtMasters.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_CalendarType_SETUP_Calendar", Storage="_SETUP_CalendarType", ThisKey="CldrType_Id", OtherKey="CldrType_Id", IsForeignKey=true)]
 		public SETUP_CalendarType SETUP_CalendarType
 		{
@@ -4131,6 +4179,18 @@ namespace SCMSDataLayer.DB
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_GL_BgdtMasters(GL_BgdtMaster entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Calendar = this;
+		}
+		
+		private void detach_GL_BgdtMasters(GL_BgdtMaster entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Calendar = null;
 		}
 	}
 	
@@ -7133,6 +7193,8 @@ namespace SCMSDataLayer.DB
 		
 		private EntitySet<SYSTEM_BudgetType> _SYSTEM_BudgetTypes;
 		
+		private EntitySet<GL_BgdtMaster> _GL_BgdtMasters;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -7187,6 +7249,7 @@ namespace SCMSDataLayer.DB
 			this._SETUP_BankAccounts = new EntitySet<SETUP_BankAccount>(new Action<SETUP_BankAccount>(this.attach_SETUP_BankAccounts), new Action<SETUP_BankAccount>(this.detach_SETUP_BankAccounts));
 			this._GL_VchrMasters = new EntitySet<GL_VchrMaster>(new Action<GL_VchrMaster>(this.attach_GL_VchrMasters), new Action<GL_VchrMaster>(this.detach_GL_VchrMasters));
 			this._SYSTEM_BudgetTypes = new EntitySet<SYSTEM_BudgetType>(new Action<SYSTEM_BudgetType>(this.attach_SYSTEM_BudgetTypes), new Action<SYSTEM_BudgetType>(this.detach_SYSTEM_BudgetTypes));
+			this._GL_BgdtMasters = new EntitySet<GL_BgdtMaster>(new Action<GL_BgdtMaster>(this.attach_GL_BgdtMasters), new Action<GL_BgdtMaster>(this.detach_GL_BgdtMasters));
 			OnCreated();
 		}
 		
@@ -7728,6 +7791,19 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_GL_BgdtMaster", Storage="_GL_BgdtMasters", ThisKey="Cmp_Id", OtherKey="Cmp_Id")]
+		public EntitySet<GL_BgdtMaster> GL_BgdtMasters
+		{
+			get
+			{
+				return this._GL_BgdtMasters;
+			}
+			set
+			{
+				this._GL_BgdtMasters.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -8055,6 +8131,18 @@ namespace SCMSDataLayer.DB
 		}
 		
 		private void detach_SYSTEM_BudgetTypes(SYSTEM_BudgetType entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Company = null;
+		}
+		
+		private void attach_GL_BgdtMasters(GL_BgdtMaster entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Company = this;
+		}
+		
+		private void detach_GL_BgdtMasters(GL_BgdtMaster entity)
 		{
 			this.SendPropertyChanging();
 			entity.SETUP_Company = null;
@@ -13234,6 +13322,8 @@ namespace SCMSDataLayer.DB
 		
 		private EntitySet<SYSTEM_BudgetType> _SYSTEM_BudgetTypes;
 		
+		private EntitySet<GL_BgdtMaster> _GL_BgdtMasters;
+		
 		private EntityRef<SETUP_Company> _SETUP_Company;
 		
     #region Extensibility Method Definitions
@@ -13284,6 +13374,7 @@ namespace SCMSDataLayer.DB
 			this._SETUP_BankAccounts = new EntitySet<SETUP_BankAccount>(new Action<SETUP_BankAccount>(this.attach_SETUP_BankAccounts), new Action<SETUP_BankAccount>(this.detach_SETUP_BankAccounts));
 			this._GL_VchrMasters = new EntitySet<GL_VchrMaster>(new Action<GL_VchrMaster>(this.attach_GL_VchrMasters), new Action<GL_VchrMaster>(this.detach_GL_VchrMasters));
 			this._SYSTEM_BudgetTypes = new EntitySet<SYSTEM_BudgetType>(new Action<SYSTEM_BudgetType>(this.attach_SYSTEM_BudgetTypes), new Action<SYSTEM_BudgetType>(this.detach_SYSTEM_BudgetTypes));
+			this._GL_BgdtMasters = new EntitySet<GL_BgdtMaster>(new Action<GL_BgdtMaster>(this.attach_GL_BgdtMasters), new Action<GL_BgdtMaster>(this.detach_GL_BgdtMasters));
 			this._SETUP_Company = default(EntityRef<SETUP_Company>);
 			OnCreated();
 		}
@@ -13776,6 +13867,19 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_GL_BgdtMaster", Storage="_GL_BgdtMasters", ThisKey="Loc_Id", OtherKey="Loc_Id")]
+		public EntitySet<GL_BgdtMaster> GL_BgdtMasters
+		{
+			get
+			{
+				return this._GL_BgdtMasters;
+			}
+			set
+			{
+				this._GL_BgdtMasters.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SETUP_Location", Storage="_SETUP_Company", ThisKey="Cmp_Id", OtherKey="Cmp_Id", IsForeignKey=true)]
 		public SETUP_Company SETUP_Company
 		{
@@ -14161,6 +14265,18 @@ namespace SCMSDataLayer.DB
 		}
 		
 		private void detach_SYSTEM_BudgetTypes(SYSTEM_BudgetType entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Location = null;
+		}
+		
+		private void attach_GL_BgdtMasters(GL_BgdtMaster entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Location = this;
+		}
+		
+		private void detach_GL_BgdtMasters(GL_BgdtMaster entity)
 		{
 			this.SendPropertyChanging();
 			entity.SETUP_Location = null;
@@ -19608,6 +19724,8 @@ namespace SCMSDataLayer.DB
 		
 		private System.Nullable<int> _BgdtType_SortOrder;
 		
+		private EntitySet<GL_BgdtMaster> _GL_BgdtMasters;
+		
 		private EntityRef<SETUP_Company> _SETUP_Company;
 		
 		private EntityRef<SETUP_Location> _SETUP_Location;
@@ -19636,6 +19754,7 @@ namespace SCMSDataLayer.DB
 		
 		public SYSTEM_BudgetType()
 		{
+			this._GL_BgdtMasters = new EntitySet<GL_BgdtMaster>(new Action<GL_BgdtMaster>(this.attach_GL_BgdtMasters), new Action<GL_BgdtMaster>(this.detach_GL_BgdtMasters));
 			this._SETUP_Company = default(EntityRef<SETUP_Company>);
 			this._SETUP_Location = default(EntityRef<SETUP_Location>);
 			OnCreated();
@@ -19809,6 +19928,19 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SYSTEM_BudgetType_GL_BgdtMaster", Storage="_GL_BgdtMasters", ThisKey="BgdtType_Id", OtherKey="BgdtType_Id")]
+		public EntitySet<GL_BgdtMaster> GL_BgdtMasters
+		{
+			get
+			{
+				return this._GL_BgdtMasters;
+			}
+			set
+			{
+				this._GL_BgdtMasters.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SYSTEM_BudgetType", Storage="_SETUP_Company", ThisKey="Cmp_Id", OtherKey="Cmp_Id", IsForeignKey=true)]
 		public SETUP_Company SETUP_Company
 		{
@@ -19873,6 +20005,556 @@ namespace SCMSDataLayer.DB
 						this._Loc_Id = default(string);
 					}
 					this.SendPropertyChanged("SETUP_Location");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_GL_BgdtMasters(GL_BgdtMaster entity)
+		{
+			this.SendPropertyChanging();
+			entity.SYSTEM_BudgetType = this;
+		}
+		
+		private void detach_GL_BgdtMasters(GL_BgdtMaster entity)
+		{
+			this.SendPropertyChanging();
+			entity.SYSTEM_BudgetType = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GL_BgdtMaster")]
+	public partial class GL_BgdtMaster : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _BgdtMas_Id;
+		
+		private string _BgdtMas_Code;
+		
+		private System.Nullable<System.DateTime> _BgdtMas_Date;
+		
+		private string _Cmp_Id;
+		
+		private string _Loc_Id;
+		
+		private string _Cldr_Id;
+		
+		private string _BgdtType_Id;
+		
+		private string _BgdtMas_Remarks;
+		
+		private string _BgdtMas_Status;
+		
+		private string _BgdtMas_EnteredBy;
+		
+		private System.Nullable<System.DateTime> _BgdtMas_EnteredDate;
+		
+		private string _BgdtMas_ApprovedBy;
+		
+		private System.Nullable<System.DateTime> _BgdtMas_ApprovedDate;
+		
+		private System.Nullable<int> _BgdtType_Revision;
+		
+		private EntityRef<SETUP_Calendar> _SETUP_Calendar;
+		
+		private EntityRef<SETUP_Company> _SETUP_Company;
+		
+		private EntityRef<SETUP_Location> _SETUP_Location;
+		
+		private EntityRef<SYSTEM_BudgetType> _SYSTEM_BudgetType;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnBgdtMas_IdChanging(string value);
+    partial void OnBgdtMas_IdChanged();
+    partial void OnBgdtMas_CodeChanging(string value);
+    partial void OnBgdtMas_CodeChanged();
+    partial void OnBgdtMas_DateChanging(System.Nullable<System.DateTime> value);
+    partial void OnBgdtMas_DateChanged();
+    partial void OnCmp_IdChanging(string value);
+    partial void OnCmp_IdChanged();
+    partial void OnLoc_IdChanging(string value);
+    partial void OnLoc_IdChanged();
+    partial void OnCldr_IdChanging(string value);
+    partial void OnCldr_IdChanged();
+    partial void OnBgdtType_IdChanging(string value);
+    partial void OnBgdtType_IdChanged();
+    partial void OnBgdtMas_RemarksChanging(string value);
+    partial void OnBgdtMas_RemarksChanged();
+    partial void OnBgdtMas_StatusChanging(string value);
+    partial void OnBgdtMas_StatusChanged();
+    partial void OnBgdtMas_EnteredByChanging(string value);
+    partial void OnBgdtMas_EnteredByChanged();
+    partial void OnBgdtMas_EnteredDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnBgdtMas_EnteredDateChanged();
+    partial void OnBgdtMas_ApprovedByChanging(string value);
+    partial void OnBgdtMas_ApprovedByChanged();
+    partial void OnBgdtMas_ApprovedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnBgdtMas_ApprovedDateChanged();
+    partial void OnBgdtType_RevisionChanging(System.Nullable<int> value);
+    partial void OnBgdtType_RevisionChanged();
+    #endregion
+		
+		public GL_BgdtMaster()
+		{
+			this._SETUP_Calendar = default(EntityRef<SETUP_Calendar>);
+			this._SETUP_Company = default(EntityRef<SETUP_Company>);
+			this._SETUP_Location = default(EntityRef<SETUP_Location>);
+			this._SYSTEM_BudgetType = default(EntityRef<SYSTEM_BudgetType>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtMas_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string BgdtMas_Id
+		{
+			get
+			{
+				return this._BgdtMas_Id;
+			}
+			set
+			{
+				if ((this._BgdtMas_Id != value))
+				{
+					this.OnBgdtMas_IdChanging(value);
+					this.SendPropertyChanging();
+					this._BgdtMas_Id = value;
+					this.SendPropertyChanged("BgdtMas_Id");
+					this.OnBgdtMas_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtMas_Code", DbType="VarChar(50)")]
+		public string BgdtMas_Code
+		{
+			get
+			{
+				return this._BgdtMas_Code;
+			}
+			set
+			{
+				if ((this._BgdtMas_Code != value))
+				{
+					this.OnBgdtMas_CodeChanging(value);
+					this.SendPropertyChanging();
+					this._BgdtMas_Code = value;
+					this.SendPropertyChanged("BgdtMas_Code");
+					this.OnBgdtMas_CodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtMas_Date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> BgdtMas_Date
+		{
+			get
+			{
+				return this._BgdtMas_Date;
+			}
+			set
+			{
+				if ((this._BgdtMas_Date != value))
+				{
+					this.OnBgdtMas_DateChanging(value);
+					this.SendPropertyChanging();
+					this._BgdtMas_Date = value;
+					this.SendPropertyChanged("BgdtMas_Date");
+					this.OnBgdtMas_DateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cmp_Id", DbType="VarChar(50)")]
+		public string Cmp_Id
+		{
+			get
+			{
+				return this._Cmp_Id;
+			}
+			set
+			{
+				if ((this._Cmp_Id != value))
+				{
+					if (this._SETUP_Company.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCmp_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Cmp_Id = value;
+					this.SendPropertyChanged("Cmp_Id");
+					this.OnCmp_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id", DbType="VarChar(50)")]
+		public string Loc_Id
+		{
+			get
+			{
+				return this._Loc_Id;
+			}
+			set
+			{
+				if ((this._Loc_Id != value))
+				{
+					if (this._SETUP_Location.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnLoc_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Loc_Id = value;
+					this.SendPropertyChanged("Loc_Id");
+					this.OnLoc_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cldr_Id", DbType="VarChar(50)")]
+		public string Cldr_Id
+		{
+			get
+			{
+				return this._Cldr_Id;
+			}
+			set
+			{
+				if ((this._Cldr_Id != value))
+				{
+					if (this._SETUP_Calendar.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCldr_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Cldr_Id = value;
+					this.SendPropertyChanged("Cldr_Id");
+					this.OnCldr_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtType_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string BgdtType_Id
+		{
+			get
+			{
+				return this._BgdtType_Id;
+			}
+			set
+			{
+				if ((this._BgdtType_Id != value))
+				{
+					if (this._SYSTEM_BudgetType.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnBgdtType_IdChanging(value);
+					this.SendPropertyChanging();
+					this._BgdtType_Id = value;
+					this.SendPropertyChanged("BgdtType_Id");
+					this.OnBgdtType_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtMas_Remarks", DbType="VarChar(200)")]
+		public string BgdtMas_Remarks
+		{
+			get
+			{
+				return this._BgdtMas_Remarks;
+			}
+			set
+			{
+				if ((this._BgdtMas_Remarks != value))
+				{
+					this.OnBgdtMas_RemarksChanging(value);
+					this.SendPropertyChanging();
+					this._BgdtMas_Remarks = value;
+					this.SendPropertyChanged("BgdtMas_Remarks");
+					this.OnBgdtMas_RemarksChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtMas_Status", DbType="VarChar(50)")]
+		public string BgdtMas_Status
+		{
+			get
+			{
+				return this._BgdtMas_Status;
+			}
+			set
+			{
+				if ((this._BgdtMas_Status != value))
+				{
+					this.OnBgdtMas_StatusChanging(value);
+					this.SendPropertyChanging();
+					this._BgdtMas_Status = value;
+					this.SendPropertyChanged("BgdtMas_Status");
+					this.OnBgdtMas_StatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtMas_EnteredBy", DbType="VarChar(100)")]
+		public string BgdtMas_EnteredBy
+		{
+			get
+			{
+				return this._BgdtMas_EnteredBy;
+			}
+			set
+			{
+				if ((this._BgdtMas_EnteredBy != value))
+				{
+					this.OnBgdtMas_EnteredByChanging(value);
+					this.SendPropertyChanging();
+					this._BgdtMas_EnteredBy = value;
+					this.SendPropertyChanged("BgdtMas_EnteredBy");
+					this.OnBgdtMas_EnteredByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtMas_EnteredDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> BgdtMas_EnteredDate
+		{
+			get
+			{
+				return this._BgdtMas_EnteredDate;
+			}
+			set
+			{
+				if ((this._BgdtMas_EnteredDate != value))
+				{
+					this.OnBgdtMas_EnteredDateChanging(value);
+					this.SendPropertyChanging();
+					this._BgdtMas_EnteredDate = value;
+					this.SendPropertyChanged("BgdtMas_EnteredDate");
+					this.OnBgdtMas_EnteredDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtMas_ApprovedBy", DbType="VarChar(100)")]
+		public string BgdtMas_ApprovedBy
+		{
+			get
+			{
+				return this._BgdtMas_ApprovedBy;
+			}
+			set
+			{
+				if ((this._BgdtMas_ApprovedBy != value))
+				{
+					this.OnBgdtMas_ApprovedByChanging(value);
+					this.SendPropertyChanging();
+					this._BgdtMas_ApprovedBy = value;
+					this.SendPropertyChanged("BgdtMas_ApprovedBy");
+					this.OnBgdtMas_ApprovedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtMas_ApprovedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> BgdtMas_ApprovedDate
+		{
+			get
+			{
+				return this._BgdtMas_ApprovedDate;
+			}
+			set
+			{
+				if ((this._BgdtMas_ApprovedDate != value))
+				{
+					this.OnBgdtMas_ApprovedDateChanging(value);
+					this.SendPropertyChanging();
+					this._BgdtMas_ApprovedDate = value;
+					this.SendPropertyChanged("BgdtMas_ApprovedDate");
+					this.OnBgdtMas_ApprovedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtType_Revision", DbType="Int")]
+		public System.Nullable<int> BgdtType_Revision
+		{
+			get
+			{
+				return this._BgdtType_Revision;
+			}
+			set
+			{
+				if ((this._BgdtType_Revision != value))
+				{
+					this.OnBgdtType_RevisionChanging(value);
+					this.SendPropertyChanging();
+					this._BgdtType_Revision = value;
+					this.SendPropertyChanged("BgdtType_Revision");
+					this.OnBgdtType_RevisionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Calendar_GL_BgdtMaster", Storage="_SETUP_Calendar", ThisKey="Cldr_Id", OtherKey="Cldr_Id", IsForeignKey=true)]
+		public SETUP_Calendar SETUP_Calendar
+		{
+			get
+			{
+				return this._SETUP_Calendar.Entity;
+			}
+			set
+			{
+				SETUP_Calendar previousValue = this._SETUP_Calendar.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Calendar.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Calendar.Entity = null;
+						previousValue.GL_BgdtMasters.Remove(this);
+					}
+					this._SETUP_Calendar.Entity = value;
+					if ((value != null))
+					{
+						value.GL_BgdtMasters.Add(this);
+						this._Cldr_Id = value.Cldr_Id;
+					}
+					else
+					{
+						this._Cldr_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Calendar");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_GL_BgdtMaster", Storage="_SETUP_Company", ThisKey="Cmp_Id", OtherKey="Cmp_Id", IsForeignKey=true)]
+		public SETUP_Company SETUP_Company
+		{
+			get
+			{
+				return this._SETUP_Company.Entity;
+			}
+			set
+			{
+				SETUP_Company previousValue = this._SETUP_Company.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Company.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Company.Entity = null;
+						previousValue.GL_BgdtMasters.Remove(this);
+					}
+					this._SETUP_Company.Entity = value;
+					if ((value != null))
+					{
+						value.GL_BgdtMasters.Add(this);
+						this._Cmp_Id = value.Cmp_Id;
+					}
+					else
+					{
+						this._Cmp_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Company");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_GL_BgdtMaster", Storage="_SETUP_Location", ThisKey="Loc_Id", OtherKey="Loc_Id", IsForeignKey=true)]
+		public SETUP_Location SETUP_Location
+		{
+			get
+			{
+				return this._SETUP_Location.Entity;
+			}
+			set
+			{
+				SETUP_Location previousValue = this._SETUP_Location.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Location.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Location.Entity = null;
+						previousValue.GL_BgdtMasters.Remove(this);
+					}
+					this._SETUP_Location.Entity = value;
+					if ((value != null))
+					{
+						value.GL_BgdtMasters.Add(this);
+						this._Loc_Id = value.Loc_Id;
+					}
+					else
+					{
+						this._Loc_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Location");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SYSTEM_BudgetType_GL_BgdtMaster", Storage="_SYSTEM_BudgetType", ThisKey="BgdtType_Id", OtherKey="BgdtType_Id", IsForeignKey=true)]
+		public SYSTEM_BudgetType SYSTEM_BudgetType
+		{
+			get
+			{
+				return this._SYSTEM_BudgetType.Entity;
+			}
+			set
+			{
+				SYSTEM_BudgetType previousValue = this._SYSTEM_BudgetType.Entity;
+				if (((previousValue != value) 
+							|| (this._SYSTEM_BudgetType.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SYSTEM_BudgetType.Entity = null;
+						previousValue.GL_BgdtMasters.Remove(this);
+					}
+					this._SYSTEM_BudgetType.Entity = value;
+					if ((value != null))
+					{
+						value.GL_BgdtMasters.Add(this);
+						this._BgdtType_Id = value.BgdtType_Id;
+					}
+					else
+					{
+						this._BgdtType_Id = default(string);
+					}
+					this.SendPropertyChanged("SYSTEM_BudgetType");
 				}
 			}
 		}
@@ -27503,6 +28185,624 @@ namespace SCMSDataLayer.DB
 				if ((this._VchMas_ReconciliationDate != value))
 				{
 					this._VchMas_ReconciliationDate = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_PopulateBudgetTypeListResult
+	{
+		
+		private string _BgdtType_Id;
+		
+		private string _BgdtType_Code;
+		
+		private string _Cmp_Id;
+		
+		private string _Loc_Id;
+		
+		private string _BgdtType_Title;
+		
+		private string _BgdtType_Prefix;
+		
+		private System.Nullable<int> _BgdtType_Active;
+		
+		private System.Nullable<int> _BgdtType_SortOrder;
+		
+		public sp_PopulateBudgetTypeListResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtType_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string BgdtType_Id
+		{
+			get
+			{
+				return this._BgdtType_Id;
+			}
+			set
+			{
+				if ((this._BgdtType_Id != value))
+				{
+					this._BgdtType_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtType_Code", DbType="VarChar(50)")]
+		public string BgdtType_Code
+		{
+			get
+			{
+				return this._BgdtType_Code;
+			}
+			set
+			{
+				if ((this._BgdtType_Code != value))
+				{
+					this._BgdtType_Code = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cmp_Id", DbType="VarChar(50)")]
+		public string Cmp_Id
+		{
+			get
+			{
+				return this._Cmp_Id;
+			}
+			set
+			{
+				if ((this._Cmp_Id != value))
+				{
+					this._Cmp_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id", DbType="VarChar(50)")]
+		public string Loc_Id
+		{
+			get
+			{
+				return this._Loc_Id;
+			}
+			set
+			{
+				if ((this._Loc_Id != value))
+				{
+					this._Loc_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtType_Title", DbType="VarChar(100)")]
+		public string BgdtType_Title
+		{
+			get
+			{
+				return this._BgdtType_Title;
+			}
+			set
+			{
+				if ((this._BgdtType_Title != value))
+				{
+					this._BgdtType_Title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtType_Prefix", DbType="VarChar(50)")]
+		public string BgdtType_Prefix
+		{
+			get
+			{
+				return this._BgdtType_Prefix;
+			}
+			set
+			{
+				if ((this._BgdtType_Prefix != value))
+				{
+					this._BgdtType_Prefix = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtType_Active", DbType="Int")]
+		public System.Nullable<int> BgdtType_Active
+		{
+			get
+			{
+				return this._BgdtType_Active;
+			}
+			set
+			{
+				if ((this._BgdtType_Active != value))
+				{
+					this._BgdtType_Active = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtType_SortOrder", DbType="Int")]
+		public System.Nullable<int> BgdtType_SortOrder
+		{
+			get
+			{
+				return this._BgdtType_SortOrder;
+			}
+			set
+			{
+				if ((this._BgdtType_SortOrder != value))
+				{
+					this._BgdtType_SortOrder = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_GetBudgetTypesListResult
+	{
+		
+		private string _BgdtType_Id;
+		
+		private string _BgdtType_Code;
+		
+		private string _Cmp_Id;
+		
+		private string _Loc_Id;
+		
+		private string _BgdtType_Title;
+		
+		private string _BgdtType_Prefix;
+		
+		private System.Nullable<int> _BgdtType_Active;
+		
+		private System.Nullable<int> _BgdtType_SortOrder;
+		
+		private string _Loc_Id1;
+		
+		private string _Loc_Code;
+		
+		private string _Cmp_Id1;
+		
+		private string _Loc_Title;
+		
+		private System.Nullable<int> _Loc_Active;
+		
+		private System.Nullable<int> _Loc_SortOrder;
+		
+		public sp_GetBudgetTypesListResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtType_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string BgdtType_Id
+		{
+			get
+			{
+				return this._BgdtType_Id;
+			}
+			set
+			{
+				if ((this._BgdtType_Id != value))
+				{
+					this._BgdtType_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtType_Code", DbType="VarChar(50)")]
+		public string BgdtType_Code
+		{
+			get
+			{
+				return this._BgdtType_Code;
+			}
+			set
+			{
+				if ((this._BgdtType_Code != value))
+				{
+					this._BgdtType_Code = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cmp_Id", DbType="VarChar(50)")]
+		public string Cmp_Id
+		{
+			get
+			{
+				return this._Cmp_Id;
+			}
+			set
+			{
+				if ((this._Cmp_Id != value))
+				{
+					this._Cmp_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id", DbType="VarChar(50)")]
+		public string Loc_Id
+		{
+			get
+			{
+				return this._Loc_Id;
+			}
+			set
+			{
+				if ((this._Loc_Id != value))
+				{
+					this._Loc_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtType_Title", DbType="VarChar(100)")]
+		public string BgdtType_Title
+		{
+			get
+			{
+				return this._BgdtType_Title;
+			}
+			set
+			{
+				if ((this._BgdtType_Title != value))
+				{
+					this._BgdtType_Title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtType_Prefix", DbType="VarChar(50)")]
+		public string BgdtType_Prefix
+		{
+			get
+			{
+				return this._BgdtType_Prefix;
+			}
+			set
+			{
+				if ((this._BgdtType_Prefix != value))
+				{
+					this._BgdtType_Prefix = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtType_Active", DbType="Int")]
+		public System.Nullable<int> BgdtType_Active
+		{
+			get
+			{
+				return this._BgdtType_Active;
+			}
+			set
+			{
+				if ((this._BgdtType_Active != value))
+				{
+					this._BgdtType_Active = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtType_SortOrder", DbType="Int")]
+		public System.Nullable<int> BgdtType_SortOrder
+		{
+			get
+			{
+				return this._BgdtType_SortOrder;
+			}
+			set
+			{
+				if ((this._BgdtType_SortOrder != value))
+				{
+					this._BgdtType_SortOrder = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id1", DbType="VarChar(50)")]
+		public string Loc_Id1
+		{
+			get
+			{
+				return this._Loc_Id1;
+			}
+			set
+			{
+				if ((this._Loc_Id1 != value))
+				{
+					this._Loc_Id1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Code", DbType="VarChar(50)")]
+		public string Loc_Code
+		{
+			get
+			{
+				return this._Loc_Code;
+			}
+			set
+			{
+				if ((this._Loc_Code != value))
+				{
+					this._Loc_Code = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cmp_Id1", DbType="VarChar(50)")]
+		public string Cmp_Id1
+		{
+			get
+			{
+				return this._Cmp_Id1;
+			}
+			set
+			{
+				if ((this._Cmp_Id1 != value))
+				{
+					this._Cmp_Id1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Title", DbType="VarChar(100)")]
+		public string Loc_Title
+		{
+			get
+			{
+				return this._Loc_Title;
+			}
+			set
+			{
+				if ((this._Loc_Title != value))
+				{
+					this._Loc_Title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Active", DbType="Int")]
+		public System.Nullable<int> Loc_Active
+		{
+			get
+			{
+				return this._Loc_Active;
+			}
+			set
+			{
+				if ((this._Loc_Active != value))
+				{
+					this._Loc_Active = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_SortOrder", DbType="Int")]
+		public System.Nullable<int> Loc_SortOrder
+		{
+			get
+			{
+				return this._Loc_SortOrder;
+			}
+			set
+			{
+				if ((this._Loc_SortOrder != value))
+				{
+					this._Loc_SortOrder = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sp_BudgetConsoleResult
+	{
+		
+		private string _Loc_Id;
+		
+		private string _Loc_Title;
+		
+		private string _Cldr_Title;
+		
+		private string _BgdtMas_Id;
+		
+		private string _BgdtMas_Code;
+		
+		private System.Nullable<System.DateTime> _BgdtMas_Date;
+		
+		private string _BgdtMas_Remarks;
+		
+		private string _BgdtMas_Status;
+		
+		private int _ApprovedBudget;
+		
+		private int _ActualExpense;
+		
+		private int _RemainingAmount;
+		
+		public sp_BudgetConsoleResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Loc_Id
+		{
+			get
+			{
+				return this._Loc_Id;
+			}
+			set
+			{
+				if ((this._Loc_Id != value))
+				{
+					this._Loc_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Title", DbType="VarChar(100)")]
+		public string Loc_Title
+		{
+			get
+			{
+				return this._Loc_Title;
+			}
+			set
+			{
+				if ((this._Loc_Title != value))
+				{
+					this._Loc_Title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cldr_Title", DbType="VarChar(100)")]
+		public string Cldr_Title
+		{
+			get
+			{
+				return this._Cldr_Title;
+			}
+			set
+			{
+				if ((this._Cldr_Title != value))
+				{
+					this._Cldr_Title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtMas_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string BgdtMas_Id
+		{
+			get
+			{
+				return this._BgdtMas_Id;
+			}
+			set
+			{
+				if ((this._BgdtMas_Id != value))
+				{
+					this._BgdtMas_Id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtMas_Code", DbType="VarChar(50)")]
+		public string BgdtMas_Code
+		{
+			get
+			{
+				return this._BgdtMas_Code;
+			}
+			set
+			{
+				if ((this._BgdtMas_Code != value))
+				{
+					this._BgdtMas_Code = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtMas_Date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> BgdtMas_Date
+		{
+			get
+			{
+				return this._BgdtMas_Date;
+			}
+			set
+			{
+				if ((this._BgdtMas_Date != value))
+				{
+					this._BgdtMas_Date = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtMas_Remarks", DbType="VarChar(200)")]
+		public string BgdtMas_Remarks
+		{
+			get
+			{
+				return this._BgdtMas_Remarks;
+			}
+			set
+			{
+				if ((this._BgdtMas_Remarks != value))
+				{
+					this._BgdtMas_Remarks = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BgdtMas_Status", DbType="VarChar(50)")]
+		public string BgdtMas_Status
+		{
+			get
+			{
+				return this._BgdtMas_Status;
+			}
+			set
+			{
+				if ((this._BgdtMas_Status != value))
+				{
+					this._BgdtMas_Status = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApprovedBudget", DbType="Int NOT NULL")]
+		public int ApprovedBudget
+		{
+			get
+			{
+				return this._ApprovedBudget;
+			}
+			set
+			{
+				if ((this._ApprovedBudget != value))
+				{
+					this._ApprovedBudget = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActualExpense", DbType="Int NOT NULL")]
+		public int ActualExpense
+		{
+			get
+			{
+				return this._ActualExpense;
+			}
+			set
+			{
+				if ((this._ActualExpense != value))
+				{
+					this._ActualExpense = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RemainingAmount", DbType="Int NOT NULL")]
+		public int RemainingAmount
+		{
+			get
+			{
+				return this._RemainingAmount;
+			}
+			set
+			{
+				if ((this._RemainingAmount != value))
+				{
+					this._RemainingAmount = value;
 				}
 			}
 		}

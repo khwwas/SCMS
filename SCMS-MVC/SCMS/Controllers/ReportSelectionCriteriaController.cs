@@ -53,15 +53,15 @@ namespace SCMS.Controllers
 
         #region VoucherDocument
         public string SetParam_VoucherDocument(string ps_ReportName, string pi_AllLoc, string ps_Location, string pi_AllVchrType, string ps_VoucherTypes,
-                                               string pi_AllDoc, string ps_DocFrom, string ps_DocTo,
+                                               string pi_AllDoc, string ps_DocFrom, string ps_DocTo, string pi_AllVchrStatus, string ps_VchrStatus,
                                                string pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo, string ps_VoucherPrint)
         {
-            string ls_Location = "", ls_VoucherTypes="";
-            
+            string ls_Location = "", ls_VoucherTypes = "";
+
             ResetParameters();
             Reports.ReportParameters.ReportName = ps_ReportName;
             Reports.ReportParameters.VoucherPrint = ps_VoucherPrint;
-
+            
             if (pi_AllLoc == "1")
             {
                 SECURITY_User user = (SECURITY_User)System.Web.HttpContext.Current.Session["user"];
@@ -97,7 +97,7 @@ namespace SCMS.Controllers
                     UserVoucherTypes = UserVoucherTypes.Where(c => c.SelectedVoucherType != "0").ToList();
                 }
 
-                ls_VoucherTypes =ConvertStringArrayToString(UserVoucherTypes.Select(c => c.VchrType_Id).ToArray());
+                ls_VoucherTypes = ConvertStringArrayToString(UserVoucherTypes.Select(c => c.VchrType_Id).ToArray());
                 if (ls_VoucherTypes == null || ls_VoucherTypes.Trim() == "")
                 {
                     ls_VoucherTypes = "''";
@@ -121,6 +121,17 @@ namespace SCMS.Controllers
                 Reports.ReportParameters.AllDoc = 0;
                 Reports.ReportParameters.DocFrom = ps_DocFrom;
                 Reports.ReportParameters.DocTo = ps_DocTo;
+            }
+
+            if (pi_AllVchrStatus == "1")
+            {
+                Reports.ReportParameters.AllVchrStatus = 1;
+                Reports.ReportParameters.VoucherStatus = "";
+            }
+            else
+            {
+                Reports.ReportParameters.AllVchrStatus = 0;
+                Reports.ReportParameters.VoucherStatus = ps_VchrStatus;
             }
 
             if (pi_AllDate == "1")

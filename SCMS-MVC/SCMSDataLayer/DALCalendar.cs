@@ -52,7 +52,7 @@ namespace SCMSDataLayer
                 SCMSDataContext dbSCMS = Connection.Create();
                 return dbSCMS.SETUP_Calendars.Where(c => c.Cldr_Active == 1).OrderBy(c => c.Cldr_Code).ToList();
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }

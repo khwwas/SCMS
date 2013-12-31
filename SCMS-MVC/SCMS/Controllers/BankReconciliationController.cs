@@ -21,7 +21,8 @@ namespace SCMS.Controllers
         {
             DALBankReconciliation objDalBankReconciliation = new DALBankReconciliation();
             GL_VchrMaster lrow_BankReconciliation = new GL_VchrMaster();
-            String ls_Action = "Edit", IsAuditTrail = "", ls_UserId = "";
+            String IsAuditTrail = "";
+            // ls_Action = "Edit", 
             String[] ls_Lable = new String[5], ls_Data = new String[5];
             Int32 li_ReturnValue = 0;
 

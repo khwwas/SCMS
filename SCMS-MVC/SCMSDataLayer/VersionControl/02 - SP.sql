@@ -394,9 +394,6 @@ Order By
 End 
 GO
 
-
-
-
 /****** Object:  StoredProcedure [dbo].[sp_BankReconciliation]    Script Date: 10/08/2013 21:22:11 ******/
 SET ANSI_NULLS ON
 GO
@@ -447,6 +444,126 @@ Select Distinct SETUP_Location.Loc_Id,
 		   GL_VchrMaster.VchMas_Date;
 
 END
+
+/****** Object:  StoredProcedure [dbo].[sp_PopulateBudgetTypeList]    Script Date: 12/10/2013 22:14:01 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_PopulateBudgetTypeList]
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * From SYSTEM_BudgetType Where ISNULL( SYSTEM_BudgetType.BgdtType_Active, 0 ) = 1
+END
+
+
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_GetBudgetTypesList]    Script Date: 12/23/2013 20:14:43 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[sp_GetBudgetTypesList]
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT *
+	  From SYSTEM_BudgetType Left Join
+	       SETUP_Location 
+	 On SYSTEM_BudgetType.Loc_Id = SETUP_Location.Loc_Id
+END
+
+GO
+
+
+
+/****** Object:  StoredProcedure [dbo].[sp_BudgetConsole]    Script Date: 12/31/2013 19:52:04 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_BudgetConsole]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_BudgetConsole]
+GO
+
+/****** Object:  StoredProcedure [dbo].[sp_BudgetConsole]    Script Date: 12/31/2013 19:52:04 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[sp_BudgetConsole]
+@AllLocation int, @LocationId varchar(10) 
+--@AllVoucherType int, @VoucherTypeId varchar(10), 
+--@AllDate int, @DateFrom varchar, @DateTo varchar 
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	  SELECT SETUP_Location.Loc_Id,
+	         SETUP_Location.Loc_Title,
+	         SETUP_Calendar.Cldr_Title,
+	         GL_BgdtMaster.BgdtMas_Id,
+			 GL_BgdtMaster.BgdtMas_Code,   
+			 GL_BgdtMaster.BgdtMas_Date,
+			 GL_BgdtMaster.BgdtMas_Remarks,   
+			 GL_BgdtMaster.BgdtMas_Status,
+			 ( --Select ISNULL( Round( Sum( ISNULL( GL_VchrDetail.BgdtMas_DrAmount, 0 ) ), 0 ), 0 )
+			     --From GL_VchrDetail
+			    --Where ( GL_BgdtMaster.BgdtMas_Id = GL_VchrDetail.BgdtMas_Id ) 
+			    0
+			 ) As ApprovedBudget,
+			 ( --Select ISNULL( Sum( ISNULL( GL_VchrDetail.BgdtMas_CrAmount, 0 ) ), 0 )
+			     --From GL_VchrDetail
+			   -- Where ( GL_BgdtMaster.BgdtMas_Id = GL_VchrDetail.BgdtMas_Id )
+			   0 
+			 ) As ActualExpense,
+			 ( --Select ISNULL( Sum( ISNULL( GL_VchrDetail.BgdtMas_DrAmount, 0 ) ), 0 ) - 
+			    --      ISNULL( Sum( ISNULL( GL_VchrDetail.BgdtMas_CrAmount, 0 ) ), 0 )
+			    -- From GL_VchrDetail
+			    --Where ( GL_BgdtMaster.BgdtMas_Id = GL_VchrDetail.BgdtMas_Id ) 
+			    0
+			 ) As RemainingAmount
+		FROM GL_BgdtMaster,   
+			 SETUP_Location,   
+			 SETUP_Calendar 
+	   WHERE ( SETUP_Location.Loc_Id = GL_BgdtMaster.Loc_Id ) and  
+			 ( SETUP_Calendar.Cldr_Id = GL_BgdtMaster.Cldr_Id ) and
+			 ( @AllLocation = 1 Or SETUP_Location.Loc_Id =  @LocationId ) --and
+			 --( @AllVoucherType = 1 or SYSTEM_BudgetType.BgdtType_Id = @VoucherTypeId ) and
+			 --( @AllDate = 1 Or CONVERT( DateTime, GL_BgdtMaster.BgdtMas_Date, 103 )
+			 --  BETWEEN CONVERT(DateTime, @DateFrom, 103 ) and CONVERT(DateTime, @DateTo, 103 ) )
+	Order By SETUP_Location.Loc_Title,   
+			 SETUP_Calendar.Cldr_Title,
+			 GL_BgdtMaster.BgdtMas_Date;
+
+END
+
+/****** Object:  StoredProcedure [dbo].[sp_BankReconciliation]    Script Date: 10/08/2013 21:22:11 ******/
+SET ANSI_NULLS ON
+
+GO
+
+
 
 
 
@@ -503,5 +620,6 @@ BEGIN
 	 On SETUP_LeaveType.Loc_Id = SETUP_Location.Loc_Id
 END
 Go
+
 
 

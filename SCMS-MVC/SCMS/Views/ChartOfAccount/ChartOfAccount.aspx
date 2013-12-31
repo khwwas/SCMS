@@ -39,14 +39,14 @@
             else {
                 //var Url = document.getElementById('frm_ChartOfAccountSetup').action;
 
-                if (lcnt_TypeGroup.checked == true) {
+                if (lcnt_TypeGroup.checked) {
                     li_Type = 1;
                 }
                 else {
                     li_Type = 2;
                 }
                 var Active = 0;
-                if (lcnt_Active.checked = true) {
+                if (lcnt_Active.checked) {
                     Active = 1;
                 }
                 var dataString = [];

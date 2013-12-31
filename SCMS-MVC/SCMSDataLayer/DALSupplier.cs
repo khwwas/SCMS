@@ -51,7 +51,7 @@ namespace SCMSDataLayer.DB
                 SCMSDataContext dbSCMS = Connection.Create();
                 return dbSCMS.SETUP_Suppliers.Where(c => c.Supp_Active == 1).OrderBy(c => c.Supp_Id).ToList();
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }

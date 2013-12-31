@@ -57,6 +57,15 @@
             }
         };
 
+        function CheckAllVchrStatus() {
+            if (document.getElementById('chk_AllVchrStatus').checked == true) {
+                document.getElementById('ddl_VchrStatus').disabled = true;
+            }
+            else {
+                document.getElementById('ddl_VchrStatus').disabled = false;
+            }
+        };
+
         function CheckAllDate() {
             if (document.getElementById('chk_AllDate').checked == true) {
                 document.getElementById('txt_DateFrom').disabled = true;
@@ -83,6 +92,9 @@
                 document.getElementById('div_VchrDocTo').style.display = "block";
                 document.getElementById('ddl_VchrDocFrom').disabled = true;
                 document.getElementById('ddl_VchrDocTo').disabled = true;
+
+                document.getElementById('div_VchrStatus').style.display = "block";
+                document.getElementById('ddl_VchrStatus').disabled = true;
 
                 document.getElementById('div_DateRange').style.display = "block";
                 document.getElementById('txt_DateFrom').disabled = true;
@@ -169,9 +181,11 @@
                 var pcnt_AllDoc = document.getElementById('chk_AllVchrDoc');
                 var pcnt_DocFrom = document.getElementById('ddl_VchrDocFrom');
                 var pcnt_DocTo = document.getElementById('ddl_VchrDocTo');
+                var pcnt_AllVchrStatus = document.getElementById('chk_AllVchrStatus');
+                var pcnt_VchrStatus = document.getElementById('ddl_VchrStatus');
                 var pcnt_VchrDocSummary = document.getElementById('rdo_VchrDocSummary').checked;
                 var pcnt_VchrDocDetail = document.getElementById('rdo_VchrDocDetail').checked;
-                var li_AllLoc, li_AllVchrType, li_AllDoc, li_AllDate, ls_VoucherPrint;
+                var li_AllLoc, li_AllVchrType, li_AllDoc, li_AllDate, ls_VoucherPrint, li_VchrStatus;
 
                 if (pcnt_AllLoc.checked == true) {
                     li_AllLoc = 1;
@@ -194,6 +208,14 @@
                     li_AllDoc = 0;
                 }
 
+                if (pcnt_AllVchrStatus.checked == true) {
+                    li_VchrStatus = 1;
+                }
+                else {
+                    li_VchrStatus = 0;
+                }
+
+
                 if (pcnt_AllDate.checked == true) {
                     li_AllDate = 1;
                 }
@@ -209,7 +231,8 @@
                 }
 
                 ps_Url = "../ReportSelectionCriteria/SetParam_VoucherDocument?ps_ReportName=" + ps_ReportName + "&pi_AllLoc=" + li_AllLoc + "&ps_Location=" + pcnt_Location.value +
-                         "&pi_AllVchrType=" + li_AllVchrType + "&ps_VoucherTypes=" + pcnt_VoucherTypes.value + "&pi_AllDoc=" + li_AllDoc.toString() + "&ps_DocFrom=" + pcnt_DocFrom.value + "&ps_DocTo=" + pcnt_DocTo.value +
+                         "&pi_AllVchrType=" + li_AllVchrType + "&ps_VoucherTypes=" + pcnt_VoucherTypes.value + "&pi_AllDoc=" + li_AllDoc.toString() + "&ps_DocFrom=" + pcnt_DocFrom.value +
+                         "&ps_DocTo=" + pcnt_DocTo.value + "&pi_AllVchrStatus=" + li_VchrStatus.toString() + "&ps_VchrStatus=" + pcnt_VchrStatus.value +
                          "&pi_AllDate=" + li_AllDate.toString() + "&pdt_DateFrom=" + pcnt_DateFrom.value + "&pdt_DateTo=" + pcnt_DateTo.value + "&ps_VoucherPrint=" + ls_VoucherPrint + "";
             }
             else if (ps_ReportName.toLowerCase() == "LedgerDtLocWise".toLowerCase() ||
@@ -433,17 +456,30 @@
             </div>
             <div id="div_VchrDocFrom" style="display: none;">
                 <div class="CustomCell" style="width: 150px; height: 30px;">
-                    Document From</div>
+                    Voucher # From</div>
                 <%= Html.DropDownList("ddl_VchrDocFrom", null, new { style = "width:955px;" })%>
             </div>
             <div class="Clear">
             </div>
             <div id="div_VchrDocTo" style="display: none;">
                 <div class="CustomCell" style="width: 150px; height: 30px;">
-                    Document To</div>
+                    Voucher # To</div>
                 <%= Html.DropDownList("ddl_VchrDocTo", null, new { style = "width:955px;" })%>
                 <input type="checkbox" class="checkbox" id="chk_AllVchrDoc" name="chk_AllVchrDoc"
                     onclick="CheckAllVchrDoc()" checked="checked" />
+            </div>
+            <div class="Clear">
+            </div>
+            <div id="div_VchrStatus" style="display: none;">
+                <div class="CustomCell" style="width: 150px; height: 30px;">
+                    Voucher Status</div>
+                <select id="ddl_VchrStatus" name="ddl_VchrStatus" class="CustomText" style="width: 251px;">
+                    <option value="Pending">Pending </option>
+                    <option value="Approved">Approved </option>
+                    <option value="Cancelled">Cancelled </option>
+                </select>
+                <input type="checkbox" class="checkbox" id="chk_AllVchrStatus" name="chk_AllVchrStatus"
+                    onclick="CheckAllVchrStatus()" checked="checked" />
             </div>
             <div class="Clear">
             </div>

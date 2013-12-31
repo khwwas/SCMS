@@ -7,7 +7,7 @@
         padding: 0;
         margin: 0;
         border-radius: 0px;
-         -webkit-border-radius: 0px;
+        -webkit-border-radius: 0px;
         -moz-border-radius: 0px;
     }
     input[type="text"]
@@ -15,7 +15,7 @@
         margin-bottom: 0;
     }
 </style>
-<table id="CompanyGrid" class="data display datatable">
+<table id="BudgetTypeGrid" class="data display datatable">
     <thead>
         <tr>
             <th style="width: 6%;">
@@ -24,18 +24,12 @@
             <th style="width: 6%;">
                 Code
             </th>
-            <th style="width: 15%;">
+            <th style="width: 6%;">
                 Prefix
             </th>
-            <th style="width: 24%;">
+            <th style="width: 30%;">
                 Title
             </th>
-            <th style="width: 6%;">
-                Initialize Code On
-            </th>
-            <%--<th style="width: 15%;">
-                Location
-            </th>--%>
         </tr>
     </thead>
     <tbody>
@@ -58,14 +52,12 @@
             <td id="txt_Code<%=BudgetTypeRow.BgdtType_Id%>" style="vertical-align: middle;">
                 <%=BudgetTypeRow.BgdtType_Code%>
             </td>
-           
+            <td id="txt_Prefix<%=BudgetTypeRow.BgdtType_Id%>" style="vertical-align: middle;">
+                <%=BudgetTypeRow.BgdtType_Prefix%>
+            </td>
             <td id="txt_Title<%=BudgetTypeRow.BgdtType_Id%>" style="vertical-align: middle;">
                 <%=BudgetTypeRow.BgdtType_Title%>
             </td>
-             <td id="txt_Prefix<%=BudgetTypeRow.BgdtType_Id%>" style="vertical-align: middle;">
-                <%=BudgetTypeRow.BgdtType_Prefix%>
-            </td>
-           
         </tr>
         <%}
           }

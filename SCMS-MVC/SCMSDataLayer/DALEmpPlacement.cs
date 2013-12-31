@@ -46,7 +46,7 @@ namespace SCMSDataLayer
                SCMSDataContext dbSCMS = Connection.Create();
                return dbSCMS.sp_GetEmployeePlacements(EmpId).LastOrDefault();
            }
-           catch (Exception ex)
+           catch
            {
                return null;
            }

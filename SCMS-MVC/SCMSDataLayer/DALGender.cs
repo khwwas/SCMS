@@ -56,7 +56,7 @@ namespace SCMSDataLayer
                 SCMSDataContext dbSCMS = Connection.Create();
                 return dbSCMS.SETUP_Genders.Where(c => c.Gndr_Active == 1).OrderBy(c => c.Gndr_Id).ToList();
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }

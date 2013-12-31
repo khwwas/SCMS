@@ -56,7 +56,7 @@ namespace SCMSDataLayer
                 SCMSDataContext dbSCMS = Connection.Create();
                 return dbSCMS.SETUP_Religions.Where(c => c.Rlgn_Active == 1).OrderBy(c => c.Rlgn_Id).ToList();
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }

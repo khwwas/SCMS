@@ -219,6 +219,7 @@ namespace SCMS.Controllers
                 }
             }
             catch (Exception ex){
+                throw new Exception(ex.Message.ToString());
             }
         }
 

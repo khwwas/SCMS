@@ -56,7 +56,7 @@ namespace SCMSDataLayer
                SCMSDataContext dbSCMS = Connection.Create();
                return dbSCMS.SETUP_EmployeeTypes.Where(c => c.EmpTyp_Active == 1).OrderBy(c => c.EmpTyp_Id).ToList();
            }
-           catch (Exception ex)
+           catch
            {
                return null;
            }

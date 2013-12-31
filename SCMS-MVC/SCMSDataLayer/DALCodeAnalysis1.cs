@@ -45,7 +45,7 @@ namespace SCMSDataLayer
                 SCMSDataContext dbSCMS = Connection.Create();
                 return dbSCMS.SETUP_CodeAnalysis1s.Where(c => c.CA_Active == 1).OrderBy(c => c.CA_Code).ToList();
             }
-            catch (Exception ex)
+            catch 
             {
                 return null;
             }

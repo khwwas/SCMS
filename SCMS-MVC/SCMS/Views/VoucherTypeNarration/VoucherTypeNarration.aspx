@@ -27,7 +27,7 @@
                 return;
             }
             else {
-                var Url = document.getElementById('frm_VoucherTypeNarrationSetup').action;
+//                var Url = document.getElementById('frm_VoucherTypeNarrationSetup').action;
                 //Url += "VoucherTypeNarration/SaveRecord?ps_Code=" + lcnt_txtSelectedCode.value + "&ps_Title=" + lcnt_txtTitle.value + "&ps_CmpId=" + lcnt_Cmp.value.toString();
                 Url = "VoucherTypeNarration/SaveRecord";
                 document.getElementById("Waiting_Image").style.display = "block";

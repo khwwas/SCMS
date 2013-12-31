@@ -71,7 +71,7 @@ namespace SCMS.Reports
             }
             catch (Exception ex)
             {
-
+                throw new Exception(ex.Message.ToString());
             }
         }
         #endregion
@@ -287,8 +287,8 @@ namespace SCMS.Reports
                         _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptVoucherDocumentSummary.rpt");
                     }
                     Datasets.dsVoucherDocument _dsVoucherDocument = new Datasets.dsVoucherDocument();
-                    string ls_Location = "", ls_VoucherTypes = "", ls_DocFrom = "", ls_DocTo = "";
-                    int li_AllDoc = 0, li_AllDate = 0;
+                    string ls_Location = "", ls_VoucherTypes = "", ls_DocFrom = "", ls_DocTo = "", ls_VchrStatus= "All";
+                    int li_AllDoc = 0, li_AllVchrStatus = 0, li_AllDate = 0;
                     DateTime ldt_DateFrom, ldt_Dateto;
 
                     ls_Location = SCMS.Reports.ReportParameters.Location;
@@ -296,6 +296,8 @@ namespace SCMS.Reports
                     li_AllDoc = SCMS.Reports.ReportParameters.AllDoc;
                     ls_DocFrom = SCMS.Reports.ReportParameters.DocFrom;
                     ls_DocTo = SCMS.Reports.ReportParameters.DocTo;
+                    li_AllVchrStatus = SCMS.Reports.ReportParameters.AllVchrStatus;
+                    ls_VchrStatus = SCMS.Reports.ReportParameters.VoucherStatus;
                     li_AllDate = SCMS.Reports.ReportParameters.AllDate;
                     ldt_DateFrom = SCMS.Reports.ReportParameters.DateFrom;
                     ldt_Dateto = SCMS.Reports.ReportParameters.DateTo;
@@ -310,7 +312,8 @@ namespace SCMS.Reports
                         _dsVoucherDocument.Tables.Remove("VoucherDocument");
                     }
 
-                    _ds = _dalReports.VoucherDocument(ls_Location, ls_VoucherTypes, li_AllDoc, ls_DocFrom, ls_DocTo, li_AllDate, ldt_DateFrom, ldt_Dateto);
+                    _ds = _dalReports.VoucherDocument(ls_Location, ls_VoucherTypes, li_AllDoc, ls_DocFrom, ls_DocTo, 
+                                                      li_AllVchrStatus, ls_VchrStatus, li_AllDate, ldt_DateFrom, ldt_Dateto);
                     _dsVoucherDocument.Tables.Add(_ds.Tables[0].Copy());
                     _dsVoucherDocument.Tables[0].TableName = "VoucherDocument";
 
@@ -534,7 +537,7 @@ namespace SCMS.Reports
                 {
                     _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptBalanceSheet.rpt");
                     Datasets.dsBalanceSheet _dsBalanceSheet = new Datasets.dsBalanceSheet();
-                    string ls_Location="";
+                    string ls_Location = "";
                     int li_Level = 0, li_Year = 0;
 
                     ls_Location = SCMS.Reports.ReportParameters.Location;

@@ -175,7 +175,7 @@ namespace SCMSDataLayer
 
         #region Voucher Document
         public DataSet VoucherDocument(string ps_Location, string ps_VoucherTypes, int pi_AllDoc, string ps_DocFrom, string ps_DocTo,
-                                       int pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo)
+                                       int pi_AllVchrStatus, string ps_VchrStatus, int pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo)
         {
             SqlConnection con = new SqlConnection();
             SqlCommand _cmd = new SqlCommand();
@@ -225,7 +225,7 @@ namespace SCMSDataLayer
                 _Sql += "                                      Convert( datetime, Convert( Char, '" + pdt_DateFrom.ToString("dd/MM/yyyy") + "', 103 ), 103 ) And ";
                 _Sql += "                                      Convert( datetime, '" + pdt_DateTo.ToString("dd/MM/yyyy") + "', 103 ) ) And ";
                 _Sql += "          ( " + pi_AllDoc + " = 1 Or GL_VchrMaster.VchMas_Id Between '" + ps_DocFrom + "' And '" + ps_DocTo + "' ) And ";
-                _Sql += "          ( Lower( GL_VchrMaster.VchMas_Status ) = Lower( 'Approved' ) ) ";
+                _Sql += "          ( " + pi_AllVchrStatus + " = 1 OR Lower( GL_VchrMaster.VchMas_Status ) = Lower( '" + ps_VchrStatus + "' ) ) ";
                 _Sql += " Order By SETUP_Location.Loc_Title, ";
                 _Sql += "          GL_VchrMaster.VchMas_Date, ";
                 _Sql += "          GL_VchrDetail.VchDet_Id ";

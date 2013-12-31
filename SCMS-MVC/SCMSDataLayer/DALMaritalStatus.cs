@@ -56,7 +56,7 @@ namespace SCMSDataLayer
                 SCMSDataContext dbSCMS = Connection.Create();
                 return dbSCMS.SETUP_MaritalStatus.Where(c => c.MS_Active == 1).OrderBy(c => c.MS_Id).ToList();
             }
-            catch (Exception ex)
+            catch
             {
                 return null;
             }
