@@ -75,30 +75,44 @@
         </div>
     </div>
     </form>
-    <div id="popup" style="display: block; background: #FFF; border-radius: 5px 5px 5px 5px;
+    <div id="popup" style="display: none; background: #FFF; border-radius: 5px 5px 5px 5px;
         -moz-border-radius: 5px 5px 5px 5px; width: 500px; padding: 10px;">
         <div id="PopUpContent">
             <div style="text-align: center; border-bottom: 1px solid #ccc;">
                 <h6>
-                    Copy Budget
+                    Select the parameters to copy the selected budget
                 </h6>
             </div>
             <form method="post" action="../../budget/CopyBudget">
             <input type="hidden" id="MasterId" name="MasterId" value="" />
-            <div class="CustomCell" style="width: 150px; height: 30px;">
+            <div class="clear" style="margin-top: 10px;">
+            </div>
+            <div class="CustomCell" style="width: 120px; height: 30px;">
                 Applicable On</div>
             <div class="CustomCell" style="width: 300px; height: 30px;">
-                <span>Budget</span><span><input type="radio" value="Budget" checked="checked" name="rdo_BudgetActual" /></span>
-                <span>Actual</span><span><input type="radio" value="Actual" name="rdo_BudgetActual" /></span>
+                <div style="float: left; margin-right: 5px; font-weight: normal;">
+                    Budget</div>
+                <div style="float: left; margin-right: 10px; margin-top: -3px;">
+                    <input type="radio" value="Budget" checked="checked" name="rdo_BudgetActual" /></div>
+                <div style="float: left; margin-right: 5px; font-weight: normal;">
+                    Actual</div>
+                <div style="float: left; margin-top: -3px;">
+                    <input type="radio" value="Actual" name="rdo_BudgetActual" /></div>
             </div>
             <div class="clear">
             </div>
-            <div class="CustomCell" style="width: 150px; height: 30px;">
+            <div class="CustomCell" style="width: 120px; height: 30px;">
                 Applicable %age</div>
             <div class="CustomCell" style="width: 300px; height: 30px;">
-                <input type="text" class="CustomText" style="width: 50px;" name="percentage" />
-                <span>Inflate</span><span><input type="radio" value="Inflate" checked="checked" name="rdo_InflateDeflate" /></span>
-                <span>Deflate</span><span><input type="radio" value="Deflate" name="rdo_InflateDeflate" /></span>
+                <input type="text" class="CustomText" style="width: 50px; float: left;" name="percentage" />
+                <div style="float: left; margin-right: 5px; font-weight: normal;">
+                    Inflate</div>
+                <div style="float: left; margin-right: 10px; margin-top: -3px;">
+                    <input type="radio" value="Inflate" checked="checked" name="rdo_InflateDeflate" /></div>
+                <div style="float: left; margin-right: 5px; font-weight: normal;">
+                    Deflate</div>
+                <div style="float: left; margin-top: -3px;">
+                    <input type="radio" value="Deflate" name="rdo_InflateDeflate" /></div>
             </div>
             <div style="width: auto; float: right; margin-right: 5px;">
                 <input id="btn_Save" type="submit" value="Save" class="btn btn-blue" style="width: 80px;
