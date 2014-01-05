@@ -208,6 +208,14 @@ namespace SCMS.Controllers
 
         }
 
+        public ActionResult CopyBudget(FormCollection frm)
+        {
+            string BudgetMasterId = frm[0];
+            string ApplicableOn = frm[1];
+
+            return RedirectToAction("Index", "BudgetConsole", new { });
+        }
+
 
     }
 }

@@ -28,7 +28,7 @@
 <table id="BudgetConsoleGrid" class="data display datatable">
     <thead>
         <tr>
-            <th style="width: 6%;">
+            <th style="width: 8%;">
                 Action
             </th>
             <th style="width: 10%;">
@@ -55,7 +55,7 @@
             <th style="width: 13%;">
                 Remarks
             </th>
-            <th style="width: 10%;">
+            <th style="width: 8%;">
                 Status
             </th>
         </tr>
@@ -73,6 +73,10 @@
             <td style="float: left">
                 <%if (DataRow.BgdtMas_Status != "Cancelled")
                   { %>
+                <div onclick="CopyBudget('<%=DataRow.BgdtMas_Id %>');" style="width: 22px; padding-right: 5px;
+                    float: left; cursor: pointer;">
+                    <img alt="Copy" src="../../img/copy.png" style="width: 22px;" />
+                </div>
                 <div onclick="javascript:window.location='../Budget?p_BudgetId=<%=DataRow.BgdtMas_Id %>'"
                     style="width: 22px; padding-right: 5px; float: left; cursor: pointer;">
                     <img alt="Edit" src="../../img/edit.png" style="width: 22px;" />
