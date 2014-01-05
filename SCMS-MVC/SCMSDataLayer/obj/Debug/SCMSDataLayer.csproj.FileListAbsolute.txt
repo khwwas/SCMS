@@ -1,0 +1,5 @@
+D:\Projects\SCMS\SCMS-MVC\SCMSDataLayer\bin\Debug\SCMSDataLayer.dll.config
+D:\Projects\SCMS\SCMS-MVC\SCMSDataLayer\bin\Debug\SCMSDataLayer.dll
+D:\Projects\SCMS\SCMS-MVC\SCMSDataLayer\bin\Debug\SCMSDataLayer.pdb
+D:\Projects\SCMS\SCMS-MVC\SCMSDataLayer\obj\Debug\SCMSDataLayer.dll
+D:\Projects\SCMS\SCMS-MVC\SCMSDataLayer\obj\Debug\SCMSDataLayer.pdb
