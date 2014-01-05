@@ -508,6 +508,7 @@
     <Content Include="img\chekbox_off.png" />
     <Content Include="img\chekbox_on.png" />
     <Content Include="img\cog.png" />
+    <Content Include="img\copy.png" />
     <Content Include="img\cross.png" />
     <Content Include="img\dark-bg.png" />
     <Content Include="img\delete.png" />

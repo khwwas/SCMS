@@ -9,8 +9,8 @@
         $(document).ready(function () {
         });
 
-//        function EditRecord(Id) {
-//        }
+        //        function EditRecord(Id) {
+        //        }
 
         function BudgetConsole(locationId) {
             window.location = "../BudgetConsole?p_LocationId=" + locationId;
@@ -48,6 +48,17 @@
             }
         }
 
+        function CopyBudget(budgetId) {
+            $("#MasterId").val(budgetId);
+            $('#popup').lightbox_me({
+                centered: true,
+                closeClick: false,
+                closeEsc: false,
+                closeSelector: ".btn-red"
+            });
+            e.preventDefault();
+        }
+
     </script>
     <form id="frm_BudgetConsole" action='<%=Url.Content("~/") %>'>
     <div class="box round first fullpage grid">
@@ -64,4 +75,45 @@
         </div>
     </div>
     </form>
+    <div id="popup" style="display: block; background: #FFF; border-radius: 5px 5px 5px 5px;
+        -moz-border-radius: 5px 5px 5px 5px; width: 500px; padding: 10px;">
+        <div id="PopUpContent">
+            <div style="text-align: center; border-bottom: 1px solid #ccc;">
+                <h6>
+                    Copy Budget
+                </h6>
+            </div>
+            <form method="post" action="../../budget/CopyBudget">
+            <input type="hidden" id="MasterId" name="MasterId" value="" />
+            <div class="CustomCell" style="width: 150px; height: 30px;">
+                Applicable On</div>
+            <div class="CustomCell" style="width: 300px; height: 30px;">
+                <span>Budget</span><span><input type="radio" value="Budget" checked="checked" name="rdo_BudgetActual" /></span>
+                <span>Actual</span><span><input type="radio" value="Actual" name="rdo_BudgetActual" /></span>
+            </div>
+            <div class="clear">
+            </div>
+            <div class="CustomCell" style="width: 150px; height: 30px;">
+                Applicable %age</div>
+            <div class="CustomCell" style="width: 300px; height: 30px;">
+                <input type="text" class="CustomText" style="width: 50px;" name="percentage" />
+                <span>Inflate</span><span><input type="radio" value="Inflate" checked="checked" name="rdo_InflateDeflate" /></span>
+                <span>Deflate</span><span><input type="radio" value="Deflate" name="rdo_InflateDeflate" /></span>
+            </div>
+            <div style="width: auto; float: right; margin-right: 5px;">
+                <input id="btn_Save" type="submit" value="Save" class="btn btn-blue" style="width: 80px;
+                    height: 30px; padding-top: 5px; color: White; font-weight: bold; font-size: 11pt;" />
+                <input id="btn_Close" type="button" value="Cancel" class="btn btn-red" style="width: 80px;
+                    height: 30px; padding-top: 5px; color: White; font-weight: bold; font-size: 11pt;" />
+            </div>
+            </form>
+        </div>
+        <div style="display: none; text-align: center;" id="wait">
+            <h4>
+                Your request is in progress, Please Wait....</h4>
+            <img alt="" src="../../img/ajax-loader.gif" width="120px" />
+        </div>
+        <div class="clear">
+        </div>
+    </div>
 </asp:Content>
