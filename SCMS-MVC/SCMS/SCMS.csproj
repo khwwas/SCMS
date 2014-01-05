@@ -191,6 +191,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsBalanceSheet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Datasets\dsBudgetAndMonthlyExpense.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsBudgetAndMonthlyExpense.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Datasets\dsBudgetSummary.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1627,6 +1632,17 @@
     </None>
     <None Include="Reports\Datasets\dsBalanceSheet.xss">
       <DependentUpon>dsBalanceSheet.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\Datasets\dsBudgetAndMonthlyExpense.xsc">
+      <DependentUpon>dsBudgetAndMonthlyExpense.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\Datasets\dsBudgetAndMonthlyExpense.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsBudgetAndMonthlyExpense.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\Datasets\dsBudgetAndMonthlyExpense.xss">
+      <DependentUpon>dsBudgetAndMonthlyExpense.xsd</DependentUpon>
     </None>
     <None Include="Reports\Datasets\dsBudgetSummary.xsc">
       <DependentUpon>dsBudgetSummary.xsd</DependentUpon>
