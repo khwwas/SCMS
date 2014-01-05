@@ -287,7 +287,7 @@ namespace SCMS.Reports
                         _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptVoucherDocumentSummary.rpt");
                     }
                     Datasets.dsVoucherDocument _dsVoucherDocument = new Datasets.dsVoucherDocument();
-                    string ls_Location = "", ls_VoucherTypes = "", ls_DocFrom = "", ls_DocTo = "", ls_VchrStatus= "All";
+                    string ls_Location = "", ls_VoucherTypes = "", ls_DocFrom = "", ls_DocTo = "", ls_VchrStatus = "All";
                     int li_AllDoc = 0, li_AllVchrStatus = 0, li_AllDate = 0;
                     DateTime ldt_DateFrom, ldt_Dateto;
 
@@ -312,7 +312,7 @@ namespace SCMS.Reports
                         _dsVoucherDocument.Tables.Remove("VoucherDocument");
                     }
 
-                    _ds = _dalReports.VoucherDocument(ls_Location, ls_VoucherTypes, li_AllDoc, ls_DocFrom, ls_DocTo, 
+                    _ds = _dalReports.VoucherDocument(ls_Location, ls_VoucherTypes, li_AllDoc, ls_DocFrom, ls_DocTo,
                                                       li_AllVchrStatus, ls_VchrStatus, li_AllDate, ldt_DateFrom, ldt_Dateto);
                     _dsVoucherDocument.Tables.Add(_ds.Tables[0].Copy());
                     _dsVoucherDocument.Tables[0].TableName = "VoucherDocument";
@@ -635,6 +635,43 @@ namespace SCMS.Reports
                     _ReportDocument.SummaryInfo.ReportTitle = "Audit Log";
                     //_ReportDocument.SetParameterValue("pm_CurrentYear", li_Year);
                     //_ReportDocument.SetParameterValue("pm_PreviousYear", li_Year - 1);
+                }
+                #endregion
+
+                #region Budget Summary
+                else if (ls_ReportName.ToLower() == "BudgetSummary".ToLower())
+                {
+                    _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptBudgetSummary.rpt");
+                    Datasets.dsBudgetSummary _dsBudgetSummary = new Datasets.dsBudgetSummary();
+                    string ls_Location = "", ls_Calendar = "";
+                    int li_AllCalendar = 0;
+
+                    ls_Location = SCMS.Reports.ReportParameters.Location;
+                    li_AllCalendar = SCMS.Reports.ReportParameters.AllCalendar;
+                    ls_Calendar = SCMS.Reports.ReportParameters.sCalendar;
+
+                    if (_dsBudgetSummary.Tables.Contains("Logo"))
+                    {
+                        _dsBudgetSummary.Tables.Remove("Logo");
+                    }
+
+                    if (_dsBudgetSummary.Tables.Contains("BudgetSummary"))
+                    {
+                        _dsBudgetSummary.Tables.Remove("BudgetSummary");
+                    }
+
+                    _ds = _dalReports.BudgetSummary(ls_Location, li_AllCalendar, ls_Calendar);
+                    _dsBudgetSummary.Tables.Add(_ds.Tables[0].Copy());
+                    _dsBudgetSummary.Tables[0].TableName = "BudgetSummary";
+
+                    if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
+                    {
+                        MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
+                        return;
+                    }
+
+                    _ReportDocument.SetDataSource(_dsBudgetSummary);
+                    _ReportDocument.SummaryInfo.ReportTitle = "Budget Summary";
                 }
                 #endregion
 

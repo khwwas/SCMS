@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -188,6 +189,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsBalanceSheet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Datasets\dsBudgetSummary.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsBudgetSummary.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Datasets\dsChartOfAccount.Designer.cs">
       <DependentUpon>dsChartOfAccount.xsd</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -249,6 +255,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>rptAuditTrail.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Reps\rptBudgetSummary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBudgetSummary.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\Reps\rptVoucherDocumentSummary.cs">
@@ -1612,6 +1624,17 @@
     <None Include="Reports\Datasets\dsBalanceSheet.xss">
       <DependentUpon>dsBalanceSheet.xsd</DependentUpon>
     </None>
+    <None Include="Reports\Datasets\dsBudgetSummary.xsc">
+      <DependentUpon>dsBudgetSummary.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\Datasets\dsBudgetSummary.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsBudgetSummary.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\Datasets\dsBudgetSummary.xss">
+      <DependentUpon>dsBudgetSummary.xsd</DependentUpon>
+    </None>
     <None Include="Reports\Datasets\dsChartOfAccount.xsc">
       <DependentUpon>dsChartOfAccount.xsd</DependentUpon>
     </None>
@@ -1807,6 +1830,10 @@
     <EmbeddedResource Include="Reports\Reps\rptAuditTrail.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptAuditTrail.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Reps\rptBudgetSummary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBudgetSummary.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Reps\rptVoucherDocumentSummary.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

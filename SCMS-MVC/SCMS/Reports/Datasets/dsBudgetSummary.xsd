@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsBudgetSummary" targetNamespace="http://tempuri.org/dsBudgetSummary.xsd" xmlns:mstns="http://tempuri.org/dsBudgetSummary.xsd" xmlns="http://tempuri.org/dsBudgetSummary.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsBudgetSummary" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsBudgetSummary" msprop:Generator_UserDSName="dsBudgetSummary">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="BudgetSummary" msprop:Generator_TableClassName="BudgetSummaryDataTable" msprop:Generator_TableVarName="tableBudgetSummary" msprop:Generator_TablePropName="BudgetSummary" msprop:Generator_RowDeletingName="BudgetSummaryRowDeleting" msprop:Generator_UserTableName="BudgetSummary" msprop:Generator_RowChangingName="BudgetSummaryRowChanging" msprop:Generator_RowEvHandlerName="BudgetSummaryRowChangeEventHandler" msprop:Generator_RowDeletedName="BudgetSummaryRowDeleted" msprop:Generator_RowEvArgName="BudgetSummaryRowChangeEvent" msprop:Generator_RowChangedName="BudgetSummaryRowChanged" msprop:Generator_RowClassName="BudgetSummaryRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Loc_Title" msprop:Generator_ColumnVarNameInTable="columnLoc_Title" msprop:Generator_ColumnPropNameInRow="Loc_Title" msprop:Generator_ColumnPropNameInTable="Loc_TitleColumn" msprop:Generator_UserColumnName="Loc_Title" type="xs:string" minOccurs="0" />
+              <xs:element name="Cldr_Id" msprop:Generator_ColumnVarNameInTable="columnCldr_Id" msprop:Generator_ColumnPropNameInRow="Cldr_Id" msprop:Generator_ColumnPropNameInTable="Cldr_IdColumn" msprop:Generator_UserColumnName="Cldr_Id" type="xs:string" minOccurs="0" />
+              <xs:element name="Cldr_SortOrder" msprop:Generator_ColumnVarNameInTable="columnCldr_SortOrder" msprop:Generator_ColumnPropNameInRow="Cldr_SortOrder" msprop:Generator_ColumnPropNameInTable="Cldr_SortOrderColumn" msprop:Generator_UserColumnName="Cldr_SortOrder" type="xs:int" minOccurs="0" />
+              <xs:element name="Cldr_Title" msprop:Generator_ColumnVarNameInTable="columnCldr_Title" msprop:Generator_ColumnPropNameInRow="Cldr_Title" msprop:Generator_ColumnPropNameInTable="Cldr_TitleColumn" msprop:Generator_UserColumnName="Cldr_Title" type="xs:string" minOccurs="0" />
+              <xs:element name="ActualExpense" msprop:Generator_ColumnVarNameInTable="columnActualExpense" msprop:Generator_ColumnPropNameInRow="ActualExpense" msprop:Generator_ColumnPropNameInTable="ActualExpenseColumn" msprop:Generator_UserColumnName="ActualExpense" type="xs:double" minOccurs="0" />
+              <xs:element name="ActualBudget" msprop:Generator_ColumnVarNameInTable="columnActualBudget" msprop:Generator_ColumnPropNameInRow="ActualBudget" msprop:Generator_ColumnPropNameInTable="ActualBudgetColumn" msprop:Generator_UserColumnName="ActualBudget" type="xs:double" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

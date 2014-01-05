@@ -22,7 +22,7 @@
                     <CR:CrystalReportViewer ID="crvReports" runat="server" AutoDataBind="true" EnableDatabaseLogonPrompt="False"
                         EnableParameterPrompt="False" ToolPanelView="None" HasCrystalLogo="False" HasDrilldownTabs="False"
                         HasDrillUpButton="False" HasSearchButton="False" HasToggleGroupTreeButton="False"
-                        HasToggleParameterPanelButton="False" PrintMode="ActiveX" />
+                        HasToggleParameterPanelButton="False" PrintMode="ActiveX"  />
                 </td>
             </tr>
         </table>

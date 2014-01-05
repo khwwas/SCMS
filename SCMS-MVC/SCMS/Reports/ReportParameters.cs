@@ -49,6 +49,17 @@ namespace SCMS.Reports
             set;
         }
 
+        public static int AllCalendar
+        {
+            get;
+            set;
+        }
+        public static string sCalendar
+        {
+            get;
+            set;
+        }
+
         public static int AllAccCode
         {
             get;
@@ -80,6 +91,7 @@ namespace SCMS.Reports
             get;
             set;
         }
+
         public static string VoucherPrint
         {
             get;

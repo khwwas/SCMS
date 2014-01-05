@@ -26,6 +26,15 @@
             }
         };
 
+        function CheckAllCalendar() {
+            if (document.getElementById('chk_AllCalendar').checked == true) {
+                document.getElementById('ddl_Calendar').disabled = true;
+            }
+            else {
+                document.getElementById('ddl_Calendar').disabled = false;
+            }
+        };
+
         function CheckAllVchrTypes() {
             if (document.getElementById('chk_AllVoucherTypes').checked == true) {
                 document.getElementById('ddl_VoucherTypes').disabled = true;
@@ -158,6 +167,13 @@
                 document.getElementById('div_DateRange').style.display = "block";
                 document.getElementById('txt_DateFrom').disabled = true;
                 document.getElementById('txt_DateTo').disabled = true;
+            }
+            else if (ps_ReportName.toLowerCase() == "BudgetSummary".toLowerCase()) {
+                document.getElementById('div_Location').style.display = "block";
+                document.getElementById('ddl_location').disabled = true;
+
+                document.getElementById('div_Calendar').style.display = "block";
+                document.getElementById('ddl_Calendar').disabled = true;
             }
         };
 
@@ -386,6 +402,31 @@
 
                 ps_Url = "../ReportSelectionCriteria/SetParam_AuditTrail?ps_ReportName=" + ps_ReportName +
                 "&pi_AllDate=" + li_AllDate.toString() + "&pdt_DateFrom=" + pcnt_DateFrom.value + "&pdt_DateTo=" + pcnt_DateTo.value + "";
+            }
+            else if (ps_ReportName.toLowerCase() == "BudgetSummary".toLowerCase()) {
+                var pcnt_AllLoc = document.getElementById('chk_AllLocations');
+                var pcnt_AllCalendar = document.getElementById('chk_AllCalendar');
+                var pcnt_Location = document.getElementById('ddl_location');
+                var pcnt_Calendar = document.getElementById('ddl_Calendar');
+
+                var li_AllLoc, li_AllCalendar;
+
+                if (pcnt_AllLoc.checked == true) {
+                    li_AllLoc = 1;
+                }
+                else {
+                    li_AllLoc = 0;
+                }
+
+                if (pcnt_AllCalendar.checked == true) {
+                    li_AllCalendar = 1;
+                }
+                else {
+                    li_AllCalendar = 0;
+                }
+
+                ps_Url = "../ReportSelectionCriteria/SetParam_BudgetSummary?ps_ReportName=" + ps_ReportName + "&pi_AllLoc=" + li_AllLoc + "&ps_Location=" + pcnt_Location.value +
+                         "&pi_AllCalendar=" + li_AllCalendar + "&ps_Calendar=" + pcnt_Calendar.value;
             };
 
             $.ajax({
@@ -546,6 +587,15 @@
                     <option value="2013">2013</option>
                     <option value="2014">2014</option>
                 </select>
+            </div>
+            <div class="Clear">
+            </div>
+            <div id="div_Calendar" style="display: none;">
+                <div class="CustomCell" style="width: 150px; height: 30px;">
+                    Year</div>
+                <%= Html.DropDownList("ddl_Calendar", null, new { style = "width:955px;" })%>
+                <input type="checkbox" class="checkbox" id="chk_AllCalendar" name="chk_AllCalendar"
+                    onclick="CheckAllCalendar()" checked="checked" />
             </div>
             <div class="Clear">
             </div>
