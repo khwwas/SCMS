@@ -212,6 +212,7 @@ namespace SCMS.Controllers
         {
             DALBudgetEntry objDalBudgetEntry = new DALBudgetEntry();
             DALCalendar objDalCalendar = new DALCalendar();
+            string ls_YearPrefix="";
 
             string BudgetMasterId = frm["MasterId"];
             string ApplicableOn = frm["rdo_BudgetActual"];
@@ -248,7 +249,7 @@ namespace SCMS.Controllers
 
             if (DALCommon.AutoCodeGeneration("GL_BgdtMaster") == 1)
             {
-                string ls_YearPrefix = objDalCalendar.GetCalendarPrefix_ByCurrentDate(DateTime.Now);
+                ls_YearPrefix = objDalCalendar.GetCalendarPrefix_ByCurrentDate(DateTime.Now);
                 BudgetMasterId = DALCommon.GetMaxBudgetId(ls_YearPrefix);
             }
 
@@ -259,7 +260,7 @@ namespace SCMS.Controllers
             NewBudgetMaster.BgdtType_Id = SelectedBudgetMaster.BgdtType_Id;
             NewBudgetMaster.Cldr_Id = SelectedBudgetMaster.Cldr_Id;
             NewBudgetMaster.Loc_Id = SelectedBudgetMaster.Loc_Id;
-            NewBudgetMaster.BgdtMas_Remarks = SelectedBudgetMaster.BgdtMas_Remarks;
+            NewBudgetMaster.BgdtMas_Remarks = "Copy of " + SelectedBudgetMaster.BgdtMas_Code + " - " +  SelectedBudgetMaster.BgdtMas_Remarks;
             NewBudgetMaster.BgdtMas_EnteredDate = DateTime.Now;
             NewBudgetMaster.BgdtMas_EnteredBy = ((SECURITY_User)Session["user"]).User_Title;
             Int32 li_ReturnValue = objDalBudgetEntry.SaveBudgetMaster(NewBudgetMaster);
