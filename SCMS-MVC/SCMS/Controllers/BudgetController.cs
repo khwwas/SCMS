@@ -210,8 +210,95 @@ namespace SCMS.Controllers
 
         public ActionResult CopyBudget(FormCollection frm)
         {
-            string BudgetMasterId = frm[0];
-            string ApplicableOn = frm[1];
+            DALBudgetEntry objDalBudgetEntry = new DALBudgetEntry();
+            DALCalendar objDalCalendar = new DALCalendar();
+
+            string BudgetMasterId = frm["MasterId"];
+            string ApplicableOn = frm["rdo_BudgetActual"];
+            int ApplicablePercent = Convert.ToInt32(frm["percentage"]);
+            string InflateDeflate = frm["rdo_InflateDeflate"];
+            int BudgetTotalAmount = 0;
+
+            GL_BgdtMaster SelectedBudgetMaster = new DALBudgetEntry().GetAllMasterRecords().Where(c => c.BgdtMas_Id.Equals(BudgetMasterId)).SingleOrDefault();
+            List<GL_BgdtDetail> SelectedBudgetDetail = new DALBudgetEntry().GetAllDetailRecords().Where(c => c.BgdtMas_Id.Equals(BudgetMasterId)).ToList();
+            System.Data.DataSet dsBudget = new DALReports().BudgetSummary(SelectedBudgetMaster.Loc_Id, 0, SelectedBudgetMaster.Cldr_Id);
+
+            if (ApplicableOn == "Budget")
+            {
+                BudgetTotalAmount = 5000;//dsBudget.Tables[0].Rows[0]["ActualBudget"] == null ? 0 : Convert.ToInt32(dsBudget.Tables[0].Rows[0]["ActualBudget"]);//Convert.ToInt32(SelectedBudgetDetail.Sum(c => c.BgdtDet_TotalAmount));
+            }
+            else
+            {
+
+                BudgetTotalAmount = 7000;//dsBudget.Tables[0].Rows[0]["ActualExpense"] == null ? 0 : Convert.ToInt32(dsBudget.Tables[0].Rows[0]["ActualExpense"]);
+            }
+
+            if (InflateDeflate == "Inflate")
+            {
+                BudgetTotalAmount = BudgetTotalAmount + ((BudgetTotalAmount * ApplicablePercent) / 100);
+            }
+            else
+            {
+                BudgetTotalAmount = BudgetTotalAmount - ((BudgetTotalAmount * ApplicablePercent) / 100);
+            }
+
+            int BudgetPerMonth = Convert.ToInt32(BudgetTotalAmount / 12);
+
+            GL_BgdtMaster NewBudgetMaster = new GL_BgdtMaster();
+
+            if (DALCommon.AutoCodeGeneration("GL_BgdtMaster") == 1)
+            {
+                string ls_YearPrefix = objDalCalendar.GetCalendarPrefix_ByCurrentDate(DateTime.Now);
+                BudgetMasterId = DALCommon.GetMaxBudgetId(ls_YearPrefix);
+            }
+
+            NewBudgetMaster.BgdtMas_Id = BudgetMasterId;
+            NewBudgetMaster.BgdtMas_Code = BudgetMasterId;
+            NewBudgetMaster.BgdtMas_Date = DateTime.Now;
+            NewBudgetMaster.BgdtMas_Status = "Pending";
+            NewBudgetMaster.BgdtType_Id = SelectedBudgetMaster.BgdtType_Id;
+            NewBudgetMaster.Cldr_Id = SelectedBudgetMaster.Cldr_Id;
+            NewBudgetMaster.Loc_Id = SelectedBudgetMaster.Loc_Id;
+            NewBudgetMaster.BgdtMas_Remarks = SelectedBudgetMaster.BgdtMas_Remarks;
+            NewBudgetMaster.BgdtMas_EnteredDate = DateTime.Now;
+            NewBudgetMaster.BgdtMas_EnteredBy = ((SECURITY_User)Session["user"]).User_Title;
+            Int32 li_ReturnValue = objDalBudgetEntry.SaveBudgetMaster(NewBudgetMaster);
+
+            if (li_ReturnValue > 0)
+            {
+                foreach (GL_BgdtDetail detail in SelectedBudgetDetail)
+                {
+                    String BudgetDetailCode = "";
+
+                    if (String.IsNullOrEmpty(BudgetDetailCode))
+                    {
+                        if (DALCommon.AutoCodeGeneration("GL_BgdtDetail") == 1)
+                        {
+                            BudgetDetailCode = DALCommon.GetMaximumCode("GL_BgdtDetail");
+                        }
+                    }
+
+                    GL_BgdtDetail dbDetail = new GL_BgdtDetail();
+                    dbDetail.BgdtDet_Id = BudgetDetailCode;
+                    dbDetail.BgdtMas_Id = BudgetMasterId;
+                    dbDetail.BgdtDet_Month1 = BudgetPerMonth;
+                    dbDetail.BgdtDet_Month2 = BudgetPerMonth;
+                    dbDetail.BgdtDet_Month3 = BudgetPerMonth;
+                    dbDetail.BgdtDet_Month4 = BudgetPerMonth;
+                    dbDetail.BgdtDet_Month5 = BudgetPerMonth;
+                    dbDetail.BgdtDet_Month6 = BudgetPerMonth;
+                    dbDetail.BgdtDet_Month7 = BudgetPerMonth;
+                    dbDetail.BgdtDet_Month8 = BudgetPerMonth;
+                    dbDetail.BgdtDet_Month9 = BudgetPerMonth;
+                    dbDetail.BgdtDet_Month10 = BudgetPerMonth;
+                    dbDetail.BgdtDet_Month11 = BudgetPerMonth;
+                    dbDetail.BgdtDet_Month12 = BudgetPerMonth;
+                    dbDetail.BgdtDet_TotalAmount = BudgetTotalAmount;
+                    dbDetail.BgdtDet_Remarks = detail.BgdtDet_Remarks;
+                    dbDetail.ChrtAcc_Id = detail.ChrtAcc_Id;
+                    objDalBudgetEntry.SaveBudgetDetail(dbDetail);
+                }
+            }
 
             return RedirectToAction("Index", "BudgetConsole", new { });
         }

@@ -49,6 +49,7 @@
         }
 
         function CopyBudget(budgetId) {
+            $("#MasterId").val(budgetId);
             $('#popup').lightbox_me({
                 centered: true,
                 closeClick: false,
