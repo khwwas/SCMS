@@ -20,23 +20,32 @@
             $('#txt_Date').Zebra_DatePicker({
                 format: 'm/d/Y'
             });
+
+            //            $(".currency").each(function () {
+            //                $(this).keyup(function () {
+            //                    $(this).val(formatCurrency($(this).val()));
+            //                });
+            //                $(this).val(formatCurrency($(this).val()));
+            //            });
+
             $("#btn_AddNewRow").click(function () {
                 var Id = parseInt($(".detailRow").last().find("select").attr("id").replace("ListBudgetDetail_", "").replace("__Account", "").trim()) + 1;
                 var comboData = $("#AccountCodesList").val().split(',');
                 var htmlString = "<div class='detailRow' style='float: left; width: auto;'>";
                 htmlString += "<div class='CustomCell' style='width: 260px; height: 30px;'>";
                 htmlString += "<select id='ListBudgetDetail_" + Id + "__Account' class='.acc' style='width: 155px;' name='ListBudgetDetail[" + Id + "].Account'";
-
                 for (var index = 0; index < comboData.length; index++) {
                     var comboArr = comboData[index].split(':');
-                    //alert("<option value='" + comboArr[0] + "'>" + comboArr[1] + "</option>");
                     htmlString += "<option value='" + comboArr[0] + "'>" + comboArr[1] + "</option>";
                 }
                 htmlString += "</select>";
                 htmlString += "</div>";
+                htmlString += "<div class='CustomCell' style='width: 80px; height: 30px;'>";
+                htmlString += " <input type='text' class='CustomText' style='width: 60px;' name='ListBudgetDetail[" + Id + "].TotalAmount' value='0' onblur='SetMonthlyAmount(this);' maxlength='50' />";
+                htmlString += "</div>";
                 for (var index = 0; index < 12; index++) {
                     htmlString += "<div class='CustomCell' style='width: 70px; height: 30px;'>";
-                    htmlString += " <input type='text' class='CustomText' style='width: 50px;' name='ListBudgetDetail[" + Id + "].Month" + (parseInt(index) + 1).toString() + "' value='' maxlength='50' />";
+                    htmlString += " <input type='text' class='CustomText' style='width: 50px;' name='ListBudgetDetail[" + Id + "].Month" + (parseInt(index) + 1).toString() + "' value='0' onblur='SetTotalAmount(this);' maxlength='50' />";
                     htmlString += "</div>";
                 }
                 htmlString += "</div>";
@@ -113,6 +122,26 @@
             window.location = "../Budget";
         }
 
+        function SetMonthlyAmount(obj) {
+            if ($(obj).val() != "") {
+                var TotalVal = parseInt($(obj).val());
+                var PermonthVal = parseInt(TotalVal / 12);
+                for (var index = 1; index <= 12; index++) {
+                    $("[name='" + $(obj).attr("name").replace("TotalAmount", "Month" + index.toString()) + "']").val(PermonthVal);
+                }
+            }
+        }
+
+        function SetTotalAmount(obj) {
+            var Id = $(obj).attr("name").replace("ListBudgetDetail[", "").replace("].Month12", "").replace("].Month11", "").replace("].Month10", "").replace("].Month9", "").replace("].Month8", "").replace("].Month7", "").replace("].Month6", "").replace("].Month5", "").replace("].Month4", "").replace("].Month3", "").replace("].Month2", "").replace("].Month1", "");
+            var TotalVal = 0;
+            for (var index = 1; index <= 12; index++) {
+                //alert("[name='ListBudgetDetail[" + Id + "].Month" + index + "']");
+                TotalVal += parseInt($("[name='ListBudgetDetail[" + Id + "].Month" + index + "']").val());
+            }
+            $("[name='ListBudgetDetail[" + Id + "].TotalAmount']").val(TotalVal);
+        }
+
     </script>
     <form id="frm_Budget" action='<%=Url.Content("~/Budget/SaveBudget") %>' method="post">
     <input type="hidden" id="txt_BudgetMasterId" name="MasterId" value='<%=Model.MasterId %>' />
@@ -170,6 +199,8 @@
         <div class="CustomCell" style="width: 260px;">
             Account Title
         </div>
+        <div class="CustomCell" style="width: 80px; text-align: center">
+            Budget Approved</div>
         <div class="CustomCell" style="width: 70px; text-align: center">
             Jan</div>
         <div class="CustomCell" style="width: 70px; text-align: center">
@@ -211,53 +242,70 @@
                         });
                     </script>
                 </div>
-                <div class="CustomCell" style="width: 70px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month1"
-                        value="<%=Model.ListBudgetDetail[index].Month1 %>" maxlength="50" />
+                <div class="CustomCell" style="width: 80px; height: 30px;">
+                    <input type="text" class="CustomText currency" style="width: 60px;" name="ListBudgetDetail[<%=index %>].TotalAmount"
+                        value="<%=Convert.ToInt32(Model.ListBudgetDetail[index].TotalAmount) %>" maxlength="50"
+                        onblur="SetMonthlyAmount(this);" />
                 </div>
                 <div class="CustomCell" style="width: 70px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month2"
-                        value="<%=Model.ListBudgetDetail[index].Month2 %>" maxlength="50" />
+                    <input type="text" class="CustomText currency" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month1"
+                        value="<%=Convert.ToInt32(Model.ListBudgetDetail[index].Month1) %>" onblur="SetTotalAmount(this);"
+                        maxlength="50" />
                 </div>
                 <div class="CustomCell" style="width: 70px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month3"
-                        value="<%=Model.ListBudgetDetail[index].Month3 %>" maxlength="50" />
+                    <input type="text" class="CustomText currency" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month2"
+                        value="<%=Convert.ToInt32(Model.ListBudgetDetail[index].Month2) %>" onblur="SetTotalAmount(this);"
+                        maxlength="50" />
                 </div>
                 <div class="CustomCell" style="width: 70px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month4"
-                        value="<%=Model.ListBudgetDetail[index].Month4 %>" maxlength="50" />
+                    <input type="text" class="CustomText currency" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month3"
+                        value="<%=Convert.ToInt32(Model.ListBudgetDetail[index].Month3) %>" onblur="SetTotalAmount(this);"
+                        maxlength="50" />
                 </div>
                 <div class="CustomCell" style="width: 70px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month5"
-                        value="<%=Model.ListBudgetDetail[index].Month5 %>" maxlength="50" />
+                    <input type="text" class="CustomText currency" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month4"
+                        value="<%=Convert.ToInt32(Model.ListBudgetDetail[index].Month4) %>" onblur="SetTotalAmount(this);"
+                        maxlength="50" />
+                </div>
+                <div class="CustomCell" style="width: 70px; height: 30px;">
+                    <input type="text" class="CustomText currency" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month5"
+                        value="<%=Convert.ToInt32(Model.ListBudgetDetail[index].Month5) %>" onblur="SetTotalAmount(this);"
+                        maxlength="50" />
                 </div>
                 <div class="CustomCell" style="width: 70px; height: 30px;">
                     <input type="text" class="CustomText" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month6"
-                        value="<%=Model.ListBudgetDetail[index].Month6 %>" maxlength="50" />
+                        value="<%=Convert.ToInt32(Model.ListBudgetDetail[index].Month6) %>" onblur="SetTotalAmount(this);"
+                        maxlength="50" />
                 </div>
                 <div class="CustomCell" style="width: 70px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month7"
-                        value="<%=Model.ListBudgetDetail[index].Month7 %>" maxlength="50" />
+                    <input type="text" class="CustomText currency" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month7"
+                        value="<%=Convert.ToInt32(Model.ListBudgetDetail[index].Month7) %>" onblur="SetTotalAmount(this);"
+                        maxlength="50" />
                 </div>
                 <div class="CustomCell" style="width: 70px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month8"
-                        value="<%=Model.ListBudgetDetail[index].Month8 %>" maxlength="50" />
+                    <input type="text" class="CustomText currency" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month8"
+                        value="<%=Convert.ToInt32(Model.ListBudgetDetail[index].Month8) %>" onblur="SetTotalAmount(this);"
+                        maxlength="50" />
                 </div>
                 <div class="CustomCell" style="width: 70px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month9"
-                        value="<%=Model.ListBudgetDetail[index].Month9 %>" maxlength="50" />
+                    <input type="text" class="CustomText currency" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month9"
+                        value="<%=Convert.ToInt32(Model.ListBudgetDetail[index].Month9) %>" onblur="SetTotalAmount(this);"
+                        maxlength="50" />
                 </div>
                 <div class="CustomCell" style="width: 70px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month10"
-                        value="<%=Model.ListBudgetDetail[index].Month10 %>" maxlength="50" />
+                    <input type="text" class="CustomText currency" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month10"
+                        value="<%=Convert.ToInt32(Model.ListBudgetDetail[index].Month10) %>" onblur="SetTotalAmount(this);"
+                        maxlength="50" />
                 </div>
                 <div class="CustomCell" style="width: 70px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month11"
-                        value="<%=Model.ListBudgetDetail[index].Month11 %>" maxlength="50" />
+                    <input type="text" class="CustomText currency" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month11"
+                        value="<%=Convert.ToInt32(Model.ListBudgetDetail[index].Month11) %>" onblur="SetTotalAmount(this);"
+                        maxlength="50" />
                 </div>
                 <div class="CustomCell" style="width: 70px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month12"
-                        value="<%=Model.ListBudgetDetail[index].Month12 %>" maxlength="50" />
+                    <input type="text" class="CustomText currency" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month12"
+                        value="<%=Convert.ToInt32(Model.ListBudgetDetail[index].Month12) %>" onblur="SetTotalAmount(this);"
+                        maxlength="50" />
                 </div>
             </div>
             <%} %>
