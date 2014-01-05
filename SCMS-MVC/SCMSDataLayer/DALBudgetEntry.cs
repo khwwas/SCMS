@@ -37,25 +37,36 @@ namespace SCMSDataLayer
             }
         }
 
-        public int SaveBudgetDetail(GL_VchrDetail newBudgetDetail)
+        public int SaveBudgetDetail(GL_BgdtDetail newBudgetDetail)
         {
             try
             {
                 SCMSDataContext dbSCMS = Connection.Create();
-                GL_VchrDetail existingBudgetDetail = dbSCMS.GL_VchrDetails.Where(c => c.VchDet_Id.Equals(newBudgetDetail.VchDet_Id)).SingleOrDefault();
+                GL_BgdtDetail existingBudgetDetail = dbSCMS.GL_BgdtDetails.Where(c => c.BgdtDet_Id.Equals(newBudgetDetail.BgdtDet_Id)).SingleOrDefault();
                 if (existingBudgetDetail != null)
                 {
-                    existingBudgetDetail.VchMas_DrAmount = newBudgetDetail.VchMas_DrAmount;
-                    existingBudgetDetail.VchMas_CrAmount = newBudgetDetail.VchMas_CrAmount;
-                    existingBudgetDetail.VchDet_Remarks = newBudgetDetail.VchDet_Remarks;
+                    existingBudgetDetail.BgdtDet_Month1 = newBudgetDetail.BgdtDet_Month1;
+                    existingBudgetDetail.BgdtDet_Month2 = newBudgetDetail.BgdtDet_Month2;
+                    existingBudgetDetail.BgdtDet_Month3 = newBudgetDetail.BgdtDet_Month3;
+                    existingBudgetDetail.BgdtDet_Month4 = newBudgetDetail.BgdtDet_Month4;
+                    existingBudgetDetail.BgdtDet_Month5 = newBudgetDetail.BgdtDet_Month5;
+                    existingBudgetDetail.BgdtDet_Month6 = newBudgetDetail.BgdtDet_Month6;
+                    existingBudgetDetail.BgdtDet_Month7 = newBudgetDetail.BgdtDet_Month7;
+                    existingBudgetDetail.BgdtDet_Month8 = newBudgetDetail.BgdtDet_Month8;
+                    existingBudgetDetail.BgdtDet_Month9 = newBudgetDetail.BgdtDet_Month9;
+                    existingBudgetDetail.BgdtDet_Month10 = newBudgetDetail.BgdtDet_Month10;
+                    existingBudgetDetail.BgdtDet_Month11 = newBudgetDetail.BgdtDet_Month11;
+                    existingBudgetDetail.BgdtDet_Month12 = newBudgetDetail.BgdtDet_Month12;
+                    existingBudgetDetail.BgdtDet_TotalAmount = newBudgetDetail.BgdtDet_TotalAmount;
+                    existingBudgetDetail.BgdtDet_Remarks = newBudgetDetail.BgdtDet_Remarks;
                     existingBudgetDetail.ChrtAcc_Id = newBudgetDetail.ChrtAcc_Id;
                 }
                 else
                 {
-                    dbSCMS.GL_VchrDetails.InsertOnSubmit(newBudgetDetail);
+                    dbSCMS.GL_BgdtDetails.InsertOnSubmit(newBudgetDetail);
                 }
                 dbSCMS.SubmitChanges();
-                return Convert.ToInt32(newBudgetDetail.VchDet_Id);
+                return Convert.ToInt32(newBudgetDetail.BgdtDet_Id);
             }
             catch
             {
@@ -70,7 +81,7 @@ namespace SCMSDataLayer
             try
             {
                 SCMSDataContext dbSCMS = Connection.Create();
-                li_ReturnValue = dbSCMS.ExecuteCommand("Delete From GL_VchrDetail where BgdtMas_Id='" + GLMaster_Id + "'");
+                li_ReturnValue = dbSCMS.ExecuteCommand("Delete From GL_BgdtDetail where BgdtMas_Id='" + GLMaster_Id + "'");
             }
             catch
             {
@@ -80,12 +91,12 @@ namespace SCMSDataLayer
             return li_ReturnValue;
         }
 
-        public List<GL_VchrDetail> GetAllDetailRecords()
+        public List<GL_BgdtDetail> GetAllDetailRecords()
         {
             try
             {
                 SCMSDataContext dbSCMS = Connection.Create();
-                return dbSCMS.GL_VchrDetails.OrderBy(c => c.VchDet_Id).ToList();
+                return dbSCMS.GL_BgdtDetails.OrderBy(c => c.BgdtDet_Id).ToList();
             }
             catch
             {
@@ -136,7 +147,7 @@ namespace SCMSDataLayer
         /// <param name="ps_DateTo"></param>
         /// <param name="ps_IncludeSecurity"></param>
         /// <returns></returns>
-        public List<sp_BudgetConsoleResult > GetBudgetEntryConsoleData(int ps_AllLocation, string ps_Location,  bool ps_IncludeSecurity)
+        public List<sp_BudgetConsoleResult> GetBudgetEntryConsoleData(int ps_AllLocation, string ps_Location, bool ps_IncludeSecurity)
         {
             try
             {
@@ -164,7 +175,7 @@ namespace SCMSDataLayer
                 SCMSDataContext dbSCMS = Connection.Create();
                 if (ps_IncludeSecurity == true)
                 {
-                    return dbSCMS.sp_BudgetConsole(ps_AllLocation, ps_Location).ToList().Where(c => LocationsIds.Contains(c.Loc_Id) ).ToList();
+                    return dbSCMS.sp_BudgetConsole(ps_AllLocation, ps_Location).ToList().Where(c => LocationsIds.Contains(c.Loc_Id)).ToList();
                     //return dbSCMS.sp_BudgetConsole(ps_AllLocation, ps_Location).ToList().Where(c => LocationsIds.Contains(c.Loc_Id) && _Status.Contains(c.BgdtMas_Status)).ToList();
                 }
                 else

@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DA_GL" Class="SCMSDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=AWAIS-PC\MSSQL2008;Initial Catalog=DA_GL;Persist Security Info=True;User ID=sa" SettingsObjectName="SCMSDataLayer.Properties.Settings" SettingsPropertyName="DA_GLConnectionString" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="SCMS" Class="SCMSDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=WAQAS\KHAWAJAWAQAS;Initial Catalog=SCMS;Persist Security Info=True;User ID=sa" SettingsObjectName="SCMSDataLayer.Properties.Settings" SettingsPropertyName="SCMSConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.SYSTEM_Screens" Member="SYSTEM_Screens">
     <Type Name="SYSTEM_Screen">
       <Column Name="Scr_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -177,6 +177,7 @@
       <Association Name="SETUP_ChartOfAccount_Security_UserChartOfAccount" Member="Security_UserChartOfAccounts" ThisKey="ChrtAcc_Id" OtherKey="ChrtAcc_Id" Type="Security_UserChartOfAccount" />
       <Association Name="SETUP_ChartOfAccount_SETUP_BankAccount" Member="SETUP_BankAccounts" ThisKey="ChrtAcc_Id" OtherKey="ChrtAcc_Id" Type="SETUP_BankAccount" />
       <Association Name="SETUP_ChartOfAccount_GL_VchrDetail" Member="GL_VchrDetails" ThisKey="ChrtAcc_Id" OtherKey="ChrtAcc_Id" Type="GL_VchrDetail" />
+      <Association Name="SETUP_ChartOfAccount_GL_BgdtDetail" Member="GL_BgdtDetails" ThisKey="ChrtAcc_Id" OtherKey="ChrtAcc_Id" Type="GL_BgdtDetail" />
       <Association Name="SETUP_Company_SETUP_ChartOfAccount" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
       <Association Name="SETUP_Location_SETUP_ChartOfAccount" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
       <Association Name="SYSTEM_AccountNature_SETUP_ChartOfAccount" Member="SYSTEM_AccountNature" ThisKey="AccNatr_Id" OtherKey="AccNatr_Id" Type="SYSTEM_AccountNature" IsForeignKey="true" />
@@ -859,10 +860,34 @@
       <Column Name="BgdtMas_ApprovedBy" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="BgdtMas_ApprovedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="BgdtType_Revision" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="GL_BgdtMaster_GL_BgdtDetail" Member="GL_BgdtDetails" ThisKey="BgdtMas_Id" OtherKey="BgdtMas_Id" Type="GL_BgdtDetail" />
       <Association Name="SETUP_Calendar_GL_BgdtMaster" Member="SETUP_Calendar" ThisKey="Cldr_Id" OtherKey="Cldr_Id" Type="SETUP_Calendar" IsForeignKey="true" />
       <Association Name="SETUP_Company_GL_BgdtMaster" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
       <Association Name="SETUP_Location_GL_BgdtMaster" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
       <Association Name="SYSTEM_BudgetType_GL_BgdtMaster" Member="SYSTEM_BudgetType" ThisKey="BgdtType_Id" OtherKey="BgdtType_Id" Type="SYSTEM_BudgetType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GL_BgdtDetail" Member="GL_BgdtDetails">
+    <Type Name="GL_BgdtDetail">
+      <Column Name="BgdtDet_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="BgdtMas_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ChrtAcc_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="BgdtDet_TotalAmount" Type="System.Decimal" DbType="Decimal(20,6)" CanBeNull="true" />
+      <Column Name="BgdtDet_Month1" Type="System.Decimal" DbType="Decimal(20,6)" CanBeNull="true" />
+      <Column Name="BgdtDet_Month2" Type="System.Decimal" DbType="Decimal(20,6)" CanBeNull="true" />
+      <Column Name="BgdtDet_Month3" Type="System.Decimal" DbType="Decimal(20,6)" CanBeNull="true" />
+      <Column Name="BgdtDet_Month4" Type="System.Decimal" DbType="Decimal(20,6)" CanBeNull="true" />
+      <Column Name="BgdtDet_Month5" Type="System.Decimal" DbType="Decimal(20,6)" CanBeNull="true" />
+      <Column Name="BgdtDet_Month6" Type="System.Decimal" DbType="Decimal(20,6)" CanBeNull="true" />
+      <Column Name="BgdtDet_Month7" Type="System.Decimal" DbType="Decimal(20,6)" CanBeNull="true" />
+      <Column Name="BgdtDet_Month8" Type="System.Decimal" DbType="Decimal(20,6)" CanBeNull="true" />
+      <Column Name="BgdtDet_Month9" Type="System.Decimal" DbType="Decimal(20,6)" CanBeNull="true" />
+      <Column Name="BgdtDet_Month10" Type="System.Decimal" DbType="Decimal(20,6)" CanBeNull="true" />
+      <Column Name="BgdtDet_Month11" Type="System.Decimal" DbType="Decimal(20,6)" CanBeNull="true" />
+      <Column Name="BgdtDet_Month12" Type="System.Decimal" DbType="Decimal(20,6)" CanBeNull="true" />
+      <Column Name="BgdtDet_Remarks" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Association Name="GL_BgdtMaster_GL_BgdtDetail" Member="GL_BgdtMaster" ThisKey="BgdtMas_Id" OtherKey="BgdtMas_Id" Type="GL_BgdtMaster" IsForeignKey="true" />
+      <Association Name="SETUP_ChartOfAccount_GL_BgdtDetail" Member="SETUP_ChartOfAccount" ThisKey="ChrtAcc_Id" OtherKey="ChrtAcc_Id" Type="SETUP_ChartOfAccount" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.sp_GetApprovalLevelList" Method="sp_GetApprovalLevelList">

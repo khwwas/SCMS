@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/SCMSMaster.Master"
-    Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+    Inherits="System.Web.Mvc.ViewPage<SCMS.Models.BudgetMaster>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Budget Entry
@@ -7,197 +7,51 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContenct" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <style type="text/css">
+        .ui-autocomplete
+        {
+            max-height: 200px;
+            overflow-y: auto;
+            width: auto;
+        }
+    </style>
     <script type="text/javascript">
         $(document).ready(function () {
-
             $('#txt_Date').Zebra_DatePicker({
                 format: 'm/d/Y'
             });
-            //            $("[name=ddl_Account]").combobox();
-            //            var Titles = document.getElementById('NarrationTitles').value;
-            //            var data = "";
-            //            if (Titles != null && Titles != "") {
-            //                data = JSON.parse(Titles);
-            //                $("[name=txt_Details]").autocomplete({ source: data });
-            //            }
 
-            //            $("[name=txt_Details]").focus(function () {
-            //                if ($(this).val() == "") {
-            //                    $(this).val($(this).parent().parent().prev().find($("input[name=txt_Details]")).val().toString());
-            //                }
-            //            });
-
-            //            $("#btn_AddNewRow").click(function () {
-            //                var comboData = $("#AccountCodesList").val().split(',');
-            //                var htmlStr = "<div class='detailRow' style='float: left; width: auto;'>";
-            //                htmlStr += "<div class='CustomCell' style='width: 250px; height: 30px;'>";
-            //                htmlStr += "<select style='width: 250px;' name='ddl_Account'>";
-            //                htmlStr += "<option value='0'></option>";
-            //                for (var index = 0; index < comboData.length; index++) {
-            //                    var comboArr = comboData[index].split(':');
-            //                    htmlStr += "<option value='" + comboArr[0] + "'>" + comboArr[1] + "</option>";
-            //                }
-            //                htmlStr += "</select>";
-            //                htmlStr += "</div>";
-            //                htmlStr += "<div class='CustomCell' style='width: 565px; height: 30px;'>";
-            //                htmlStr += "<input type='text' class='CustomText' style='width: 545px;' name='txt_Details' maxlength='200' />";
-            //                htmlStr += "</div>";
-            //                htmlStr += "<div class='CustomCell' style='width: 118px; height: 30px;'>";
-            //                htmlStr += "<input type='text' class='CustomText' style='width: 100px;' name='txt_Debit' maxlength='50' />";
-            //                htmlStr += "</div>";
-            //                htmlStr += "<div class='CustomCell' style='width: 118px; height: 30px;'>";
-            //                htmlStr += "<input type='text' class='CustomText' style='width: 100px;' name='txt_Credit' maxlength='50' />";
-            //                htmlStr += "</div>";
-            //                htmlStr += "</div>";
-            //                $(".detailRow").last().after(htmlStr);
-            //                $(".detailRow").last().find("[name=ddl_Account]").combobox();
-            //                $(".detailRow").last().find("[name=txt_Details]").autocomplete({ source: data });
-
-            //                $(".detailRow").last().find("input[name=txt_Details]").focus(function () {
-            //                    if ($(this).val() == "") {
-            //                        $(this).val($(this).parent().parent().prev().find($("input[name=txt_Details]")).val().toString());
-            //                    }
-            //                });
-
-            //                $(".detailRow").last().find("[name=txt_Debit],[name=txt_Credit]").blur(function () {
-            //                    if ($(this).attr("name") == "txt_Debit" && $(this).val() != "") {
-            //                        $(this).parent().next().find("input").attr("disabled", "disabled");
-            //                        if ($(this).parent().parent().next().hasClass("img_Container") == true) {
-            //                            $("#btn_AddNewRow").trigger("click");
-            //                        }
-            //                    }
-            //                    else {
-            //                        $(this).parent().next().find("input").removeAttr("disabled");
-            //                    }
-
-            //                    if ($(this).attr("name") == "txt_Credit" && $(this).val() != "") {
-            //                        $(this).parent().prev().find("input").attr("disabled", "disabled");
-            //                        if ($(this).parent().parent().next().hasClass("img_Container") == true) {
-            //                            $("#btn_AddNewRow").trigger("click");
-            //                        }
-            //                    }
-            //                    else {
-            //                        $(this).parent().prev().find("input").removeAttr("disabled");
-            //                    }
-
-            //                    var sum = 0;
-            //                    $("input[name=txt_Debit]").each(function () {
-            //                        if ($(this).val() != "") {
-            //                            sum += parseFloat($(this).val().replace(/\,/g, ''));
-            //                        }
-            //                    });
-            //                    $("#txt_TotalDebit").val(sum);
-
-            //                    sum = 0;
-            //                    $("input[name=txt_Credit]").each(function () {
-            //                        if ($(this).val() != "") {
-            //                            sum += parseFloat($(this).val().replace(/\,/g, ''));
-            //                        }
-            //                    });
-            //                    $("#txt_TotalCredit").val(sum);
-
-            //                    $("#txt_TotalDebit").css("color", "green");
-            //                    $("#txt_TotalCredit").css("color", "green");
-            //                    $("#txt_Difference").css("color", "green");
-            //                    if ($("#txt_TotalDebit").val() < $("#txt_TotalCredit").val()) {
-            //                        $("#txt_TotalDebit").css("color", "red");
-            //                        $("#txt_TotalCredit").css("color", "green");
-            //                    }
-            //                    if ($("#txt_TotalCredit").val() < $("#txt_TotalDebit").val()) {
-            //                        $("#txt_TotalDebit").css("color", "green");
-            //                        $("#txt_TotalCredit").css("color", "red");
-            //                    }
-
-            //                    $("#txt_Difference").val(parseFloat($("#txt_TotalDebit").val().replace(',', '')) - parseFloat($("#txt_TotalCredit").val().replace(',', '')));
-            //                    if ($("#txt_Difference").val() < 0) {
-            //                        $("#txt_Difference").val(parseFloat($("#txt_TotalCredit").val().replace(',', '')) - parseFloat($("#txt_TotalDebit").val().replace(',', '')));
-            //                    }
-            //                    if ($("#txt_Difference").val() > 0) {
-            //                        $("#txt_Difference").css("color", "red");
-            //                    }
-
-            //                    $("#txt_TotalDebit").val(formatCurrency($("#txt_TotalDebit").val()));
-            //                    $("#txt_TotalCredit").val(formatCurrency($("#txt_TotalCredit").val()));
-            //                    $("#txt_Difference").val(formatCurrency($("#txt_Difference").val()));
-            //                });
-
-            //                $(".detailRow").last().find("[name=txt_Debit],[name=txt_Credit]").keyup(function () {
+            //            $(".currency").each(function () {
+            //                $(this).keyup(function () {
             //                    $(this).val(formatCurrency($(this).val()));
             //                });
-            //            });
-
-            //            $("input[name=txt_Debit],input[name=txt_Credit]").keyup(function () {
             //                $(this).val(formatCurrency($(this).val()));
             //            });
 
-            //            $("input[name=txt_Debit],input[name=txt_Credit]").blur(function () {
-            //                if ($(this).attr("name") == "txt_Debit" && $(this).val() != "") {
-            //                    $(this).parent().next().find("input").attr("disabled", "disabled");
-            //                    if ($(this).parent().parent().next().hasClass("img_Container") == true) {
-            //                        $("#btn_AddNewRow").trigger("click");
-            //                    }
-            //                }
-            //                else {
-            //                    $(this).parent().next().find("input").removeAttr("disabled");
-            //                }
-
-            //                if ($(this).attr("name") == "txt_Credit" && $(this).val() != "") {
-            //                    $(this).parent().prev().find("input").attr("disabled", "disabled");
-            //                    if ($(this).parent().parent().next().hasClass("img_Container") == true) {
-            //                        $("#btn_AddNewRow").trigger("click");
-            //                    }
-            //                }
-            //                else {
-            //                    $(this).parent().prev().find("input").removeAttr("disabled");
-            //                }
-
-            //                if ($("#txt_TotalDebit").val() == "") {
-            //                    $("#txt_TotalDebit").val("0");
-            //                }
-            //                if ($("#txt_TotalCredit").val() == "") {
-            //                    $("#txt_TotalCredit").val("0");
-            //                }
-
-            //                var sum = 0;
-            //                $("input[name=txt_Debit]").each(function () {
-            //                    if ($(this).val() != "") {
-            //                        sum += parseFloat($(this).val().replace(/\,/g, ''));
-            //                    }
-            //                });
-            //                $("#txt_TotalDebit").val(sum);
-
-            //                sum = 0;
-            //                $("input[name=txt_Credit]").each(function () {
-            //                    if ($(this).val() != "") {
-            //                        sum += parseFloat($(this).val().replace(/\,/g, ''));
-            //                    }
-            //                });
-            //                $("#txt_TotalCredit").val(sum);
-
-            //                $("#txt_TotalDebit").css("color", "green");
-            //                $("#txt_TotalCredit").css("color", "green");
-            //                $("#txt_Difference").css("color", "green");
-            //                if ($("#txt_TotalDebit").val() < $("#txt_TotalCredit").val()) {
-            //                    $("#txt_TotalDebit").css("color", "red");
-            //                    $("#txt_TotalCredit").css("color", "green");
-            //                }
-            //                if ($("#txt_TotalCredit").val() < $("#txt_TotalDebit").val()) {
-            //                    $("#txt_TotalDebit").css("color", "green");
-            //                    $("#txt_TotalCredit").css("color", "red");
-            //                }
-
-            //                $("#txt_Difference").val(parseFloat($("#txt_TotalDebit").val().replace(',', '')) - parseFloat($("#txt_TotalCredit").val().replace(',', '')));
-            //                if ($("#txt_Difference").val() < 0) {
-            //                    $("#txt_Difference").val(parseFloat($("#txt_TotalCredit").val().replace(',', '')) - parseFloat($("#txt_TotalDebit").val().replace(',', '')));
-            //                }
-            //                if ($("#txt_Difference").val() > 0) {
-            //                    $("#txt_Difference").css("color", "red");
-            //                }
-            //                $("#txt_TotalDebit").val(formatCurrency($("#txt_TotalDebit").val()));
-            //                $("#txt_TotalCredit").val(formatCurrency($("#txt_TotalCredit").val()));
-            //                $("#txt_Difference").val(formatCurrency($("#txt_Difference").val()));
-            //            });
-            //            SetUserRights();
+            $("#btn_AddNewRow").click(function () {
+                var Id = parseInt($(".detailRow").last().find("select").attr("id").replace("ListBudgetDetail_", "").replace("__Account", "").trim()) + 1;
+                var comboData = $("#AccountCodesList").val().split(',');
+                var htmlString = "<div class='detailRow' style='float: left; width: auto;'>";
+                htmlString += "<div class='CustomCell' style='width: 260px; height: 30px;'>";
+                htmlString += "<select id='ListBudgetDetail_" + Id + "__Account' class='.acc' style='width: 155px;' name='ListBudgetDetail[" + Id + "].Account'";
+                for (var index = 0; index < comboData.length; index++) {
+                    var comboArr = comboData[index].split(':');
+                    htmlString += "<option value='" + comboArr[0] + "'>" + comboArr[1] + "</option>";
+                }
+                htmlString += "</select>";
+                htmlString += "</div>";
+                htmlString += "<div class='CustomCell' style='width: 80px; height: 30px;'>";
+                htmlString += " <input type='text' class='CustomText' style='width: 60px;' name='ListBudgetDetail[" + Id + "].TotalAmount' value='0' onblur='SetMonthlyAmount(this);' maxlength='50' />";
+                htmlString += "</div>";
+                for (var index = 0; index < 12; index++) {
+                    htmlString += "<div class='CustomCell' style='width: 70px; height: 30px;'>";
+                    htmlString += " <input type='text' class='CustomText' style='width: 50px;' name='ListBudgetDetail[" + Id + "].Month" + (parseInt(index) + 1).toString() + "' value='0' onblur='SetTotalAmount(this);' maxlength='50' />";
+                    htmlString += "</div>";
+                }
+                htmlString += "</div>";
+                $(".detailRow").last().after(htmlString);
+                $("#ListBudgetDetail_" + Id + "__Account").combobox();
+            });
         });
 
         function formatCurrency(num) {
@@ -218,173 +72,102 @@
             return (fnum);
         }
 
-
-        function SaveBudget() {
-            var MessageBox = document.getElementById('MessageBox');
-            var txtSelectedMasterId = document.getElementById("txt_SelectedMasterId");
-            var txtVoucherMasterCode = document.getElementById('txt_Code');
-            var txtDate = document.getElementById('txt_Date');
-            var ddlStatus = document.getElementById('ddl_Status');
-            var ddlBudgetType = document.getElementById('ddl_BudgetType');
-            var ddlYear = document.getElementById('ddl_Year');
-            var ddlLocation = document.getElementById('ddl_Location');
-            var txtRemarks = document.getElementById('txt_Remarks');
-            //            var txt_SelectedDetailCode = document.getElementById("txt_SelectedDetailCode");
-            //            var txt_Difference = document.getElementById('txt_Difference');
-
-            if (txt_Date.value == "") {
-                FadeIn(MessageBox);
-                MessageBox.innerHTML = "<h5>Error!</h5><p>Please select date.</p>";
-                MessageBox.setAttribute("class", "message error");
+        $(document).on('submit', "#frm_Budget", function (e) {
+            e.preventDefault();
+            if ($("#txt_Date").val() == "") {
+                FadeIn($("#MessageBox"));
+                $("#MessageBox").html("<h5>Error!</h5><p>Please select date.</p>");
+                $("#MessageBox").attr("class", "message error");
                 scroll(0, 0);
-                FadeOut(MessageBox);
-                txt_Date.focus();
+                FadeOut($("#MessageBox"));
+                $("#txt_Date").focus();
                 return;
             }
-            //            else if (ddl_Status.value == "0") {
-            //                FadeIn(MessageBox);
-            //                MessageBox.innerHTML = "<h5>Error!</h5><p>Please select status.</p>";
-            //                MessageBox.setAttribute("class", "message error");
-            //                scroll(0, 0);
-            //                FadeOut(MessageBox);
-            //                ddl_Status.focus();
-            //                return;
-            //            }
-            //            else if (ddl_Year.value == "0") {
-            //                FadeIn(MessageBox);
-            //                MessageBox.innerHTML = "<h5>Error!</h5><p>Please select voucher type.</p>";
-            //                MessageBox.setAttribute("class", "message error");
-            //                scroll(0, 0);
-            //                FadeOut(MessageBox);
-            //                ddl_VoucherType.focus();
-            //                return;
-            //            }
-            //            else if (ddl_Status.value == "Approved" && (txt_Difference.value == "" || txt_Difference.value != "0")) {
-            //                FadeIn(MessageBox);
-            //                MessageBox.innerHTML = "<h5>Error!</h5><p>Debit and Credit values should be equal.</p>";
-            //                MessageBox.setAttribute("class", "message error");
-            //                scroll(0, 0);
-            //                FadeOut(MessageBox);
-            //                ddl_Status.focus();
-            //                return;
-            //            }
-            else {
-                var BudgetRow = [];
-                //                var index = 0;
+            $("#Waiting_Image").show();
+            $("#btn_Save").hide();
+            $("#BudgetType").removeAttr("disabled");
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize(),
 
-                //                $(".detailRow").each(function () {
-                //                    var ddl_Account = $(this).find("[name=ddl_Account]");
-                //                    var txt_Debit = $(this).find("input[name=txt_Debit]");
-                //                    var txt_Credit = $(this).find("input[name=txt_Credit]");
-                //                    var txt_Details = $(this).find("input[name=txt_Details]");
+                success: function (result) {
+                    FadeIn("#MessageBox");
+                    if (result != null && result != "" && result != "0") {
 
-                //                    if (ddl_Account != null) {
-                //                        VoucherDetailRows[index] = ddl_Account.val() + "║";
-                //                    }
-                //                    else {
-                //                        VoucherDetailRows[index] = "NULL" + "║";
-                //                    }
-
-                //                    if (txt_Debit != null) {
-                //                        VoucherDetailRows[index] += txt_Debit.val() + "║";
-                //                    }
-                //                    else {
-                //                        VoucherDetailRows[index] += "NULL" + "║";
-                //                    }
-
-                //                    if (txt_Credit != null) {
-                //                        VoucherDetailRows[index] += txt_Credit.val() + "║";
-                //                    }
-                //                    else {
-                //                        VoucherDetailRows[index] += "NULL" + "║";
-                //                    }
-
-                //                    if (txt_Details != null) {
-                //                        VoucherDetailRows[index] += txt_Details.val();
-                //                    }
-                //                    else {
-                //                        VoucherDetailRows[index] += "NULL";
-                //                    }
-                //                    index++;
-                //                });
-                BudgetRow[$(".detailRow").length] = txtSelectedMasterId.value + "║" + txtVoucherMasterCode.value + "║" + txtDate.value + "║" + ddlStatus.value + "║" + ddlBudgetType.value + "║" + ddlYear.value + "║" + ddlLocation.value + "║" + txtRemarks.value;
-                document.getElementById("Waiting_Image").style.display = "block";
-                document.getElementById("btn_Save").style.display = "none";
-                $.ajax({
-                    type: "POST",
-                    url: "../Budget/SaveBudget",
-                    data: JSON.stringify(BudgetRow),
-                    dataType: 'json',
-                    contentType: "application/json; charset=utf-8",
-                    success: function (response) {
-                        FadeIn(MessageBox);
-                        var Arr = response.toString().split(",");
-                        if (Arr[0] != null) {
-                            document.getElementById("txt_SelectedMasterId").value = Arr[0];
-                        }
-                        if (Arr[1] != null) {
-                            document.getElementById("txt_Code").value = Arr[1];
-                        }
-                        else {
-                            document.getElementById("txt_Code").value = "[Auto]";
-                        }
-                        if (Arr[2] != null && Arr[2] != "0") {
-                            MessageBox.innerHTML = "<h5>Success!</h5><p>Record saved successfully.</p>";
-                            MessageBox.setAttribute("class", "message success");
-                        }
-                        else {
-                            MessageBox.innerHTML = "<h5>Error!</h5><p>Unable to save record.</p>";
-                            MessageBox.setAttribute("class", "message error");
-                        }
-                        document.getElementById("Waiting_Image").style.display = "none";
-                        document.getElementById("btn_Save").style.display = "block";
-                        scroll(0, 0);
-                        //                        GetLastVoucherByTypeId();
-                        FadeOut(MessageBox);
-                        //                        SetUserRights();
+                        $("#txt_BudgetMasterId").val(result.split(":")[0]);
+                        $("#txt_Code").val(result.split(":")[1]);
+                        $("#MessageBox").html("<h5>Success!</h5><p>Record saved successfully.</p>");
+                        $("#MessageBox").attr("class", "message success");
                     }
-                });
-            }
-        }
+                    else {
+                        $("#MessageBox").html("<h5>Error!</h5><p>Unable to save record.</p>");
+                        $("#MessageBox").attr("class", "message error");
+                    }
+                    $("#Waiting_Image").hide();
+                    $("#btn_Save").show();
+                    $("#BudgetType").attr("disabled", "disabled");
+                    scroll(0, 0);
+                    FadeOut("#MessageBox");
+                },
+                error: function (result) {
+                    alert("Error Occured!")
+                }
+            });
+
+            return false;
+        });
 
         function ResetForm() {
             window.location = "../Budget";
         }
 
+        function SetMonthlyAmount(obj) {
+            if ($(obj).val() != "") {
+                var TotalVal = parseInt($(obj).val());
+                var PermonthVal = parseInt(TotalVal / 12);
+                for (var index = 1; index <= 12; index++) {
+                    $("[name='" + $(obj).attr("name").replace("TotalAmount", "Month" + index.toString()) + "']").val(PermonthVal);
+                }
+            }
+        }
+
+        function SetTotalAmount(obj) {
+            var Id = $(obj).attr("name").replace("ListBudgetDetail[", "").replace("].Month12", "").replace("].Month11", "").replace("].Month10", "").replace("].Month9", "").replace("].Month8", "").replace("].Month7", "").replace("].Month6", "").replace("].Month5", "").replace("].Month4", "").replace("].Month3", "").replace("].Month2", "").replace("].Month1", "");
+            var TotalVal = 0;
+            for (var index = 1; index <= 12; index++) {
+                //alert("[name='ListBudgetDetail[" + Id + "].Month" + index + "']");
+                TotalVal += parseInt($("[name='ListBudgetDetail[" + Id + "].Month" + index + "']").val());
+            }
+            $("[name='ListBudgetDetail[" + Id + "].TotalAmount']").val(TotalVal);
+        }
+
     </script>
-    <form id="frm_VoucherEntry" action='<%=Url.Content("~/") %>'>
-    <input type="hidden" id="txt_SelectedMasterId" name="txt_SelectedMasterId" value='<%=ViewData["BudgetId"] %>' />
-    <input type="hidden" id="txt_SelectedDetailCode" name="txt_SelectedDetailCode" value="" />
-    <%--<input type="hidden" id="NarrationTitles" name="NarrationTitles" value='<%=ViewData["Narrations"] %>' />
-    <%string AccountCodes = ViewData["ChartOfAccountCodesWithTitles"].ToString().Replace("'", "&#39"); %>
-    <input type="hidden" id="AccountCodesList" name="AccountCodesList" value='<%=AccountCodes %>' />--%>
+    <form id="frm_Budget" action='<%=Url.Content("~/Budget/SaveBudget") %>' method="post">
+    <input type="hidden" id="txt_BudgetMasterId" name="MasterId" value='<%=Model.MasterId %>' />
     <div class="box round first fullpage grid">
         <h2>
             Budget Entry</h2>
         <div class="block">
-            <div id="MessageBox">
+            <div id="MessageBox" style="position: fixed; top: 0px; width: 95%;">
             </div>
-            <%-- <div id="LastVoucherContainer">
-            </div>--%>
             <div class="CustomCell" style="width: 97px; height: 30px;">
                 Budget #</div>
             <div class="CustomCell" style="width: 320px; height: 30px;">
-                <input type="text" class="CustomText" style="width: 250px; font-weight: bold;" id="txt_Code"
-                    name="txt_Code" maxlength="15" readonly="readonly" value='<%=ViewData["BudgetCode"] %>' />
+                <%=Html.TextBoxFor(m => m.Code, new { @class = "CustomText", @style = "width: 250px; font-weight: bold;", @id = "txt_Code", @maxlength = "15", @readonly = "readonly" })%>
             </div>
             <div class="CustomCell" style="width: 40px; height: 30px;">
                 Date</div>
             <div class="CustomCell" style="width: 278px; height: 30px;">
-                <input type="text" class="CustomText" style="width: 220px;" id="txt_Date" name="txt_Date"
-                    value="<%=ViewData["CurrentDate"]%>" maxlength="180" />
+                <%=Html.TextBoxFor(m => m.Date, new { @class = "CustomText", @style = "width: 220px;", @id = "txt_Date", @maxlength = "12" })%>
             </div>
         </div>
         <div class="CustomCell" style="width: 54px; height: 30px;">
             Status</div>
         <div class="CustomCell" style="width: 320px; height: 30px;">
-            <select id="ddl_Status" name="ddl_Status" class="CustomText" style="width: 251px;">
+            <select id="ddl_Status" name="Status" class="CustomText" style="width: 251px;">
                 <option value="Pending">Pending </option>
-                <option value="Approved">Approved </option>
+                <option value="Approved" <%=Model.Status=="Approved"?"selected":"" %>>Approved </option>
             </select>
         </div>
         <div class="Clear">
@@ -392,224 +175,137 @@
         <div class="CustomCell" style="width: 97px; height: 30px;">
             Budget Type</div>
         <div class="CustomCell" style="width: 320px; height: 30px;">
-            <%= Html.DropDownList("ddl_BudgetType", null, new { style = "width:265px;", disabled="true" })%>
+            <%= Html.DropDownList("BudgetType", null, new { @style = "width:265px;", @disabled = "disabled" })%>
         </div>
         <div class="CustomCell" style="width: 40px; height: 30px;">
             Year</div>
         <div class="CustomCell" style="width: 278px; height: 30px;">
-            <%= Html.DropDownList("ddl_Year", null, new { style = "width:235px;" })%>
+            <%= Html.DropDownList("CalendarYear", null, new { style = "width:235px;" })%>
         </div>
         <div class="CustomCell" style="width: 54px; height: 30px;">
             Location
         </div>
         <div class="CustomCell" style="width: 320px; height: 30px;">
-            <%= Html.DropDownList("ddl_Location", null, new { style = "width:251px;" })%>
+            <%= Html.DropDownList("Location", null, new { style = "width:251px;" })%>
         </div>
         <div class="Clear">
         </div>
         <div class="CustomCell" style="width: 97px; height: 30px;">
             Remarks</div>
         <div class="CustomCell" style="width: 960px; height: 30px;">
-            <input type="text" value="<%=ViewData["Remarks"] %>" class="CustomText" style="width: 942px;"
-                id="txt_Remarks" name="txt_Remarks" maxlength="180" />
+            <%=Html.TextBoxFor(m => m.Remarks, new { @class = "CustomText", @style = "width: 942px;", @id = "txt_Remarks", @maxlength = "180" })%>
         </div>
         <hr style="padding: 0; margin-bottom: 5px;" />
-        <div class="CustomCell" style="width: 200px;">
+        <div class="CustomCell" style="width: 260px;">
             Account Title
         </div>
         <div class="CustomCell" style="width: 80px; text-align: center">
+            Budget Approved</div>
+        <div class="CustomCell" style="width: 70px; text-align: center">
             Jan</div>
-        <div class="CustomCell" style="width: 80px; text-align: center">
+        <div class="CustomCell" style="width: 70px; text-align: center">
             Feb</div>
-        <div class="CustomCell" style="width: 80px; text-align: center">
+        <div class="CustomCell" style="width: 70px; text-align: center">
             Mar</div>
-        <div class="CustomCell" style="width: 80px; text-align: center">
+        <div class="CustomCell" style="width: 70px; text-align: center">
             Apr</div>
-        <div class="CustomCell" style="width: 80px; text-align: center">
+        <div class="CustomCell" style="width: 70px; text-align: center">
             May</div>
-        <div class="CustomCell" style="width: 80px; text-align: center">
+        <div class="CustomCell" style="width: 70px; text-align: center">
             Jun</div>
-        <div class="CustomCell" style="width: 80px; text-align: center">
+        <div class="CustomCell" style="width: 70px; text-align: center">
             Jul</div>
-        <div class="CustomCell" style="width: 80px; text-align: center">
+        <div class="CustomCell" style="width: 70px; text-align: center">
             Aug</div>
-        <div class="CustomCell" style="width: 80px; text-align: center">
+        <div class="CustomCell" style="width: 70px; text-align: center">
             Sep</div>
-        <div class="CustomCell" style="width: 80px; text-align: center">
+        <div class="CustomCell" style="width: 70px; text-align: center">
             Oct</div>
-        <div class="CustomCell" style="width: 80px; text-align: center">
+        <div class="CustomCell" style="width: 70px; text-align: center">
             Nov</div>
-        <div class="CustomCell" style="width: 80px; text-align: center">
+        <div class="CustomCell" style="width: 70px; text-align: center">
             Dec</div>
         <div class="Clear">
         </div>
         <div id="DetailContainer">
-            <%if (ViewData["Edit"] != null && ViewData["Edit"] != "")
-              {
-                  List<SCMSDataLayer.DB.GL_VchrDetail> voucherDetails = new List<SCMSDataLayer.DB.GL_VchrDetail>();
-                  if (ViewData["DetailRecords"] != null)
-                  {
-                      voucherDetails = (List<SCMSDataLayer.DB.GL_VchrDetail>)ViewData["DetailRecords"];
-                  }
-                  if (voucherDetails != null && voucherDetails.Count > 0)
-                  {
-                      foreach (SCMSDataLayer.DB.GL_VchrDetail row in voucherDetails)
-                      {
-                          string Remarks = row.VchDet_Remarks.Replace("'", "&#39");
-                          
-            %>
+            <%string AccountCodes = ViewData["ChartOfAccountCodesWithTitles"].ToString().Replace("'", "&#39"); %>
+            <input type="hidden" id="AccountCodesList" name="AccountCodesList" value='<%=AccountCodes %>' />
+            <% for (int index = 0; index < Model.ListBudgetDetail.Count; index++)
+               {%>
             <div class="detailRow" style="float: left; width: auto;">
-                <%-- <div class="CustomCell" style="width: 250px; height: 30px;">
-                    <%ViewData["ddl_Account"] = new SelectList((List<SCMSDataLayer.DB.SETUP_ChartOfAccount>)ViewData["ChartOfAccounts"], "ChrtAcc_Id", "ChrtAcc_Title", row.ChrtAcc_Id);%>
-                    <%= Html.DropDownList("ddl_Account", null, new { style = "width:250px;" })%>
-                </div>--%>
-                <div class="CustomCell" style="width: 565px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 545px;" name="txt_Details" value='<%=Remarks %>'
-                        maxlength="200" />
+                <% ViewData["ListBudgetDetail[" + index + "].Account"] = new SelectList((List<SCMSDataLayer.DB.SETUP_ChartOfAccount>)ViewData["ddl_Account"], "ChrtAcc_Id", "ChrtAcc_Title", Model.ListBudgetDetail[index].Account); %>
+                <div class="CustomCell" style="width: 260px; height: 30px;">
+                    <%= Html.DropDownList("ListBudgetDetail[" + index + "].Account", null, new { @style = "width:155px;",@class=".acc" })%>
+                    <script type="text/jscript">
+                        $(document).ready(function () {
+                            $("#ListBudgetDetail_<%=index %>__Account").combobox();
+                        });
+                    </script>
                 </div>
-                <div class="CustomCell" style="width: 118px; height: 30px;">
-                    <%if (row.VchMas_CrAmount > 0)
-                      {
-                    %>
-                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Debit" disabled="disabled"
+                <div class="CustomCell" style="width: 80px; height: 30px;">
+                    <input type="text" class="CustomText currency" style="width: 60px;" name="ListBudgetDetail[<%=index %>].TotalAmount"
+                        value="<%=Convert.ToInt32(Model.ListBudgetDetail[index].TotalAmount) %>" maxlength="50"
+                        onblur="SetMonthlyAmount(this);" />
+                </div>
+                <div class="CustomCell" style="width: 70px; height: 30px;">
+                    <input type="text" class="CustomText currency" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month1"
+                        value="<%=Convert.ToInt32(Model.ListBudgetDetail[index].Month1) %>" onblur="SetTotalAmount(this);"
                         maxlength="50" />
-                    <%}
-                      else
-                      {%>
-                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Debit" value="<%= string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N0}", Convert.ToInt32(row.VchMas_DrAmount)) %>"
+                </div>
+                <div class="CustomCell" style="width: 70px; height: 30px;">
+                    <input type="text" class="CustomText currency" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month2"
+                        value="<%=Convert.ToInt32(Model.ListBudgetDetail[index].Month2) %>" onblur="SetTotalAmount(this);"
                         maxlength="50" />
-                    <%} %>
                 </div>
-                <div class="CustomCell" style="width: 118px; height: 30px;">
-                    <%if (row.VchMas_DrAmount > 0)
-                      { %>
-                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Credit" disabled="disabled"
+                <div class="CustomCell" style="width: 70px; height: 30px;">
+                    <input type="text" class="CustomText currency" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month3"
+                        value="<%=Convert.ToInt32(Model.ListBudgetDetail[index].Month3) %>" onblur="SetTotalAmount(this);"
                         maxlength="50" />
-                    <%}
-                      else
-                      { %>
-                    <input type="text" class="CustomText" style="width: 100px;" name="txt_Credit" value="<%= string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N0}", Convert.ToInt32(row.VchMas_CrAmount)) %>"
+                </div>
+                <div class="CustomCell" style="width: 70px; height: 30px;">
+                    <input type="text" class="CustomText currency" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month4"
+                        value="<%=Convert.ToInt32(Model.ListBudgetDetail[index].Month4) %>" onblur="SetTotalAmount(this);"
                         maxlength="50" />
-                    <%} %>
                 </div>
-            </div>
-            <%}
-                  }
-            %>
-            <div class="img_Container">
-            </div>
-            <%--            <script type="text/javascript">
-                document.getElementById("ddl_Status").value = '<%=ViewData["Status"] %>';
-                document.getElementById("ddl_VoucherType").value = '<%=ViewData["VoucherType"] %>';
-                document.getElementById("ddl_Location").value = '<%=ViewData["LocationId"] %>';
-                document.getElementById("ddl_VoucherType").disabled = true;
-                document.getElementById("ddl_Location").disabled = true;
-
-                $(document).ready(function () {
-
-                    if ($("#txt_TotalDebit").val() == "") {
-                        $("#txt_TotalDebit").val("0");
-                    }
-                    if ($("#txt_TotalCredit").val() == "") {
-                        $("#txt_TotalCredit").val("0");
-                    }
-
-                    var sum = 0;
-                    $("input[name=txt_Debit]").each(function () {
-                        if ($(this).val() != "") {
-                            sum += parseFloat($(this).val().replace(/\,/g, ''));
-                        }
-                    });
-                    $("#txt_TotalDebit").val(sum);
-
-                    sum = 0;
-                    $("input[name=txt_Credit]").each(function () {
-                        if ($(this).val() != "") {
-                            sum += parseFloat($(this).val().replace(/\,/g, ''));
-                        }
-                    });
-                    $("#txt_TotalCredit").val(sum);
-
-                    $("#txt_TotalDebit").css("color", "green");
-                    $("#txt_TotalCredit").css("color", "green");
-                    $("#txt_Difference").css("color", "green");
-                    if ($("#txt_TotalDebit").val() < $("#txt_TotalCredit").val()) {
-                        $("#txt_TotalDebit").css("color", "red");
-                        $("#txt_TotalCredit").css("color", "green");
-                    }
-                    if ($("#txt_TotalCredit").val() < $("#txt_TotalDebit").val()) {
-                        $("#txt_TotalDebit").css("color", "green");
-                        $("#txt_TotalCredit").css("color", "red");
-                    }
-
-                    $("#txt_Difference").val(parseFloat($("#txt_TotalDebit").val().replace(',', '')) - parseFloat($("#txt_TotalCredit").val().replace(',', '')));
-                    if ($("#txt_Difference").val() < 0) {
-                        $("#txt_Difference").val(parseFloat($("#txt_TotalCredit").val().replace(',', '')) - parseFloat($("#txt_TotalDebit").val().replace(',', '')));
-                    }
-                    if ($("#txt_Difference").val() > 0) {
-                        $("#txt_Difference").css("color", "red");
-                    }
-                    $("#txt_TotalDebit").val(formatCurrency($("#txt_TotalDebit").val()));
-                    $("#txt_TotalCredit").val(formatCurrency($("#txt_TotalCredit").val()));
-                    $("#txt_Difference").val(formatCurrency($("#txt_Difference").val()));
-                });
-
-            </script>
-            --%>
-            <%}
-              else
-              {%>
-            <div class="detailRow" style="float: left; width: auto;">
-                <div class="CustomCell" style="width: 200px; height: 30px;">
-                    <%= Html.DropDownList("ddl_Account", null, new { style = "width:195px;" })%>
+                <div class="CustomCell" style="width: 70px; height: 30px;">
+                    <input type="text" class="CustomText currency" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month5"
+                        value="<%=Convert.ToInt32(Model.ListBudgetDetail[index].Month5) %>" onblur="SetTotalAmount(this);"
+                        maxlength="50" />
                 </div>
-                <div class="CustomCell" style="width: 80px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 60px;" name="txt_Jan" maxlength="50"
-                        tabindex="2" />
+                <div class="CustomCell" style="width: 70px; height: 30px;">
+                    <input type="text" class="CustomText" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month6"
+                        value="<%=Convert.ToInt32(Model.ListBudgetDetail[index].Month6) %>" onblur="SetTotalAmount(this);"
+                        maxlength="50" />
                 </div>
-                <div class="CustomCell" style="width: 80px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 60px;" name="txt_Feb" maxlength="50"
-                        tabindex="3" />
+                <div class="CustomCell" style="width: 70px; height: 30px;">
+                    <input type="text" class="CustomText currency" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month7"
+                        value="<%=Convert.ToInt32(Model.ListBudgetDetail[index].Month7) %>" onblur="SetTotalAmount(this);"
+                        maxlength="50" />
                 </div>
-                <div class="CustomCell" style="width: 80px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 60px;" name="txt_Mar" maxlength="50"
-                        tabindex="4" />
+                <div class="CustomCell" style="width: 70px; height: 30px;">
+                    <input type="text" class="CustomText currency" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month8"
+                        value="<%=Convert.ToInt32(Model.ListBudgetDetail[index].Month8) %>" onblur="SetTotalAmount(this);"
+                        maxlength="50" />
                 </div>
-                <div class="CustomCell" style="width: 80px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 60px;" name="txt_Apr" maxlength="50"
-                        tabindex="5" />
+                <div class="CustomCell" style="width: 70px; height: 30px;">
+                    <input type="text" class="CustomText currency" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month9"
+                        value="<%=Convert.ToInt32(Model.ListBudgetDetail[index].Month9) %>" onblur="SetTotalAmount(this);"
+                        maxlength="50" />
                 </div>
-                <div class="CustomCell" style="width: 80px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 60px;" name="txt_May" maxlength="50"
-                        tabindex="6" />
+                <div class="CustomCell" style="width: 70px; height: 30px;">
+                    <input type="text" class="CustomText currency" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month10"
+                        value="<%=Convert.ToInt32(Model.ListBudgetDetail[index].Month10) %>" onblur="SetTotalAmount(this);"
+                        maxlength="50" />
                 </div>
-                <div class="CustomCell" style="width: 80px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 60px;" name="txt_Jun" maxlength="50"
-                        tabindex="7" />
+                <div class="CustomCell" style="width: 70px; height: 30px;">
+                    <input type="text" class="CustomText currency" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month11"
+                        value="<%=Convert.ToInt32(Model.ListBudgetDetail[index].Month11) %>" onblur="SetTotalAmount(this);"
+                        maxlength="50" />
                 </div>
-                <div class="CustomCell" style="width: 80px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 60px;" name="txt_Jul" maxlength="50"
-                        tabindex="8" />
-                </div>
-                <div class="CustomCell" style="width: 80px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 60px;" name="txt_Aug" maxlength="50"
-                        tabindex="9" />
-                </div>
-                <div class="CustomCell" style="width: 80px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 60px;" name="txt_Sep" maxlength="50"
-                        tabindex="10" />
-                </div>
-                <div class="CustomCell" style="width: 80px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 60px;" name="txt_Oct" maxlength="50"
-                        tabindex="11" />
-                </div>
-                <div class="CustomCell" style="width: 80px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 60px;" name="txt_Nov" maxlength="50"
-                        tabindex="12" />
-                </div>
-                <div class="CustomCell" style="width: 80px; height: 30px;">
-                    <input type="text" class="CustomText" style="width: 60px;" name="txt_Dec" maxlength="50"
-                        tabindex="13" />
+                <div class="CustomCell" style="width: 70px; height: 30px;">
+                    <input type="text" class="CustomText currency" style="width: 50px;" name="ListBudgetDetail[<%=index %>].Month12"
+                        value="<%=Convert.ToInt32(Model.ListBudgetDetail[index].Month12) %>" onblur="SetTotalAmount(this);"
+                        maxlength="50" />
                 </div>
             </div>
             <%} %>
@@ -617,32 +313,12 @@
                 <img id="btn_AddNewRow" alt="Add New" src="../../img/add.png" style="width: 30px;
                     cursor: pointer;" />
             </div>
-            <%--  <hr style="padding: 0; margin-bottom: 5px;" />
-            <div class="CustomCell" style="width: 820px; height: 30px; text-align: right;">
-                Total &nbsp;
-            </div>
-            <div class="CustomCell" style="width: 118px; height: 30px;">
-                <input type="text" class="CustomText" style="width: 100px;" id="txt_TotalDebit" name="txt_TotalDebit"
-                    maxlength="50" disabled="disabled" />
-            </div>
-            <div class="CustomCell" style="width: 118px; height: 30px;">
-                <input type="text" class="CustomText" style="width: 100px;" id="txt_TotalCredit"
-                    name="txt_TotalCredit" maxlength="50" disabled="disabled" />
-            </div>
-           <div class="CustomCell" style="width: 30px; height: 30px; text-align: right;">
-                Diff &nbsp;
-            </div>
-            <div class="CustomCell" style="width: 165px; height: 30px;">
-                <input type="text" class="CustomText" style="width: 100px;" id="txt_Difference" disabled="disabled"
-                    name="txt_Difference" maxlength="50" />
-            </div>--%>
             <div class="Clear">
             </div>
             <div style="float: right; margin-bottom: 10px;">
                 <div style="float: left; margin-right: 5px;">
-                    <input id="btn_Save" type="button" value="Save" class="btn btn-blue" onclick="SaveBudget();"
-                        style="width: 90px; height: 35px; padding-top: 5px; color: White; font-weight: bold;
-                        font-size: 11pt;" />
+                    <input id="btn_Save" type="submit" value="Save" class="btn btn-blue" style="width: 90px;
+                        height: 35px; padding-top: 5px; color: White; font-weight: bold; font-size: 11pt;" />
                     <img alt="" id="Waiting_Image" src="../../img/Ajax_Loading.gif" style="display: none;
                         margin-left: 10" /></div>
                 <div style="float: left;">
