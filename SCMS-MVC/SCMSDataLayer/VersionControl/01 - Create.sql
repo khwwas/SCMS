@@ -1089,6 +1089,61 @@ ALTER TABLE [dbo].[GL_BgdtMaster] CHECK CONSTRAINT [FK_GLBgdtMaster_SYSTEMBgdtTy
 GO
 
 
+/****** Object:  Table [dbo].[GL_BgdtDetail]    Script Date: 01/02/2014 21:00:03 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[GL_BgdtDetail](
+	[BgdtDet_Id] [varchar](50) NOT NULL,
+	[BgdtMas_Id] [varchar](50) NOT NULL,
+	[ChrtAcc_Id] [varchar](50) NOT NULL,
+	[BgdtDet_TotalAmount] [decimal](20, 6) NULL,
+	[BgdtDet_Month1] [decimal](20, 6) NULL,
+	[BgdtDet_Month2] [decimal](20, 6) NULL,
+	[BgdtDet_Month3] [decimal](20, 6) NULL,
+	[BgdtDet_Month4] [decimal](20, 6) NULL,
+	[BgdtDet_Month5] [decimal](20, 6) NULL,
+	[BgdtDet_Month6] [decimal](20, 6) NULL,
+	[BgdtDet_Month7] [decimal](20, 6) NULL,
+	[BgdtDet_Month8] [decimal](20, 6) NULL,
+	[BgdtDet_Month9] [decimal](20, 6) NULL,
+	[BgdtDet_Month10] [decimal](20, 6) NULL,
+	[BgdtDet_Month11] [decimal](20, 6) NULL,
+	[BgdtDet_Month12] [decimal](20, 6) NULL,
+	[BgdtDet_Remarks] [varchar](200) NULL,
+ CONSTRAINT [PK_GLBgdtDetail_BgdtDetId] PRIMARY KEY CLUSTERED 
+(
+	[BgdtDet_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[GL_BgdtDetail]  WITH CHECK ADD  CONSTRAINT [FK_GLBgdtDetail_GLBgdtMaster_BgdtMasId] FOREIGN KEY([BgdtMas_Id])
+REFERENCES [dbo].[GL_BgdtMaster] ([BgdtMas_Id])
+GO
+
+ALTER TABLE [dbo].[GL_BgdtDetail] CHECK CONSTRAINT [FK_GLBgdtDetail_GLBgdtMaster_BgdtMasId]
+GO
+
+ALTER TABLE [dbo].[GL_BgdtDetail]  WITH CHECK ADD  CONSTRAINT [FK_GLBgdtDetail_SETUPChartOfAccount_ChrtAccId] FOREIGN KEY([ChrtAcc_Id])
+REFERENCES [dbo].[SETUP_ChartOfAccount] ([ChrtAcc_Id])
+GO
+
+ALTER TABLE [dbo].[GL_BgdtDetail] CHECK CONSTRAINT [FK_GLBgdtDetail_SETUPChartOfAccount_ChrtAccId]
+GO
+
+
+
 
 
 

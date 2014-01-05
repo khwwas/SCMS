@@ -14,12 +14,12 @@ namespace SCMS.Controllers
         public ActionResult Index(string ps_ReportName)
         {
             ViewData["ddl_Location"] = new SelectList(new DALLocation().PopulateData(), "Loc_Id", "Loc_Title");
-            //ViewData["ddl_Year"] = new SelectList(new DALLocation().PopulateData(), "Loc_Id", "Loc_Title");
             ViewData["ddl_VoucherTypes"] = new SelectList(new DALVoucherType().PopulateData(), "VchrType_Id", "VchrType_Title");
             ViewData["ddl_AccCodeFrom"] = new SelectList(new DALChartOfAccount().GetChartOfAccountForDropDown(), "ChrtAcc_Id", "ChrtAcc_Title");
             ViewData["ddl_AccCodeTo"] = new SelectList(new DALChartOfAccount().GetChartOfAccountForDropDown(), "ChrtAcc_Id", "ChrtAcc_Title");
             ViewData["ddl_VchrDocFrom"] = new SelectList(new DALVoucherEntry().GetAllMasterRecords(), "VchMas_Id", "VchMas_Code");
             ViewData["ddl_VchrDocTo"] = new SelectList(new DALVoucherEntry().GetAllMasterRecords(), "VchMas_Id", "VchMas_Code");
+            ViewData["ddl_Calendar"] = new SelectList(new DALCalendar().GetAllRecords(), "Cldr_Id", "Cldr_Title");
 
             ViewData["ReportName"] = ps_ReportName;
             ViewData["CurrentDate"] = DateTime.Now.ToString("MM/dd/yyyy");
@@ -61,7 +61,7 @@ namespace SCMS.Controllers
             ResetParameters();
             Reports.ReportParameters.ReportName = ps_ReportName;
             Reports.ReportParameters.VoucherPrint = ps_VoucherPrint;
-            
+
             if (pi_AllLoc == "1")
             {
                 SECURITY_User user = (SECURITY_User)System.Web.HttpContext.Current.Session["user"];
@@ -402,6 +402,44 @@ namespace SCMS.Controllers
                 Reports.ReportParameters.AllDate = 0;
                 Reports.ReportParameters.DateFrom = pdt_DateFrom;
                 Reports.ReportParameters.DateTo = pdt_DateTo;
+            }
+
+            return "OK";
+        }
+        #endregion
+
+        #region Budget Summary
+        public string SetParam_BudgetSummary(string ps_ReportName, string pi_AllLoc, string ps_Location, string pi_AllCalendar, string ps_Calendar)
+        {
+            string ls_Location = "";
+
+            ResetParameters();
+            Reports.ReportParameters.ReportName = ps_ReportName;
+            Reports.ReportParameters.AllCalendar = Convert.ToInt32(pi_AllCalendar);
+            Reports.ReportParameters.sCalendar = ps_Calendar;
+
+            if (pi_AllLoc == "1")
+            {
+                SECURITY_User user = (SECURITY_User)System.Web.HttpContext.Current.Session["user"];
+                UserLoginId = user.User_Id;
+
+                List<sp_GetUserLocationsByUserIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByUserId(UserLoginId).ToList();
+                if (UserLocations != null && UserLocations.Count > 0)
+                {
+                    UserLocations = UserLocations.Where(c => c.SelectedLocation != "0").ToList();
+                }
+
+                ls_Location = ConvertStringArrayToString(UserLocations.Select(c => c.Loc_Id).ToArray());
+                if (ls_Location == null || ls_Location.Trim() == "")
+                {
+                    ls_Location = "''";
+                }
+
+                Reports.ReportParameters.Location = ls_Location;
+            }
+            else
+            {
+                Reports.ReportParameters.Location = ps_Location;
             }
 
             return "OK";

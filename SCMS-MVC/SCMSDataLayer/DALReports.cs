@@ -10,11 +10,12 @@ namespace SCMSDataLayer
 {
     public class DALReports
     {
+        SqlConnection con = new SqlConnection();
+        SqlCommand _cmd = new SqlCommand();
+
         #region Setups
         public DataSet ListOfCompanies()
         {
-            SqlConnection con = new SqlConnection();
-            SqlCommand _cmd = new SqlCommand();
             DataSet _ds = new DataSet();
 
             try
@@ -44,10 +45,7 @@ namespace SCMSDataLayer
         }
         public DataSet ListOfLocations()
         {
-            SqlConnection con = new SqlConnection();
-            SqlCommand _cmd = new SqlCommand();
             DataSet _ds = new DataSet();
-            //string _Sql = "";
 
             try
             {
@@ -76,10 +74,7 @@ namespace SCMSDataLayer
         }
         public DataSet ListOfCities()
         {
-            SqlConnection con = new SqlConnection();
-            SqlCommand _cmd = new SqlCommand();
             DataSet _ds = new DataSet();
-            //string _Sql = "";
 
             try
             {
@@ -108,10 +103,7 @@ namespace SCMSDataLayer
         }
         public DataSet ListOfVoucherTypes()
         {
-            SqlConnection con = new SqlConnection();
-            SqlCommand _cmd = new SqlCommand();
             DataSet _ds = new DataSet();
-            //string _Sql = "";
 
             try
             {
@@ -140,10 +132,7 @@ namespace SCMSDataLayer
         }
         public DataSet ListOfChartOfAccounts(int pi_Level)
         {
-            SqlConnection con = new SqlConnection();
-            SqlCommand _cmd = new SqlCommand();
             DataSet _ds = new DataSet();
-            //string _Sql = "";
 
             try
             {
@@ -177,8 +166,6 @@ namespace SCMSDataLayer
         public DataSet VoucherDocument(string ps_Location, string ps_VoucherTypes, int pi_AllDoc, string ps_DocFrom, string ps_DocTo,
                                        int pi_AllVchrStatus, string ps_VchrStatus, int pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo)
         {
-            SqlConnection con = new SqlConnection();
-            SqlCommand _cmd = new SqlCommand();
             DataSet _ds = new DataSet();
             string _Sql = "";
 
@@ -248,8 +235,6 @@ namespace SCMSDataLayer
         public DataSet LedgerDetail_LocWise(string ps_Location, int pi_AllAccCode, string ps_AccCodeFrom, string ps_AccCodeTo,
                                             int pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo)
         {
-            SqlConnection con = new SqlConnection();
-            //SqlCommand _cmd = new SqlCommand();
             DataSet _ds = new DataSet();
             string _Sql = "";
 
@@ -350,8 +335,6 @@ namespace SCMSDataLayer
         public DataSet LedgerDetail_AccWise(string ps_Location, int pi_AllAccCode, string ps_AccCodeFrom, string ps_AccCodeTo,
                                             int pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo)
         {
-            SqlConnection con = new SqlConnection();
-            //SqlCommand _cmd = new SqlCommand();
             DataSet _ds = new DataSet();
             string _Sql = "";
 
@@ -454,8 +437,6 @@ namespace SCMSDataLayer
         public DataSet TrialBalance(string ps_Location, int pi_AllAccCode, string ps_AccCodeFrom, string ps_AccCodeTo,
                                     int pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo, int pi_Level, string ps_TrialActivity)
         {
-            SqlConnection con = new SqlConnection();
-            SqlCommand _cmd = new SqlCommand();
             DataSet _ds = new DataSet();
             string _Sql = "";
 
@@ -672,8 +653,6 @@ namespace SCMSDataLayer
         #region Income Statement
         public DataSet IncomeStatement(string ps_Location, int pi_Level, int pi_Year)
         {
-            SqlConnection con = new SqlConnection();
-            SqlCommand _cmd = new SqlCommand();
             DataSet _ds = new DataSet();
             string _Sql = "";
 
@@ -856,8 +835,6 @@ namespace SCMSDataLayer
         #region Balance Sheet
         public DataSet BalanceSheet(string ps_Location, int pi_Level, int pi_Year)
         {
-            SqlConnection con = new SqlConnection();
-            SqlCommand _cmd = new SqlCommand();
             DataSet _ds = new DataSet();
             string _Sql = "";
 
@@ -1113,8 +1090,6 @@ namespace SCMSDataLayer
         #region Audit Trial
         public DataSet AuditTrail(int pi_AllDate, DateTime pdt_DateFrom, DateTime pdt_DateTo)
         {
-            SqlConnection con = new SqlConnection();
-            SqlCommand _cmd = new SqlCommand();
             DataSet _ds = new DataSet();
             string _Sql = "";
 
@@ -1173,6 +1148,69 @@ namespace SCMSDataLayer
 
                 SqlDataAdapter da = new SqlDataAdapter(_Sql, con);
                 da.Fill(_ds, "AuditTrail");
+
+                Connection.ReportConnection("Close");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message.ToString());
+            }
+
+            return _ds;
+        }
+        #endregion
+
+        #region Budget Summary
+        public DataSet BudgetSummary(string ps_Location, int pi_AllYear, string ps_Year)
+        {
+            DataSet _ds = new DataSet();
+            string _Sql = "";
+
+            try
+            {
+                con = Connection.ReportConnection("Open");
+                if (con.State != System.Data.ConnectionState.Open)
+                {
+                    return null;
+                }
+
+                _Sql += "   Select SETUP_Location.Loc_Title, ";
+                _Sql += "          SETUP_Calendar.Cldr_Id, ";
+                _Sql += "          SETUP_Calendar.Cldr_SortOrder, ";
+                _Sql += "          SETUP_Calendar.Cldr_Title, ";
+                _Sql += "          ( Select SUM( ISNULL( GL_VchrDetail.VchMas_DrAmount, 0 ) ) ";
+                _Sql += "              From GL_VchrMaster, ";
+                _Sql += "                   GL_VchrDetail, ";
+                _Sql += "                   SYSTEM_Nature, ";
+                _Sql += "                   SETUP_ChartOfAccount ";
+                _Sql += "             Where ( SYSTEM_Nature.Natr_SystemTitle = 'Expense' ) And ";
+                _Sql += "                   ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And ";
+                _Sql += "                   ( GL_VchrDetail.VchMas_Id = GL_VchrMaster.VchMas_Id ) And ";
+                _Sql += "                   ( GL_VchrDetail.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And ";
+                _Sql += "                   ( SETUP_ChartOfAccount.Natr_Id = SYSTEM_Nature.Natr_Id ) And ";
+                _Sql += "                   ( GL_VchrMaster.VchMas_Date Between SETUP_Calendar.Cldr_DateStart And SETUP_Calendar.Cldr_DateEnd ) ";
+                _Sql += "          ) As ActualExpense, ";
+                _Sql += "          ( Select SUM( ISNULL( GL_BgdtDetail.BgdtDet_TotalAmount, 0 ) ) ";
+                _Sql += "              From GL_BgdtMaster, ";
+                _Sql += "                   GL_BgdtDetail, ";
+                _Sql += "                   SYSTEM_Nature, ";
+                _Sql += "                   SETUP_ChartOfAccount ";
+                _Sql += "             Where ( SYSTEM_Nature.Natr_SystemTitle = 'Expense' ) And ";
+                _Sql += "                   ( GL_BgdtMaster.Loc_Id = SETUP_Location.Loc_Id ) And ";
+                _Sql += "                   ( GL_BgdtDetail.BgdtMas_Id = GL_BgdtMaster.BgdtMas_Id ) And ";
+                _Sql += "                   ( GL_BgdtDetail.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And ";
+                _Sql += "                   ( SETUP_ChartOfAccount.Natr_Id = SYSTEM_Nature.Natr_Id ) And ";
+                _Sql += "                   ( GL_BgdtMaster.BgdtMas_Date Between SETUP_Calendar.Cldr_DateStart And SETUP_Calendar.Cldr_DateEnd ) ";
+                _Sql += "          ) As ActualBudget ";
+                _Sql += "     From SETUP_Location, ";
+                _Sql += "          SETUP_Calendar ";
+                _Sql += "    Where ( SETUP_Location.Loc_Id IN ( " + ps_Location + " ) ) And ";
+                _Sql += "          ( " + pi_AllYear.ToString() + " = 1 Or SETUP_Calendar.Cldr_Id = '" + ps_Year + "' )  ";
+                _Sql += " Order By SETUP_Location.Loc_Title, ";
+                _Sql += "          SETUP_Calendar.Cldr_SortOrder ";
+
+                 SqlDataAdapter da = new SqlDataAdapter(_Sql, con);
+                da.Fill(_ds, "BudgetSummary");
 
                 Connection.ReportConnection("Close");
             }
