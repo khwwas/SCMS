@@ -1222,5 +1222,68 @@ namespace SCMSDataLayer
             return _ds;
         }
         #endregion
+
+        #region Budget And Monthly Expense
+        public DataSet BudgetAndMonthlyExpense(string ps_Location, int pi_AllYear, string ps_Year)
+        {
+            DataSet _ds = new DataSet();
+            string _Sql = "";
+
+            try
+            {
+                con = Connection.ReportConnection("Open");
+                if (con.State != System.Data.ConnectionState.Open)
+                {
+                    return null;
+                }
+
+                _Sql += "   Select SETUP_Location.Loc_Title, ";
+                _Sql += "          SETUP_Calendar.Cldr_Id, ";
+                _Sql += "          SETUP_Calendar.Cldr_SortOrder, ";
+                _Sql += "          SETUP_Calendar.Cldr_Title, ";
+                _Sql += "          ( Select SUM( ISNULL( GL_VchrDetail.VchMas_DrAmount, 0 ) ) ";
+                _Sql += "              From GL_VchrMaster, ";
+                _Sql += "                   GL_VchrDetail, ";
+                _Sql += "                   SYSTEM_Nature, ";
+                _Sql += "                   SETUP_ChartOfAccount ";
+                _Sql += "             Where ( SYSTEM_Nature.Natr_SystemTitle = 'Expense' ) And ";
+                _Sql += "                   ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And ";
+                _Sql += "                   ( GL_VchrDetail.VchMas_Id = GL_VchrMaster.VchMas_Id ) And ";
+                _Sql += "                   ( GL_VchrDetail.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And ";
+                _Sql += "                   ( SETUP_ChartOfAccount.Natr_Id = SYSTEM_Nature.Natr_Id ) And ";
+                _Sql += "                   ( GL_VchrMaster.VchMas_Date Between SETUP_Calendar.Cldr_DateStart And SETUP_Calendar.Cldr_DateEnd ) ";
+                _Sql += "          ) As ActualExpense, ";
+                _Sql += "          ( Select SUM( ISNULL( GL_BgdtDetail.BgdtDet_TotalAmount, 0 ) ) ";
+                _Sql += "              From GL_BgdtMaster, ";
+                _Sql += "                   GL_BgdtDetail, ";
+                _Sql += "                   SYSTEM_Nature, ";
+                _Sql += "                   SETUP_ChartOfAccount ";
+                _Sql += "             Where ( SYSTEM_Nature.Natr_SystemTitle = 'Expense' ) And ";
+                _Sql += "                   ( GL_BgdtMaster.Loc_Id = SETUP_Location.Loc_Id ) And ";
+                _Sql += "                   ( GL_BgdtDetail.BgdtMas_Id = GL_BgdtMaster.BgdtMas_Id ) And ";
+                _Sql += "                   ( GL_BgdtDetail.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And ";
+                _Sql += "                   ( SETUP_ChartOfAccount.Natr_Id = SYSTEM_Nature.Natr_Id ) And ";
+                _Sql += "                   ( GL_BgdtMaster.BgdtMas_Date Between SETUP_Calendar.Cldr_DateStart And SETUP_Calendar.Cldr_DateEnd ) ";
+                _Sql += "          ) As ActualBudget ";
+                _Sql += "     From SETUP_Location, ";
+                _Sql += "          SETUP_Calendar ";
+                _Sql += "    Where ( SETUP_Location.Loc_Id IN ( " + ps_Location + " ) ) And ";
+                _Sql += "          ( " + pi_AllYear.ToString() + " = 1 Or SETUP_Calendar.Cldr_Id = '" + ps_Year + "' )  ";
+                _Sql += " Order By SETUP_Location.Loc_Title, ";
+                _Sql += "          SETUP_Calendar.Cldr_SortOrder ";
+
+                SqlDataAdapter da = new SqlDataAdapter(_Sql, con);
+                da.Fill(_ds, "BudgetAndMonthlyExpense");
+
+                Connection.ReportConnection("Close");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message.ToString());
+            }
+
+            return _ds;
+        }
+        #endregion
     }
 }

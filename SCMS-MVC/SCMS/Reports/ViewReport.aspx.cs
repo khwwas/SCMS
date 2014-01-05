@@ -123,29 +123,26 @@ namespace SCMS.Reports
                 if (ls_ReportName.ToLower() == "Company".ToLower())
                 {
                     _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptCompany.rpt");
-                    Datasets.dsCompany _dsCompany = new Datasets.dsCompany();
+                    _ds = new Datasets.dsCompany();
 
-                    if (_dsCompany.Tables.Contains("Logo"))
+                    if (_ds.Tables.Contains("Logo"))
                     {
-                        _dsCompany.Tables.Remove("Logo");
+                        _ds.Tables.Remove("Logo");
                     }
 
-                    if (_dsCompany.Tables.Contains("Company"))
+                    if (_ds.Tables.Contains("Company"))
                     {
-                        _dsCompany.Tables.Remove("Company");
+                        _ds.Tables.Remove("Company");
                     }
 
                     _ds = _dalReports.ListOfCompanies();
-                    _dsCompany.Tables.Add(_ds.Tables["Company"].Copy());
-                    _dsCompany.Tables.Add(_dtImage.Copy());
-
-                    if (_dsCompany == null || _dsCompany.Tables == null || _dsCompany.Tables.Count <= 0)
+                    if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
                     {
                         MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
                         return;
                     }
 
-                    _ReportDocument.SetDataSource(_dsCompany);
+                    _ReportDocument.SetDataSource(_ds);
                     _ReportDocument.SummaryInfo.ReportTitle = "List Of Companies";
                 }
                 #endregion
@@ -154,29 +151,26 @@ namespace SCMS.Reports
                 if (ls_ReportName.ToLower() == "Location".ToLower())
                 {
                     _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptLocation.rpt");
-                    Datasets.dsLocation _dsLocation = new Datasets.dsLocation();
+                    _ds = new Datasets.dsLocation();
 
-                    if (_dsLocation.Tables.Contains("Logo"))
+                    if (_ds.Tables.Contains("Logo"))
                     {
-                        _dsLocation.Tables.Remove("Logo");
+                        _ds.Tables.Remove("Logo");
                     }
 
-                    if (_dsLocation.Tables.Contains("Location"))
+                    if (_ds.Tables.Contains("Location"))
                     {
-                        _dsLocation.Tables.Remove("Location");
+                        _ds.Tables.Remove("Location");
                     }
 
                     _ds = _dalReports.ListOfLocations();
-                    _dsLocation.Tables.Add(_ds.Tables["Location"].Copy());
-                    _dsLocation.Tables.Add(_dtImage.Copy());
-
-                    if (_dsLocation == null || _dsLocation.Tables == null || _dsLocation.Tables.Count <= 0)
+                    if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
                     {
                         MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
                         return;
                     }
 
-                    _ReportDocument.SetDataSource(_dsLocation);
+                    _ReportDocument.SetDataSource(_ds);
                     _ReportDocument.SummaryInfo.ReportTitle = "List Of Locations";
                 }
                 #endregion
@@ -185,29 +179,26 @@ namespace SCMS.Reports
                 if (ls_ReportName.ToLower() == "City".ToLower())
                 {
                     _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptCity.rpt");
-                    Datasets.dsCity _dsCity = new Datasets.dsCity();
+                    _ds = new Datasets.dsCity();
 
-                    if (_dsCity.Tables.Contains("Logo"))
+                    if (_ds.Tables.Contains("Logo"))
                     {
-                        _dsCity.Tables.Remove("Logo");
+                        _ds.Tables.Remove("Logo");
                     }
 
-                    if (_dsCity.Tables.Contains("City"))
+                    if (_ds.Tables.Contains("City"))
                     {
-                        _dsCity.Tables.Remove("City");
+                        _ds.Tables.Remove("City");
                     }
 
                     _ds = _dalReports.ListOfCities();
-                    _dsCity.Tables.Add(_ds.Tables["City"].Copy());
-                    _dsCity.Tables.Add(_dtImage.Copy());
-
-                    if (_dsCity == null || _dsCity.Tables == null || _dsCity.Tables.Count <= 0)
+                    if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
                     {
                         MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
                         return;
                     }
 
-                    _ReportDocument.SetDataSource(_dsCity);
+                    _ReportDocument.SetDataSource(_ds);
                     _ReportDocument.SummaryInfo.ReportTitle = "List Of Cities";
                 }
                 #endregion
@@ -216,29 +207,26 @@ namespace SCMS.Reports
                 if (ls_ReportName.ToLower() == "VoucherTypes".ToLower())
                 {
                     _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptVoucherTypes.rpt");
-                    Datasets.dsVoucherTypes _dsVoucherTypes = new Datasets.dsVoucherTypes();
+                    _ds = new Datasets.dsVoucherTypes();
 
-                    if (_dsVoucherTypes.Tables.Contains("Logo"))
+                    if (_ds.Tables.Contains("Logo"))
                     {
-                        _dsVoucherTypes.Tables.Remove("Logo");
+                        _ds.Tables.Remove("Logo");
                     }
 
-                    if (_dsVoucherTypes.Tables.Contains("VoucherTypes"))
+                    if (_ds.Tables.Contains("VoucherTypes"))
                     {
-                        _dsVoucherTypes.Tables.Remove("VoucherTypes");
+                        _ds.Tables.Remove("VoucherTypes");
                     }
 
                     _ds = _dalReports.ListOfVoucherTypes();
-                    _dsVoucherTypes.Tables.Add(_ds.Tables["VoucherTypes"].Copy());
-                    _dsVoucherTypes.Tables.Add(_dtImage.Copy());
-
-                    if (_dsVoucherTypes == null || _dsVoucherTypes.Tables == null || _dsVoucherTypes.Tables.Count <= 0)
+                    if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
                     {
                         MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
                         return;
                     }
 
-                    _ReportDocument.SetDataSource(_dsVoucherTypes);
+                    _ReportDocument.SetDataSource(_ds);
                     _ReportDocument.SummaryInfo.ReportTitle = "List Of Voucher Types";
                 }
                 #endregion
@@ -247,29 +235,26 @@ namespace SCMS.Reports
                 if (ls_ReportName.ToLower() == "ChartOfAccount".ToLower())
                 {
                     _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptChartOfAccount.rpt");
-                    Datasets.dsChartOfAccount _dsChartOfAccount = new Datasets.dsChartOfAccount();
+                    _ds = new Datasets.dsChartOfAccount();
 
-                    if (_dsChartOfAccount.Tables.Contains("Logo"))
+                    if (_ds.Tables.Contains("Logo"))
                     {
-                        _dsChartOfAccount.Tables.Remove("Logo");
+                        _ds.Tables.Remove("Logo");
                     }
 
-                    if (_dsChartOfAccount.Tables.Contains("ChartOfAccount"))
+                    if (_ds.Tables.Contains("ChartOfAccount"))
                     {
-                        _dsChartOfAccount.Tables.Remove("ChartOfAccount");
+                        _ds.Tables.Remove("ChartOfAccount");
                     }
 
                     _ds = _dalReports.ListOfChartOfAccounts(ReportParameters.Level);
-                    _dsChartOfAccount.Tables.Add(_ds.Tables["ChartOfAccount"].Copy());
-                    _dsChartOfAccount.Tables.Add(_dtImage.Copy());
-
-                    if (_dsChartOfAccount == null || _dsChartOfAccount.Tables == null || _dsChartOfAccount.Tables.Count <= 0)
+                    if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
                     {
                         MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
                         return;
                     }
 
-                    _ReportDocument.SetDataSource(_dsChartOfAccount);
+                    _ReportDocument.SetDataSource(_ds);
                     _ReportDocument.SummaryInfo.ReportTitle = "List Of Chart Of Account";
                 }
                 #endregion
@@ -286,7 +271,7 @@ namespace SCMS.Reports
                     {
                         _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptVoucherDocumentSummary.rpt");
                     }
-                    Datasets.dsVoucherDocument _dsVoucherDocument = new Datasets.dsVoucherDocument();
+                    _ds = new Datasets.dsVoucherDocument();
                     string ls_Location = "", ls_VoucherTypes = "", ls_DocFrom = "", ls_DocTo = "", ls_VchrStatus = "All";
                     int li_AllDoc = 0, li_AllVchrStatus = 0, li_AllDate = 0;
                     DateTime ldt_DateFrom, ldt_Dateto;
@@ -302,28 +287,25 @@ namespace SCMS.Reports
                     ldt_DateFrom = SCMS.Reports.ReportParameters.DateFrom;
                     ldt_Dateto = SCMS.Reports.ReportParameters.DateTo;
 
-                    if (_dsVoucherDocument.Tables.Contains("Logo"))
+                    if (_ds.Tables.Contains("Logo"))
                     {
-                        _dsVoucherDocument.Tables.Remove("Logo");
+                        _ds.Tables.Remove("Logo");
                     }
 
-                    if (_dsVoucherDocument.Tables.Contains("VoucherDocument"))
+                    if (_ds.Tables.Contains("VoucherDocument"))
                     {
-                        _dsVoucherDocument.Tables.Remove("VoucherDocument");
+                        _ds.Tables.Remove("VoucherDocument");
                     }
 
                     _ds = _dalReports.VoucherDocument(ls_Location, ls_VoucherTypes, li_AllDoc, ls_DocFrom, ls_DocTo,
                                                       li_AllVchrStatus, ls_VchrStatus, li_AllDate, ldt_DateFrom, ldt_Dateto);
-                    _dsVoucherDocument.Tables.Add(_ds.Tables[0].Copy());
-                    _dsVoucherDocument.Tables[0].TableName = "VoucherDocument";
-
                     if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
                     {
                         MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
                         return;
                     }
 
-                    _ReportDocument.SetDataSource(_dsVoucherDocument);
+                    _ReportDocument.SetDataSource(_ds);
                     if (SCMS.Reports.ReportParameters.VoucherPrint.ToLower() == "Detail".ToLower())
                     {
                         _ReportDocument.SummaryInfo.ReportTitle = "Voucher Detail";
@@ -340,7 +322,7 @@ namespace SCMS.Reports
                 {
 
                     _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptLedger_LocWise.rpt");
-                    Datasets.dsLedger _dsLedger = new Datasets.dsLedger();
+                    _ds = new Datasets.dsLedger();
                     string ls_Location = "", ls_AccCodeFrom = "", ls_AccCodeTo = "";
                     int li_AllAccCode = 0, li_AllDate = 0;
                     DateTime ldt_DateFrom, ldt_Dateto;
@@ -353,27 +335,24 @@ namespace SCMS.Reports
                     ldt_DateFrom = SCMS.Reports.ReportParameters.DateFrom;
                     ldt_Dateto = SCMS.Reports.ReportParameters.DateTo;
 
-                    if (_dsLedger.Tables.Contains("Logo"))
+                    if (_ds.Tables.Contains("Logo"))
                     {
-                        _dsLedger.Tables.Remove("Logo");
+                        _ds.Tables.Remove("Logo");
                     }
 
-                    if (_dsLedger.Tables.Contains("LedgerDetail"))
+                    if (_ds.Tables.Contains("LedgerDetail"))
                     {
-                        _dsLedger.Tables.Remove("LedgerDetail");
+                        _ds.Tables.Remove("LedgerDetail");
                     }
 
                     _ds = _dalReports.LedgerDetail_LocWise(ls_Location, li_AllAccCode, ls_AccCodeFrom, ls_AccCodeTo, li_AllDate, ldt_DateFrom, ldt_Dateto);
-                    _dsLedger.Tables.Add(_ds.Tables[0].Copy());
-                    _dsLedger.Tables[0].TableName = "LedgerDetail";
-
                     if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
                     {
                         MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
                         return;
                     }
 
-                    _ReportDocument.SetDataSource(_dsLedger);
+                    _ReportDocument.SetDataSource(_ds);
                     _ReportDocument.SummaryInfo.ReportTitle = "Ledger Detail - Location Wise";
                     _ReportDocument.SetParameterValue("pm_AllDate", li_AllDate);
                     _ReportDocument.SetParameterValue("pm_DateFrom", ldt_DateFrom);
@@ -385,7 +364,7 @@ namespace SCMS.Reports
                 else if (ls_ReportName.ToLower() == "LedgerDtAccWise".ToLower())
                 {
                     _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptLedger_AccWise.rpt");
-                    Datasets.dsLedger _dsLedger = new Datasets.dsLedger();
+                    _ds = new Datasets.dsLedger();
                     string ls_Location = "", ls_AccCodeFrom = "", ls_AccCodeTo = "";
                     int li_AllAccCode = 0, li_AllDate = 0;
                     DateTime ldt_DateFrom, ldt_Dateto;
@@ -398,27 +377,24 @@ namespace SCMS.Reports
                     ldt_DateFrom = SCMS.Reports.ReportParameters.DateFrom;
                     ldt_Dateto = SCMS.Reports.ReportParameters.DateTo;
 
-                    if (_dsLedger.Tables.Contains("Logo"))
+                    if (_ds.Tables.Contains("Logo"))
                     {
-                        _dsLedger.Tables.Remove("Logo");
+                        _ds.Tables.Remove("Logo");
                     }
 
-                    if (_dsLedger.Tables.Contains("LedgerDetail"))
+                    if (_ds.Tables.Contains("LedgerDetail"))
                     {
-                        _dsLedger.Tables.Remove("LedgerDetail");
+                        _ds.Tables.Remove("LedgerDetail");
                     }
 
                     _ds = _dalReports.LedgerDetail_AccWise(ls_Location, li_AllAccCode, ls_AccCodeFrom, ls_AccCodeTo, li_AllDate, ldt_DateFrom, ldt_Dateto);
-                    _dsLedger.Tables.Add(_ds.Tables[0].Copy());
-                    _dsLedger.Tables[0].TableName = "LedgerDetail";
-
                     if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
                     {
                         MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
                         return;
                     }
 
-                    _ReportDocument.SetDataSource(_dsLedger);
+                    _ReportDocument.SetDataSource(_ds);
                     _ReportDocument.SummaryInfo.ReportTitle = "Ledger Detail - Account Wise";
                     _ReportDocument.SetParameterValue("pm_AllDate", li_AllDate);
                     _ReportDocument.SetParameterValue("pm_DateFrom", ldt_DateFrom);
@@ -432,7 +408,7 @@ namespace SCMS.Reports
                     string ls_Location = "", ls_AccCodeFrom = "", ls_AccCodeTo = "";
                     int li_AllAccCode = 0, li_AllDate = 0, li_ChrtOfAccLevel = 5;
                     DateTime ldt_DateFrom, ldt_Dateto;
-                    Datasets.dsTrialBalance _dsTrialBalance = new Datasets.dsTrialBalance();
+                    _ds = new Datasets.dsTrialBalance();
 
                     ls_Location = SCMS.Reports.ReportParameters.Location;
                     li_AllAccCode = SCMS.Reports.ReportParameters.AllAccCode;
@@ -464,28 +440,25 @@ namespace SCMS.Reports
                         _ReportDocument.SummaryInfo.ReportTitle = "Trial Balance - As at " + ldt_Dateto.ToString("dd/MMM/yyyy");
                     }
 
-                    if (_dsTrialBalance.Tables.Contains("Logo"))
+                    if (_ds.Tables.Contains("Logo"))
                     {
-                        _dsTrialBalance.Tables.Remove("Logo");
+                        _ds.Tables.Remove("Logo");
                     }
 
-                    if (_dsTrialBalance.Tables.Contains("TrialBalance"))
+                    if (_ds.Tables.Contains("TrialBalance"))
                     {
-                        _dsTrialBalance.Tables.Remove("TrialBalance");
+                        _ds.Tables.Remove("TrialBalance");
                     }
 
                     _ds = _dalReports.TrialBalance(ls_Location, li_AllAccCode, ls_AccCodeFrom, ls_AccCodeTo, li_AllDate, ldt_DateFrom,
                                                    ldt_Dateto, li_ChrtOfAccLevel, SCMS.Reports.ReportParameters.TrialActivity);
-                    _dsTrialBalance.Tables.Add(_ds.Tables[0].Copy());
-                    _dsTrialBalance.Tables[0].TableName = "TrialBalance";
-
                     if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
                     {
                         MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
                         return;
                     }
 
-                    _ReportDocument.SetDataSource(_dsTrialBalance);
+                    _ReportDocument.SetDataSource(_ds);
                     _ReportDocument.SetParameterValue("pm_AllDate", li_AllDate);
                     _ReportDocument.SetParameterValue("pm_DateFrom", ldt_DateFrom);
                     _ReportDocument.SetParameterValue("pm_DateTo", ldt_Dateto);
@@ -496,36 +469,32 @@ namespace SCMS.Reports
                 else if (ls_ReportName.ToLower() == "IncomeStatement".ToLower())
                 {
                     _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptIncomeStatement.rpt");
-                    Datasets.dsIncomeStatement _dsIncomeStatement = new Datasets.dsIncomeStatement();
+                    _ds = new Datasets.dsIncomeStatement();
                     string ls_Location = "";
                     int li_Level = 0, li_Year = 0;
-                    //DateTime ldt_DateFrom, ldt_Dateto;
 
                     ls_Location = SCMS.Reports.ReportParameters.Location;
                     li_Level = SCMS.Reports.ReportParameters.Level;
                     li_Year = SCMS.Reports.ReportParameters.Year;
 
-                    if (_dsIncomeStatement.Tables.Contains("Logo"))
+                    if (_ds.Tables.Contains("Logo"))
                     {
-                        _dsIncomeStatement.Tables.Remove("Logo");
+                        _ds.Tables.Remove("Logo");
                     }
 
-                    if (_dsIncomeStatement.Tables.Contains("IncomeStatement"))
+                    if (_ds.Tables.Contains("IncomeStatement"))
                     {
-                        _dsIncomeStatement.Tables.Remove("IncomeStatement");
+                        _ds.Tables.Remove("IncomeStatement");
                     }
 
                     _ds = _dalReports.IncomeStatement(ls_Location, li_Level, li_Year);
-                    _dsIncomeStatement.Tables.Add(_ds.Tables[0].Copy());
-                    _dsIncomeStatement.Tables[0].TableName = "IncomeStatement";
-
                     if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
                     {
                         MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
                         return;
                     }
 
-                    _ReportDocument.SetDataSource(_dsIncomeStatement);
+                    _ReportDocument.SetDataSource(_ds);
                     _ReportDocument.SummaryInfo.ReportTitle = "Income Statement";
                     _ReportDocument.SetParameterValue("pm_CurrentYear", li_Year);
                     _ReportDocument.SetParameterValue("pm_PreviousYear", li_Year - 1);
@@ -536,7 +505,7 @@ namespace SCMS.Reports
                 else if (ls_ReportName.ToLower() == "BalanceSheet".ToLower())
                 {
                     _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptBalanceSheet.rpt");
-                    Datasets.dsBalanceSheet _dsBalanceSheet = new Datasets.dsBalanceSheet();
+                    _ds = new Datasets.dsBalanceSheet();
                     string ls_Location = "";
                     int li_Level = 0, li_Year = 0;
 
@@ -544,24 +513,24 @@ namespace SCMS.Reports
                     li_Level = SCMS.Reports.ReportParameters.Level;
                     li_Year = SCMS.Reports.ReportParameters.Year;
 
-                    if (_dsBalanceSheet.Tables.Contains("Logo"))
+                    if (_ds.Tables.Contains("Logo"))
                     {
-                        _dsBalanceSheet.Tables.Remove("Logo");
+                        _ds.Tables.Remove("Logo");
                     }
 
-                    if (_dsBalanceSheet.Tables.Contains("Assets"))
+                    if (_ds.Tables.Contains("Assets"))
                     {
-                        _dsBalanceSheet.Tables.Remove("Assets");
+                        _ds.Tables.Remove("Assets");
                     }
 
-                    if (_dsBalanceSheet.Tables.Contains("Equity"))
+                    if (_ds.Tables.Contains("Equity"))
                     {
-                        _dsBalanceSheet.Tables.Remove("Equity");
+                        _ds.Tables.Remove("Equity");
                     }
 
                     _ds = _dalReports.BalanceSheet(ls_Location, li_Level, li_Year);
-                    _dsBalanceSheet.Tables.Add(_ds.Tables["Assets"].Copy());
-                    _dsBalanceSheet.Tables.Add(_ds.Tables["Equity"].Copy());
+                    _ds.Tables.Add(_ds.Tables["Assets"].Copy());
+                    _ds.Tables.Add(_ds.Tables["Equity"].Copy());
                     //_dsBalanceSheet.Tables[0].TableName = "BalanceSheet";
 
                     if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
@@ -570,7 +539,7 @@ namespace SCMS.Reports
                         return;
                     }
 
-                    _ReportDocument.SetDataSource(_dsBalanceSheet);
+                    _ReportDocument.SetDataSource(_ds);
                     _ReportDocument.SummaryInfo.ReportTitle = "Balance Sheet";
                     _ReportDocument.SetParameterValue("pm_CurrentYear", li_Year);
                     _ReportDocument.SetParameterValue("pm_PreviousYear", li_Year - 1);
@@ -581,7 +550,7 @@ namespace SCMS.Reports
                 else if (ls_ReportName.ToLower() == "AuditTrail".ToLower())
                 {
                     _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptAuditTrail.rpt");
-                    Datasets.dsAuditTrail _dsAuditTrail = new Datasets.dsAuditTrail();
+                    _ds = new Datasets.dsAuditTrail();
                     int li_AllDate = 0;
                     DateTime ldt_DateFrom, ldt_Dateto;
 
@@ -596,20 +565,17 @@ namespace SCMS.Reports
                     ldt_DateFrom = SCMS.Reports.ReportParameters.DateFrom;
                     ldt_Dateto = SCMS.Reports.ReportParameters.DateTo;
 
-                    if (_dsAuditTrail.Tables.Contains("Logo"))
+                    if (_ds.Tables.Contains("Logo"))
                     {
-                        _dsAuditTrail.Tables.Remove("Logo");
+                        _ds.Tables.Remove("Logo");
                     }
 
-                    if (_dsAuditTrail.Tables.Contains("AuditTrail"))
+                    if (_ds.Tables.Contains("AuditTrail"))
                     {
-                        _dsAuditTrail.Tables.Remove("AuditTrail");
+                        _ds.Tables.Remove("AuditTrail");
                     }
 
                     _ds = _dalReports.AuditTrail(li_AllDate, ldt_DateFrom, ldt_Dateto);
-                    _dsAuditTrail.Tables.Add(_ds.Tables[0].Copy());
-                    _dsAuditTrail.Tables[0].TableName = "AuditTrail";
-
                     if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
                     {
                         MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
@@ -631,7 +597,7 @@ namespace SCMS.Reports
                     //    }
                     //}
 
-                    _ReportDocument.SetDataSource(_dsAuditTrail);
+                    _ReportDocument.SetDataSource(_ds);
                     _ReportDocument.SummaryInfo.ReportTitle = "Audit Log";
                     //_ReportDocument.SetParameterValue("pm_CurrentYear", li_Year);
                     //_ReportDocument.SetParameterValue("pm_PreviousYear", li_Year - 1);
@@ -642,7 +608,7 @@ namespace SCMS.Reports
                 else if (ls_ReportName.ToLower() == "BudgetSummary".ToLower())
                 {
                     _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptBudgetSummary.rpt");
-                    Datasets.dsBudgetSummary _dsBudgetSummary = new Datasets.dsBudgetSummary();
+                    _ds = new Datasets.dsBudgetSummary();
                     string ls_Location = "", ls_Calendar = "";
                     int li_AllCalendar = 0;
 
@@ -650,28 +616,59 @@ namespace SCMS.Reports
                     li_AllCalendar = SCMS.Reports.ReportParameters.AllCalendar;
                     ls_Calendar = SCMS.Reports.ReportParameters.sCalendar;
 
-                    if (_dsBudgetSummary.Tables.Contains("Logo"))
+                    if (_ds.Tables.Contains("Logo"))
                     {
-                        _dsBudgetSummary.Tables.Remove("Logo");
+                        _ds.Tables.Remove("Logo");
                     }
 
-                    if (_dsBudgetSummary.Tables.Contains("BudgetSummary"))
+                    if (_ds.Tables.Contains("BudgetSummary"))
                     {
-                        _dsBudgetSummary.Tables.Remove("BudgetSummary");
+                        _ds.Tables.Remove("BudgetSummary");
                     }
 
                     _ds = _dalReports.BudgetSummary(ls_Location, li_AllCalendar, ls_Calendar);
-                    _dsBudgetSummary.Tables.Add(_ds.Tables[0].Copy());
-                    _dsBudgetSummary.Tables[0].TableName = "BudgetSummary";
-
                     if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
                     {
                         MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
                         return;
                     }
 
-                    _ReportDocument.SetDataSource(_dsBudgetSummary);
+                    _ReportDocument.SetDataSource(_ds);
                     _ReportDocument.SummaryInfo.ReportTitle = "Budget Summary";
+                }
+                #endregion
+
+                #region Budget And Monthly Expense
+                else if (ls_ReportName.ToLower() == "BudgetAndMonthlyExpense".ToLower())
+                {
+                    _ReportDocument.Load(_ServerPath + "\\Reports\\Reps\\rptBudgetAndMonthlyExpense.rpt");
+                    _ds = new Datasets.dsBudgetAndMonthlyExpense();
+                    string ls_Location = "", ls_Calendar = "";
+                    int li_AllCalendar = 0;
+
+                    ls_Location = SCMS.Reports.ReportParameters.Location;
+                    li_AllCalendar = SCMS.Reports.ReportParameters.AllCalendar;
+                    ls_Calendar = SCMS.Reports.ReportParameters.sCalendar;
+
+                    if (_ds.Tables.Contains("Logo"))
+                    {
+                        _ds.Tables.Remove("Logo");
+                    }
+
+                    if (_ds.Tables.Contains("BudgetAndMonthlyExpense"))
+                    {
+                        _ds.Tables.Remove("BudgetAndMonthlyExpense");
+                    }
+
+                    _ds = _dalReports.BudgetAndMonthlyExpense(ls_Location, li_AllCalendar, ls_Calendar);
+                    if (_ds == null || _ds.Tables == null || _ds.Tables.Count <= 0)
+                    {
+                        MessageBox.InnerHtml = "Report dindn't find anything against the selected criteria";
+                        return;
+                    }
+
+                    _ReportDocument.SetDataSource(_ds);
+                    _ReportDocument.SummaryInfo.ReportTitle = "Budget And Monthly Expenditure";
                 }
                 #endregion
 
