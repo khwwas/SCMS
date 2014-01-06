@@ -9,9 +9,6 @@
         $(document).ready(function () {
         });
 
-        //        function EditRecord(Id) {
-        //        }
-
         function BudgetConsole(locationId) {
             window.location = "../BudgetConsole?p_LocationId=" + locationId;
         }

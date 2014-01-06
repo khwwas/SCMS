@@ -82,7 +82,7 @@ namespace SCMSDataLayer
             }
         }
 
-        public List<SETUP_ChartOfAccount> GetChartOfAccountForDropDown()
+        public List<SETUP_ChartOfAccount> GetChartOfAccountForDropDown(Int32 pi_AllNature, string ps_Nature)
         {
             string _Sql = "";
             try
@@ -94,8 +94,11 @@ namespace SCMSDataLayer
 
                 _Sql += "  Select SETUP_ChartOfAccount.ChrtAcc_Id, ";
                 _Sql += "         SETUP_ChartOfAccount.ChrtAcc_Title + ' [' + SETUP_ChartOfAccount.ChrtAcc_CodeDisplay + ']'  as ChrtAcc_Title ";
-                _Sql += "    From SETUP_ChartOfAccount ";
+                _Sql += "    From SETUP_ChartOfAccount, ";
+                _Sql += "         SYSTEM_Nature ";
                 _Sql += "   Where ( IsNULL( SETUP_ChartOfAccount.ChrtAcc_Type, 0 ) = 2 ) And ";
+                _Sql += "         ( SETUP_ChartOfAccount.Natr_Id = SYSTEM_Nature.Natr_Id ) And ";
+                _Sql += "         ( " + pi_AllNature.ToString() + " = 1 Or SYSTEM_Nature.Natr_SystemTitle In ( " + ps_Nature + " ) ) And ";
                 _Sql += "         ( SETUP_ChartOfAccount.ChrtAcc_Id in ( Select ChrtAcc_Id ";
                 _Sql += "                                                  From Security_UserChartOfAccount ";
                 _Sql += "                                                 Where UserGrp_Id = '" + UserGroupId + "' And ";

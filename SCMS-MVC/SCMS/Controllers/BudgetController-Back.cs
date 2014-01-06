@@ -21,7 +21,7 @@ namespace SCMS.Controllers
             var lst_BudgetTypes = new DALBudgetType().PopulateData();
             var lst_Years = new DALCalendar().GetAllRecords();
             var lst_Locations = new DALLocation().PopulateData();
-            var lst_ChartOfAccounts = new DALChartOfAccount().GetChartOfAccountForDropDown();
+            var lst_ChartOfAccounts = new DALChartOfAccount().GetChartOfAccountForDropDown(1,"''");
 
             ViewData["ddl_BudgetType"] = new SelectList(lst_BudgetTypes, "BgdtType_Id", "BgdtType_Title", "");
             ViewData["ddl_Year"] = new SelectList(lst_Years, "Cldr_Id", "Cldr_Title", "");
@@ -154,7 +154,7 @@ namespace SCMS.Controllers
             {
                 Credit = Math.Round(Convert.ToDecimal(Credit), 2).ToString();
             }
-            var ChartOfAccounts = new DALChartOfAccount().GetChartOfAccountForDropDown();
+            var ChartOfAccounts = new DALChartOfAccount().GetChartOfAccountForDropDown(1,"''");
             String Response = "";
             // Response += "<div id='DetailRow" + RowNo.ToString() + "' style='float: left; width: auto;'>";
             Response += "<div class='CustomCell' style='width: 250px; height: 30px;'>";

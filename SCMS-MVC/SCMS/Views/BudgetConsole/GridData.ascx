@@ -47,7 +47,7 @@
                 Approved Budget
             </th>
             <th style="width: 10%;">
-                Actual Expense (As on today)
+                Actual Expense
             </th>
             <th style="width: 15%;">
                 Remaining Amount
@@ -73,10 +73,6 @@
             <td style="float: left">
                 <%if (DataRow.BgdtMas_Status != "Cancelled")
                   { %>
-                <div onclick="CopyBudget('<%=DataRow.BgdtMas_Id %>');" style="width: 22px; padding-right: 5px;
-                    float: left; cursor: pointer;">
-                    <img alt="Copy" src="../../img/copy.png" style="width: 22px;" />
-                </div>
                 <div onclick="javascript:window.location='../Budget?p_BudgetId=<%=DataRow.BgdtMas_Id %>'"
                     style="width: 22px; padding-right: 5px; float: left; cursor: pointer;">
                     <img alt="Edit" src="../../img/edit.png" style="width: 22px;" />
@@ -84,6 +80,10 @@
                 <div onclick="javascript:return DeleteRecord('<%=DataRow.BgdtMas_Id %>')" style="width: 22px;
                     float: left; cursor: pointer;">
                     <img alt="Delete" src="../../img/delete.png" style="width: 22px;" />
+                </div>
+                <div onclick="CopyBudget('<%=DataRow.BgdtMas_Id %>');" style="width: 22px; padding-left: 5px;
+                    float: left; cursor: pointer;">
+                    <img alt="Copy" src="../../img/copy.png" style="width: 22px;" />
                 </div>
                 <%} %>
             </td>
@@ -99,13 +99,13 @@
             <td id="txt_Date<%=DataRow.BgdtMas_Id%>" style="vertical-align: middle;">
                 <%=Convert.ToDateTime(DataRow.BgdtMas_Date).ToString("MM/dd/yyyy")%>
             </td>
-            <td id="txt_ApprovedBudet" style="vertical-align: middle;">
+            <td id="txt_ApprovedBudet<%=DataRow.BgdtMas_Id%>" style="vertical-align: middle; text-align: center;">
                 <%=string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N0}", Convert.ToInt32(DataRow.ApprovedBudget))%>
             </td>
-            <td id="txt_ActualExpense" style="vertical-align: middle;">
+            <td id="txt_ActualExpense<%=DataRow.BgdtMas_Id%>" style="vertical-align: middle; text-align: center;">
                 <%=string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N0}", Convert.ToInt32(DataRow.ActualExpense))%>
             </td>
-            <td id="txt_RemainingAmount" style="vertical-align: middle;">
+            <td id="txt_RemainingAmount<%=DataRow.BgdtMas_Id%>" style="vertical-align: middle; text-align: center;">
                 <%=string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N0}", Convert.ToInt32(DataRow.RemainingAmount))%>
             </td>
             <td id="txt_Remarks<%=DataRow.BgdtMas_Id%>" style="vertical-align: middle;">

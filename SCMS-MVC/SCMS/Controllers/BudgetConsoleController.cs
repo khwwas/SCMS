@@ -106,7 +106,7 @@ namespace SCMS.Controllers
         public ActionResult DeleteRecordById(String ps_Id)
         {
             DALBudgetEntry objDal = new DALBudgetEntry();
-            String ls_Action = "Cancel", IsAuditTrail = "", ls_UserId = "";
+            //String ls_Action = "Cancel", IsAuditTrail = "", ls_UserId = "";
             String[] ls_Lable = new String[7], ls_Data = new String[7];
             Int32 li_ReturnValue = 0;
 

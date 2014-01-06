@@ -14,11 +14,12 @@ namespace SCMS.Controllers
     {
         public ActionResult Index(string p_BudgetId)
         {
+            string ls_Nature = "'Expense', 'Revenue'";
             var lst_BudgetTypes = new DALBudgetType().PopulateData();
             var lst_Years = new DALCalendar().GetAllRecords();
             var lst_Locations = new DALLocation().PopulateData();
             //var lst_ChartOfAccounts = new DALChartOfAccount().GetChartOfAccountForDropDown();
-            var ChartOfAccounts = new DALChartOfAccount().GetChartOfAccountForDropDown();
+            var ChartOfAccounts = new DALChartOfAccount().GetChartOfAccountForDropDown(0, ls_Nature);
             string ChartOfAccountCodes = "";
             foreach (SETUP_ChartOfAccount COA in ChartOfAccounts)
             {
@@ -92,79 +93,82 @@ namespace SCMS.Controllers
             DALBudgetEntry objDalBudgetEntry = new DALBudgetEntry();
             DALCalendar objDalCalendar = new DALCalendar();
             GL_BgdtMaster GLBgdtMaster = new GL_BgdtMaster();
-            int flag = 0;
+            string ls_YearPrefix = "";
+            Int32 li_ReturnValue = 0;
+            String ls_BudgetMasterId = "", ls_BudgetMasterCode = "", ls_Status = "", ls_BudgetType = "", ls_Year= "", ls_LocationId= "", ls_Remarks = "",
+                   ls_BudgetDetailId = "";
+            DateTime ldt_BudgetDate;
 
-            String IsAuditTrail = "", ls_UserId = "";
+            //int flag = 0;
+            //String IsAuditTrail = "", ls_UserId = "";
 
             try
             {
+                ls_BudgetMasterId = BudgetModel.MasterId;
+                ls_BudgetMasterCode = BudgetModel.Code.Replace("[Auto]", null);
+                ldt_BudgetDate = !String.IsNullOrEmpty(BudgetModel.Date) ? Convert.ToDateTime(BudgetModel.Date) : DateTime.Now;
+                ls_Status = BudgetModel.Status;
+                ls_BudgetType = BudgetModel.BudgetType;
+                ls_Year = BudgetModel.CalendarYear;
+                ls_LocationId = BudgetModel.Location;
+                ls_Remarks = BudgetModel.Remarks;
 
-                String BudgetMasterId = BudgetModel.MasterId;
-                String BudgetMasterCode = BudgetModel.Code.Replace("[Auto]", null);
-                DateTime BudgetDate = !String.IsNullOrEmpty(BudgetModel.Date) ? Convert.ToDateTime(BudgetModel.Date) : DateTime.Now;
-                String Status = BudgetModel.Status;
-                String BudgetType = BudgetModel.BudgetType;
-                String Year = BudgetModel.CalendarYear;
-                String LocationId = BudgetModel.Location;
-                String Remarks = BudgetModel.Remarks;
-                string ls_YearPrefix = "";
-
-
-                if (String.IsNullOrEmpty(BudgetMasterCode))
+                if (String.IsNullOrEmpty(ls_BudgetMasterId))
                 {
                     if (DALCommon.AutoCodeGeneration("GL_BgdtMaster") == 1)
                     {
-                        ls_YearPrefix = objDalCalendar.GetCalendarPrefix_ByCurrentDate(BudgetDate);
+                        ls_YearPrefix = objDalCalendar.GetCalendarPrefix_ByCurrentDate(ldt_BudgetDate);
                         if (ls_YearPrefix == null && ls_YearPrefix == "")
                         {
                             return "";
                         }
-                        BudgetMasterId = DALCommon.GetMaxBudgetId(ls_YearPrefix);
-                        BudgetMasterCode = BudgetMasterId;
+                        ls_BudgetMasterId = DALCommon.GetMaxBudgetId(ls_YearPrefix);
+                        ls_BudgetMasterCode = ls_BudgetMasterId;
                     }
                 }
                 else
                 {
-                    flag = 1;
+                    objDalBudgetEntry.DeleteDetailRecordByMasterId(ls_BudgetMasterId);
+                //    flag = 1;
                 }
 
-
-                if (!String.IsNullOrEmpty(BudgetMasterCode))
+                if (!String.IsNullOrEmpty(ls_BudgetMasterCode))
                 {
-                    GLBgdtMaster.BgdtMas_Id = BudgetMasterId;
-                    GLBgdtMaster.BgdtMas_Code = BudgetMasterCode;
-                    GLBgdtMaster.BgdtMas_Date = BudgetDate;
-                    GLBgdtMaster.BgdtMas_Status = Status;
-                    GLBgdtMaster.BgdtType_Id = BudgetType;
-                    GLBgdtMaster.Cldr_Id = Year;
-                    GLBgdtMaster.Loc_Id = LocationId;
-                    GLBgdtMaster.BgdtMas_Remarks = Remarks;
+                    GLBgdtMaster.BgdtMas_Id = ls_BudgetMasterId;
+                    GLBgdtMaster.BgdtMas_Code = ls_BudgetMasterCode;
+                    GLBgdtMaster.BgdtMas_Date = ldt_BudgetDate;
+                    GLBgdtMaster.BgdtMas_Status = ls_Status;
+                    GLBgdtMaster.BgdtType_Id = ls_BudgetType;
+                    GLBgdtMaster.Cldr_Id = ls_Year;
+                    GLBgdtMaster.Loc_Id = ls_LocationId;
+                    GLBgdtMaster.BgdtMas_Remarks = ls_Remarks;
                     GLBgdtMaster.BgdtMas_EnteredDate = DateTime.Now;
                     GLBgdtMaster.BgdtMas_EnteredBy = ((SECURITY_User)Session["user"]).User_Title;
-                    Int32 li_ReturnValue = objDalBudgetEntry.SaveBudgetMaster(GLBgdtMaster);
+                    
+                    li_ReturnValue = objDalBudgetEntry.SaveBudgetMaster(GLBgdtMaster);
 
                     if (li_ReturnValue > 0)
                     {
-                        if (flag == 1)
-                        {
-                            objDalBudgetEntry.DeleteDetailRecordByMasterId(BudgetMasterId);
-                        }
+                        //if (flag == 1)
+                        //{
+                        //    objDalBudgetEntry.DeleteDetailRecordByMasterId(BudgetMasterId);
+                        //}
 
                         foreach (SCMS.Models.BudgetDetail detail in BudgetModel.ListBudgetDetail)
                         {
-                            String BudgetDetailCode = "";
 
-                            if (String.IsNullOrEmpty(BudgetDetailCode))
+                            if (String.IsNullOrEmpty(ls_BudgetDetailId))
                             {
                                 if (DALCommon.AutoCodeGeneration("GL_BgdtDetail") == 1)
                                 {
-                                    BudgetDetailCode = DALCommon.GetMaximumCode("GL_BgdtDetail");
+                                    ls_BudgetDetailId = DALCommon.GetMaximumCode("GL_BgdtDetail");
                                 }
                             }
 
                             GL_BgdtDetail dbDetail = new GL_BgdtDetail();
-                            dbDetail.BgdtDet_Id = BudgetDetailCode;
-                            dbDetail.BgdtMas_Id = BudgetMasterCode;
+                            dbDetail.BgdtDet_Id = ls_BudgetDetailId;
+                            dbDetail.BgdtMas_Id = ls_BudgetMasterId;
+                            dbDetail.ChrtAcc_Id = detail.Account;
                             dbDetail.BgdtDet_Month1 = detail.Month1;
                             dbDetail.BgdtDet_Month2 = detail.Month2;
                             dbDetail.BgdtDet_Month3 = detail.Month3;
@@ -177,29 +181,16 @@ namespace SCMS.Controllers
                             dbDetail.BgdtDet_Month10 = detail.Month10;
                             dbDetail.BgdtDet_Month11 = detail.Month11;
                             dbDetail.BgdtDet_Month12 = detail.Month12;
-                            //decimal TotalAmount = 0;
-                            //TotalAmount += Convert.ToDecimal(detail.Month1);
-                            //TotalAmount += Convert.ToDecimal(detail.Month2);
-                            //TotalAmount += Convert.ToDecimal(detail.Month3);
-                            //TotalAmount += Convert.ToDecimal(detail.Month4);
-                            //TotalAmount += Convert.ToDecimal(detail.Month5);
-                            //TotalAmount += Convert.ToDecimal(detail.Month6);
-                            //TotalAmount += Convert.ToDecimal(detail.Month7);
-                            //TotalAmount += Convert.ToDecimal(detail.Month8);
-                            //TotalAmount += Convert.ToDecimal(detail.Month9);
-                            //TotalAmount += Convert.ToDecimal(detail.Month10);
-                            //TotalAmount += Convert.ToDecimal(detail.Month11);
-                            //TotalAmount += Convert.ToDecimal(detail.Month12);
                             dbDetail.BgdtDet_TotalAmount = detail.TotalAmount;
                             dbDetail.BgdtDet_Remarks = detail.Remarks;
-                            dbDetail.ChrtAcc_Id = detail.Account;
+
                             objDalBudgetEntry.SaveBudgetDetail(dbDetail);
                         }
                     }
                 }
 
 
-                return BudgetMasterId + ":" + BudgetMasterCode;
+                return ls_BudgetMasterId + ":" + ls_BudgetMasterCode;
             }
             catch
             {
@@ -212,7 +203,7 @@ namespace SCMS.Controllers
         {
             DALBudgetEntry objDalBudgetEntry = new DALBudgetEntry();
             DALCalendar objDalCalendar = new DALCalendar();
-            string ls_YearPrefix="";
+            string ls_YearPrefix = "";
 
             string BudgetMasterId = frm["MasterId"];
             string ApplicableOn = frm["rdo_BudgetActual"];
@@ -260,7 +251,7 @@ namespace SCMS.Controllers
             NewBudgetMaster.BgdtType_Id = SelectedBudgetMaster.BgdtType_Id;
             NewBudgetMaster.Cldr_Id = SelectedBudgetMaster.Cldr_Id;
             NewBudgetMaster.Loc_Id = SelectedBudgetMaster.Loc_Id;
-            NewBudgetMaster.BgdtMas_Remarks = "Copy of " + SelectedBudgetMaster.BgdtMas_Code + " - " +  SelectedBudgetMaster.BgdtMas_Remarks;
+            NewBudgetMaster.BgdtMas_Remarks = "Copy of " + SelectedBudgetMaster.BgdtMas_Code + " - " + SelectedBudgetMaster.BgdtMas_Remarks;
             NewBudgetMaster.BgdtMas_EnteredDate = DateTime.Now;
             NewBudgetMaster.BgdtMas_EnteredBy = ((SECURITY_User)Session["user"]).User_Title;
             Int32 li_ReturnValue = objDalBudgetEntry.SaveBudgetMaster(NewBudgetMaster);
@@ -303,7 +294,6 @@ namespace SCMS.Controllers
 
             return RedirectToAction("Index", "BudgetConsole", new { });
         }
-
 
     }
 }

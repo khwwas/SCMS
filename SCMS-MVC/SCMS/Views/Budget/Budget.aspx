@@ -21,12 +21,12 @@
                 format: 'm/d/Y'
             });
 
-            //            $(".currency").each(function () {
-            //                $(this).keyup(function () {
-            //                    $(this).val(formatCurrency($(this).val()));
-            //                });
-            //                $(this).val(formatCurrency($(this).val()));
-            //            });
+            $(".currency").each(function () {
+                $(this).keyup(function () {
+                    $(this).val(formatCurrency($(this).val()));
+                });
+                $(this).val(formatCurrency($(this).val()));
+            });
 
             $("#btn_AddNewRow").click(function () {
                 var Id = parseInt($(".detailRow").last().find("select").attr("id").replace("ListBudgetDetail_", "").replace("__Account", "").trim()) + 1;
@@ -141,7 +141,6 @@
             }
             $("[name='ListBudgetDetail[" + Id + "].TotalAmount']").val(TotalVal);
         }
-
     </script>
     <form id="frm_Budget" action='<%=Url.Content("~/Budget/SaveBudget") %>' method="post">
     <input type="hidden" id="txt_BudgetMasterId" name="MasterId" value='<%=Model.MasterId %>' />

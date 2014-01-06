@@ -16,7 +16,6 @@ namespace SCMSDataLayer
                 GL_BgdtMaster existingBudgetMaster = dbSCMS.GL_BgdtMasters.Where(c => c.BgdtMas_Id.Equals(newBudgetMaster.BgdtMas_Id)).SingleOrDefault();
                 if (existingBudgetMaster != null)
                 {
-                    //existingBudgetMaster.BgdtMas_Code = newBudgetMaster.BgdtMas_Code;
                     existingBudgetMaster.BgdtMas_Date = newBudgetMaster.BgdtMas_Date;
                     existingBudgetMaster.BgdtMas_Status = newBudgetMaster.BgdtMas_Status;
                     existingBudgetMaster.BgdtType_Id = newBudgetMaster.BgdtType_Id;
@@ -29,12 +28,13 @@ namespace SCMSDataLayer
                     dbSCMS.GL_BgdtMasters.InsertOnSubmit(newBudgetMaster);
                 }
                 dbSCMS.SubmitChanges();
-                return 1; // Convert.ToInt32(newBudgetMaster.BgdtMas_Id);
             }
             catch
             {
                 return 0;
             }
+
+            return 1;
         }
 
         public int SaveBudgetDetail(GL_BgdtDetail newBudgetDetail)
@@ -156,7 +156,7 @@ namespace SCMSDataLayer
                 SECURITY_User user = (SECURITY_User)System.Web.HttpContext.Current.Session["user"];
                 string UserLoginId = user.User_Id;
                 string UserGroupId = user.UsrGrp_Id;
-                string _Status = "Pending";
+                //string _Status = "Pending";
 
                 //List<sp_GetUserBudgetTypesByUserIdResult> UserBudgetTypes = new DALUserMenuRights().GetUserBudgetTypesByUserId(UserLoginId).ToList();
                 //if (UserBudgetTypes != null && UserBudgetTypes.Count > 0)
