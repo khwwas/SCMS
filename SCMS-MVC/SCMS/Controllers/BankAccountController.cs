@@ -15,7 +15,7 @@ namespace SCMS.Controllers
             ViewData["ddl_location"] = new SelectList(new DALLocation().PopulateData(), "Loc_Id", "Loc_Title", "");
             ViewData["ddl_Bank"] = new SelectList(new DALBank().PopulateData(), "Bank_Id", "Bank_Title", "");
 
-            var ChartOfAccounts = new DALChartOfAccount().GetChartOfAccountForDropDown(1,"''");
+            var ChartOfAccounts = new DALChartOfAccount().GetChartOfAccountForDropDown(1, "''");
             SETUP_ChartOfAccount SelectChartOfAccount = new SETUP_ChartOfAccount();
             SelectChartOfAccount.ChrtAcc_Id = "0";
             SelectChartOfAccount.ChrtAcc_Title = "";

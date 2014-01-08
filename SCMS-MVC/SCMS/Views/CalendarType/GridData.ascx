@@ -78,33 +78,6 @@
             <td id="txt_Title<%=lRow_Data.CldrType_Id%>" style="vertical-align: middle;">
                 <%=lRow_Data.CldrType_Title%>
             </td>
-            <!--
-            <td id="ddl_level< %=lRow_Data.CldrType_Id%>" style="vertical-align: middle;">
-                <input type="hidden" id="txt_level< %=lRow_Data.CldrType_Id%>" value="< %=lRow_Data.CldrType_Level%>" />
-                < % if (lRow_Data.CldrType_Level == Convert.ToInt32(SCMSDataLayer.CalenderLevel.Yearly))
-                       Response.Write("Yearly");
-                   else if (lRow_Data.CldrType_Level == Convert.ToInt32(SCMSDataLayer.CalenderLevel.Monthly))
-                       Response.Write("Monthly");
-                   else if (lRow_Data.CldrType_Level == Convert.ToInt32(SCMSDataLayer.CalenderLevel.Fornigthtly))
-                       Response.Write("Fornigthtly");
-                   else if (lRow_Data.CldrType_Level == Convert.ToInt32(SCMSDataLayer.CalenderLevel.Weekly))
-                       Response.Write("Weekly");
-                   else if (lRow_Data.CldrType_Level == Convert.ToInt32(SCMSDataLayer.CalenderLevel.Daily))
-                       Response.Write("Daily");
-                %>
-            </td>
-            <td id="ddl_Company< %=lRow_Data.CldrType_Id%>" style="vertical-align: middle;">
-                < %if (CompanyRow != null)
-                  { %>
-                < %=CompanyRow.Cmp_Title%>
-                < %} %>
-            </td>
-            <td id="ddl_location< %=lRow_Data.CldrType_Id%>" style="vertical-align: middle;">
-                < %if (LocationRow != null)
-                  { %>
-                < %=LocationRow.Loc_Title%>
-                < %} %>
-            </td>-->
         </tr>
         <%}
             }

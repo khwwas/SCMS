@@ -63,7 +63,7 @@
     <tbody>
         <%List<SCMSDataLayer.DB.sp_BudgetConsoleResult> DataList = new List<SCMSDataLayer.DB.sp_BudgetConsoleResult>();
 
-          DataList = new SCMSDataLayer.DALBudgetEntry().GetBudgetEntryConsoleData(Convert.ToInt32(ViewData["AllLoc"]), ViewData["LocationId"].ToString(), true);
+          DataList = new SCMSDataLayer.DALBudgetEntry().GetBudgetEntryConsoleData(Convert.ToInt32(ViewData["AllLoc"]), ViewData["LocationId"].ToString());
 
           if (DataList != null && DataList.Count > 0)
           {

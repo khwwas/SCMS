@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="SCMS" Class="SCMSDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=WAQAS\KHAWAJAWAQAS;Initial Catalog=SCMS;Persist Security Info=True;User ID=sa" SettingsObjectName="SCMSDataLayer.Properties.Settings" SettingsPropertyName="SCMSConnectionString2" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DA_GL" Class="SCMSDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=AWAIS-PC\MSSQL2008;Initial Catalog=DA_GL;Persist Security Info=True;User ID=sa" SettingsObjectName="SCMSDataLayer.Properties.Settings" SettingsPropertyName="DA_GLConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.SYSTEM_Screens" Member="SYSTEM_Screens">
     <Type Name="SYSTEM_Screen">
       <Column Name="Scr_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -1490,8 +1490,6 @@
     </ElementType>
   </Function>
   <Function Name="dbo.sp_BudgetConsole" Method="sp_BudgetConsole">
-    <Parameter Name="AllLocation" Parameter="allLocation" Type="System.Int32" DbType="Int" />
-    <Parameter Name="LocationId" Parameter="locationId" Type="System.String" DbType="VarChar(10)" />
     <ElementType Name="sp_BudgetConsoleResult">
       <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Loc_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
@@ -1501,9 +1499,9 @@
       <Column Name="BgdtMas_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="BgdtMas_Remarks" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Column Name="BgdtMas_Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="ApprovedBudget" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ActualExpense" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="RemainingAmount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ApprovedBudget" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
+      <Column Name="ActualExpense" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
+      <Column Name="RemainingAmount" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

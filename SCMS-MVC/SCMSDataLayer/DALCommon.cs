@@ -14,15 +14,6 @@ namespace SCMSDataLayer
         Month = 2
     }
 
-    public enum CalenderLevel
-    {
-        Yearly = 1,
-        Monthly = 2,
-        Fornigthtly = 3,
-        Weekly = 4,
-        Daily = 5
-    }
-
     public static class DALCommon
     {
         public static Int32 AutoCodeGeneration(String ps_TableName)
@@ -214,7 +205,7 @@ namespace SCMSDataLayer
             return _ReturnValue;
         }
 
-        public static String GetMaxBudgetId(string ps_YearPrefix)
+        public static String GetMaxBudgetMasId(string ps_YearPrefix)
         {
             string _Sql = "", _ReturnValue = "";
             Int32 _CodeLength = 10, _MaxId = 0;
@@ -228,6 +219,39 @@ namespace SCMSDataLayer
                 _Sql += " Select IsNULL( Max( SubString( IsNULL( GL_BgdtMaster.BgdtMas_Id, 0 ), ( Len( '" + ps_YearPrefix + "' ) + 1 ), 10) ), 0 ) + 1 ";
                 _Sql += "   From GL_BgdtMaster ";
                 _Sql += "  Where ( Left( GL_BgdtMaster.BgdtMas_Id, Len( '" + ps_YearPrefix + "' ) ) = '" + ps_YearPrefix + "' )";
+
+                SqlCommand cmd = new SqlCommand(_Sql, con);
+                cmd = new SqlCommand(_Sql, con);
+                _MaxId = (Int32)cmd.ExecuteScalar();
+
+                if (_MaxId != 0)
+                {
+                    _ReturnValue = ps_YearPrefix + _MaxId.ToString().PadLeft((_CodeLength - ps_YearPrefix.Length), '0');
+                }
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message.ToString());
+            }
+
+            return _ReturnValue;
+        }
+        public static String GetMaxBudgetDetId(string ps_YearPrefix)
+        {
+            string _Sql = "", _ReturnValue = "";
+            Int32 _CodeLength = 10, _MaxId = 0;
+
+            try
+            {
+                var dbSCMS = Connection.Create();
+                SqlConnection con = (SqlConnection)dbSCMS.Connection;
+                con.Open();
+
+                _Sql += " Select IsNULL( Max( SubString( IsNULL( GL_BgdtDetail.BgdtDet_Id, 0 ), ( Len( '" + ps_YearPrefix + "' ) + 1 ), 10) ), 0 ) + 1 ";
+                _Sql += "   From GL_BgdtDetail ";
+                _Sql += "  Where ( Left( GL_BgdtDetail.BgdtDet_Id, Len( '" + ps_YearPrefix + "' ) ) = '" + ps_YearPrefix + "' )";
 
                 SqlCommand cmd = new SqlCommand(_Sql, con);
                 cmd = new SqlCommand(_Sql, con);

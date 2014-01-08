@@ -268,7 +268,7 @@ namespace SCMS.Controllers
                         {
                             return "";
                         }
-                        BudgetMasterId = DALCommon.GetMaxBudgetId(ls_YearPrefix);
+                        BudgetMasterId = DALCommon.GetMaxBudgetMasId(ls_YearPrefix);
                         BudgetMasterCode = BudgetMasterId;
                         //BudgetMasterCode = DALCommon.GetMaxBudgetCode("GL_VchrMaster", BudgetType, Prefix, LocationId, ls_YearPrefix);
                         //ls_Action = "Add";

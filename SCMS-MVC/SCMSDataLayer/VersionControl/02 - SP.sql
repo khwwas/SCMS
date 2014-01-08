@@ -496,20 +496,21 @@ GO
 
 
 
-/****** Object:  StoredProcedure [dbo].[sp_BudgetConsole]    Script Date: 12/31/2013 19:52:04 ******/
+/****** Object:  StoredProcedure [dbo].[sp_BudgetConsole]    Script Date: 01/09/2014 01:42:49 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_BudgetConsole]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[sp_BudgetConsole]
 GO
 
-/****** Object:  StoredProcedure [dbo].[sp_BudgetConsole]    Script Date: 12/31/2013 19:52:04 ******/
+/****** Object:  StoredProcedure [dbo].[sp_BudgetConsole]    Script Date: 01/09/2014 01:42:49 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
+
 CREATE PROCEDURE [dbo].[sp_BudgetConsole]
-@AllLocation int, @LocationId varchar(10) 
+--@AllLocation int, @LocationId varchar(10) 
 --@AllVoucherType int, @VoucherTypeId varchar(10), 
 --@AllDate int, @DateFrom varchar, @DateTo varchar 
 AS
@@ -517,7 +518,7 @@ BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
-
+	
     -- Insert statements for procedure here
 	  SELECT SETUP_Location.Loc_Id,
 	         SETUP_Location.Loc_Title,
@@ -527,41 +528,58 @@ BEGIN
 			 GL_BgdtMaster.BgdtMas_Date,
 			 GL_BgdtMaster.BgdtMas_Remarks,   
 			 GL_BgdtMaster.BgdtMas_Status,
-			 ( --Select ISNULL( Round( Sum( ISNULL( GL_VchrDetail.BgdtMas_DrAmount, 0 ) ), 0 ), 0 )
-			     --From GL_VchrDetail
-			    --Where ( GL_BgdtMaster.BgdtMas_Id = GL_VchrDetail.BgdtMas_Id ) 
-			    0
+			 ( Select ISNULL( Sum( ISNULL( GL_BgdtDetail.BgdtDet_TotalAmount, 0 ) ), 0 )
+			     From GL_BgdtDetail
+			    Where ( GL_BgdtMaster.BgdtMas_Id = GL_BgdtDetail.BgdtMas_Id ) 
 			 ) As ApprovedBudget,
-			 ( --Select ISNULL( Sum( ISNULL( GL_VchrDetail.BgdtMas_CrAmount, 0 ) ), 0 )
-			     --From GL_VchrDetail
-			   -- Where ( GL_BgdtMaster.BgdtMas_Id = GL_VchrDetail.BgdtMas_Id )
-			   0 
-			 ) As ActualExpense,
-			 ( --Select ISNULL( Sum( ISNULL( GL_VchrDetail.BgdtMas_DrAmount, 0 ) ), 0 ) - 
-			    --      ISNULL( Sum( ISNULL( GL_VchrDetail.BgdtMas_CrAmount, 0 ) ), 0 )
-			    -- From GL_VchrDetail
-			    --Where ( GL_BgdtMaster.BgdtMas_Id = GL_VchrDetail.BgdtMas_Id ) 
-			    0
+			 ( Select ISNull( SUM( ISNULL( GL_VchrDetail.VchMas_DrAmount, 0 ) ), 0 )
+                 From GL_VchrMaster, 
+                      GL_VchrDetail, 
+                      SYSTEM_Nature, 
+                      SETUP_ChartOfAccount 
+                Where ( SYSTEM_Nature.Natr_SystemTitle IN ( 'Assets', 'Expense' ) ) And 
+                      ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And 
+                      ( GL_VchrDetail.VchMas_Id = GL_VchrMaster.VchMas_Id ) And 
+                      ( GL_VchrDetail.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And 
+                      ( SETUP_ChartOfAccount.Natr_Id = SYSTEM_Nature.Natr_Id ) And 
+                      ( GL_VchrMaster.VchMas_Date Between SETUP_Calendar.Cldr_DateStart And SETUP_Calendar.Cldr_DateEnd ) 
+             ) As ActualExpense, 
+			 ( ( Select ISNULL( Sum( ISNULL( GL_BgdtDetail.BgdtDet_TotalAmount, 0 ) ), 0 )
+			     From GL_BgdtDetail
+			    Where ( GL_BgdtMaster.BgdtMas_Id = GL_BgdtDetail.BgdtMas_Id ) 
+			 ) - 
+			 ( Select ISNull( SUM( ISNULL( GL_VchrDetail.VchMas_DrAmount, 0 ) ), 0 )
+                 From GL_VchrMaster, 
+                      GL_VchrDetail, 
+                      SYSTEM_Nature, 
+                      SETUP_ChartOfAccount 
+                Where ( SYSTEM_Nature.Natr_SystemTitle IN ( 'Assets', 'Expense' ) ) And 
+                      ( GL_VchrMaster.Loc_Id = SETUP_Location.Loc_Id ) And 
+                      ( GL_VchrDetail.VchMas_Id = GL_VchrMaster.VchMas_Id ) And 
+                      ( GL_VchrDetail.ChrtAcc_Id = SETUP_ChartOfAccount.ChrtAcc_Id ) And 
+                      ( SETUP_ChartOfAccount.Natr_Id = SYSTEM_Nature.Natr_Id ) And 
+                      ( GL_VchrMaster.VchMas_Date Between SETUP_Calendar.Cldr_DateStart And SETUP_Calendar.Cldr_DateEnd ) 
+             )
 			 ) As RemainingAmount
 		FROM GL_BgdtMaster,   
 			 SETUP_Location,   
 			 SETUP_Calendar 
 	   WHERE ( SETUP_Location.Loc_Id = GL_BgdtMaster.Loc_Id ) and  
-			 ( SETUP_Calendar.Cldr_Id = GL_BgdtMaster.Cldr_Id ) and
-			 ( @AllLocation = 1 Or SETUP_Location.Loc_Id =  @LocationId ) --and
-			 --( @AllVoucherType = 1 or SYSTEM_BudgetType.BgdtType_Id = @VoucherTypeId ) and
-			 --( @AllDate = 1 Or CONVERT( DateTime, GL_BgdtMaster.BgdtMas_Date, 103 )
-			 --  BETWEEN CONVERT(DateTime, @DateFrom, 103 ) and CONVERT(DateTime, @DateTo, 103 ) )
+			 ( SETUP_Calendar.Cldr_Id = GL_BgdtMaster.Cldr_Id ) 
 	Order By SETUP_Location.Loc_Title,   
 			 SETUP_Calendar.Cldr_Title,
-			 GL_BgdtMaster.BgdtMas_Date;
+			 GL_BgdtMaster.BgdtMas_Date 
 
 END
 
 /****** Object:  StoredProcedure [dbo].[sp_BankReconciliation]    Script Date: 10/08/2013 21:22:11 ******/
 SET ANSI_NULLS ON
-
 GO
+
+
+
+
+
 
 
 

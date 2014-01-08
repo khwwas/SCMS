@@ -77,7 +77,7 @@
         <div id="PopUpContent">
             <div style="text-align: center; border-bottom: 1px solid #ccc;">
                 <h6>
-                    Select the parameters to copy the selected budget
+                    Enter parameter values to generate new budget
                 </h6>
             </div>
             <form method="post" action="../../budget/CopyBudget">
@@ -99,9 +99,10 @@
             <div class="clear">
             </div>
             <div class="CustomCell" style="width: 120px; height: 30px;">
-                Applicable %age</div>
+                Applicable %Age</div>
             <div class="CustomCell" style="width: 300px; height: 30px;">
-                <input type="text" class="CustomText" style="width: 50px; float: left;" name="percentage" />
+                <input type="text" class="CustomText" style="width: 50px; float: left;" name="percentage"
+                    value="5" />
                 <div style="float: left; margin-right: 5px; font-weight: normal;">
                     Inflate</div>
                 <div style="float: left; margin-right: 10px; margin-top: -3px;">

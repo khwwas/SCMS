@@ -159,7 +159,5 @@ namespace SCMS.Controllers
                 return PartialView("GridData");
             }
         }
-
- 
     }
 }

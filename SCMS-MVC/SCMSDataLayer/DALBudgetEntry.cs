@@ -147,60 +147,53 @@ namespace SCMSDataLayer
         /// <param name="ps_DateTo"></param>
         /// <param name="ps_IncludeSecurity"></param>
         /// <returns></returns>
-        public List<sp_BudgetConsoleResult> GetBudgetEntryConsoleData(int ps_AllLocation, string ps_Location, bool ps_IncludeSecurity)
+        public List<sp_BudgetConsoleResult> GetBudgetEntryConsoleData(int pi_AllLocation, string ps_Location)
         {
             try
             {
-                //int ps_AllBudgetType, string ps_BudgetType, int ps_AllDate, string ps_DateFrom, string ps_DateTo,
-
                 SECURITY_User user = (SECURITY_User)System.Web.HttpContext.Current.Session["user"];
                 string UserLoginId = user.User_Id;
                 string UserGroupId = user.UsrGrp_Id;
-                //string _Status = "Pending";
+                string[] LocationsIds;
 
-                //List<sp_GetUserBudgetTypesByUserIdResult> UserBudgetTypes = new DALUserMenuRights().GetUserBudgetTypesByUserId(UserLoginId).ToList();
-                //if (UserBudgetTypes != null && UserBudgetTypes.Count > 0)
-                //{
-                //    UserBudgetTypes = UserBudgetTypes.Where(c => c.SelectedBudgetType != "0").ToList();
-                //}
-                //string[] BudgetTypeIds = UserBudgetTypes.Select(c => c.BgdtType_Id).ToArray();
-
-                List<sp_GetUserLocationsByUserIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByUserId(UserLoginId).ToList();
-                if (UserLocations != null && UserLocations.Count > 0)
-                {
-                    UserLocations = UserLocations.Where(c => c.SelectedLocation != "0").ToList();
-                }
-                string[] LocationsIds = UserLocations.Select(c => c.Loc_Id).ToArray();
 
                 SCMSDataContext dbSCMS = Connection.Create();
-                if (ps_IncludeSecurity == true)
+                if (pi_AllLocation == 1)
                 {
-                    return dbSCMS.sp_BudgetConsole(ps_AllLocation, ps_Location).ToList().Where(c => LocationsIds.Contains(c.Loc_Id)).ToList();
-                    //return dbSCMS.sp_BudgetConsole(ps_AllLocation, ps_Location).ToList().Where(c => LocationsIds.Contains(c.Loc_Id) && _Status.Contains(c.BgdtMas_Status)).ToList();
+                    List<sp_GetUserLocationsByUserIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByUserId(UserLoginId).ToList();
+                    if (UserLocations != null && UserLocations.Count > 0)
+                    {
+                        UserLocations = UserLocations.Where(c => c.SelectedLocation != "0").ToList();
+                    }
+                    LocationsIds = UserLocations.Select(c => c.Loc_Id).ToArray();
                 }
                 else
                 {
-                    return dbSCMS.sp_BudgetConsole(ps_AllLocation, ps_Location).ToList();
+                    LocationsIds = new string[1];
+                    LocationsIds[0] = ps_Location;
                 }
+
+                //return dbSCMS.sp_BudgetConsole(ps_AllLocation, ps_Location).ToList().Where(c => LocationsIds.Contains(c.Loc_Id) && _Status.Contains(c.BgdtMas_Status)).ToList();
+                return dbSCMS.sp_BudgetConsole().ToList().Where(c => LocationsIds.Contains(c.Loc_Id)).ToList();
             }
-            catch
+            catch (Exception ex)
             {
                 return null;
             }
         }
 
-        public List<GL_BgdtMaster> GetLastRecordByVchrType(string ps_LocationId, string ps_BudgetType)
-        {
-            try
-            {
-                SCMSDataContext dbSCMS = Connection.Create();
-                return dbSCMS.GL_BgdtMasters.Where(c => c.Loc_Id == ps_LocationId && c.BgdtType_Id == ps_BudgetType).ToList();
-            }
-            catch
-            {
-                return null;
-            }
-        }
+        //public List<GL_BgdtMaster> GetLastRecordByVchrType(string ps_LocationId, string ps_BudgetType)
+        //{
+        //    try
+        //    {
+        //        SCMSDataContext dbSCMS = Connection.Create();
+        //        return dbSCMS.GL_BgdtMasters.Where(c => c.Loc_Id == ps_LocationId && c.BgdtType_Id == ps_BudgetType).ToList();
+        //    }
+        //    catch
+        //    {
+        //        return null;
+        //    }
+        //}
 
     }
 }

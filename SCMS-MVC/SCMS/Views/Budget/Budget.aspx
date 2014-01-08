@@ -21,12 +21,12 @@
                 format: 'm/d/Y'
             });
 
-            $(".currency").each(function () {
-                $(this).keyup(function () {
-                    $(this).val(formatCurrency($(this).val()));
-                });
-                $(this).val(formatCurrency($(this).val()));
-            });
+//            $(".currency").each(function () {
+//                $(this).keyup(function () {
+//                    $(this).val(formatCurrency($(this).val()));
+//                });
+//                $(this).val(formatCurrency($(this).val()));
+//            });
 
             $("#btn_AddNewRow").click(function () {
                 var Id = parseInt($(".detailRow").last().find("select").attr("id").replace("ListBudgetDetail_", "").replace("__Account", "").trim()) + 1;
@@ -126,9 +126,11 @@
             if ($(obj).val() != "") {
                 var TotalVal = parseInt($(obj).val());
                 var PermonthVal = parseInt(TotalVal / 12);
-                for (var index = 1; index <= 12; index++) {
+                for (var index = 1; index <= 11; index++) {
                     $("[name='" + $(obj).attr("name").replace("TotalAmount", "Month" + index.toString()) + "']").val(PermonthVal);
                 }
+                index = 12;
+                $("[name='" + $(obj).attr("name").replace("TotalAmount", "Month" + index.toString()) + "']").val(TotalVal - (PermonthVal * 11));
             }
         }
 
@@ -136,7 +138,6 @@
             var Id = $(obj).attr("name").replace("ListBudgetDetail[", "").replace("].Month12", "").replace("].Month11", "").replace("].Month10", "").replace("].Month9", "").replace("].Month8", "").replace("].Month7", "").replace("].Month6", "").replace("].Month5", "").replace("].Month4", "").replace("].Month3", "").replace("].Month2", "").replace("].Month1", "");
             var TotalVal = 0;
             for (var index = 1; index <= 12; index++) {
-                //alert("[name='ListBudgetDetail[" + Id + "].Month" + index + "']");
                 TotalVal += parseInt($("[name='ListBudgetDetail[" + Id + "].Month" + index + "']").val());
             }
             $("[name='ListBudgetDetail[" + Id + "].TotalAmount']").val(TotalVal);
