@@ -1142,6 +1142,72 @@ GO
 ALTER TABLE [dbo].[GL_BgdtDetail] CHECK CONSTRAINT [FK_GLBgdtDetail_SETUPChartOfAccount_ChrtAccId]
 GO
 
+/****** Object:  Table [dbo].[SETUP_WithholdingTaxType]    Script Date: 01/13/2014 21:51:04 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SETUP_WithholdingTaxType]') AND type in (N'U'))
+DROP TABLE [dbo].[SETUP_WithholdingTaxType]
+GO
+
+/****** Object:  Table [dbo].[SETUP_WithholdingTaxType]    Script Date: 01/13/2014 21:51:04 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[SETUP_WithholdingTaxType](
+	[WthHoldType_Id] [varchar](50) NOT NULL,
+	[WthHoldType_Code] [varchar](50) NULL,
+	[Cmp_Id] [varchar](50) NULL,
+	[Loc_Id] [varchar](50) NULL,
+	[WthHoldType_Title] [varchar](100) NULL,
+	[WthHoldType_Active] [int] NULL,
+	[WthHoldType_SortOrder] [int] NULL,
+	[WthHoldType_Level] [int] NULL,
+ CONSTRAINT [PK_WithholdingTaxType_WthHoldTypeId] PRIMARY KEY CLUSTERED 
+(
+	[WthHoldType_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[SETUP_WithholdingTaxType]  WITH CHECK ADD  CONSTRAINT [FK_SETUPWithholdingTaxType_SETUPCompany_CmpId] FOREIGN KEY([Cmp_Id])
+REFERENCES [dbo].[SETUP_Company] ([Cmp_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_WithholdingTaxType] CHECK CONSTRAINT [FK_SETUPWithholdingTaxType_SETUPCompany_CmpId]
+GO
+
+ALTER TABLE [dbo].[SETUP_WithholdingTaxType]  WITH CHECK ADD  CONSTRAINT [FK_SETUPWithholdingTaxType_SETUPLocation_LocId] FOREIGN KEY([Loc_Id])
+REFERENCES [dbo].[SETUP_Location] ([Loc_Id])
+GO
+
+ALTER TABLE [dbo].[SETUP_WithholdingTaxType] CHECK CONSTRAINT [FK_SETUPWithholdingTaxType_SETUPLocation_LocId]
+GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

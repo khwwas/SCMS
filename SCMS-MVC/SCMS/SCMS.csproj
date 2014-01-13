@@ -145,6 +145,7 @@
     <Compile Include="Controllers\BudgetController.cs" />
     <Compile Include="Controllers\BudgetConsoleController.cs" />
     <Compile Include="Controllers\BudgetController-Back.cs" />
+    <Compile Include="Controllers\WithholdingTaxTypeController.cs" />
     <Compile Include="Controllers\SystemProcessController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
@@ -984,6 +985,9 @@
     <Content Include="Views\Bank\GridData.ascx" />
     <Content Include="Views\ApprovalLevel\GridData.ascx" />
     <Content Include="Views\ApprovalLevel\ApprovalLevel.aspx" />
+    <Content Include="Views\WithholdingTaxType\Budget.aspx" />
+    <Content Include="Views\WithholdingTaxType\BudgetDetail.ascx" />
+    <Content Include="Views\WithholdingTaxType\GridData.ascx" />
     <Content Include="Views\SystemProcess\SystemProcess.aspx" />
     <Content Include="Views\Employee\Placement.ascx" />
     <Content Include="Views\Employee\Employee.aspx" />

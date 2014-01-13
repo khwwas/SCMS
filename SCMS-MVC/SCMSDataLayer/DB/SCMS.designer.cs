@@ -198,6 +198,9 @@ namespace SCMSDataLayer.DB
     partial void InsertGL_BgdtDetail(GL_BgdtDetail instance);
     partial void UpdateGL_BgdtDetail(GL_BgdtDetail instance);
     partial void DeleteGL_BgdtDetail(GL_BgdtDetail instance);
+    partial void InsertSETUP_WithholdingTaxType(SETUP_WithholdingTaxType instance);
+    partial void UpdateSETUP_WithholdingTaxType(SETUP_WithholdingTaxType instance);
+    partial void DeleteSETUP_WithholdingTaxType(SETUP_WithholdingTaxType instance);
     #endregion
 		
 		public SCMSDataContext() : 
@@ -675,6 +678,14 @@ namespace SCMSDataLayer.DB
 			get
 			{
 				return this.GetTable<GL_BgdtDetail>();
+			}
+		}
+		
+		public System.Data.Linq.Table<SETUP_WithholdingTaxType> SETUP_WithholdingTaxTypes
+		{
+			get
+			{
+				return this.GetTable<SETUP_WithholdingTaxType>();
 			}
 		}
 		
@@ -7234,6 +7245,8 @@ namespace SCMSDataLayer.DB
 		
 		private EntitySet<GL_BgdtMaster> _GL_BgdtMasters;
 		
+		private EntitySet<SETUP_WithholdingTaxType> _SETUP_WithholdingTaxTypes;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -7289,6 +7302,7 @@ namespace SCMSDataLayer.DB
 			this._GL_VchrMasters = new EntitySet<GL_VchrMaster>(new Action<GL_VchrMaster>(this.attach_GL_VchrMasters), new Action<GL_VchrMaster>(this.detach_GL_VchrMasters));
 			this._SYSTEM_BudgetTypes = new EntitySet<SYSTEM_BudgetType>(new Action<SYSTEM_BudgetType>(this.attach_SYSTEM_BudgetTypes), new Action<SYSTEM_BudgetType>(this.detach_SYSTEM_BudgetTypes));
 			this._GL_BgdtMasters = new EntitySet<GL_BgdtMaster>(new Action<GL_BgdtMaster>(this.attach_GL_BgdtMasters), new Action<GL_BgdtMaster>(this.detach_GL_BgdtMasters));
+			this._SETUP_WithholdingTaxTypes = new EntitySet<SETUP_WithholdingTaxType>(new Action<SETUP_WithholdingTaxType>(this.attach_SETUP_WithholdingTaxTypes), new Action<SETUP_WithholdingTaxType>(this.detach_SETUP_WithholdingTaxTypes));
 			OnCreated();
 		}
 		
@@ -7843,6 +7857,19 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SETUP_WithholdingTaxType", Storage="_SETUP_WithholdingTaxTypes", ThisKey="Cmp_Id", OtherKey="Cmp_Id")]
+		public EntitySet<SETUP_WithholdingTaxType> SETUP_WithholdingTaxTypes
+		{
+			get
+			{
+				return this._SETUP_WithholdingTaxTypes;
+			}
+			set
+			{
+				this._SETUP_WithholdingTaxTypes.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -8182,6 +8209,18 @@ namespace SCMSDataLayer.DB
 		}
 		
 		private void detach_GL_BgdtMasters(GL_BgdtMaster entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Company = null;
+		}
+		
+		private void attach_SETUP_WithholdingTaxTypes(SETUP_WithholdingTaxType entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Company = this;
+		}
+		
+		private void detach_SETUP_WithholdingTaxTypes(SETUP_WithholdingTaxType entity)
 		{
 			this.SendPropertyChanging();
 			entity.SETUP_Company = null;
@@ -13363,6 +13402,8 @@ namespace SCMSDataLayer.DB
 		
 		private EntitySet<GL_BgdtMaster> _GL_BgdtMasters;
 		
+		private EntitySet<SETUP_WithholdingTaxType> _SETUP_WithholdingTaxTypes;
+		
 		private EntityRef<SETUP_Company> _SETUP_Company;
 		
     #region Extensibility Method Definitions
@@ -13414,6 +13455,7 @@ namespace SCMSDataLayer.DB
 			this._GL_VchrMasters = new EntitySet<GL_VchrMaster>(new Action<GL_VchrMaster>(this.attach_GL_VchrMasters), new Action<GL_VchrMaster>(this.detach_GL_VchrMasters));
 			this._SYSTEM_BudgetTypes = new EntitySet<SYSTEM_BudgetType>(new Action<SYSTEM_BudgetType>(this.attach_SYSTEM_BudgetTypes), new Action<SYSTEM_BudgetType>(this.detach_SYSTEM_BudgetTypes));
 			this._GL_BgdtMasters = new EntitySet<GL_BgdtMaster>(new Action<GL_BgdtMaster>(this.attach_GL_BgdtMasters), new Action<GL_BgdtMaster>(this.detach_GL_BgdtMasters));
+			this._SETUP_WithholdingTaxTypes = new EntitySet<SETUP_WithholdingTaxType>(new Action<SETUP_WithholdingTaxType>(this.attach_SETUP_WithholdingTaxTypes), new Action<SETUP_WithholdingTaxType>(this.detach_SETUP_WithholdingTaxTypes));
 			this._SETUP_Company = default(EntityRef<SETUP_Company>);
 			OnCreated();
 		}
@@ -13919,6 +13961,19 @@ namespace SCMSDataLayer.DB
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_SETUP_WithholdingTaxType", Storage="_SETUP_WithholdingTaxTypes", ThisKey="Loc_Id", OtherKey="Loc_Id")]
+		public EntitySet<SETUP_WithholdingTaxType> SETUP_WithholdingTaxTypes
+		{
+			get
+			{
+				return this._SETUP_WithholdingTaxTypes;
+			}
+			set
+			{
+				this._SETUP_WithholdingTaxTypes.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SETUP_Location", Storage="_SETUP_Company", ThisKey="Cmp_Id", OtherKey="Cmp_Id", IsForeignKey=true)]
 		public SETUP_Company SETUP_Company
 		{
@@ -14316,6 +14371,18 @@ namespace SCMSDataLayer.DB
 		}
 		
 		private void detach_GL_BgdtMasters(GL_BgdtMaster entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Location = null;
+		}
+		
+		private void attach_SETUP_WithholdingTaxTypes(SETUP_WithholdingTaxType entity)
+		{
+			this.SendPropertyChanging();
+			entity.SETUP_Location = this;
+		}
+		
+		private void detach_SETUP_WithholdingTaxTypes(SETUP_WithholdingTaxType entity)
 		{
 			this.SendPropertyChanging();
 			entity.SETUP_Location = null;
@@ -21150,6 +21217,318 @@ namespace SCMSDataLayer.DB
 						this._ChrtAcc_Id = default(string);
 					}
 					this.SendPropertyChanged("SETUP_ChartOfAccount");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SETUP_WithholdingTaxType")]
+	public partial class SETUP_WithholdingTaxType : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _WthHoldType_Id;
+		
+		private string _WthHoldType_Code;
+		
+		private string _Cmp_Id;
+		
+		private string _Loc_Id;
+		
+		private string _WthHoldType_Title;
+		
+		private System.Nullable<int> _WthHoldType_Active;
+		
+		private System.Nullable<int> _WthHoldType_SortOrder;
+		
+		private System.Nullable<int> _WthHoldType_Level;
+		
+		private EntityRef<SETUP_Company> _SETUP_Company;
+		
+		private EntityRef<SETUP_Location> _SETUP_Location;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnWthHoldType_IdChanging(string value);
+    partial void OnWthHoldType_IdChanged();
+    partial void OnWthHoldType_CodeChanging(string value);
+    partial void OnWthHoldType_CodeChanged();
+    partial void OnCmp_IdChanging(string value);
+    partial void OnCmp_IdChanged();
+    partial void OnLoc_IdChanging(string value);
+    partial void OnLoc_IdChanged();
+    partial void OnWthHoldType_TitleChanging(string value);
+    partial void OnWthHoldType_TitleChanged();
+    partial void OnWthHoldType_ActiveChanging(System.Nullable<int> value);
+    partial void OnWthHoldType_ActiveChanged();
+    partial void OnWthHoldType_SortOrderChanging(System.Nullable<int> value);
+    partial void OnWthHoldType_SortOrderChanged();
+    partial void OnWthHoldType_LevelChanging(System.Nullable<int> value);
+    partial void OnWthHoldType_LevelChanged();
+    #endregion
+		
+		public SETUP_WithholdingTaxType()
+		{
+			this._SETUP_Company = default(EntityRef<SETUP_Company>);
+			this._SETUP_Location = default(EntityRef<SETUP_Location>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WthHoldType_Id", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string WthHoldType_Id
+		{
+			get
+			{
+				return this._WthHoldType_Id;
+			}
+			set
+			{
+				if ((this._WthHoldType_Id != value))
+				{
+					this.OnWthHoldType_IdChanging(value);
+					this.SendPropertyChanging();
+					this._WthHoldType_Id = value;
+					this.SendPropertyChanged("WthHoldType_Id");
+					this.OnWthHoldType_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WthHoldType_Code", DbType="VarChar(50)")]
+		public string WthHoldType_Code
+		{
+			get
+			{
+				return this._WthHoldType_Code;
+			}
+			set
+			{
+				if ((this._WthHoldType_Code != value))
+				{
+					this.OnWthHoldType_CodeChanging(value);
+					this.SendPropertyChanging();
+					this._WthHoldType_Code = value;
+					this.SendPropertyChanged("WthHoldType_Code");
+					this.OnWthHoldType_CodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cmp_Id", DbType="VarChar(50)")]
+		public string Cmp_Id
+		{
+			get
+			{
+				return this._Cmp_Id;
+			}
+			set
+			{
+				if ((this._Cmp_Id != value))
+				{
+					if (this._SETUP_Company.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCmp_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Cmp_Id = value;
+					this.SendPropertyChanged("Cmp_Id");
+					this.OnCmp_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Loc_Id", DbType="VarChar(50)")]
+		public string Loc_Id
+		{
+			get
+			{
+				return this._Loc_Id;
+			}
+			set
+			{
+				if ((this._Loc_Id != value))
+				{
+					if (this._SETUP_Location.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnLoc_IdChanging(value);
+					this.SendPropertyChanging();
+					this._Loc_Id = value;
+					this.SendPropertyChanged("Loc_Id");
+					this.OnLoc_IdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WthHoldType_Title", DbType="VarChar(100)")]
+		public string WthHoldType_Title
+		{
+			get
+			{
+				return this._WthHoldType_Title;
+			}
+			set
+			{
+				if ((this._WthHoldType_Title != value))
+				{
+					this.OnWthHoldType_TitleChanging(value);
+					this.SendPropertyChanging();
+					this._WthHoldType_Title = value;
+					this.SendPropertyChanged("WthHoldType_Title");
+					this.OnWthHoldType_TitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WthHoldType_Active", DbType="Int")]
+		public System.Nullable<int> WthHoldType_Active
+		{
+			get
+			{
+				return this._WthHoldType_Active;
+			}
+			set
+			{
+				if ((this._WthHoldType_Active != value))
+				{
+					this.OnWthHoldType_ActiveChanging(value);
+					this.SendPropertyChanging();
+					this._WthHoldType_Active = value;
+					this.SendPropertyChanged("WthHoldType_Active");
+					this.OnWthHoldType_ActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WthHoldType_SortOrder", DbType="Int")]
+		public System.Nullable<int> WthHoldType_SortOrder
+		{
+			get
+			{
+				return this._WthHoldType_SortOrder;
+			}
+			set
+			{
+				if ((this._WthHoldType_SortOrder != value))
+				{
+					this.OnWthHoldType_SortOrderChanging(value);
+					this.SendPropertyChanging();
+					this._WthHoldType_SortOrder = value;
+					this.SendPropertyChanged("WthHoldType_SortOrder");
+					this.OnWthHoldType_SortOrderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_WthHoldType_Level", DbType="Int")]
+		public System.Nullable<int> WthHoldType_Level
+		{
+			get
+			{
+				return this._WthHoldType_Level;
+			}
+			set
+			{
+				if ((this._WthHoldType_Level != value))
+				{
+					this.OnWthHoldType_LevelChanging(value);
+					this.SendPropertyChanging();
+					this._WthHoldType_Level = value;
+					this.SendPropertyChanged("WthHoldType_Level");
+					this.OnWthHoldType_LevelChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Company_SETUP_WithholdingTaxType", Storage="_SETUP_Company", ThisKey="Cmp_Id", OtherKey="Cmp_Id", IsForeignKey=true)]
+		public SETUP_Company SETUP_Company
+		{
+			get
+			{
+				return this._SETUP_Company.Entity;
+			}
+			set
+			{
+				SETUP_Company previousValue = this._SETUP_Company.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Company.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Company.Entity = null;
+						previousValue.SETUP_WithholdingTaxTypes.Remove(this);
+					}
+					this._SETUP_Company.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_WithholdingTaxTypes.Add(this);
+						this._Cmp_Id = value.Cmp_Id;
+					}
+					else
+					{
+						this._Cmp_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Company");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SETUP_Location_SETUP_WithholdingTaxType", Storage="_SETUP_Location", ThisKey="Loc_Id", OtherKey="Loc_Id", IsForeignKey=true)]
+		public SETUP_Location SETUP_Location
+		{
+			get
+			{
+				return this._SETUP_Location.Entity;
+			}
+			set
+			{
+				SETUP_Location previousValue = this._SETUP_Location.Entity;
+				if (((previousValue != value) 
+							|| (this._SETUP_Location.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SETUP_Location.Entity = null;
+						previousValue.SETUP_WithholdingTaxTypes.Remove(this);
+					}
+					this._SETUP_Location.Entity = value;
+					if ((value != null))
+					{
+						value.SETUP_WithholdingTaxTypes.Add(this);
+						this._Loc_Id = value.Loc_Id;
+					}
+					else
+					{
+						this._Loc_Id = default(string);
+					}
+					this.SendPropertyChanged("SETUP_Location");
 				}
 			}
 		}

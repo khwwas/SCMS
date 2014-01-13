@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DALWithholdingTaxType.cs" />
     <Compile Include="DALBudgetEntry.cs" />
     <Compile Include="DALBudgetType.cs" />
     <Compile Include="DALSystemProcess.cs" />

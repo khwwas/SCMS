@@ -314,6 +314,7 @@
       <Association Name="SETUP_Company_GL_VchrMaster" Member="GL_VchrMasters" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="GL_VchrMaster" />
       <Association Name="SETUP_Company_SYSTEM_BudgetType" Member="SYSTEM_BudgetTypes" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SYSTEM_BudgetType" />
       <Association Name="SETUP_Company_GL_BgdtMaster" Member="GL_BgdtMasters" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="GL_BgdtMaster" />
+      <Association Name="SETUP_Company_SETUP_WithholdingTaxType" Member="SETUP_WithholdingTaxTypes" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_WithholdingTaxType" />
     </Type>
   </Table>
   <Table Name="dbo.SETUP_CompanyModule" Member="SETUP_CompanyModules">
@@ -575,6 +576,7 @@
       <Association Name="SETUP_Location_GL_VchrMaster" Member="GL_VchrMasters" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="GL_VchrMaster" />
       <Association Name="SETUP_Location_SYSTEM_BudgetType" Member="SYSTEM_BudgetTypes" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SYSTEM_BudgetType" />
       <Association Name="SETUP_Location_GL_BgdtMaster" Member="GL_BgdtMasters" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="GL_BgdtMaster" />
+      <Association Name="SETUP_Location_SETUP_WithholdingTaxType" Member="SETUP_WithholdingTaxTypes" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_WithholdingTaxType" />
       <Association Name="SETUP_Company_SETUP_Location" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
     </Type>
   </Table>
@@ -888,6 +890,20 @@
       <Column Name="BgdtDet_Remarks" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
       <Association Name="GL_BgdtMaster_GL_BgdtDetail" Member="GL_BgdtMaster" ThisKey="BgdtMas_Id" OtherKey="BgdtMas_Id" Type="GL_BgdtMaster" IsForeignKey="true" />
       <Association Name="SETUP_ChartOfAccount_GL_BgdtDetail" Member="SETUP_ChartOfAccount" ThisKey="ChrtAcc_Id" OtherKey="ChrtAcc_Id" Type="SETUP_ChartOfAccount" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SETUP_WithholdingTaxType" Member="SETUP_WithholdingTaxTypes">
+    <Type Name="SETUP_WithholdingTaxType">
+      <Column Name="WthHoldType_Id" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="WthHoldType_Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Cmp_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Loc_Id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="WthHoldType_Title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="WthHoldType_Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="WthHoldType_SortOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="WthHoldType_Level" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SETUP_Company_SETUP_WithholdingTaxType" Member="SETUP_Company" ThisKey="Cmp_Id" OtherKey="Cmp_Id" Type="SETUP_Company" IsForeignKey="true" />
+      <Association Name="SETUP_Location_SETUP_WithholdingTaxType" Member="SETUP_Location" ThisKey="Loc_Id" OtherKey="Loc_Id" Type="SETUP_Location" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.sp_GetApprovalLevelList" Method="sp_GetApprovalLevelList">
