@@ -528,11 +528,11 @@
     <Content Include="img\img-profile.png" />
     <Content Include="Slider\bullet.png" />
     <Content Include="Slider\generic.css" />
-    <Content Include="Slider\image-slider-1.jpg" />
-    <Content Include="Slider\image-slider-2.jpg" />
-    <Content Include="Slider\image-slider-3.jpg" />
-    <Content Include="Slider\image-slider-4.jpg" />
-    <Content Include="Slider\image-slider-5.jpg" />
+    <Content Include="Slider\image-slider-1.png" />
+    <Content Include="Slider\image-slider-2.png" />
+    <Content Include="Slider\image-slider-3.png" />
+    <Content Include="Slider\image-slider-4.png" />
+    <Content Include="Slider\image-slider-5.png" />
     <Content Include="Slider\js-image-slider.css" />
     <Content Include="Slider\js-image-slider.js" />
     <Content Include="Slider\loading.gif" />
