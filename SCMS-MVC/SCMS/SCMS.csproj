@@ -526,8 +526,16 @@
     <Content Include="img\header_inner.png" />
     <Content Include="img\header_inner_corners.png" />
     <Content Include="img\img-profile.png" />
-    <Content Include="Slider\photos\1.jpg" />
-    <Content Include="Slider\photos\2.png" />
+    <Content Include="Slider\bullet.png" />
+    <Content Include="Slider\generic.css" />
+    <Content Include="Slider\image-slider-1.jpg" />
+    <Content Include="Slider\image-slider-2.jpg" />
+    <Content Include="Slider\image-slider-3.jpg" />
+    <Content Include="Slider\image-slider-4.jpg" />
+    <Content Include="Slider\image-slider-5.jpg" />
+    <Content Include="Slider\js-image-slider.css" />
+    <Content Include="Slider\js-image-slider.js" />
+    <Content Include="Slider\loading.gif" />
     <Content Include="img\horizontal.jpg" />
     <Content Include="img\house.png" />
     <Content Include="img\icon-charts-graphs.png" />
@@ -574,7 +582,6 @@
     <Content Include="img\shine-effect.png" />
     <Content Include="img\sidemenu-repeat-hover.jpg" />
     <Content Include="img\sidemenu-repeat.jpg" />
-    <Content Include="Slider\photos\3.jpg" />
     <Content Include="img\star_list.png" />
     <Content Include="img\switch_minus.gif" />
     <Content Include="img\switch_plus.gif" />
@@ -985,19 +992,10 @@
     <Content Include="Views\Bank\GridData.ascx" />
     <Content Include="Views\ApprovalLevel\GridData.ascx" />
     <Content Include="Views\ApprovalLevel\ApprovalLevel.aspx" />
-<<<<<<< HEAD
     <Content Include="Views\WithholdingTaxType\Budget.aspx" />
     <Content Include="Views\WithholdingTaxType\BudgetDetail.ascx" />
     <Content Include="Views\WithholdingTaxType\GridData.ascx" />
-=======
-    <Content Include="Slider\Slider.html" />
-    <Content Include="Slider\flashmo_224_style.css" />
-    <Content Include="Slider\flashmo_225_bar_slider.swf" />
-    <Content Include="Slider\flashmo_225_photo_list.xml" />
     <Content Include="Views\Home\Index.aspx" />
-    <Content Include="Slider\swfobject.js" />
-    <Content Include="Slider\transitions.swf" />
->>>>>>> 21f61c5c324deec549c5f41b8ae0ee6b0c513a87
     <Content Include="Views\SystemProcess\SystemProcess.aspx" />
     <Content Include="Views\Employee\Placement.ascx" />
     <Content Include="Views\Employee\Employee.aspx" />
@@ -1768,21 +1766,6 @@
     <None Include="Reports\Datasets\dsVoucherTypes.xss">
       <DependentUpon>dsVoucherTypes.xsd</DependentUpon>
     </None>
-    <None Include="Slider\caurina\transitions\AuxFunctions.as" />
-    <None Include="Slider\caurina\transitions\Equations.as" />
-    <None Include="Slider\caurina\transitions\properties\ColorShortcuts.as" />
-    <None Include="Slider\caurina\transitions\properties\CurveModifiers.as" />
-    <None Include="Slider\caurina\transitions\properties\DisplayShortcuts.as" />
-    <None Include="Slider\caurina\transitions\properties\FilterShortcuts.as" />
-    <None Include="Slider\caurina\transitions\properties\SoundShortcuts.as" />
-    <None Include="Slider\caurina\transitions\properties\TextShortcuts.as" />
-    <None Include="Slider\caurina\transitions\PropertyInfoObj.as" />
-    <None Include="Slider\caurina\transitions\SpecialProperty.as" />
-    <None Include="Slider\caurina\transitions\SpecialPropertyModifier.as" />
-    <None Include="Slider\caurina\transitions\SpecialPropertySplitter.as" />
-    <None Include="Slider\caurina\transitions\Tweener.as" />
-    <None Include="Slider\caurina\transitions\TweenListObj.as" />
-    <None Include="Slider\flashmo_225_bar_slider.fla" />
     <None Include="Widgets\EULA.pdf" />
     <None Include="Widgets\phpdemos\bind_chart_to_mysql_database\connect.php" />
     <None Include="Widgets\phpdemos\bind_chart_to_mysql_database\data.php" />
@@ -1846,7 +1829,6 @@
   <ItemGroup>
     <Folder Include="Scripts\tiny-mce\plugins\spellchecker\classes\utils\" />
     <Folder Include="Scripts\tiny-mce\plugins\spellchecker\includes\" />
-    <Folder Include="UploadedDocuments\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
