@@ -37,7 +37,7 @@
             });
 
             $("#btn_AddNewRow").click(function () {
-                var comboData = $("#AccountCodesList").val().split(',');
+                var comboData = $("#AccountCodesList").val().split('|');
                 var htmlStr = "<div class='detailRow' style='float: left; width: auto;'>";
                 htmlStr += "<div class='CustomCell' style='width: 250px; height: 30px;'>";
                 htmlStr += "<select style='width: 250px;' name='ddl_Account'>";

@@ -28,14 +28,15 @@ namespace SCMS.Controllers
             var Voucher = new DALVoucherEntry().GetAllMasterRecords();
 
             ViewData["ddl_VoucherType"] = new SelectList(VoucherTypes, "VchrType_Id", "VchrType_Title", Session["VoucherTypeForVoucherEntry"]);
-            var ChartOfAccounts = new DALChartOfAccount().GetChartOfAccountForDropDown(1,"''");
+            var ChartOfAccounts = new DALChartOfAccount().GetChartOfAccountForDropDown(1, "''");
             string ChartOfAccountCodes = "";
             foreach (SETUP_ChartOfAccount COA in ChartOfAccounts)
             {
                 if (ChartOfAccountCodes.Length > 0)
                 {
-                    ChartOfAccountCodes += "," + COA.ChrtAcc_Id + ":" + COA.ChrtAcc_Title;
+                    ChartOfAccountCodes += "|" + COA.ChrtAcc_Id + ":" + COA.ChrtAcc_Title;
                 }
+                else
                 {
                     ChartOfAccountCodes += COA.ChrtAcc_Id + ":" + COA.ChrtAcc_Title;
                 }
@@ -99,7 +100,7 @@ namespace SCMS.Controllers
             {
                 Credit = Math.Round(Convert.ToDecimal(Credit), 2).ToString();
             }
-            var ChartOfAccounts = new DALChartOfAccount().GetChartOfAccountForDropDown(1,"''");
+            var ChartOfAccounts = new DALChartOfAccount().GetChartOfAccountForDropDown(1, "''");
             String Response = "";
             // Response += "<div id='DetailRow" + RowNo.ToString() + "' style='float: left; width: auto;'>";
             Response += "<div class='CustomCell' style='width: 250px; height: 30px;'>";
