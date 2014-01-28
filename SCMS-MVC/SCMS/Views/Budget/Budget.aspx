@@ -30,7 +30,7 @@
 
             $("#btn_AddNewRow").click(function () {
                 var Id = parseInt($(".detailRow").last().find("select").attr("id").replace("ListBudgetDetail_", "").replace("__Account", "").trim()) + 1;
-                var comboData = $("#AccountCodesList").val().split(',');
+                var comboData = $("#AccountCodesList").val().split('|');
                 var htmlString = "<div class='detailRow' style='float: left; width: auto;'>";
                 htmlString += "<div class='CustomCell' style='width: 260px; height: 30px;'>";
                 htmlString += "<select id='ListBudgetDetail_" + Id + "__Account' class='.acc' style='width: 155px;' name='ListBudgetDetail[" + Id + "].Account'";

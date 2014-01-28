@@ -25,8 +25,9 @@ namespace SCMS.Controllers
             {
                 if (ChartOfAccountCodes.Length > 0)
                 {
-                    ChartOfAccountCodes += "," + COA.ChrtAcc_Id + ":" + COA.ChrtAcc_Title;
+                    ChartOfAccountCodes += "|" + COA.ChrtAcc_Id + ":" + COA.ChrtAcc_Title;
                 }
+                else
                 {
                     ChartOfAccountCodes += COA.ChrtAcc_Id + ":" + COA.ChrtAcc_Title;
                 }
