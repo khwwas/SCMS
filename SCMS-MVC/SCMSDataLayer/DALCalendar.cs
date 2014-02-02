@@ -115,5 +115,44 @@ namespace SCMSDataLayer
 
             return ls_ReturnValue;
         }
+
+        public string GetCalendarPrefix_ByCldrId(string ps_CldrId) 
+        {
+            SqlConnection con = new SqlConnection();
+            SqlCommand _cmd = new SqlCommand();
+            DataSet _ds = new DataSet();
+            string ls_Sql = "", ls_ReturnValue = "";
+
+            try
+            {
+                con = Connection.ReportConnection("Open");
+                if (con.State != System.Data.ConnectionState.Open)
+                {
+                    return null;
+                }
+
+                ls_Sql += " Select Cldr_Prefix ";
+                ls_Sql += "   From SETUP_Calendar ";
+                ls_Sql += "  Where ( SETUP_Calendar.Cldr_Id = '" + ps_CldrId + "' ) ";
+
+                SqlDataAdapter da = new SqlDataAdapter(ls_Sql, con);
+                da.Fill(_ds, "Calendar");
+
+                if (_ds != null && _ds.Tables != null && _ds.Tables[0].Rows.Count > 0 &&
+                    _ds.Tables[0].Rows[0]["Cldr_Prefix"] != null &&
+                    _ds.Tables[0].Rows[0]["Cldr_Prefix"].ToString() != "")
+                {
+                    ls_ReturnValue = _ds.Tables[0].Rows[0]["Cldr_Prefix"].ToString();
+                }
+
+                Connection.ReportConnection("Close");
+            }
+            catch
+            {
+                ls_ReturnValue = "";
+            }
+
+            return ls_ReturnValue;
+        }
     }
 }

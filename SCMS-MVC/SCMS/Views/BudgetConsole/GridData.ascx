@@ -77,13 +77,24 @@
                     style="width: 22px; padding-right: 5px; float: left; cursor: pointer;">
                     <img alt="Edit" src="../../img/edit.png" style="width: 22px;" />
                 </div>
-                <div onclick="javascript:return DeleteRecord('<%=DataRow.BgdtMas_Id %>')" style="width: 22px;
+                <div onclick="javascript:return CancelBudget('<%=DataRow.BgdtMas_Id %>')" style="width: 22px;
                     float: left; cursor: pointer;">
-                    <img alt="Delete" src="../../img/delete.png" style="width: 22px;" />
+                    <img alt="Cancel" src="../../img/Cancel.png" style="width: 20px;" />
+                </div>
+                <div onclick="javascript:return DeleteBudget('<%=DataRow.BgdtMas_Id %>')" style="width: 22px;
+                    float: left; cursor: pointer;">
+                    <img alt="Delete" src="../../img/Delete.png" style="width: 22px;" />
                 </div>
                 <div onclick="CopyBudget('<%=DataRow.BgdtMas_Id %>');" style="width: 22px; padding-left: 5px;
                     float: left; cursor: pointer;">
                     <img alt="Copy" src="../../img/copy.png" style="width: 22px;" />
+                </div>
+                <%}
+                  else
+                  { %>
+                <div onclick="javascript:return DeleteBudget('<%=DataRow.BgdtMas_Id %>')" style="width: 22px;
+                    float: left; cursor: pointer;">
+                    <img alt="Delete" src="../../img/Delete.png" style="width: 22px;" />
                 </div>
                 <%} %>
             </td>
@@ -99,13 +110,16 @@
             <td id="txt_Date<%=DataRow.BgdtMas_Id%>" style="vertical-align: middle;">
                 <%=Convert.ToDateTime(DataRow.BgdtMas_Date).ToString("MM/dd/yyyy")%>
             </td>
-            <td id="txt_ApprovedBudet<%=DataRow.BgdtMas_Id%>" style="vertical-align: middle; text-align: center;">
+            <td id="txt_ApprovedBudet<%=DataRow.BgdtMas_Id%>" style="vertical-align: middle;
+                text-align: center;">
                 <%=string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N0}", Convert.ToInt32(DataRow.ApprovedBudget))%>
             </td>
-            <td id="txt_ActualExpense<%=DataRow.BgdtMas_Id%>" style="vertical-align: middle; text-align: center;">
+            <td id="txt_ActualExpense<%=DataRow.BgdtMas_Id%>" style="vertical-align: middle;
+                text-align: center;">
                 <%=string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N0}", Convert.ToInt32(DataRow.ActualExpense))%>
             </td>
-            <td id="txt_RemainingAmount<%=DataRow.BgdtMas_Id%>" style="vertical-align: middle; text-align: center;">
+            <td id="txt_RemainingAmount<%=DataRow.BgdtMas_Id%>" style="vertical-align: middle;
+                text-align: center;">
                 <%=string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:N0}", Convert.ToInt32(DataRow.RemainingAmount))%>
             </td>
             <td id="txt_Remarks<%=DataRow.BgdtMas_Id%>" style="vertical-align: middle;">

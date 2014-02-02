@@ -265,6 +265,11 @@
       <DependentUpon>rptAuditTrail.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\Reps\rptBudgetAndMonthlyExpense.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBudgetAndMonthlyExpense.rpt</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Reps\rptBudgetSummary.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1849,6 +1854,10 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reports\Reps\rptBudgetAndMonthlyExpense.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBudgetAndMonthlyExpense.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Reps\rptBalanceSheet_Equity.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptBalanceSheet_Equity.cs</LastGenOutput>

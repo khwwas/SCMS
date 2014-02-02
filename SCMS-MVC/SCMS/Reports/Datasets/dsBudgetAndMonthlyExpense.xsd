@@ -1,16 +1,34 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
-<xs:schema id="dsBudgetAndMonthlyExpense" 
-                  targetNamespace="http://tempuri.org/dsBudgetAndMonthlyExpense.xsd"
-                  elementFormDefault="qualified"
-                  attributeFormDefault="qualified"
-                  xmlns="http://tempuri.org/dsBudgetAndMonthlyExpense.xsd"
-                  xmlns:mstns="http://tempuri.org/dsBudgetAndMonthlyExpense.xsd"
-                  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                  xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
-                  xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
-    <xs:element name="dsBudgetAndMonthlyExpense" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true">
-        <xs:complexType>
-            <xs:choice minOccurs="0" maxOccurs="unbounded"></xs:choice>
-        </xs:complexType>
-    </xs:element>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsBudgetAndMonthlyExpense" targetNamespace="http://tempuri.org/dsBudgetAndMonthlyExpense.xsd" xmlns:mstns="http://tempuri.org/dsBudgetAndMonthlyExpense.xsd" xmlns="http://tempuri.org/dsBudgetAndMonthlyExpense.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsBudgetAndMonthlyExpense" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsBudgetAndMonthlyExpense" msprop:Generator_UserDSName="dsBudgetAndMonthlyExpense">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="BudgetAndMonthlyExpense" msprop:Generator_TableClassName="BudgetAndMonthlyExpenseDataTable" msprop:Generator_TableVarName="tableBudgetAndMonthlyExpense" msprop:Generator_TablePropName="BudgetAndMonthlyExpense" msprop:Generator_RowDeletingName="BudgetAndMonthlyExpenseRowDeleting" msprop:Generator_UserTableName="BudgetAndMonthlyExpense" msprop:Generator_RowChangingName="BudgetAndMonthlyExpenseRowChanging" msprop:Generator_RowEvHandlerName="BudgetAndMonthlyExpenseRowChangeEventHandler" msprop:Generator_RowDeletedName="BudgetAndMonthlyExpenseRowDeleted" msprop:Generator_RowEvArgName="BudgetAndMonthlyExpenseRowChangeEvent" msprop:Generator_RowChangedName="BudgetAndMonthlyExpenseRowChanged" msprop:Generator_RowClassName="BudgetAndMonthlyExpenseRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ChrtAcc_Id" msprop:Generator_ColumnVarNameInTable="columnChrtAcc_Id" msprop:Generator_ColumnPropNameInRow="ChrtAcc_Id" msprop:Generator_ColumnPropNameInTable="ChrtAcc_IdColumn" msprop:Generator_UserColumnName="ChrtAcc_Id" type="xs:string" minOccurs="0" />
+              <xs:element name="ChrtAcc_CodeDisplay" msprop:Generator_ColumnVarNameInTable="columnChrtAcc_CodeDisplay" msprop:Generator_ColumnPropNameInRow="ChrtAcc_CodeDisplay" msprop:Generator_ColumnPropNameInTable="ChrtAcc_CodeDisplayColumn" msprop:Generator_UserColumnName="ChrtAcc_CodeDisplay" type="xs:string" minOccurs="0" />
+              <xs:element name="ChrtAcc_Title" msprop:Generator_ColumnVarNameInTable="columnChrtAcc_Title" msprop:Generator_ColumnPropNameInRow="ChrtAcc_Title" msprop:Generator_ColumnPropNameInTable="ChrtAcc_TitleColumn" msprop:Generator_UserColumnName="ChrtAcc_Title" type="xs:string" minOccurs="0" />
+              <xs:element name="ChrtAcc_Type" msprop:Generator_ColumnVarNameInTable="columnChrtAcc_Type" msprop:Generator_ColumnPropNameInRow="ChrtAcc_Type" msprop:Generator_ColumnPropNameInTable="ChrtAcc_TypeColumn" msprop:Generator_UserColumnName="ChrtAcc_Type" type="xs:string" minOccurs="0" />
+              <xs:element name="Loc_Id" msprop:Generator_ColumnVarNameInTable="columnLoc_Id" msprop:Generator_ColumnPropNameInRow="Loc_Id" msprop:Generator_ColumnPropNameInTable="Loc_IdColumn" msprop:Generator_UserColumnName="Loc_Id" type="xs:string" minOccurs="0" />
+              <xs:element name="Loc_Title" msprop:Generator_ColumnVarNameInTable="columnLoc_Title" msprop:Generator_ColumnPropNameInRow="Loc_Title" msprop:Generator_ColumnPropNameInTable="Loc_TitleColumn" msprop:Generator_UserColumnName="Loc_Title" type="xs:string" minOccurs="0" />
+              <xs:element name="Cldr_Title" msprop:Generator_ColumnVarNameInTable="columnCldr_Title" msprop:Generator_ColumnPropNameInRow="Cldr_Title" msprop:Generator_ColumnPropNameInTable="Cldr_TitleColumn" msprop:Generator_UserColumnName="Cldr_Title" type="xs:string" minOccurs="0" />
+              <xs:element name="BgdtDet_TotalAmount" msprop:Generator_ColumnVarNameInTable="columnBgdtDet_TotalAmount" msprop:Generator_ColumnPropNameInRow="BgdtDet_TotalAmount" msprop:Generator_ColumnPropNameInTable="BgdtDet_TotalAmountColumn" msprop:Generator_UserColumnName="BgdtDet_TotalAmount" type="xs:double" minOccurs="0" />
+              <xs:element name="ThisMonthExpense" msprop:Generator_ColumnVarNameInTable="columnThisMonthExpense" msprop:Generator_ColumnPropNameInRow="ThisMonthExpense" msprop:Generator_ColumnPropNameInTable="ThisMonthExpenseColumn" msprop:Generator_UserColumnName="ThisMonthExpense" type="xs:double" minOccurs="0" />
+              <xs:element name="PreviousMonthExpense" msprop:Generator_ColumnVarNameInTable="columnPreviousMonthExpense" msprop:Generator_ColumnPropNameInRow="PreviousMonthExpense" msprop:Generator_ColumnPropNameInTable="PreviousMonthExpenseColumn" msprop:Generator_UserColumnName="PreviousMonthExpense" type="xs:double" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

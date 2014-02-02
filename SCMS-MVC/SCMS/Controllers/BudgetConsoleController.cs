@@ -103,19 +103,20 @@ namespace SCMS.Controllers
         //    }
         //}
 
-        public ActionResult DeleteRecordById(String ps_Id)
+        public ActionResult DeleteBudget_ByBgdtMasId(String ps_BgdtMasId)
         {
             DALBudgetEntry objDal = new DALBudgetEntry();
-            //String ls_Action = "Cancel", IsAuditTrail = "", ls_UserId = "";
             String[] ls_Lable = new String[7], ls_Data = new String[7];
             Int32 li_ReturnValue = 0;
 
             try
             {
-                GL_BgdtMaster BudgetMasterRow = objDal.GetAllMasterRecords().Where(c => c.BgdtMas_Id.Equals(ps_Id)).SingleOrDefault();
+                //GL_BgdtMaster BudgetMasterRow = objDal.GetAllMasterRecords().Where(c => c.BgdtMas_Id.Equals(ps_Id)).SingleOrDefault();
                 //List<GL_VchrDetail> BudgetDetailList = objDal.GetAllDetailRecords().Where(c => c.BgdtMas_Id.Equals(ps_Id)).ToList();
 
-                li_ReturnValue = objDal.DeleteRecordById(ps_Id);
+                li_ReturnValue = objDal.DeleteBudgetDetail_ByBgdtMasId(ps_BgdtMasId);
+                li_ReturnValue = objDal.DeleteBudgetMaster_ByBgdtMasId(ps_BgdtMasId);
+
                 ViewData["result"] = li_ReturnValue;
 
                 //IsAuditTrail = System.Configuration.ConfigurationManager.AppSettings.GetValues("IsAuditTrail")[0];
@@ -147,10 +148,32 @@ namespace SCMS.Controllers
                 //// Audit Trail Section End
                 ViewData["ddl_Location"] = new SelectList(new DALLocation().PopulateData(), "Loc_Id", "Loc_Title");
                 //ViewData["ddl_BudgetType"] = new SelectList(new DALBudgetType().PopulateData(), "VchrType_Id", "VchrType_Title");
-                //ViewData["AllLoc"] = 1;
-                //ViewData["LocationId"] = "";
+                ViewData["AllLoc"] = 1;
+                ViewData["LocationId"] = "";
                 //ViewData["AllVchrType"] = 1;
                 //ViewData["BudgetTypeId"] = "";
+
+                return PartialView("GridData");
+            }
+            catch
+            {
+                return PartialView("GridData");
+            }
+        }
+
+        public ActionResult CancelBudget_ByBgdtMasId(String ps_BgdtMasId)
+        {
+            DALBudgetEntry objDal = new DALBudgetEntry();
+            String[] ls_Lable = new String[7], ls_Data = new String[7];
+            Int32 li_ReturnValue = 0;
+
+            try
+            {
+                li_ReturnValue = objDal.CancelBudget_ByBgdtMasId(ps_BgdtMasId);
+                ViewData["result"] = li_ReturnValue;
+                ViewData["ddl_Location"] = new SelectList(new DALLocation().PopulateData(), "Loc_Id", "Loc_Title");
+                ViewData["AllLoc"] = 1;
+                ViewData["LocationId"] = "";
 
                 return PartialView("GridData");
             }

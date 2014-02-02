@@ -175,6 +175,13 @@
                 document.getElementById('div_Calendar').style.display = "block";
                 document.getElementById('ddl_Calendar').disabled = true;
             }
+            else if (ps_ReportName.toLowerCase() == "BudgetAndMonthlyExpense".toLowerCase()) {
+                document.getElementById('div_Location').style.display = "block";
+                document.getElementById('ddl_location').disabled = true;
+
+                document.getElementById('div_Calendar').style.display = "block";
+                document.getElementById('ddl_Calendar').disabled = true;
+            }
         };
 
         function ViewReport() {
@@ -426,6 +433,31 @@
                 }
 
                 ps_Url = "../ReportSelectionCriteria/SetParam_BudgetSummary?ps_ReportName=" + ps_ReportName + "&pi_AllLoc=" + li_AllLoc + "&ps_Location=" + pcnt_Location.value +
+                         "&pi_AllCalendar=" + li_AllCalendar + "&ps_Calendar=" + pcnt_Calendar.value;
+            }
+            else if (ps_ReportName.toLowerCase() == "BudgetAndMonthlyExpense".toLowerCase()) {
+                var pcnt_AllLoc = document.getElementById('chk_AllLocations');
+                var pcnt_AllCalendar = document.getElementById('chk_AllCalendar');
+                var pcnt_Location = document.getElementById('ddl_location');
+                var pcnt_Calendar = document.getElementById('ddl_Calendar');
+
+                var li_AllLoc, li_AllCalendar;
+
+                if (pcnt_AllLoc.checked == true) {
+                    li_AllLoc = 1;
+                }
+                else {
+                    li_AllLoc = 0;
+                }
+
+                if (pcnt_AllCalendar.checked == true) {
+                    li_AllCalendar = 1;
+                }
+                else {
+                    li_AllCalendar = 0;
+                }
+
+                ps_Url = "../ReportSelectionCriteria/SetParam_BudgetAndMonthlyExpense?ps_ReportName=" + ps_ReportName + "&pi_AllLoc=" + li_AllLoc + "&ps_Location=" + pcnt_Location.value +
                          "&pi_AllCalendar=" + li_AllCalendar + "&ps_Calendar=" + pcnt_Calendar.value;
             };
 

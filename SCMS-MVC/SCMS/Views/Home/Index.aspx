@@ -12,11 +12,11 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div id="sliderFrame">
         <div id="slider">
-            <img src="../../Slider/image-slider-1.png" alt=""/>
-            <img src="../../Slider/image-slider-2.png" alt=""/>
-            <img src="../../Slider/image-slider-3.png" alt=""/>
-            <img src="../../Slider/image-slider-4.png" alt=""/>
-            <img src="../../Slider/image-slider-5.png" alt=""/>
+            <img src="<%=ResolveUrl("~/") %>Slider/image-slider-1.png" alt=""/>
+            <img src="<%=ResolveUrl("~/") %>Slider/image-slider-2.png" alt=""/>
+            <img src="<%=ResolveUrl("~/") %>Slider/image-slider-3.png" alt=""/>
+            <img src="<%=ResolveUrl("~/") %>Slider/image-slider-4.png" alt=""/>
+            <img src="<%=ResolveUrl("~/") %>Slider/image-slider-5.png" alt=""/>
         </div>
         
     </div>

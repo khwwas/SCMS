@@ -111,7 +111,8 @@ namespace SCMS.Controllers
                 ls_LocationId = BudgetModel.Location;
                 ls_Remarks = BudgetModel.Remarks;
 
-                ls_YearPrefix = objDalCalendar.GetCalendarPrefix_ByCurrentDate(ldt_BudgetDate);
+                //ls_YearPrefix = objDalCalendar.GetCalendarPrefix_ByCurrentDate(ldt_BudgetDate);
+                ls_YearPrefix = objDalCalendar.GetCalendarPrefix_ByCldrId(ls_Year);
 
                 if (String.IsNullOrEmpty(ls_BudgetMasterId))
                 {
@@ -128,7 +129,7 @@ namespace SCMS.Controllers
                 }
                 else
                 {
-                    objDalBudgetEntry.DeleteDetailRecordByMasterId(ls_BudgetMasterId);
+                    objDalBudgetEntry.DeleteBudgetDetail_ByBgdtMasId(ls_BudgetMasterId);
                 }
 
                 if (!String.IsNullOrEmpty(ls_BudgetMasterCode))

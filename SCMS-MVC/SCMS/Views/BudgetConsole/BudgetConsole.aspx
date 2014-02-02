@@ -13,11 +13,11 @@
             window.location = "../BudgetConsole?p_LocationId=" + locationId;
         }
 
-        function DeleteRecord(Id) {
-            if (confirm("Do you really want to cancel this record")) {
+        function CancelBudget(Id) {
+            if (confirm("Do you want to cancel this record")) {
                 var MessageBox = document.getElementById('MessageBox');
                 var Url = document.getElementById('frm_BudgetConsole').action;
-                Url += "BudgetConsole/DeleteRecordById?ps_Id=" + Id;
+                Url += "BudgetConsole/CancelBudget_ByBgdtMasId?ps_BgdtMasId=" + Id;
                 $.ajax({
                     type: "GET",
                     url: Url,
@@ -36,6 +36,38 @@
                     error: function (rs, e) {
                         FadeIn(MessageBox);
                         MessageBox.innerHTML = "<h5>Error!</h5><p>An error occured in cancelling this record.</p>";
+                        MessageBox.setAttribute("class", "message error");
+                        scroll(0, 0);
+                        FadeOut(MessageBox);
+                        SetUserRights();
+                    }
+                });
+            }
+        }
+
+        function DeleteBudget(Id) {
+            if (confirm("Do you want to delete this record")) {
+                var MessageBox = document.getElementById('MessageBox');
+                var Url = document.getElementById('frm_BudgetConsole').action;
+                Url += "BudgetConsole/DeleteBudget_ByBgdtMasId?ps_BgdtMasId=" + Id;
+                $.ajax({
+                    type: "GET",
+                    url: Url,
+                    success: function (response) {
+                        html = response;
+                        $("#GridContainer").html(response);
+
+                        //ResetForm();
+                        FadeIn(MessageBox);
+                        MessageBox.innerHTML = "<h5>Success!</h5><p>Record deleted successfully.</p>";
+                        MessageBox.setAttribute("class", "message success");
+                        scroll(0, 0);
+                        FadeOut(MessageBox);
+                        SetGrid();
+                    },
+                    error: function (rs, e) {
+                        FadeIn(MessageBox);
+                        MessageBox.innerHTML = "<h5>Error!</h5><p>An error occured in deleting this record.</p>";
                         MessageBox.setAttribute("class", "message error");
                         scroll(0, 0);
                         FadeOut(MessageBox);

@@ -446,6 +446,44 @@ namespace SCMS.Controllers
         }
         #endregion
 
+        #region Budget And Monthly Expense
+        public string SetParam_BudgetAndMonthlyExpense(string ps_ReportName, string pi_AllLoc, string ps_Location, string pi_AllCalendar, string ps_Calendar) 
+        {
+            string ls_Location = "";
+
+            ResetParameters();
+            Reports.ReportParameters.ReportName = ps_ReportName;
+            Reports.ReportParameters.AllCalendar = Convert.ToInt32(pi_AllCalendar);
+            Reports.ReportParameters.sCalendar = ps_Calendar;
+
+            if (pi_AllLoc == "1")
+            {
+                SECURITY_User user = (SECURITY_User)System.Web.HttpContext.Current.Session["user"];
+                UserLoginId = user.User_Id;
+
+                List<sp_GetUserLocationsByUserIdResult> UserLocations = new DALUserMenuRights().GetUserLocationsByUserId(UserLoginId).ToList();
+                if (UserLocations != null && UserLocations.Count > 0)
+                {
+                    UserLocations = UserLocations.Where(c => c.SelectedLocation != "0").ToList();
+                }
+
+                ls_Location = ConvertStringArrayToString(UserLocations.Select(c => c.Loc_Id).ToArray());
+                if (ls_Location == null || ls_Location.Trim() == "")
+                {
+                    ls_Location = "''";
+                }
+
+                Reports.ReportParameters.Location = ls_Location;
+            }
+            else
+            {
+                Reports.ReportParameters.Location = ps_Location;
+            }
+
+            return "OK";
+        }
+        #endregion
+
         #region Functions
         void ResetParameters()
         {

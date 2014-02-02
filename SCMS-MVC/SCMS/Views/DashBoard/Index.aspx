@@ -33,7 +33,7 @@
         }
         .ModuleTitle:hover, .ModuleBox:hover
         {
-            color: grey;
+            color: Gray;
         }
     </style>
     <div class="box round first fullpage grid">
@@ -60,7 +60,7 @@
                        
             %>
             <script type="text/javascript">
-                window.location = '../Home?ModId=<%=modules[0].Mod_Id %>&ModDesc=<%=modules[0].Mod_Desc %>&ModAbbr=<%=modules[0].Mod_Abbreviation %>';
+                window.location = '<%=ResolveUrl("~/") %>Home?ModId=<%=modules[0].Mod_Id %>&ModDesc=<%=modules[0].Mod_Desc %>&ModAbbr=<%=modules[0].Mod_Abbreviation %>';
             </script>
             <%}
                 }%>

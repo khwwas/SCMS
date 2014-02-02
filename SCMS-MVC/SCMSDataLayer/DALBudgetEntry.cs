@@ -74,23 +74,6 @@ namespace SCMSDataLayer
             }
         }
 
-        public int DeleteDetailRecordByMasterId(String GLMaster_Id)
-        {
-            int li_ReturnValue = 0;
-
-            try
-            {
-                SCMSDataContext dbSCMS = Connection.Create();
-                li_ReturnValue = dbSCMS.ExecuteCommand("Delete From GL_BgdtDetail where BgdtMas_Id='" + GLMaster_Id + "'");
-            }
-            catch
-            {
-                li_ReturnValue = 0;
-            }
-
-            return li_ReturnValue;
-        }
-
         public List<GL_BgdtDetail> GetAllDetailRecords()
         {
             try
@@ -118,7 +101,7 @@ namespace SCMSDataLayer
             }
         }
 
-        public int DeleteRecordById(String ps_Id)
+        public int DeleteBudgetMaster_ByBgdtMasId(String ps_BgdtMasId)
         {
             int li_Result = 0;
 
@@ -126,7 +109,40 @@ namespace SCMSDataLayer
             {
                 SCMSDataContext dbSCMS = Connection.Create();
 
-                li_Result = dbSCMS.ExecuteCommand("Update GL_BgdtMaster Set BgdtMas_Status='Cancelled' Where BgdtMas_Id='" + ps_Id + "'");
+                li_Result = dbSCMS.ExecuteCommand("Delete From GL_BgdtMaster Where BgdtMas_Id = '" + ps_BgdtMasId + "'");
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+        public int DeleteBudgetDetail_ByBgdtMasId(String ps_BgdtMasId) 
+        {
+            int li_ReturnValue = 0;
+
+            try
+            {
+                SCMSDataContext dbSCMS = Connection.Create();
+                li_ReturnValue = dbSCMS.ExecuteCommand("Delete From GL_BgdtDetail where BgdtMas_Id = '" + ps_BgdtMasId + "'");
+            }
+            catch
+            {
+                li_ReturnValue = 0;
+            }
+
+            return li_ReturnValue;
+        }
+
+        public int CancelBudget_ByBgdtMasId(String ps_BgdtMasId)   
+        {
+            int li_Result = 0;
+
+            try
+            {
+                SCMSDataContext dbSCMS = Connection.Create();
+
+                li_Result = dbSCMS.ExecuteCommand("Update GL_BgdtMaster Set BgdtMas_Status='Cancelled' Where BgdtMas_Id = '" + ps_BgdtMasId + "'");
                 return 1;
             }
             catch
